@@ -3,13 +3,17 @@
 
 <template>
   <div id="app">
-    <router-view />
+    <zdd-layout></zdd-layout>
   </div>
 </template>
 
 <script>
+import zddMain from '@/components/layout/zddMain.vue';
 export default {
   name: "App",
+  components: {
+    'zdd-layout':zddMain
+  },
   created() {},
   methods: {
     /**

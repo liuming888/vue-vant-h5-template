@@ -2,6 +2,7 @@ module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
     devServer: {
+        disableHostCheck: true,
         proxy: {
             '/api': {
                 // 测试环境
