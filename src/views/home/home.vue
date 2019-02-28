@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
+import { Swipe, SwipeItem} from "vant";
+const obj = { Swipe, SwipeItem};
 const vantCom = {};
 for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
@@ -30,6 +30,11 @@ export default {
     aCommodityThatIsBeingBargained, // 一件正在进行砍价商品  
     commodityItem, // 商品列表展示的商品X
     ...vantCom  // vant组件
+  },
+  data(){
+    return {
+
+    }
   }
 };
 </script>
