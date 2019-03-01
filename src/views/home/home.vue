@@ -8,14 +8,14 @@
 
 
 <template>
-  <div class="home-container">
+  <div class="home-container" @click="testA">
     home页面
   </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem} from "vant";
-const obj = { Swipe, SwipeItem};
+import { Swipe, SwipeItem } from "vant";
+const obj = { Swipe, SwipeItem };
 const vantCom = {};
 for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
@@ -27,13 +27,25 @@ import commodityItem from "@/components/commodity/commodityItem.vue";
 export default {
   components: {
     userPickingUpMessage, // 用户领取消息播放
-    aCommodityThatIsBeingBargained, // 一件正在进行砍价商品  
+    aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
     commodityItem, // 商品列表展示的商品X
-    ...vantCom  // vant组件
+    ...vantCom // vant组件
   },
-  data(){
-    return {
-
+  data() {
+    return {};
+  },
+  methods: {
+    // 测试登录FB
+    async testA() {
+      let loginInfo = await window.$faceBookApi.loginFB();
+      console.warn("loginInfo: ", loginInfo);
+      if(loginInfo){
+        let  {authResponse:{accessToken},id,name,pic_square}=loginInfo;
+        this.$store.commit("setUserInfo",{accessToken,id,name,pic_square});
+        localStorage.setItem("userInfo",JSON.stringify({accessToken,id,name,pic_square}));
+        console.log("1111111111111",this.$store.state.userInfo);
+        console.log("222222222222",localStorage.getItem("userInfo"));
+      }
     }
   }
 };
