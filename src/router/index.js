@@ -29,7 +29,22 @@ const curRouter = new Router({
             name: '好友帮砍页',
             component: () => import('../views/forBargain.vue'),
         },
-
+        {
+            path: '/purchase',
+            name: '购买商品页',
+            component: () => import('../views/purchase/index.vue'),
+        },
+        {
+            path: '/shippingAddress',
+            name: '（已有）收货地址页',
+            component: () => import('../views/shippingAddress.vue'),
+        },
+        {
+            path: '/purchase/paymentSuccess',
+            name: '支付成功页',
+            component: () => import('../views/purchase/paymentSuccess.vue'),
+        },
+        
 
         {
             path: '/my',

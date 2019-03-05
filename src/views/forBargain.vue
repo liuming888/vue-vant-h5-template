@@ -7,9 +7,9 @@
     帮砍页面
 
     <!-- 弹窗 -->
-    <dialog-login-select/>
-    <dialog-new-users-help-cut-successfully/>
-    <dialog-old-users-help-cut-successfully/>
+    <dialog-login-select :dialogVisible.sync="dialogs.loginSelect" />
+    <dialog-new-users-help-cut-successfully :dialogVisible.sync="dialogs.newUsersHelpCutSuccessfully" />
+    <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully" />
   </div>
 </template>
 
@@ -29,7 +29,19 @@ export default {
     dialogOldUsersHelpCutSuccessfully // 老用户帮砍成功弹窗
   },
   data() {
-    return {};
+    return {
+      dialogs: {
+        loginSelect: {
+          show: false
+        },
+        newUsersHelpCutSuccessfully: {
+          show: false
+        },
+        oldUsersHelpCutSuccessfully: {
+          show: true
+        }
+      }
+    };
   },
   methods: {}
 };

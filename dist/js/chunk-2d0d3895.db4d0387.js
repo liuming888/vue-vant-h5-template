@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d3895"],{"5cd5":function(n,c,e){"use strict";e.r(c);var t=function(){var n=this,c=n.$createElement,e=n._self._c||c;return e("div",{staticClass:"incomeBreakdown-container"},[n._v("\n  收益明细\n")])},a=[],s={},d=s,i=e("8c9c"),o=Object(i["a"])(d,t,a,!1,null,"16d179ad",null);c["default"]=o.exports}}]);

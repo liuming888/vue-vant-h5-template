@@ -3,22 +3,26 @@
 
 <template>
   <div class="dialogOldUsersHelpCutSuccessfully-container">
-    老用户帮砍成功弹窗
-    <van-popup v-model="show"
-      :close-on-click-overlay="false">内容</van-popup>
+    <van-popup v-model="dialogVisible.show"
+      :close-on-click-overlay="false">老用户帮砍成功弹窗</van-popup>
   </div>
 </template>
 
 <script>
 export default {
   name: "dialogOldUsersHelpCutSuccessfully",
-  components: {
-    [Popup.name]: Popup
+  props: {
+    dialogVisible: {
+      type: Object,
+      default() {
+        return {
+          show: false
+        };
+      }
+    }
   },
   data() {
-    return {
-      show: false
-    };
+    return {};
   }
 };
 </script>

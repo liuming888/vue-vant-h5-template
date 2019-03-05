@@ -11,12 +11,8 @@
 </template>
 
 <script>
-import { Popup } from 'vant';
 export default {
     name:"dialogBidPriceCompleted",
-    components: {
-      [Popup.name]:Popup
-    },
     data(){
       return {
         show:false

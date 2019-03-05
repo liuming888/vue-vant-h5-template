@@ -17,7 +17,12 @@
 import incomeWindow from '../../incomeWindow.vue';   
 export default {
     components: {
-        incomeWindow //收益弹窗
+        incomeWindow //收益浮窗
+    },
+    data(){
+        return {
+          
+        }
     }
 }
 </script>

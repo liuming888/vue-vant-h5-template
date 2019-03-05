@@ -2,15 +2,17 @@
 </style>
 
 <template>
-  <div class="dialogLoginSelect-container">
+  <div class="dialogPostAddAddress-container">
     <van-popup v-model="dialogVisible.show"
-      :close-on-click-overlay="false">登录选择弹窗</van-popup>
+      :close-on-click-overlay="false">
+      添加新收货地址
+    </van-popup>
   </div>
 </template>
 
 <script>
 export default {
-  name: "dialogLoginSelect",
+  name: "dialogPostAddAddress",
   props:{
     dialogVisible:{
       type:Object,

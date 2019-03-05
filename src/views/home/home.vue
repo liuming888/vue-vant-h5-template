@@ -8,8 +8,9 @@
 
 
 <template>
-  <div class="home-container" @click="testA">
+  <div class="home-container">
     home页面
+    <a href="javascript:whatsApp();" class="xq-whatsapp" data-action="share/whatsapp/share">whatsapp</a>
   </div>
 </template>
 
@@ -39,12 +40,25 @@ export default {
     async testA() {
       let loginInfo = await window.$faceBookApi.loginFB();
       console.warn("loginInfo: ", loginInfo);
-      if(loginInfo){
-        let  {authResponse:{accessToken},id,name,pic_square}=loginInfo;
-        this.$store.commit("setUserInfo",{accessToken,id,name,pic_square});
-        localStorage.setItem("userInfo",JSON.stringify({accessToken,id,name,pic_square}));
-        console.log("1111111111111",this.$store.state.userInfo);
-        console.log("222222222222",localStorage.getItem("userInfo"));
+      if (loginInfo) {
+        let {
+          authResponse: { accessToken },
+          id,
+          name,
+          pic_square
+        } = loginInfo;
+        this.$store.commit("setUserInfo", {
+          accessToken,
+          id,
+          name,
+          pic_square
+        });
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ accessToken, id, name, pic_square })
+        );
+        console.log("1111111111111", this.$store.state.userInfo);
+        console.log("222222222222", localStorage.getItem("userInfo"));
       }
     }
   }
