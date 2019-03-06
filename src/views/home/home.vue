@@ -10,17 +10,17 @@
 <template>
   <div class="home-container">
     home页面
-    <a href="javascript:whatsApp();" class="xq-whatsapp" data-action="share/whatsapp/share">whatsapp</a>
+    <!-- <a href="javascript:whatsApp();" class="xq-whatsapp" data-action="share/whatsapp/share">whatsapp</a> -->
   </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// import { Swipe, SwipeItem } from "vant";
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import aCommodityThatIsBeingBargained from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
@@ -30,10 +30,13 @@ export default {
     userPickingUpMessage, // 用户领取消息播放
     aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
     commodityItem, // 商品列表展示的商品X
-    ...vantCom // vant组件
+    // ...vantCom // vant组件
   },
   data() {
     return {};
+  },
+  mounted () {
+    
   },
   methods: {
     // 测试登录FB
