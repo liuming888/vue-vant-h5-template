@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <div class="my-container">
-        我的
+    <div class="myFriends-container">
+        我的好友
     </div>
 </template>

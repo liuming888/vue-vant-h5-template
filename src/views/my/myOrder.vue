@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <div class="my-container">
-        我的
+    <div class="myOrder-container">
+        我的订单
     </div>
 </template>

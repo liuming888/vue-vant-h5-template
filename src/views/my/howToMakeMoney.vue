@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <div class="my-container">
-        我的
+    <div class="howToMakeMoney-container">
+        如何赚钱
     </div>
 </template>

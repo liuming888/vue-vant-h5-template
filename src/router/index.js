@@ -76,6 +76,34 @@ const curRouter = new Router({
             name: '收益明细',
             component: () => import('../views/withdrawRelated/incomeBreakdown.vue'),
         },
+
+
+        // 以下为v0.2版本得做的页面
+        {
+            path: '/my/myFriends',
+            name: '我的好友',
+            component: () => import('../views/my/myFriends.vue'),
+        },
+        {
+            path: '/my/myOrder',
+            name: '我的订单',
+            component: () => import('../views/my/myOrder.vue'),
+        },
+        {
+            path: '/my/inviteFriends',
+            name: '邀请好友',
+            component: () => import('../views/my/inviteFriends.vue'),
+        },
+        {
+            path: '/my/howToMakeMoney',
+            name: '如何赚钱',
+            component: () => import('../views/my/howToMakeMoney.vue'),
+        },
+        {
+            path: '/my/billboard',
+            name: '排行榜',
+            component: () => import('../views/my/billboard.vue'),
+        },
     ],
 });
 
