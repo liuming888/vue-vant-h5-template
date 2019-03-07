@@ -18,6 +18,14 @@
 
     <a href="javascript:;"
       style="font-size:20px;" @click="whatsApp">whatsapp(url带test分享文字)</a>
+
+    <br>
+    <a href="line://msg/text/https://liuming.mynatapp.cc"  style="font-size:20px;">LINE文字</a>
+
+    <br>
+    <a href="https://social-plugins.line.me/lineit/share?url=https://liuming.mynatapp.cc"  style="font-size:20px;">LINE图文</a>
+    <br>
+    <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="2" data-url="https://liuming.mynatapp.cc" style ="display: none;"></div> 
   </div>
 </template>
 
