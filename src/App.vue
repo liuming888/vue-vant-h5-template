@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import {FBConfig} from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
 
 import { login } from "@/server/user.js";
@@ -26,12 +27,7 @@ export default {
     initFB() {
       const vm = this;
       window.fbAsyncInit = async function() {
-        FB.init({
-          appId: "844618395883361",
-          cookie: true,
-          xfbml: true,
-          version: "v3.2"
-        });
+        FB.init(FBConfig);
         FB.AppEvents.logPageView();
         console.warn("已经初始化FB了");
         let checkResInfo = await window.$faceBookApi.checkFBLoginState();

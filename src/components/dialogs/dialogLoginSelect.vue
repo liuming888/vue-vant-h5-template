@@ -27,7 +27,7 @@ export default {
       type: Object,
       default() {
         return {
-          show: true
+          show: false
         };
       }
     }
@@ -67,6 +67,7 @@ export default {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          this.$emit("update:dialogVisible",{show:false});
           if(url){
             this.$route.push({path:url});
           }

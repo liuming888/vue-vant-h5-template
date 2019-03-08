@@ -150,12 +150,14 @@
     };
 
     /**
-     * @msg:  分享好友
+     * @description:  分享好友
+     * @param invite_url 分享的链接
+     * @param quote  分享的默认显示文字
      */
-    FBsdk.prototype.shareFB = function(invite_url) {
+    FBsdk.prototype.shareFB = function (invite_url, quote) {
         // console.log('当前执行分享的用户ID为', user_id);
         return new Promise(resolve => {
-            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ hashtag: '#' + document.title, quote: 'Come to the game box and play games and get rewards' }, function(response) {
+            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ hashtag: '#' + document.title, quote: quote }, function(response) {
                 if (response && !response.error_message) {
                     // console.log('Posting completed.');
                     resolve(response);
