@@ -32,13 +32,13 @@ export default {
     return {
       dialogs: {
         loginSelect: {
-          show: false
+          show: true
         },
         newUsersHelpCutSuccessfully: {
           show: false
         },
         oldUsersHelpCutSuccessfully: {
-          show: true
+          show: false
         }
       }
     };

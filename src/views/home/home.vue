@@ -20,7 +20,7 @@
       style="font-size:20px;" @click="whatsApp">whatsapp(url带test分享文字)</a>
 
     <br>
-    <a href="line://msg/text/https://liuming.mynatapp.cc"  style="font-size:20px;">LINE文字</a>
+    <a href="line://msg/text/11111111111111111111111"  style="font-size:20px;">LINE文字</a>
 
     <br>
     <a href="https://social-plugins.line.me/lineit/share?url=https://liuming.mynatapp.cc"  style="font-size:20px;">LINE图文</a>

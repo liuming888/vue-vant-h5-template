@@ -11,11 +11,11 @@
                 js = d.createElement(s);
                 js.id = id;
                 // 默认美式英文
-                // js.src = 'https://connect.facebook.net/en_US/sdk.js'; 
+                js.src = 'https://connect.facebook.net/en_US/sdk.js'; 
                 // 中文（简体）
                 // js.src = "https://connect.facebook.net/zh_CN/sdk.js";
                 // 中国台湾（繁体）
-                js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+                // js.src = "https://connect.facebook.net/zh_TW/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             })(document, 'script', 'facebook-jssdk');
         } catch (error) {

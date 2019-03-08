@@ -28,7 +28,7 @@ dialogVisible // 控制弹窗显示隐藏
 砍价进度条           bargainingProgressBar   砍价页,好友帮砍页面
 分享好友      sharingFriends   砍价页
 砍价帮        bargainingHelpInformation    砍价页
-登录选择弹窗 dialogLoginSelect  帮砍页
+登录选择弹窗 dialogLoginSelect  帮砍页（所有需要登录才能操作的页面）
 新用户帮砍成功弹窗 dialogNewUsersHelpCutSuccessfully 帮砍页
 老用户帮砍成功弹窗 dialogOldUsersHelpCutSuccessfully 帮砍页
 

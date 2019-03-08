@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router/index.js'
 import store from './store/index.js'
 import * as $util from './utils/util.js'
-// import "./utils/faceBookSdk.js"
+import "./utils/faceBookSdk.js"
 import { Toast, Popup } from 'vant';
 Vue.use(Toast);
 Vue.use(Popup);
