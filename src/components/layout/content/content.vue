@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
     .content-container{
-        height: 95vh;
+        height: calc(100vh - 93px);
         overflow-y:scroll; 
         box-sizing: border-box;
     }
@@ -8,7 +8,6 @@
 
 <template>
     <div class="content-container">
-        内容
         <router-view></router-view>
     </div>
 </template>
