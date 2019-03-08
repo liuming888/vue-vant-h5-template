@@ -59,20 +59,16 @@ export default {
     shareMessenger() {
       const appId = FBConfig.appId; // FB的appid
       console.log("appId: ", appId);
-      const link=window.location.origin; // 分享的链接（必须和FB应用设置的一致）
-      const link = "https://liuming.mynatapp.cc"; // 测试
+      // const link=this.shareInfo.shareUrl; // 分享的链接（必须和FB应用设置的一致）
+      const link = "https://liuming.mynatapp.cc/forBargain"; // 测试
       window.location.href = `fb-messenger://share/?link=${link}/&app_id=${appId}`;
     },
     /**
      * @description: 分享到whatsapp
      */
     shareWhatsapp() {
-      //  var u = document.getElementsByClassName("share_url")[0].content;
-      // console.log('u: ', u);
-      var t = document.getElementsByClassName("share_title")[0].content;
-      console.log("t: ", t);
-      const link = encodeURIComponent("\n\n" + window.location.origin); // 分享的链接
-      // const link = encodeURIComponent("\n\n" + "https://liuming.mynatapp.cc"); // 测试
+      var t = this.shareInfo.shareTitle;
+      const link = encodeURIComponent("\n\n" + this.shareInfo.shareUrl); // 分享的链接
       window.location.href =
         "whatsapp://send?text=" +
         encodeURIComponent(t) +
@@ -84,9 +80,8 @@ export default {
      */
     shareLine() {
       //  分享第一种没限制服务器ip地区的（分享文字为主，好像也可以显示图片了）
-      // var t = document.getElementsByClassName("share_title")[0].content;
-      // const link = encodeURIComponent(window.location.origin); // 分享的链接
-      const link = encodeURIComponent("https://liuming.mynatapp.cc"); // 测试
+      // const link = encodeURIComponent(this.shareInfo.shareUrl); // 分享的链接
+      const link = encodeURIComponent("https://liuming.mynatapp.cc/forBargain"); // 测试
       window.location.href = `line://msg/text/${link}`;
 
 
@@ -97,10 +92,11 @@ export default {
      * @description: 分享到FB
      */
     async shareFacebook(){
-       const link =window.location.origin; // 分享的链接
-      // const link = "https://liuming.mynatapp.cc"; // 测试
-      const quote=document.getElementsByClassName("share_url")[0].content;
-      let result=await window.$faceBookApi.shareFB(link,quote);
+      //  const link =this.shareInfo.shareUrl; // 分享的链接
+      const link = "https://liuming.mynatapp.cc/forBargain?a=1"; // 测试
+      const quote=this.shareInfo.quote;
+      const hashtag=this.shareInfo.hashtag;
+      let result=await window.$faceBookApi.shareFB(link,quote,hashtag);
       if(result){
         // 分享成功
       }else{

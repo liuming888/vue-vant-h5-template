@@ -11,7 +11,7 @@
                 js = d.createElement(s);
                 js.id = id;
                 // 默认美式英文
-                js.src = 'https://connect.facebook.net/en_US/sdk.js'; 
+                js.src = 'https://connect.facebook.net/en_US/sdk.js';
                 // 中文（简体）
                 // js.src = "https://connect.facebook.net/zh_CN/sdk.js";
                 // 中国台湾（繁体）
@@ -153,11 +153,12 @@
      * @description:  分享好友
      * @param invite_url 分享的链接
      * @param quote  分享的默认显示文字
+     * @param hashtag  FB分享的tag标签(注意必须有#)
      */
-    FBsdk.prototype.shareFB = function (invite_url, quote) {
+    FBsdk.prototype.shareFB = function(invite_url, quote, hashtag) {
         // console.log('当前执行分享的用户ID为', user_id);
         return new Promise(resolve => {
-            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ hashtag: '#' + document.title, quote: quote }, function(response) {
+            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ quote, hashtag: '#' + (hashtag || document.title) }, function(response) {
                 if (response && !response.error_message) {
                     // console.log('Posting completed.');
                     resolve(response);
