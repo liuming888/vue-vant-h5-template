@@ -8,7 +8,10 @@
 </template>
 
 <script>
+import {FBConfig} from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
+
+import { login } from "@/server/user.js";
 export default {
   name: "App",
   components: {
@@ -24,12 +27,7 @@ export default {
     initFB() {
       const vm = this;
       window.fbAsyncInit = async function() {
-        FB.init({
-          appId: "844618395883361",
-          cookie: true,
-          xfbml: true,
-          version: "v3.2"
-        });
+        FB.init(FBConfig);
         FB.AppEvents.logPageView();
         console.warn("已经初始化FB了");
         let checkResInfo = await window.$faceBookApi.checkFBLoginState();
@@ -41,18 +39,19 @@ export default {
             name,
             pic_square
           } = checkResInfo;
-          vm.$store.commit("setUserInfo", {
-            accessToken,
-            id,
-            name,
-            pic_square
+          let result = await login({
+            tp_id: id,
+            tp_token: accessToken,
+            tp_type: 1
           });
-          localStorage.setItem(
-            "userInfo",
-            JSON.stringify({ accessToken, id, name, pic_square })
-          );
-          console.log("1111111111111", vm.$store.state.userInfo);
-          console.log("222222222222", localStorage.getItem("userInfo"));
+
+          if (result.code == 0) {
+            let userInfo = result.data;
+            vm.$store.commit("setUserInfo", userInfo);
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+            console.log("1111111111111", vm.$store.state.userInfo);
+            console.log("222222222222", localStorage.getItem("userInfo"));
+          }
         } else {
           // 直接弹起会被浏览器阻止
           // let loginInfo=await  window.$faceBookApi.loginFB();

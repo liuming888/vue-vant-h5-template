@@ -8,6 +8,7 @@
     <br>
 
     <a href="javascript:;"
+<<<<<<< HEAD
       style="font-size:20px;" @click="whatsApp">whatsapp(url带test分享文字)</a> -->
     <section class="home-top-container">
       <!-- <div class="home-top-msg">
@@ -48,6 +49,17 @@
         </li> -->
       </ul>
     </section>
+=======
+      style="font-size:20px;" @click="whatsApp">whatsapp(url带test分享文字)</a>
+
+    <br>
+    <a href="line://msg/text/11111111111111111111111"  style="font-size:20px;">LINE文字</a>
+
+    <br>
+    <a href="https://social-plugins.line.me/lineit/share?url=https://liuming.mynatapp.cc"  style="font-size:20px;">LINE图文</a>
+    <br>
+    <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="2" data-url="https://liuming.mynatapp.cc" style ="display: none;"></div> 
+>>>>>>> efe637e374edc106ee79fa654f4ab6e808073f6f
   </div>
 </template>
 
