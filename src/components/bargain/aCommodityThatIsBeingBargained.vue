@@ -325,7 +325,7 @@ export default {
       let result = await shareBargain({
         bargain_id: this.spuBargainItem.bargain_id
       });
-      if (result.code == 0) {
+      if (result) {
         this.shareInfo = result.data.share_info;
         this.dialogs.sharingFriends.show = true;
       }

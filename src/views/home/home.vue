@@ -165,19 +165,19 @@ export default {
   },
   created() {
     this.initMybargainSpus();
-    this.initGoodsList();
+    // this.initGoodsList({});
   },
   methods: {
     async initMybargainSpus() {
-      let result = await getMybargainSpus({ pageSize: 2, pageNum: 1 });
+      let result = await getMybargainSpus({ page_size: 2, page_num: 1 });
       console.log("result: ", result);
-      if (result.code == 0) {
+      if (result) {
         this.spuBargainList = result.data.spu_bargain_list;
       }
     },
     async initGoodsList({ page_size = 15, page_num = 1, is_all = 0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
-      if (result.code == 0) {
+      if (result) {
         this.goodsList = result.data.spu_list;
       }
     }

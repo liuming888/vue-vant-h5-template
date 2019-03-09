@@ -107,7 +107,7 @@
   <div class="commodityItem-container">
     <div class="home-goods-item">
       <div class="goods-img">
-        <van-swipe v-if="itemData.spu_pics.length>0"
+        <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
           :autoplay="3000"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
@@ -218,7 +218,7 @@ export default {
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
-      if (result.code == 0) {
+      if (result) {
         this.shareInfo = result.data.share_info;
       }
       this.dialogs.sharingFriends.show = true;

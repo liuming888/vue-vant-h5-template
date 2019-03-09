@@ -2,6 +2,8 @@ export default {
     getUrl(NODE_ENV) {
         let url = '';
         switch (NODE_ENV) {
+            case 'mock':
+                url = '';
             case 'development':
                 url = '';
                 break;

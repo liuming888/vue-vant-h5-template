@@ -9,10 +9,10 @@ export function getOrderTips({ pageSize, pageNum, spu_id }) {
 }
 
 // 获取用户正在砍价的商品列表（首页进行中和我的砍价页面）
-export function getMybargainSpus({ pageSize, pageNum }) {
+export function getMybargainSpus({ page_size, page_num }) {
     return $request.post({
         url: '/api/v1/spu/get_mybargain_spus',
-        data: { pageSize, pageNum },
+        data: { page_size, page_num },
     });
 }
 

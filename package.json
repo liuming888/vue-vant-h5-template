@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "serve:mock": "cross-env NODE_ENV=mock vue-cli-service serve --copy",
     "serve": "vue-cli-service serve --copy",
     "build": "vue-cli-service build",
     "build:test": "cross-env NODE_ENV=test vue-cli-service build --modern",

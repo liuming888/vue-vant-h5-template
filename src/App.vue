@@ -46,7 +46,7 @@ export default {
             tp_type: 1
           });
 
-          if (result.code == 0) {
+          if (result) {
             let userInfo = result.data;
             vm.$store.commit("setUserInfo", userInfo);
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
