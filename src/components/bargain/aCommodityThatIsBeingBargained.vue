@@ -25,7 +25,7 @@
             <a href="javascrip:;" class="button-l">
               Cash Back
             </a>
-            <a href="javascrip:;" class="button-r">Go On</a>
+            <router-link to="/bargain" class="button-r">Go On</router-link>
           </div>
         </div>
       </div>
