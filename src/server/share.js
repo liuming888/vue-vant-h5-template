@@ -9,9 +9,9 @@ export function shareSpu({ spu_id }) {
 }
 
 // 帮砍价
-export function shareSpu({ bargain_id }) {
-    return $request.post({
-        url: '/api/v1/share/shareBargain',
-        data: { bargain_id },
-    });
-}
+export function shareBargain({ bargain_id }) {
+           return $request.post({
+               url: '/api/v1/share/shareBargain',
+               data: { bargain_id },
+           });
+       }

@@ -1,18 +1,18 @@
-
 <style lang="scss" scoped>
 .home-container {
-  background-color: #D30C05;
+  background-color: #d30c05;
   > .home-top-container {
     position: relative;
     &::after {
-      content: '';
+      content: "";
       display: block;
       height: 39px;
       width: 100%;
       position: absolute;
       bottom: 0;
       left: 0;
-      background: url('./../../assets/images/clapboard.png') no-repeat top center;
+      background: url("./../../assets/images/clapboard.png") no-repeat top
+        center;
       background-size: 100% auto;
     }
     > .home-top-msg {
@@ -28,10 +28,10 @@
       text-indent: 65px;
       color: #fff;
       font-size: 20px;
-      background-color: rgba(255,255,255,.4);
+      background-color: rgba(255, 255, 255, 0.4);
       max-width: calc(100% - 62px);
       overflow: hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
       white-space: nowrap;
       > .home-top-msg-img {
         width: 38px;
@@ -45,7 +45,6 @@
       width: 100%;
       height: auto;
     }
-    
   }
   > .home-goods {
     > .home-goods-title {
@@ -56,12 +55,13 @@
       color: #fff;
       // background: url('./../../assets/images/clapboard.png') no-repeat top center;
       // background-size: 100% auto;
-      &::before, &::after {
-        content: '';
+      &::before,
+      &::after {
+        content: "";
         width: 95px;
         height: 4px;
         display: block;
-        background: url('./../../assets/images/line-l.png') no-repeat;
+        background: url("./../../assets/images/line-l.png") no-repeat;
         background-size: 100% auto;
         position: absolute;
         top: 50px;
@@ -71,7 +71,7 @@
         left: 124px;
       }
       &::after {
-        background: url('./../../assets/images/line-r.png') no-repeat;
+        background: url("./../../assets/images/line-r.png") no-repeat;
         background-size: 100% auto;
         right: 124px;
       }
@@ -83,47 +83,47 @@
       }
     }
   }
-  > .fudai {
-    position: fixed;
-    bottom: 221px;
-    right: 0;
-    cursor: pointer;
-    > img {
-      width: 120px;
-    }
-  }
 }
 </style>
+
 <template>
   <div class="home-container">
-    <!-- home页面 -->
     <section class="home-top-container">
       <!-- 用户消息 -->
       <user-picking-up-message></user-picking-up-message>
       <div class="home-banner">
-        <img src="@/assets/images/home-banner.png" alt="">
+        <img  v-lazy="require('@/assets/images/home-banner.png')">
       </div>
       <!-- 抢购商品 -->
-      <freebing-box></freebing-box>
+      <freebing-box v-for="item of spuBargainList"
+        :key="item.spu_id"
+        :spuBargainItem="item" />
+
     </section>
-    <!-- 商品列表 -->
     <section class="home-goods">
       <div class="home-goods-title">DAILY DISCOVER</div>
       <ul class="home-goods-list">
-        <commodity-item v-for="(item, index) in goodsList" :key="index" :itemData="item" />
+        <commodity-item v-for="(item, index) of goodsList"
+          :key="index"
+          :itemData="item" />
       </ul>
     </section>
-    <!-- 福袋 -->
-    <div class="fudai">
-      <img src="@/assets/images/fudai.png" alt="">
-    </div>
   </div>
 </template>
 
 <script>
+// import { Swipe, SwipeItem } from "vant";
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
+
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
 import commodityItem from "@/components/commodity/commodityItem.vue";
+
+import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
     userPickingUpMessage, // 用户领取消息播放
@@ -133,29 +133,55 @@ export default {
   },
   data() {
     return {
-      // 商品列表数据
-      goodsList: [
+      // 正在砍价的商品列表（默认最多展示两条）
+      spuBargainList: [
+        //类型：Array  必有字段  备注：无
         {
-          title: 'Casual Large Capacity Compartment',
-          path: '/',
-          description: 'Details details details details details details details details',
-          discount: '0.00',
-          realAmount: '1258',
-          imgUrl: require('@/assets/images/good-large.png')
-        },
-        {
-          title: 'Casual Large Capacity Compartment',
-          path: '/',
-          description: 'Details details details details details details details details',
-          discount: '0.00',
-          realAmount: '1258',
-          imgUrl: require('@/assets/images/good-large.png')
+          //类型：Object  必有字段  备注：无
+          spu_id: 1, //类型：Number  必有字段  备注：商品id
+          title: "mock", //类型：String  必有字段  备注：商品标题
+          bargain_rate: 1, //类型：Number  必有字段  备注：已砍价比例
+          bargain_coin: "mock", //类型：String  必有字段  备注：已砍价金额
+          expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
+          bargain_id: "mock" //类型：String  必有字段  备注：砍价号
         }
-      ]
+      ],
+      goodsList: [
+        //类型：Array  必有字段  备注：砍价商品列表
+        {
+          //类型：Object  必有字段  备注：无
+          spu_id: 1, //类型：Number  必有字段  备注：商品id
+          title: "mock", //类型：String  必有字段  备注：商品标题
+          price: 1, //类型：Number  必有字段  备注：商品售价
+          deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
+          spu_pics: ["http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg","https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg"]
+        }
+      ],
+      goodsListPageDat: {
+        page_size: 15,
+        page_num: 1
+      }
     };
   },
-  mounted() {},
+  created() {
+    this.initMybargainSpus();
+    this.initGoodsList();
+  },
   methods: {
+    async initMybargainSpus() {
+      let result = await getMybargainSpus({ pageSize: 2, pageNum: 1 });
+      console.log("result: ", result);
+      if (result.code == 0) {
+        this.spuBargainList = result.data.spu_bargain_list;
+      }
+    },
+    async initGoodsList({ page_size = 15, page_num = 1, is_all = 0 }) {
+      let result = await getBargainSpus({ page_size, page_num, is_all });
+      if (result.code == 0) {
+        this.goodsList = result.data.spu_list;
+      }
+    }
   }
 };
 </script>
+
