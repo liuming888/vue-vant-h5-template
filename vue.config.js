@@ -6,14 +6,14 @@ module.exports = {
         proxy: {
             '/api': {
                 // mock
-                target:'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api',
+                // target:'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api',
 
+                // 锦涛
+                target: 'http://192.168.4.128:8024/api',
 
                 // 测试环境
                 // target: 'http://119.23.230.72:8088/',
 
-                // 权
-                // target: 'http://192.168.4.142:8091/',
 
                 // 开发服务器
                 // target: 'http://dev-xhz-backend.batmobi.net/',

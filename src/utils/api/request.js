@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import axios from 'axios';
 // import qs from 'qs';
-import config from './config';
 // import md5 from 'md5';
+import config from './config';
+
+axios.defaults.headers.common['user_id'] = "";
+axios.defaults.headers.common['access_token'] = "";
 
 var instance = axios.create();
 
