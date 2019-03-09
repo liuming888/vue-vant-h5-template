@@ -47,7 +47,7 @@ export default {
           shareDescription:"分享的描述",
           shareImage:"https://s.pinimg.com/images/facebook_share_image.png", //  分享的预览图（图片有限制）
           quote:"FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）",
-          hashtag:"FB分享的tag标签"
+          // hashtag:"FB分享的tag标签"
         }
       }
     }
@@ -95,8 +95,8 @@ export default {
       //  const link =this.shareInfo.shareUrl; // 分享的链接
       const link = "https://liuming.mynatapp.cc/forBargain?a=1"; // 测试
       const quote=this.shareInfo.quote;
-      const hashtag=this.shareInfo.hashtag;
-      let result=await window.$faceBookApi.shareFB(link,quote,hashtag);
+      // const hashtag=this.shareInfo.hashtag;
+      let result=await window.$faceBookApi.shareFB(link,quote/* ,hashtag */);
       if(result){
         // 分享成功
       }else{
