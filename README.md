@@ -26,7 +26,7 @@ dialogVisible // 控制弹窗显示隐藏
 分享赚弹起浮窗       dialogSharingMakes    商品列表展示的商品X组件需要
 收益浮窗               incomeWindow   公共所有页面
 砍价进度条           bargainingProgressBar   砍价页,好友帮砍页面
-分享好友      dialogSharingFriends   砍价页（所有需要分享的页面）
+分享好友弹窗      dialogSharingFriends   砍价页（所有需要分享的页面）
 砍价帮        bargainingHelpInformation    砍价页
 登录选择弹窗 dialogLoginSelect  帮砍页（所有需要登录才能操作的页面）
 新用户帮砍成功弹窗 dialogNewUsersHelpCutSuccessfully 帮砍页

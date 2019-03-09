@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import quicklink from "quicklink/dist/quicklink.mjs";
+import quicklink from 'quicklink/dist/quicklink.mjs';
 Vue.use(Router);
 
 const curRouter = new Router({
@@ -44,7 +44,6 @@ const curRouter = new Router({
             name: '支付成功页',
             component: () => import('../views/purchase/paymentSuccess.vue'),
         },
-        
 
         {
             path: '/my',
@@ -56,27 +55,30 @@ const curRouter = new Router({
             name: '提现相关tab主页面',
             component: () => import('../views/withdrawRelated/index.vue'),
         },
+        
         {
             path: '/withdrawRelated/withdrawImmediately',
             name: '立即提现',
             component: () => import('../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'),
+            redirect: '/withdrawRelated/toWithdraw',
+            children: [
+                {
+                    path: '/withdrawRelated/toWithdraw',
+                    name: '我要提现',
+                    component: () => import('../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'),
+                },
+                {
+                    path: '/withdrawRelated/withdrawalsRecord',
+                    name: '提现记录',
+                    component: () => import('../views/withdrawRelated/withdrawalsRecord.vue'),
+                },
+                {
+                    path: '/withdrawRelated/incomeBreakdown',
+                    name: '收益明细',
+                    component: () => import('../views/withdrawRelated/incomeBreakdown.vue'),
+                },
+            ],
         },
-        {
-            path: '/withdrawRelated/toWithdraw',
-            name: '我要提现',
-            component: () => import('../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'),
-        },
-        {
-            path: '/withdrawRelated/withdrawalsRecord',
-            name: '提现记录',
-            component: () => import('../views/withdrawRelated/withdrawalsRecord.vue'),
-        },
-        {
-            path: '/withdrawRelated/incomeBreakdown',
-            name: '收益明细',
-            component: () => import('../views/withdrawRelated/incomeBreakdown.vue'),
-        },
-
 
         // 以下为v0.2版本得做的页面
         {
@@ -110,23 +112,23 @@ const curRouter = new Router({
 // 全局前置守卫
 curRouter.beforeEach((to, from, next) => {
     next();
-})
+});
 
 // 全局后置钩子
 curRouter.afterEach(() => {
     quicklink({
-    //     // 默认2秒
-    //     // timeout: 2000,
-    //     // 如果不设置，默认为 document
-    //     // el: document.getElementById('app'),
-    //     // 设置预取 URL 数组
-    //     // urls: ['2.html', '3.html', '4.js'],
-    //     // 设置预取的请求优先级
-    //     // priority: true,
-    //     // 启用所有跨 origin 请求
+        //     // 默认2秒
+        //     // timeout: 2000,
+        //     // 如果不设置，默认为 document
+        //     // el: document.getElementById('app'),
+        //     // 设置预取 URL 数组
+        //     // urls: ['2.html', '3.html', '4.js'],
+        //     // 设置预取的请求优先级
+        //     // priority: true,
+        //     // 启用所有跨 origin 请求
         // origins: true,
-    //     //过滤
-    //     // ignores: [/\/api\/?/, url => url.includes('.zip'), (url, elem) => elem.hasAttribute('noprefetch')],
+        //     //过滤
+        //     // ignores: [/\/api\/?/, url => url.includes('.zip'), (url, elem) => elem.hasAttribute('noprefetch')],
     });
 
     // 直接使用 prefetcher
