@@ -2,7 +2,7 @@
 .bargain-container {
   > .bargain-header {
     position: relative;
-    padding: 40px 30px 0 30px;
+    padding: 40px 30px 150px 30px;
     height: 400px;
     background: url('./../assets/images/bargain-bg.png') no-repeat;
     background-size: 100%;
@@ -97,6 +97,7 @@
           font-size: 24px;
           color: #323232;
           text-align: center;
+          margin-bottom: 25px;
           .dollar {
             font-size: 20px; 
           }
@@ -109,21 +110,162 @@
             color: #D30C05;
           }
         }
+        .schedule {
+          position: relative;
+          margin: 0 auto;
+          width: 580px;
+          height: 18px;
+          border-radius: 9px;
+          background-color: #FECECA;
+          display: flex;
+          > .active {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 100%;
+            background: url('./../assets/images/progress-bar-1.png') no-repeat;
+            background-size: auto 100%;
+            border-radius: 9px;
+          }
+          > .schedule-item {
+            position: relative;
+            flex: 1;
+            padding-top: 40px;
+            text-align: center;
+            font-size: 18px;
+            color: #323232;
+            .highlight {
+              color: #D30C05;
+              font-size: 20px;
+            }
+          }
+          > .schedule-item:nth-of-type(2) {
+            text-align: left;
+          }
+          > .schedule-item:last-of-type {
+            text-align: right;
+          }
+          > .ball::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            // left: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            background:linear-gradient(-45deg,rgba(238,93,47,1),rgba(255,155,4,1));
+          }
+          > .ball-center::after {
+            left: calc(50% - 12px);
+          }
+          > .ball-right::after {
+            right: 0;
+          }
+        }
       }
     }
   }
   > .bargain-content {
+    padding: 0 30px;
+    .page-title {
+      position: relative;
+      width: 100%;
+      display: block;
+      height: 75px;
+      line-height: 75px;
+      // margin: 50px 0;
+      font-size: 26px;
+      text-align: center;
+      color: #323232;
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        width: 70px;
+        height: 1px;
+        background-color: #ccc;
+      }
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20%;
+        width: 70px;
+        height: 1px;
+        background-color: #ccc;
+      }
+    }
+    > .team-box {
+      > .team-list {
+          margin-bottom: 38px;
+          > li {
+              display: flex;
+              align-items: center;
+              > .column {
+                  flex: 1;
+              }
+          }
+          > .team-list-title {
+              color: #888;
+              font-size: 22px;
+              text-align: center;
+              > div:first-child {
+                  text-align: left;
+              }
+          }
+          > .team-list-item {
+              margin-top: 30px;
+              & > .column:nth-child(2) {
+                  text-align: center;
+                  display: block;
+                  font-size: 26px;
+                  color: #888888;
+                  line-height: 90px;
+                  > .dollar {
+                    font-size: 22px;
+                    color: #D30C05;
+                    > span {
+                      font-size: 30px;
+                    }
+                  }
+              }
+              > .column {
+                  display: flex;
+                  > .team-img {
+                      padding: 17px 0 0 9px;
+                      margin-right: 20px;
+                      display: inline-block;
+                      > img {
+                          width: 90px;
+                          height: 90px;
+                      }
+                  }
+                  .first {
+                      background: url('./../assets/images/huangguan1.png') no-repeat 0 0;
+                      background-size: 44px 44px;
+                  }
+                  > .team-info {
+                      flex: 1;
+                      > .team-name {
+                        margin-top: 17px;
+                        line-height: 90px;
+                        font-size: 24px;
+                        color: #323232;
+                      }
+                  }
+              }
+          }
+      }
+    }
     > .recommend-products {
-      padding: 0 30px;
       display: flex;
       flex-wrap: wrap;
-      > .recommend-products-title {
-        width: 100%;
-        display: block;
-        margin: 50px 0;
-        font-size: 26px;
-        text-align: center;
-        color: #323232;
+      > .page-title {
+        margin-bottom: 30px;
       }
       > .recommend-item {
         box-sizing: border-box;
@@ -173,8 +315,10 @@
 
 <template>
   <div class="bargain-container">
+    <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
+        <!-- 砍价商品信息 -->
         <div class="bargain-info">
           <div class="img-box">
             <img src="./../assets/images/good-large.png" alt="">
@@ -206,17 +350,49 @@
             </div>
           </div>
         </div>
+        <!-- 砍价进度 -->
         <div class="bargain-schedule">
           <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>10.00</span>, leaving <span class="n-2"><span class="dollar">$</span>39.8</span></p>
+          <div class="schedule">
+            <div class="active ball ball-right"></div>
+            <div class="schedule-item">
+              <span class="description">cut <span class="highlight">45%</span></span>
+            </div>
+            <div class="schedule-item ball ball-center">
+              <span class="description">Available for purchase</span>
+            </div>
+            <div class="schedule-item ball ball-right">
+              <span class="description">Take it free</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="bargain-content">
+      <!-- 商品详情 -->
       <div class="goods-detail">
 
       </div>
+      <!-- 帮砍团队 -->
+      <div class="team-box">
+        <p class="page-title">Bargaining team</p>
+        <ul class="team-list">
+          <li class="team-list-item" v-for="(item, index) in teamList" :key="index">
+              <div class="column">
+                  <div class="team-img first">
+                      <img :src="item.imgUrl" alt="">
+                  </div>
+                  <div class="team-info">
+                      <p class="team-name">{{item.name}}</p>
+                  </div>
+              </div>
+              <div class="column">cut <span class="dollar">$<span>{{item.money}}</span></span></div>
+          </li>
+      </ul>
+      </div>
+      <!-- 推荐商品 -->
       <div class="recommend-products">
-        <p class="recommend-products-title">More Products</p>
+        <p class="page-title">More Products</p>
         <div class="recommend-item">
           <img src="./../assets/images/good-large.png" alt="" class="products-photo">
           <p class="products-title">Water Women Bagba</p>
@@ -273,7 +449,40 @@ export default {
         sharingFriends:{
           show:true
         }
-      }
+      },
+      // 团队
+      teamList: [
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+          {
+              name: 'Chrsitin  Andy',
+              money: 20000,
+              imgUrl: require('@/assets/images/tabBar-me-active.png')
+          },
+      ]
     }
   }
 };
