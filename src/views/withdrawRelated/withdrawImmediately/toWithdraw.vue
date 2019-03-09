@@ -1,4 +1,23 @@
 <style lang="scss" scoped>
+.cash-out-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: 98px;
+  line-height: 98px;
+  text-align: center;
+  width: 100vw;
+  background: linear-gradient(
+    -45deg,
+    rgba(211, 12, 5, 1) 0%,
+    rgba(255, 54, 47, 1) 100%
+  );
+  font-size: 32px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+}
+
 .toWithdraw-container {
   width: 100%;
   box-sizing: border-box;
@@ -111,8 +130,8 @@
     }
   }
 
-  .cash-withdrawal-box{
-    .cash-withdrawal-tit{
+  .cash-withdrawal-box {
+    .cash-withdrawal-tit {
       margin-bottom: 82px;
     }
   }
@@ -135,7 +154,7 @@
     color: #888888;
     line-height: 36px;
 
-    p{
+    p {
       margin-bottom: 20px;
     }
   }
@@ -210,6 +229,10 @@
           2. Please pay attention to the "My - Withdrawal Record" to check the status of the redemption record.
         </p>
       </div>
+    </div>
+
+    <div class="cash-out-btn" @click.stop="">
+      Cash out
     </div>
   </div>
 </template>
