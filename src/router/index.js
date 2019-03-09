@@ -54,18 +54,12 @@ const curRouter = new Router({
             path: '/withdrawRelated',
             name: '提现相关tab主页面',
             component: () => import('../views/withdrawRelated/index.vue'),
-        },
-        
-        {
-            path: '/withdrawRelated/withdrawImmediately',
-            name: '立即提现',
-            component: () => import('../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'),
-            redirect: '/withdrawRelated/toWithdraw',
+            redirect: '/withdrawRelated/withdrawImmediately',
             children: [
                 {
-                    path: '/withdrawRelated/toWithdraw',
-                    name: '我要提现',
-                    component: () => import('../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'),
+                    path: '/withdrawRelated/withdrawImmediately',
+                    name: '立即提现',
+                    component: () => import('../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'),
                 },
                 {
                     path: '/withdrawRelated/withdrawalsRecord',
@@ -78,6 +72,11 @@ const curRouter = new Router({
                     component: () => import('../views/withdrawRelated/incomeBreakdown.vue'),
                 },
             ],
+        },
+        {
+            path: '/withdrawRelated/toWithdraw',
+            name: '我要提现',
+            component: () => import('../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'),
         },
 
         // 以下为v0.2版本得做的页面
