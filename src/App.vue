@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import {FBConfig} from "@/config/index.js";
+import axios from "axios";
+import { FBConfig } from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
 
 import { login } from "@/server/user.js";
@@ -49,6 +50,9 @@ export default {
             let userInfo = result.data;
             vm.$store.commit("setUserInfo", userInfo);
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
+            axios.defaults.headers.common["user_id"] = userInfo.user_id;
+            axios.defaults.headers.common["access_token"] =
+              userInfo.access_token;
             console.log("1111111111111", vm.$store.state.userInfo);
             console.log("222222222222", localStorage.getItem("userInfo"));
           }
