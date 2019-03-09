@@ -5,7 +5,7 @@
 
 <template>
   <div class="isBargainingList-container">
-      正在砍价列表页面
+    
   </div>
 </template>
 
