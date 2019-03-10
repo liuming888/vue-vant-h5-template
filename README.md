@@ -31,7 +31,8 @@ dialogVisible // 控制弹窗显示隐藏
 登录选择弹窗 dialogLoginSelect  帮砍页（所有需要登录才能操作的页面）
 新用户帮砍成功弹窗 dialogNewUsersHelpCutSuccessfully 帮砍页
 老用户帮砍成功弹窗 dialogOldUsersHelpCutSuccessfully 帮砍页
-
+地址列表页（也可用为组件） shippingAddress    商品购买页
 添加新收货地址         dialogPostAddAddress     （已有）收货地址页
+
 
 

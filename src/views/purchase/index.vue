@@ -1,296 +1,4 @@
-<style lang="scss" scoped>
-.purchase-container {
-  width: 100vw;
-  background: #f9f9f9;
-  min-height: calc(100vh - 1.24rem);
-  box-sizing: border-box;
-  padding-bottom: 50px;
-  overflow: hidden;
-}
-
-.top-info {
-  height: 48px;
-  padding: 0 30px;
-  box-align: border-box;
-  background: rgb(231, 212, 212);
-  display: flex;
-  align-items: center;
-
-  .info-box {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    font-family: Helvetica;
-    font-weight: 400;
-    color: rgba(51, 32, 31, 1);
-
-    .head-portrait {
-      width: 38px;
-      height: 38px;
-      margin-right: 10px;
-    }
-  }
-}
-
-.no-shipping-address {
-  width: 100%;
-  height: 93px;
-  padding: 0 30px;
-  box-align: border-box;
-  display: flex;
-  align-items: center;
-  position: relative;
-  background: #fff;
-
-  .add-icon {
-    width: 44px;
-    height: 44px;
-    margin-right: 20px;
-  }
-
-  .txt {
-    font-size: 28px;
-    font-family: Helvetica;
-    font-weight: 400;
-    color: rgba(50, 50, 50, 1);
-    margin-right: 195px;
-  }
-}
-
-.y-shipping-address {
-  width: 100%;
-  height: 169px;
-  background: #fff;
-  padding: 30px;
-  box-align: border-box;
-  display: flex;
-  align-items: center;
-
-  .position {
-    width: 32px;
-    height: 40px;
-  }
-
-  .shipping-address-content {
-    width: 590px;
-    height: 100%;
-    padding: 50px 30px 0 20px;
-    box-align: border-box;
-    font-size: 28px;
-    font-family: Helvetica;
-    font-weight: 400;
-    color: rgba(50, 50, 50, 1);
-
-    .top-box {
-      width: 100%;
-      display: flex;
-      margin-bottom: 20px;
-
-      .phone {
-        flex: 1;
-        text-align: right;
-      }
-    }
-  }
-}
-
-.commodity-info {
-  background: #f9f9f9;
-  width: 100%;
-  height: 238px;
-  padding: 13px 30px;
-  box-align: border-box;
-  display: flex;
-  margin-bottom: 31px;
-
-  .commodity-img {
-    width: 220px;
-    height: auto;
-    margin-right: 24px;
-  }
-
-  .commodity-content {
-    .commodity-tit {
-      padding-top: 15px;
-      width: 450px;
-      font-size: 28px;
-      font-family: Helvetica;
-      font-weight: 400;
-      color: rgba(50, 50, 50, 1);
-      line-height: 37px;
-      margin-bottom: 10px;
-    }
-
-    .type-num {
-      height: 19px;
-      font-size: 24px;
-      font-family: Helvetica;
-      font-weight: 400;
-      color: rgba(136, 136, 136, 1);
-      margin-bottom: 54px;
-    }
-
-    .price-quantity {
-      display: flex;
-      .current-price {
-        font-size: 42px;
-        font-weight: 500;
-        color: rgba(211, 12, 5, 1);
-        line-height: 37px;
-        margin-right: 21px;
-      }
-
-      .original-price {
-        font-size: 24px;
-        font-weight: 500;
-        text-decoration: line-through;
-        color: rgba(136, 136, 136, 1);
-      }
-
-      .commodity-num {
-        flex: 1;
-        text-align: right;
-      }
-    }
-  }
-}
-
-.commodity-type {
-  width: 100%;
-  padding: 0 30px;
-  box-sizing: border-box;
-  background: #fff;
-  margin-bottom: 20px;
-
-  .commodity-item {
-    width: 100%;
-    margin-bottom: 45px;
-
-    .tit {
-      font-size: 28px;
-      font-weight: 400;
-      color: rgba(50, 50, 50, 1);
-      margin-bottom: 30px;
-    }
-
-    .type-box {
-      display: flex;
-      flex-wrap: wrap;
-      //   align-items: center;
-
-      .type-item-box {
-        margin-right: 30px;
-        width: 110px;
-        height: 64px;
-        text-align: center;
-        line-height: 64px;
-        background: rgba(245, 245, 245, 1);
-        border-radius: 32px;
-        font-size: 24px;
-        font-family: Helvetica;
-        font-weight: 400;
-        color: rgba(50, 50, 50, 1);
-        margin-bottom: 26px;
-
-        &.cur {
-          background: rgba(255, 251, 251, 1);
-          border: 1px solid rgba(211, 12, 5, 1);
-          color:rgba(211, 12, 5, 1);
-        }
-
-        &:nth-of-type(5n) {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-}
-
-.paly-type-list {
-  width: 100%;
-  padding: 0 30px;
-  box-align: border-box;
-  font-size: 28px;
-  font-family: Helvetica;
-  font-weight: 400;
-  color: rgba(50, 50, 50, 1);
-  background: #fff;
-
-  .paly-item {
-    width: 100%;
-    height: 92px;
-    line-height: 92px;
-    overflow: hidden;
-    margin-bottom: 62px;
-
-    &:nth-last-of-type(1) {
-      margin-bottom: 0;
-    }
-
-    .paly-select-icon {
-      float: right;
-      width: 30px;
-      height: 30px;
-      position: relative;
-      top: 36px;
-      left: -6px;
-    }
-  }
-}
-
-.down-box {
-  width: 100vw;
-  height: 98px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  background: pink;
-  display: flex;
-
-  .left-box {
-    width: 465px;
-    line-height: 98px;
-    background: #fff;
-    padding-left: 30px;
-    padding-top: 12px;
-    box-sizing: border-box;
-    font-size: 24px;
-    display: flex;
-
-    .num-box {
-      margin-left: 10px;
-      font-size: 50px;
-      color: #d30c05;
-      vertical-align: bottom;
-      font-weight: 500;
-      position: relative;
-      top: -12px;
-
-      b {
-        font-size: 20px;
-        font-weight: 400;
-      }
-    }
-  }
-
-  .pay-immediately {
-    flex: 1;
-    height: 98px;
-    line-height: 98px;
-    text-align: center;
-    background: linear-gradient(
-      90deg,
-      rgba(211, 12, 5, 1) 0%,
-      rgba(246, 78, 1, 1) 100%
-    );
-    font-size: 32px;
-    font-family: Helvetica;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 1);
-  }
-}
-</style>
+<style lang="scss" scoped src="./index.scss"></style>
 
 <template>
   <div class="purchase-container">
@@ -336,12 +44,12 @@
       style="width:100vw;height:auto;margin-bottom:50px;">
 
     <div class="commodity-info">
-      <img v-lazy="require('@/assets/images/add.png')"
+      <img v-lazy="spu.pic_urls&&spu.pic_urls[0]||require('@/assets/images/add.png')"
         class="commodity-img">
 
       <div class="commodity-content">
         <div class="commodity-tit">
-          Casual Large Capacity Copartment Handbag women
+          {{spu.title}}
         </div>
 
         <div class="type-num">
@@ -367,15 +75,16 @@
 
     <ul class="commodity-type">
       <li class="commodity-item"
-        v-for="item in 2"
-        :key="item">
-        <p class="tit">Warna</p>
+        v-for="(specItem,index) in spu.specs"
+        :key="index">
+        <p class="tit">{{specItem.spec_name}}</p>
         <div class="type-box">
           <div class="type-item-box"
-            :class="{cur:item==1}"
-            v-for="item in 6"
-            :key="item">
-            386
+            v-for="(specValuesItem,index) in specItem.spec_values"
+            :class="{cur:specItem.spec_id==index}"
+            :key="specValuesItem"
+            @click="specItem.spec_id=index">
+            {{specValuesItem}}
           </div>
         </div>
       </li>
@@ -383,11 +92,12 @@
 
     <ul class="paly-type-list">
       <li class="paly-item"
-        v-for="item in 2"
+        v-for="(item,idx) in 2"
+        @click="paly_id=idx"
         :key="item">
         <span class="paly-txt">Papal payment</span>
         <img class="paly-select-icon"
-          :src="item==1?require('@/assets/images/select.png'):require('@/assets/images/select-fill.png')">
+          :src="paly_id==idx?require('@/assets/images/select-fill.png'):require('@/assets/images/select.png')">
       </li>
     </ul>
 
@@ -399,23 +109,99 @@
         </div>
       </div>
 
-      <div class="pay-immediately">
+      <div class="pay-immediately"
+        @click="goPaly">
         pay immediately
       </div>
+    </div>
+
+    <!-- 商品列表页以组件形式  默认阻止点击穿透 -->
+    <div class="dialog-box" v-if="showShippingAddressPage"
+      @click.stop="abc=1">
+      <shipping-address :showShippingAddressPage.sync="showShippingAddressPage" />
     </div>
   </div>
 </template>
 
 <script>
 import { Icon } from "vant";
+
+import shippingAddress from "../shippingAddress.vue";
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
+
+import { getInfo } from "@/server/goods.js";
+import { orderCreate } from "@/server/pay.js";
 export default {
   components: {
+    shippingAddress, // 地址列表组件
+
     ...vantCom
+  },
+  data() {
+    return {
+      spu: {
+        //类型：Object  必有字段  备注：商品
+        spu_id: 1, //类型：Number  必有字段  备注：商品id
+        title: "mock", //类型：String  必有字段  备注：商品标题
+        pic_urls: [
+          //类型：Array  必有字段  备注：图片地址列表
+          "mock" //类型：String  必有字段  备注：无
+        ],
+        specs: [
+          //类型：Array  必有字段  备注：规格列表
+          {
+            //类型：Object  必有字段  备注：无
+            spec_name: "mock", //类型：String  必有字段  备注：规格名
+            spec_values: [
+              //类型：Array  必有字段  备注：规格列表
+              "mock1", //类型：String  必有字段  备注：无
+              "mock2",
+              "mock3"
+            ],
+            spec_id: 0 // 当前选择下标
+          }
+        ],
+        price: "mock", //类型：String  必有字段  备注：商品售价
+        desp: "mock", //类型：String  必有字段  备注：商品详情描述
+        expire_ttl: "mock" //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒
+      },
+
+      paly_id: 0,
+
+      showShippingAddressPage:false  //显示地址列表页
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    async init() {
+      let result = await getInfo({ spu_id: this.$route.query.spuId });
+      if (result) {
+        this.spu = result.data.spu;
+      }
+    },
+    /**
+     * @description: 支付下单接口流程
+     */
+    async goPaly() {
+      let param = {
+        specs: spu.specs,
+        address_id: "地址id",
+        spu_id: spu.spu_id,
+        pay_type: "支付方式"
+      };
+      if (this.$route.query.bargain_id) {
+        param = { ...param, bargain_id: this.$route.query.bargain_id };
+      }
+      let result = await orderCreate(param);
+      if (result) {
+      }
+    }
   }
 };
 </script>
