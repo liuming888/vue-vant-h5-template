@@ -2,7 +2,7 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-03-10 23:27:31
+ * @LastEditTime: 2019-03-10 23:49:32
  */
 import Clipboard from 'clipboard';
 export default {

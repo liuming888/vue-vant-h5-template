@@ -149,7 +149,7 @@ export default {
     return {
       dialogs: {
         sharingFriends: {
-          show: true
+          show: false
         }
       },
 

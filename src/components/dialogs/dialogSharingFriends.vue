@@ -6,7 +6,7 @@
   left: 0;
   top: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@
 
 <template>
   <div class="dialogSharingFriends-container"
-    v-if="dialogVisible.show"
+    v-show="dialogVisible.show"
     @click.stop="abc=1">
     <!-- <van-popup v-model="dialogVisible.show">
       <h3> 分享好友</h3>
