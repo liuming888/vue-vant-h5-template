@@ -2,7 +2,7 @@ import $request from '../utils/api/request.js';
 
 // 分享赚
 export function shareSpu({ spu_id }) {
-    return $request.get({
+    return $request.post({
         url: '/api/v1/share/shareSpu',
         data: { spu_id },
     });

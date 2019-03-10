@@ -141,8 +141,8 @@
       </div>
     </div>
 
-    <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/>
-    <!-- <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingMakes" /> -->
+    <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
+    <dialog-sharing-makes  :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo" />
   </div>
 </template>
 
@@ -154,15 +154,15 @@ for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
 
-// import dialogSharingMakes from "./dialogSharingMakes.vue";
-import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
+// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
+import dialogSharingMakes from "./dialogSharingMakes.vue";
 
 import { shareSpu } from "@/server/share.js";
 export default {
   name: "commodityItem",
   components: {
-    // dialogSharingMakes, // 分享赚弹起浮窗
-    dialogSharingFriends, // 分享好友弹窗
+    // dialogSharingFriends, // 分享好友弹窗
+    dialogSharingMakes, // 分享赚弹起浮窗
 
     ...vantCom
   },
