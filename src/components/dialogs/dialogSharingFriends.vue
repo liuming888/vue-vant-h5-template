@@ -46,7 +46,7 @@
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 124px;
+  margin-bottom: 136px;
 }
 .copy-link {
   display: block;
@@ -97,11 +97,7 @@
       <!-- <button class="copy-link"
         :data-clipboard-text="mx_copyUrl">Copy Link</button> -->
 
-      <input type="text"
-        id="success_form_input"
-        readonly="readonly"
-        v-model="mx_copyUrl"
-        v-show="false" />
+      
       <button ref="copy"  class="copy-link"
         data-clipboard-action="copy"
         data-clipboard-target="#success_form_input"
@@ -110,6 +106,12 @@
       <div class="close-img">
 
       </div>
+      
+      <!-- 复制用到input -->
+      <input type="text"
+        id="success_form_input"
+        readonly="readonly"
+        v-model="mx_copyUrl"  style="margin-left:-99999px;" />
     </div>
   </div>
 </template>

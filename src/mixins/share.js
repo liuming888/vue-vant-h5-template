@@ -2,26 +2,34 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-03-10 19:02:23
+ * @LastEditTime: 2019-03-10 23:27:31
  */
 import Clipboard from 'clipboard';
 export default {
     data() {
         return {
-            mx_copyBtn: null ,//存储初始化复制按钮事件
-            mx_copyUrl: 'aaaa', // 复制的url
+            mx_copyBtn: null, //存储初始化复制按钮事件
+            mx_copyUrl: 'bbb', // 复制的url
         };
     },
     mounted() {
         this.mx_copyBtn = new Clipboard(this.$refs.copy);
     },
     methods: {
-        mx_copyLink(){
-            let _this = this;
-            let clipboard = _this.mx_copyBtn;
-            clipboard.on('success', function () {
+        /**
+         * @description:  点击复制按钮后
+         */
+        mx_copyLink() {
+            this.mx_copyUrl = 'ceshi';
+
+            let vm = this;
+            let clipboard = vm.mx_copyBtn;
+            clipboard.on('success', function() {
+                console.log('chenggongfuzhi');
+                vm.$toast('Copy success !');
             });
-            clipboard.on('error', function () {
+            clipboard.on('error', function() {
+                vm.$toast('Copy the failure !');
             });
         },
         /**
