@@ -84,6 +84,55 @@
     }
   }
 }
+
+.freebing-box {
+  position: relative;
+  margin: 0 30px;
+  padding-bottom: 67px;
+  // height: 300px;
+
+  > .freebing-title {
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 175px);
+    width: 350px;
+    height: 60px;
+    background: linear-gradient(
+      0deg,
+      rgba(246, 76, 1, 1),
+      rgba(246, 171, 1, 1)
+    );
+    border-radius: 0px 0px 8px 8px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+    color: #fff;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -2px;
+      left: -21px;
+      width: 0;
+      height: 0;
+      border-color: #ac4d07 transparent;
+      border-width: 0px 0px 21px 21px;
+      border-style: solid;
+    }
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -2px;
+      right: -21px;
+      width: 0;
+      height: 0;
+      border-color: #ac4d07 transparent;
+      border-width: 0px 21px 21px 0;
+      border-style: solid;
+    }
+  }
+}
 </style>
 
 <template>
@@ -96,11 +145,15 @@
           @click="testLogin">
       </div>
 
-      <template v-for="item of spuBargainList">
-        <!-- 抢购商品 -->
-        <freebing-box :key="item.bargain_info.spu_id"
-          :spuBargainItem="{...item.bargain_info,...item.spu}" v-if="item.bargain_info.status==2"/>
-      </template>
+      <div class="freebing-box">
+        <div class="freebing-title">Ongoing Freebies</div>
+        <template v-for="item of spuBargainList">
+          <!-- 抢购商品 -->
+          <freebing-box :key="item.bargain_info.spu_id"
+            :spuBargainItem="{...item.bargain_info,...item.spu}"
+            v-if="item.bargain_info.status==2" />
+        </template>
+      </div>
 
     </section>
     <section class="home-goods">
@@ -139,7 +192,7 @@ export default {
   },
   data() {
     return {
-      messageList:[],  // 顶部滚动消息
+      messageList: [], // 顶部滚动消息
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [],
       goodsList: [
@@ -168,11 +221,11 @@ export default {
     this.initGoodsList({ ...this.goodsListPageDat });
   },
   methods: {
-    async initHomeTip(){
-      let result=await getHomeTip();
-      if(result){
-        this.messageList=result.data.home_tips;
-        console.log('this.messageList: ', this.messageList);
+    async initHomeTip() {
+      let result = await getHomeTip();
+      if (result) {
+        this.messageList = result.data.home_tips;
+        console.log("this.messageList: ", this.messageList);
       }
     },
     async initMybargainSpus() {
@@ -182,7 +235,7 @@ export default {
         this.spuBargainList = result.data;
       }
     },
-    async initGoodsList({ page_size, page_num, is_all=0 }) {
+    async initGoodsList({ page_size, page_num, is_all = 0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
       if (result) {
         this.goodsList = result.data.spu_list;

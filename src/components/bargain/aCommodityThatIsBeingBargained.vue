@@ -1,51 +1,51 @@
 <style lang='scss' scoped>
-.freebing-box {
-  position: relative;
-  margin: 0 30px;
-  padding-bottom: 67px;
-  // height: 300px;
-  > .freebing-title {
-    position: absolute;
-    top: -20px;
-    left: calc(50% - 175px);
-    width: 350px;
-    height: 60px;
-    background: linear-gradient(
-      0deg,
-      rgba(246, 76, 1, 1),
-      rgba(246, 171, 1, 1)
-    );
-    border-radius: 0px 0px 8px 8px;
-    font-size: 28px;
-    text-align: center;
-    line-height: 60px;
-    color: #fff;
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -2px;
-      left: -21px;
-      width: 0;
-      height: 0;
-      border-color: #ac4d07 transparent;
-      border-width: 0px 0px 21px 21px;
-      border-style: solid;
-    }
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -2px;
-      right: -21px;
-      width: 0;
-      height: 0;
-      border-color: #ac4d07 transparent;
-      border-width: 0px 21px 21px 0;
-      border-style: solid;
-    }
-  }
-  > .freebing-container {
+// .freebing-box {
+//   position: relative;
+//   margin: 0 30px;
+//   padding-bottom: 67px;
+//   // height: 300px;
+//   > .freebing-title {
+//     position: absolute;
+//     top: -20px;
+//     left: calc(50% - 175px);
+//     width: 350px;
+//     height: 60px;
+//     background: linear-gradient(
+//       0deg,
+//       rgba(246, 76, 1, 1),
+//       rgba(246, 171, 1, 1)
+//     );
+//     border-radius: 0px 0px 8px 8px;
+//     font-size: 28px;
+//     text-align: center;
+//     line-height: 60px;
+//     color: #fff;
+//     &::before {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       top: -2px;
+//       left: -21px;
+//       width: 0;
+//       height: 0;
+//       border-color: #ac4d07 transparent;
+//       border-width: 0px 0px 21px 21px;
+//       border-style: solid;
+//     }
+//     &::after {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       top: -2px;
+//       right: -21px;
+//       width: 0;
+//       height: 0;
+//       border-color: #ac4d07 transparent;
+//       border-width: 0px 21px 21px 0;
+//       border-style: solid;
+//     }
+//   }
+   .freebing-container {
     padding: 24px;
     background-color: #fff;
     border-radius: 20px;
@@ -58,12 +58,12 @@
         margin-right: 30px;
       }
       > .good-detail {
-            overflow: hidden;
+        overflow: hidden;
         > .good-title {
           font-size: 30px;
           color: #323232;
           overflow: hidden;
-          text-overflow:ellipsis;
+          text-overflow: ellipsis;
           white-space: nowrap;
         }
         > .progress {
@@ -77,6 +77,7 @@
           line-height: 28px;
           color: #fff;
           font-size: 20px;
+          overflow: hidden;
           > img {
             // z-index: 1;
             position: absolute;
@@ -181,12 +182,12 @@
     }
   }
   // background-color: #fff;
-}
+// }
 </style>
 
 <template>
-  <div class="freebing-box">
-    <div class="freebing-title">Ongoing Freebies</div>
+  <div>
+    <!-- <div class="freebing-title">Ongoing Freebies</div> -->
     <div class="freebing-container">
       <div class="good-box">
         <img class="good-img"
@@ -239,7 +240,7 @@
 <script>
 // import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
-import countDown from '@/components/countDown.vue'
+import countDown from "@/components/countDown.vue";
 
 import { shareBargain } from "@/server/share.js";
 export default {

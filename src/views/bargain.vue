@@ -239,16 +239,18 @@ export default {
         let result = await this.goBargainChop({
           spu_id: this.$route.query.spuId
         });
-        if(result){
-          const chop_info=result.data.chop_info;
-          this.$router.push({
-            path:"/bargain",
-            query:{
-              ...this.$route.query,
-              bargainId:chop_info.bargain_id
-            }
-          })
-        }
+        // if(result){
+        //   alert(1);
+        //   console.log("66666666666666")
+        //   const chop_info=result.data.chop_info;
+        //   this.$router.push({
+        //     path:"/bargain",
+        //     query:{
+        //       ...this.$route.query,
+        //       bargainId:chop_info.bargain_id
+        //     }
+        //   })
+        // }
       }
       
       this.initBargainInfo();
@@ -258,7 +260,16 @@ export default {
     },
     async goBargainChop({ bargain_id, spu_id }) {
       let result = await bargainChop({ bargain_id, spu_id });
-      console.log("result: ", result);
+       if(result){
+          const chop_info=result.data.chop_info;
+          this.$router.push({
+            path:"/bargain",
+            query:{
+              ...this.$route.query,
+              bargainId:chop_info.bargain_id
+            }
+          })
+        }
     },
     /**
      * @description: 获取商品信息
@@ -308,11 +319,11 @@ export default {
         is_all: 0
       });
       if (result) {
-        this.spu_list = result.data.spu_list;
+        this.spu_list = result.data&&result.data.spu_list;
       }
     },
     async openSharingFriendsDialog() {
-      let result = await shareSpu({ spu_id: this.$route.spu_id });
+      let result = await shareSpu({ spu_id: this.$route.query.spuId });
       if (result) {
         this.shareInfo = result.data.share_info;
         this.dialogs.sharingFriends.show = true;
