@@ -156,7 +156,7 @@
       </div>
 
     </section>
-    <section class="home-goods">
+    <section class="home-goods" v-if="goodsList.length>0">
       <div class="home-goods-title">DAILY DISCOVER</div>
       <ul class="home-goods-list">
         <commodity-item v-for="(item, index) of goodsList"
@@ -195,20 +195,7 @@ export default {
       messageList: [], // 顶部滚动消息
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [],
-      goodsList: [
-        //类型：Array  必有字段  备注：砍价商品列表
-        {
-          //类型：Object  必有字段  备注：无
-          spu_id: 1, //类型：Number  必有字段  备注：商品id
-          title: "mock", //类型：String  必有字段  备注：商品标题
-          price: 1, //类型：Number  必有字段  备注：商品售价
-          deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
-          spu_pics: [
-            "http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg",
-            "https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg"
-          ]
-        }
-      ],
+      goodsList: [],
       goodsListPageDat: {
         page_size: 10,
         page_num: 1
@@ -237,7 +224,7 @@ export default {
     },
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
-      if (result) {
+      if (result&& result.data) {
         this.goodsList = result.data.spu_list;
       }
     },

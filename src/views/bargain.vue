@@ -318,8 +318,8 @@ export default {
         page_num: 1,
         is_all: 0
       });
-      if (result) {
-        this.spu_list = result.data&&result.data.spu_list;
+      if (result&&result.data) {
+        this.spu_list = result.data.spu_list;
       }
     },
     async openSharingFriendsDialog() {
