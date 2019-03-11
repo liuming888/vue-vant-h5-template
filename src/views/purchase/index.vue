@@ -9,37 +9,35 @@
         <span class="info-txt">Michelle got a freebie just now</span>
       </div>
     </div>
-
-    <!-- 无收货地址 -->
-    <!-- <div class="no-shipping-address">
-      <img v-lazy="require('@/assets/images/add.png')"
-        class="add-icon">
-      <div class="txt">Tambahkan alamat secara manual</div>
-      <van-icon name="arrow" />
-    </div> -->
-
     <!-- 显示的收货地址 -->
-    <div class="y-shipping-address">
+    <div v-if="myAddress && myAddress.id" class="y-shipping-address">
       <img src="~@/assets/images/position.png"
         class="position">
 
       <div class="shipping-address-content">
         <div class="top-box">
           <span class="Receiver">
-            Receiver: duoduo
+            Receiver: {{myAddress.username}}
           </span>
 
-          <span class="phone">13502866688</span>
+          <span class="phone">{{myAddress.telephone}}</span>
         </div>
         <div class="receiving-address">
-          Receiving address: Xintai Technology Building,Tianhe District, Guangzhou
+          Receiving address: {{myAddress.address_one}}{{myAddress.address_two}}
         </div>
       </div>
 
       <van-icon name="arrow"
         style="font-size:22px;color:#888888;" />
     </div>
-
+    <!-- 无收货地址 -->
+    <div v-else class="no-shipping-address" @click="showAddressDialog.show = true">
+      <img v-lazy="require('@/assets/images/add.png')"
+        class="add-icon">
+      <div class="txt">Tambahkan alamat secara manual</div>
+      <van-icon name="arrow" />
+    </div>
+    
     <img v-lazy="require('@/assets/images/Addressmodification.png')"
       style="width:100vw;height:auto;margin-bottom:50px;">
 
@@ -59,11 +57,11 @@
         <div class="price-quantity">
           <span class="current-price">
             <b style="font-size:1px;">Rp</b>
-            0.00
+            {{spu.price}}
           </span>
 
           <span class="original-price">
-            Rp299.000
+            Rp{{spu.original_price}}
           </span>
 
           <span class="commodity-num">
@@ -105,7 +103,7 @@
       <div class="left-box">
         Actual payment:
         <div class="num-box">
-          <b>Rp</b>0.00
+          <b>Rp</b>{{spu.price}}
         </div>
       </div>
 
@@ -120,6 +118,7 @@
       @click.stop="abc=1">
       <shipping-address :showShippingAddressPage.sync="showShippingAddressPage" />
     </div>
+    <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
   </div>
 </template>
 
@@ -127,6 +126,7 @@
 import { Icon } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
+import dialogPostAddAddress from '@/components/dialogs/dialogPostAddAddress.vue'
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
@@ -135,10 +135,11 @@ for (let k in obj) {
 
 import { getInfo } from "@/server/goods.js";
 import { orderCreate } from "@/server/pay.js";
+import { getMyAddress } from '@/server/user.js'
 export default {
   components: {
     shippingAddress, // 地址列表组件
-
+    dialogPostAddAddress,
     ...vantCom
   },
   data() {
@@ -172,17 +173,28 @@ export default {
 
       paly_id: 0,
 
-      showShippingAddressPage:false  //显示地址列表页
+      showShippingAddressPage:false,  //显示地址列表页
+      showAddressDialog: {
+        show: false
+      },
+      myAddress: []
     };
   },
   created() {
     this.init();
+    this.getMyAddressInfo();
   },
   methods: {
     async init() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
       if (result) {
         this.spu = result.data.spu;
+      }
+    },
+    async getMyAddressInfo() {
+      const result =  await getMyAddress()
+      if (result) {
+        this.myAddress= (result.data.address_list.filter(item => item.is_default === 1))[0]
       }
     },
     /**

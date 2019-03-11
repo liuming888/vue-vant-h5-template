@@ -178,7 +178,7 @@
                   display: inline-block;
                   margin-left: 10px;
                   position: relative;
-                  width:140px;
+                  width:120px;
                   height:16px;
                   background:rgba(255,255,255,1);
                   border:1px solid rgba(252,123,119,1);
@@ -254,8 +254,8 @@
             <p class="title">{{item.spu.title}}</p>
             <div class="price-box">
               <div class="price-item">
-                <p class="now-price"><span>Rp</span>{{item.spu.price}}</p>
-                <p class="real-price"><span>Rp</span>{{item.spu.original_price}}</p>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after}}</p>
+                <p class="real-price"><span>Rp</span>{{item.bargain_info.price}}</p>
               </div>
               <div class="price-item">
                 <div class="btn" @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
@@ -277,19 +277,19 @@
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
-            <count-down :dateDiff="3333"></count-down>
+            <count-down :dateDiff="item.spu.expire_ttl"></count-down>
             <div class="price-box">
               <div class="price-item">
-                <div class="msg-box">cut Rp 256.653</div>
-                <p class="now-price"><span>Rp</span>{{item.spu.price}}</p>
-                <p class="real-price"><span>Rp</span>{{item.spu.original_price}}</p>
+                <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount}}</div>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after}}</p>
+                <p class="real-price"><span>Rp</span>{{item.bargain_info.price}}</p>
               </div>
               <div class="price-item">
                 <div class="btn" @click="jumpCurBargainPage(item.spu.spu_id)">Go On</div>
                 <div class="cut-schedule">
-                  <span class="cut">cut <span>60%</span></span>
+                  <span class="cut">cut <span>{{item.bargain_info.bargain_rate}}%</span></span>
                   <div class="schedule">
-                    <div class="active"></div>
+                    <div class="active" :style="{'width': `${item.bargain_info.bargain_rate}%`}"></div>
                   </div>
                 </div>
               </div>
