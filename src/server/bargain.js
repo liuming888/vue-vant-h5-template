@@ -17,10 +17,10 @@ export function getHelpBargainList({ bargain_id, page_size, page_num }) {
 }
 
 // 砍价接口
-export function bargainChop({ type, bargain_id }) {
+export function bargainChop({  bargain_id, spu_id  }) {
     return $request.post({
         url: '/api/v1/bargain/chop',
-        data: { type, bargain_id },
+        data: { spu_id, bargain_id },
     });
 }
 

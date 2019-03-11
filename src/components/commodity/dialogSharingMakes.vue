@@ -19,6 +19,7 @@
     100%;
   padding-top: 320px;
   box-sizing: border-box;
+  position: relative;
 
   .tit {
     text-align: center;
@@ -38,7 +39,8 @@
   position: relative;
 
   img {
-    width: 110px;
+    width: 100px;
+    margin-right: 20px;
     height: auto;
   }
 }
@@ -47,22 +49,31 @@
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 120px;
+  margin-bottom: 135px;
+  font-size:26px;
 }
 .copy-link {
   display: block;
   background: none;
-  padding-left: 230px;
+  // padding-left: 230px;
   font-size: 34px;
   font-weight: bold;
   color: rgba(211, 12, 5, 1);
+  position: absolute;
+  left: 230px;
+  bottom:50px;
 }
 
-.close-img{
+.close-img {
   display: block;
   width: 70px;
   height: auto;
-  margin: 96px auto 0;
+  // margin: 96px auto 0;
+  position: absolute;
+  bottom:-90px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 </style>
 
@@ -92,9 +103,18 @@
       <h5 class="tit">Share To</h5>
 
       <div class="share-types">
-        <img src="~@/assets/images/fb.png"
+        <img src="@/assets/images/messenger.png"
           class="fb"
           alt="fb"
+          @click="mx_shareMessenger">
+
+        <img src="@/assets/images/line.png"
+          @click="mx_shareLine">
+
+        <img src="@/assets/images/whatsapp.png"
+          @click="mx_shareWhatsapp">
+          
+        <img src="@/assets/images/facbook.png"
           @click="mx_shareFacebook">
       </div>
 
@@ -108,25 +128,17 @@
       <button ref="copy"
         class="copy-link"
         data-clipboard-action="copy"
-        data-clipboard-target="#success_form_input"
+        :data-clipboard-text="shareInfo.share_url"
         @click="mx_copyLink">Copy Link</button>
 
       <img src="@/assets/images/guanbi@2x.png"
-        class="close-img"  @click="closeDialog">
-
-      <!-- 复制用到input -->
-      <input type="text"
-        id="success_form_input"
-        readonly="readonly"
-        v-model="mx_copyUrl"
-        style="margin-left:-99999px;"/>
+        class="close-img"
+        @click="closeDialog">
     </div>
   </div>
 </template>
 
 <script>
-import { FBConfig } from "@/config/index.js";
-
 import share from "@/mixins/share.js";
 export default {
   mixins: [share],
@@ -144,20 +156,20 @@ export default {
       type: Object,
       default() {
         return {
-          shareUrl: window.location.origin + "/forBargain", // 从点击打开的链接
-          shareTitle: "分享标题",
-          shareDescription: "分享的描述",
-          shareImage: "https://s.pinimg.com/images/facebook_share_image.png", //  分享的预览图（图片有限制）
-          quote:
-            "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
+          share_url: window.location.origin + "/forBargain", // 从点击打开的链接
+          share_title: "分享标题",
+          share_desp: "分享的描述",
+          share_image: "https://s.pinimg.com/images/facebook_share_image.png" //  分享的预览图（图片有限制）
+          // quote:
+          //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
           // hashtag:"FB分享的tag标签"
         };
       }
     }
   },
   methods: {
-    closeDialog(){
-      this.$emit("update:dialogVisible",{show:false});
+    closeDialog() {
+      this.$emit("update:dialogVisible", { show: false });
     }
   }
 };

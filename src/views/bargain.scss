@@ -29,7 +29,7 @@
                         line-height: 37px;
                     }
                     > .count-down {
-                        margin: 22px 0;
+                        margin: 30px 0;
                         font-size: 24px;
                         color: #585858;
                         line-height: 31px;
@@ -48,6 +48,7 @@
                         display: flex;
                         align-items: flex-end;
                         > .price-box-item {
+                            width: 100px;
                             flex: auto;
                             &:nth-of-type(2) {
                                 width: 100px;
@@ -68,10 +69,11 @@
                                 }
                             }
                             > .p-t-2 {
+                                min-width: 160px;
                                 display: block;
                                 padding: 0 6px;
                                 background-color: #d30c05;
-                                line-height: 22px;
+                                line-height: 24px;
                                 color: #fff;
                                 font-size: 16px;
                                 border-radius: 6px;
@@ -79,6 +81,9 @@
                             > .p-n-1 {
                                 color: #d30c05;
                                 font-size: 41px;
+                                position: relative;
+                                left: 30px;
+                                top:10px;
                                 > span {
                                     font-size: 22px;
                                 }
@@ -87,6 +92,8 @@
                                 color: #888;
                                 font-size: 24px;
                                 margin-bottom: 6px;
+                                position: relative;
+                                top:6px;
                             }
                         }
                     }

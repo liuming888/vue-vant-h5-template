@@ -182,7 +182,7 @@ export default {
         this.spuBargainList = result.data;
       }
     },
-    async initGoodsList({ page_size, page_num, is_all }) {
+    async initGoodsList({ page_size, page_num, is_all=0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
       if (result) {
         this.goodsList = result.data.spu_list;

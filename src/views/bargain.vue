@@ -35,9 +35,9 @@
           <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_price||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.left_price||spu.price}}</span></p>
           <div class="schedule">
             <div class="active ball ball-right"
-              :style="{'width':bargain_info.left_price *100+'%'}"></div>
+              :style="{'width':bargain_info.bargain_rate+'%'}"></div>
             <div class="schedule-item">
-              <span class="description">cut <span class="highlight">{{bargain_info.bargain_price / bargain_info.left_price *100}}%</span></span>
+              <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
             </div>
             <div class="schedule-item ball ball-center">
               <span class="description">Available for purchase</span>
@@ -75,7 +75,7 @@
         class="goods-detail">
         <!-- 商品详情图 -->
         <p class="page-title">Product Petails</p>
-        <img v-for="(item, index) in spu.spu_pics" :key="index" :src="item" alt="">
+        <img v-lazy="spu.spu_pics[0]">
       </div>
 
       <!-- 推荐商品 -->
@@ -110,7 +110,8 @@
         <p>buy now</p>
       </div>
 
-      <div class="share-friends" @click.stop="openSharingFriendsDialog">
+      <div class="share-friends"
+        @click.stop="openSharingFriendsDialog">
         Share to friends
       </div>
     </div>
@@ -123,7 +124,7 @@
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
-import countDown from '@/components/countDown.vue'
+import countDown from "@/components/countDown.vue";
 // import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
@@ -233,11 +234,31 @@ export default {
     this.init();
   },
   methods: {
-    init() {
-      this.initSpuInfo();
+    async init() {
+      if (!this.$route.query.bargainId) {
+        let result = await this.goBargainChop({
+          spu_id: this.$route.query.spuId
+        });
+        if(result){
+          const chop_info=result.data.chop_info;
+          this.$router.push({
+            path:"/bargain",
+            query:{
+              ...this.$route.query,
+              bargainId:chop_info.bargain_id
+            }
+          })
+        }
+      }
+      
       this.initBargainInfo();
       this.initHelpBargainList();
+      this.initSpuInfo();
       this.initSpuList();
+    },
+    async goBargainChop({ bargain_id, spu_id }) {
+      let result = await bargainChop({ bargain_id, spu_id });
+      console.log("result: ", result);
     },
     /**
      * @description: 获取商品信息
@@ -257,15 +278,11 @@ export default {
      */
     async initBargainInfo() {
       let result = await getBargainInfo({
-        bargain_id: this.$route.query.bargain_id
+        bargain_id: this.$route.query.bargainId
       });
       if (result) {
-        const { bargain_info, spu } = result.data;
-        this.bargain_info = bargain_info;
-        for (let k in spu) {
-          this.spu[k] = spu[k];
-        }
-        console.log("11111111111111", this.spu)
+        this.bargain_info = result.data;
+        console.log('this.bargain_info: ', this.bargain_info);
       }
     },
     /**
@@ -294,11 +311,11 @@ export default {
         this.spu_list = result.data.spu_list;
       }
     },
-    async openSharingFriendsDialog(){
-      let result=await shareSpu({spu_id:this.$route.spu_id});
-      if(result){
-        this.shareInfo=result.data.share_info;
-        this.dialogs.sharingFriends.show=true;
+    async openSharingFriendsDialog() {
+      let result = await shareSpu({ spu_id: this.$route.spu_id });
+      if (result) {
+        this.shareInfo = result.data.share_info;
+        this.dialogs.sharingFriends.show = true;
       }
     },
     jumpCurBargainPage(spu_id) {
@@ -312,7 +329,7 @@ export default {
     },
 
     jumpBuyPage() {
-      this.$router.push({ path: "/purchase",query:{...this.$route.query} });
+      this.$router.push({ path: "/purchase", query: { ...this.$route.query } });
     },
     /**
      * @description: 时间定时器
