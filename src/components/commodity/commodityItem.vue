@@ -216,7 +216,7 @@ export default {
     };
   },
   created() {
-    console.log("66666666666666666666", this.itemData);
+    // console.log("66666666666666666666", this.itemData);
   },
   methods: {
     /**

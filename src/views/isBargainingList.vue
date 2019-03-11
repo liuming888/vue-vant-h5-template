@@ -133,7 +133,7 @@
             white-space: nowrap;
           }
           > .count-down {
-            margin: 22px 0 0 0;
+            margin: 0;
             font-size: 24px;
             color: #585858;
             line-height: 31px;
@@ -239,45 +239,26 @@
 }
 </style>
 
-
 <template>
   <div class="isBargainingList-container">
-    <div class="finish-box">
+    <div class="finish-box" v-if="finishList.length > 0">
       <div class="banner">
         <img src="./../assets/images/bargain-finish-banner.png" alt="">
       </div>
       <ul class="goods-list">
-        <li class="goods-item">
+        <li class="goods-item" v-for="(item, index) in finishList" :key="index">
           <div class="img-box">
             <img src="./../assets/images/good-large.png" alt="">
           </div>
           <div class="detail">
-            <p class="title">Casual Large Capacity Copartment Handbag women</p>
+            <p class="title">{{item.spu.title}}</p>
             <div class="price-box">
               <div class="price-item">
-                <p class="now-price"><span>Rp</span>0.00</p>
-                <p class="real-price"><span>Rp</span>99.99</p>
+                <p class="now-price"><span>Rp</span>{{item.spu.price}}</p>
+                <p class="real-price"><span>Rp</span>{{item.spu.original_price}}</p>
               </div>
               <div class="price-item">
-                <div class="btn">To Buy</div>
-                <p class="completed">completed</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="goods-item">
-          <div class="img-box">
-            <img src="./../assets/images/good-large.png" alt="">
-          </div>
-          <div class="detail">
-            <p class="title">Casual Large Capacity Copartment Handbag women</p>
-            <div class="price-box">
-              <div class="price-item">
-                <p class="now-price"><span>Rp</span>0.00</p>
-                <p class="real-price"><span>Rp</span>99.99</p>
-              </div>
-              <div class="price-item">
-                <div class="btn">To Buy</div>
+                <div class="btn" @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
                 <p class="completed">completed</p>
               </div>
             </div>
@@ -285,51 +266,26 @@
         </li>
       </ul>
     </div>
-    <div class="ing-box">
+    <div class="ing-box" v-if="ingList.length > 0">
       <div class="banner">
         <img src="./../assets/images/bargin-active-banner.png" alt="">
       </div>
       <ul class="goods-list">
-        <li class="goods-item">
+        <li class="goods-item" v-for="(item, index) in ingList" :key="index">
           <div class="img-box">
             <img src="./../assets/images/good-large.png" alt="">
           </div>
           <div class="detail">
-            <p class="title">Casual Large Capacity Copartment Handbag women</p>
+            <p class="title">{{item.spu.title}}</p>
             <count-down :dateDiff="3333"></count-down>
             <div class="price-box">
               <div class="price-item">
                 <div class="msg-box">cut Rp 256.653</div>
-                <p class="now-price"><span>Rp</span>0.00</p>
-                <p class="real-price"><span>Rp</span>99.99</p>
+                <p class="now-price"><span>Rp</span>{{item.spu.price}}</p>
+                <p class="real-price"><span>Rp</span>{{item.spu.original_price}}</p>
               </div>
               <div class="price-item">
-                <div class="btn">Go On</div>
-                <div class="cut-schedule">
-                  <span class="cut">cut <span>60%</span></span>
-                  <div class="schedule">
-                    <div class="active"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="goods-item">
-          <div class="img-box">
-            <img src="./../assets/images/good-large.png" alt="">
-          </div>
-          <div class="detail">
-            <p class="title">Casual Large Capacity Copartment Handbag women</p>
-            <count-down :dateDiff="2000"></count-down>
-            <div class="price-box">
-              <div class="price-item">
-                <div class="msg-box">cut Rp 256.653</div>
-                <p class="now-price"><span>Rp</span>0.00</p>
-                <p class="real-price"><span>Rp</span>99.99</p>
-              </div>
-              <div class="price-item">
-                <div class="btn">Go On</div>
+                <div class="btn" @click="jumpCurBargainPage(item.spu.spu_id)">Go On</div>
                 <div class="cut-schedule">
                   <span class="cut">cut <span>60%</span></span>
                   <div class="schedule">
@@ -348,11 +304,47 @@
 <script>
 import aCommodityThatIsBeingBargained from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
 import countDown from '@/components/countDown.vue'
+import { getMyBargainSpus } from '@/server/bargain.js'
 export default {
   data() {
     return {
-      
+      finishList: [],
+      ingList: []
     }
+  },
+  created() {
+    this.getMyBargainInfo()
+  },
+  methods: {
+    async getMyBargainInfo() {
+      const params = {
+        page_size: 10,
+        page_num: 1
+      }
+      try {
+        const result = await getMyBargainSpus(params)
+        this.finishList = result.data.filter(item => item.bargain_info.status === 2)
+        this.ingList = result.data.filter(item => item.bargain_info.status === 1)
+      } catch (error) {
+        
+      }
+    },
+    jumpCurBargainPage(spu_id) {
+      this.$router.push({
+        path: "/bargain",
+        query: {
+          spuId: spu_id
+        }
+      });
+    },
+    jumpPurchasePage(spu_id) {
+      this.$router.push({
+        path: "/purchase",
+        query: {
+          spuId: spu_id
+        }
+      });
+    },
   },
   components: {
     aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
