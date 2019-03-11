@@ -1,48 +1,18 @@
 <style lang="scss" scoped>
 @keyframes mes {
   0% {
-    transform: translateX(0);
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateX(-100vw);
-  }
-  21% {
-    transform: translateX(-100vw);
-    transform: translateY(-70px);
-  }
-  22% {
     transform: translateX(100vw);
-    transform: translateY(-70px);
   }
-  23% {
-    transform: translateX(100vw);
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateX(60vw);
-    transform: translateY(0);
-  }
-
-  60% {
-    transform: translateX(30vw);
-    transform: translateY(0);
-  }
-  // 50% {
-  //   transform: translateX(-00px);
-  // }
-
+ 
   100% {
-    transform: translateX(0);
-    transform: translateY(0);
+     transform: translateX(-100vw);
   }
 }
 
 .home-top-msg {
   position: absolute;
   top: 21px;
-  left: 0;
+  left: 100vw;
   // width: 355px;
   margin: 0 23px;
   padding-right: 16px;
@@ -57,11 +27,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  animation: mes 10s infinite;
+  animation: mes 20s infinite;
 
   > .home-top-msg-img {
     width: 38px;
     height: 38px;
+    border-radius:50%; 
     position: absolute;
     top: 5px;
     left: 16px;
@@ -73,7 +44,7 @@
 <template>
   <div class="home-top-msg">
     <img class="home-top-msg-img"
-      src="@/assets/images/tabBar-me-active.png">
+      v-lazy="curDat&&curDat.avatar">
     <span>{{curDat&&curDat.username}} got a freebie just now</span>
   </div>
 </template>
@@ -100,7 +71,7 @@ export default {
   mounted() {
     const timer = setInterval(() => {
       this.curIdx = ~~(Math.random() * this.messageList.length);
-    }, 1000);
+    }, 20000);
     this.$once("hook:beforeDestroy", () => {
       clearInterval(timer);
     });
