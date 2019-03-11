@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2226a2"],{cf09:function(n,c,t){"use strict";t.r(c);var e=function(){var n=this,c=n.$createElement,t=n._self._c||c;return t("div",{staticClass:"withdrawalsRecord-container"},[n._v("\n   提现记录\n")])},a=[],s={},r=s,i=t("8c9c"),l=Object(i["a"])(r,e,a,!1,null,"403772d6",null);c["default"]=l.exports}}]);
