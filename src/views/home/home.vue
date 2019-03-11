@@ -92,7 +92,8 @@
       <!-- 用户消息 -->
       <user-picking-up-message></user-picking-up-message>
       <div class="home-banner">
-        <img  v-lazy="require('@/assets/images/home-banner.png')">
+        <img v-lazy="require('@/assets/images/home-banner.png')"
+          @click="testLogin">
       </div>
       <!-- 抢购商品 -->
       <freebing-box v-for="item of spuBargainList"
@@ -123,6 +124,8 @@ import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
 import commodityItem from "@/components/commodity/commodityItem.vue";
 
+import axios from "axios";
+import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
@@ -135,6 +138,7 @@ export default {
     return {
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [
+        /* 
         //类型：Array  必有字段  备注：无
         {
           //类型：Object  必有字段  备注：无
@@ -145,6 +149,7 @@ export default {
           expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
           bargain_id: "mock" //类型：String  必有字段  备注：砍价号
         }
+       */
       ],
       goodsList: [
         //类型：Array  必有字段  备注：砍价商品列表
@@ -154,18 +159,21 @@ export default {
           title: "mock", //类型：String  必有字段  备注：商品标题
           price: 1, //类型：Number  必有字段  备注：商品售价
           deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
-          spu_pics: ["http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg","https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg"]
+          spu_pics: [
+            "http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg",
+            "https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg"
+          ]
         }
       ],
       goodsListPageDat: {
-        page_size: 15,
+        page_size: 10,
         page_num: 1
       }
     };
   },
   created() {
     this.initMybargainSpus();
-    // this.initGoodsList({});
+    this.initGoodsList({ ...this.goodsListPageDat });
   },
   methods: {
     async initMybargainSpus() {
@@ -175,11 +183,48 @@ export default {
         this.spuBargainList = result.data.spu_bargain_list;
       }
     },
-    async initGoodsList({ page_size = 15, page_num = 1, is_all = 0 }) {
+    async initGoodsList({ page_size, page_num, is_all }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
       if (result) {
         this.goodsList = result.data.spu_list;
       }
+    },
+    async testLogin() {
+      let loginInfo = await window.$faceBookApi.loginFB();
+      console.warn("loginInfo: ", loginInfo);
+      if (loginInfo) {
+        let {
+          authResponse: { accessToken },
+          id,
+          name,
+          pic_square
+        } = loginInfo;
+
+        let result = await login({
+          tp_id: id,
+          tp_token: accessToken,
+          tp_type: 1
+        });
+        //   let result = await login({
+        //   tp_id: "104497707249033",
+        //   tp_token: "EAAMALQt1F2EBAPIkLNSuTpi4YftnZBUoQPo0OI0Y3Ea9g00LoA2N0w78YV1xYI8KdQ1XIoOEzE6iEFVP702l0mTKzsASYn1jSqCcOeBlNrzgt80PWbNXrKrEpgnmrRdxMcjVXG6Kjd5LQDDYsXmLJWMSRVofQqwIahzoAAmRCWyRwb6UadzUyT368lug39CWd8Oje3gZDZD",
+        //   tp_type: 1
+        // });
+        console.log("result: ", result);
+        if (result) {
+          let userInfo = result.data;
+          this.$store.commit("setUserInfo", userInfo);
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          axios.defaults.headers.common["user_id"] = userInfo.user_id;
+          axios.defaults.headers.common["access_token"] = userInfo.access_token;
+          this.$emit("update:dialogVisible", { show: false });
+          if (this.jumpUrl) {
+            this.$router.push({ path: this.jumpUrl });
+          }
+          return true;
+        }
+      }
+      return false;
     }
   }
 };

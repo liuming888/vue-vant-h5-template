@@ -4,8 +4,20 @@ import axios from 'axios';
 // import md5 from 'md5';
 import config from './config';
 
-axios.defaults.headers.common['user_id'] = "";
-axios.defaults.headers.common['access_token'] = "";
+let user_id="";
+let access_token="";
+// if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="mock"){
+//     user_id=1;
+//     access_token = 'c576c451d3d74e0d9203a177e751d71d';
+// }
+let userStr=localStorage.getItem("userInfo");
+if (userStr){
+    let userInfo = JSON.parse(userStr);
+    user_id = userInfo.user_id;
+    access_token = userInfo.access_token;
+}
+axios.defaults.headers.common['user_id'] = user_id;
+axios.defaults.headers.common['access_token'] = access_token;
 
 var instance = axios.create();
 
@@ -57,6 +69,8 @@ instance.interceptors.response.use(
         try {
             if (response.data.code == curCode) {
                 return response.data;
+            } else if (response.data.code==3){
+                
             } else {
                 throw response.data;
             }
