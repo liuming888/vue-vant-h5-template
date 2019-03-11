@@ -26,7 +26,7 @@ export default {
   },
   props: {
     dateDiff: {
-      type: String,
+      // type: String,
       default: '0'
     }
   },
