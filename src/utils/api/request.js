@@ -16,6 +16,9 @@ instance.defaults.withCredentials = true;
 
 Vue.prototype.$loaddingNum = 0;
 
+const curCode = process.env.NODE_ENV=="mock"?1:0; // 当前代表成功的code (mock 1为成功)
+console.log('curCode: ', curCode);
+
 // 请求拦截
 instance.interceptors.request.use(
     config => {
@@ -52,7 +55,7 @@ instance.interceptors.response.use(
             Vue.prototype.$toast.clear();
         }
         try {
-            if (response.data.code == 0) {
+            if (response.data.code == curCode) {
                 return response.data;
             } else {
                 throw response.data;
@@ -75,7 +78,7 @@ instance.interceptors.response.use(
         if (Vue.prototype.$loaddingNum <= 0) {
             Vue.prototype.$toast.clear();
         }
-        return Promise.reject(error);
+        return false;
     }
 );
 

@@ -5,11 +5,12 @@
 
 <template>
   <div class="toWithdraw-container">
-    我要提现
+    woyaotixian
   </div>
 </template>
 
 <script>
 export default {
+ 
 };
 </script>

@@ -1,317 +1,4 @@
-<style lang="scss" scoped>
-.bargain-container {
-  > .bargain-header {
-    position: relative;
-    padding: 40px 30px 150px 30px;
-    height: 400px;
-    background: url('./../assets/images/bargain-bg.png') no-repeat;
-    background-size: 100%;
-    > .bargain-info-box {
-      background-color: #fff;
-      border-radius: 20px;
-      padding: 34px;
-      > .bargain-info {
-        display: flex;
-        > .img-box {
-          width: 220px;
-          height: 220px;
-          margin-right: 24px;
-          > img {
-            width: 100%;
-            // height: 100%;
-          }
-        }
-        > .detail {
-          flex: 1;
-          > .title {
-            font-size: 26px;
-            color: #323232;
-            line-height: 37px;
-          }
-          > .count-down {
-            margin: 22px 0;
-            font-size: 24px;
-            color: #585858;
-            line-height: 31px;
-            > .time {
-              display: inline-block;
-              background-color: #585858;
-              color: #fff;
-              border-radius: 8px;
-              padding: 0 6px;
-            }
-            > .dec {
-              padding-left: 12px;
-            }
-          }
-          > .price-box {
-            display: flex;
-            align-items: flex-end;
-            > .price-box-item {
-              flex: 1;
-              & + .price-box-item {
-                margin-left: 10px;
-              }
-              > .p-t-1 {
-                font-size: 18px;
-                color: #888;
-                > span:first-child {
-                  font-size: 16px;
-                  color: #F77E18;
-                  // text-decoration: line-through;
-                }
-                > span:last-child {
-                  font-size: 24px;
-                  color: #F77E18;
-                  text-decoration: line-through;
-                }
-              }
-              > .p-t-2 {
-                display: block;
-                padding: 0 6px;
-                background-color: #D30C05;
-                line-height: 22px;
-                color: #fff;
-                font-size: 18px;
-                border-radius: 6px;
-              }
-              > .p-n-1 {
-                color: #D30C05;
-                font-size: 41px;
-                > span {
-                  font-size: 22px;
-                }
-              }
-              > .p-n-2 {
-                color: #888;
-                font-size: 24px;
-                margin-bottom: 6px;
-              }
-            }
-          }
-        }
-      }
-      > .bargain-schedule {
-        margin: 78px 0 25px 0;
-        > .title {
-          font-size: 24px;
-          color: #323232;
-          text-align: center;
-          margin-bottom: 25px;
-          .dollar {
-            font-size: 20px; 
-          }
-          > .n-1 {
-            font-size: 30px;
-            color: #F75E10;
-          }
-          > .n-2 {
-            font-size: 30px;
-            color: #D30C05;
-          }
-        }
-        .schedule {
-          position: relative;
-          margin: 0 auto;
-          width: 580px;
-          height: 18px;
-          border-radius: 9px;
-          background-color: #FECECA;
-          display: flex;
-          > .active {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 30%;
-            height: 100%;
-            background: url('./../assets/images/progress-bar-1.png') no-repeat;
-            background-size: auto 100%;
-            border-radius: 9px;
-          }
-          > .schedule-item {
-            position: relative;
-            flex: 1;
-            padding-top: 40px;
-            text-align: center;
-            font-size: 18px;
-            color: #323232;
-            .highlight {
-              color: #D30C05;
-              font-size: 20px;
-            }
-          }
-          > .schedule-item:nth-of-type(2) {
-            text-align: left;
-          }
-          > .schedule-item:last-of-type {
-            text-align: right;
-          }
-          > .ball::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            // left: 0;
-            width: 24px;
-            height: 24px;
-            border-radius: 12px;
-            background:linear-gradient(-45deg,rgba(238,93,47,1),rgba(255,155,4,1));
-          }
-          > .ball-center::after {
-            left: calc(50% - 12px);
-          }
-          > .ball-right::after {
-            right: 0;
-          }
-        }
-      }
-    }
-  }
-  > .bargain-content {
-    padding: 0 30px;
-    .page-title {
-      position: relative;
-      width: 100%;
-      display: block;
-      height: 75px;
-      line-height: 75px;
-      // margin: 50px 0;
-      font-size: 26px;
-      text-align: center;
-      color: #323232;
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 20%;
-        width: 70px;
-        height: 1px;
-        background-color: #ccc;
-      }
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 20%;
-        width: 70px;
-        height: 1px;
-        background-color: #ccc;
-      }
-    }
-    > .team-box {
-      > .team-list {
-          margin-bottom: 38px;
-          > li {
-              display: flex;
-              align-items: center;
-              > .column {
-                  flex: 1;
-              }
-          }
-          > .team-list-title {
-              color: #888;
-              font-size: 22px;
-              text-align: center;
-              > div:first-child {
-                  text-align: left;
-              }
-          }
-          > .team-list-item {
-              margin-top: 30px;
-              & > .column:nth-child(2) {
-                  text-align: center;
-                  display: block;
-                  font-size: 26px;
-                  color: #888888;
-                  line-height: 90px;
-                  > .dollar {
-                    font-size: 22px;
-                    color: #D30C05;
-                    > span {
-                      font-size: 30px;
-                    }
-                  }
-              }
-              > .column {
-                  display: flex;
-                  > .team-img {
-                      padding: 17px 0 0 9px;
-                      margin-right: 20px;
-                      display: inline-block;
-                      > img {
-                          width: 90px;
-                          height: 90px;
-                      }
-                  }
-                  .first {
-                      background: url('./../assets/images/huangguan1.png') no-repeat 0 0;
-                      background-size: 44px 44px;
-                  }
-                  > .team-info {
-                      flex: 1;
-                      > .team-name {
-                        margin-top: 17px;
-                        line-height: 90px;
-                        font-size: 24px;
-                        color: #323232;
-                      }
-                  }
-              }
-          }
-      }
-    }
-    > .recommend-products {
-      display: flex;
-      flex-wrap: wrap;
-      > .page-title {
-        margin-bottom: 30px;
-      }
-      > .recommend-item {
-        box-sizing: border-box;
-        width: calc(50% - 10px);
-        border:1px solid rgba(229,229,229,1);
-        border-radius:10px 10px 0px 0px;
-        overflow: hidden;
-        margin-bottom: 28px;
-        > .products-photo {
-          width: 100%;
-          height: auto;
-        }
-        > .products-title {
-          margin: 15px 0 27px 0;
-          color: #323232;
-          font-size: 28px;
-          text-align: center;
-        }
-        > .products-ctrl {
-          line-height: 50px;
-          color: #888;
-          font-size: 24px;
-          padding: 0 24px;
-          margin-bottom: 45px;
-          > .btn {
-            display: block;
-            float: right;
-            font-size: 24px;
-            color: #fff;
-            text-align: center;
-            width:160px;
-            height:50px;
-            background:linear-gradient(90deg,rgba(211,12,5,1) 0%,rgba(246,78,1,1) 100%);
-            border-radius:25px;
-            text-decoration: none;
-          }
-        }
-      }
-      > .recommend-item:nth-of-type(2n) {
-        margin-left: 20px;
-      }
-    }
-  }
-}
-</style>
-
+<style lang="scss" scoped src="./bargain.scss"></style>
 
 <template>
   <div class="bargain-container">
@@ -321,16 +8,16 @@
         <!-- 砍价商品信息 -->
         <div class="bargain-info">
           <div class="img-box">
-            <img src="./../assets/images/good-large.png" alt="">
+            <img v-lazy="spu.pic_urls[0]||require('./../assets/images/good-large.png')">
           </div>
           <div class="detail">
-            <p class="title">Casual Large Capacity Copartment Handbag women</p>
+            <p class="title">{{spu.title}}</p>
             <div class="count-down">
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
+              <span class="time">{{expirationDat.h}}</span>
+              :
+              <span class="time">{{expirationDat.p}}</span>
+              :
+              <span class="time">{{expirationDat.m}}</span>
               <span class="dec">overdued</span>
             </div>
             <div class="price-box">
@@ -345,18 +32,19 @@
                 <p class="p-n-1"><span>$</span>9.80</p>
               </div>
               <div class="price-box-item">
-                <p class="p-n-2">2432 Sent</p>
+                <p class="p-n-2">{{spu.deliver_count}} Sent</p>
               </div>
             </div>
           </div>
         </div>
         <!-- 砍价进度 -->
         <div class="bargain-schedule">
-          <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>10.00</span>, leaving <span class="n-2"><span class="dollar">$</span>39.8</span></p>
+          <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_price||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.left_price||spu.price}}</span></p>
           <div class="schedule">
-            <div class="active ball ball-right"></div>
+            <div class="active ball ball-right"
+              :style="{'width':bargain_info.left_price *100+'%'}"></div>
             <div class="schedule-item">
-              <span class="description">cut <span class="highlight">45%</span></span>
+              <span class="description">cut <span class="highlight">{{bargain_info.bargain_price / bargain_info.left_price *100}}%</span></span>
             </div>
             <div class="schedule-item ball ball-center">
               <span class="description">Available for purchase</span>
@@ -369,120 +57,278 @@
       </div>
     </div>
     <div class="bargain-content">
-      <!-- 商品详情 -->
-      <div class="goods-detail">
 
-      </div>
       <!-- 帮砍团队 -->
-      <div class="team-box">
+      <div class="team-box"
+        v-if="$route.query.bargainId">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
-          <li class="team-list-item" v-for="(item, index) in teamList" :key="index">
-              <div class="column">
-                  <div class="team-img first">
-                      <img :src="item.imgUrl" alt="">
-                  </div>
-                  <div class="team-info">
-                      <p class="team-name">{{item.name}}</p>
-                  </div>
+          <li class="team-list-item"
+            v-for="(item, index) in help_bargain_list"
+            :key="index">
+            <div class="column">
+              <div class="team-img first">
+                <img v-lazy="item.friend_avatar">
               </div>
-              <div class="column">cut <span class="dollar">$<span>{{item.money}}</span></span></div>
+              <div class="team-info">
+                <p class="team-name">{{item.username}}</p>
+              </div>
+            </div>
+            <div class="column">cut <span class="dollar">$<span>{{item.bargain_amount}}</span></span></div>
           </li>
-      </ul>
+        </ul>
       </div>
+      <div v-else
+        class="goods-detail">
+        <!-- 商品详情图 -->
+
+      </div>
+
       <!-- 推荐商品 -->
       <div class="recommend-products">
         <p class="page-title">More Products</p>
-        <div class="recommend-item">
-          <img src="./../assets/images/good-large.png" alt="" class="products-photo">
-          <p class="products-title">Water Women Bagba</p>
+        <div class="recommend-item"
+          v-for="item in spu_list"
+          :key="item.spu_id">
+          <img v-lazy="item.pic_urls&&item.pic_urls[0]||require('./../assets/images/good-large.png')"
+            class="products-photo">
+          <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
-            <span class="money">2432 Sent</span>
-            <a href="javascrip:;" class="btn">Get Freebie</a>
-          </div>
-        </div>
-        <div class="recommend-item">
-          <img src="./../assets/images/good-large.png" alt="" class="products-photo">
-          <p class="products-title">Water Women Bagba</p>
-          <div class="products-ctrl">
-            <span class="money">2432 Sent</span>
-            <a href="javascrip:;" class="btn">Get Freebie</a>
-          </div>
-        </div>
-        <div class="recommend-item">
-          <img src="./../assets/images/good-large.png" alt="" class="products-photo">
-          <p class="products-title">Water Women Bagba</p>
-          <div class="products-ctrl">
-            <span class="money">2432 Sent</span>
-            <a href="javascrip:;" class="btn">Get Freebie</a>
-          </div>
-        </div>
-        <div class="recommend-item">
-          <img src="./../assets/images/good-large.png" alt="" class="products-photo">
-          <p class="products-title">Water Women Bagba</p>
-          <div class="products-ctrl">
-            <span class="money">2432 Sent</span>
-            <a href="javascrip:;" class="btn">Get Freebie</a>
+            <span class="money">{{item.deliver_count}} Sent</span>
+            <a href="javascrip:;"
+              class="btn"
+              @click="jumpCurBargainPage(item.spu_id)">Get Freebie</a>
           </div>
         </div>
       </div>
     </div>
-    <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"/> -->
+
+    <div class="down-box">
+      <div class="home-btn"
+        @click.stop="$router.push({path:'/'})">
+        <img src="~@/assets/images/tabBar-home.png">
+        <p>HOME</p>
+      </div>
+
+      <div class="buy-now"
+        @click.stop="jumpBuyPage">
+        <div class="paly-num">$19.8</div>
+        <p>buy now</p>
+      </div>
+
+      <div class="share-friends" @click.stop="openSharingFriendsDialog">
+        Share to friends
+      </div>
+    </div>
+    <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
+      :shareInfo="shareInfo" />
   </div>
 </template>
 
 <script>
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
-import  dialogSharingFriends from '@/components/dialogs/dialogSharingFriends.vue';
-import bargainingHelpInformation from '@/components/bargain/bargainingHelpInformation.vue';
-import commodityItem from '@/components/commodity/commodityItem.vue';
+import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
+import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
+// import commodityItem from "@/components/commodity/commodityItem.vue";
+
+import { getInfo, getBargainSpus } from "@/server/goods.js";
+import { shareSpu } from "@/server/share.js";
+import {
+  getBargainInfo,
+  getHelpBargainList,
+  bargainChop
+} from "@/server/bargain.js";
 export default {
   components: {
     bargainingProgressBar, // 砍价进度条
-    dialogSharingFriends,  // 分享好友弹窗
-    bargainingHelpInformation, // 砍价帮
-    commodityItem // 商品列表展示的商品X 
+    dialogSharingFriends, // 分享好友弹窗
+    bargainingHelpInformation // 砍价帮
+    // commodityItem // 商品列表展示的商品X
   },
-  data(){
+  data() {
     return {
-      dialogs:{
-        sharingFriends:{
-          show:true
+      dialogs: {
+        sharingFriends: {
+          show: false
         }
       },
-      // 团队
-      teamList: [
+
+      shareInfo: {
+        shareUrl: window.location.origin + "/forBargain", // 从点击打开的链接
+        shareTitle: "分享标题",
+        shareDescription: "分享的描述",
+        shareImage: "https://s.pinimg.com/images/facebook_share_image.png", //  分享的预览图（图片有限制）
+        quote:
+          "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
+        // hashtag:"FB分享的tag标签"
+      },
+
+      spu: {
+        //类型：Object  必有字段  备注：商品
+        spu_id: 1, //类型：Number  必有字段  备注：商品id
+        title: "mock", //类型：String  必有字段  备注：商品标题
+        pic_urls: [
+          //类型：Array  必有字段  备注：图片地址列表
+          "mock" //类型：String  必有字段  备注：无
+        ],
+        specs: [
+          //类型：Array  必有字段  备注：规格列表
           {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
-          {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
-          {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
-          {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
-          {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
-          {
-              name: 'Chrsitin  Andy',
-              money: 20000,
-              imgUrl: require('@/assets/images/tabBar-me-active.png')
-          },
+            //类型：Object  必有字段  备注：无
+            spec_name: "mock", //类型：String  必有字段  备注：规格名
+            spec_values: [
+              //类型：Array  必有字段  备注：规格列表
+              "mock" //类型：String  必有字段  备注：无
+            ]
+          }
+        ],
+        price: "mock", //类型：String  必有字段  备注：商品售价
+        desp: "mock", //类型：String  必有字段  备注：商品详情描述
+        expire_ttl: "mock", //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
+        expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
+        deliver_count: "mock" //类型：String  必有字段  备注：已免费拿数量
+      },
+      bargain_info: {
+        //类型：Object  必有字段  备注：砍价信息
+        bargain_id: 1, //类型：Number  必有字段  备注：砍价号
+        bargain_rate: 1, //类型：Number  必有字段  备注：已砍价比例
+        bargain_price: 1, //类型：Number  必有字段  备注：已砍价金额
+        left_price: 1 //类型：Number  必有字段  备注：剩余金额
+      },
+
+      expirationDat: {
+        h: "24",
+        p: "00",
+        m: "00"
+      },
+
+      help_bargain_list: [
+        //类型：Array  必有字段  备注：帮砍列表
+        {
+          //类型：Object  必有字段  备注：无
+          user_id: 1, //类型：Number  必有字段  备注：用户id
+          username: "mock", //类型：String  必有字段  备注：用户名
+          bargain_amount: 1, //类型：Number  必有字段  备注：帮砍额度
+          bargain_time: "mock", //类型：String  必有字段  备注：帮砍时间
+          friend_avatar: require("@/assets/images/tabBar-me-active.png")
+        }
+      ],
+      helpBargainPageDat: {
+        page_size: 10,
+        page_num: 1
+      },
+
+      spu_list: [
+        //类型：Array  必有字段  备注：砍价商品列表
+        {
+          //类型：Object  必有字段  备注：无
+          spu_id: 2, //类型：Number  必有字段  备注：商品id
+          title: "mock", //类型：String  必有字段  备注：商品标题
+          price: 1, //类型：Number  必有字段  备注：商品售价
+          deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
+          pic_urls: [
+            //类型：Array  必有字段  备注：图片地址列表（已排好序）
+          ]
+        }
       ]
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.initSpuInfo();
+      this.initBargainInfo();
+      this.initHelpBargainList();
+      this.initSpuList();
+    },
+    /**
+     * @description: 获取商品信息
+     */
+    async initSpuInfo() {
+      let result = await getInfo({ spu_id: this.$route.query.spu_Id });
+      if (result) {
+        let spu = result.data.spu;
+        for (let k in spu) {
+          this.spu[k] = spu[k];
+        }
+        this.refreshTime();
+      }
+    },
+    /**
+     * @description: 获取砍价信息
+     */
+    async initBargainInfo() {
+      let result = await getBargainInfo({
+        bargain_id: this.$route.query.bargain_id
+      });
+      if (result) {
+        const { bargain_info, spu } = result.data;
+        this.bargain_info = bargain_info;
+        for (let k in spu) {
+          this.spu[k] = spu[k];
+        }
+      }
+    },
+    /**
+     * @description: 帮砍列表
+     */
+    async initHelpBargainList() {
+      let result = await getHelpBargainList({
+        bargain_id: this.$route.query.bargainId,
+        ...this.helpBargainPageDat
+      });
+      if (result) {
+        this.help_bargain_list = result.data.help_bargain_list;
+      }
+    },
+
+    /**
+     * @description: 更多商品列表
+     */
+    async initSpuList() {
+      let result = await getBargainSpus({
+        page_size: 16,
+        page_num: 1,
+        is_all: 0
+      });
+      if (result) {
+        this.spu_list = result.data.spu_list;
+      }
+    },
+    async openSharingFriendsDialog(){
+      let result=await shareSpu({spu_id:this.$route.spu_id});
+      if(result){
+        this.shareInfo=result.data.share_info;
+        this.dialogs.sharingFriends.show=true;
+      }
+    },
+    jumpCurBargainPage(spu_id) {
+      this.$router.push({
+        path: "/bargain",
+        query: {
+          spuId: spu_id
+        }
+      });
+    },
+
+    jumpBuyPage() {
+      this.$router.push({ path: "/purchase",query:{...this.$route.query} });
+    },
+    /**
+     * @description: 时间定时器
+     */
+    refreshTime() {
+      let result = this.$util.expiration(this.spu.expire_ttl);
+      if (!result) return;
+      this.expirationDat = result;
+      const timer = setInterval(() => {
+        this.expirationDat = his.$util.expiration(this.spu.expire_ttl);
+      }, 1000);
+      this.$once("hook:beforeDestroy", () => {
+        clearInterval(timer);
+      });
     }
   }
 };

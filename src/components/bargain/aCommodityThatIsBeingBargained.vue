@@ -186,8 +186,7 @@
     <div class="freebing-container">
       <div class="good-box">
         <img class="good-img"
-          v-lazy="require('./../../assets/images/good-mini.png')"
-         >
+          v-lazy="require('./../../assets/images/good-mini.png')">
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
           <div class="progress">
@@ -224,19 +223,24 @@
     </div>
 
     <!-- 弹窗 -->
-    <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
+    <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
+      :shareInfo="shareInfo" /> -->
+
+    <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo" />
   </div>
 </template>
 
 <script>
-import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
+// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
+import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
 
 import { shareBargain } from "@/server/share.js";
 export default {
   name: "aCommodityThatIsBeingBargained",
   components: {
-    dialogSharingFriends // 分享好友
+    // dialogSharingFriends, // 分享好友弹窗
+    dialogSharingMakes // 分享赚弹起浮窗
   },
   props: {
     spuBargainItem: {
@@ -289,34 +293,17 @@ export default {
      * @description: 时间定时器
      */
     refreshTime() {
-      let result = this.expiration(this.spuBargainItem.expire_time);
+      let result = this.$util.expiration(this.spuBargainItem.expire_time);
       if (!result) return;
+      this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expiration(this.spuBargainItem.expire_time);
+        this.expirationDat = this.$util.expiration(
+          this.spuBargainItem.expire_time
+        );
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
       });
-    },
-    /**
-     * @description: 多久过期
-     */
-    expiration(expire_time) {
-      if (isNaN(expire_time)) {
-        return false;
-      }
-
-      let expireTimeNum = new Date(expire_time);
-      let curTimeNum = +new Date();
-      let expirationNum = expireTimeNum - curTimeNum;
-      let h = Math.floor(expirationNum / (1000 * 60 * 60));
-      h = h < 10 ? "0" + h : h;
-      let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));
-      p = p < 10 ? "0" + p : p;
-      let m = expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p;
-      m = m < 10 ? "0" + m : m;
-      this.expirationDat = { h, p, m };
-      return true;
     },
     /**
      * @description: 分享赚
@@ -325,7 +312,7 @@ export default {
       let result = await shareBargain({
         bargain_id: this.spuBargainItem.bargain_id
       });
-      if (result.code == 0) {
+      if (result) {
         this.shareInfo = result.data.share_info;
         this.dialogs.sharingFriends.show = true;
       }

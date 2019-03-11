@@ -77,7 +77,7 @@ export default {
         //   tp_type: 1
         // });
         console.log("result: ", result);
-        if (result.code == 0) {
+        if (result) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
