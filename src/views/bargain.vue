@@ -12,14 +12,7 @@
           </div>
           <div class="detail">
             <p class="title">{{spu.title}}</p>
-            <div class="count-down">
-              <span class="time">{{expirationDat.h}}</span>
-              :
-              <span class="time">{{expirationDat.p}}</span>
-              :
-              <span class="time">{{expirationDat.m}}</span>
-              <span class="dec">overdued</span>
-            </div>
+            <count-down :dateDiff="spu.expire_ttl"></count-down>
             <div class="price-box">
               <div class="price-box-item">
                 <p class="p-t-1">
@@ -129,6 +122,7 @@
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
+import countDown from '@/components/countDown.vue'
 // import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
@@ -142,7 +136,8 @@ export default {
   components: {
     bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
-    bargainingHelpInformation // 砍价帮
+    bargainingHelpInformation, // 砍价帮
+    countDown
     // commodityItem // 商品列表展示的商品X
   },
   data() {
@@ -184,7 +179,7 @@ export default {
         ],
         price: "mock", //类型：String  必有字段  备注：商品售价
         desp: "mock", //类型：String  必有字段  备注：商品详情描述
-        expire_ttl: "mock", //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
+        expire_ttl: "3635", //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
         expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
         deliver_count: "mock" //类型：String  必有字段  备注：已免费拿数量
       },
@@ -311,6 +306,7 @@ export default {
           spuId: spu_id
         }
       });
+      this.init();
     },
 
     jumpBuyPage() {
@@ -324,7 +320,7 @@ export default {
       if (!result) return;
       this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expirationDat = his.$util.expiration(this.spu.expire_ttl);
+        this.expirationDat = this.$util.expiration(this.spu.expire_ttl);
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);

@@ -3,6 +3,10 @@
   .banner {
     width: 100%;
     height: 148px;
+    > img {
+      width: 100%;
+      height: 100%;
+    }
   }
   > .finish-box {
     margin-bottom: 30px;
@@ -149,6 +153,18 @@
             align-items: flex-end;
             > .price-item {
               flex: 1;
+              > .msg-box {
+                display: inline-block;
+                padding: 0 10px;
+                min-width: 150px;
+                height: 32px;
+                background: url('./../assets/images/goods-msg-box.png') no-repeat;
+                background-size: 100% 100%;
+                text-align: center;
+                color: #F65E10;
+                font-size: 20px;
+                line-height: 24px;
+              }
               > .cut-schedule {
                 > .cut {
                   color: #888;
@@ -280,16 +296,10 @@
           </div>
           <div class="detail">
             <p class="title">Casual Large Capacity Copartment Handbag women</p>
-            <div class="count-down">
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
-              <span class="dec">overdued</span>
-            </div>
+            <count-down :dateDiff="3333"></count-down>
             <div class="price-box">
               <div class="price-item">
+                <div class="msg-box">cut Rp 256.653</div>
                 <p class="now-price"><span>Rp</span>0.00</p>
                 <p class="real-price"><span>Rp</span>99.99</p>
               </div>
@@ -311,21 +321,21 @@
           </div>
           <div class="detail">
             <p class="title">Casual Large Capacity Copartment Handbag women</p>
-            <div class="count-down">
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
-                :
-              <span class="time">12</span>
-              <span class="dec">overdued</span>
-            </div>
+            <count-down :dateDiff="2000"></count-down>
             <div class="price-box">
               <div class="price-item">
+                <div class="msg-box">cut Rp 256.653</div>
                 <p class="now-price"><span>Rp</span>0.00</p>
                 <p class="real-price"><span>Rp</span>99.99</p>
               </div>
               <div class="price-item">
                 <div class="btn">Go On</div>
+                <div class="cut-schedule">
+                  <span class="cut">cut <span>60%</span></span>
+                  <div class="schedule">
+                    <div class="active"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -337,9 +347,16 @@
 
 <script>
 import aCommodityThatIsBeingBargained from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
+import countDown from '@/components/countDown.vue'
 export default {
+  data() {
+    return {
+      
+    }
+  },
   components: {
-    aCommodityThatIsBeingBargained // 一件正在进行砍价商品
+    aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
+    countDown
   }
 };
 </script>

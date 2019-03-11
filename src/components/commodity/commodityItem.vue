@@ -14,14 +14,22 @@
   }
   > .goods-detail {
     padding: 49px 31px 0 31px;
+    overflow: hidden;
     > .goods-title {
+      display: block;
       font-size: 36px;
       color: #323232;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
     > .goods-description {
       line-height: 40px;
       font-size: 24px;
       color: #888888;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
     > .goods-price {
       padding: 10px 0;

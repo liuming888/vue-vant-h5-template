@@ -58,9 +58,13 @@
         margin-right: 30px;
       }
       > .good-detail {
+            overflow: hidden;
         > .good-title {
           font-size: 30px;
           color: #323232;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
         }
         > .progress {
           margin: 19px 0;
@@ -197,14 +201,15 @@
               <span>65%</span>
             </div>
           </div>
-          <div class="count-down">
+          <count-down :dateDiff="3333"></count-down>
+          <!-- <div class="count-down">
             <span class="time">{{expirationDat.h}}</span>
             :
             <span class="time">{{expirationDat.p}}</span>
             :
             <span class="time">{{expirationDat.m}}</span>
             <span class="dec">overdued</span>
-          </div>
+          </div> -->
           <div class="goods-control">
             <a href="javascrip:;"
               class="button-l"
@@ -234,13 +239,15 @@
 <script>
 // import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
+import countDown from '@/components/countDown.vue'
 
 import { shareBargain } from "@/server/share.js";
 export default {
   name: "aCommodityThatIsBeingBargained",
   components: {
     // dialogSharingFriends, // 分享好友弹窗
-    dialogSharingMakes // 分享赚弹起浮窗
+    dialogSharingMakes, // 分享赚弹起浮窗
+    countDown
   },
   props: {
     spuBargainItem: {

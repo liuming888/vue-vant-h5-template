@@ -23,3 +23,11 @@ export function bargainChop({ type, bargain_id }) {
         data: { type, bargain_id },
     });
 }
+
+// 获取砍价商品列表
+export function getBargainSpus({ page_size = 10, page_num = 1, is_all = 1 }) {
+    return $request.post({
+        url: '/api/v1/spu/get_bargain_spus',
+        data: { page_size, page_num, is_all },
+    });
+}
