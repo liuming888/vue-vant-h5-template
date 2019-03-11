@@ -48,8 +48,9 @@
                         display: flex;
                         align-items: flex-end;
                         > .price-box-item {
-                            flex: 1;
-                            & + .price-box-item {
+                            flex: auto;
+                            &:nth-of-type(2) {
+                                width: 100px;
                                 margin-left: 10px;
                             }
                             > .p-t-1 {
@@ -72,7 +73,7 @@
                                 background-color: #d30c05;
                                 line-height: 22px;
                                 color: #fff;
-                                font-size: 18px;
+                                font-size: 16px;
                                 border-radius: 6px;
                             }
                             > .p-n-1 {
