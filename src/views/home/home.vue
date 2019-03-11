@@ -99,7 +99,7 @@
       <template v-for="item of spuBargainList">
         <!-- 抢购商品 -->
         <freebing-box :key="item.bargain_info.spu_id"
-          :spuBargainItem="item.bargain_info" v-if="item.bargain_info.status==2"/>
+          :spuBargainItem="{...item.bargain_info,...item.spu}" v-if="item.bargain_info.status==2"/>
       </template>
 
     </section>

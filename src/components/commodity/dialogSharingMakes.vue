@@ -35,6 +35,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 41px;
+  position: relative;
 
   img {
     width: 110px;
@@ -46,7 +47,7 @@
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 136px;
+  margin-bottom: 120px;
 }
 .copy-link {
   display: block;
@@ -55,6 +56,13 @@
   font-size: 34px;
   font-weight: bold;
   color: rgba(211, 12, 5, 1);
+}
+
+.close-img{
+  display: block;
+  width: 70px;
+  height: auto;
+  margin: 96px auto 0;
 }
 </style>
 
@@ -97,21 +105,21 @@
       <!-- <button class="copy-link"
         :data-clipboard-text="mx_copyUrl">Copy Link</button> -->
 
-      
-      <button ref="copy"  class="copy-link"
+      <button ref="copy"
+        class="copy-link"
         data-clipboard-action="copy"
         data-clipboard-target="#success_form_input"
         @click="mx_copyLink">Copy Link</button>
 
-      <div class="close-img">
+      <img src="@/assets/images/guanbi@2x.png"
+        class="close-img"  @click="closeDialog">
 
-      </div>
-      
       <!-- 复制用到input -->
       <input type="text"
         id="success_form_input"
         readonly="readonly"
-        v-model="mx_copyUrl"  style="margin-left:-99999px;" />
+        v-model="mx_copyUrl"
+        style="margin-left:-99999px;"/>
     </div>
   </div>
 </template>
@@ -145,6 +153,11 @@ export default {
           // hashtag:"FB分享的tag标签"
         };
       }
+    }
+  },
+  methods: {
+    closeDialog(){
+      this.$emit("update:dialogVisible",{show:false});
     }
   }
 };
