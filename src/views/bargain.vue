@@ -60,7 +60,7 @@
             v-for="(item, index) in help_bargain_list"
             :key="index">
             <div class="column">
-              <div class="team-img first">
+              <div :class="`team-img huangguan${index + 1}`">
                 <img v-lazy="item.friend_avatar">
               </div>
               <div class="team-info">
@@ -276,7 +276,7 @@ export default {
         ...this.helpBargainPageDat
       });
       if (result) {
-        this.help_bargain_list = result.data.help_bargain_list;
+        this.help_bargain_list = result.data;
       }
     },
 

@@ -277,7 +277,7 @@
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
-            <count-down :dateDiff="3333"></count-down>
+            <count-down :dateDiff="'3333'"></count-down>
             <div class="price-box">
               <div class="price-item">
                 <div class="msg-box">cut Rp 256.653</div>

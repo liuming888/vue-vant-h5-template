@@ -26,8 +26,8 @@ export default {
   },
   props: {
     dateDiff: {
-      type: Number,
-      default: 0
+      type: String,
+      default: '0'
     }
   },
   mounted() {

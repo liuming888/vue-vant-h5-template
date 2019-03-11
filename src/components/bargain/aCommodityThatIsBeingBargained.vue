@@ -201,7 +201,7 @@
               <span>{{spuBargainItem.bargain_rate}}%</span>
             </div>
           </div>
-          <count-down :dateDiff="3333"></count-down>
+          <count-down :dateDiff="'3333'"></count-down>
           <!-- <div class="count-down">
             <span class="time">{{expirationDat.h}}</span>
             :
