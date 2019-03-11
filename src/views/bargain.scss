@@ -123,8 +123,9 @@
                         left: 0;
                         width: 30%;
                         height: 100%;
-                        background: url('./../assets/images/progress-bar-1.png') no-repeat;
-                        background-size: 100% auto;
+                        background: url('./../assets/images/progress-bar-2.png') no-repeat;
+                        background-size: 100%;
+                        background-color: #d30c05;
                         border-radius: 9px;
                     }
                     > .schedule-item {
@@ -282,10 +283,13 @@
                     height: auto;
                 }
                 > .products-title {
-                    margin: 15px 0 27px 0;
+                    margin: 15px 10px 27px 10px;
                     color: #323232;
                     font-size: 28px;
                     text-align: center;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
                 > .products-ctrl {
                     line-height: 50px;

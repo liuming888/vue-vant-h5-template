@@ -98,7 +98,6 @@
       <freebing-box v-for="item of spuBargainList"
         :key="item.spu_id"
         :spuBargainItem="item" />
-
     </section>
     <section class="home-goods">
       <div class="home-goods-title">DAILY DISCOVER</div>
