@@ -95,10 +95,12 @@
         <img v-lazy="require('@/assets/images/home-banner.png')"
           @click="testLogin">
       </div>
-      <!-- 抢购商品 -->
-      <freebing-box v-for="item of spuBargainList"
-        :key="item.spu_id"
-        :spuBargainItem="item" />
+
+      <template v-for="item of spuBargainList">
+        <!-- 抢购商品 -->
+        <freebing-box :key="item.bargain_info.spu_id"
+          :spuBargainItem="item.bargain_info" v-if="item.bargain_info.status==2"/>
+      </template>
 
     </section>
     <section class="home-goods">
@@ -137,20 +139,7 @@ export default {
   data() {
     return {
       // 正在砍价的商品列表（默认最多展示两条）
-      spuBargainList: [
-        /* 
-        //类型：Array  必有字段  备注：无
-        {
-          //类型：Object  必有字段  备注：无
-          spu_id: 1, //类型：Number  必有字段  备注：商品id
-          title: "mock", //类型：String  必有字段  备注：商品标题
-          bargain_rate: 1, //类型：Number  必有字段  备注：已砍价比例
-          bargain_coin: "mock", //类型：String  必有字段  备注：已砍价金额
-          expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
-          bargain_id: "mock" //类型：String  必有字段  备注：砍价号
-        }
-       */
-      ],
+      spuBargainList: [],
       goodsList: [
         //类型：Array  必有字段  备注：砍价商品列表
         {
@@ -180,7 +169,7 @@ export default {
       let result = await getMybargainSpus({ page_size: 2, page_num: 1 });
       console.log("result: ", result);
       if (result) {
-        this.spuBargainList = result.data.spu_bargain_list;
+        this.spuBargainList = result.data;
       }
     },
     async initGoodsList({ page_size, page_num, is_all }) {

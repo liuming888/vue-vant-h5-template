@@ -122,11 +122,11 @@
       <div class="goods-detail">
         <a :href="itemData.path || '/'"
           class="goods-title">{{itemData.title || ''}}</a>
-        <p class="goods-description">{{itemData.description || ''}}</p>
+        <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">
-          <span class="discount">$ {{itemData.discount || 0}}</span>
-          <span class="real">${{itemData.realAmount || 0}}</span>
+          <span class="discount">$ {{itemData.price || 0}}</span>
+          <span class="real">${{itemData.original_price || 0}}</span>
         </div>
       </div>
       <div class="goods-control">
