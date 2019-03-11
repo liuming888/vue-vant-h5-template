@@ -6,16 +6,18 @@ import config from './config';
 
 let user_id="";
 let access_token="";
-// if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="mock"){
-//     user_id=1;
-//     access_token = 'c576c451d3d74e0d9203a177e751d71d';
-// }
 let userStr=localStorage.getItem("userInfo");
 if (userStr){
     let userInfo = JSON.parse(userStr);
     user_id = userInfo.user_id;
     access_token = userInfo.access_token;
 }
+
+if (process.env.NODE_ENV =="development"){ // 开发
+    user_id = 1;
+    access_token = '4788b13bed7d4e8b8764b9e849a624b2';
+}
+
 axios.defaults.headers.common['user_id'] = user_id;
 axios.defaults.headers.common['access_token'] = access_token;
 

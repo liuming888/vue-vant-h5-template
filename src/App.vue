@@ -19,7 +19,7 @@ export default {
     "zdd-layout": zddMain
   },
   created() {
-    this.initToken();
+    // this.initToken();
     this.initFB();
   },
   methods: {

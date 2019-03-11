@@ -90,7 +90,7 @@
   <div class="home-container">
     <section class="home-top-container">
       <!-- 用户消息 -->
-      <user-picking-up-message></user-picking-up-message>
+      <user-picking-up-message :messageList="messageList"></user-picking-up-message>
       <div class="home-banner">
         <img v-lazy="require('@/assets/images/home-banner.png')"
           @click="testLogin">
@@ -127,6 +127,7 @@ import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue
 import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import axios from "axios";
+import { getHomeTip } from "@/server/other.js";
 import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
@@ -138,6 +139,7 @@ export default {
   },
   data() {
     return {
+      messageList:[],  // 顶部滚动消息
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [],
       goodsList: [
@@ -161,10 +163,18 @@ export default {
     };
   },
   created() {
+    this.initHomeTip();
     this.initMybargainSpus();
     this.initGoodsList({ ...this.goodsListPageDat });
   },
   methods: {
+    async initHomeTip(){
+      let result=await getHomeTip();
+      if(result){
+        this.messageList=result.data.home_tips;
+        console.log('this.messageList: ', this.messageList);
+      }
+    },
     async initMybargainSpus() {
       let result = await getMybargainSpus({ page_size: 2, page_num: 1 });
       console.log("result: ", result);
