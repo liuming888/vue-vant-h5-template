@@ -190,15 +190,15 @@
     <div class="freebing-container">
       <div class="good-box">
         <img class="good-img"
-          v-lazy="require('./../../assets/images/good-mini.png')">
+          v-lazy="spuBargainItem.spu_pics[0]">
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
           <div class="progress">
             <img src="~@/assets/images/progress-bar.png"
-              width="65%">
+              :width="spuBargainItem.bargain_rate+'%'">
             <div class="progress-content">
-              <span>has been cut {{spuBargainItem.bargain_coin}}</span>
-              <span>65%</span>
+              <span>has been cut {{spuBargainItem.bargain_amount}}</span>
+              <span>{{spuBargainItem.bargain_rate}}%</span>
             </div>
           </div>
           <count-down :dateDiff="3333"></count-down>
