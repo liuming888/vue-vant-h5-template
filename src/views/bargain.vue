@@ -8,7 +8,7 @@
         <!-- 砍价商品信息 -->
         <div class="bargain-info">
           <div class="img-box">
-            <img v-lazy="spu.pic_urls[0]||require('./../assets/images/good-large.png')">
+            <img v-lazy="spu.spu_pics[0]||require('./../assets/images/good-large.png')">
           </div>
           <div class="detail">
             <p class="title">{{spu.title}}</p>
@@ -17,7 +17,7 @@
               <div class="price-box-item">
                 <p class="p-t-1">
                   Price
-                  <span>$</span><span>999</span>
+                  <span>$</span><span>{{spu.original_price}}</span>
                 </p>
                 <p class="p-t-2">current price</p>
               </div>
@@ -84,7 +84,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.pic_urls&&item.pic_urls[0]||require('./../assets/images/good-large.png')"
+          <img v-lazy="item.spu_pics&&item.spu_pics[0]||require('./../assets/images/good-large.png')"
             class="products-photo">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
@@ -163,7 +163,7 @@ export default {
         //类型：Object  必有字段  备注：商品
         spu_id: 1, //类型：Number  必有字段  备注：商品id
         title: "mock", //类型：String  必有字段  备注：商品标题
-        pic_urls: [
+        spu_pics: [
           //类型：Array  必有字段  备注：图片地址列表
           "mock" //类型：String  必有字段  备注：无
         ],
@@ -222,7 +222,7 @@ export default {
           title: "mock", //类型：String  必有字段  备注：商品标题
           price: 1, //类型：Number  必有字段  备注：商品售价
           deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
-          pic_urls: [
+          spu_pics: [
             //类型：Array  必有字段  备注：图片地址列表（已排好序）
           ]
         }
@@ -265,6 +265,7 @@ export default {
         for (let k in spu) {
           this.spu[k] = spu[k];
         }
+        console.log("11111111111111", this.spu)
       }
     },
     /**
