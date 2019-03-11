@@ -17,12 +17,12 @@
               <div class="price-box-item">
                 <p class="p-t-1">
                   Price
-                  <span>$</span><span>999</span>
+                  <span>$</span><span>{{spu.original_price}}</span>
                 </p>
                 <p class="p-t-2">current price</p>
               </div>
               <div class="price-box-item">
-                <p class="p-n-1"><span>$</span>9.80</p>
+                <p class="p-n-1"><span>$</span>{{spu.price}}</p>
               </div>
               <div class="price-box-item">
                 <p class="p-n-2">{{spu.deliver_count}} Sent</p>
@@ -106,7 +106,7 @@
 
       <div class="buy-now"
         @click.stop="jumpBuyPage">
-        <div class="paly-num">$19.8</div>
+        <div class="paly-num">${{spu.price}}</div>
         <p>buy now</p>
       </div>
 
@@ -180,7 +180,7 @@ export default {
         ],
         price: "mock", //类型：String  必有字段  备注：商品售价
         desp: "mock", //类型：String  必有字段  备注：商品详情描述
-        expire_ttl: "3635", //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
+        expire_ttl: 0, //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
         expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
         deliver_count: "mock" //类型：String  必有字段  备注：已免费拿数量
       },

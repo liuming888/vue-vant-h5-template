@@ -26,21 +26,12 @@ export default {
   },
   props: {
     dateDiff: {
-      type: String,
-      default: '0'
+      // type: Number,
+      default: 0
     }
   },
   mounted() {
-    // 创建计时器
-    this.newTime = this.dateDiff
-    this.setIntervalBox = setInterval(() => {
-      if (this.newTime > 0) {
-        this.newTime -= 1
-        this.getDifferTime(this.newTime)
-      } else {
-        clearInterval(this.setIntervalBox)
-      }
-    }, 1000)
+    this.startCountDown()
   },
   destroyed() {
     // 清除计时器
@@ -66,6 +57,24 @@ export default {
         s: second,
       }
     },
+    startCountDown() {
+      clearInterval(this.setIntervalBox)
+      // 创建计时器
+      this.newTime = this.dateDiff
+      this.setIntervalBox = setInterval(() => {
+        if (this.newTime > 0) {
+          this.newTime -= 1
+          this.getDifferTime(this.newTime)
+        } else {
+          clearInterval(this.setIntervalBox)
+        }
+      }, 1000)
+    }
+  },
+  watch: {
+    dateDiff() {
+      this.startCountDown()
+    }
   }
 }
 </script>
