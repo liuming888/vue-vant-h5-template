@@ -74,7 +74,8 @@
       <div v-else
         class="goods-detail">
         <!-- 商品详情图 -->
-
+        <p class="page-title">Product Petails</p>
+        <img v-for="(item, index) in spu.spu_pics" :key="index" :src="item" alt="">
       </div>
 
       <!-- 推荐商品 -->
@@ -242,13 +243,13 @@ export default {
      * @description: 获取商品信息
      */
     async initSpuInfo() {
-      let result = await getInfo({ spu_id: this.$route.query.spu_Id });
+      let result = await getInfo({ spu_id: this.$route.query.spuId });
       if (result) {
         let spu = result.data.spu;
         for (let k in spu) {
           this.spu[k] = spu[k];
         }
-        this.refreshTime();
+        // this.refreshTime();
       }
     },
     /**

@@ -315,6 +315,13 @@
                 margin-left: 20px;
             }
         }
+        > .goods-detail {
+            > img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
     }
 }
 
