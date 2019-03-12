@@ -1,4 +1,4 @@
-const appId="";
+let appId="";
 if (process.env.NODE_ENV == 'dev'){
     appId = "844618395883361";
 } else if (process.env.NODE_ENV=='test'){
