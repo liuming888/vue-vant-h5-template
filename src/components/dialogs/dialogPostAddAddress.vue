@@ -101,13 +101,13 @@
       <h5 class="tit">Tambahkan alamat panen</h5>
 
       <div class="name-and-phone-box">
-        <van-field v-model="username"
+        <van-field v-model.trim="curAddress.username"
           placeholder="name"
           class="user-name"
           style="border-right:1px solid #F2F2F2;" />
-        <van-field v-model="telephone"
+        <van-field v-model.trim="curAddress.telephone"
           placeholder="phone"
-          class="user-phone" />
+          class="user-phone" type="number"/>
       </div>
 
       <div class="alamat-pengiriman"
@@ -119,14 +119,15 @@
       </div>
 
       <textarea class="alamat-lengkap"
-        placeholder="Alamat lengkap (jalan, nomor rumah)"></textarea>
+        placeholder="Alamat lengkap (jalan, nomor rumah)"
+        :value="`${curAddress.address_two} , ${curAddress.address_one}`"></textarea>
 
       <div class="simpan-btn"
         @click="simpan">
         Simpan
       </div>
     </van-popup>
-    
+
     <!-- 弹窗 -->
     <dialog-area :dialogVisible.sync="dialogs.area" />
   </div>
@@ -137,6 +138,21 @@ import { Field, Icon } from "vant";
 import dialogArea from "./dialogArea.vue";
 
 import { dealMyAddress } from "@/server/user.js";
+const defaultAddress = {
+  //类型：Object  必有字段  备注：无
+  // id: "mixed", //类型：Mixed  必有字段  备注：operation 2和-1时必须
+  username: "", //类型：String  必有字段  备注：用户名 1和2时必须
+  telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
+  // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
+  country: "", //类型：String  必有字段  备注：国家1和2时必须
+  region: "", //类型：String  必有字段  备注：省州 1和2时必须
+  city: "", //类型：String  必有字段  备注：城市 1和2时必须
+  // zip: "253100", //类型：String  必有字段  备注：邮编 1和2时必须
+  address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
+  address_two: "", //类型：String  必有字段  备注：配送地址-二级
+  is_default: 0 //类型：Number  必有字段  备注：默认（0：正常 1：默认）
+};
+
 export default {
   name: "dialogPostAddAddress",
   components: {
@@ -152,6 +168,10 @@ export default {
           show: false
         };
       }
+    },
+    showType: {
+      type: String,
+      default: "add"
     }
   },
   data() {
@@ -161,25 +181,36 @@ export default {
           show: false
         }
       },
-      username: "",
-      telephone: ""
+      curAddress: defaultAddress
     };
   },
+  created() {},
   methods: {
     async simpan() {
+      let operation = 1;
+      if (this.showType == "add") {
+        operation = 1;
+      } else if (this.showType == "edit") {
+        operation = 2;
+      }
       let result = await dealMyAddress({
-        operation: 1,
-        username: this.username,
-        telephone: this.telephone,
-        address_one: "",
-        address_two: ""
+        operation,
+        user_address: this.curAddress
       });
       if (result) {
+        this.$toast("success !");
         this.closeDialog();
       }
     },
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
+    }
+  },
+  watch: {
+    showType(val) {
+      if (val == "add") {
+        this.curAddress = defaultAddress;
+      }
     }
   }
 };

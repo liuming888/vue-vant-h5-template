@@ -31,3 +31,11 @@ export function getBargainSpus({ page_size, page_num, is_all }) {
         data: { page_size, page_num, is_all },
     });
 }
+
+// 根据商品id获取商品规格接口
+export function getSpuSpecs({ spu_id }) {
+    return $request.get({
+        url: '/api/v1/spu/get_spu_specs',
+        data: { spu_id },
+    });
+}

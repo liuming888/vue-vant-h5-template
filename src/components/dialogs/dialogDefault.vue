@@ -65,8 +65,8 @@
         <slot name="content"></slot>
       </div>
       <div class="footer">
-        <div class="cancel" @click="closeDialog()" v-if="!noCancle">{{info.cancelText || 'cancel'}}</div>
-        <div class="ok" @click="okHandle()">{{info.okText || 'ok'}}</div>
+        <div class="cancel" @click="closeDialog" v-if="!noCancle">{{info.cancelText || 'cancel'}}</div>
+        <div class="ok" @click="okHandle">{{info.okText || 'ok'}}</div>
       </div>
     </div>
   </div>
@@ -90,6 +90,7 @@ export default {
         content: 'test',
         cancleText: 'cancel',
         okText: 'ok',
+        delId:0
       }
     }
   },
@@ -98,7 +99,8 @@ export default {
        this.$emit("update:dialogVisible", false);
     },
     okHandle() {
-      this.$emit("ok");
+      this.$emit("ok",this.info.delId);
+      this.closeDialog();
     }
   }
 }

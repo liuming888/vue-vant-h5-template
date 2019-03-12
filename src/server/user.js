@@ -25,16 +25,17 @@ export function refreshToken({ user_id, access_token }) {
 }
 
 // 我的配送地址管理
-export function dealMyAddress({ operation, id, username, telephone, address_one, address_two }) {
+export function dealMyAddress({ operation, user_address }) {
     return $request.post({
-        url: '/api/v1/user/deal_my_address',
-        data: { operation, id, username, telephone, address_one, address_two },
+        url: '/api/v1/user/addresses/deal_my_address ',
+        data: { operation, user_address },
     });
 }
 
-// 获取我的配送地址列表 
-export function getMyAddress() {
+// 获取我的配送地址列表
+export function getMyAddress({ page_size, page_num, is_default }) {
     return $request.post({
-        url: '/api/v1/user/get_my_address',
+        url: '/api/v1/user/addresses/get_my_address',
+        data: { page_size, page_num, is_default },
     });
 }
