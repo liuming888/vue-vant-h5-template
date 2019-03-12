@@ -1,43 +1,3 @@
-<template>
-  <div class="dialog-default" v-show="dialogVisible">
-    <div class="bg" @click.stop="closeDialog()"></div>
-    <div class="dialog-container">
-      <div class="content">{{info.content}}</div>
-      <div class="footer">
-        <div class="cancel" @click="closeDialog()">{{info.cancelText || 'cancel'}}</div>
-        <div class="ok" @click="okHandle()">{{info.okText || 'ok'}}</div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  props: {
-    dialogVisible: {
-      type: Boolean,
-      default: false
-    },
-    info: {
-      type: Object,
-      default: {
-        content: 'test',
-        cancleText: 'cancel',
-        okText: 'ok',
-      }
-    }
-  },
-  methods: {
-    closeDialog(){
-       this.$emit("update:dialogVisible", false);
-    },
-    okHandle() {
-      this.$emit("ok");
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
   .dialog-default {
     position: fixed;
@@ -92,3 +52,42 @@ export default {
     }
   }
 </style>
+<template>
+  <div class="dialog-default" v-show="dialogVisible">
+    <div class="bg" @click.stop="closeDialog()"></div>
+    <div class="dialog-container">
+      <div class="content">{{info.content}}</div>
+      <div class="footer">
+        <div class="cancel" @click="closeDialog()">{{info.cancelText || 'cancel'}}</div>
+        <div class="ok" @click="okHandle()">{{info.okText || 'ok'}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    dialogVisible: {
+      type: Boolean,
+      default: false
+    },
+    info: {
+      type: Object,
+      default: {
+        content: 'test',
+        cancleText: 'cancel',
+        okText: 'ok',
+      }
+    }
+  },
+  methods: {
+    closeDialog(){
+       this.$emit("update:dialogVisible", false);
+    },
+    okHandle() {
+      this.$emit("ok");
+    }
+  }
+}
+</script>
