@@ -93,7 +93,7 @@
   <div class="dialogPostAddAddress-container">
     <van-popup v-model="dialogVisible.show"
       :close-on-click-overlay="false">
-      <img src="~@/assets/images/delete.png"
+      <img src="~@/assets/images/delete-1.png"
         class="close" @click="closeDialog">
 
       <h5 class="tit">Tambahkan alamat panen</h5>
