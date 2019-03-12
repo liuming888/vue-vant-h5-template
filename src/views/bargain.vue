@@ -325,7 +325,7 @@ export default {
     async openSharingFriendsDialog() {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
       if (result) {
-        this.shareInfo = result.data.share_info;
+        this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       }
     },

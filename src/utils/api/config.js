@@ -11,7 +11,7 @@ export default {
                 url = 'https://dev-ht-zdd-api.batmobi.net';
                 break;
             case 'test':
-                url = '';
+                url = 'https://test-ht-zdd-api.batmobi.net';
                 break;
             case 'production':
                 url = 'http://127.0.0.1:9078';

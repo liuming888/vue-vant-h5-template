@@ -8,8 +8,15 @@
         > .bargain-info-box {
             background-color: #fff;
             border-radius: 20px;
-            padding: 34px;
+            padding: 25px 20px;
             > .bargain-info {
+                width: 649px;
+                height: 238px;
+                background: rgba(249, 249, 249, 1);
+                border-radius: 10px;
+                padding: 13px;
+                box-sizing: border-box;
+
                 display: flex;
                 > .img-box {
                     width: 220px;
@@ -69,7 +76,7 @@
                                 }
                             }
                             > .p-t-2 {
-                                min-width: 160px;
+                                // min-width: 160px;
                                 display: block;
                                 padding: 0 6px;
                                 background-color: #d30c05;
@@ -82,8 +89,8 @@
                                 color: #d30c05;
                                 font-size: 41px;
                                 position: relative;
-                                left: 30px;
-                                top:10px;
+                                // left: 30px;
+                                top: 10px;
                                 > span {
                                     font-size: 22px;
                                 }
@@ -93,14 +100,14 @@
                                 font-size: 24px;
                                 margin-bottom: 6px;
                                 position: relative;
-                                top:6px;
+                                top: 6px;
                             }
                         }
                     }
                 }
             }
             > .bargain-schedule {
-                margin: 78px 0 25px 0;
+                margin: 65px 0 25px 0;
                 > .title {
                     font-size: 24px;
                     color: #323232;

@@ -262,8 +262,7 @@
           v-for="(item, index) in finishList"
           :key="index">
           <div class="img-box">
-            <img src="./../assets/images/good-large.png"
-              alt="">
+            <img v-lazy="item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
@@ -293,8 +292,7 @@
           v-for="(item, index) in ingList"
           :key="index">
           <div class="img-box">
-            <img src="./../assets/images/good-large.png"
-              alt="">
+            <img v-lazy="item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
