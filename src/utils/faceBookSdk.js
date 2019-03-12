@@ -1,10 +1,8 @@
-
-
 (function() {
     function FBsdk() {
         try {
             console.warn('hello faceBookSdk!');
-            (function (d, s, id) {
+            (function(d, s, id) {
                 var js,
                     fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {
@@ -12,7 +10,12 @@
                 }
                 js = d.createElement(s);
                 js.id = id;
+                // 默认美式英文
                 js.src = 'https://connect.facebook.net/en_US/sdk.js';
+                // 中文（简体）
+                // js.src = "https://connect.facebook.net/zh_CN/sdk.js";
+                // 中国台湾（繁体）
+                // js.src = "https://connect.facebook.net/zh_TW/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             })(document, 'script', 'facebook-jssdk');
         } catch (error) {
@@ -21,23 +24,23 @@
     }
 
     /**
-   * @msg: 登录
-   *  @return {pormise} 返回用户的信息如id token name pic_square（头像）或者登录失败的false
-   */
-    FBsdk.prototype.loginFB = function () {
+     * @msg: 登录
+     *  @return {pormise} 返回用户的信息如id token name pic_square（头像）或者登录失败的false
+     */
+    FBsdk.prototype.loginFB = function() {
         var that = this;
         return new Promise(resolve => {
             FB.login(
-                function (response) {
+                function(response) {
                     // console.log('FBlogin');
                     if (response.status === 'connected') {
                         console.warn('login_success!!!!!', response);
-                        FB.api('/me', function (res) {
+                        FB.api('/me', function(res) {
                             // console.log('用户信息为: ', res);
                             var param = { ...response, ...res };
 
                             // 获取用户头像
-                            FB.api('/' + res.id + '/picture', 'GET', { redirect: 'false' }, function (response) {
+                            FB.api('/' + res.id + '/picture', 'GET', { redirect: 'false' }, function(response) {
                                 var pic_square = response.data.url;
                                 param = { ...param, pic_square };
                                 resolve(param);
@@ -63,11 +66,11 @@
      * @msg: 检查登录状态
      * @return {pormise} 返回用户的信息如id token name pic_square（头像）  或者没登录的false
      */
-    FBsdk.prototype.checkFBLoginState = function () {
+    FBsdk.prototype.checkFBLoginState = function() {
         var that = this;
         return new Promise((resolve, rejcet) => {
             // console.log('FB.getLoginStatus', FB.getLoginStatus);
-            FB.getLoginStatus(function (response) {
+            FB.getLoginStatus(function(response) {
                 that.statusChangeCallback(response)
                     .then(res => {
                         // console.log('哈哈哈');
@@ -81,11 +84,11 @@
     };
 
     /**
-   * @msg:  检查接口或者登录接口的回调参数处理
-   * @param {object} response  回调参数
-   * @return {pormise} 返回用户的信息如id token name pic_square（头像）  或者没登录的false不是promise
-   */
-    FBsdk.prototype.statusChangeCallback = function (response) {
+     * @msg:  检查接口或者登录接口的回调参数处理
+     * @param {object} response  回调参数
+     * @return {pormise} 返回用户的信息如id token name pic_square（头像）  或者没登录的false不是promise
+     */
+    FBsdk.prototype.statusChangeCallback = function(response) {
         var that = this;
         // {
         //     status: 'connected',
@@ -105,25 +108,25 @@
         } else {
             console.error('没登录！');
             // console.log(response);
-            return false;
+            return Promise.resolve(false);
         }
     };
 
     /**
-   * @msg: 返回获取到的用户信息
-   * @param {promise} 返回用户的信息如id token name pic_square（头像）
-   * @return:
-   */
-    FBsdk.prototype.getUserInfo = function (response) {
+     * @msg: 返回获取到的用户信息
+     * @param {promise} 返回用户的信息如id token name pic_square（头像）
+     * @return:
+     */
+    FBsdk.prototype.getUserInfo = function(response) {
         var that = this;
         // console.log('Welcome!  Fetching your information.... ');
         return new Promise(resolve => {
-            FB.api('/me', function (res) {
+            FB.api('/me', function(res) {
                 // console.log('用户信息为: ', res);
                 var param = { ...response, ...res };
 
                 // 获取用户头像
-                FB.api('/' + res.id + '/picture', 'GET', { redirect: 'false' }, function (response) {
+                FB.api('/' + res.id + '/picture', 'GET', { redirect: 'false' }, function(response) {
                     var pic_square = response.data.url;
                     param = { ...param, pic_square };
                     resolve(param);
@@ -146,17 +149,16 @@
         });
     };
 
-
-
-
-    
     /**
-     * @msg:  分享好友
+     * @description:  分享好友
+     * @param invite_url 分享的链接
+    //  * @param quote  分享的默认显示文字
+    //  * @param hashtag  FB分享的tag标签(注意必须有#)
      */
-    FBsdk.prototype.shareFB = function(invite_url) {
+    FBsdk.prototype.shareFB = function(invite_url/* , quote, hashtag */) {
         // console.log('当前执行分享的用户ID为', user_id);
         return new Promise(resolve => {
-            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ hashtag: '#' + document.title, quote: 'Come to the game box and play games and get rewards' }, function(response) {
+            FB.ui({ method: 'share', href: invite_url, /* mobile_iframe: true, */ /* quote, hashtag: '#' + (hashtag || document.title) */ }, function(response) {
                 if (response && !response.error_message) {
                     // console.log('Posting completed.');
                     resolve(response);
@@ -175,7 +177,7 @@
     //  */
     // FBsdk.prototype.fbAsyncInit = function(callBack) {
     //     window.fbAsyncInit = function() {
-    //         FB.init({ appId: '259750671380714', cookie: true, xfbml: true, version: 'v3.2' });
+    //         FB.init({ appId: '844618395883361', cookie: true, xfbml: true, version: 'v3.2' });
     //         FB.AppEvents.logPageView();
     //         callBack();
     //     };

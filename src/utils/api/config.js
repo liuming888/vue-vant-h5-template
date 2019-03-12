@@ -2,11 +2,16 @@ export default {
     getUrl(NODE_ENV) {
         let url = '';
         switch (NODE_ENV) {
-            case 'development':
+            case 'mock':
                 url = '';
+            case 'development':
+                // url = 'http://dev-ht-zdd-api.batmobi.net';
+                break;
+            case 'dev':  // 开发域名环境
+                url = 'https://dev-ht-zdd-api.batmobi.net';
                 break;
             case 'test':
-                // url = 'http://127.0.0.1:7001';
+                url = 'https://test-ht-zdd-api.batmobi.net';
                 break;
             case 'production':
                 url = 'http://127.0.0.1:9078';

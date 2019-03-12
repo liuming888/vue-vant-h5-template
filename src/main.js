@@ -1,11 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router/index.js'
-import store from './store/index.js'
-import * as $util from './utils/util.js'
-import "./utils/faceBookSdk.js"
-import { Toast } from 'vant';
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router/index.js';
+import store from './store/index.js';
+import $request from '@/utils/api/request.js';
+import * as $util from './utils/util.js';
+import './utils/faceBookSdk.js';
+import { Toast, Popup, Lazyload } from 'vant';
 Vue.use(Toast);
+Vue.use(Popup);
+Vue.use(Lazyload);
 
 // Vue.prototype.$toast.loading({
 //   mask: true, // 是否显示背景蒙层
@@ -16,13 +19,14 @@ Vue.use(Toast);
 // setTimeout(() => {
 //   Vue.prototype.$toast.clear();
 // }, 1000);
-
+Vue.prototype.$curStore = store;
 Vue.prototype.$util = $util;
+Vue.prototype.$request = $request;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    store,
+    render: h => h(App),
+}).$mount('#app');

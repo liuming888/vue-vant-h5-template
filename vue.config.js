@@ -1,17 +1,35 @@
+console.log('111111111111111', process.env.NODE_ENV);
+function getUrl(NODE_ENV) {
+    let url = '';
+    switch (NODE_ENV) {
+        case 'mock':
+            url = 'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api';
+            break;
+        case 'development':
+            // 锦涛
+            // url = 'http://192.168.4.128:8024/api';
+            // 阳
+            url = 'http://192.168.4.32:8024/api';
+            // url = 'https://dev-ht-zdd-api.batmobi.net/api';
+            break;
+        case 'test':
+            // url = 'http://127.0.0.1:7001';
+            break;
+        case 'production':
+            // url = 'http://127.0.0.1:9078';
+            break;
+    }
+    return url;
+}
+
 module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
     devServer: {
+        disableHostCheck: true,
         proxy: {
             '/api': {
-                // 测试环境
-                // target: 'http://119.23.230.72:8088/',
-
-                // 权
-                // target: 'http://192.168.4.142:8091/',
-
-                // 开发服务器
-                target: 'http://dev-xhz-backend.batmobi.net/',
+                target: getUrl(process.env.NODE_ENV),
 
                 ws: true,
 

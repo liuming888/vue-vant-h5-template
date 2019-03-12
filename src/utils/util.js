@@ -78,3 +78,35 @@ export function formatMoney(coin) {
     var result = s.replace(/^\./, '0.');
     return result.substring('0', result.length - 1);
 }
+
+/**
+    * @description: 过期时间倒计时
+    * @param {expire_time} 过期时间段（单位时间戳）
+    * @return {false | 格式化后的时间对象}
+    */
+export function expiration(expire_time) {
+    if (isNaN(expire_time)) {
+        return false;
+    }
+
+    // let expireTimeNum = new Date(expire_time);
+    // let curTimeNum = +new Date();
+    // let expirationNum = expireTimeNum - curTimeNum;
+    // let h = Math.floor(expirationNum / (1000 * 60 * 60));
+    // h = h < 10 ? "0" + h : h;
+    // let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));
+    // p = p < 10 ? "0" + p : p;
+    // let m = expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p;
+    // m = m < 10 ? "0" + m : m;
+    // this.expirationDat = { h, p, m };
+
+    let expirationNum = new Date(expire_time);
+    let h = Math.floor(expirationNum / (1000 * 60 * 60));
+    h = h < 10 ? "0" + h : h;
+    let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));
+    p = p < 10 ? "0" + p : p;
+    let m = expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p;
+    m = m < 10 ? "0" + m : m;
+    this.expirationDat = { h, p, m };
+    return { h, p, m };
+}

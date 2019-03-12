@@ -3,15 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "serve:mock": "cross-env NODE_ENV=mock vue-cli-service serve --copy",
     "serve": "vue-cli-service serve --copy",
     "build": "vue-cli-service build",
+    "build:dev": "cross-env NODE_ENV=dev vue-cli-service build",
     "build:test": "cross-env NODE_ENV=test vue-cli-service build --modern",
     "build:prod": "cross-env NODE_ENV=production vue-cli-service build  --modern",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "clipboard": "^2.0.4",
     "cross-env": "^5.2.0",
+    "moment": "^2.24.0",
     "quicklink": "^1.0.0",
     "vant": "^1.6.7",
     "vue": "^2.6.6",
