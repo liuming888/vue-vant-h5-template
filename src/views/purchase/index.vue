@@ -10,7 +10,8 @@
       </div>
     </div>
     <!-- 显示的收货地址 -->
-    <div v-if="myAddress && myAddress.id" class="y-shipping-address">
+    <div v-if="myAddress && myAddress.id"
+      class="y-shipping-address">
       <img src="~@/assets/images/position.png"
         class="position">
 
@@ -31,18 +32,20 @@
         style="font-size:22px;color:#888888;" />
     </div>
     <!-- 无收货地址 -->
-    <div v-else class="no-shipping-address" @click="showAddressDialog.show = true">
+    <div v-else
+      class="no-shipping-address"
+      @click="showAddressDialog.show = true">
       <img v-lazy="require('@/assets/images/add.png')"
         class="add-icon">
       <div class="txt">Tambahkan alamat secara manual</div>
       <van-icon name="arrow" />
     </div>
-    
+
     <img v-lazy="require('@/assets/images/Addressmodification.png')"
       style="width:100vw;height:auto;margin-bottom:50px;">
 
     <div class="commodity-info">
-      <img v-lazy="spu.pic_urls&&spu.pic_urls[0]||require('@/assets/images/add.png')"
+      <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('@/assets/images/add.png')"
         class="commodity-img">
 
       <div class="commodity-content">
@@ -51,7 +54,7 @@
         </div>
 
         <div class="type-num">
-          Color :386
+          <!-- Color :386 -->
         </div>
 
         <div class="price-quantity">
@@ -114,7 +117,8 @@
     </div>
 
     <!-- 商品列表页以组件形式  默认阻止点击穿透 -->
-    <div class="dialog-box" v-if="showShippingAddressPage"
+    <div class="dialog-box"
+      v-if="showShippingAddressPage"
       @click.stop="abc=1">
       <shipping-address :showShippingAddressPage.sync="showShippingAddressPage" />
     </div>
@@ -126,7 +130,7 @@
 import { Icon } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
-import dialogPostAddAddress from '@/components/dialogs/dialogPostAddAddress.vue'
+import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
@@ -135,7 +139,7 @@ for (let k in obj) {
 
 import { getInfo } from "@/server/goods.js";
 import { orderCreate } from "@/server/pay.js";
-import { getMyAddress } from '@/server/user.js'
+import { getMyAddress } from "@/server/user.js";
 export default {
   components: {
     shippingAddress, // 地址列表组件
@@ -148,7 +152,7 @@ export default {
         //类型：Object  必有字段  备注：商品
         spu_id: 1, //类型：Number  必有字段  备注：商品id
         title: "mock", //类型：String  必有字段  备注：商品标题
-        pic_urls: [
+        spu_pics: [
           //类型：Array  必有字段  备注：图片地址列表
           "mock" //类型：String  必有字段  备注：无
         ],
@@ -157,23 +161,22 @@ export default {
           {
             //类型：Object  必有字段  备注：无
             spec_name: "mock", //类型：String  必有字段  备注：规格名
+            spec_id: "mock", //类型：String  必有字段  备注：规格id
             spec_values: [
               //类型：Array  必有字段  备注：规格列表
-              "mock1", //类型：String  必有字段  备注：无
-              "mock2",
-              "mock3"
-            ],
-            spec_id: 0 // 当前选择下标
+              "mock" //类型：String  必有字段  备注：无
+            ]
           }
         ],
         price: "mock", //类型：String  必有字段  备注：商品售价
+        original_price: "mock", //类型：String  必有字段  备注：原价
         desp: "mock", //类型：String  必有字段  备注：商品详情描述
         expire_ttl: "mock" //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒
       },
 
       paly_id: 0,
 
-      showShippingAddressPage:false,  //显示地址列表页
+      showShippingAddressPage: false, //显示地址列表页
       showAddressDialog: {
         show: false
       },
@@ -192,9 +195,11 @@ export default {
       }
     },
     async getMyAddressInfo() {
-      const result =  await getMyAddress()
+      const result = await getMyAddress();
       if (result) {
-        this.myAddress= (result.data.address_list.filter(item => item.is_default === 1))[0]
+        this.myAddress = result.data.address_list.filter(
+          item => item.is_default === 1
+        )[0];
       }
     },
     /**
