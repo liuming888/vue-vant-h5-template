@@ -3,6 +3,7 @@
   width: 610px;
   height: 630px;
   overflow: visible;
+  top: 36%;
 }
 
 .close {
@@ -94,7 +95,8 @@
     <van-popup v-model="dialogVisible.show"
       :close-on-click-overlay="false">
       <img src="~@/assets/images/delete-1.png"
-        class="close" @click="closeDialog">
+        class="close"
+        @click="closeDialog">
 
       <h5 class="tit">Tambahkan alamat panen</h5>
 
@@ -108,7 +110,8 @@
           class="user-phone" />
       </div>
 
-      <div class="alamat-pengiriman">
+      <div class="alamat-pengiriman"
+        @click="dialogs.area.show=true;">
         <span class="txt">Pilih alamat pengiriman</span>
         <div class="arrow-icon">
           <van-icon name="arrow" />
@@ -118,20 +121,26 @@
       <textarea class="alamat-lengkap"
         placeholder="Alamat lengkap (jalan, nomor rumah)"></textarea>
 
-      <div class="simpan-btn" @click="simpan">
+      <div class="simpan-btn"
+        @click="simpan">
         Simpan
       </div>
     </van-popup>
+    
+    <!-- 弹窗 -->
+    <dialog-area :dialogVisible.sync="dialogs.area" />
   </div>
 </template>
 
 <script>
 import { Field, Icon } from "vant";
+import dialogArea from "./dialogArea.vue";
 
-import {dealMyAddress} from "@/server/user.js";
+import { dealMyAddress } from "@/server/user.js";
 export default {
   name: "dialogPostAddAddress",
   components: {
+    dialogArea, // 地区选择弹窗
     [Field.name]: Field,
     [Icon.name]: Icon
   },
@@ -140,26 +149,37 @@ export default {
       type: Object,
       default() {
         return {
-          show: true
+          show: false
         };
       }
     }
   },
   data() {
     return {
-      username:"",
-      telephone:""
+      dialogs: {
+        area: {
+          show: false
+        }
+      },
+      username: "",
+      telephone: ""
     };
   },
   methods: {
-    async simpan(){
-      let result=await dealMyAddress({operation:1,username:this.username,telephone:this.telephone,address_one:"",address_two:""});
-      if(result){
+    async simpan() {
+      let result = await dealMyAddress({
+        operation: 1,
+        username: this.username,
+        telephone: this.telephone,
+        address_one: "",
+        address_two: ""
+      });
+      if (result) {
         this.closeDialog();
       }
     },
-    closeDialog(){
-       this.$emit("update:dialogVisible",{show:false});
+    closeDialog() {
+      this.$emit("update:dialogVisible", { show: false });
     }
   }
 };

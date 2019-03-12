@@ -61,7 +61,7 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img v-lazy="item.friend_avatar">
+                <img v-lazy="item.avatar">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
@@ -207,7 +207,7 @@ export default {
           username: "mock", //类型：String  必有字段  备注：用户名
           bargain_amount: 1, //类型：Number  必有字段  备注：帮砍额度
           bargain_time: "mock", //类型：String  必有字段  备注：帮砍时间
-          friend_avatar: require("@/assets/images/tabBar-me-active.png")
+          avatar: "mock" //类型：String  必有字段  备注：头像
         }
       ],
       helpBargainPageDat: {
@@ -252,7 +252,7 @@ export default {
         //   })
         // }
       }
-      
+
       this.initBargainInfo();
       this.initHelpBargainList();
       this.initSpuInfo();
@@ -260,16 +260,16 @@ export default {
     },
     async goBargainChop({ bargain_id, spu_id }) {
       let result = await bargainChop({ bargain_id, spu_id });
-       if(result){
-          const chop_info=result.data.chop_info;
-          this.$router.push({
-            path:"/bargain",
-            query:{
-              ...this.$route.query,
-              bargainId:chop_info.bargain_id
-            }
-          })
-        }
+      if (result) {
+        const chop_info = result.data.chop_info;
+        this.$router.push({
+          path: "/bargain",
+          query: {
+            ...this.$route.query,
+            bargainId: chop_info.bargain_id
+          }
+        });
+      }
     },
     /**
      * @description: 获取商品信息
@@ -293,7 +293,7 @@ export default {
       });
       if (result) {
         this.bargain_info = result.data;
-        console.log('this.bargain_info: ', this.bargain_info);
+        console.log("this.bargain_info: ", this.bargain_info);
       }
     },
     /**
@@ -318,7 +318,7 @@ export default {
         page_num: 1,
         is_all: 0
       });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.spu_list = result.data.spu_list;
       }
     },
