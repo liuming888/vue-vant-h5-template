@@ -19,7 +19,8 @@ export default {
     "zdd-layout": zddMain
   },
   created() {
-    // this.initToken();
+    if(process.env.NODE_ENV=='development'||process.env.NODE_ENV=='mock') return;
+    this.initToken();
     this.initFB();
   },
   methods: {
@@ -82,6 +83,7 @@ export default {
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
           axios.defaults.headers.common["user_id"] = userInfo.user_id;
           axios.defaults.headers.common["access_token"] = userInfo.access_token;
+          console.log("已经刷新token了");
         }
       }
     }

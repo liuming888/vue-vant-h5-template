@@ -128,8 +128,8 @@
       </div>
 
       <div class="goods-detail">
-        <a :href="itemData.path || '/'"
-          class="goods-title">{{itemData.title || ''}}</a>
+        <a href="javascript:;"
+          class="goods-title" @click="jumpBargain">{{itemData.title || ''}}</a>
         <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">

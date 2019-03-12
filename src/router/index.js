@@ -110,24 +110,22 @@ const curRouter = new Router({
 
 // 全局前置守卫
 curRouter.beforeEach((to, from, next) => {
-    let userStr = localStorage.getItem("userInfo");
+    let userStr = localStorage.getItem('userInfo');
     // 第一次进页面时，得先刷新token接口调用了后才行
-    // if (userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
-    //     Vue.prototype.$curStore.watch(
-    //         // 当返回结果改变...
-    //         function(state) {
-    //             return state.isreFreshToken;
-    //         },
-    //         // 执行回调函数
-    //         function() {
-    //             next();
-    //         }
-    //     );
-    // } else {
-    //     next();
-    // }
-
-    next();
+    if (process.env.NODE_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
+        Vue.prototype.$curStore.watch(
+            // 当返回结果改变...
+            function(state) {
+                return state.isreFreshToken;
+            },
+            // 执行回调函数
+            function() {
+                next();
+            }
+        );
+    } else {
+        next();
+    }
 });
 
 // 全局后置钩子

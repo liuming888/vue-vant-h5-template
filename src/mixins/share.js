@@ -2,7 +2,7 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-03-11 21:12:20
+ * @LastEditTime: 2019-03-12 10:58:54
  */
 import { FBConfig } from '@/config/index.js';
 import Clipboard from 'clipboard';
@@ -46,6 +46,7 @@ export default {
         mx_shareWhatsapp() {
             var t = this.shareInfo.share_title;
             const link = encodeURIComponent('\n\n' + this.shareInfo.share_url); // 分享的链接
+            console.log('this.shareInfo.share_url: ', this.shareInfo.share_url);
             window.location.href = 'whatsapp://send?text=' + encodeURIComponent(t) + link + '&via=lopscoop';
         },
         /**

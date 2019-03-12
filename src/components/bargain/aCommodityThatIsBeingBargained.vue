@@ -233,7 +233,7 @@
       :shareInfo="shareInfo" /> -->
 
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
   </div>
 </template>
 
@@ -321,7 +321,8 @@ export default {
         bargain_id: this.spuBargainItem.bargain_id
       });
       if (result) {
-        this.shareInfo = result.data.share_info;
+        this.shareInfo = result.data;
+        console.log('this.shareInfo: ', this.shareInfo);
         this.dialogs.sharingFriends.show = true;
       }
     },
