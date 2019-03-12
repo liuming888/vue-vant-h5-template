@@ -7,6 +7,7 @@
     width: 100%;
     height: 100%;
     align-items: center;
+    z-index: 99999;
     > .bg {
       position: absolute;
       top: 0;
@@ -24,13 +25,16 @@
       text-align: center;
       // justify-content: center;
       > .content {
-        padding: 0 40px;
-        min-height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 40px;
+        // min-height: 200px;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
         color: #323232;
         font-size: 32px;
+        > span {
+          font-weight: bold;
+        }
       }
       > .footer {
         height: 100px;
@@ -56,9 +60,12 @@
   <div class="dialog-default" v-show="dialogVisible">
     <div class="bg" @click.stop="closeDialog()"></div>
     <div class="dialog-container">
-      <div class="content">{{info.content}}</div>
+      <div class="content">
+        <span>{{info.content}}</span>
+        <slot name="content"></slot>
+      </div>
       <div class="footer">
-        <div class="cancel" @click="closeDialog()">{{info.cancelText || 'cancel'}}</div>
+        <div class="cancel" @click="closeDialog()" v-if="!noCancle">{{info.cancelText || 'cancel'}}</div>
         <div class="ok" @click="okHandle()">{{info.okText || 'ok'}}</div>
       </div>
     </div>
@@ -67,8 +74,13 @@
 
 <script>
 export default {
+  name: 'dialog-default',
   props: {
     dialogVisible: {
+      type: Boolean,
+      default: false
+    },
+    noCancle: {
       type: Boolean,
       default: false
     },

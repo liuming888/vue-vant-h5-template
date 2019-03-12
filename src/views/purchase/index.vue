@@ -10,7 +10,7 @@
       </div>
     </div>
     <!-- 显示的收货地址 -->
-    <div v-if="myAddress && myAddress.id" class="y-shipping-address">
+    <div v-if="myAddress && myAddress.id" class="y-shipping-address" @click="goShippingAddressList()">
       <img src="~@/assets/images/position.png"
         class="position">
 
@@ -108,7 +108,7 @@
       </div>
 
       <div class="pay-immediately"
-        @click="goPaly">
+        @click="dialogVisible = true">
         pay immediately
       </div>
     </div>
@@ -119,6 +119,12 @@
       <shipping-address :showShippingAddressPage.sync="showShippingAddressPage" />
     </div>
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
+    <!-- 支付失败调用的弹窗 -->
+    <dialog-default :info="info" :dialogVisible.sync="dialogVisible" @ok="dialogVisible = false">
+      <div slot="content" class="pay-error">
+        <p>Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin</p>
+      </div>
+    </dialog-default>
   </div>
 </template>
 
@@ -127,6 +133,7 @@ import { Icon } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from '@/components/dialogs/dialogPostAddAddress.vue'
+import DialogDefault from '@/components/dialogs/dialogDefault.vue'
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
@@ -138,6 +145,7 @@ import { orderCreate } from "@/server/pay.js";
 import { getMyAddress } from '@/server/user.js'
 export default {
   components: {
+    DialogDefault,
     shippingAddress, // 地址列表组件
     dialogPostAddAddress,
     ...vantCom
@@ -177,7 +185,13 @@ export default {
       showAddressDialog: {
         show: false
       },
-      myAddress: []
+      myAddress: [],
+      info: {
+        content: 'Konfirmasikan untuk melunasi?',
+        cancleText: 'Menyerah',
+        okText: 'Terus bayar',
+      },
+      dialogVisible: false
     };
   },
   created() {
@@ -213,7 +227,15 @@ export default {
       let result = await orderCreate(param);
       if (result) {
       }
-    }
+    },
+    goShippingAddressList(spu_id) {
+      this.$router.push({
+        path: "/shippingAddress",
+        query: {
+          spuId: spu_id
+        }
+      });
+    },
   }
 };
 </script>
