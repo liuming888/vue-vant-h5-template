@@ -68,17 +68,6 @@ eval("module.exports = __webpack_require__.p + \"img/facbook.b93c5628.png\";//# 
 
 /***/ }),
 
-/***/ "./src/assets/images/good-large.png":
-/*!******************************************!*\
-  !*** ./src/assets/images/good-large.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__.p + \"img/good-large.47423e8c.png\";//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYXNzZXRzL2ltYWdlcy9nb29kLWxhcmdlLnBuZy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9hc3NldHMvaW1hZ2VzL2dvb2QtbGFyZ2UucG5nP2JlYmYiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArIFwiaW1nL2dvb2QtbGFyZ2UuNDc0MjNlOGMucG5nXCI7Il0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/assets/images/good-large.png\n");
-
-/***/ }),
-
 /***/ "./src/assets/images/guanbi@2x.png":
 /*!*****************************************!*\
   !*** ./src/assets/images/guanbi@2x.png ***!
