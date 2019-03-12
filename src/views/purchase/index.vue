@@ -135,12 +135,8 @@
 import { Icon } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
-<<<<<<< HEAD
 import dialogPostAddAddress from '@/components/dialogs/dialogPostAddAddress.vue'
 import DialogDefault from '@/components/dialogs/dialogDefault.vue'
-=======
-import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
->>>>>>> d8265a322878e07fe21bfe5119ae162e010d078b
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
