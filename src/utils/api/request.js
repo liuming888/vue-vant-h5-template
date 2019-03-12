@@ -15,7 +15,7 @@ if (userStr){
 
 if (process.env.NODE_ENV =="development"){ // 开发
     user_id = 1;
-    access_token = '4788b13bed7d4e8b8764b9e849a624b2';
+    access_token = 'kaifaluantiao';
 }
 
 axios.defaults.headers.common['user_id'] = user_id;
@@ -101,14 +101,14 @@ instance.interceptors.response.use(
 const $request = {
     // url,
     post({ url, data = {}, config = {} }) {
-        let dat = data;
+        // let dat = data;
         // if (!config.headers) {
         //     config.headers = {
         //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         //     };
         //     dat = qs.stringify(data);
         // }
-        return instance({ method: 'post', url, data: dat, ...config })
+        return instance({ method: 'post', url, data, ...config })
             .then(response => {
                 return response;
             })
