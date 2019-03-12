@@ -13,7 +13,7 @@ if (userStr){
     access_token = userInfo.access_token;
 }
 
-if (process.env.NODE_ENV =="development"){ // 开发
+if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
     user_id = 1;
     access_token = 'kaifaluantiao';
 }
@@ -100,7 +100,7 @@ instance.interceptors.response.use(
 
 const $request = {
     // url,
-    post({ url, data = {}, config = {} }) {
+    post({ url, data, config = {} }) {
         // let dat = data;
         // if (!config.headers) {
         //     config.headers = {
