@@ -47,8 +47,8 @@
 //   }
    .freebing-container {
     padding: 24px;
-    background-color: #fff;
-    border-radius: 20px;
+    // background-color: #fff;
+    // border-radius: 20px;
     > .good-box {
       margin-top: 44px;
       display: flex;
@@ -173,13 +173,13 @@
         }
       }
     }
-    > .freebing-more {
-      margin-top: 35px;
-      display: block;
-      font-size: 24px;
-      text-align: center;
-      color: #585858;
-    }
+    // > .freebing-more {
+    //   margin-top: 35px;
+    //   display: block;
+    //   font-size: 24px;
+    //   text-align: center;
+    //   color: #585858;
+    // }
   }
   // background-color: #fff;
 // }
@@ -223,9 +223,9 @@
           </div>
         </div>
       </div>
-      <a href="javascript:;"
+      <!-- <a href="javascript:;"
         class="freebing-more"
-        @click="$router.push({path:'/isBargainingList'})">More About ></a>
+        @click="$router.push({path:'/isBargainingList'})">More About ></a> -->
     </div>
 
     <!-- 弹窗 -->

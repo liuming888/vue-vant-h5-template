@@ -9,7 +9,7 @@
   > .goods-img {
     img {
       width: 100%;
-      height: auto;
+      max-height: 690px;
     }
   }
   > .goods-detail {

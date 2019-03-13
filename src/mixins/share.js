@@ -2,7 +2,7 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-03-12 10:58:54
+ * @LastEditTime: 2019-03-13 11:32:55
  */
 import { FBConfig } from '@/config/index.js';
 import Clipboard from 'clipboard';
@@ -13,7 +13,7 @@ export default {
         };
     },
     mounted() {
-        this.mx_copyBtn = new Clipboard(this.$refs.copy);
+        // this.mx_copyBtn = new Clipboard(this.$refs.copy);
     },
     methods: {
         /**
