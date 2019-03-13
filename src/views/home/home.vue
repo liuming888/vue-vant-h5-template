@@ -238,7 +238,7 @@ export default {
     async initMybargainSpus() {
       let result = await getMybargainSpus({ page_size: 2, page_num: 1 });
       console.log("result: ", result);
-      if (result) {
+      if (result&&result.data) {
         this.spuBargainList = result.data;
       }
     },
@@ -270,7 +270,7 @@ export default {
         //   tp_type: 1
         // });
         console.log("result: ", result);
-        if (result) {
+        if (result&&result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
