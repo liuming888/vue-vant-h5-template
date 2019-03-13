@@ -2,49 +2,57 @@
 
 <template>
   <div class="bargain-container">
+    <!-- 返回首页 -->
+    <div class="turn-home"></div>
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
-        <!-- 砍价商品信息 -->
-        <div class="bargain-info">
-          <div class="img-box">
-            <img v-lazy="spu.spu_pics[0]||require('./../assets/images/good-large.png')">
+        <img class="bg" src="./../assets/images/bargain-bg-2.png" alt="">
+        <div class="bargain-content">
+          <!-- 砍价商品信息 -->
+          <div class="bargain-info">
+            <div class="img-box">
+              <img v-lazy="spu.spu_pics[0]||require('./../assets/images/good-large.png')">
+            </div>
+            <div class="detail">
+              <p class="title">{{spu.title}}</p>
+              <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
+              <div class="price-box">
+                <div class="price-box-item">
+                  <p class="p-t-3">244d Sent</p>
+                  <p class="p-t-1">
+                    Price
+                    <span>$</span><span>{{spu.original_price}}</span>
+                  </p>
+                  <p class="p-t-2">current price</p>
+                </div>
+                <div class="price-box-item">
+                  <p class="p-n-1"><span>Rp</span>{{spu.price}}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="detail">
-            <p class="title">{{spu.title}}</p>
-            <count-down :dateDiff="spu.expire_ttl"></count-down>
-            <div class="price-box">
-              <div class="price-box-item">
-                <p class="p-t-1">
-                  Price
-                  <span>$</span><span>{{spu.original_price}}</span>
-                </p>
-                <p class="p-t-2">current price</p>
+          <!-- 砍价进度 -->
+          <div class="bargain-schedule">
+            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_price||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.left_price||spu.price}}</span></p>
+            <div class="schedule">
+              <div class="active"
+                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
+              <div class="schedule-item">
+                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
               </div>
-              <div class="price-box-item">
-                <p class="p-n-1"><span>$</span>{{spu.price}}</p>
+              <div class="schedule-item ball ball-center">
+                <span class="description">Available for purchase</span>
               </div>
-              <div class="price-box-item">
-                <p class="p-n-2">{{spu.deliver_count}} Sent</p>
+              <div class="schedule-item ball ball-right">
+                <span class="description">Take it free</span>
               </div>
             </div>
           </div>
-        </div>
-        <!-- 砍价进度 -->
-        <div class="bargain-schedule">
-          <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_price||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.left_price||spu.price}}</span></p>
-          <div class="schedule">
-            <div class="active ball ball-right"
-              :style="{'width':bargain_info.bargain_rate+'%'}"></div>
-            <div class="schedule-item">
-              <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
-            </div>
-            <div class="schedule-item ball ball-center">
-              <span class="description">Available for purchase</span>
-            </div>
-            <div class="schedule-item ball ball-right">
-              <span class="description">Take it free</span>
-            </div>
+          <count-down :dateDiff="spu.expire_ttl" class="spu-count-down"></count-down>
+          <div class="ctrl-box">
+            <div class="share-btn">Share friends to cut</div>
+            <div class="buy-btn">Rp 987.987  buy now</div>
           </div>
         </div>
       </div>
@@ -52,8 +60,7 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-      <div class="team-box"
-        v-if="$route.query.bargainId">
+      <div class="team-box">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -61,18 +68,21 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img v-lazy="item.avatar">
+                <img src="./../assets/images/good-large.png" alt="">
+                <!-- <img v-lazy="item.avatar"> -->
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
+                <p class="team-date">2019-03-11 10:36:54</p>
               </div>
             </div>
-            <div class="column">cut <span class="dollar">$<span>{{item.bargain_amount}}</span></span></div>
+            <div class="column">
+              <p class="dollar">Rp<span>{{item.bargain_amount}}</span></p>
+            </div>
           </li>
         </ul>
       </div>
-      <div v-else
-        class="goods-detail">
+      <div class="goods-detail">
         <!-- 商品详情图 -->
         <p class="page-title">Product Petails</p>
         <img v-lazy="spu.spu_pics[0]">
@@ -80,7 +90,10 @@
 
       <!-- 推荐商品 -->
       <div class="recommend-products">
-        <p class="page-title">More Products</p>
+        <p class="page-title">
+          <img src="./../assets/images/start.png" alt="">
+          <span>More Products</span>
+        </p>
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
@@ -97,7 +110,7 @@
       </div>
     </div>
 
-    <div class="down-box">
+    <!-- <div class="down-box">
       <div class="home-btn"
         @click.stop="$router.push({path:'/'})">
         <img src="~@/assets/images/tabBar-home.png">
@@ -114,7 +127,7 @@
         @click.stop="openSharingFriendsDialog">
         Share to friends
       </div>
-    </div>
+    </div> -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo" />
   </div>
@@ -231,7 +244,7 @@ export default {
     };
   },
   created() {
-    this.init();
+    // this.init();
   },
   methods: {
     async init() {

@@ -1,22 +1,22 @@
 .bargain-container {
     // background: #f9f9f9;
     background:linear-gradient(45deg,rgba(253,84,72,1),rgba(232,43,35,1));
-    > .turn-home {
-        position: fixed;
-        top: 60%;
-        right: 10px;
-        width: 90px;
-        height: 90px;
-        background: url('./../assets/images/home@2x(1).png') no-repeat;
-        background-size: 100%;
-        z-index: 9999;
-    }
     > .bargain-header {
         position: relative;
-        padding: 40px 10px 10px 10px;
-        // height: 400px;
-        background: url('./../assets/images/bargain-bg-1.png') no-repeat;
-        background-size: 100%;
+        padding: 50px 10px 10px 10px;
+        > .bargain-banner {
+            > img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        > .turn-home {
+            position: absolute;
+            top: -1px;
+            right: 10px;
+            width: 90px;
+            height: 90px;
+        }
         > .bargain-info-box {
             position: relative;
             border-radius: 20px;
@@ -72,7 +72,6 @@
                                 &:nth-of-type(2) {
                                     width: 100px;
                                     margin-left: 10px;
-                                    // flex: auto;
                                 }
                                 > .p-t-1 {
                                     font-size: 18px;
@@ -364,7 +363,7 @@
                 margin-left: 20px;
             }
         }
-        > .goods-detail {
+        > .help-page {
             background:linear-gradient(180deg,rgba(229,57,49,1),rgba(233,72,64,1));
             box-shadow:0px 2px 4px 0px rgba(152,19,0,0.46);
             border-radius:10px;
@@ -380,10 +379,41 @@
                 text-align: center;
                 color: #fff;
             }
-            > img {
-                display: block;
-                width: 100%;
-                height: auto;
+            > .help-list {
+                margin: 0 50px;
+                border-top: 1px dotted #FFB893;
+                display: flex;
+                justify-content: center;
+                > .help-item {
+                    flex: 1;
+                    text-align: center;
+                    padding: 60px 0;
+                    color: #fff;
+                    font-size: 24px;
+                    font-weight: lighter;
+                    > img {
+                        width: 86px;
+                        height: 86px;
+                        margin-bottom: 23px;
+                    }
+                    & + .help-item {
+                        position: relative;
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 30%;
+                            left: -50px;
+                            display: block;
+                            width: 37px;
+                            height: 27px;
+                            background: url('./../assets/images/jiantou.png') no-repeat;
+                            background-size: 37px 27px;
+                        }
+                    }
+                }
+                > .help-item:nth-of-type(2) {
+                    margin: 0 50px;
+                }
             }
         }
     }

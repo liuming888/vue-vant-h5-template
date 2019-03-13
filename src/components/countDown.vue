@@ -93,6 +93,7 @@ export default {
       padding: 0 6px;
   }
   > .dec {
+      font-weight: lighter;
       padding-left: 12px;
   }
 }
