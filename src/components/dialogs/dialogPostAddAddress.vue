@@ -165,7 +165,7 @@ export default {
       type: Object,
       default() {
         return {
-          show: false
+          show: true
         };
       }
     },
