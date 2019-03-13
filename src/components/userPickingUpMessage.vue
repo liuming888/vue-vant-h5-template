@@ -28,7 +28,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   animation: mes 20s infinite;
-
+  z-index: 9999;
   > .home-top-msg-img {
     width: 38px;
     height: 38px;
