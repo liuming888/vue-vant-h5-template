@@ -2,7 +2,7 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-03-13 11:32:55
+ * @LastEditTime: 2019-03-13 14:18:19
  */
 import { FBConfig } from '@/config/index.js';
 import Clipboard from 'clipboard';
@@ -13,13 +13,14 @@ export default {
         };
     },
     mounted() {
-        // this.mx_copyBtn = new Clipboard(this.$refs.copy);
+        this.mx_copyBtn = new Clipboard(this.$refs.copy);
     },
     methods: {
         /**
          * @description:  点击复制按钮后
          */
         mx_copyLink() {
+            console.log("6666666666666")
             let vm = this;
             let clipboard = vm.mx_copyBtn;
             clipboard.on('success', function() {

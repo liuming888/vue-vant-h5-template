@@ -85,12 +85,13 @@
     .good-box {
       width: 514px;
       height: 195px;
-      margin: 30px auto 0;
-      background: pink;
+      margin: 24px auto 0;
+      // background: pink;
       display: flex;
       align-items: center;
-      padding-left: 25px;
+      padding-left: 12px;
       box-sizing: border-box;
+      transform: scale(0.9);
 
       .good-img {
         width: 150px;
@@ -108,11 +109,11 @@
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
-          margin-bottom: 20px;
+          margin-bottom: 25px;
         }
 
         .old-m {
-          font-size: 20px;
+          font-size: 16px;
           font-family: Helvetica;
           font-weight: 400;
           text-decoration: line-through;
@@ -120,16 +121,71 @@
         }
 
         .cur-n {
-          font-size: 30px;
+          font-size: 36px;
           font-weight: 600;
           color: rgba(211, 12, 5, 1);
 
-          .rp{
-            
+          .rp {
+            font-size: 20px;
+            margin-right: 4px;
           }
         }
       }
     }
+
+    .share-to {
+      font-size: 34px;
+      font-weight: bold;
+      color: rgba(211, 12, 5, 1);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .share-types {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 41px;
+      position: relative;
+
+      .share-item {
+        width: 100px;
+        margin-right: 20px;
+        height: auto;
+        text-align: center;
+        font-size: 20px;
+        color: #323232;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .copy-link {
+    position: absolute;
+    width: 429px;
+    height: 81px;
+    bottom: 42px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+  }
+
+  .close-img {
+    display: block;
+    width: 70px;
+    height: auto;
+    // margin: 96px auto 0;
+    position: absolute;
+    bottom: -110px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 }
 </style>
@@ -140,38 +196,6 @@
     @click.stop="abc=1">
 
     <div class="share-box">
-      <!-- <h5 class="tit">Share To</h5>
-
-      <div class="share-types">
-        <img src="@/assets/images/messenger.png"
-          class="fb"
-          alt="fb"
-          @click="mx_shareMessenger">
-
-        <img src="@/assets/images/line.png"
-          @click="mx_shareLine">
-
-        <img src="@/assets/images/whatsapp.png"
-          @click="mx_shareWhatsapp">
-          
-        <img src="@/assets/images/facbook.png"
-          @click="mx_shareFacebook">
-      </div>
-
-      <div class="tip">
-        Tip: Sharing to new friends will cut faster and more.
-      </div>
-
-      <button ref="copy"
-        class="copy-link"
-        data-clipboard-action="copy"
-        :data-clipboard-text="shareInfo.share_url"
-        @click="mx_copyLink">Copy Link</button>
-
-      <img src="@/assets/images/guanbi@2x.png"
-        class="close-img"
-        @click="closeDialog"> -->
-
       <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5>
 
       <div class="content">
@@ -188,7 +212,47 @@
             </div>
           </div>
         </div>
+
+        <div class="share-to">Share To</div>
+
+        <div class="share-types">
+
+          <div class="share-item">
+            <img src="@/assets/images/facbook.png"
+              @click="mx_shareFacebook">
+            <p>Facebook</p>
+          </div>
+
+          <div class="share-item">
+            <img src="@/assets/images/line.png"
+              @click="mx_shareLine">
+            <p>LINE</p>
+          </div>
+
+          <div class="share-item">
+            <img src="@/assets/images/whatsapp.png"
+              @click="mx_shareWhatsapp">
+            <p>WhatsApp</p>
+          </div>
+
+          <div class="share-item">
+            <img src="@/assets/images/messenger.png"
+              @click="mx_shareMessenger">
+            <p>Messenger</p>
+          </div>
+
+        </div>
+
+        <button ref="copy"
+          class="copy-link"
+          data-clipboard-action="copy"
+          :data-clipboard-text="shareInfo.share_url||'ceshi'"
+          @click="mx_copyLink"></button>
       </div>
+
+      <img src="~@/assets/images/guanbi@2x.png"
+        class="close-img"
+        @click="closeDialog">
     </div>
   </div>
 </template>
