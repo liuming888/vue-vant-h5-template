@@ -51,8 +51,8 @@
           </div>
           <count-down :dateDiff="spu.expire_ttl" class="spu-count-down"></count-down>
           <div class="ctrl-box">
-            <div class="share-btn">Share friends to cut</div>
-            <div class="buy-btn">Rp 987.987  buy now</div>
+            <div class="share-btn" @click="openSharingFriendsDialog">Share friends to cut</div>
+            <div class="buy-btn" @click="jumpBuyPage">Rp 987.987  buy now</div>
           </div>
         </div>
       </div>
@@ -235,7 +235,7 @@ export default {
     };
   },
   created() {
-    // this.init();
+    this.init();
   },
   methods: {
     async init() {
