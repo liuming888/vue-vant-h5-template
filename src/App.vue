@@ -1,3 +1,9 @@
+<style lang="scss">
+  #app{
+    width: 100vw;
+    overflow: hidden;
+  }
+</style>
 
 <style lang="scss" src="./assets/css/init.scss"></style>
 

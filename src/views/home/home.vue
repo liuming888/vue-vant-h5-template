@@ -3,6 +3,8 @@
   background-color: #d30c05;
   > .home-top-container {
     position: relative;
+    width: 100vw;
+    overflow: hidden;
     &::after {
       content: "";
       display: block;

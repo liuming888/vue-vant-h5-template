@@ -46,17 +46,6 @@ eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// lo
 
 /***/ }),
 
-/***/ "./src/assets/images/bargain-finish-banner.png":
-/*!*****************************************************!*\
-  !*** ./src/assets/images/bargain-finish-banner.png ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__.p + \"img/bargain-finish-banner.20835bcd.png\";\n\n//# sourceURL=webpack:///./src/assets/images/bargain-finish-banner.png?");
-
-/***/ }),
-
 /***/ "./src/assets/images/bargin-active-banner.png":
 /*!****************************************************!*\
   !*** ./src/assets/images/bargin-active-banner.png ***!
