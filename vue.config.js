@@ -27,7 +27,7 @@ module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
     devServer: {
-        disableHostCheck: true,
+        // disableHostCheck: true,
         proxy: {
             '/api': {
                 target: getUrl(process.env.NODE_ENV),

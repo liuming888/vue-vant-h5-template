@@ -199,7 +199,7 @@ export default {
         //   show: true
         // },
         sharingFriends: {
-          show: false
+          show: true
         }
       },
 
