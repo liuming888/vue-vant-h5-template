@@ -13,20 +13,41 @@
     <van-popup v-model="dialogVisible.show"
       position="bottom"
       :overlay="false">
-      <van-area :area-list="areaListDat"
+      <!-- <van-area :area-list="areaListDat"
         :value="curCode"
         @confirm="confirm"
-        @cancel="cancel" />
+        @cancel="cancel" /> -->
+      <van-picker :columns="columns"
+        @change="onChange" />
     </van-popup>
   </div>
 </template>
 
 <script>
-import { Area } from "vant";
+
+const citys = {
+  浙江: ["杭州", "宁波", "温州", "嘉兴", "湖州"],
+  福建: ["福州", "厦门", "莆田", "三明", "泉州"]
+};
+const qu = {
+  杭州: ['1','2','3'],
+  宁波: ['3','4','5']
+}
+// const a = {
+//   a: ['b', '3']
+// }
+// const c = {
+//   b: ['b', '3']
+// }
+// const qu = {
+//   a: ['12','123']
+// }
+
+import { Picker } from "vant";
 export default {
   name: "dialogArea",
   components: {
-    [Area.name]: Area
+    [Picker.name]: Picker
   },
   props: {
     dialogVisible: {
@@ -40,39 +61,29 @@ export default {
   },
   data() {
     return {
-      curCode: "120000", // 当前默认选中
-      areaListDat: {
-        province_list: {
-          110000: "北京市",
-          120000: "天津市"
+      columns: [
+        {
+          values: Object.keys(citys),
+          className: "column1"
         },
-        city_list: {
-          110100: "北京市",
-          110200: "县",
-          120100: "天津市",
-          120200: "县"
+        {
+          values: citys['浙江'],
+          className: "column2",
+          defaultIndex: 0
         },
-        county_list: {
-          110101: "东城区",
-          110102: "西城区",
-          110105: "朝阳区",
-          110106: "丰台区",
-          120101: "和平区",
-          120102: "河东区",
-          120103: "河西区",
-          120104: "南开区",
-          120105: "河北区"
+        {
+          values: qu['杭州'],
+          className: "column3",
+          defaultIndex: 0
         }
-      }
+      ]
     };
   },
   methods: {
-    confirm(datArr,idxs) {
-      console.log("1111111111111",datArr,idxs);
-      //   this.cancel();
-    },
-    cancel() {
-      this.$emit("update:dialogVisible", { show: false });
+    onChange(picker, values) {
+      console.log(values)
+      picker.setColumnValues(1, citys[values[0]]);
+      picker.setColumnValues(2, qu[values[1]]);
     }
   }
 };

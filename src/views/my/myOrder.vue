@@ -61,6 +61,26 @@
             }
         }
     }
+    .without-order {
+        padding: 0 30px;
+        text-align: center;
+        font-size: 28px;
+        color: #888;
+        > .none-file-icon {
+            width: auto;
+            height: 140px;
+            margin: 170px 0 70px 0;
+        }
+        > .btn {
+            margin-top: 100px;
+            height:88px;
+            line-height: 88px;
+            border:1px solid rgba(211,12,5,1);
+            border-radius:44px;
+            color: #D30C05;
+            font-size: 32px;
+        }
+    }
 </style>
 
 <template>
@@ -102,6 +122,12 @@
                         </div>
                     </li>
                 </ul>
+                <!-- 无订单 -->
+                <div class="without-order" v-show="false">
+                    <img src="@/assets/images/order-none.png" alt="" class="none-file-icon">
+                    <p>Tidak ada pesanan terkait</p>
+                    <div class="btn">Buka halaman beranda dan lihat</div>
+                </div>
             </van-tab>
         </van-tabs>
     </div>

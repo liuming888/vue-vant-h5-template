@@ -111,8 +111,12 @@
         </div>
       </div>
 
-      <div class="pay-immediately"
+      <!-- <div class="pay-immediately"
         @click="dialogVisible = true">
+        pay immediately
+      </div> -->
+      <div class="pay-immediately"
+        @click="goPaly">
         pay immediately
       </div>
     </div>
@@ -304,9 +308,7 @@ export default {
         is_default: 1
       });
       if (result && result.data) {
-        this.myAddress = result.data.filter(
-          item => item.is_default === 1
-        )[0];
+        this.myAddress = result.data.filter(item => item.is_default === 1)[0];
       }
     },
     /**
@@ -322,26 +324,34 @@ export default {
      * @description: 支付下单接口流程
      */
     async goPaly() {
+      let spu_spec_items = [];
+      this.specs.forEach(item => {
+        spu_spec_items.push(item.id);
+      });
+      console.log("spu_spec_items----------", spu_spec_items);
       let param = {
-        specs: spu.specs,
-        address_id: "地址id",
-        spu_id: spu.spu_id,
-        pay_type: "支付方式"
+        spu_spec_items,
+        address_id: "3",
+        spu_id: this.spu.spu_id,
+        pay_type: "1"
       };
-      if (this.$route.query.bargain_id) {
-        param = { ...param, bargain_id: this.$route.query.bargain_id };
+      if (this.$route.query.bargainId) {
+        param = { ...param, bargain_id: this.$route.query.bargainId };
       }
+      console.log("param--------------", param);
       let result = await orderCreate(param);
-      if (result) {
+      if (result && result.data) {
+        let { pay_url, order_no } = result.data;
+        window.open(pay_url);
       }
     },
     goShippingAddressList() {
-      this.showShippingAddressPage=true;
+      this.showShippingAddressPage = true;
     }
   },
-  watch:{
-    showShippingAddressPage(val){
-      if(!val){
+  watch: {
+    showShippingAddressPage(val) {
+      if (!val) {
         console.log("66666666666666");
         this.getMyAddressInfo();
       }
