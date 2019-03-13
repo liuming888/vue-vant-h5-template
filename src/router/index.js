@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import quicklink from 'quicklink/dist/quicklink.mjs';
+// import quicklink from 'quicklink/dist/quicklink.mjs';
 Vue.use(Router);
 
 const curRouter = new Router({
