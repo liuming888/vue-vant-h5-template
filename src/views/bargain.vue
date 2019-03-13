@@ -239,18 +239,6 @@ export default {
         let result = await this.goBargainChop({
           spu_id: this.$route.query.spuId
         });
-        // if(result){
-        //   alert(1);
-        //   console.log("66666666666666")
-        //   const chop_info=result.data.chop_info;
-        //   this.$router.push({
-        //     path:"/bargain",
-        //     query:{
-        //       ...this.$route.query,
-        //       bargainId:chop_info.bargain_id
-        //     }
-        //   })
-        // }
       }
 
       this.initBargainInfo();
@@ -326,8 +314,8 @@ export default {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
       if (result) {
         this.shareInfo = result.data;
-        this.dialogs.sharingFriends.show = true;
       }
+      this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(spu_id) {
       this.$router.push({
