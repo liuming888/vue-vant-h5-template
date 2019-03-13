@@ -254,7 +254,7 @@ export default {
      */
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result&&result.data&&result.data.spu) {
         let spu = result.data.spu;
         for (let k in spu) {
           this.spu[k] = spu[k];
