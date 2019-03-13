@@ -45,143 +45,143 @@
 //       border-style: solid;
 //     }
 //   }
-   .freebing-container {
-    padding: 24px;
-    background-color: #fff;
-    border-radius: 20px;
-    > .good-box {
-      margin-top: 44px;
-      display: flex;
-      > .good-img {
-        width: 202px;
-        height: 202px;
-        margin-right: 30px;
-      }
-      > .good-detail {
-        overflow: hidden;
-        > .good-title {
-          font-size: 30px;
-          color: #323232;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        > .progress {
-          margin: 19px 0;
-          position: relative;
-          width: 300px;
-          height: 28px;
-          border-radius: 14px;
-          background-color: #fececa;
-          padding: 0 16px;
-          line-height: 28px;
-          color: #fff;
-          font-size: 20px;
-          overflow: hidden;
-          > img {
-            // z-index: 1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-          }
-          > .progress-content {
-            position: relative;
-            > span:last-child {
-              float: right;
-              color: #d30c05;
-            }
-          }
-        }
-        > .count-down {
-          font-size: 26px;
-          color: #585858;
-          line-height: 33px;
-          > .time {
-            display: inline-block;
-            background-color: #585858;
-            color: #fff;
-            border-radius: 8px;
-            padding: 0 6px;
-          }
-          > .dec {
-            padding-left: 12px;
-          }
-        }
-        > .goods-control {
-          margin-top: 23px;
-          // padding: 0 31px 39px 31px;
-          // display: flex;
-          height: 45px;
-          > .button-l {
-            position: relative;
-            display: inline-block;
-            font-size: 24px;
-            color: #fff;
-            text-indent: 49px;
-            line-height: 45px;
-            width: 184px;
-            height: 45px;
-            margin-right: 30px;
-            background: linear-gradient(
-              90deg,
-              rgba(246, 174, 1, 1) 0%,
-              rgba(246, 75, 1, 1) 100%
-            );
-            border-radius: 35px;
-            text-decoration: none;
-            &::before {
-              content: "";
-              display: block;
-              width: 28px;
-              height: 28px;
-              position: absolute;
-              top: 8px;
-              left: 15px;
-              background: url("./../../assets/images/btn-1.png") no-repeat;
-              background-size: 100% auto;
-            }
-          }
-          > .button-r {
-            position: relative;
-            float: right;
-            font-size: 24px;
-            color: #fff;
-            text-indent: 69px;
-            line-height: 45px;
-            width: 184px;
-            height: 45px;
-            background: linear-gradient(
-              90deg,
-              rgba(211, 12, 5, 1) 0%,
-              rgba(246, 78, 1, 1) 100%
-            );
-            border-radius: 35px;
-            text-decoration: none;
-            &::before {
-              content: "";
-              display: block;
-              width: 28px;
-              height: 28px;
-              position: absolute;
-              top: 8px;
-              left: 15px;
-              background: url("./../../assets/images/btn-3.png") no-repeat;
-              background-size: 100% auto;
-            }
-          }
-        }
-      }
+.freebing-container {
+  padding: 24px;
+  // background-color: #fff;
+  // border-radius: 20px;
+  > .good-box {
+    margin-top: 44px;
+    display: flex;
+    > .good-img {
+      width: 202px;
+      height: 202px;
+      margin-right: 30px;
     }
-    > .freebing-more {
-      margin-top: 35px;
-      display: block;
-      font-size: 24px;
-      text-align: center;
-      color: #585858;
+    > .good-detail {
+      overflow: hidden;
+      > .good-title {
+        font-size: 30px;
+        color: #323232;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      > .progress {
+        margin: 19px 0;
+        position: relative;
+        width: 300px;
+        height: 28px;
+        border-radius: 14px;
+        background-color: #fececa;
+        padding: 0 16px;
+        line-height: 28px;
+        color: #fff;
+        font-size: 20px;
+        overflow: hidden;
+        > img {
+          // z-index: 1;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+        }
+        > .progress-content {
+          position: relative;
+          > span:last-child {
+            float: right;
+            color: #d30c05;
+          }
+        }
+      }
+      > .count-down {
+        font-size: 26px;
+        color: #585858;
+        line-height: 33px;
+        > .time {
+          display: inline-block;
+          background-color: #585858;
+          color: #fff;
+          border-radius: 8px;
+          padding: 0 6px;
+        }
+        > .dec {
+          padding-left: 12px;
+        }
+      }
+      > .goods-control {
+        margin-top: 23px;
+        // padding: 0 31px 39px 31px;
+        // display: flex;
+        height: 45px;
+        > .button-l {
+          position: relative;
+          display: inline-block;
+          font-size: 24px;
+          color: #fff;
+          text-indent: 49px;
+          line-height: 45px;
+          width: 184px;
+          height: 45px;
+          margin-right: 30px;
+          background: linear-gradient(
+            90deg,
+            rgba(246, 174, 1, 1) 0%,
+            rgba(246, 75, 1, 1) 100%
+          );
+          border-radius: 35px;
+          text-decoration: none;
+          &::before {
+            content: "";
+            display: block;
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            background: url("./../../assets/images/btn-1.png") no-repeat;
+            background-size: 100% auto;
+          }
+        }
+        > .button-r {
+          position: relative;
+          float: right;
+          font-size: 24px;
+          color: #fff;
+          text-indent: 69px;
+          line-height: 45px;
+          width: 184px;
+          height: 45px;
+          background: linear-gradient(
+            90deg,
+            rgba(211, 12, 5, 1) 0%,
+            rgba(246, 78, 1, 1) 100%
+          );
+          border-radius: 35px;
+          text-decoration: none;
+          &::before {
+            content: "";
+            display: block;
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            background: url("./../../assets/images/btn-3.png") no-repeat;
+            background-size: 100% auto;
+          }
+        }
+      }
     }
   }
-  // background-color: #fff;
+  // > .freebing-more {
+  //   margin-top: 35px;
+  //   display: block;
+  //   font-size: 24px;
+  //   text-align: center;
+  //   color: #585858;
+  // }
+}
+// background-color: #fff;
 // }
 </style>
 
@@ -223,9 +223,9 @@
           </div>
         </div>
       </div>
-      <a href="javascript:;"
+      <!-- <a href="javascript:;"
         class="freebing-more"
-        @click="$router.push({path:'/isBargainingList'})">More About ></a>
+        @click="$router.push({path:'/isBargainingList'})">More About ></a> -->
     </div>
 
     <!-- 弹窗 -->
@@ -233,7 +233,8 @@
       :shareInfo="shareInfo" /> -->
 
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
+      :shareInfo="shareInfo"
+      v-if="dialogs.sharingFriends.show" />
   </div>
 </template>
 
@@ -322,9 +323,9 @@ export default {
       });
       if (result) {
         this.shareInfo = result.data;
-        console.log('this.shareInfo: ', this.shareInfo);
-        this.dialogs.sharingFriends.show = true;
+        console.log("this.shareInfo: ", this.shareInfo);
       }
+      this.dialogs.sharingFriends.show = true;
     },
     /**
      * @description: 跳转到砍价页（商品详情页）

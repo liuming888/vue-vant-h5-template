@@ -13,10 +13,10 @@ if (userStr){
     access_token = userInfo.access_token;
 }
 
-if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
+// if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
     user_id = 1;
     access_token = 'kaifaluantiao';
-}
+// }
 
 axios.defaults.headers.common['user_id'] = user_id;
 axios.defaults.headers.common['access_token'] = access_token;

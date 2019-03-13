@@ -3,6 +3,8 @@
   background-color: #d30c05;
   > .home-top-container {
     position: relative;
+    width: 100vw;
+    overflow: hidden;
     &::after {
       content: "";
       display: block;
@@ -87,8 +89,11 @@
 
 .freebing-box {
   position: relative;
+  z-index: 10;
   margin: 0 30px;
-  padding-bottom: 67px;
+  padding-bottom: 30px;
+  background-color: #fff;
+  border-radius: 20px;
   // height: 300px;
 
   > .freebing-title {
@@ -132,6 +137,14 @@
       border-style: solid;
     }
   }
+
+  .freebing-more {
+    margin-top: 35px;
+    display: block;
+    font-size: 24px;
+    text-align: center;
+    color: #585858;
+  }
 }
 </style>
 
@@ -153,10 +166,15 @@
             :spuBargainItem="{...item.bargain_info,...item.spu}"
             v-if="item.bargain_info.status==2" />
         </template>
+
+        <a href="javascript:;"
+          class="freebing-more"
+          @click="$router.push({path:'/isBargainingList'})">More About ></a>
       </div>
 
     </section>
-    <section class="home-goods" v-if="goodsList.length>0">
+    <section class="home-goods"
+      v-if="goodsList.length>0">
       <div class="home-goods-title">DAILY DISCOVER</div>
       <ul class="home-goods-list">
         <commodity-item v-for="(item, index) of goodsList"
@@ -224,7 +242,7 @@ export default {
     },
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
-      if (result&& result.data) {
+      if (result && result.data) {
         this.goodsList = result.data.spu_list;
       }
     },

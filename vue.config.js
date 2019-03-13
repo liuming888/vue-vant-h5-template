@@ -9,8 +9,9 @@ function getUrl(NODE_ENV) {
             // 锦涛
             // url = 'http://192.168.4.128:8024/api';
             // 阳
-            url = 'http://192.168.4.32:8024/api';
+            // url = 'http://192.168.4.32:8024/api';
             // url = 'https://dev-ht-zdd-api.batmobi.net/api';
+            url = 'https://test-ht-zdd-api.batmobi.net/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
@@ -26,7 +27,7 @@ module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
     devServer: {
-        disableHostCheck: true,
+        // disableHostCheck: true,
         proxy: {
             '/api': {
                 target: getUrl(process.env.NODE_ENV),
