@@ -9,7 +9,7 @@
   > .goods-img {
     img {
       width: 100%;
-      height: auto;
+      max-height: 690px;
     }
   }
   > .goods-detail {
@@ -199,7 +199,7 @@ export default {
         //   show: true
         // },
         sharingFriends: {
-          show: true
+          show: false
         }
       },
 
