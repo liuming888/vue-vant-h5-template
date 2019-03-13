@@ -24,10 +24,24 @@
 </template>
 
 <script>
+
 const citys = {
   浙江: ["杭州", "宁波", "温州", "嘉兴", "湖州"],
   福建: ["福州", "厦门", "莆田", "三明", "泉州"]
 };
+const qu = {
+  杭州: ['1','2','3'],
+  宁波: ['3','4','5']
+}
+// const a = {
+//   a: ['b', '3']
+// }
+// const c = {
+//   b: ['b', '3']
+// }
+// const qu = {
+//   a: ['12','123']
+// }
 
 import { Picker } from "vant";
 export default {
@@ -53,16 +67,23 @@ export default {
           className: "column1"
         },
         {
-          values: citys["浙江"],
+          values: citys['浙江'],
           className: "column2",
-          defaultIndex: 2
+          defaultIndex: 0
+        },
+        {
+          values: qu['杭州'],
+          className: "column3",
+          defaultIndex: 0
         }
       ]
     };
   },
   methods: {
     onChange(picker, values) {
+      console.log(values)
       picker.setColumnValues(1, citys[values[0]]);
+      picker.setColumnValues(2, qu[values[1]]);
     }
   }
 };
