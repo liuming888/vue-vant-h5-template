@@ -60,12 +60,8 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-<<<<<<< HEAD
-      <div class="team-box">
-=======
       <div class="team-box"
         v-if="$route.query.bargainId&&help_bargain_list.length>0">
->>>>>>> c2d9f5935bc5e1975bc0015d172c392cfff4b58c
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -239,7 +235,7 @@ export default {
     };
   },
   created() {
-    // this.init();
+    this.init();
   },
   methods: {
     async init() {
