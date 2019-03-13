@@ -170,35 +170,7 @@
                 font-size: 20px;
                 line-height: 24px;
               }
-              > .cut-schedule {
-                > .cut {
-                  color: #888;
-                  font-size: 18px;
-                  > span {
-                    font-size: 24px;
-                  }
-                }
-                > .schedule {
-                  line-height: 20px;
-                  display: inline-block;
-                  margin-left: 10px;
-                  position: relative;
-                  width: 120px;
-                  height: 16px;
-                  background: rgba(255, 255, 255, 1);
-                  border: 1px solid rgba(252, 123, 119, 1);
-                  border-radius: 8px;
-                  > .active {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 60%;
-                    height: 100%;
-                    background: rgba(254, 206, 202, 1);
-                    border-radius: 8px;
-                  }
-                }
-              }
+
               > .btn {
                 width: 168px;
                 height: 66px;
@@ -245,6 +217,68 @@
         }
       }
     }
+  }
+}
+
+.go-on {
+  background: linear-gradient(
+    90deg,
+    rgba(211, 12, 5, 1) 0%,
+    rgba(246, 77, 1, 1) 100%
+  ) !important;
+  margin-top: 0 !important;
+}
+
+.cut-schedule {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  > .cut {
+    color: #888;
+    font-size: 18px;
+    > span {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+  }
+  > .schedule {
+    line-height: 20px;
+    display: inline-block;
+    margin-left: 10px;
+    position: relative;
+    width: 340px;
+    height: 16px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(252, 123, 119, 1);
+    border-radius: 8px;
+    > .active {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60%;
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(
+        135deg,
+        rgba(213, 15, 4, 1),
+        rgba(245, 76, 1, 1)
+      );
+    }
+  }
+}
+
+.go-on-price-box {
+  margin-top: 40px;
+  position: relative;
+
+  .go-on-item-btn {
+    position: absolute;
+    right: 0;
+    top: -36px;
+    width: 168px;
+    height: 150px;
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 </style>
@@ -297,22 +331,27 @@
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
             <count-down :dateDiff="item.spu.expire_ttl"></count-down>
-            <div class="price-box">
+            <div class="price-box go-on-price-box">
               <div class="price-item">
                 <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount}}</div>
                 <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater}}</p>
                 <p class="real-price"><span>Rp</span>{{item.bargain_info.price}}</p>
               </div>
-              <div class="price-item">
-                <div class="btn"
+              <div class="price-item go-on-item-btn">
+                <div class="btn go-on"
+                  style="margin:0;"
                   @click="jumpCurBargainPage(item.spu.spu_id)">Go On</div>
-                <div class="cut-schedule">
-                  <span class="cut">cut <span>{{item.bargain_info.bargain_rate}}%</span></span>
-                  <div class="schedule">
-                    <div class="active"
-                      :style="{'width': `${item.bargain_info.bargain_rate}%`}"></div>
-                  </div>
-                </div>
+
+                <div class="btn" v-show="item.bargain_info.can_buy==1"
+                  @click="jumpCurBargainPage(item.spu.spu_id)">To Buy</div>
+              </div>
+            </div>
+
+            <div class="cut-schedule">
+              <span class="cut">cut <span>{{item.bargain_info.bargain_rate}}%</span></span>
+              <div class="schedule">
+                <div class="active"
+                  :style="{'width': `${item.bargain_info.bargain_rate}%`}"></div>
               </div>
             </div>
           </div>
@@ -348,9 +387,11 @@ export default {
       };
       try {
         const result = await getMyBargainSpus(params);
-        this.finishList = result.data.filter(
-          item => item.bargain_info.status === 2
-        );
+        this.finishList = result.data.filter(item => {
+          return (
+            item.bargain_info.can_buy === 1 && item.bargain_info.status === 2
+          );
+        });
         this.ingList = result.data.filter(
           item => item.bargain_info.status === 1
         );

@@ -60,7 +60,12 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
+<<<<<<< HEAD
       <div class="team-box">
+=======
+      <div class="team-box"
+        v-if="$route.query.bargainId&&help_bargain_list.length>0">
+>>>>>>> c2d9f5935bc5e1975bc0015d172c392cfff4b58c
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -212,17 +217,7 @@ export default {
         m: "00"
       },
 
-      help_bargain_list: [
-        //类型：Array  必有字段  备注：帮砍列表
-        {
-          //类型：Object  必有字段  备注：无
-          user_id: 1, //类型：Number  必有字段  备注：用户id
-          username: "mock", //类型：String  必有字段  备注：用户名
-          bargain_amount: 1, //类型：Number  必有字段  备注：帮砍额度
-          bargain_time: "mock", //类型：String  必有字段  备注：帮砍时间
-          avatar: "mock" //类型：String  必有字段  备注：头像
-        }
-      ],
+      help_bargain_list: [],
       helpBargainPageDat: {
         page_size: 10,
         page_num: 1
@@ -252,18 +247,6 @@ export default {
         let result = await this.goBargainChop({
           spu_id: this.$route.query.spuId
         });
-        // if(result){
-        //   alert(1);
-        //   console.log("66666666666666")
-        //   const chop_info=result.data.chop_info;
-        //   this.$router.push({
-        //     path:"/bargain",
-        //     query:{
-        //       ...this.$route.query,
-        //       bargainId:chop_info.bargain_id
-        //     }
-        //   })
-        // }
       }
 
       this.initBargainInfo();
@@ -273,7 +256,7 @@ export default {
     },
     async goBargainChop({ bargain_id, spu_id }) {
       let result = await bargainChop({ bargain_id, spu_id });
-      if (result) {
+      if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.$router.push({
           path: "/bargain",
@@ -317,7 +300,7 @@ export default {
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
       });
-      if (result) {
+      if (result && result.data) {
         this.help_bargain_list = result.data;
       }
     },
@@ -339,8 +322,8 @@ export default {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
       if (result) {
         this.shareInfo = result.data;
-        this.dialogs.sharingFriends.show = true;
       }
+      this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(spu_id) {
       this.$router.push({

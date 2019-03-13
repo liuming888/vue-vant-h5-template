@@ -12,68 +12,113 @@
   align-items: center;
 }
 
+// .share-types {
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-bottom: 41px;
+//   position: relative;
+
+//   img {
+//     width: 100px;
+//     margin-right: 20px;
+//     height: auto;
+//   }
+// }
+
+// .tip {
+//   width: 400px;
+//   margin: 0 auto;
+//   text-align: center;
+//   margin-bottom: 135px;
+//   font-size: 26px;
+// }
+// .copy-link {
+//   display: block;
+//   background: none;
+//   // padding-left: 230px;
+//   font-size: 34px;
+//   font-weight: bold;
+//   color: rgba(211, 12, 5, 1);
+//   position: absolute;
+//   left: 230px;
+//   bottom: 50px;
+// }
+
 .share-box {
   width: 571px;
   height: 836px;
   background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
     100%;
-  padding-top: 320px;
+  padding-top: 210px;
   box-sizing: border-box;
   position: relative;
 
+  .tip {
+    width: 463px;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    line-height: 38px;
+    margin: 0 auto;
+    margin-bottom: 76px;
+  }
+
   .tit {
-    text-align: center;
+    height: 31px;
     font-size: 40px;
     font-weight: bold;
     color: rgba(211, 12, 5, 1);
-    margin-bottom: 29px;
+    text-align: center;
+    margin-bottom: 41px;
   }
-}
 
-.share-types {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 41px;
-  position: relative;
+  .share-types {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 41px;
+    position: relative;
 
-  img {
-    width: 100px;
-    margin-right: 20px;
+    .share-item {
+      width: 100px;
+      margin-right: 20px;
+      height: auto;
+      text-align: center;
+      font-size: 20px;
+      color: #323232;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .copy-link {
+    position: absolute;
+    width: 429px;
+    height: 81px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+  }
+
+  .close-img {
+    display: block;
+    width: 70px;
     height: auto;
+    // margin: 96px auto 0;
+    position: absolute;
+    bottom: -90px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
-}
-
-.tip {
-  width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 135px;
-  font-size:26px;
-}
-.copy-link {
-  display: block;
-  background: none;
-  // padding-left: 230px;
-  font-size: 34px;
-  font-weight: bold;
-  color: rgba(211, 12, 5, 1);
-  position: absolute;
-  left: 230px;
-  bottom:50px;
-}
-
-.close-img {
-  display: block;
-  width: 70px;
-  height: auto;
-  // margin: 96px auto 0;
-  position: absolute;
-  bottom:-90px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
 }
 </style>
 
@@ -81,28 +126,14 @@
   <div class="dialogSharingFriends-container"
     v-show="dialogVisible.show"
     @click.stop="abc=1">
-    <!-- <van-popup v-model="dialogVisible.show">
-      <h3> 分享好友</h3>
-      <div class="share-messenger"
-        @click="mx_shareMessenger"
-        style="font-size:36px;">Messenger</div>
-      <div class="share-whatsapp"
-        @click="mx_shareWhatsapp"
-        style="font-size:36px;">whatsapp</div>
-      <div class="share-line"
-        @click="mx_shareLine"
-        style="font-size:36px;">LINE</div> -->
-    <!-- LINE网站生成button按钮 -->
-    <!-- <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="2" data-url="https://liuming.mynatapp.cc" style ="display: none;"></div>  -->
-    <!-- <div class="share-facebook"
-        @click="mx_shareFacebook"
-        style="font-size:36px;">FB</div> -->
-    <!-- </van-popup> -->
-
     <div class="share-box">
+      <div class="tip">
+        Tip: Sharing to new friends will cut faster and more.
+      </div>
+
       <h5 class="tit">Share To</h5>
 
-      <div class="share-types">
+      <!-- <div class="share-types">
         <img src="@/assets/images/messenger.png"
           class="fb"
           alt="fb"
@@ -113,23 +144,44 @@
 
         <img src="@/assets/images/whatsapp.png"
           @click="mx_shareWhatsapp">
-          
+
         <img src="@/assets/images/facbook.png"
           @click="mx_shareFacebook">
-      </div>
+      </div> -->
 
-      <div class="tip">
-        Tip: Sharing to new friends will cut faster and more.
-      </div>
+      <div class="share-types">
 
-      <!-- <button class="copy-link"
-        :data-clipboard-text="mx_copyUrl">Copy Link</button> -->
+        <div class="share-item">
+          <img src="@/assets/images/facbook.png"
+            @click="mx_shareFacebook">
+          <p>Facebook</p>
+        </div>
+
+        <div class="share-item">
+          <img src="@/assets/images/line.png"
+            @click="mx_shareLine">
+          <p>LINE</p>
+        </div>
+
+        <div class="share-item">
+          <img src="@/assets/images/whatsapp.png"
+            @click="mx_shareWhatsapp">
+          <p>WhatsApp</p>
+        </div>
+
+        <div class="share-item">
+          <img src="@/assets/images/messenger.png"
+            @click="mx_shareMessenger">
+          <p>Messenger</p>
+        </div>
+
+      </div>
 
       <button ref="copy"
         class="copy-link"
         data-clipboard-action="copy"
         :data-clipboard-text="shareInfo.share_url"
-        @click="mx_copyLink">Copy Link</button>
+        @click="mx_copyLink"></button>
 
       <img src="@/assets/images/guanbi@2x.png"
         class="close-img"
