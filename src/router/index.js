@@ -130,7 +130,7 @@ curRouter.beforeEach((to, from, next) => {
 
 // 全局后置钩子
 curRouter.afterEach(() => {
-    quicklink({
+    // quicklink({
         //     // 默认2秒
         //     // timeout: 2000,
         //     // 如果不设置，默认为 document
@@ -143,7 +143,7 @@ curRouter.afterEach(() => {
         // origins: true,
         //     //过滤
         //     // ignores: [/\/api\/?/, url => url.includes('.zip'), (url, elem) => elem.hasAttribute('noprefetch')],
-    });
+    // });
 
     // 直接使用 prefetcher
     // const prefetch = require('quicklink/src/prefetch.mjs');
