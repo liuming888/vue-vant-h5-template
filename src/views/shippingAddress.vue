@@ -199,7 +199,7 @@ export default {
     },
     // 关闭当前
     cloneCurPageCom() {
-      this.$emit("update:showAddressPage", false);
+      // this.$emit("update:showAddressPage", false);
     },
     editAddress(item){
       this.$refs.address_dialog.curAddress=item;
@@ -209,16 +209,16 @@ export default {
      * @description: 设置当前默认选择地址
      */
     async setActiveCls(item) {
-      item.is_default = 1;
-      this.address_list.forEach(dat => {
-        if (dat.id !== item.id) {
-          dat.is_default = 0;
-        }
-      });
-       let result=await dealMyAddress({operation:2,user_address:item});
-       if(result.code==0){
-         this.cloneCurPageCom();
-       }
+      // item.is_default = 1;
+      // this.address_list.forEach(dat => {
+      //   if (dat.id !== item.id) {
+      //     dat.is_default = 0;
+      //   }
+      // });
+      //  let result=await dealMyAddress({operation:2,user_address:item});
+      //  if(result.code==0){
+      //    this.cloneCurPageCom();
+      //  }
     }
   },
   watch: {

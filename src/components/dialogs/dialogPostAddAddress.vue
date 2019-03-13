@@ -107,7 +107,8 @@
           style="border-right:1px solid #F2F2F2;" />
         <van-field v-model.trim="curAddress.telephone"
           placeholder="phone"
-          class="user-phone" type="number"/>
+          class="user-phone"
+          type="number" />
       </div>
 
       <div class="alamat-pengiriman"
@@ -120,7 +121,7 @@
 
       <textarea class="alamat-lengkap"
         placeholder="Alamat lengkap (jalan, nomor rumah)"
-        :value="`${curAddress.address_two} , ${curAddress.address_one}`"></textarea>
+        v-model="curAddress.address_one"></textarea>
 
       <div class="simpan-btn"
         @click="simpan">
@@ -144,10 +145,10 @@ const defaultAddress = {
   username: "", //类型：String  必有字段  备注：用户名 1和2时必须
   telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
   // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
-  country: "", //类型：String  必有字段  备注：国家1和2时必须
-  region: "", //类型：String  必有字段  备注：省州 1和2时必须
-  city: "", //类型：String  必有字段  备注：城市 1和2时必须
-  // zip: "253100", //类型：String  必有字段  备注：邮编 1和2时必须
+  country: "国家", //类型：String  必有字段  备注：国家1和2时必须
+  region: "省州", //类型：String  必有字段  备注：省州 1和2时必须
+  city: "城市", //类型：String  必有字段  备注：城市 1和2时必须
+  zip: "253100", //类型：String  必有字段  备注：邮编 1和2时必须
   address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
   address_two: "", //类型：String  必有字段  备注：配送地址-二级
   is_default: 0 //类型：Number  必有字段  备注：默认（0：正常 1：默认）
