@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 .home-container {
   background-color: #d30c05;
+  padding-bottom: 36px;
   > .home-top-container {
     position: relative;
     width: 100vw;

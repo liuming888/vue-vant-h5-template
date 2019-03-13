@@ -53,7 +53,7 @@
 
       <!-- 帮砍团队 -->
       <div class="team-box"
-        v-if="$route.query.bargainId">
+        v-if="$route.query.bargainId&&help_bargain_list.length>0">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -199,17 +199,7 @@ export default {
         m: "00"
       },
 
-      help_bargain_list: [
-        //类型：Array  必有字段  备注：帮砍列表
-        {
-          //类型：Object  必有字段  备注：无
-          user_id: 1, //类型：Number  必有字段  备注：用户id
-          username: "mock", //类型：String  必有字段  备注：用户名
-          bargain_amount: 1, //类型：Number  必有字段  备注：帮砍额度
-          bargain_time: "mock", //类型：String  必有字段  备注：帮砍时间
-          avatar: "mock" //类型：String  必有字段  备注：头像
-        }
-      ],
+      help_bargain_list: [],
       helpBargainPageDat: {
         page_size: 10,
         page_num: 1
@@ -248,7 +238,7 @@ export default {
     },
     async goBargainChop({ bargain_id, spu_id }) {
       let result = await bargainChop({ bargain_id, spu_id });
-      if (result) {
+      if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.$router.push({
           path: "/bargain",
@@ -292,7 +282,7 @@ export default {
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
       });
-      if (result) {
+      if (result && result.data) {
         this.help_bargain_list = result.data;
       }
     },
