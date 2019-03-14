@@ -25,7 +25,8 @@
           <span class="phone">{{myAddress.telephone}}</span>
         </div>
         <div class="receiving-address">
-          Receiving address: {{myAddress.address_two}},{{myAddress.address_one}},{{myAddress.city}},{{myAddress.region}},{{myAddress.country}}
+          Receiving address:
+          <!--  {{myAddress.address_two}}, -->{{myAddress.address_one}},{{myAddress.city}},{{myAddress.region}},{{myAddress.country}}
         </div>
       </div>
 
@@ -95,11 +96,11 @@
     <ul class="paly-type-list">
       <li class="paly-item"
         v-for="(item,idx) in 2"
-        @click="paly_id=idx"
-        :key="item">
+        @click="paly_id=item"
+        :key="idx">
         <span class="paly-txt">Papal payment</span>
         <img class="paly-select-icon"
-          :src="paly_id==idx?require('@/assets/images/select-fill.png'):require('@/assets/images/select.png')">
+          :src="paly_id==item?require('@/assets/images/select-fill.png'):require('@/assets/images/select.png')">
       </li>
     </ul>
 
@@ -128,8 +129,10 @@
       <shipping-address :showAddressPage.sync="showShippingAddressPage" />
     </div>
 
-    <!-- 弹窗 -->
+    <!-- 弹窗 --------------------------------->
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
+    <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog" @continuePlay="goPaly"/>
+
     <!-- 支付失败调用的弹窗 -->
     <dialog-default :info="info"
       :dialogVisible.sync="dialogVisible"
@@ -148,6 +151,7 @@ import { Icon } from "vant";
 import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
 import DialogDefault from "@/components/dialogs/dialogDefault.vue";
+import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
 const obj = { Icon };
 const vantCom = {};
 for (let k in obj) {
@@ -162,6 +166,7 @@ export default {
     DialogDefault,
     shippingAddress, // 地址列表组件
     dialogPostAddAddress,
+    dialogWaitPayment, // 等待用户付款弹窗
     ...vantCom
   },
   data() {
@@ -261,10 +266,13 @@ export default {
         }
       ],
 
-      paly_id: 0,
+      paly_id: 1,
 
       showShippingAddressPage: false, //显示地址列表页
       showAddressDialog: {
+        show: false
+      },
+      showWaitPaymentDialog: {
         show: false
       },
       myAddress: {
@@ -331,9 +339,10 @@ export default {
       console.log("spu_spec_items----------", spu_spec_items);
       let param = {
         spu_spec_items,
-        address_id: "3",
+        address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
-        pay_type: "1"
+        // pay_type: this.paly_id
+        pay_type: 1
       };
       if (this.$route.query.bargainId) {
         param = { ...param, bargain_id: this.$route.query.bargainId };
@@ -342,7 +351,9 @@ export default {
       let result = await orderCreate(param);
       if (result && result.data) {
         let { pay_url, order_no } = result.data;
-        window.open(pay_url);
+        console.log("pay_url: ", pay_url);
+        this.showWaitPaymentDialog.show = true;
+        // window.open(pay_url);
       }
     },
     goShippingAddressList() {

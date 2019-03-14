@@ -3,7 +3,21 @@
   .van-picker__cancel,
   .van-picker__confirm,
   .van-picker-column__item--selected {
+    font-size: 30px;
     color: #d30c05;
+  }
+
+  .van-picker-column__item {
+    font-size: 30px;
+  }
+
+  .van-hairline--top-bottom.van-picker__toolbar {
+    height: 80px;
+    line-height: 80px;
+
+    > div {
+      padding: 0 30px;
+    }
   }
 }
 </style>
@@ -13,33 +27,33 @@
     <van-popup v-model="dialogVisible.show"
       position="bottom"
       :overlay="false">
-      <!-- <van-area :area-list="areaListDat"
-        :value="curCode"
-        @confirm="confirm"
-        @cancel="cancel" /> -->
-      <van-picker :columns="columns"
+      <van-picker show-toolbar
+        confirm-button-text="ok"
+        cancel-button-text="cancel"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+        :columns="columns"
         @change="onChange" />
     </van-popup>
   </div>
 </template>
 
 <script>
-
-const citys = {
-  浙江: ["杭州", "宁波", "温州", "嘉兴", "湖州"],
-  福建: ["福州", "厦门", "莆田", "三明", "泉州"]
+const regions = {
+  浙江: ["杭州", "宁波"],
+  福建: ["福州", "厦门", "莆田", "三明", "泉州", "福州"]
 };
-const qu = {
-  杭州: ['1','2','3'],
-  宁波: ['3','4','5']
-}
+const citys = {
+  杭州: ["1", "2", "3"],
+  宁波: ["3", "4", "5"]
+};
 // const a = {
 //   a: ['b', '3']
 // }
 // const c = {
 //   b: ['b', '3']
 // }
-// const qu = {
+// const citys = {
 //   a: ['12','123']
 // }
 
@@ -57,22 +71,26 @@ export default {
           show: false
         };
       }
+    },
+    curDat: {
+      type: Object
     }
   },
   data() {
     return {
       columns: [
         {
-          values: Object.keys(citys),
-          className: "column1"
+          values: Object.keys(regions),
+          className: "column1",
+          defaultIndex: 0
         },
         {
-          values: citys['浙江'],
+          values: regions["浙江"],
           className: "column2",
           defaultIndex: 0
         },
         {
-          values: qu['杭州'],
+          values: citys["杭州"],
           className: "column3",
           defaultIndex: 0
         }
@@ -80,10 +98,43 @@ export default {
     };
   },
   methods: {
+    onConfirm(value, index) {
+      console.log(`当前值：${value}, 当前索引：${index}`);
+      this.$emit("update:curDat", {
+        ...this.curDat,
+        region: value[0],
+        city: value[1]
+      });
+      this.onCancel();
+    },
+    onCancel() {
+      this.$emit("update:dialogVisible", { show: false });
+    },
     onChange(picker, values) {
-      console.log(values)
-      picker.setColumnValues(1, citys[values[0]]);
-      picker.setColumnValues(2, qu[values[1]]);
+      console.log(values);
+      picker.setColumnValues(1, regions[values[0]]);
+      // picker.setColumnValues(2, citys[values[1]]);
+    }
+  },
+  watch: {
+    "dialogVisible.show"(val) {
+      if (val) {
+        const { region, city } = this.curDat;
+        if (region) {
+          let refionIdx = Object.keys(regions).indexOf(region);
+          if (refionIdx > -1) {
+            this.columns[0].defaultIndex = refionIdx;
+
+            if (city) {
+              this.columns[1].values = regions[region];
+              let cityIdx = regions[region].indexOf(city);
+              if (cityIdx > -1) {
+                this.columns[1].defaultIndex = cityIdx;
+              }
+            }
+          }
+        }
+      }
     }
   }
 };

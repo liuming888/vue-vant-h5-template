@@ -16,34 +16,16 @@
   }
 }
 .like-goods {
-  background-color: #D30C05;
+  background-color: #d30c05;
   > .like-goods-title {
-    position: relative;
-    text-align: center;
     padding: 37px 0;
-    font-size: 28px;
-    color: #fff;
-    // background: url('./../../assets/images/clapboard.png') no-repeat top center;
-    // background-size: 100% auto;
-    &::before,
-    &::after {
-      content: "";
-      width: 95px;
-      height: 4px;
-      display: block;
-      background: url("./../../assets/images/line-l.png") no-repeat;
-      background-size: 100% auto;
-      position: absolute;
-      top: 50px;
-      // left: 124px;
-    }
-    &::before {
-      left: 50px;
-    }
-    &::after {
-      background: url("./../../assets/images/line-r.png") no-repeat;
-      background-size: 100% auto;
-      right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      width: 720px;
+      height: 33px;
     }
   }
   > .like-goods-list {
@@ -58,14 +40,21 @@
 <template>
   <div class="purchase-container">
     <div class="info-box">
-      <img src="@/assets/images/success.png" alt class="success-icon">
+      <img src="@/assets/images/success.png"
+        alt
+        class="success-icon">
       <p>Selamat, Anda telah berhasil membayar!</p>
     </div>
-     <!-- v-if="goodsList.length>0" -->
-    <section class="like-goods" v-show="goodsList.length > 0">
-      <div class="like-goods-title">Tebak apa yang kamu suka</div>
+    <section class="like-goods"
+      v-show="goodsList.length > 0">
+      <div class="like-goods-title">
+        <img src="@/assets/images/loveproducts.png">
+      </div>
+
       <ul class="like-goods-list">
-        <commodity-item v-for="(item, index) of goodsList" :key="index" :itemData="item"/>
+        <commodity-item v-for="(item, index) of goodsList"
+          :key="index"
+          :itemData="item" />
       </ul>
     </section>
   </div>
@@ -73,14 +62,30 @@
 
 <script>
 import commodityItem from "@/components/commodity/commodityItem.vue";
+import { getBargainSpus } from "@/server/goods.js";
 export default {
-  data() {
-    return {
-      goodsList: []
-    }
-  },
   components: {
     commodityItem //商品列表展示的商品X
+  },
+  data() {
+    return {
+      goodsList: [],
+      goodsListPageDat: {
+        page_size: 10,
+        page_num: 1
+      }
+    };
+  },
+  created() {
+    this.initGoodsList({ ...this.goodsListPageDat });
+  },
+  methods: {
+    async initGoodsList({ page_size, page_num, is_all = 0 }) {
+      let result = await getBargainSpus({ page_size, page_num, is_all });
+      if (result && result.data) {
+        this.goodsList = result.data.spu_list;
+      }
+    }
   }
 };
 </script>
