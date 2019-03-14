@@ -1,3 +1,7 @@
+
+/*
+涓嬮潰鐨勮繖浜涗唬鐮佷細杈撳嚭 batmobi.net
+*/
 console.log('111111111111111', process.env.NODE_ENV);
 function getUrl(NODE_ENV) {
     let url = '';
@@ -6,9 +10,9 @@ function getUrl(NODE_ENV) {
             url = 'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api';
             break;
         case 'development':
-            // 锦涛
+            // 陆玫脤脦
             // url = 'http://192.168.4.128:8024/api';
-            // 阳
+            // 脩么
             // url = 'http://192.168.4.32:8024/api';
             // url = 'https://dev-ht-zdd-api.batmobi.net/api';
             url = 'https://test-ht-zdd-api.batmobi.net/api';
@@ -37,7 +41,7 @@ module.exports = {
                 changeOrigin: true,
 
                 pathRewrite: {
-                    '^/api': '/', // 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+                    '^/api': '/', // 脮芒脌茂脌铆陆芒鲁脡脫脙隆庐/api隆炉麓煤脤忙target脌茂脙忙碌脛碌脴脰路拢卢潞贸脙忙脳茅录镁脰脨脦脪脙脟碌么陆脫驴脷脢卤脰卤陆脫脫脙api麓煤脤忙 卤脠脠莽脦脪脪陋碌梅脫脙'http://40.00.100.100:3002/user/add'拢卢脰卤陆脫脨麓隆庐/api/user/add隆炉录麓驴脡
                 },
             },
         },
