@@ -159,7 +159,7 @@ const defaultAddress = {
   username: "", //类型：String  必有字段  备注：用户名 1和2时必须
   telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
   // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
-  country: "国家", //类型：String  必有字段  备注：国家1和2时必须
+  country: "Indonesia", //类型：String  必有字段  备注：国家1和2时必须
   region: "福建", //类型：String  必有字段  备注：省州 1和2时必须
   city: "福州", //类型：String  必有字段  备注：城市 1和2时必须
   zip: "", //类型：String  必有字段  备注：邮编 1和2时必须
@@ -202,6 +202,7 @@ export default {
   created() {},
   methods: {
     async simpan() {
+      let {username,telephone,country,region,city,zip}=this.curAddress;
       let operation = 1;
       if (this.showType == "add") {
         operation = 1;

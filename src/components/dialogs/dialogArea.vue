@@ -39,25 +39,32 @@
 </template>
 
 <script>
-const regions = {
-  浙江: ["杭州", "宁波"],
-  福建: ["福州", "厦门", "莆田", "三明", "泉州", "福州"]
-};
-const citys = {
-  杭州: ["1", "2", "3"],
-  宁波: ["3", "4", "5"]
-};
-// const a = {
-//   a: ['b', '3']
-// }
-// const c = {
-//   b: ['b', '3']
-// }
-// const citys = {
-//   a: ['12','123']
+// 遍历处理印尼数据的逻辑
+// for (let k in IndonesiaCities) {
+//   for (let l in IndonesiaCities[k]) {
+//     let curArr = [];
+
+//     for (let m in IndonesiaCities[k][l]) {
+//       curArr.push(IndonesiaCities[k][l][m]);
+//     }
+
+//     regions[l] = curArr;
+//   }
 // }
 
+// const regions = {
+//   浙江: ["杭州", "宁波"],
+//   福建: ["福州", "厦门", "莆田", "三明", "泉州", "福州"]
+// };
+// const citys = {
+//   杭州: ["1", "2", "3"],
+//   宁波: ["3", "4", "5"]
+// };
+
+import IndonesiaCities from "@/config/IndonesiaCities.js";
 import { Picker } from "vant";
+
+const regions = IndonesiaCities;
 export default {
   name: "dialogArea",
   components: {
@@ -85,15 +92,15 @@ export default {
           defaultIndex: 0
         },
         {
-          values: regions["浙江"],
+          values: regions["Bali"],
           className: "column2",
           defaultIndex: 0
-        },
+        } /* ,
         {
           values: citys["杭州"],
           className: "column3",
           defaultIndex: 0
-        }
+        } */
       ]
     };
   },

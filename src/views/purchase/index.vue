@@ -131,12 +131,13 @@
 
     <!-- 弹窗 --------------------------------->
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
-    <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog" @continuePlay="goPaly"/>
+    <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
+      @continuePlay="goPaly" @playfail="dialogVisible = true"/>
 
     <!-- 支付失败调用的弹窗 -->
     <dialog-default :info="info"
       :dialogVisible.sync="dialogVisible"
-      @ok="dialogVisible = false">
+      @ok="goPaly">
       <div slot="content"
         class="pay-error">
         <p>Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin</p>
@@ -301,6 +302,11 @@ export default {
     this.init();
     this.getMyAddressInfo();
     this.curSpuSpecs();
+
+    // 支付失败回调进入的
+    if (this.$route.query.payment === "failed") {
+      this.dialogVisible = true;
+    }
   },
   methods: {
     async init() {
@@ -329,9 +335,11 @@ export default {
       }
     },
     /**
-     * @description: 支付下单接口流程
+     * @description: 支付下单接口流程(继续支付复用)
      */
     async goPaly() {
+      this.dialogVisible = false; // 关闭支付失败弹窗
+
       let spu_spec_items = [];
       this.specs.forEach(item => {
         spu_spec_items.push(item.id);
@@ -353,7 +361,7 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
+        window.open(pay_url);
       }
     },
     goShippingAddressList() {

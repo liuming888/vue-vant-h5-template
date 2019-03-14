@@ -101,8 +101,13 @@ export default {
   },
   methods: {
     completeOk() {
+      this.$emit("playfail"); // 开启支付失败弹窗
       this.$emit("update:dialogVisible", { show: false });
-      this.$router.push({ path: "/purchase/paymentSuccess" });
+
+      // 查询是否真的支付成功
+      if (false) {
+        this.$router.push({ path: "/purchase/paymentSuccess" });
+      }
     },
     goContinue() {
       this.$emit("continuePlay");
