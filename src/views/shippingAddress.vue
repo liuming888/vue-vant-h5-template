@@ -1,9 +1,13 @@
 <style lang="scss" scoped>
 .shipping-address-container {
   width: 100%;
-  // height: 100%;
+  min-height: 100%;
+  padding-bottom: 20px;
   > .address-list {
+    max-height: 86vh;
     padding: 0 32px;
+    overflow: hidden;
+    overflow-y: scroll;
     > .address-item {
       padding: 26px 0;
       & + .address-item {
@@ -22,8 +26,15 @@
           position: absolute;
           top: 0;
           right: 0;
-          width: 21px;
-          height: 21px;
+          width: 100px;
+          height: 100px;
+          text-align: right;
+          vertical-align: top;
+
+          img {
+            width: 21px;
+            height: auto;
+          }
         }
       }
       > .info-ctrl {
@@ -39,6 +50,8 @@
           display: inline-block;
         }
         > .edit {
+          width: 100px;
+          text-align: right;
           color: #888;
           float: right;
         }
@@ -96,13 +109,16 @@
         <div class="info-box">
           <p>{{item.username}}, {{item.telephone}} </p>
           <p>Receiving address: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
-          <img src="@/assets/images/delete.png"
-            class="close"
-            @click="delItem(item.id)">
+
+          <div class="close"
+            @click.stop="delItem(item.id)">
+            <img src="@/assets/images/delete.png">
+          </div>
         </div>
         <div :class="`info-ctrl ${item.is_default === 1 ? 'active' : ''}`">
           <div class="default">Tetapkan sebagai alamat default</div>
-          <div class="edit" @click.stop="editAddress(item)">Edit</div>
+          <div class="edit"
+            @click.stop="editAddress(item)">Edit</div>
         </div>
       </li>
     </ul>
@@ -112,7 +128,9 @@
       <span>Tambahkan alamat</span>
     </div>
     <!-- 已有收货地址列表页 -->
-    <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress" ref="address_dialog" :showType="addressDialogType"/>
+    <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress"
+      ref="address_dialog"
+      :showType="addressDialogType" />
     <!-- 删除地址弹窗 -->
     <dialog-default :info="dialogDefaultInfo"
       :dialogVisible.sync="dialogDefaultShow"
@@ -144,14 +162,14 @@ export default {
           show: false
         }
       },
-      addressDialogType:"add", // 地址弹窗当前显示时的类型
+      addressDialogType: "add", // 地址弹窗当前显示时的类型
       // 删除按钮弹窗信息
       dialogDefaultShow: false,
       dialogDefaultInfo: {
         content: "Anda yakin ingin menghapus alamatnya?",
         cancelText: "Batalkan",
         okText: "Tentukan",
-        delId:0
+        delId: 0
       },
 
       address_list: [
@@ -182,27 +200,30 @@ export default {
         this.address_list = result.data;
       }
     },
-    delItem(id){
-      this.dialogDefaultInfo.delId=id;
+    delItem(id) {
+      this.dialogDefaultInfo.delId = id;
       this.dialogDefaultShow = true;
     },
-    async delOk(id){
-      let result=await dealMyAddress({operation:-1,user_address:this.address_list.find(item=>item.id==id)});
-      if(result&&result.data){
-          this.address_list=this.address_list.filter(item=>item.id!=id);
+    async delOk(id) {
+      let result = await dealMyAddress({
+        operation: -1,
+        user_address: this.address_list.find(item => item.id == id)
+      });
+      if (result && result.data) {
+        this.address_list = this.address_list.filter(item => item.id != id);
       }
     },
-    openAddressDialog(type){
-      this.addressDialogType=type;
-      console.log('this.addressDialogType: ', this.addressDialogType);
-      this.dialogs.postAddAddress.show=true;
+    openAddressDialog(type) {
+      this.addressDialogType = type;
+      console.log("this.addressDialogType: ", this.addressDialogType);
+      this.dialogs.postAddAddress.show = true;
     },
     // 关闭当前
     cloneCurPageCom() {
       this.$emit("update:showAddressPage", false);
     },
-    editAddress(item){
-      this.$refs.address_dialog.curAddress=item;
+    editAddress(item) {
+      this.$refs.address_dialog.curAddress = item;
       this.openAddressDialog("edit");
     },
     /**
@@ -215,10 +236,10 @@ export default {
           dat.is_default = 0;
         }
       });
-       let result=await dealMyAddress({operation:2,user_address:item});
-       if(result.code==0){
-         this.cloneCurPageCom();
-       }
+      let result = await dealMyAddress({ operation: 2, user_address: item });
+      if (result.code == 0) {
+        this.cloneCurPageCom();
+      }
     }
   },
   watch: {

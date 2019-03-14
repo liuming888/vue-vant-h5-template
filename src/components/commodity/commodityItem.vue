@@ -9,7 +9,7 @@
   > .goods-img {
     img {
       width: 100%;
-      max-height: 690px;
+      height: 690px;
     }
   }
   > .goods-detail {
@@ -20,7 +20,7 @@
       font-size: 36px;
       color: #323232;
       overflow: hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
     > .goods-description {
@@ -28,7 +28,7 @@
       font-size: 24px;
       color: #888888;
       overflow: hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
     > .goods-price {
@@ -129,7 +129,8 @@
 
       <div class="goods-detail">
         <a href="javascript:;"
-          class="goods-title" @click="jumpBargain">{{itemData.title || ''}}</a>
+          class="goods-title"
+          @click="jumpBargain">{{itemData.title || ''}}</a>
         <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">
@@ -150,7 +151,9 @@
     </div>
 
     <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
-    <dialog-sharing-makes  :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
+    <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
+      :shareInfo="shareInfo"
+      v-if="dialogs.sharingFriends.show" />
   </div>
 </template>
 
@@ -204,14 +207,14 @@ export default {
       },
 
       shareInfo: {
-          share_url: window.location.origin + "/forBargain", // 从点击打开的链接
-          share_title: "分享标题",
-          share_desp: "分享的描述",
-          share_image: "https://s.pinimg.com/images/facebook_share_image.png", //  分享的预览图（图片有限制）
-          // quote:
-          //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
-          // hashtag:"FB分享的tag标签"
-        }
+        share_url: window.location.origin + "/forBargain", // 从点击打开的链接
+        share_title: "分享标题",
+        share_desp: "分享的描述",
+        share_image: "https://s.pinimg.com/images/facebook_share_image.png" //  分享的预览图（图片有限制）
+        // quote:
+        //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
+        // hashtag:"FB分享的tag标签"
+      }
     };
   },
   created() {
@@ -227,7 +230,7 @@ export default {
       });
       if (result) {
         this.shareInfo = result.data;
-        console.log('this.shareInfo: ', this.shareInfo);
+        console.log("this.shareInfo: ", this.shareInfo);
       }
       this.dialogs.sharingFriends.show = true;
     },

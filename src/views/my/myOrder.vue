@@ -1,3 +1,11 @@
+<style lang="scss">
+.order-container{
+    .van-ellipsis{
+        // font-size: 30px;
+    }
+}
+</style>
+
 <style lang="scss" scoped>
     .all-order {
         padding: 20px 30px;

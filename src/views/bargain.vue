@@ -83,7 +83,7 @@
           </li>
         </ul>
       </div>
-      <div class="goods-detail">
+      <div class="goods-detail" v-if="help_bargain_list.length<2">
         <!-- 商品详情图 -->
         <p class="page-title">Product Petails</p>
         <img v-lazy="spu.spu_pics[0]">

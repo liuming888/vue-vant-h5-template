@@ -66,7 +66,7 @@
 
 .alamat-lengkap {
   width: 100%;
-  height: 179px;
+  height: 109px;
   border-bottom: 1px solid #f2f2f2;
   padding: 24px 0 0 28px;
   box-sizing: border-box;
@@ -88,6 +88,14 @@
   color: rgba(255, 255, 255, 1);
   margin: 30px auto 0;
 }
+
+.input-size {
+  font-size: 30px;
+}
+
+.zip-code {
+  padding-left: 24px;
+}
 </style>
 
 <template>
@@ -103,11 +111,11 @@
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
           placeholder="name"
-          class="user-name"
+          class="user-name input-size"
           style="border-right:1px solid #F2F2F2;" />
         <van-field v-model.trim="curAddress.telephone"
           placeholder="phone"
-          class="user-phone"
+          class="user-phone input-size"
           type="number" />
       </div>
 
@@ -119,9 +127,13 @@
         </div>
       </div>
 
-      <textarea class="alamat-lengkap"
+      <textarea class="alamat-lengkap input-size"
         placeholder="Alamat lengkap (jalan, nomor rumah)"
         v-model="curAddress.address_one"></textarea>
+
+      <van-field v-model.trim="curAddress.zip"
+        placeholder="Zip code"
+        class="input-size zip-code" />
 
       <div class="simpan-btn"
         @click="simpan">
@@ -130,7 +142,9 @@
     </van-popup>
 
     <!-- 弹窗 -->
-    <dialog-area :dialogVisible.sync="dialogs.area" />
+    <dialog-area :dialogVisible.sync="dialogs.area"
+      v-if="dialogVisible.show"
+      :curDat.sync="curAddress" />
   </div>
 </template>
 
@@ -145,10 +159,10 @@ const defaultAddress = {
   username: "", //类型：String  必有字段  备注：用户名 1和2时必须
   telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
   // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
-  country: "国家", //类型：String  必有字段  备注：国家1和2时必须
-  region: "省州", //类型：String  必有字段  备注：省州 1和2时必须
-  city: "城市", //类型：String  必有字段  备注：城市 1和2时必须
-  zip: "253100", //类型：String  必有字段  备注：邮编 1和2时必须
+  country: "Indonesia", //类型：String  必有字段  备注：国家1和2时必须
+  region: "福建", //类型：String  必有字段  备注：省州 1和2时必须
+  city: "福州", //类型：String  必有字段  备注：城市 1和2时必须
+  zip: "", //类型：String  必有字段  备注：邮编 1和2时必须
   address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
   address_two: "", //类型：String  必有字段  备注：配送地址-二级
   is_default: 0 //类型：Number  必有字段  备注：默认（0：正常 1：默认）
@@ -166,7 +180,7 @@ export default {
       type: Object,
       default() {
         return {
-          show: true
+          show: false
         };
       }
     },
@@ -188,6 +202,7 @@ export default {
   created() {},
   methods: {
     async simpan() {
+      let {username,telephone,country,region,city,zip}=this.curAddress;
       let operation = 1;
       if (this.showType == "add") {
         operation = 1;
@@ -212,7 +227,14 @@ export default {
       if (val == "add") {
         this.curAddress = defaultAddress;
       }
-    }
+    },
+    // "dialogVisible.show"(val) {
+    //   if (val) {
+    //     if (this.curAddress.city) {
+    //       // this.dialogs.area.show = true;
+    //     }
+    //   }
+    // }
   }
 };
 </script>
