@@ -33,7 +33,7 @@ module.exports = {
                 target: getUrl(process.env.NODE_ENV),
 
                 ws: true,
-	 email: xx@batmobi.net,
+	 			// email: xx@batmobi.net,
                 changeOrigin: true,
 
                 pathRewrite: {
