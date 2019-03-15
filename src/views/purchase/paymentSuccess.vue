@@ -79,6 +79,11 @@ export default {
   created() {
     this.initGoodsList({ ...this.goodsListPageDat });
   },
+  mounted () {
+    setTimeout(() => {
+        this.$router.push("/");
+    }, 1000);
+  },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
       let result = await getBargainSpus({ page_size, page_num, is_all });
@@ -86,6 +91,11 @@ export default {
         this.goodsList = result.data.spu_list;
       }
     }
-  }
+  },
+  //  beforeRouteLeave (to, from, next) {
+  //   // 导航离开该组件的对应路由时调用
+  //   // 可以访问组件实例 `this`
+  //   window.location.href="http://192.168.4.77:8080/";
+  // }
 };
 </script>
