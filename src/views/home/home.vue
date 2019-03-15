@@ -1,7 +1,9 @@
 <style lang="scss" scoped>
 .home-container {
   background-color: #d30c05;
-  padding-bottom: (36px + 93px);
+    height: 90vh;
+    overflow-y:auto;
+  padding-bottom: 36px;
   > .home-top-container {
     position: relative;
     width: 100vw;
@@ -150,6 +152,7 @@
 </style>
 
 <template>
+<div>
   <div class="home-container">
     <section class="home-top-container">
       <!-- 用户消息 -->
@@ -189,7 +192,11 @@
           :itemData="item" />
       </ul>
     </section>
+
   </div>
+    <tabBar></tabBar>
+
+</div>
 </template>
 
 <script>
@@ -200,6 +207,7 @@ for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
 
+import tabBar from "@/components/layout/tabBar/tabBar.vue";
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
 import commodityItem from "@/components/commodity/commodityItem.vue";
@@ -210,6 +218,7 @@ import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
+    tabBar,  // 底部tab
     userPickingUpMessage, // 用户领取消息播放
     FreebingBox, // 一件正在进行砍价商品
     commodityItem, // 商品列表展示的商品X
