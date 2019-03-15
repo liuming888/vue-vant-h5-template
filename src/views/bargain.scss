@@ -1,6 +1,6 @@
 .bargain-container {
     // background: #f9f9f9;
-    background:linear-gradient(45deg,rgba(253,84,72,1),rgba(232,43,35,1));
+    background: linear-gradient(45deg, rgba(253, 84, 72, 1), rgba(232, 43, 35, 1));
     > .turn-home {
         position: fixed;
         top: 60%;
@@ -204,23 +204,28 @@
                 > .ctrl-box {
                     margin-top: 60px;
                     > .share-btn {
-                        color: #A53A06;
+                        color: #a53a06;
                         font-size: 36px;
-                        height:103px;
+                        height: 103px;
                         line-height: 103px;
-                        background:linear-gradient(180deg,rgba(248,229,163,1),rgba(244,204,109,1));
-                        box-shadow:0px 9px 9px 0px rgba(174,36,5,0.66);
-                        border-radius:52px;
+                        background: linear-gradient(180deg, rgba(248, 229, 163, 1), rgba(244, 204, 109, 1));
+                        box-shadow: 0px 9px 9px 0px rgba(174, 36, 5, 0.66);
+                        border-radius: 52px;
                     }
                     > .buy-btn {
                         margin-top: 24px;
-                        color: #FCE0DD;
+                        color: #fce0dd;
                         font-size: 36px;
-                        height:103px;
+                        height: 103px;
                         line-height: 103px;
-                        background:linear-gradient(180deg,rgba(251,162,132,1),rgba(249,102,69,1));
-                        box-shadow:0px 9px 9px 0px rgba(174,36,5,0.66);
-                        border-radius:52px;
+                        background: linear-gradient(180deg, rgba(251, 162, 132, 1), rgba(249, 102, 69, 1));
+                        box-shadow: 0px 9px 9px 0px rgba(174, 36, 5, 0.66);
+                        border-radius: 52px;
+
+                        &.cur {
+                            color: rgba(153, 153, 153, 1);
+                            background: linear-gradient(180deg, rgba(239, 239, 239, 1), rgba(205, 206, 206, 1));
+                        }
                     }
                 }
             }
@@ -228,9 +233,9 @@
     }
     > .bargain-content {
         > .team-box {
-            background:linear-gradient(180deg,rgba(229,57,49,1),rgba(233,72,64,1));
-            box-shadow:0px 2px 4px 0px rgba(152,19,0,0.46);
-            border-radius:10px;
+            background: linear-gradient(180deg, rgba(229, 57, 49, 1), rgba(233, 72, 64, 1));
+            box-shadow: 0px 2px 4px 0px rgba(152, 19, 0, 0.46);
+            border-radius: 10px;
             margin: 0 30px;
             > .page-title {
                 position: relative;
@@ -255,7 +260,7 @@
                     margin: 0 50px;
                     display: flex;
                     align-items: center;
-                    border-top: 1px dotted #FFB893;
+                    border-top: 1px dotted #ffb893;
                     color: #fff;
                     > .column {
                         flex: 2;
@@ -305,10 +310,10 @@
                 // margin: 50px 0;
                 font-size: 34px;
                 text-align: center;
-                color:rgba(230,81,55,1);
-                background:linear-gradient(180deg,rgba(244,74,2,1) 0.2685546875%, rgba(212,14,5,1) 100%);
-                -webkit-background-clip:text;
-                -webkit-text-fill-color:transparent;
+                color: rgba(230, 81, 55, 1);
+                background: linear-gradient(180deg, rgba(244, 74, 2, 1) 0.2685546875%, rgba(212, 14, 5, 1) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -365,9 +370,9 @@
             }
         }
         > .goods-detail {
-            background:linear-gradient(180deg,rgba(229,57,49,1),rgba(233,72,64,1));
-            box-shadow:0px 2px 4px 0px rgba(152,19,0,0.46);
-            border-radius:10px;
+            background: linear-gradient(180deg, rgba(229, 57, 49, 1), rgba(233, 72, 64, 1));
+            box-shadow: 0px 2px 4px 0px rgba(152, 19, 0, 0.46);
+            border-radius: 10px;
             margin: 0 30px 30px 30px;
             > .page-title {
                 position: relative;

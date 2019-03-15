@@ -225,6 +225,12 @@ export default {
      * @description: 分享赚
      */
     async cashBack() {
+      if (!this.$store.state.userInfo.user_id) {
+        this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
@@ -244,6 +250,13 @@ export default {
           spuId: this.itemData.spu_id
         }
       });
+    }
+  },
+  beforeRouteUpdate(to, from, next) {
+    const { loginShare } = to.query;
+    if (loginShare == "ok") {
+      this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
+      this.cashBack();
     }
   }
 };

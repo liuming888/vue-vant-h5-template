@@ -16,7 +16,7 @@
     > .top-tips {
       margin-top: 437px;
       font-size: 28px;
-      color: #6C0C06;
+      color: #6c0c06;
     }
     > .cut-num {
       margin: 0 auto;
@@ -24,7 +24,7 @@
       height: 105px;
       line-height: 105px;
       font-size: 70px;
-      color: #D30C05;
+      color: #d30c05;
       > span {
         font-size: 34px;
       }
@@ -33,7 +33,7 @@
       margin: 90px auto 0 auto;
       width: 420px;
       font-size: 24px;
-      color: #FFEEBB;
+      color: #ffeebb;
       font-weight: lighter;
       > span {
         font-weight: bold;
@@ -49,7 +49,7 @@
     width: 70px;
     height: 70px;
     margin: 100px auto 0 auto;
-    background: url('./../../assets/images/guanbi@2x.png') no-repeat;
+    background: url("./../../assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
 }
@@ -57,15 +57,20 @@
 
 <template>
   <div class="dialogOldUsersHelpCutSuccessfully-container">
-    <van-popup v-model="dialogVisible.show" :close-on-click-overlay="false" style="background-color: transparent;width: 100%">
+    <van-popup v-model="dialogVisible.show"
+      :close-on-click-overlay="false"
+      style="background-color: transparent;width: 100%">
       <div class="box">
-        <img src="@/assets/images/$@2x.png" alt="" class="bg">
+        <img src="@/assets/images/$@2x.png"
+          alt=""
+          class="bg">
         <div class="box-info">
           <p class="top-tips">Help Him Cut </p>
-          <p class="cut-num"><span>Rp</span> 903.879</p>
-          <p class="bottom-tips">After he bys, you get <span><span>Rp</span> 5.500</span> to help cut rewards</p>
+          <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
+          <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p>
         </div>
-        <div class="close" @click="closeDialog()"></div>
+        <div class="close"
+          @click="closeDialog"></div>
       </div>
     </van-popup>
   </div>
@@ -82,14 +87,26 @@ export default {
           show: true
         };
       }
+    },
+    chopInfo: {
+      type: Object,
+      default() {
+        return {
+          //类型：Object  必有字段  备注：无
+          bargain_id: 1, //类型：Number  必有字段  备注：砍价号
+          bargain_amount: 1, //类型：Number  必有字段  备注：砍价金额
+          bargain_rate: 1, //类型：Number  必有字段  备注：砍价比例
+          reward_amount: "mock" //类型：String  必有字段  备注：下单能获取的金额
+        };
+      }
     }
   },
   data() {
     return {};
   },
   methods: {
-    closeDialog(){
-       this.$emit("update:dialogVisible",{show:false});
+    closeDialog() {
+      this.$emit("update:dialogVisible", { show: false });
     }
   }
 };

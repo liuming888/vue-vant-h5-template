@@ -44,7 +44,7 @@
         left: 16px;
       }
     }
-    > .home-banner > img {
+    > .home-banner img {
       width: 100%;
       height: auto;
     }
@@ -140,7 +140,7 @@
   }
 
   .freebing-more {
-    margin-top: 35px;
+    // margin-top: 35px;
     display: block;
     font-size: 24px;
     text-align: center;
@@ -154,10 +154,15 @@
     <section class="home-top-container">
       <!-- 用户消息 -->
       <user-picking-up-message :messageList="messageList"></user-picking-up-message>
-      <div class="home-banner">
-        <img v-lazy="require('@/assets/images/home-banner.png')"
-          @click="testLogin">
-      </div>
+
+      <van-swipe :autoplay="3000"
+        indicator-color="white"
+        class="home-banner">
+        <van-swipe-item>
+          <img v-lazy="require('@/assets/images/home-banner.png')"
+            @click="testLogin">
+        </van-swipe-item>
+      </van-swipe>
 
       <div class="freebing-box"
         v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
@@ -188,12 +193,12 @@
 </template>
 
 <script>
-// import { Swipe, SwipeItem } from "vant";
-// const obj = { Swipe, SwipeItem };
-// const vantCom = {};
-// for (let k in obj) {
-//   vantCom[obj[k].name] = obj[k];
-// }
+import { Swipe, SwipeItem } from "vant";
+const obj = { Swipe, SwipeItem };
+const vantCom = {};
+for (let k in obj) {
+  vantCom[obj[k].name] = obj[k];
+}
 
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
@@ -207,8 +212,8 @@ export default {
   components: {
     userPickingUpMessage, // 用户领取消息播放
     FreebingBox, // 一件正在进行砍价商品
-    commodityItem // 商品列表展示的商品X
-    // ...vantCom // vant组件
+    commodityItem, // 商品列表展示的商品X
+    ...vantCom // vant组件
   },
   data() {
     return {
@@ -238,7 +243,7 @@ export default {
     async initMybargainSpus() {
       let result = await getMybargainSpus({ page_size: 2, page_num: 1 });
       console.log("result: ", result);
-      if (result&&result.data) {
+      if (result && result.data) {
         this.spuBargainList = result.data;
       }
     },
@@ -270,7 +275,7 @@ export default {
         //   tp_type: 1
         // });
         console.log("result: ", result);
-        if (result&&result.data) {
+        if (result && result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));

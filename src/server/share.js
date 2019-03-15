@@ -15,3 +15,11 @@ export function shareBargain({ bargain_id }) {
         data: { bargain_id },
     });
 }
+
+// 根据分享号获取分享信息
+export function shareInfo({ relation_id }) {
+    return $request.get({
+        url: '/api/v1/share/get_share_info',
+        data: { relation_id },
+    });
+}

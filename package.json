@@ -6,9 +6,9 @@
     "serve:mock": "cross-env NODE_ENV=mock vue-cli-service serve --copy",
     "serve": "vue-cli-service serve --copy",
     "build": "vue-cli-service build",
-    "build:dev": "cross-env NODE_ENV=dev vue-cli-service build ",
-    "build:test": "cross-env NODE_ENV=test vue-cli-service build --modern",
-    "build:prod": "cross-env NODE_ENV=production vue-cli-service build  --modern",
+    "build:dev": "cross-env NODE_ENV=dev vue-cli-service build",
+    "build:test": "cross-env NODE_ENV=test vue-cli-service build",
+    "build:prod": "cross-env NODE_ENV=production vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
     "babel-plugin-import": "^1.11.0",
     "node-sass": "^4.9.0",
     "postcss-pxtorem": "^4.0.1",
