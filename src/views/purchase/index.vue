@@ -95,7 +95,7 @@
 
     <ul class="paly-type-list">
       <li class="paly-item"
-        v-for="(item,idx) in 2"
+        v-for="(item,idx) in 1"
         @click="paly_id=item"
         :key="idx">
         <span class="paly-txt">Papal payment</span>
@@ -132,12 +132,13 @@
     <!-- 弹窗 --------------------------------->
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
     <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
-      @continuePlay="goPaly" @playfail="dialogVisible = true"/>
+      @continuePlay="goPaly"
+      @playfail="dialogVisible = true" />
 
     <!-- 支付失败调用的弹窗 -->
     <dialog-default :info="info"
       :dialogVisible.sync="dialogVisible"
-      @ok="goPaly">
+      @ok="goRepaidPay">
       <div slot="content"
         class="pay-error">
         <p>Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin</p>
@@ -160,7 +161,7 @@ for (let k in obj) {
 }
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
-import { orderCreate } from "@/server/pay.js";
+import { orderCreate, repaidOrder } from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
 export default {
   components: {
@@ -331,11 +332,14 @@ export default {
     async curSpuSpecs() {
       let result = await getSpuSpecs({ spu_id: this.$route.query.spuId });
       if (result && result.data) {
-        this.specs = result.data;
+        this.specs = result.data.map(item => {
+          item.id = item.spu_spec_items[0].id;
+          return item;
+        });
       }
     },
     /**
-     * @description: 支付下单接口流程(继续支付复用)
+     * @description: 支付下单接口流程
      */
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
@@ -350,7 +354,8 @@ export default {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
         // pay_type: this.paly_id
-        pay_type: 1
+        pay_type: 1,
+        spu_name: this.spu.title
       };
       if (this.$route.query.bargainId) {
         param = { ...param, bargain_id: this.$route.query.bargainId };
@@ -361,9 +366,15 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
-        window.location.href=pay_url;
+        window.open(pay_url);
+        // window.location.href=pay_url;
       }
+    },
+    /**
+     * @description: 继续支付
+     */
+    async goRepaidPay(){
+      let result=await repaidOrder({order_no:"", spu_name:this.spu.title, pay_type:1});
     },
     goShippingAddressList() {
       this.showShippingAddressPage = true;
