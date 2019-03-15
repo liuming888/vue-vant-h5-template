@@ -10,5 +10,6 @@ module.exports = {
             },
             'vant',
         ],
+        'dynamic-import-webpack',
     ],
 };
