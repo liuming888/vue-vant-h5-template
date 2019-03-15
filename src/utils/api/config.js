@@ -10,7 +10,7 @@ export default {
             case 'dev':  // 开发域名环境
                 // url = 'https://dev-ht-zdd-api.batmobi.net';
                 // 阳
-                url = 'http://192.168.4.32:8024/api';
+                url = 'http://192.168.4.32:8024';
                 break;
             case 'test':
                 // url = 'https://test-ht-zdd-api.batmobi.net';

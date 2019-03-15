@@ -9,10 +9,10 @@ function getUrl(NODE_ENV) {
             // 锦涛
             // url = 'http://192.168.4.128:8024/api';
             // 阳
-            url = 'http://192.168.4.32:8024/api';
+            // url = 'http://192.168.4.32:8024/api';
             // url = 'https://dev-ht-zdd-api.batmobi.net/api';
             // url = 'https://test-ht-zdd-api.batmobi.net/api';
-            // url = 'http://test-ht-zdd-api.batmobi.cn:43321/api';
+            url = 'http://test-ht-zdd-api.batmobi.cn:43321/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';

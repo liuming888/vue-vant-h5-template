@@ -9,7 +9,7 @@
 <template>
   <div class="main-container">
     <zdd-content></zdd-content>
-    <zdd-tab-bar></zdd-tab-bar>
+    <!-- <zdd-tab-bar></zdd-tab-bar> -->
 
     <!-- 弹窗 -->
     <dialog-login-select v-if="$store.state.dialogs.loginSelect.show" />
