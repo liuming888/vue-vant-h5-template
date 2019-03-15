@@ -374,7 +374,13 @@ export default {
      * @description: 继续支付
      */
     async goRepaidPay(){
-      let result=await repaidOrder({order_no:"", spu_name:this.spu.title, pay_type:1});
+      let result=await repaidOrder({order_no:this.$route.query.orderNo, spu_name:this.spu.title, pay_type:1});
+      if(result&&result.data){
+          let { pay_url, order_no } = result.data;
+        console.log("pay_url: ", pay_url);
+        this.showWaitPaymentDialog.show = true;
+        window.open(pay_url);
+      }
     },
     goShippingAddressList() {
       this.showShippingAddressPage = true;

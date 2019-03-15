@@ -12,7 +12,7 @@ function getUrl(NODE_ENV) {
             url = 'http://192.168.4.32:8024/api';
             // url = 'https://dev-ht-zdd-api.batmobi.net/api';
             // url = 'https://test-ht-zdd-api.batmobi.net/api';
-            // url = 'https://test-ht-zdd-api.batmobi.net/api';
+            // url = 'http://test-ht-zdd-api.batmobi.cn:43321/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';

@@ -15,7 +15,7 @@ if (userStr){
 
 // if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
     user_id = 1;
-    access_token = 'kaifaluantiao';
+access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
 // }
 
 axios.defaults.headers.common['user_id'] = user_id;
