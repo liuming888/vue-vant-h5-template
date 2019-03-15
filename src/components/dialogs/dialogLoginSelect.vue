@@ -107,12 +107,6 @@ import axios from "axios";
 import { login, check_login } from "@/server/user.js";
 export default {
   name: "dialogLoginSelect",
-  props: {
-    jumpUrl: {
-      // 登录完成要跳转的页面
-      type: String
-    }
-  },
   data() {
     return {};
   },
@@ -141,15 +135,15 @@ export default {
           tp_username: name,
           tp_avatar: pic_square
         };
-        const {spuId,bargainId ,inviteUserId}=this.$route.query;
-        if(spuId){
-          param.spu_id =spuId;
+        const { spuId, bargainId, inviteUserId } = this.$route.query;
+        if (spuId) {
+          param.spu_id = spuId;
         }
-        if(bargainId){
-          param.bargain_id=bargainId;
+        if (bargainId) {
+          param.bargain_id = bargainId;
         }
-        if(inviteUserId){
-          param.invite_user_id=inviteUserId;
+        if (inviteUserId) {
+          param.invite_user_id = inviteUserId;
         }
 
         let result = await login(param);
@@ -165,10 +159,25 @@ export default {
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
           axios.defaults.headers.common["user_id"] = userInfo.user_id;
           axios.defaults.headers.common["access_token"] = userInfo.access_token;
-          this.$emit("update:dialogVisible", { show: false });
-          if (this.jumpUrl) {
-            this.$router.push({ path: this.jumpUrl });
+          // this.$emit("update:dialogVisible", { show: false });
+          this.$store.commit("setLoginSelectShow", false);
+          if (this.$store.state.dialogs.loginSelect.jumpUrl) {
+            this.$router.push({
+              path: this.$store.state.dialogs.loginSelect.jumpUrl
+            });
           }
+
+          // if (this.$route.path == "/forBargain") {
+          //   // 如果是帮砍页面用户登录
+          //   this.$router.push({
+          //     path: this.$route.path,
+          //     query: {
+          //       ...this.$route.query,
+          //       helpCur: "ok"
+          //     }
+          //   });
+          // }
+
           return true;
         }
       }
