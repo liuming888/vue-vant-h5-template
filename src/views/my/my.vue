@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .my-container {
-  height: 93vh;
+  height: 92vh;
   overflow-y: auto;
   > .my-header {
     padding: 40px 30px 0 30px;

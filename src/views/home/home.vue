@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .home-container {
   background-color: #d30c05;
-    height: 90vh;
+    height: 89vh;
     overflow-y:auto;
   padding-bottom: 36px;
   > .home-top-container {
