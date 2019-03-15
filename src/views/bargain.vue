@@ -3,7 +3,8 @@
 <template>
   <div class="bargain-container">
     <!-- 返回首页 -->
-    <div class="turn-home"></div>
+    <div class="turn-home"
+      @click="$router.push('/')"></div>
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
@@ -245,6 +246,9 @@ export default {
   created() {
     this.init();
   },
+  mounted() {
+    document.getElementsByClassName("content-container")[0].scroll(0, 0);
+  },
   methods: {
     async init() {
       // 分享链接点击进入的
@@ -382,11 +386,13 @@ export default {
           spuId: spu_id
         }
       });
+      document.getElementsByClassName("content-container")[0].scroll(0, 0);
       this.init();
     },
 
     jumpBuyPage() {
-       if (!this.$store.state.userInfo.user_id) {
+      // 上线时不能注释
+      /*  if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
         this.$store.commit(
           "setLoginJumpUrl",
@@ -395,8 +401,8 @@ export default {
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
+      if (this.bargain_info.can_buy != 1) return; */
 
-      if (bargain_info.can_buy != 1) return;
       this.$router.push({ path: "/purchase", query: { ...this.$route.query } });
     },
     /**
@@ -415,13 +421,13 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    const { loginGoShare ,bargainType} = to.query;
+    const { loginGoShare, bargainType } = to.query;
     if (loginGoShare == "ok") {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.openSharingFriendsDialog();
     }
 
-    // if(bargainType=='another'){ 
+    // if(bargainType=='another'){
     //   this.init();
     // }
   }
