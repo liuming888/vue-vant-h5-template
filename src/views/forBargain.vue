@@ -3,17 +3,22 @@
 <template>
   <div class="bargain-container">
     <!-- 用户消息 -->
-    <user-picking-up-message :messageList="messageList"></user-picking-up-message>
+    <!-- <user-picking-up-message :messageList="messageList"></user-picking-up-message> -->
     <!-- 头部信息 -->
     <div class="bargain-header">
       <!-- 头部返回首页 -->
-      <img src="./../assets/images/HOME@2x.png" alt="" class="turn-home">
+      <img src="./../assets/images/HOME@2x.png"
+        alt=""
+        class="turn-home">
       <!-- banner -->
       <div class="bargain-banner">
-        <img src="./../assets/images/WaterWomenBagba@2x.png" alt="">
+        <img src="./../assets/images/WaterWomenBagba@2x.png"
+          alt="">
       </div>
       <div class="bargain-info-box">
-        <img class="bg" src="./../assets/images/bargain-2.png" alt="">
+        <img class="bg"
+          src="./../assets/images/bargain-2.png"
+          alt="">
         <div class="bargain-content">
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
@@ -52,9 +57,10 @@
               </div>
             </div>
           </div>
-          <count-down :dateDiff="spu.expire_ttl" class="spu-count-down"></count-down>
+          <count-down :dateDiff="spu.expire_ttl"
+            class="spu-count-down"></count-down>
           <div class="ctrl-box">
-            <div class="share-btn">Help friend cut a knife</div>
+            <div class="share-btn" @click="goBargainChop">Help friend cut a knife</div>
           </div>
         </div>
       </div>
@@ -70,7 +76,8 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img src="./../assets/images/good-large.png" alt="">
+                <img src="./../assets/images/good-large.png"
+                  alt="">
                 <!-- <img v-lazy="item.avatar"> -->
               </div>
               <div class="team-info">
@@ -89,15 +96,18 @@
         <p class="page-title">How to get a free gift</p>
         <ul class="help-list">
           <li class="help-item">
-            <img src="./../assets/images/shouji@2x.png" alt="">
+            <img src="./../assets/images/shouji@2x.png"
+              alt="">
             <p>Click on favorite goods</p>
           </li>
           <li class="help-item">
-            <img src="./../assets/images/yaoqinghaoyou@2x.png" alt="">
+            <img src="./../assets/images/yaoqinghaoyou@2x.png"
+              alt="">
             <p>Invite friends to bargain</p>
           </li>
           <li class="help-item">
-            <img src="./../assets/images/liwu@2x.png" alt="">
+            <img src="./../assets/images/liwu@2x.png"
+              alt="">
             <p>Cut into free</p>
           </li>
         </ul>
@@ -106,7 +116,8 @@
       <!-- 推荐商品 -->
       <div class="recommend-products">
         <p class="page-title">
-          <img src="./../assets/images/start.png" alt="">
+          <img src="./../assets/images/start.png"
+            alt="">
           <span>More Products</span>
         </p>
         <div class="recommend-item"
@@ -157,7 +168,7 @@ import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 // import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
-import { shareSpu } from "@/server/share.js";
+import { shareSpu, shareInfo } from "@/server/share.js";
 import {
   getBargainInfo,
   getHelpBargainList,
@@ -261,35 +272,55 @@ export default {
     };
   },
   created() {
-    // this.init();
+    this.init();
   },
   methods: {
     async init() {
-      if (!this.$route.query.bargainId) {
-        let result = await this.goBargainChop({
-          spu_id: this.$route.query.spuId
-        });
-        // if(result){
-        //   alert(1);
-        //   console.log("66666666666666")
-        //   const chop_info=result.data.chop_info;
-        //   this.$router.push({
-        //     path:"/bargain",
-        //     query:{
-        //       ...this.$route.query,
-        //       bargainId:chop_info.bargain_id
-        //     }
-        //   })
-        // }
+      // 分享链接点击进入的
+      if (this.$route.query.relationId) {
+        await this.initShareInfo(this.$route.query.relationId);
       }
+
+      // if (!this.$route.query.bargainId) {
+      //   await this.goBargainChop({
+      //     spu_id: this.$route.query.spuId
+      //   });
+      // }
 
       this.initBargainInfo();
       this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
     },
-    async goBargainChop({ bargain_id, spu_id }) {
-      let result = await bargainChop({ bargain_id, spu_id });
+    async initShareInfo(relationId) {
+      let result = await shareInfo({ relation_id: relationId });
+      if (result && result.data) {
+        const { bargain_id, spu_id, type, invite_user_id } = result.data;
+        console.log("{ bargain_id, spu_id, type, invite_user_id } : ", {
+          bargain_id,
+          spu_id,
+          type,
+          invite_user_id
+        });
+        this.$router.push({
+          path: "/forBargain",
+          query: {
+            ...this.$route.query,
+            bargainId: bargain_id,
+            spuId: spu_id,
+            type,
+            inviteUserId: invite_user_id
+          }
+        });
+      }
+    },
+    async goBargainChop() {
+      if(!this.$store.state.userInfo.user_id){
+        alert("弹出登录弹窗");
+        return;
+      }
+      const { bargainId, spuId } = this.$route.query;
+      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
       if (result) {
         const chop_info = result.data.chop_info;
         this.$router.push({

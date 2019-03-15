@@ -1,162 +1,193 @@
 <style lang="scss">
-.order-container{
-    .van-ellipsis{
-        // font-size: 30px;
-    }
+.order-container {
+  .van-ellipsis {
+    // font-size: 30px;
+  }
 }
 </style>
 
 <style lang="scss" scoped>
-    .all-order {
-        padding: 20px 30px;
-        > .all-order-item {
-            padding: 30px 20px;
-            & + .all-order-item {
-                margin-top: 20px;
-            }
-            > .info-box {
-                display: flex;
-                margin-bottom: 20px;
-                > img {
-                    width: 200px;
-                    height: 200px;
-                    margin-right: 20px;
-                }
-                > .info {
-                    flex: 1;
-                    overflow: hidden;
-                    > .info-top {
-                        display: flex;
-                        color: #323232;
-                        font-size: 28px;
-                        font-weight: lighter;
-                        > .title {
-                            flex: 3;
-
-                        }
-                        > .price {
-                            flex: 1;
-                            text-align: right;
-                        }
-                    }
-                    > .info-description, > .address {
-                        font-size: 24px;
-                        color: #888;
-                        margin-top: 10px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
-                }
-            }
-            > .ctrl-box {
-                text-align: right;
-                > .btn {
-                    display: inline-block;
-                    width: 190px;
-                    height: 64px;
-                    border:1px solid rgba(211,12,5,1);
-                    border-radius:32px;
-                    color: #D30C05;
-                    line-height: 64px;
-                    font-size: 28px;
-                    text-align: center;
-                }
-                > .active {
-                    color: #fff;
-                    background-color: #D30C05;
-                }
-            }
-        }
+.all-order {
+  padding: 20px 30px;
+  > .all-order-item {
+    padding: 30px 20px;
+    & + .all-order-item {
+      margin-top: 20px;
     }
-    .without-order {
-        padding: 0 30px;
-        text-align: center;
+    > .info-box {
+      display: flex;
+      margin-bottom: 20px;
+      > img {
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+      }
+      > .info {
+        flex: 1;
+        overflow: hidden;
+        > .info-top {
+          display: flex;
+          color: #323232;
+          font-size: 28px;
+          font-weight: lighter;
+          > .title {
+            flex: 3;
+          }
+          > .price {
+            flex: 1;
+            text-align: right;
+          }
+        }
+        > .info-description,
+        > .address {
+          font-size: 24px;
+          color: #888;
+          margin-top: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+    > .ctrl-box {
+      text-align: right;
+      > .btn {
+        display: inline-block;
+        width: 190px;
+        height: 64px;
+        border: 1px solid rgba(211, 12, 5, 1);
+        border-radius: 32px;
+        color: #d30c05;
+        line-height: 64px;
         font-size: 28px;
-        color: #888;
-        > .none-file-icon {
-            width: auto;
-            height: 140px;
-            margin: 170px 0 70px 0;
-        }
-        > .btn {
-            margin-top: 100px;
-            height:88px;
-            line-height: 88px;
-            border:1px solid rgba(211,12,5,1);
-            border-radius:44px;
-            color: #D30C05;
-            font-size: 32px;
-        }
+        text-align: center;
+      }
+      > .active {
+        color: #fff;
+        background-color: #d30c05;
+      }
     }
+  }
+}
+.without-order {
+  padding: 0 30px;
+  text-align: center;
+  font-size: 28px;
+  color: #888;
+  > .none-file-icon {
+    width: auto;
+    height: 140px;
+    margin: 170px 0 70px 0;
+  }
+  > .btn {
+    margin-top: 100px;
+    height: 88px;
+    line-height: 88px;
+    border: 1px solid rgba(211, 12, 5, 1);
+    border-radius: 44px;
+    color: #d30c05;
+    font-size: 32px;
+  }
+}
 </style>
 
 <template>
-    <div class="order-container">
-        <van-tabs swipeable title-active-color="#D30C05" title-inactive-color="#323232">
-            <van-tab v-for="(item, index) in tabList" :title="item" :key="index">
-                <!-- 所有订单 -->
-                <ul class="all-order">
-                    <li class="all-order-item">
-                        <div class="info-box">
-                            <img src="./../../assets/images/good-large.png" alt="">
-                            <div class="info">
-                                <div class="info-top">
-                                    <p class="title">Casual Large Capacity Copartment Handbag women</p>
-                                    <div class="price">Rp0.00</div>
-                                </div>
-                                <p class="info-description">Color :386</p>
-                                <p class="address">Dikirim ke Jakarta Dikirim ke Jakar...</p>
-                            </div>
-                        </div>
-                        <div class="ctrl-box">
-                            <div class="btn">pelanggan</div>
-                        </div>
-                    </li>
-                    <li class="all-order-item">
-                        <div class="info-box">
-                            <img src="./../../assets/images/good-large.png" alt="">
-                            <div class="info">
-                                <div class="info-top">
-                                    <p class="title">Casual Large Capacity Copartment Handbag women</p>
-                                    <div class="price">Rp0.00</div>
-                                </div>
-                                <p class="info-description">Color :386</p>
-                                <p class="address">Dikirim ke Jakarta Dikirim ke Jakar...</p>
-                            </div>
-                        </div>
-                        <div class="ctrl-box">
-                            <div class="btn active">Beli</div>
-                        </div>
-                    </li>
-                </ul>
-                <!-- 无订单 -->
-                <div class="without-order" v-show="false">
-                    <img src="@/assets/images/order-none.png" alt="" class="none-file-icon">
-                    <p>Tidak ada pesanan terkait</p>
-                    <div class="btn">Buka halaman beranda dan lihat</div>
+  <div class="order-container">
+    <van-tabs swipeable
+      title-active-color="#D30C05"
+      title-inactive-color="#323232">
+      <van-tab v-for="(item, index) in tabList"
+        :title="item"
+        :key="index">
+        <!-- 所有订单 -->
+        <ul class="all-order">
+          <li class="all-order-item">
+            <div class="info-box">
+              <img src="./../../assets/images/good-large.png"
+                alt="">
+              <div class="info">
+                <div class="info-top">
+                  <p class="title">Casual Large Capacity Copartment Handbag women</p>
+                  <div class="price">Rp0.00</div>
                 </div>
-            </van-tab>
-        </van-tabs>
-    </div>
+                <p class="info-description">
+                  <!-- Color :386 --> &nbsp;</p>
+                <p class="address">Dikirim ke Jakarta Dikirim ke Jakar...</p>
+              </div>
+            </div>
+            <div class="ctrl-box">
+              <div class="btn">pelanggan</div>
+            </div>
+          </li>
+          <li class="all-order-item">
+            <div class="info-box">
+              <img src="./../../assets/images/good-large.png"
+                alt="">
+              <div class="info">
+                <div class="info-top">
+                  <p class="title">Casual Large Capacity Copartment Handbag women</p>
+                  <div class="price">Rp0.00</div>
+                </div>
+                <p class="info-description">Color :386</p>
+                <p class="address">Dikirim ke Jakarta Dikirim ke Jakar...</p>
+              </div>
+            </div>
+            <div class="ctrl-box">
+              <div class="btn active">Beli</div>
+            </div>
+          </li>
+        </ul>
+        <!-- 无订单 -->
+        <div class="without-order"
+          v-show="false">
+          <img src="@/assets/images/order-none.png"
+            alt=""
+            class="none-file-icon">
+          <p>Tidak ada pesanan terkait</p>
+          <div class="btn">Buka halaman beranda dan lihat</div>
+        </div>
+      </van-tab>
+    </van-tabs>
+  </div>
 </template>
 <script>
-
 import { Tab, Tabs } from "vant";
+
+import { orderList } from "@/server/pay.js";
 export default {
-    data() {
-        return {
-            tabList: [
-                'Semua',
-                'Pembayaran tertunda',
-                'Kwitansi tertunda'
-            ]
+  components: {
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs
+  },
+  data() {
+    return {
+      tabList: ["Semua", "Pembayaran tertunda", "Kwitansi tertunda"],
+
+      orderList: [
+        //类型：Array  必有字段  备注：无
+        {
+          //类型：Object  必有字段  备注：无
+          order_no: "mock", //类型：String  必有字段  备注：订单号
+          spu_title: "mock", //类型：String  必有字段  备注：商品标题
+          sku_attr: "mock", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
+          amount: "mock" //类型：String  必有字段  备注：订单金额
         }
-    },
-    components: {
-        [Tab.name]: Tab,
-        [Tabs.name]: Tabs
+      ],
+      orderPageDat: {
+        page_num: 1,
+        page_size: 5
+      }
+    };
+  },
+  created() {},
+  methods: {
+    async init() {
+      let result = await orderList({ ...this.orderPageDat, type: 0 });
+      if (result && result.data) {
+          this.orderList=result.data;
+      }
     }
-}
+  }
+};
 </script>
 

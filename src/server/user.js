@@ -1,20 +1,20 @@
 import $request from '../utils/api/request.js';
 
 // login
-export function login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id }) {
+export function login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar}) {
     return $request.post({
         url: '/api/v1/user/login',
-        data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id },
+        data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar},
     });
 }
 
 // 测试登录
-export function check_login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id }) {
-    return $request.post({
-        url: '/api/v1/user/check_login',
-        data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id },
-    });
-}
+export function check_login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar }) {
+           return $request.post({
+               url: '/api/v1/user/check_login',
+               data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar},
+           });
+       }
 
 // 用户凭证刷新接口
 export function refreshToken({ user_id, access_token }) {
