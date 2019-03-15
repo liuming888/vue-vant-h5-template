@@ -11,99 +11,99 @@ const curRouter = new Router({
         {
             path: '/',
             name: '首页',
-            component: () => import('../views/home/home.vue'),
+            component: resolve => require(['../views/home/home.vue'], resolve),
         },
         {
             path: '/bargain',
             name: '砍价页',
-            component: () => import('../views/bargain.vue'),
+            component: resolve => require(['../views/bargain.vue'], resolve),
         },
         {
             path: '/isBargainingList',
             name: '正在砍价列表页',
-            component: () => import('../views/isBargainingList.vue'),
+            component: resolve => require(['../views/isBargainingList.vue'], resolve),
         },
 
         {
             path: '/forBargain',
             name: '好友帮砍页',
-            component: () => import('../views/forBargain.vue'),
+            component: resolve => require(['../views/forBargain.vue'], resolve),
         },
         {
             path: '/purchase',
             name: '购买商品页',
-            component: () => import('../views/purchase/index.vue'),
+            component: resolve => require(['../views/purchase/index.vue'], resolve),
         },
         {
             path: '/shippingAddress',
             name: '（已有）收货地址页',
-            component: () => import('../views/shippingAddress.vue'),
+            component: resolve => require(['../views/shippingAddress.vue'], resolve),
         },
         {
             path: '/purchase/paymentSuccess',
             name: '支付成功页',
-            component: () => import('../views/purchase/paymentSuccess.vue'),
+            component: resolve => require(['../views/purchase/paymentSuccess.vue'], resolve),
         },
 
         {
             path: '/my',
             name: '我的',
-            component: () => import('../views/my/my.vue'),
+            component: resolve => require(['../views/my/my.vue'], resolve),
         },
         {
             path: '/withdrawRelated',
             name: '提现相关tab主页面',
-            component: () => import('../views/withdrawRelated/index.vue'),
+            component: resolve => require(['../views/withdrawRelated/index.vue'], resolve),
             redirect: '/withdrawRelated/withdrawImmediately',
             children: [
                 {
                     path: '/withdrawRelated/withdrawImmediately',
                     name: '立即提现',
-                    component: () => import('../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'),
+                    component: resolve => require(['../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'], resolve),
                 },
                 {
                     path: '/withdrawRelated/withdrawalsRecord',
                     name: '提现记录',
-                    component: () => import('../views/withdrawRelated/withdrawalsRecord.vue'),
+                    component: resolve => require(['../views/withdrawRelated/withdrawalsRecord.vue'], resolve),
                 },
                 {
                     path: '/withdrawRelated/incomeBreakdown',
                     name: '收益明细',
-                    component: () => import('../views/withdrawRelated/incomeBreakdown.vue'),
+                    component: resolve => require(['../views/withdrawRelated/incomeBreakdown.vue'], resolve),
                 },
             ],
         },
         {
             path: '/withdrawRelated/toWithdraw',
             name: '我要提现',
-            component: () => import('../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'),
+            component: resolve => require(['../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'], resolve),
         },
 
         // 以下为v0.2版本得做的页面
         {
             path: '/my/myFriends',
             name: '我的好友',
-            component: () => import('../views/my/myFriends.vue'),
+            component: resolve => require(['../views/my/myFriends.vue'], resolve),
         },
         {
             path: '/my/myOrder',
             name: '我的订单',
-            component: () => import('../views/my/myOrder.vue'),
+            component: resolve => require(['../views/my/myOrder.vue'], resolve),
         },
         {
             path: '/my/inviteFriends',
             name: '邀请好友',
-            component: () => import('../views/my/inviteFriends.vue'),
+            component: resolve => require(['../views/my/inviteFriends.vue'], resolve),
         },
         {
             path: '/my/howToMakeMoney',
             name: '如何赚钱',
-            component: () => import('../views/my/howToMakeMoney.vue'),
+            component: resolve => require(['../views/my/howToMakeMoney.vue'], resolve),
         },
         {
             path: '/my/billboard',
             name: '排行榜',
-            component: () => import('../views/my/billboard.vue'),
+            component: resolve => require(['../views/my/billboard.vue'], resolve),
         },
     ],
 });

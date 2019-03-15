@@ -9,7 +9,6 @@ module.exports = {
                 style: true,
             },
             'vant',
-        ],
-        'dynamic-import-webpack',
+        ]
     ],
 };
