@@ -24,6 +24,7 @@ axios.defaults.headers.common['access_token'] = access_token;
 var instance = axios.create();
 
 let url = config.getUrl(process.env.NODE_ENV);
+console.log('url: ', url);
 instance.defaults.baseURL = url;
 instance.defaults.timeout = 6000;
 instance.defaults.withCredentials = true;
