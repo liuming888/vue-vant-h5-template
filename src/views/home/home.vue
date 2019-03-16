@@ -1,8 +1,8 @@
 <style lang="scss" scoped>
 .home-container {
   background-color: #d30c05;
-    height: 89vh;
-    overflow-y:auto;
+  height: 89vh;
+  overflow-y: auto;
   padding-bottom: 36px;
   > .home-top-container {
     position: relative;
@@ -152,51 +152,51 @@
 </style>
 
 <template>
-<div>
-  <div class="home-container">
-    <section class="home-top-container">
-      <!-- 用户消息 -->
-      <user-picking-up-message :messageList="messageList"></user-picking-up-message>
+  <div>
+    <div class="home-container">
+      <section class="home-top-container">
+        <!-- 用户消息 -->
+        <user-picking-up-message :messageList="messageList"></user-picking-up-message>
 
-      <van-swipe :autoplay="3000"
-        indicator-color="white"
-        class="home-banner">
-        <van-swipe-item>
-          <img v-lazy="require('@/assets/images/home-banner.png')"
-            @click="testLogin">
-        </van-swipe-item>
-      </van-swipe>
+        <van-swipe :autoplay="3000"
+          indicator-color="white"
+          class="home-banner">
+          <van-swipe-item>
+            <img v-lazy="require('@/assets/images/home-banner.png')"
+              @click="testLogin">
+          </van-swipe-item>
+        </van-swipe>
 
-      <div class="freebing-box"
-        v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
-        <div class="freebing-title">Ongoing Freebies</div>
-        <template v-for="item of spuBargainList">
-          <!-- 抢购商品 -->
-          <freebing-box :key="item.bargain_info.spu_id"
-            :spuBargainItem="{...item.bargain_info,...item.spu}"
-            v-if="item.bargain_info.status==1" />
-        </template>
+        <div class="freebing-box"
+          v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
+          <div class="freebing-title">Ongoing Freebies</div>
+          <template v-for="item of spuBargainList">
+            <!-- 抢购商品 -->
+            <freebing-box :key="item.bargain_info.spu_id"
+              :spuBargainItem="{...item.bargain_info,...item.spu}"
+              v-if="item.bargain_info.status==1" />
+          </template>
 
-        <a href="javascript:;"
-          class="freebing-more"
-          @click="$router.push({path:'/isBargainingList'})">More About ></a>
-      </div>
+          <a href="javascript:;"
+            class="freebing-more"
+            @click="$router.push({path:'/isBargainingList'})">More About ></a>
+        </div>
 
-    </section>
-    <section class="home-goods"
-      v-if="goodsList.length>0">
-      <div class="home-goods-title">DAILY DISCOVER</div>
-      <ul class="home-goods-list">
-        <commodity-item v-for="(item, index) of goodsList"
-          :key="index"
-          :itemData="item" />
-      </ul>
-    </section>
+      </section>
+      <section class="home-goods"
+        v-if="goodsList.length>0">
+        <div class="home-goods-title">DAILY DISCOVER</div>
+        <ul class="home-goods-list">
+          <commodity-item v-for="(item, index) of goodsList"
+            :key="index"
+            :itemData="item" />
+        </ul>
+      </section>
 
-  </div>
+    </div>
     <tabBar></tabBar>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -218,7 +218,7 @@ import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
-    tabBar,  // 底部tab
+    tabBar, // 底部tab
     userPickingUpMessage, // 用户领取消息播放
     FreebingBox, // 一件正在进行砍价商品
     commodityItem, // 商品列表展示的商品X
@@ -276,7 +276,9 @@ export default {
         let result = await login({
           tp_id: id,
           tp_token: accessToken,
-          tp_type: 1
+          tp_type: 1,
+          tp_username: name,
+          tp_avatar: pic_square
         });
         //   let result = await login({
         //   tp_id: "104497707249033",
