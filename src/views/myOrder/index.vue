@@ -19,6 +19,39 @@
 }
 </style>
 
+<style lang="scss">
+.all-order {
+  padding: 20px 30px;
+  > .all-order-item {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.without-order {
+  padding: 0 30px;
+  text-align: center;
+  font-size: 28px;
+  color: #888;
+  > .none-file-icon {
+    width: auto;
+    height: 140px;
+    margin: 170px 0 70px 0;
+  }
+  > .btn {
+    margin-top: 100px;
+    height: 88px;
+    line-height: 88px;
+    border: 1px solid rgba(211, 12, 5, 1);
+    border-radius: 44px;
+    color: #d30c05;
+    font-size: 32px;
+  }
+}
+</style>
+
 <template>
   <div class="order-container">
     <van-tabs swipeable
