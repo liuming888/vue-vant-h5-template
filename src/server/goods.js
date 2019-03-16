@@ -24,7 +24,7 @@ export function getInfo({ spu_id }) {
     });
 }
 
-// 获取砍价商品列表
+// 获取砍价商品列表（目前后端没做分页，前端暂时也不做）
 export function getBargainSpus({ page_size, page_num, is_all }) {
     return $request.post({
         url: '/api/v1/spu/get_bargain_spus',

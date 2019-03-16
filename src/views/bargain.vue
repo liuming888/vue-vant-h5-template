@@ -302,6 +302,14 @@ export default {
             bargainId: chop_info.bargain_id
           }
         });
+
+        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        arr.forEach(item => {
+          if (item.spu_id == spu_id) {
+            item.isBargain = true;
+          }
+        });
+        this.$store.commit("setGoodsList", arr);
       }
     },
     /**
@@ -343,9 +351,18 @@ export default {
     },
 
     /**
-     * @description: 更多商品列表
+     * @description: 更多商品列表（目前后端没做分页，前端暂时也不做）
      */
     async initSpuList() {
+      // 看看vuex里有木有缓存6条没砍价的
+      let stateGoodsList = this.$store.state.goodsList.filter(
+        item => !item.isBargain
+      );
+      if (stateGoodsList.length > 6) {
+        this.spu_list = stateGoodsList;
+        return;
+      }
+
       let result = await getBargainSpus({
         page_size: 16,
         page_num: 1,
@@ -353,6 +370,13 @@ export default {
       });
       if (result && result.data) {
         this.spu_list = result.data.spu_list;
+
+        // if (page_num == 1) {
+        this.$store.commit("setGoodsList", this.spu_list);
+        // } else {
+        //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
+        // }
       }
     },
     async openSharingFriendsDialog() {
@@ -435,7 +459,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       // 通过 `vm` 访问组件实例
-      if(from.path=='/purchase'){
+      if (from.path == "/purchase") {
         vm.$util.paymentCancellationPrompt();
       }
     });

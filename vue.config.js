@@ -13,10 +13,10 @@ function getUrl(NODE_ENV) {
             // url = 'http://test-ht-zdd-api.batmobi.cn:43321/api';
 
             // 开发环境
-            // url = 'https://dev-ht-zdd-api.batmobi.net/api';
+            url = 'https://dev-ht-zdd-api.batmobi.net/api';
 
             // 测试环境
-            url = 'https://test-ht-zdd-api.batmobi.net/api';
+            // url = 'https://test-ht-zdd-api.batmobi.net/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
