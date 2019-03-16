@@ -13,8 +13,8 @@ export default {
                 url = 'http://192.168.4.32:8024';
                 break;
             case 'test':
-                url = 'https://test-ht-zdd-api.batmobi.net';
-                // url = 'http://test-ht-zdd-api.batmobi.cn:43321';
+                // url = 'https://test-ht-zdd-api.batmobi.net';
+                url = 'http://test-ht-zdd-api.batmobi.cn:43321';
                 break;
             case 'production':
                 url = 'http://127.0.0.1:9078';
