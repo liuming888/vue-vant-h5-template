@@ -5021,7 +5021,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _cac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FBConfig\", function() { return FBConfig; });\nvar appId = \"\";\n\nif (false) {} else if (true) {\n  // appId =\"641363916309941\";  // 自己的\n  appId = '411009183037605'; // 公司测试的\n} else {}\n\nvar FBConfig = {\n  appId: appId,\n  cookie: true,\n  xfbml: true,\n  version: 'v3.2'\n};\n\n//# sourceURL=webpack:///./src/config/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FBConfig\", function() { return FBConfig; });\nvar appId = \"\";\n\nif (false) {} else if (true) {\n  // appId =\"641363916309941\";  // 自己的\n  // appId = '411009183037605';  // 公司测试的\n  appId = '2292102501067089'; // 公司正式的\n} else {}\n\nvar FBConfig = {\n  appId: appId,\n  cookie: true,\n  xfbml: true,\n  version: 'v3.2'\n};\n\n//# sourceURL=webpack:///./src/config/index.js?");
 
 /***/ }),
 
