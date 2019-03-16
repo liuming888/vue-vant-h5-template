@@ -80,10 +80,10 @@ export function formatMoney(coin) {
 }
 
 /**
-    * @description: 过期时间倒计时
-    * @param {expire_time} 过期时间段（单位时间戳）
-    * @return {false | 格式化后的时间对象}
-    */
+ * @description: 过期时间倒计时
+ * @param {expire_time} 过期时间段（单位时间戳）
+ * @return {false | 格式化后的时间对象}
+ */
 export function expiration(expire_time) {
     if (isNaN(expire_time)) {
         return false;
@@ -102,11 +102,24 @@ export function expiration(expire_time) {
 
     let expirationNum = new Date(expire_time);
     let h = Math.floor(expirationNum / (1000 * 60 * 60));
-    h = h < 10 ? "0" + h : h;
+    h = h < 10 ? '0' + h : h;
     let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));
-    p = p < 10 ? "0" + p : p;
+    p = p < 10 ? '0' + p : p;
     let m = expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p;
-    m = m < 10 ? "0" + m : m;
+    m = m < 10 ? '0' + m : m;
     this.expirationDat = { h, p, m };
     return { h, p, m };
+}
+
+/**
+ * @description: 点击返回按钮，回到上一步的页面。弹出Toast提示：支付已取消，可以在“我的订单”重新发起支付。Toast2s后消失。
+ */
+export function paymentCancellationPrompt() {
+    setTimeout(() => {
+        const Toast = require('vant').Toast;
+        Toast({
+            message: `Payment has been cancelled, you can re-initiate payment in "My Order" !`,
+            duration: 2000,
+        });
+    }, 500);
 }

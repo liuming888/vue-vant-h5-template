@@ -430,6 +430,15 @@ export default {
     // if(bargainType=='another'){
     //   this.init();
     // }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例
+      if(from.path=='/purchase'){
+        vm.$util.paymentCancellationPrompt();
+      }
+    });
   }
 };
 </script>
