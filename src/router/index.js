@@ -87,7 +87,25 @@ const curRouter = new Router({
         {
             path: '/my/myOrder',
             name: '我的订单',
-            component: resolve => require(['../views/my/myOrder.vue'], resolve),
+            component: resolve => require(['../views/myOrder/index.vue'], resolve),
+            redirect: '/my/myOrder/semua',
+            children: [
+                {
+                    path: '/my/myOrder/semua',
+                    name: '所有订单',
+                    component: resolve => require(['../views/myOrder/semua.vue'], resolve),
+                },
+                {
+                    path: '/my/myOrder/pendingPayment',
+                    name: '待完成订单',
+                    component: resolve => require(['../views/myOrder/pendingPayment.vue'], resolve),
+                },
+                {
+                    path: '/my/myOrder/completed',
+                    name: '已完成订单',
+                    component: resolve => require(['../views/myOrder/completed.vue'], resolve),
+                },
+            ],
         },
         {
             path: '/my/inviteFriends',
@@ -101,18 +119,19 @@ const curRouter = new Router({
         },
         {
             path: '/my/billboard',
-            name: '排行榜',
+            name: '排行榜1',
             component: resolve => require(['../views/my/billboard.vue'], resolve),
-        }, {
+        },
+        {
             path: '/my/Tutorial',
             name: '排行榜',
             component: resolve => require(['../views/my/Tutorial.vue'], resolve),
         },
         {
             path: '/my/revenueDetails',
-                name: '收益明细',
-                component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
-        }
+            name: '收益明细2',
+            component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
+        },
     ],
 });
 
