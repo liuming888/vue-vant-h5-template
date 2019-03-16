@@ -60,7 +60,7 @@ export default {
   -webkit-align-items: center;
   align-items: center;
   display: flex;
-  padding: 10px 30px;
+  padding: 10px;
   & > .column:nth-child(2) {
     text-align: center;
     display: block;
@@ -114,6 +114,7 @@ export default {
       > .hero-name {
         font-size: 24px;
         color: #888;
+        text-align: left;
       }
     }
   }
