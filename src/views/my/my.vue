@@ -214,7 +214,7 @@
               alt="">
           </div>
           <a class="my-right-btn"
-            href="javascript">
+            @click="$router.push('/withdrawRelated')">
             Cash out
           </a>
         </div>

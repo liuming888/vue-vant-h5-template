@@ -40,7 +40,7 @@
 
 <template>
   <div class="withdrawRelated-container">
-    <ul class="tabs">
+    <!-- <ul class="tabs">
       <li class="toWithdraw"
         :class="{cur:$route.path==='/withdrawRelated/withdrawImmediately'}"
         @click="$router.push({path:'/withdrawRelated/withdrawImmediately'})">Cash out1</li>
@@ -50,7 +50,7 @@
       <li class="incomeBreakdown"
         :class="{cur:$route.path==='/withdrawRelated/incomeBreakdown'}"
         @click="$router.push({path:'/withdrawRelated/incomeBreakdown'})">Cash out3</li>
-    </ul>
+    </ul> -->
 
     <div class="withdrawImmediately-content">
       <router-view></router-view>

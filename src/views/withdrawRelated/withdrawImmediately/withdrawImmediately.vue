@@ -76,9 +76,9 @@
 
 .play-box {
   background: #fff;
-  padding: 0 30px;
+  padding: 0 30px 1px 30px;
   box-sizing: border-box;
-  margin-bottom: 76px;
+  margin-bottom: 26px;
 
   .top-txt {
     height: 102px;
@@ -96,12 +96,17 @@
     }
 
     .embodiment-statement {
-      color: #888888;
-      display: flex;
-      align-items: center;
+      width: 170px;
+      height: 58px;
+      line-height: 58px;
+      color: #f65e10;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(246, 94, 16, 1);
+      border-radius: 29px;
+      text-align: center;
+      margin-top: 20px;
     }
   }
-
   .play-types {
     width: 100%;
     height: 88px;
@@ -130,15 +135,8 @@
     }
     .active {
       border: 1px solid #d30c05;
-      background: url('./../../../assets/images/Selected.png') no-repeat 0 0;
+      background: url("./../../../assets/images/Selected.png") no-repeat 0 0;
       background-size: 28px;
-    }
-  }
-
-  .cash-withdrawal-box {
-    .cash-withdrawal-tit {
-      margin-bottom: 82px;
-      font-size: 28px;
     }
   }
 }
@@ -175,78 +173,82 @@
   background-color: #fececa;
   display: flex;
   > .active {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 30%;
-      height: 100%;
-      background: url('./../../../assets/images/progress-bar-2.png') no-repeat;
-      background-size: 100%;
-      background-color: #F65E10;
-      border-radius: 9px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: url("./../../../assets/images/progress-bar-2.png") no-repeat;
+    background-size: 100%;
+    background-color: #f65e10;
+    border-radius: 9px;
   }
   > .schedule-item {
-      position: relative;
-      flex: 1;
-      padding-top: 40px;
-      text-align: center;
-      font-size: 18px;
-      color: #323232;
-      .highlight {
-          color: #d30c05;
-          font-size: 20px;
-      }
+    position: relative;
+    flex: 1;
+    padding-top: 40px;
+    text-align: center;
+    font-size: 18px;
+    color: #323232;
+    .highlight {
+      color: #d30c05;
+      font-size: 20px;
+    }
   }
   > .schedule-item:nth-of-type(2) {
-      text-align: left;
+    text-align: left;
   }
   > .schedule-item:last-of-type {
-      text-align: right;
+    text-align: right;
   }
   > .ball::after {
-      content: '';
-      position: absolute;
-      top: -14px;
-      // left: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
-      background: #FFECE6;
+    content: "";
+    position: absolute;
+    top: -14px;
+    // left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #ffece6;
   }
   > .ball-active::after {
-      background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
+    background: linear-gradient(
+      -45deg,
+      rgba(238, 93, 47, 1),
+      rgba(255, 155, 4, 1)
+    );
   }
   > .ball-center::after {
-      left: calc(50% - 12px);
+    left: calc(50% - 12px);
   }
   > .ball-center-1 {
-      text-indent: -25%;
+    text-indent: -25%;
   }
   > .ball-center-1::after {
-      left: calc(30% - 12px);
+    left: calc(30% - 12px);
   }
   > .ball-center-2::after {
-      width: 60px;
-      height: 60px;
-      top: -25px;
-      background: url('./../../../assets/images/coin.gif') no-repeat center;
-      background-size: 60px;
-      left: calc(50% - 20px);
+    width: 60px;
+    height: 60px;
+    top: -25px;
+    background: url("./../../../assets/images/coin.gif") no-repeat center;
+    background-size: 60px;
+    left: calc(50% - 20px);
   }
-  > .ball-center-2{
-      text-indent: 10%;
+  > .ball-center-2 {
+    text-indent: 10%;
   }
   > .ball-center-3::after {
-      left: calc(70% - 12px);
+    left: calc(70% - 12px);
   }
-  > .ball-center-3{
-      text-indent: 50%;
+  > .ball-center-3 {
+    text-indent: 50%;
   }
   > .ball-right::after {
-      right: 0;
+    right: 0;
   }
   > .ball-left::after {
-      left: 0;
+    left: 0;
   }
 }
 .cash-description {
@@ -257,12 +259,107 @@
     margin-top: 20px;
   }
 }
+
+.list {
+  overflow: hidden;
+  margin: 20px 0;
+  background: #fff;
+  padding: 0 30px;
+  li {
+    line-height: 111px;
+    border-bottom: 1px solid #ddd;
+    color: #323232;
+    font-size: 28px;
+    display: flex;
+    span {
+      flex: 1;
+    }
+    input {
+      width: 250px;
+      text-align: right;
+      color: #919395;
+    }
+  }
+}
+
+.cash-withdrawal-box {
+  height: 362px;
+  background: #fff;
+  .cash-withdrawal-tit {
+    font-size: 28px;
+    padding: 40px;
+    margin-bottom: 20px;
+  }
+}
+.alertBox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+  .alertWrap {
+    width: 610px;
+    height: 432px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    h1 {
+      height: 34px;
+      font-size: 36px;
+      font-family: Helvetica-Bold;
+      font-weight: bold;
+      color: rgba(50, 50, 50, 1);
+      line-height: 40px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    p {
+      height: 141px;
+      font-size: 28px;
+      font-family: Helvetica;
+      font-weight: 400;
+      color: rgba(50, 50, 50, 1);
+      line-height: 40px;
+      padding: 0 30px;
+    }
+    div {
+      height: 24px;
+      font-size: 32px;
+      font-family: Helvetica-Bold;
+      font-weight: bold;
+      color: rgba(211, 12, 5, 1);
+      line-height: 40px;
+      position: absolute;
+    }
+  }
+}
 </style>
 
 
 <template>
   <div class="withdrawImmediately-container">
-
+    <div
+      class="alertBox"
+      v-if="showAlert"
+    >
+      <div class="alertWrap">
+        <h1>Withdrawal application</h1>
+        <p>
+          Your withdrawal request has been initiated, please check it out!
+          <br>If you have any questions, please ask customer service
+        </p>
+        <div>I know</div>
+      </div>
+    </div>
     <div class="balance-box">
       <div class="current-balance">
         <h5 class="tit">Current balance</h5>
@@ -284,76 +381,118 @@
     <div class="play-box">
       <div class="top-txt">
         <div class="cash-withdrawal-method">Cash withdrawal method</div>
-        <div class="embodiment-statement" @click="dialogVisible = true">Embodiment statement
-          <van-icon name="arrow" />
-        </div>
+        <div
+          class="embodiment-statement"
+          @click="dialogVisible = true"
+        >Introduction</div>
       </div>
 
       <div class="play-types">
         <div class="play-item active">
-          <img class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')">
+          <img
+            class="play-img"
+            v-lazy="require('@/assets/images/paybal.png')"
+          >
           <span class="play-txt">Alipay</span>
         </div>
 
         <div class="play-item">
-          <img class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')">
+          <img
+            class="play-img"
+            v-lazy="require('@/assets/images/paybal.png')"
+          >
           <span class="play-txt">Alipay</span>
         </div>
 
         <div class="play-item">
-          <img class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')">
+          <img
+            class="play-img"
+            v-lazy="require('@/assets/images/paybal.png')"
+          >
           <span class="play-txt">Alipay</span>
         </div>
       </div>
+    </div>
 
-      <div class="cash-withdrawal-box">
-        <p class="cash-withdrawal-tit">Cash withdrawal method</p>
-        <div class="progress-box">
-          <div class="schedule">
-            <div class="active" :style="{'width':' 50%'}"></div>
-            <!-- <div class="schedule-item"> -->
-              <!-- <span class="description">cut <span class="highlight">30%</span></span> -->
-            <!-- </div> -->
-            <div class="schedule-item ball ball-left ball-active">
-              <span class="description">Rp8</span>
-            </div>
-            <div class="schedule-item ball ball-center-1 ball-active">
-              <span class="description">Rp8</span>
-            </div>
-            <div class="schedule-item ball ball-center-2">
-              <span class="description">Rp8</span>
-            </div>
-            <div class="schedule-item ball ball-center-3">
-              <span class="description">Rp8</span>
-            </div>
-            <div class="schedule-item ball ball-right">
-              <span class="description">Rp258</span>
-            </div>
+    <div class="list">
+      <ul>
+        <li>
+          <span>Withdrawal Amount</span>
+          <input
+            v-model="amount"
+            type="text"
+            placeholder="Enter the amount"
+          >
+        </li>
+        <li>
+          <span>Account Name</span>
+          <input
+            v-model="name"
+            type="text"
+            placeholder="Papal110"
+          >
+        </li>
+        <li>
+          <span>Confirm the account</span>
+          <input
+            v-model="account"
+            type="text"
+            placeholder="Papal110"
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="cash-withdrawal-box">
+      <p class="cash-withdrawal-tit">Cash withdrawal method</p>
+      <div class="progress-box">
+        <div class="schedule">
+          <div
+            class="active"
+            :style="{'width':' 50%'}"
+          ></div>
+          <!-- <div class="schedule-item"> -->
+          <!-- <span class="description">cut <span class="highlight">30%</span></span> -->
+          <!-- </div> -->
+          <div class="schedule-item ball ball-left ball-active">
+            <span class="description">Rp8</span>
+          </div>
+          <div class="schedule-item ball ball-center-1 ball-active">
+            <span class="description">Rp8</span>
+          </div>
+          <div class="schedule-item ball ball-center-2">
+            <span class="description">Rp8</span>
+          </div>
+          <div class="schedule-item ball ball-center-3">
+            <span class="description">Rp8</span>
+          </div>
+          <div class="schedule-item ball ball-right">
+            <span class="description">Rp258</span>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- 
     <div class="precautions-box">
       <h5 class="precautions">Precautions</h5>
       <div class="precautions-txt">
-        <p>
-          1. The first withdrawal will arrive within 1 second. If you encounter the peak period, you may delay the payment. Please be patient.
-        </p>
-        <p>
-          2. Please pay attention to the "My - Withdrawal Record" to check the status of the redemption record.
-        </p>
+        <p>1. The first withdrawal will arrive within 1 second. If you encounter the peak period, you may delay the payment. Please be patient.</p>
+        <p>2. Please pay attention to the "My - Withdrawal Record" to check the status of the redemption record.</p>
       </div>
-    </div>
-
-    <div class="cash-out-btn" @click.stop="jumpToWithdrawPage">
-      Cash out
-    </div>
-    <dialog-default :info="info" :dialogVisible="dialogVisible" noCancle @ok="dialogVisible = false">
-      <div slot="content" class="cash-description">
+    </div>-->
+    <div
+      class="cash-out-btn"
+      @click.stop="jumpToWithdrawPage"
+    >Cash out</div>
+    <dialog-default
+      :info="info"
+      :dialogVisible="dialogVisible"
+      noCancle
+      @ok="dialogVisible = false"
+    >
+      <div
+        slot="content"
+        class="cash-description"
+      >
         <p>1. The balance is over 88 rounds, and 8 rounds can be withdrawn. The arrival time is the same day;</p>
         <p>2. The balance is 338 rounds, 138 rounds can be withdrawn, and the time of arrival is 3-5 working days;</p>
         <p>3. The balance is 438 rounds, 188 rounds can be withdrawn, and the time of arrival is 7-14 working days;</p>
@@ -364,31 +503,31 @@
 </template>
 
 <script>
-import { Icon } from "vant";
-import DialogDefault from '@/components/dialogs/dialogDefault.vue'
+import { Icon, Dialog } from "vant";
+import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 export default {
   components: {
     DialogDefault,
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    [Dialog.name]: Dialog
   },
   data() {
     return {
       info: {
-        content: 'Withdrawal rules',
-        cancleText: 'cancel',
-        okText: 'I know',
+        content: "Withdrawal rules",
+        cancleText: "cancel",
+        okText: "I know"
       },
-      dialogVisible: false
-    }
+      dialogVisible: false,
+      username: "",
+      password: "",
+      amount: "",
+      name: "",
+      account: "",
+      showAlert: true
+    };
   },
-  methods: {
-    jumpToWithdrawPage(){
-      this.$router.push({
-        path:"/withdrawRelated/toWithdraw",
-        query:{}
-      })
-    }
-  }
+  methods: {}
 };
 </script>
 
