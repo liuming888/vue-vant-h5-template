@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 .my-container {
+  background: rgb(245, 245, 245);
   height: 92vh;
   overflow-y: auto;
   > .my-header {
@@ -11,7 +12,7 @@
     > .my-info {
       display: flex;
       > .my-img {
-        margin-right: 37px;
+        margin-right: 27px;
         width: 110px;
         height: 110px;
         border-radius: 50%;
@@ -26,9 +27,21 @@
         flex: 1;
         color: #fff;
         > .name {
-          margin: 14px 0 20px 0;
+          margin: 34px 0 20px 0;
           font-size: 36px;
-          height: 28px;
+          line-height: 40px;
+          span {
+            background: url("./../../assets/images/member.png") left top
+              no-repeat;
+            background-size: 100% auto;
+            display: inline-block;
+            width: 144px;
+            height: 36px;
+            line-height: 36px;
+            padding-left: 40px;
+            font-size: 22px;
+            vertical-align: middle;
+          }
         }
         > .member {
           height: 32px;
@@ -51,24 +64,42 @@
     }
     > .my-wallet {
       position: absolute;
-      bottom: -38px;
       left: 30px;
       right: 30px;
-      padding: 0 18px 42px 18px;
-      height: 260px;
-      background-color: #fff;
+      height: 393px;
+      top: 180px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 226, 166, 1) 0%,
+        rgba(255, 203, 90, 1) 100%
+      );
       border-radius: 20px;
       text-align: center;
+      .my-right-btn {
+        position: absolute;
+        right: 0;
+        top: 70px;
+        width: 199px;
+        height: 70px;
+        line-height: 70px;
+        background: rgba(153, 103, 16, 1);
+        border: 2px solid rgba(148, 103, 29, 1);
+        border-radius: 14px 0px 0px 14px;
+        color: #fff;
+        font-size: 28px;
+      }
       > .top {
         > .title {
-          font-size: 20px;
-          color: #ababae;
-          padding: 33px 0 20px 0;
+          font-size: 26px;
+          color: #94671d;
+          padding: 43px 30px 10px 30px;
+          text-align: left;
         }
         > .number {
           font-size: 60px;
-          color: #d30c05;
-          padding-bottom: 38px;
+          color: #996710;
+          text-align: left;
+          padding: 0 30px 68px 30px;
         }
       }
       > .bottom {
@@ -77,22 +108,26 @@
           flex: 1;
           > .title {
             font-size: 20px;
-            color: #ababae;
+            color: #996710;
             padding: 0 0 20px 0;
           }
           > .number {
-            font-size: 30px;
-            color: #323232;
+            padding: 0 30px;
+            font-size: 40px;
+            color: #996710;
+            text-align: left;
+            margin-bottom: 10px;
           }
         }
       }
     }
   }
   > .my-control {
-    margin: 58px 0 20px 0;
-    padding: 0 30px;
+    margin: 158px 30px 20px 30px;
+    border-radius: 20px;
     height: 158px;
     display: flex;
+    background: #fff;
     // align-items: center;
     > .my-control-item {
       flex: 1;
@@ -109,26 +144,32 @@
       }
     }
   }
-  
-.hero-rank {
-  padding: 0 30px;
-  > .title {
-    padding: 28px 0;
-    font-size: 40px;
-    color: #323232;
-    text-align: center;
-  }
-  > .hero-list {
-    margin: 38px 0;
-    > li {
-      display: flex;
-      align-items: center;
-      > .column {
-        flex: 1;
+
+  .hero-rank {
+    margin: 0 30px;
+    background: #fff;
+    > .title {
+      padding: 28px 0 0 0;
+      font-size: 40px;
+      color: #323232;
+      text-align: center;
+    }
+    > .hero-list {
+      margin: 38px 0;
+      > li {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #F2F2F2;
+        > .column {
+          flex: 1;
+          color:#888888;
+          font-size: 22px;
+        }
       }
     }
   }
-}
 }
 </style>
 <template>
@@ -143,60 +184,70 @@
             >
           </div>
           <div class="my-info-detail">
-            <p class="name">DUODUO</p>
-            <img
-              class="member"
-              src="@/assets/images/VIPmember.png"
-              alt
-            >
+            <p class="name">
+              DUODUO
+              <span>VIP Member</span>
+            </p>
           </div>
+        </div>
+        <div class="my-wallet">
           <a
             class="my-right-btn"
             @click="$router.push('/withdrawRelated')"
           >Cash out</a>
-        </div>
-        <div class="my-wallet">
           <div class="top">
             <p class="title">Cumulative estimated return($)</p>
             <p class="number">1688.68</p>
           </div>
           <div class="bottom">
             <div class="bottom-item">
-              <p class="title">Estimated earnings today</p>
               <p class="number">1000</p>
+              <p class="title">Estimated earnings today</p>
             </div>
             <div class="bottom-item">
-              <p class="title">Revenue arrived today($)</p>
               <p class="number">500</p>
+              <p class="title">Revenue arrived today($)</p>
             </div>
           </div>
         </div>
       </section>
       <ul class="my-control">
-        <li class="my-control-item" @click="$router.push('/my/myFriends')">
+        <li
+          class="my-control-item"
+          @click="$router.push('/my/myFriends')"
+        >
           <img
-            src="@/assets/images/Invitefriends.png"
+            src="@/assets/images/Myfriends@2x.png"
             alt
           >
           <p>Friends</p>
         </li>
-        <li class="my-control-item" @click="$router.push('/my/myOrder')">
+        <li
+          class="my-control-item"
+          @click="$router.push('/my/myOrder')"
+        >
           <img
-            src="@/assets/images/Invitefriends.png"
+            src="@/assets/images/Myorder@2x.png"
             alt
           >
           <p>My order</p>
         </li>
-        <li class="my-control-item" @click="$router.push('/my/revenueDetails')">
+        <li
+          class="my-control-item"
+          @click="$router.push('/my/revenueDetails')"
+        >
           <img
-            src="@/assets/images/Invitefriends.png"
+            src="@/assets/images/Revenuedetails@2x.png"
             alt
           >
           <p>Revenue details</p>
         </li>
-        <li class="my-control-item" @click="$router.push('/my/Tutorial')">
+        <li
+          class="my-control-item"
+          @click="$router.push('/my/Tutorial')"
+        >
           <img
-            src="@/assets/images/Invitefriends.png"
+            src="@/assets/images/Tutorial@2x.png"
             alt
           >
           <p>Tutorial</p>

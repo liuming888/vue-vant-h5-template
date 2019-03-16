@@ -1,4 +1,5 @@
 console.log('111111111111111', process.env.NODE_ENV);
+
 function getUrl(NODE_ENV) {
     let url = '';
     switch (NODE_ENV) {
@@ -32,6 +33,7 @@ module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
     devServer: {
+        port: 8088,
         // disableHostCheck: true,
         proxy: {
             '/api': {
