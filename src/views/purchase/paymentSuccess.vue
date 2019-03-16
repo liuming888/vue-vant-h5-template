@@ -86,9 +86,24 @@ export default {
   },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
+       // 看看vuex里有木有缓存6条没砍价的
+      let stateGoodsList = this.$store.state.goodsList.filter(
+        item => !item.isBargain
+      );
+      if (stateGoodsList.length > 6) {
+        this.goodsList = stateGoodsList;
+        return;
+      }
+
       let result = await getBargainSpus({ page_size, page_num, is_all });
       if (result && result.data) {
         this.goodsList = result.data.spu_list;
+         if (page_num == 1) {
+          this.$store.commit("setGoodsList", this.goodsList);
+        } else {
+          let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+          this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
+        }
       }
     }
   },

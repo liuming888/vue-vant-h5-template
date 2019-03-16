@@ -11,4 +11,7 @@ export default {
     setLoginJumpUrl(state, payload) {
         state.dialogs.loginSelect.jumpUrl = payload;
     },
+    setGoodsList(state,payload){
+        state.goodsList = payload;
+    }
 };

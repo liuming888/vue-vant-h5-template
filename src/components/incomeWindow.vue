@@ -6,7 +6,7 @@
   // height: (224px / 1.5);
   background-size: 100% 100%;
   position: fixed;
-  bottom: 254px;
+  bottom: 200px;
   right: -30px;
   z-index: 100;
   font-size: 14px;
@@ -17,10 +17,16 @@
   padding-top: 36px;
   text-align: center;
   transform: rotate(-2deg) scale(0.7) translateX(0);
-  animation: move 1s infinite;
+  transition: all 1s;
+  animation: move1 1s infinite alternate;
+
+  &.cur {
+    transform: rotate(2deg) scale(0.7) translateX(100px);
+    animation: move2 1s infinite alternate;
+  }
 }
 
-@keyframes move {
+@keyframes move1 {
   0% {
     transform: rotate(-2deg) scale(0.7) translateX(0);
   }
@@ -29,12 +35,22 @@
     transform: rotate(2deg) scale(0.7) translateX(0);
   }
 }
+
+@keyframes move2 {
+  0% {
+    transform: rotate(-2deg) scale(0.7) translateX(100px);
+  }
+
+  100% {
+    transform: rotate(2deg) scale(0.7) translateX(100px);
+  }
+}
 </style>
 
 
 <template>
   <div class="incomeWindow-container"
-    ref="incomeWindow"
+    :class="{cur:showCur}"
     @click="setShow"
     v-lazy:background-image="require('@/assets/images/fudai.png')">
     <p class="income">Income</p>
@@ -45,9 +61,14 @@
 <script>
 export default {
   name: "incomeWindow",
+  data() {
+    return {
+      showCur: false
+    };
+  },
   methods: {
     setShow() {
-      this.$refs.incomeWindow.style.transform=" transform: rotate(2deg) scale(0.7) translateX(100px)";
+      this.showCur = !this.showCur;
     }
   }
 };
