@@ -127,7 +127,8 @@
       @click="openAddressDialog('add')">
       <span>Tambahkan alamat</span>
     </div>
-    <!-- 已有收货地址列表页 -->
+
+    <!-- 弹窗 -->
     <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress"
       ref="address_dialog"
       :showType="addressDialogType" />

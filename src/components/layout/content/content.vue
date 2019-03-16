@@ -10,6 +10,8 @@
 <template>
     <div class="content-container">
         <router-view></router-view>
+
+        <income-window />
     </div>
 </template>
 
