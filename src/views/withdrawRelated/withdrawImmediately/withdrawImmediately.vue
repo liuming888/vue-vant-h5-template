@@ -332,13 +332,18 @@
       padding: 0 30px;
     }
     div {
-      height: 24px;
       font-size: 32px;
       font-family: Helvetica-Bold;
       font-weight: bold;
       color: rgba(211, 12, 5, 1);
-      line-height: 40px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
       position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-top: 1px solid rgba(242,242,242,1);
     }
   }
 }
@@ -357,7 +362,7 @@
           Your withdrawal request has been initiated, please check it out!
           <br>If you have any questions, please ask customer service
         </p>
-        <div>I know</div>
+        <div @click="cashOk">I know</div>
       </div>
     </div>
     <div class="balance-box">
@@ -527,7 +532,12 @@ export default {
       showAlert: true
     };
   },
-  methods: {}
+  methods: {
+    // 提现ok
+    cashOk(){
+      console.log('ok')
+    }
+  }
 };
 </script>
 

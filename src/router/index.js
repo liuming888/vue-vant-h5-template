@@ -78,7 +78,6 @@ const curRouter = new Router({
             name: '我要提现',
             component: resolve => require(['../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'], resolve),
         },
-
         // 以下为v0.2版本得做的页面
         {
             path: '/my/myFriends',
@@ -104,7 +103,16 @@ const curRouter = new Router({
             path: '/my/billboard',
             name: '排行榜',
             component: resolve => require(['../views/my/billboard.vue'], resolve),
+        }, {
+            path: '/my/Tutorial',
+            name: '排行榜',
+            component: resolve => require(['../views/my/Tutorial.vue'], resolve),
         },
+        {
+            path: '/my/revenueDetails',
+                name: '收益明细',
+                component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
+        }
     ],
 });
 
