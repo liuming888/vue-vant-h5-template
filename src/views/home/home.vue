@@ -53,32 +53,16 @@
   }
   > .home-goods {
     > .home-goods-title {
-      position: relative;
-      text-align: center;
       padding: 37px 0;
       font-size: 28px;
       color: #fff;
-      // background: url('./../../assets/images/clapboard.png') no-repeat top center;
-      // background-size: 100% auto;
-      &::before,
-      &::after {
-        content: "";
-        width: 95px;
-        height: 4px;
-        display: block;
-        background: url("./../../assets/images/line-l.png") no-repeat;
-        background-size: 100% auto;
-        position: absolute;
-        top: 50px;
-        // left: 124px;
-      }
-      &::before {
-        left: 124px;
-      }
-      &::after {
-        background: url("./../../assets/images/line-r.png") no-repeat;
-        background-size: 100% auto;
-        right: 124px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 560px;
+        height: auto;
       }
     }
     > .home-goods-list {
@@ -156,7 +140,7 @@
     <div class="home-container">
       <section class="home-top-container">
         <!-- 用户消息 -->
-        <user-picking-up-message :messageList="messageList"></user-picking-up-message>
+        <user-picking-up-message :messageList="messageList" v-if="messageList.length>0"></user-picking-up-message>
 
         <van-swipe :autoplay="3000"
           indicator-color="white"
@@ -185,7 +169,10 @@
       </section>
       <section class="home-goods"
         v-if="goodsList.length>0">
-        <div class="home-goods-title">DAILY DISCOVER</div>
+        <div class="home-goods-title"
+          v-if="goodsList.length>0&&spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
+          <img v-lazy="require('@/assets/images/gengduotop.png')">
+        </div>
         <ul class="home-goods-list">
           <commodity-item v-for="(item, index) of goodsList"
             :key="index"

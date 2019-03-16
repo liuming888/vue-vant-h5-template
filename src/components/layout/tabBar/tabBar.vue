@@ -30,7 +30,7 @@
 <template>
   <div class="tabBar-container">
     <router-link v-for="(item, index) in tabBarList" :key="index" :class="{'tabBar-item': true, 'active': activeRouter === item.path}" :to="item.path">
-      <img class="tabBar-item-img" :src="activeRouter === item.path ? item.imgActiveUrl : item.imgUrl" alt="">
+      <img class="tabBar-item-img" v-lazy="activeRouter === item.path ? item.imgActiveUrl : item.imgUrl">
       <p>{{item.title}}</p>
     </router-link>
     <!-- <router-link :class="{'tabBar-item': true, 'active': activeRouter === '/my'}" to="/my">

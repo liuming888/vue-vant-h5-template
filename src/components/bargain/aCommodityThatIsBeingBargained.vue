@@ -17,7 +17,7 @@
             </div>
 
             <div class="progress">
-              <img src="~@/assets/images/progress-bar.png"
+              <img v-lazy="require('@/assets/images/progress-bar.png')"
                 :width="spuBargainItem.bargain_rate+'%'">
               <div class="progress-content">
                 <span>has been cut {{spuBargainItem.bargain_amount}}</span>
