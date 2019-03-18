@@ -29,14 +29,10 @@
 
 <template>
   <div class="tabBar-container">
-    <router-link v-for="(item, index) in tabBarList" :key="index" :class="{'tabBar-item': true, 'active': activeRouter === item.path}" :to="item.path">
+    <span v-for="(item, index) in tabBarList" :key="index" :class="{'tabBar-item': true, 'active': activeRouter === item.path}" @click="jumpPage(item.path)">
       <img class="tabBar-item-img" v-lazy="activeRouter === item.path ? item.imgActiveUrl : item.imgUrl">
       <p>{{item.title}}</p>
-    </router-link>
-    <!-- <router-link :class="{'tabBar-item': true, 'active': activeRouter === '/my'}" to="/my">
-      <img class="tabBar-item-img" src="@/assets/images/tabBar-me.png" alt="">
-      <p>Me</p>
-    </router-link> -->
+    </span>
   </div>
 </template>
 
@@ -63,6 +59,20 @@ export default {
   computed: {
     activeRouter() {
       return this.$route.path
+    }
+  },
+  methods:{
+    jumpPage(path){
+      if(path=='/my'&&!this.$store.state.userInfo.user_id){
+        this.$store.commit(
+          "setLoginJumpUrl",
+         '/my'
+        );
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
+      this.$router.push(path);
     }
   }
 }
