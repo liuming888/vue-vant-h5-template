@@ -78,8 +78,8 @@ export default {
       let userStr = localStorage.getItem("userInfo");
       if (userStr) {
         let userInfo = JSON.parse(userStr);
-        axios.defaults.headers.common["user_id"] = userInfo.user_id;
-        axios.defaults.headers.common["access_token"] = userInfo.access_token;
+        axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+        axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
 
         let result = await refreshToken(JSON.parse(userStr));
         this.$store.commit("setIsreFreshToken", true);
@@ -87,8 +87,8 @@ export default {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          axios.defaults.headers.common["user_id"] = userInfo.user_id;
-          axios.defaults.headers.common["access_token"] = userInfo.access_token;
+          axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+          axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
           console.log("已经刷新token了");
         }
       }

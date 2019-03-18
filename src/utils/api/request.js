@@ -4,22 +4,22 @@ import axios from 'axios';
 // import md5 from 'md5';
 import config from './config';
 
-let user_id="";
-let access_token="";
-let userStr=localStorage.getItem("userInfo");
-if (userStr){
+let user_id = '';
+let access_token = '';
+let userStr = localStorage.getItem('userInfo');
+if (userStr) {
     let userInfo = JSON.parse(userStr);
     user_id = userInfo.user_id;
     access_token = userInfo.access_token;
 }
 
 // if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
-    user_id = 1;
+user_id = 1;
 access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
 // }
 
-axios.defaults.headers.common['user_id'] = user_id;
-axios.defaults.headers.common['access_token'] = access_token;
+axios.defaults.headers.common['User-Id'] = user_id;
+axios.defaults.headers.common['Access-Token'] = access_token;
 
 var instance = axios.create();
 
@@ -31,7 +31,7 @@ instance.defaults.withCredentials = true;
 
 Vue.prototype.$loaddingNum = 0;
 
-const curCode = process.env.NODE_ENV=="mock"?1:0; // 当前代表成功的code (mock 1为成功)
+const curCode = process.env.NODE_ENV == 'mock' ? 1 : 0; // 当前代表成功的code (mock 1为成功)
 console.log('curCode: ', curCode);
 
 // 请求拦截
@@ -72,8 +72,7 @@ instance.interceptors.response.use(
         try {
             if (response.data.code == curCode) {
                 return response.data;
-            } else if (response.data.code==3){
-                
+            } else if (response.data.code == 3) {
             } else {
                 throw response.data;
             }

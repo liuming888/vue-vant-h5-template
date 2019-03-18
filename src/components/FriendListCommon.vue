@@ -15,8 +15,8 @@
         <p class="hero-name">{{item.username}}</p>
       </div>
     </div>
-    <div class="column">{{item.joinTime}}</div>
-    <div class="column">{{item.profit}}</div>
+    <div class="column">{{item.joinTime||item.fans_count}}</div>
+    <div class="column">{{item.profit||item.sum_amount}}</div>
   </li>
 </template>
 

@@ -234,7 +234,8 @@
           <p>Tutorial</p>
         </li>
       </ul>
-      <div class="hero-rank">
+      <div class="hero-rank"
+        v-if="heroList.length>0">
         <p class="title">Heroes</p>
         <ul class="hero-list">
           <li class="hero-list-title">
@@ -257,7 +258,7 @@
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 import FriendListCommon from "@/components/FriendListCommon.vue";
 
-import { getMyAccount } from "@/server/userAccount.js";
+import { getMyAccount, getHeroList } from "@/server/user.js";
 export default {
   components: {
     tabBar,
@@ -281,15 +282,34 @@ export default {
           options2: 20000,
           imgUrl: require("@/assets/images/tabBar-me-active.png")
         }
+      ],
+
+      hero_tips: [
+        //类型：Array  必有字段  备注：无
+        {
+          //类型：Object  必有字段  备注：无
+          username: "用户1", //类型：String  必有字段  备注：无
+          avatar:
+            "https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=2a5524e6e8cd7b89f66c3c833f244291/1e30e924b899a901b25a7f1a13950a7b0208f5ab.jpg", //类型：String  必有字段  备注：无
+          fans_count: 5131, //类型：Number  必有字段  备注：无
+          sum_amount: 1229 //类型：Number  必有字段  备注：无
+        }
       ]
     };
   },
   created() {
     // if (this.$store.state.userInfo.user_id) {
     this.ininMyAccount();
+    this.initHeroTips();
     // }
   },
   methods: {
+    async initHeroTips() {
+      let result = await getHeroList();
+      if (result && result.data) {
+        this.hero_tips = result.data;
+      }
+    },
     async ininMyAccount() {
       let result = await getMyAccount();
       if (result && result.data) {
