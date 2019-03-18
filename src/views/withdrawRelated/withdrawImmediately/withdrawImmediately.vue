@@ -128,8 +128,8 @@
       color: rgba(50, 50, 50, 1);
 
       .play-img {
-        width: 40px;
-        height: auto;
+        width: 100%;
+        height: 100%;
         margin-right: 12px;
       }
     }
@@ -400,7 +400,7 @@
           :key="index">
           <img class="play-img"
             v-lazy="item.icon">
-          <span class="play-txt">{{item.name}}</span>
+          <!-- <span class="play-txt">{{item.name}}</span> -->
         </div>
 
       </div>

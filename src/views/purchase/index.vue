@@ -113,7 +113,7 @@
           </div>
         </div>
 
-        <div class="l-d-box">About Rp12.000</div>
+        <div class="l-d-box">About Rp{{spu.price/exchangeRateDat.exchange_rate}}</div>
       </div>
 
       <!-- <div class="pay-immediately"
@@ -167,6 +167,7 @@ for (let k in obj) {
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
 import { orderCreate, repaidOrder } from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
+import { getExchangeRate } from "@/server/finance.js";
 export default {
   components: {
     DialogDefault,
@@ -239,13 +240,20 @@ export default {
         cancleText: "Menyerah",
         okText: "Terus bayar"
       },
-      dialogVisible: false
+      dialogVisible: false,
+
+      exchangeRateDat: {
+        //类型：Object  必有字段  备注：无
+        currency_code: "IDR", //类型：String  必有字段  备注：货币符号
+        exchange_rate: 1 //类型：Number  必有字段  备注：汇率
+      }
     };
   },
   created() {
     this.init();
     this.getMyAddressInfo();
     this.curSpuSpecs();
+    this.initExchangeRate();
 
     // 支付失败回调进入的
     if (this.$route.query.payment === "failed") {
@@ -257,6 +265,12 @@ export default {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
       if (result) {
         this.spu = result.data.spu;
+      }
+    },
+    async initExchangeRate() {
+      let result = await getExchangeRate({ currency_code: "IDR" });
+      if (result && result.data) {
+        this.exchangeRateDat=result.data;
       }
     },
     async getMyAddressInfo() {

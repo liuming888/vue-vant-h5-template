@@ -16,17 +16,25 @@ export function applyWithdraw({ pay_type, account_name, account_no, amount }) {
 }
 
 // 获取提现列表
-export function getWithdrawList({ pay_type, account_name, account_no, amount }) {
+export function getWithdrawList({ page_size, page_num }) {
     return $request.post({
         url: '/api/v1/withdraw/get_withdraw_list',
-        data: { pay_type, account_name, account_no, amount },
+        data: { page_size, page_num },
     });
 }
 
 // 获取明细列表
-export function getFundRecordList({ pay_type, account_name, account_no, amount }) {
+export function getFundRecordList({ page_size, page_num }) {
     return $request.post({
         url: '/api/v1/withdraw/get_fund_record_list',
-        data: { pay_type, account_name, account_no, amount },
+        data: { page_size, page_num },
+    });
+}
+
+// 根据货币code获取兑美元汇率
+export function getExchangeRate({ currency_code = 'IDR' }) {
+    return $request.post({
+        url: '/api/v1/currency/get_exchange_rate',
+        data: { currency_code },
     });
 }

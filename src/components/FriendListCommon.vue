@@ -3,46 +3,44 @@
   <li class="hero-list-item">
     <div class="column">
       <div class="hero-img first">
-        <img
-          :src="item.imgUrl"
-          alt
-        >
+        <img v-lazy="item.avatar"
+          alt>
       </div>
       <div class="hero-info">
-        <div
-          v-if="index < 3"
+        <div v-if="index < 3"
           alt
-          :class="`hero-no hero-no-${index + 1}`"
-        ></div>
-        <p
-          v-else
-          class="hero-no"
-        >NO.{{index + 1}}</p>
-        <p class="hero-name">{{item.name}}</p>
+          :class="`hero-no hero-no-${index + 1}`"></div>
+        <p v-else
+          class="hero-no">NO.{{index + 1}}</p>
+        <p class="hero-name">{{item.username}}</p>
       </div>
     </div>
-    <div class="column">{{item.options1}}</div>
-    <div class="column">{{item.options2}}</div>
+    <div class="column">{{item.joinTime}}</div>
+    <div class="column">{{item.profit}}</div>
   </li>
 </template>
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-
   name: "FriendListCommon",
-
-  components: {},
-
-  computed: {},
-
-  mounted() {},
-
-  props: ["item", "index"],
-
-  methods: {}
+  props: {
+    item: {
+      type: Object,
+      default() {
+        return {
+          //类型：Object  必有字段  备注：无
+          user_id: 1, //类型：Number  必有字段  备注：无
+          joinTime: "2019-03-08 16:50:50", //类型：String  必有字段  备注：无
+          avatar: "12", //类型：String  必有字段  备注：无
+          profit: 50, //类型：Number  必有字段  备注：无
+          username: "1212" //类型：String  必有字段  备注：无
+        };
+      }
+    },
+    index:{
+      type:Number
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
