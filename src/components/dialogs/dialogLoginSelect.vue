@@ -68,15 +68,6 @@
 
 <template>
   <div class="dialogLoginSelect-container">
-    <!-- <van-popup v-model="dialogVisible.show"
-      :close-on-click-overlay="false">
-      <h3 style="margin-bottom:30px;">通过以下方式登录</h3>
-      <div style="text-align:center;font-size:36px"
-        @click="checkLogin">
-        FB
-      </div>
-    </van-popup> -->
-
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/login-dialog.png')">
       <div class="tips">

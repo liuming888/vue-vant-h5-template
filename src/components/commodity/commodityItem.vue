@@ -206,15 +206,7 @@ export default {
         }
       },
 
-      shareInfo: {
-        share_url: window.location.origin + "/forBargain", // 从点击打开的链接
-        share_title: "分享标题",
-        share_desp: "分享的描述",
-        share_image: "https://s.pinimg.com/images/facebook_share_image.png" //  分享的预览图（图片有限制）
-        // quote:
-        //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
-        // hashtag:"FB分享的tag标签"
-      }
+      shareInfo: {}
     };
   },
   created() {

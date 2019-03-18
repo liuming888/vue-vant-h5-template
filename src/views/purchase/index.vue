@@ -109,11 +109,11 @@
         <div class="l-t-box">
           Actual payment:
           <div class="num-box">
-            <b>$</b>{{spu.price}}
+            <b>Rp</b>{{spu.price}}
           </div>
         </div>
 
-        <div class="l-d-box">About Rp{{spu.price/exchangeRateDat.exchange_rate}}</div>
+        <div class="l-d-box">About ${{(spu.price/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
       </div>
 
       <!-- <div class="pay-immediately"
@@ -288,7 +288,13 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
-      // let spuSpecItems = {};
+       let param = {
+        address_id: this.myAddress.id,
+        spu_id: this.spu.spu_id,
+        // pay_type: this.paly_id
+        pay_type: 1, // 暂时写死
+        spu_name: this.spu.title
+      };
       let spu_spec_items = "";
       this.specs.forEach(item => {
         spu_spec_items =
@@ -298,20 +304,15 @@ export default {
           item.spu_spec_items.find(typeItem => typeItem.id == item.id)
             .item_name +
           " ";
-        // spuSpecItems[item.spec_name]=item.spu_spec_items.find(typeItem=>typeItem.id==item.id).item_name;
       });
-      // spu_spec_items=JSON.stringify(spuSpecItems);
       console.log("spu_spec_items----------", spu_spec_items);
-      let param = {
-        spu_spec_items,
-        address_id: this.myAddress.id,
-        spu_id: this.spu.spu_id,
-        // pay_type: this.paly_id
-        pay_type: 1,
-        spu_name: this.spu.title
-      };
+     
+      if(spu_spec_items){
+        param.spu_spec_items=spu_spec_items;
+      }
+
       if (this.$route.query.bargainId) {
-        param = { ...param, bargain_id: this.$route.query.bargainId };
+        param.bargain_id=this.$route.query.bargainId;
       }
       console.log("param--------------", param);
       let result = await orderCreate(param);
@@ -347,7 +348,6 @@ export default {
   watch: {
     showShippingAddressPage(val) {
       if (!val) {
-        console.log("66666666666666");
         this.getMyAddressInfo();
       }
     }

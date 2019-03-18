@@ -1,7 +1,8 @@
 <style lang="scss" scoped>
     .content-container{
-        // height: calc(100vh - 93px);
+        width: 100vw;
         height:100vh;
+        overflow: hidden;
         overflow-y:scroll; 
         box-sizing: border-box;
     }
