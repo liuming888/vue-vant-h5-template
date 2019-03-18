@@ -162,9 +162,10 @@ export default {
           // this.$emit("update:dialogVisible", { show: false });
           this.$store.commit("setLoginSelectShow", false);
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
-            this.$router.push({
-              path: this.$store.state.dialogs.loginSelect.jumpUrl
-            });
+            // this.$router.push({
+            //   path: this.$store.state.dialogs.loginSelect.jumpUrl
+            // });
+            window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
           }
 
           // if (this.$route.path == "/forBargain") {

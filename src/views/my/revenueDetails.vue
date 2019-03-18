@@ -32,21 +32,7 @@ import { getFundRecordList } from "@/server/finance.js";
 export default {
   data() {
     return {
-      detailList: [
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：id
-          type: 1, //类型：Number  必有字段  备注：收入类型（1：购物佣金 2：砍价分成 3.提现）
-          txid: 1, //类型：Number  必有字段  备注：业务id
-          summary: "213", //类型：String  必有字段  备注：转账或者奖励摘要信息
-          amount: 12, //类型：Number  必有字段  备注：金额数值
-          user_id: 1, //类型：Number  必有字段  备注：用户id
-          icon: "mock", //类型：String  必有字段  备注：无
-          amount_status: "1", //类型：String  必有字段  备注：1: 增加 2：减少
-          create_time: "2019-03-15 03:24:28", //类型：String  必有字段  备注：创建时间
-          update_time: "2019-03-15 03:24:28" //类型：String  必有字段  备注：更新时间
-        }
-      ],
+      detailList: [],
       curPageDat:{
         page_size:10,
         page_num:1

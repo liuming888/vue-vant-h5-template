@@ -221,20 +221,7 @@ export default {
       showWaitPaymentDialog: {
         show: false
       },
-      myAddress: {
-        //类型：Object  必有字段  备注：无
-        username: "mock", //类型：String  必有字段  备注：用户名
-        telephone: "mock", //类型：String  必有字段  备注：手机号
-        id: 1, //类型：Number  必有字段  备注：id
-        address_one: "mock", //类型：String  必有字段  备注：一级地址
-        address_two: "mock", //类型：String  必有字段  备注：二级地址
-        is_default: 1, //类型：Number  必有字段  备注：是否默认地址（1：默认 0：常规）
-        email: "mock", //类型：String  必有字段  备注：无
-        country: "mock", //类型：String  必有字段  备注：无
-        region: "mock", //类型：String  必有字段  备注：无
-        city: "mock", //类型：String  必有字段  备注：无
-        zip: "mock" //类型：String  必有字段  备注：无
-      },
+      myAddress: {},
       info: {
         content: "Konfirmasikan untuk melunasi?",
         cancleText: "Menyerah",

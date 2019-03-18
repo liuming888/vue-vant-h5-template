@@ -58,8 +58,10 @@
             <div class="share-btn"
               @click="openSharingFriendsDialog">Share friends to cut</div>
             <div class="buy-btn"
-              :class="{cur:bargain_info.can_buy==2}"
-              @click="jumpBuyPage">Rp {{bargain_info.left_amount}} buy now</div>
+              v-if="bargain_info.can_buy==1"
+              @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
+            <div class="buy-btn cur"
+              v-else>Rp {{bargain_info.left_amount}} buy now</div>
           </div>
         </div>
       </div>
@@ -297,7 +299,6 @@ export default {
         const chop_info = result.data.chop_info;
         console.log("chop_info: ", chop_info);
         this.$router.push({
-          
           query: {
             ...this.$route.query,
             bargainId: chop_info.bargain_id
@@ -400,9 +401,12 @@ export default {
       this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(spu_id) {
-       if (!this.$store.state.userInfo.user_id) {
+      if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${spu_id}&bargainType=another`);
+        this.$store.commit(
+          "setLoginJumpUrl",
+          `/bargain?spuId=${spu_id}&bargainType=another`
+        );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -419,12 +423,9 @@ export default {
 
     jumpBuyPage() {
       // 上线时不能注释
-       if (!this.$store.state.userInfo.user_id) {
+      if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          `/purchase${search}`
-        );
+        this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
