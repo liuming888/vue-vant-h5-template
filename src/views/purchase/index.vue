@@ -135,9 +135,9 @@
 
     <!-- 弹窗 --------------------------------->
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
-    <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
+    <!-- <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
       @continuePlay="goPaly"
-      @playfail="dialogVisible = true" />
+      @playfail="dialogVisible = true" /> -->
 
     <!-- 支付失败调用的弹窗 -->
     <dialog-default :info="info"
@@ -332,8 +332,8 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
-        // window.location.href=pay_url;
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     },
     /**
@@ -349,7 +349,8 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     },
     goShippingAddressList() {

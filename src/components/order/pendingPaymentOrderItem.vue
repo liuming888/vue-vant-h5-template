@@ -174,7 +174,8 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         // this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     }
   }
