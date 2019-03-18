@@ -1,6 +1,9 @@
 <style lang="scss">
   #app{
     width: 100vw;
+    // position: fixed;
+    // left: 0;
+    // top: 0;
     overflow: hidden;
   }
 </style>
