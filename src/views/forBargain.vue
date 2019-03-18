@@ -462,6 +462,7 @@ export default {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
+    next();
   }
 };
 </script>

@@ -130,7 +130,7 @@
 <script>
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
+// import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
 import countDown from "@/components/countDown.vue";
 // import commodityItem from "@/components/commodity/commodityItem.vue";
 
@@ -145,7 +145,7 @@ export default {
   components: {
     bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
-    bargainingHelpInformation, // 砍价帮
+    // bargainingHelpInformation, // 砍价帮
     countDown
     // commodityItem // 商品列表展示的商品X
   },
@@ -280,7 +280,7 @@ export default {
         } = result.data;
 
         this.$router.push({
-          path: "/bargain",
+          // path: "/bargain",
           query: {
             ...this.$route.query,
             bargainId,
@@ -295,8 +295,9 @@ export default {
       let result = await bargainChop({ bargain_id, spu_id });
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
+        console.log("chop_info: ", chop_info);
         this.$router.push({
-          path: "/bargain",
+          
           query: {
             ...this.$route.query,
             bargainId: chop_info.bargain_id
@@ -310,6 +311,8 @@ export default {
           }
         });
         this.$store.commit("setGoodsList", arr);
+
+        return Promise.resolve();
       }
     },
     /**
@@ -450,7 +453,7 @@ export default {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.openSharingFriendsDialog();
     }
-
+    next();
     // if(bargainType=='another'){
     //   this.init();
     // }

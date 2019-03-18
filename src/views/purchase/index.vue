@@ -315,7 +315,6 @@ export default {
       });
       // spu_spec_items=JSON.stringify(spuSpecItems);
       console.log("spu_spec_items----------", spu_spec_items);
-      return;
       let param = {
         spu_spec_items,
         address_id: this.myAddress.id,
