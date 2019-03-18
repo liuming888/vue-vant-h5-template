@@ -106,10 +106,14 @@
 
     <div class="down-box">
       <div class="left-box">
-        Actual payment:
-        <div class="num-box">
-          <b>Rp</b>{{spu.price}}
+        <div class="l-t-box">
+          Actual payment:
+          <div class="num-box">
+            <b>$</b>{{spu.price}}
+          </div>
         </div>
+
+        <div class="l-d-box">About Rp12.000</div>
       </div>
 
       <!-- <div class="pay-immediately"
@@ -177,29 +181,14 @@ export default {
         //类型：Object  必有字段  备注：商品
         spu_id: 1, //类型：Number  必有字段  备注：商品id
         title: "mock", //类型：String  必有字段  备注：商品标题
-        spu_pics: [
-          //类型：Array  必有字段  备注：图片地址列表
-          "mock" //类型：String  必有字段  备注：无
-        ],
-        // specs: [
-        //   //类型：Array  必有字段  备注：规格列表
-        //   {
-        //     //类型：Object  必有字段  备注：无
-        //     spec_name: "mock", //类型：String  必有字段  备注：规格名
-        //     spec_id: "mock", //类型：String  必有字段  备注：规格id
-        //     spec_values: [
-        //       //类型：Array  必有字段  备注：规格列表
-        //       "mock" //类型：String  必有字段  备注：无
-        //     ]
-        //   }
-        // ],
+        spu_pics: [],
         price: "mock", //类型：String  必有字段  备注：商品售价
         original_price: "mock", //类型：String  必有字段  备注：原价
         desp: "mock", //类型：String  必有字段  备注：商品详情描述
         expire_ttl: "mock" //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒
       },
       specs: [
-        // 备注：规格列表
+        /* 
         {
           //类型：Object  必有字段  备注：无
           id: 1, //类型：Number  必有字段  备注：无
@@ -215,57 +204,11 @@ export default {
               id: 1, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
               spec_id: 1, //类型：Number  必有字段  备注：规格类id
               item_name: "红色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 2, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "h色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 3, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "l色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            }
-          ]
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：无
-          spu_id: 1, //类型：Number  必有字段  备注：商品id
-          spec_name: "颜色", //类型：String  必有字段  备注：规格类名称
-          seq: 10, //类型：Number  必有字段  备注：无
-          create_time: "2019-03-10 00:29:27", //类型：String  必有字段  备注：无
-          update_time: "2019-03-10 00:37:50", //类型：String  必有字段  备注：无
-          spu_spec_items: [
-            //类型：Array  必有字段  备注：规格可选参考值列表
-            {
-              //类型：Object  必有字段  备注：无
-              id: 1, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "红色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 2, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "h色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 3, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "l色", //类型：String  必有字段  备注：规格参考值名称
               seq: 10 //类型：Number  必有字段  备注：无
             }
           ]
         }
+       */
       ],
 
       paly_id: 1,
@@ -344,11 +287,21 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
-      let spu_spec_items = [];
+      // let spuSpecItems = {};
+      let spu_spec_items = "";
       this.specs.forEach(item => {
-        spu_spec_items.push(item.id);
+        spu_spec_items =
+          spu_spec_items +
+          item.spec_name +
+          ":" +
+          item.spu_spec_items.find(typeItem => typeItem.id == item.id)
+            .item_name +
+          " ";
+        // spuSpecItems[item.spec_name]=item.spu_spec_items.find(typeItem=>typeItem.id==item.id).item_name;
       });
+      // spu_spec_items=JSON.stringify(spuSpecItems);
       console.log("spu_spec_items----------", spu_spec_items);
+      return;
       let param = {
         spu_spec_items,
         address_id: this.myAddress.id,
@@ -373,10 +326,14 @@ export default {
     /**
      * @description: 继续支付
      */
-    async goRepaidPay(){
-      let result=await repaidOrder({order_no:this.$route.query.orderNo, spu_name:this.spu.title, pay_type:1});
-      if(result&&result.data){
-          let { pay_url, order_no } = result.data;
+    async goRepaidPay() {
+      let result = await repaidOrder({
+        order_no: this.$route.query.orderNo,
+        spu_name: this.spu.title,
+        pay_type: 1
+      });
+      if (result && result.data) {
+        let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
         window.open(pay_url);

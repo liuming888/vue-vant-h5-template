@@ -5,12 +5,12 @@
       v-if="orderList.length>0">
       <template v-for="item of orderList">
         <li class="all-order-item"
-          :key="item.order_no+'1'">
+          :key="item.order_no+'1'" v-if="item.order_status==1">
           <pending-payment-order-item :curDat="item"
             :key="item.order_no" />
         </li>
         <li class="all-order-item"
-          :key="item.order_no+'2'">
+          :key="item.order_no+'2'"  v-if="item.order_status==2||item.order_status==3">
           <order-completed-item :curDat="item"
             :key="item.order_no" />
         </li>
@@ -18,7 +18,7 @@
     </ul>
     <!-- 无订单 -->
     <div class="without-order"
-      v-if="false">
+      v-if="orderList.length<1">
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
@@ -50,7 +50,7 @@ export default {
           amount: "mock", //类型：String  必有字段  备注：订单金额
           create_time: "mock", //类型：String  必有字段  备注：创建时间
           expire_time: 1, //类型：Number  必有字段  备注：过期时间，毫秒
-          order_status: "mock" //类型：String  必有字段  备注：订单状态
+          order_status: "mock" //类型：String  必有字段  备注：订单状态（1：待支付 2：已支付 3：已发货 4：订单超时失效）
         }
       ],
       orderPageDat: {

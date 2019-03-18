@@ -105,11 +105,11 @@
 <template>
   <div>
     <div class="order-header">
-      <span>2019-02-27 12:20</span>
+      <span>{{curDat.create_time}}</span>
       <label>Pending payment</label>
     </div>
     <div class="info-box">
-      <img src="./../../assets/images/good-large.png"
+      <img v-lazy="curDat.spu_url"
         alt>
       <div class="info">
         <div class="info-top">
@@ -117,8 +117,7 @@
           <div class="price">Rp{{curDat.amount}}</div>
         </div>
         <p class="info-description">
-          &nbsp;
-          &nbsp;
+         {{curDat.sku_attr}}
         </p>
         <p class="address">Order Number:{{curDat.order_no}}</p>
       </div>
@@ -126,7 +125,7 @@
     <div class="ctrl-box">
       <div class="pay-time">
         Please
-        <span>10:05:30</span> complete payment
+        <span>{{exitTime}}</span> complete payment
       </div>
       <div class="btn"
         @click="goRepaidPay">Go buy</div>
@@ -149,6 +148,12 @@ export default {
           amount: "mock" //类型：String  必有字段  备注：订单金额
         };
       }
+    }
+  },
+  computed: {
+    exitTime(){
+      let {h,p,m}=$util.expiration(curDat.expire_time);
+      return `${h}:${p}:${m}`;
     }
   },
   methods: {

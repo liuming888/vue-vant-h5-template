@@ -100,7 +100,7 @@ export function expiration(expire_time) {
     // m = m < 10 ? "0" + m : m;
     // this.expirationDat = { h, p, m };
 
-    let expirationNum = new Date(expire_time);
+    let expirationNum = expire_time;
     let h = Math.floor(expirationNum / (1000 * 60 * 60));
     h = h < 10 ? '0' + h : h;
     let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));

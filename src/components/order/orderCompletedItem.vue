@@ -101,11 +101,11 @@
 <template>
   <div>
     <div class="order-header">
-      <span>2019-02-27 12:20</span>
+      <span>{{curDat.create_time}}</span>
       <label>Completed</label>
     </div>
     <div class="info-box">
-      <img src="./../../assets/images/good-large.png"
+      <img v-lazy="curDat.spu_url"
         alt>
       <div class="info">
         <div class="info-top">
@@ -113,8 +113,7 @@
           <div class="price">Rp{{curDat.amount}}</div>
         </div>
         <p class="info-description">
-          &nbsp;
-          &nbsp;
+          {{curDat.sku_attr}}
         </p>
         <p class="address">Order Number:{{curDat.order_no}}</p>
       </div>

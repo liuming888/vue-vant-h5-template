@@ -255,27 +255,35 @@
 
     .left-box {
         width: 465px;
-        line-height: 98px;
         background: #fff;
         padding-left: 30px;
-        padding-top: 12px;
         box-sizing: border-box;
         font-size: 24px;
-        display: flex;
 
-        .num-box {
-            margin-left: 10px;
-            font-size: 50px;
-            color: #d30c05;
-            vertical-align: bottom;
-            font-weight: 500;
-            position: relative;
-            top: -12px;
+        .l-t-box {
+            display: flex;
+            width: 100%;
+            line-height: 50px;
+            margin-bottom: 10px;
+            .num-box {
+                margin-left: 10px;
+                font-size: 24px;
+                color: #d30c05;
+                vertical-align: top;
+                font-weight: 500;
 
-            b {
-                font-size: 20px;
-                font-weight: 400;
+                b {
+                    font-size: 20px;
+                    font-weight: 400;
+                }
             }
+        }
+
+        .l-d-box {
+            font-size: 22px;
+            font-family: Helvetica;
+            font-weight: 400;
+            color: rgba(136, 136, 136, 1);
         }
     }
 
