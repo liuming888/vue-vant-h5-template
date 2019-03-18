@@ -227,7 +227,7 @@
   > .ball-center-1::after {
     left: calc(30% - 12px);
   }
-  > .ball-center-2::after {
+  > .ball-center-cur::after {
     width: 60px;
     height: 60px;
     top: -25px;
@@ -343,7 +343,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      border-top: 1px solid rgba(242,242,242,1);
+      border-top: 1px solid rgba(242, 242, 242, 1);
     }
   }
 }
@@ -352,10 +352,10 @@
 
 <template>
   <div class="withdrawImmediately-container">
-    <div
-      class="alertBox"
-      v-if="showAlert"
-    >
+
+    <!-- 提现成功弹窗 -->
+    <div class="alertBox"
+      v-if="showAlert">
       <div class="alertWrap">
         <h1>Withdrawal application</h1>
         <p>
@@ -365,20 +365,22 @@
         <div @click="cashOk">I know</div>
       </div>
     </div>
+
+
     <div class="balance-box">
       <div class="current-balance">
         <h5 class="tit">Current balance</h5>
         <div class="balance-item">
-          <span class="units">$</span>
-          <span class="balance-num">1688.68</span>
+          <span class="units">Rp</span>
+          <span class="balance-num">{{user_fund.balance}}</span>
         </div>
       </div>
 
       <div class="can-withdraw">
         <h5 class="tit">Can withdraw</h5>
         <div class="balance-item">
-          <span class="units">$</span>
-          <span class="balance-num">10</span>
+          <span class="units">Rp</span>
+          <span class="balance-num">{{user_fund.withdraw_amount}}</span>
         </div>
       </div>
     </div>
@@ -386,36 +388,21 @@
     <div class="play-box">
       <div class="top-txt">
         <div class="cash-withdrawal-method">Cash withdrawal method</div>
-        <div
-          class="embodiment-statement"
-          @click="dialogVisible = true"
-        >Introduction</div>
+        <div class="embodiment-statement"
+          @click="dialogVisible = true">Introduction</div>
       </div>
 
       <div class="play-types">
-        <div class="play-item active">
-          <img
-            class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')"
-          >
-          <span class="play-txt">Alipay</span>
+        <div class="play-item"
+          v-for="(item,index) of pay_type"
+          :class="{active:item.type==withdrawParam.pay_type}"
+          @click="withdrawParam.pay_type=item.type"
+          :key="index">
+          <img class="play-img"
+            v-lazy="item.icon">
+          <span class="play-txt">{{item.name}}</span>
         </div>
 
-        <div class="play-item">
-          <img
-            class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')"
-          >
-          <span class="play-txt">Alipay</span>
-        </div>
-
-        <div class="play-item">
-          <img
-            class="play-img"
-            v-lazy="require('@/assets/images/paybal.png')"
-          >
-          <span class="play-txt">Alipay</span>
-        </div>
       </div>
     </div>
 
@@ -423,27 +410,22 @@
       <ul>
         <li>
           <span>Withdrawal Amount</span>
-          <input
-            v-model="amount"
+          <!-- <input v-model="amount"
             type="text"
-            placeholder="Enter the amount"
-          >
+            placeholder="Enter the amount"> -->
+          <span style="text-align: right;">{{user_fund.withdraw_amount}}</span>
         </li>
         <li>
           <span>Account Name</span>
-          <input
-            v-model="name"
+          <input v-model="withdrawParam.account_name"
             type="text"
-            placeholder="Papal110"
-          >
+            placeholder="Papal110">
         </li>
         <li>
           <span>Confirm the account</span>
-          <input
-            v-model="account"
+          <input v-model="withdrawParam.account_no"
             type="text"
-            placeholder="Papal110"
-          >
+            placeholder="Papal110">
         </li>
       </ul>
     </div>
@@ -451,28 +433,16 @@
       <p class="cash-withdrawal-tit">Cash withdrawal method</p>
       <div class="progress-box">
         <div class="schedule">
-          <div
-            class="active"
-            :style="{'width':' 50%'}"
-          ></div>
-          <!-- <div class="schedule-item"> -->
-          <!-- <span class="description">cut <span class="highlight">30%</span></span> -->
-          <!-- </div> -->
-          <div class="schedule-item ball ball-left ball-active">
-            <span class="description">Rp8</span>
+          <div class="active"
+            :style="{'width':user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%'}"></div>
+
+          <div class="schedule-item ball"
+            v-for="(item,index) of rule"
+            :key="index"
+            :class="setScheduleItemCls(item,index)">
+            <span class="description">Rp{{item.threshold}}</span>
           </div>
-          <div class="schedule-item ball ball-center-1 ball-active">
-            <span class="description">Rp8</span>
-          </div>
-          <div class="schedule-item ball ball-center-2">
-            <span class="description">Rp8</span>
-          </div>
-          <div class="schedule-item ball ball-center-3">
-            <span class="description">Rp8</span>
-          </div>
-          <div class="schedule-item ball ball-right">
-            <span class="description">Rp258</span>
-          </div>
+
         </div>
       </div>
     </div>
@@ -484,20 +454,14 @@
         <p>2. Please pay attention to the "My - Withdrawal Record" to check the status of the redemption record.</p>
       </div>
     </div>-->
-    <div
-      class="cash-out-btn"
-      @click.stop="jumpToWithdrawPage"
-    >Cash out</div>
-    <dialog-default
-      :info="info"
+    <div class="cash-out-btn"
+      @click.stop="goApplyWithdraw">Cash out</div>
+    <dialog-default :info="info"
       :dialogVisible="dialogVisible"
       noCancle
-      @ok="dialogVisible = false"
-    >
-      <div
-        slot="content"
-        class="cash-description"
-      >
+      @ok="dialogVisible = false">
+      <div slot="content"
+        class="cash-description">
         <p>1. The balance is over 88 rounds, and 8 rounds can be withdrawn. The arrival time is the same day;</p>
         <p>2. The balance is 338 rounds, 138 rounds can be withdrawn, and the time of arrival is 3-5 working days;</p>
         <p>3. The balance is 438 rounds, 188 rounds can be withdrawn, and the time of arrival is 7-14 working days;</p>
@@ -510,6 +474,8 @@
 <script>
 import { Icon, Dialog } from "vant";
 import DialogDefault from "@/components/dialogs/dialogDefault.vue";
+
+import { getWithdrawInfo, applyWithdraw } from "@/server/finance.js";
 export default {
   components: {
     DialogDefault,
@@ -529,13 +495,127 @@ export default {
       amount: "",
       name: "",
       account: "",
-      showAlert: true
+      showAlert: false,
+
+      withdrawParam: {
+        pay_type: 1, //类型：Number  必有字段  备注：支付类型
+        account_name: "", //类型：String  必有字段  备注：账号名称
+        account_no: "", //类型：String  必有字段  备注：账号
+        amount: "" //类型：String  必有字段  备注：金额
+      },
+
+      rule: [
+        //类型：Array  必有字段  备注：提现规则
+        {
+          //类型：Object  必有字段  备注：无
+          id: 1, //类型：Number  必有字段  备注：规则id
+          threshold: 8, //类型：Number  必有字段  备注：提现门槛
+          amount: 1, //类型：Number  必有字段  备注：可提现金额
+          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
+        },
+        {
+          //类型：Object  必有字段  备注：无
+          id: 2, //类型：Number  必有字段  备注：规则id
+          threshold: 138, //类型：Number  必有字段  备注：提现门槛
+          amount: 5, //类型：Number  必有字段  备注：可提现金额
+          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
+        },
+        {
+          //类型：Object  必有字段  备注：无
+          id: 3, //类型：Number  必有字段  备注：规则id
+          threshold: 188, //类型：Number  必有字段  备注：提现门槛
+          amount: 10, //类型：Number  必有字段  备注：可提现金额
+          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
+        },
+        {
+          //类型：Object  必有字段  备注：无
+          id: 4, //类型：Number  必有字段  备注：规则id
+          threshold: 238, //类型：Number  必有字段  备注：提现门槛
+          amount: 15, //类型：Number  必有字段  备注：可提现金额
+          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
+        },
+        {
+          //类型：Object  必有字段  备注：无
+          id: 5, //类型：Number  必有字段  备注：规则id
+          threshold: 288, //类型：Number  必有字段  备注：提现门槛
+          amount: 30, //类型：Number  必有字段  备注：可提现金额
+          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
+        }
+      ],
+      pay_type: [
+        //类型：Array  必有字段  备注：支付类型
+        {
+          //类型：Object  必有字段  备注：无
+          id: 1, //类型：Number  必有字段  备注：类型id
+          type: 1, //类型：Number  必有字段  备注：支付类型
+          name: "paypal" //类型：String  必有字段  备注：支付类型名
+        },
+        {
+          //类型：Object  必有字段  备注：无
+          id: 2, //类型：Number  必有字段  备注：类型id
+          type: 2, //类型：Number  必有字段  备注：支付类型
+          name: "ceshi" //类型：String  必有字段  备注：支付类型名
+        }
+      ],
+      user_fund: {
+        //类型：Object  必有字段  备注：用户金额
+        balance: 0, //类型：Number  必有字段  备注：用户余额
+        withdraw_amount: 0 //类型：Number  必有字段  备注：用户可提现金额
+      }
     };
   },
+  created() {
+    this.initWithdrawInfo();
+  },
   methods: {
+    async initWithdrawInfo() {
+      let result = await getWithdrawInfo();
+      if (result && result.data) {
+        const { rule, pay_type, user_fund } = result.data;
+        this.rule = rule;
+        this.pay_type = pay_type;
+        this.user_fund = user_fund;
+
+        this.withdrawParam.pay_type = this.pay_type[0].type;
+        this.withdrawParam.amount = this.user_fund.withdraw_amount;
+      }
+    },
+    async goApplyWithdraw() {
+      const { account_name, account_no } = this.withdrawParam;
+      if (!account_name || !account_no) {
+        Dialog.alert({
+          message: "Informasi akun tidak boleh kosong",
+          confirmButtonText:"Tentukan"
+        });
+        return;
+      }
+      console.log("this.withdrawParam", this.withdrawParam);
+
+      let result = await applyWithdraw(this.withdrawParam);
+      if (result && result.code == 0) {
+        this.showAlert = true;
+      }
+    },
+    setScheduleItemCls(item, index) {
+      let withdrawAmount = this.user_fund.withdraw_amount;
+      return [
+        { "ball-left": index == 0 },
+        { "ball-active": withdrawAmount >= item.amount },
+        `ball-center-${index}`,
+        { "ball-right": index == this.rule.length - 1 },
+        {
+          "ball-center-cur":
+            (index > 0 &&
+              withdrawAmount > this.rule[index - 1].amount &&
+              withdrawAmount < item.amount) ||
+            (withdrawAmount < item.amount && index == 0)
+        }
+      ];
+    },
     // 提现ok
-    cashOk(){
-      console.log('ok')
+    cashOk() {
+      console.log("ok");
+      this.$router.push("/my");
     }
   }
 };

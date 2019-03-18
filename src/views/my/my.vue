@@ -106,16 +106,17 @@
         display: flex;
         > .bottom-item {
           flex: 1;
+          text-align: left;
+
           > .title {
             font-size: 20px;
             color: #996710;
-            padding: 0 0 20px 0;
+            padding: 0 0 20px 30px;
           }
           > .number {
             padding: 0 30px;
             font-size: 40px;
             color: #996710;
-            text-align: left;
             margin-bottom: 10px;
           }
         }
@@ -161,10 +162,10 @@
         display: flex;
         align-items: center;
         padding-bottom: 10px;
-        border-bottom: 1px solid #F2F2F2;
+        border-bottom: 1px solid #f2f2f2;
         > .column {
           flex: 1;
-          color:#888888;
+          color: #888888;
           font-size: 22px;
         }
       }
@@ -178,78 +179,58 @@
       <section class="my-header">
         <div class="my-info">
           <div class="my-img">
-            <img
-              src
-              alt
-            >
+            <img v-lazy="accountInfo.avatar"
+              alt>
           </div>
           <div class="my-info-detail">
             <p class="name">
-              DUODUO
+              {{accountInfo.user_name}}
               <span>VIP Member</span>
             </p>
           </div>
         </div>
         <div class="my-wallet">
-          <a
-            class="my-right-btn"
-            @click="$router.push('/withdrawRelated')"
-          >Cash out</a>
+          <a class="my-right-btn"
+            @click="$router.push('/withdrawRelated')">Cash out</a>
           <div class="top">
-            <p class="title">Cumulative estimated return($)</p>
-            <p class="number">1688.68</p>
+            <p class="title">Cumulative estimated return(Rp)</p>
+            <p class="number">{{accountInfo.total_future_price}}</p>
           </div>
           <div class="bottom">
             <div class="bottom-item">
-              <p class="number">1000</p>
+              <p class="number">{{accountInfo.today_future_price}}</p>
               <p class="title">Estimated earnings today</p>
             </div>
             <div class="bottom-item">
-              <p class="number">500</p>
-              <p class="title">Revenue arrived today($)</p>
+              <p class="number">{{accountInfo.today_received_price}}</p>
+              <p class="title">Revenue arrived today(Rp)</p>
             </div>
           </div>
         </div>
       </section>
       <ul class="my-control">
-        <li
-          class="my-control-item"
-          @click="$router.push('/my/myFriends')"
-        >
-          <img
-            src="@/assets/images/Myfriends@2x.png"
-            alt
-          >
+        <li class="my-control-item"
+          @click="$router.push('/my/myFriends')">
+          <img src="@/assets/images/Myfriends@2x.png"
+            alt>
           <p>Friends</p>
         </li>
-        <li
-          class="my-control-item"
-          @click="$router.push('/my/myOrder')"
-        >
-          <img
-            src="@/assets/images/Myorder@2x.png"
-            alt
-          >
+        <li class="my-control-item"
+          @click="$router.push('/my/myOrder')">
+          <img src="@/assets/images/Myorder@2x.png"
+            alt>
           <p>My order</p>
         </li>
-        <li
-          class="my-control-item"
-          @click="$router.push('/my/revenueDetails')"
-        >
-          <img
-            src="@/assets/images/Revenuedetails@2x.png"
-            alt
-          >
+        <li class="my-control-item"
+          @click="$router.push('/my/revenueDetails')">
+          <img src="@/assets/images/Revenuedetails@2x.png"
+            alt>
           <p>Revenue details</p>
         </li>
-        <li
-          class="my-control-item"
-          @click="$router.push('/my/Tutorial')"
-        >
-          <img
-            src="@/assets/images/Tutorial@2x.png"
-            alt
-          >
+        <li class="my-control-item"
+          @click="$router.push('/my/Tutorial')">
+          <img src="@/assets/images/Tutorial@2x.png"
+            alt>
           <p>Tutorial</p>
         </li>
       </ul>
@@ -261,12 +242,10 @@
             <div class="column">Number of fans</div>
             <div class="column">Cumulative income($)</div>
           </li>
-          <FriendListCommon
-            v-for="(item, index) in heroList"
+          <FriendListCommon v-for="(item, index) in heroList"
             :key="index"
             :item="item"
-            :index="index"
-          />
+            :index="index" />
         </ul>
       </div>
     </div>
@@ -277,6 +256,8 @@
 <script>
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 import FriendListCommon from "@/components/FriendListCommon.vue";
+
+import { getMyAccount } from "@/server/userAccount.js";
 export default {
   components: {
     tabBar,
@@ -284,6 +265,15 @@ export default {
   },
   data() {
     return {
+      accountInfo: {
+        user_id: "mock", //类型：String  可有字段  备注：用户ID
+        user_name: "mock", //类型：String  必有字段  备注：用户名
+        vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
+        avatar: "mock", //类型：String  必有字段  备注：头像地址
+        total_future_price: "mock", //类型：String  必有字段  备注：累计预估收益
+        today_future_price: "mock", //类型：String  必有字段  备注：今日预估收益
+        today_received_price: "mock" //类型：String  必有字段  备注：今日到账收益
+      },
       heroList: [
         {
           name: "Zoe",
@@ -293,6 +283,19 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    // if (this.$store.state.userInfo.user_id) {
+    this.ininMyAccount();
+    // }
+  },
+  methods: {
+    async ininMyAccount() {
+      let result = await getMyAccount();
+      if (result && result.data) {
+        this.accountInfo = result.data;
+      }
+    }
   }
 };
 </script>

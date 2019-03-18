@@ -13,7 +13,7 @@
 
     <!-- 弹窗 -->
     <dialog-login-select v-if="$store.state.dialogs.loginSelect.show" />
-    <dialog-new-gift-bag/>
+    <!-- <dialog-new-gift-bag/> -->
   </div>
 </template>
 
