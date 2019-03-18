@@ -47,12 +47,15 @@ export default {
           order_no: "mock", //类型：String  必有字段  备注：订单号
           spu_title: "mock", //类型：String  必有字段  备注：商品标题
           sku_attr: "mock", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
-          amount: "mock" //类型：String  必有字段  备注：订单金额
+          amount: "mock", //类型：String  必有字段  备注：订单金额
+          create_time: "mock", //类型：String  必有字段  备注：创建时间
+          expire_time: 1, //类型：Number  必有字段  备注：过期时间，毫秒
+          order_status: "mock" //类型：String  必有字段  备注：订单状态
         }
       ],
       orderPageDat: {
         page_num: 1,
-        page_size: 5
+        page_size: 10
       }
     };
   },
