@@ -117,7 +117,7 @@
           <div class="price">Rp{{curDat.amount}}</div>
         </div>
         <p class="info-description">
-         {{curDat.sku_attr}}
+          {{curDat.sku_attr}}
         </p>
         <p class="address">Order Number:{{curDat.order_no}}</p>
       </div>
@@ -151,9 +151,13 @@ export default {
     }
   },
   computed: {
-    exitTime(){
-      let {h,p,m}=$util.expiration(curDat.expire_time);
-      return `${h}:${p}:${m}`;
+    exitTime() {
+      let { h, p, m } = this.$util.expiration(this.curDat.expire_time);
+      if (h || p || m) {
+        return `${h}:${p}:${m}`;
+      } else {
+        return "00:00:00";
+      }
     }
   },
   methods: {

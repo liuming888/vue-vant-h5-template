@@ -156,6 +156,8 @@
       text-align: center;
     }
     > .hero-list {
+      height: 480px;
+      overflow-y: auto;
       margin: 38px 0;
       > li {
         text-align: center;
@@ -243,7 +245,7 @@
             <div class="column">Number of fans</div>
             <div class="column">Cumulative income($)</div>
           </li>
-          <FriendListCommon v-for="(item, index) in heroList"
+          <FriendListCommon v-for="(item, index) in hero_tips"
             :key="index"
             :item="item"
             :index="index" />
@@ -307,7 +309,7 @@ export default {
     async initHeroTips() {
       let result = await getHeroList();
       if (result && result.data) {
-        this.hero_tips = result.data;
+        this.hero_tips = result.data.hero_tips;
       }
     },
     async ininMyAccount() {

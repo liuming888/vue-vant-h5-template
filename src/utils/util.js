@@ -85,7 +85,7 @@ export function formatMoney(coin) {
  * @return {false | 格式化后的时间对象}
  */
 export function expiration(expire_time) {
-    if (isNaN(expire_time)) {
+    if (isNaN(expire_time) || expire_time<0) {
         return false;
     }
 

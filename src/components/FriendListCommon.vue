@@ -37,8 +37,8 @@ export default {
         };
       }
     },
-    index:{
-      type:Number
+    index: {
+      type: Number
     }
   }
 };
@@ -81,6 +81,7 @@ export default {
       > img {
         width: 90px;
         height: 90px;
+        border-radius: 50%;
       }
     }
     .first {
