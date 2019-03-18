@@ -13,10 +13,8 @@ if (userStr) {
     access_token = userInfo.access_token;
 }
 
-// if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
-user_id = 1;
-access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
-// }
+// user_id = 1;
+// access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
 
 axios.defaults.headers.common['User-Id'] = user_id;
 axios.defaults.headers.common['Access-Token'] = access_token;

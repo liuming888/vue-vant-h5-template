@@ -400,12 +400,12 @@ export default {
       this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(spu_id) {
-      //  if (!this.$store.state.userInfo.user_id) {
-      //   const { pathname, search } = window.location;
-      //   this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${spu_id}&bargainType=another`);
-      //   this.$store.commit("setLoginSelectShow", true);
-      //   return;
-      // }
+       if (!this.$store.state.userInfo.user_id) {
+        const { pathname, search } = window.location;
+        this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${spu_id}&bargainType=another`);
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
 
       this.$router.push({
         path: "/bargain",
@@ -419,7 +419,7 @@ export default {
 
     jumpBuyPage() {
       // 上线时不能注释
-      /*  if (!this.$store.state.userInfo.user_id) {
+       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
         this.$store.commit(
           "setLoginJumpUrl",
@@ -428,7 +428,7 @@ export default {
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
-      if (this.bargain_info.can_buy != 1) return; */
+      if (this.bargain_info.can_buy != 1) return;
 
       this.$router.push({ path: "/purchase", query: { ...this.$route.query } });
     },
