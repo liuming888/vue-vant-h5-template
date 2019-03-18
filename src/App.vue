@@ -29,6 +29,9 @@ export default {
     this.initToken();
     this.initFB();
   },
+  mounted () {
+    document.getElementById("mainApp").classList.remove("pre-app");
+  },
   methods: {
     /**
      * @description: 初始化FB

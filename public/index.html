@@ -4,19 +4,38 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    
-    <meta property="og:url" class="share_url" content="https://test-zdd.batmobi.net/" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" class="share_title" content="share to your friens. make more money" />
-    <meta property="og:description" content="分享的链接描素内容111" />
-    <meta property="og:image" content="https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=c8a9d4e2841363270aedc433a18fa056/11385343fbf2b2114a65cd70c48065380cd78e41.jpg" />
+
+    <meta property="og:url" class="share_url" content="https://test-zdd.batmobi.net/"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" class="share_title" content="share to your friens. make more money"/>
+    <meta property="og:description" content="分享的链接描素内容111"/>
+    <meta property="og:image" content="https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=c8a9d4e2841363270aedc433a18fa056/11385343fbf2b2114a65cd70c48065380cd78e41.jpg"/>
 
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>opl-zdd-h5</title>
     <style>
-      html,body{
-        width:100vw;
-        overflow:hidden;
+      body,
+      html {
+        width: 100vw;
+        overflow: hidden;
+      }
+
+      .pre-app {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .pre-app::before {
+        content: "";
+        display:block;
+        width: 50vw;
+        height:50vh;
+        background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552942887743&di=0ffda939d6eb0127e7ef07d6e0a6898a&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01e9d75a113d80a80121985c97ac51.gif") no-repeat;
+        background-size:50vw auto;
+        position:fixed;
+        z-index:9999;
+        top:42vh;
+        left:30vw;
       }
     </style>
     <script>
@@ -37,12 +56,12 @@
       }
     </script>
   </head>
-  <body>
+  <body class="pre-app" id="mainApp">
     <noscript>
       <strong>We're sorry but opl-zdd-h5 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    
+
   </body>
 </html>
