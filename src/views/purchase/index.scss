@@ -1,0 +1,309 @@
+.purchase-container {
+    width: 100vw;
+    background: #f9f9f9;
+    min-height: calc(100vh - 1.24rem);
+    box-sizing: border-box;
+    padding-bottom: (50px + 93px);
+    overflow: hidden;
+}
+
+.top-info {
+    height: 48px;
+    padding: 0 30px;
+    box-align: border-box;
+    background: rgb(231, 212, 212);
+    display: flex;
+    align-items: center;
+
+    .info-box {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-family: Helvetica;
+        font-weight: 400;
+        color: rgba(51, 32, 31, 1);
+
+        .head-portrait {
+            width: 38px;
+            height: 38px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.no-shipping-address {
+    width: 100%;
+    height: 93px;
+    padding: 0 30px;
+    box-align: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #fff;
+
+    .add-icon {
+        width: 44px;
+        height: 44px;
+        margin-right: 20px;
+    }
+
+    .txt {
+        font-size: 28px;
+        font-family: Helvetica;
+        font-weight: 400;
+        color: rgba(50, 50, 50, 1);
+        margin-right: 195px;
+    }
+}
+
+.y-shipping-address {
+    width: 100%;
+    height: 169px;
+    background: #fff;
+    padding: 30px;
+    box-align: border-box;
+    display: flex;
+    align-items: center;
+
+    .position {
+        width: 32px;
+        height: 40px;
+    }
+
+    .shipping-address-content {
+        width: 590px;
+        height: 100%;
+        padding: 50px 30px 0 20px;
+        box-align: border-box;
+        font-size: 28px;
+        font-family: Helvetica;
+        font-weight: 400;
+        color: rgba(50, 50, 50, 1);
+
+        .top-box {
+            width: 100%;
+            display: flex;
+            margin-bottom: 20px;
+
+            .phone {
+                flex: 1;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.commodity-info {
+    background: #f9f9f9;
+    width: 100%;
+    height: 238px;
+    padding: 13px 30px;
+    box-align: border-box;
+    display: flex;
+    margin-bottom: 31px;
+
+    .commodity-img {
+        width: 220px;
+        height: auto;
+        margin-right: 24px;
+    }
+
+    .commodity-content {
+        position: relative;
+        .commodity-tit {
+            padding-top: 15px;
+            width: 450px;
+            font-size: 28px;
+            font-family: Helvetica;
+            font-weight: 400;
+            color: rgba(50, 50, 50, 1);
+            line-height: 37px;
+            margin-bottom: 10px;
+        }
+
+        .type-num {
+            height: 19px;
+            font-size: 24px;
+            font-family: Helvetica;
+            font-weight: 400;
+            color: rgba(136, 136, 136, 1);
+            margin-bottom: 54px;
+        }
+
+        .price-quantity {
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            display: flex;
+            .current-price {
+                font-size: 42px;
+                font-weight: 500;
+                color: rgba(211, 12, 5, 1);
+                line-height: 37px;
+                margin-right: 21px;
+            }
+
+            .original-price {
+                font-size: 24px;
+                font-weight: 500;
+                text-decoration: line-through;
+                color: rgba(136, 136, 136, 1);
+            }
+
+            .commodity-num {
+                flex: 1;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.commodity-type {
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+    background: #fff;
+    margin-bottom: 20px;
+
+    .commodity-item {
+        width: 100%;
+        padding-top: 31px;
+        margin-bottom: 45px;
+
+        .tit {
+            font-size: 28px;
+            font-weight: 400;
+            color: rgba(50, 50, 50, 1);
+            margin-bottom: 30px;
+        }
+
+        .type-box {
+            display: flex;
+            flex-wrap: wrap;
+            //   align-items: center;
+
+            .type-item-box {
+                margin-right: 30px;
+                width: 110px;
+                height: 64px;
+                text-align: center;
+                line-height: 64px;
+                background: rgba(245, 245, 245, 1);
+                border-radius: 32px;
+                font-size: 24px;
+                font-family: Helvetica;
+                font-weight: 400;
+                color: rgba(50, 50, 50, 1);
+                margin-bottom: 26px;
+
+                &.cur {
+                    background: rgba(255, 251, 251, 1);
+                    border: 1px solid rgba(211, 12, 5, 1);
+                    color: rgba(211, 12, 5, 1);
+                }
+
+                &:nth-of-type(5n) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.paly-type-list {
+    width: 100%;
+    padding: 0 30px;
+    box-align: border-box;
+    font-size: 28px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
+    background: #fff;
+
+    .paly-item {
+        width: 100%;
+        height: 92px;
+        line-height: 92px;
+        overflow: hidden;
+        margin-bottom: 62px;
+
+        &:nth-last-of-type(1) {
+            margin-bottom: 0;
+        }
+
+        .paly-select-icon {
+            float: right;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            top: 36px;
+            left: -6px;
+        }
+    }
+}
+
+.down-box {
+    width: 100vw;
+    height: 98px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background: pink;
+    display: flex;
+
+    .left-box {
+        width: 465px;
+        line-height: 98px;
+        background: #fff;
+        padding-left: 30px;
+        padding-top: 12px;
+        box-sizing: border-box;
+        font-size: 24px;
+        display: flex;
+
+        .num-box {
+            margin-left: 10px;
+            font-size: 50px;
+            color: #d30c05;
+            vertical-align: bottom;
+            font-weight: 500;
+            position: relative;
+            top: -12px;
+
+            b {
+                font-size: 20px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .pay-immediately {
+        flex: 1;
+        height: 98px;
+        line-height: 98px;
+        text-align: center;
+        background: linear-gradient(90deg, rgba(211, 12, 5, 1) 0%, rgba(246, 78, 1, 1) 100%);
+        font-size: 32px;
+        font-family: Helvetica;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+    }
+}
+
+.dialog-box {
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+}
+.pay-error {
+    margin-top: 35px;
+    font-size: 24px;
+    color: #888;
+    line-height: 30px;
+}

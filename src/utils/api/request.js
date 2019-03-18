@@ -1,17 +1,38 @@
 import Vue from 'vue';
 import axios from 'axios';
 // import qs from 'qs';
-import config from './config';
 // import md5 from 'md5';
+import config from './config';
+
+let user_id="";
+let access_token="";
+let userStr=localStorage.getItem("userInfo");
+if (userStr){
+    let userInfo = JSON.parse(userStr);
+    user_id = userInfo.user_id;
+    access_token = userInfo.access_token;
+}
+
+// if (process.env.NODE_ENV == "development" || process.env.NODE_ENV=="dev"){ // 开发
+    user_id = 1;
+access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
+// }
+
+axios.defaults.headers.common['user_id'] = user_id;
+axios.defaults.headers.common['access_token'] = access_token;
 
 var instance = axios.create();
 
 let url = config.getUrl(process.env.NODE_ENV);
+console.log('url: ', url);
 instance.defaults.baseURL = url;
 instance.defaults.timeout = 6000;
 instance.defaults.withCredentials = true;
 
 Vue.prototype.$loaddingNum = 0;
+
+const curCode = process.env.NODE_ENV=="mock"?1:0; // 当前代表成功的code (mock 1为成功)
+console.log('curCode: ', curCode);
 
 // 请求拦截
 instance.interceptors.request.use(
@@ -49,8 +70,10 @@ instance.interceptors.response.use(
             Vue.prototype.$toast.clear();
         }
         try {
-            if (response.data.code == 0) {
+            if (response.data.code == curCode) {
                 return response.data;
+            } else if (response.data.code==3){
+                
             } else {
                 throw response.data;
             }
@@ -72,21 +95,21 @@ instance.interceptors.response.use(
         if (Vue.prototype.$loaddingNum <= 0) {
             Vue.prototype.$toast.clear();
         }
-        return Promise.reject(error);
+        return false;
     }
 );
 
 const $request = {
     // url,
-    post({ url, data = {}, config = {} }) {
-        let dat = data;
+    post({ url, data, config = {} }) {
+        // let dat = data;
         // if (!config.headers) {
         //     config.headers = {
         //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         //     };
         //     dat = qs.stringify(data);
         // }
-        return instance({ method: 'post', url, data: dat, ...config })
+        return instance({ method: 'post', url, data, ...config })
             .then(response => {
                 return response;
             })
