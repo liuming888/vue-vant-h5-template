@@ -13,7 +13,7 @@ export default {
                 break;
             case 'test':
                 // url =' https://test-ht-zdd-api.istarbuy.com/';
-                url ='https://test-zdd-api.istarbuy.cn:8443/';
+                url = 'https://test-ht-zdd-api.istarbuy.com:8443';
                 break;
             case 'production':
                 url = 'https://api.istarbuy.com';

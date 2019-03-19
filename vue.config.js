@@ -1,21 +1,45 @@
+// getUrl(VUE_APP_ENV) {
+//     let url = '';
+//     switch (VUE_APP_ENV) {
+//         case 'mock':
+//             url = '';
+//         case 'development':
+//             break;
+//         case 'dev': // 开发域名环境
+//             url = 'https://dev-ht-zdd-api.istarbuy.com/';
+//             // 阳
+//             // url = 'http://192.168.4.32:8024';
+//             break;
+//         case 'test':
+//             // url =' https://test-ht-zdd-api.istarbuy.com/';
+//             url = 'https://test-zdd-api.istarbuy.cn:8443/';
+//             break;
+//         case 'production':
+//             url = 'https://api.istarbuy.com';
+//             break;
+//     }
+//     return url;
+// }
+
 function getUrl(VUE_APP_ENV) {
     let url = '';
     switch (VUE_APP_ENV) {
         case 'mock':
-            url = 'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api';
             break;
         case 'development':
             // 锦涛
             // url = 'http://192.168.4.128:8024/api';
             // 阳
             // url = 'http://192.168.4.32:8024/api';
-            // url = 'http://test-ht-zdd-api.batmobi.cn:43321/api';
 
             // 开发环境
             url = 'https://dev-ht-zdd-api.istarbuy.com/api';
 
-            // 测试环境
-            // url = 'https://test-ht-zdd-api.istarbuy.com/';
+            // 测试环境内网
+            // url = 'https://test-ht-zdd-api.istarbuy.com/api';
+
+            // 测试环境外网
+            url ='https://test-ht-zdd-api.istarbuy.com:8443/api'
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
