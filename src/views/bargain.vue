@@ -126,6 +126,8 @@
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo" />
+    <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully"
+      :chopInfo="chop_info" />
   </div>
 </template>
 
@@ -133,6 +135,7 @@
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import countDown from "@/components/countDown.vue";
+import dialogOldUsersHelpCutSuccessfully from "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
@@ -145,17 +148,20 @@ export default {
   components: {
     bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
-    // bargainingHelpInformation, // 砍价帮
-    countDown
-    // commodityItem // 商品列表展示的商品X
+    countDown,
+    dialogOldUsersHelpCutSuccessfully // 帮砍成功弹窗
   },
   data() {
     return {
       dialogs: {
         sharingFriends: {
           show: false
+        },
+        oldUsersHelpCutSuccessfully: {
+          show: false
         }
       },
+      chop_info: {},
 
       shareInfo: {},
 
@@ -233,6 +239,7 @@ export default {
       let result = await bargainChop({ bargain_id, spu_id });
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
+        this.chop_info=chop_info;
         console.log("chop_info: ", chop_info);
         this.$router.push({
           query: {
@@ -248,7 +255,7 @@ export default {
           }
         });
         this.$store.commit("setGoodsList", arr);
-
+        this.dialogs.oldUsersHelpCutSuccessfully.show=true;
         return Promise.resolve();
       }
     },

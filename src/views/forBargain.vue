@@ -62,7 +62,7 @@
               v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
-              v-else-if="$route.query.helpCur=='ok'&&bargain_user_info&&bargain_user_info.type==2"
+              v-else-if="$route.query.helpCur=='ok'"
               onclick="window.location.href='#helpCurOk'">Also take it for free</div>
             <template v-else>
               <div class="share-btn">Receive reward</div>
@@ -184,7 +184,7 @@ export default {
         sharingFriends: {
           show: false
         },
-        oldUsersHelpCutSuccessfully: {
+        oldUsersHelpCutSuccessfully: {  // 砍价完成
           show: false
         }
       },
