@@ -35,10 +35,10 @@ export default {
         //类型：Array  必有字段  备注：无
         {
           //类型：Object  必有字段  备注：无
-          order_no: "mock", //类型：String  必有字段  备注：订单号
-          spu_title: "mock", //类型：String  必有字段  备注：商品标题
-          sku_attr: "mock", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
-          amount: "mock" //类型：String  必有字段  备注：订单金额
+          order_no: "", //类型：String  必有字段  备注：订单号
+          spu_title: "", //类型：String  必有字段  备注：商品标题
+          sku_attr: "", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
+          amount: "" //类型：String  必有字段  备注：订单金额
         }
       ],
       orderPageDat: {

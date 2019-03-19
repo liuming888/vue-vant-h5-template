@@ -3,8 +3,8 @@
 <template>
   <div class="bargain-container">
     <!-- 返回首页 -->
-    <div class="turn-home"
-      @click="$router.push('/')"></div>
+    <!-- <div class="turn-home"
+      @click="$router.push('/')"></div> -->
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
