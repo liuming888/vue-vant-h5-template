@@ -58,12 +58,18 @@
         width: 320px;
 
         .good-tit {
+          width: 282px;
+          height: 60px;
           font-size: 24px;
           font-family: Helvetica;
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
           margin-bottom: 25px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
         }
 
         .old-m {
@@ -154,15 +160,15 @@
 
       <div class="content">
         <div class="good-box">
-          <img v-lazy="require('@/assets/images/bargain-finish-banner.png')"
+          <img v-lazy="itemData.spu_pics&&itemData.spu_pics[0]"
             class="good-img">
           <div class="right-box">
             <div class="good-tit">
-              Casual Large Capacity Copartment Handbag women
+              {{itemData.title}}
             </div>
-            <div class="old-m">Rp280.000</div>
+            <div class="old-m">Rp{{itemData.original_price}}</div>
             <div class="cur-n">
-              <span class="rp">Rp</span>0.00
+              <span class="rp">Rp</span>{{itemData.price}}
             </div>
           </div>
         </div>
@@ -238,6 +244,9 @@ export default {
           // hashtag:"FB分享的tag标签"
         };
       }
+    },
+    itemData: {
+      type: Object
     }
   },
   methods: {

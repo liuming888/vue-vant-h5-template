@@ -153,7 +153,7 @@
     <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
-      v-if="dialogs.sharingFriends.show" />
+      v-if="dialogs.sharingFriends.show" :itemData="itemData"/>
   </div>
 </template>
 

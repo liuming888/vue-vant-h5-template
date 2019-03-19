@@ -43,15 +43,15 @@
     </div>
 
     <!-- 弹窗 -->
-    <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
+    <!-- <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
-      v-if="dialogs.sharingFriends.show" />
+      v-if="dialogs.sharingFriends.show" /> -->
   </div>
 </template>
 
 <script>
 // import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
+// import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
 import countDown from "@/components/countDown.vue";
 
 import { shareBargain } from "@/server/share.js";
@@ -59,7 +59,7 @@ export default {
   name: "aCommodityThatIsBeingBargained",
   components: {
     // dialogSharingFriends, // 分享好友弹窗
-    dialogSharingMakes, // 分享赚弹起浮窗
+    // dialogSharingMakes, // 分享赚弹起浮窗
     countDown
   },
   props: {
@@ -129,16 +129,16 @@ export default {
     /**
      * @description: 分享赚
      */
-    async cashBack() {
-      let result = await shareBargain({
-        bargain_id: this.spuBargainItem.bargain_id
-      });
-      if (result) {
-        this.shareInfo = result.data;
-        console.log("this.shareInfo: ", this.shareInfo);
-      }
-      this.dialogs.sharingFriends.show = true;
-    },
+    // async cashBack() {
+    //   let result = await shareBargain({
+    //     bargain_id: this.spuBargainItem.bargain_id
+    //   });
+    //   if (result) {
+    //     this.shareInfo = result.data;
+    //     console.log("this.shareInfo: ", this.shareInfo);
+    //   }
+    //   this.dialogs.sharingFriends.show = true;
+    // },
     /**
      * @description: 跳转到砍价页（商品详情页）
      */
