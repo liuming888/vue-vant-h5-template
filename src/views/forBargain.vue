@@ -21,7 +21,7 @@
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
             <div class="img-box">
-              <img v-lazy="spu.spu_pics[0]||require('./../assets/images/good-large.png')">
+              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('./../assets/images/good-large.png')">
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
@@ -75,7 +75,7 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-      <div class="team-box">
+      <div class="team-box" v-if="help_bargain_list.length>0">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -120,7 +120,7 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products">
+      <div class="recommend-products" v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="require('./../assets/images/start.png')">
           <span>More Products</span>
@@ -186,65 +186,14 @@ export default {
         }
       },
 
-      shareInfo: {
-        shareUrl: window.location.origin + "/forBargain", // 从点击打开的链接
-        shareTitle: "分享标题",
-        shareDescription: "分享的描述",
-        shareImage: "https://s.pinimg.com/images/facebook_share_image.png", //  分享的预览图（图片有限制）
-        quote:
-          "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
-        // hashtag:"FB分享的tag标签"
-      },
+      shareInfo: {},
 
-      spu: {
-        //类型：Object  必有字段  备注：商品
-        spu_id: 1, //类型：Number  必有字段  备注：商品id
-        title: "mock", //类型：String  必有字段  备注：商品标题
-        spu_pics: [
-          //类型：Array  必有字段  备注：图片地址列表
-          "mock" //类型：String  必有字段  备注：无
-        ],
-        specs: [
-          //类型：Array  必有字段  备注：规格列表
-          {
-            //类型：Object  必有字段  备注：无
-            spec_name: "mock", //类型：String  必有字段  备注：规格名
-            spec_values: [
-              //类型：Array  必有字段  备注：规格列表
-              "mock" //类型：String  必有字段  备注：无
-            ]
-          }
-        ],
-        price: "mock", //类型：String  必有字段  备注：商品售价
-        desp: "mock", //类型：String  必有字段  备注：商品详情描述
-        expire_ttl: 0, //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒 (需要跟后台沟通改为毫秒)
-        expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
-        deliver_count: "mock" //类型：String  必有字段  备注：已免费拿数量
-      },
+      spu: {},
 
-      bargain_info: {
-        //类型：Object  必有字段  备注：砍价信息
-        bargain_id: 1, //类型：Number  必有字段  备注：砍价号
-        bargain_rate: 1, //类型：Number  必有字段  备注：已砍价比例
-        bargain_amount: 1, //类型：Number  必有字段  备注：已砍价金额
-        bargain_after: 1, //类型：Number  必有字段  备注：剩余金额
-        spu_id: "mock", //类型：String  必有字段  备注：商品id
-        status: 1, //类型：Number  必有字段  备注：1:砍价中 2：砍价过期 3: 砍价购买完成
-        can_buy: 1 //类型：Number  必有字段  备注： 1:可购买 2：不可购买
-      },
-      bargain_user_info: {
-        //类型：Object  可有字段  备注：登录用户会，判断是否帮砍
-        type: "mock", //类型：String  必有字段  备注：1:自砍 2：帮砍
-        reward_amount: "mock" //类型：String  必有字段  备注：奖励金额
-      },
+      bargain_info: {},
+      bargain_user_info: {},
 
-      chop_info: {
-        //类型：Object  必有字段  备注：无
-        bargain_id: 1, //类型：Number  必有字段  备注：砍价号
-        bargain_amount: 1, //类型：Number  必有字段  备注：砍价金额
-        bargain_rate: 1, //类型：Number  必有字段  备注：砍价比例
-        reward_amount: "mock" //类型：String  必有字段  备注：下单能获取的金额
-      },
+      chop_info: {},
 
       expirationDat: {
         h: "24",
@@ -252,35 +201,13 @@ export default {
         m: "00"
       },
 
-      help_bargain_list: [
-        //类型：Array  必有字段  备注：帮砍列表
-        {
-          //类型：Object  必有字段  备注：无
-          user_id: 1, //类型：Number  必有字段  备注：用户id
-          username: "mock", //类型：String  必有字段  备注：用户名
-          bargain_amount: 1, //类型：Number  必有字段  备注：帮砍额度
-          bargain_time: "mock", //类型：String  必有字段  备注：帮砍时间
-          avatar: "mock" //类型：String  必有字段  备注：头像
-        }
-      ],
+      help_bargain_list: [],
       helpBargainPageDat: {
         page_size: 10,
         page_num: 1
       },
 
-      spu_list: [
-        //类型：Array  必有字段  备注：砍价商品列表
-        {
-          //类型：Object  必有字段  备注：无
-          spu_id: 2, //类型：Number  必有字段  备注：商品id
-          title: "mock", //类型：String  必有字段  备注：商品标题
-          price: 1, //类型：Number  必有字段  备注：商品售价
-          deliver_count: 1, //类型：Number  必有字段  备注：已送出数量
-          spu_pics: [
-            //类型：Array  必有字段  备注：图片地址列表（已排好序）
-          ]
-        }
-      ]
+      spu_list: []
     };
   },
   created() {
@@ -462,6 +389,7 @@ export default {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
+    next();
   }
 };
 </script>

@@ -106,10 +106,14 @@
 
     <div class="down-box">
       <div class="left-box">
-        Actual payment:
-        <div class="num-box">
-          <b>Rp</b>{{spu.price}}
+        <div class="l-t-box">
+          Actual payment:
+          <div class="num-box">
+            <b>Rp</b>{{spu.price}}
+          </div>
         </div>
+
+        <div class="l-d-box">About ${{(spu.price/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
       </div>
 
       <!-- <div class="pay-immediately"
@@ -131,9 +135,9 @@
 
     <!-- 弹窗 --------------------------------->
     <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
-    <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
+    <!-- <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
       @continuePlay="goPaly"
-      @playfail="dialogVisible = true" />
+      @playfail="dialogVisible = true" /> -->
 
     <!-- 支付失败调用的弹窗 -->
     <dialog-default :info="info"
@@ -163,6 +167,7 @@ for (let k in obj) {
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
 import { orderCreate, repaidOrder } from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
+import { getExchangeRate } from "@/server/finance.js";
 export default {
   components: {
     DialogDefault,
@@ -177,29 +182,14 @@ export default {
         //类型：Object  必有字段  备注：商品
         spu_id: 1, //类型：Number  必有字段  备注：商品id
         title: "mock", //类型：String  必有字段  备注：商品标题
-        spu_pics: [
-          //类型：Array  必有字段  备注：图片地址列表
-          "mock" //类型：String  必有字段  备注：无
-        ],
-        // specs: [
-        //   //类型：Array  必有字段  备注：规格列表
-        //   {
-        //     //类型：Object  必有字段  备注：无
-        //     spec_name: "mock", //类型：String  必有字段  备注：规格名
-        //     spec_id: "mock", //类型：String  必有字段  备注：规格id
-        //     spec_values: [
-        //       //类型：Array  必有字段  备注：规格列表
-        //       "mock" //类型：String  必有字段  备注：无
-        //     ]
-        //   }
-        // ],
+        spu_pics: [],
         price: "mock", //类型：String  必有字段  备注：商品售价
         original_price: "mock", //类型：String  必有字段  备注：原价
         desp: "mock", //类型：String  必有字段  备注：商品详情描述
         expire_ttl: "mock" //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒
       },
       specs: [
-        // 备注：规格列表
+        /* 
         {
           //类型：Object  必有字段  备注：无
           id: 1, //类型：Number  必有字段  备注：无
@@ -215,57 +205,11 @@ export default {
               id: 1, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
               spec_id: 1, //类型：Number  必有字段  备注：规格类id
               item_name: "红色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 2, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "h色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 3, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "l色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            }
-          ]
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：无
-          spu_id: 1, //类型：Number  必有字段  备注：商品id
-          spec_name: "颜色", //类型：String  必有字段  备注：规格类名称
-          seq: 10, //类型：Number  必有字段  备注：无
-          create_time: "2019-03-10 00:29:27", //类型：String  必有字段  备注：无
-          update_time: "2019-03-10 00:37:50", //类型：String  必有字段  备注：无
-          spu_spec_items: [
-            //类型：Array  必有字段  备注：规格可选参考值列表
-            {
-              //类型：Object  必有字段  备注：无
-              id: 1, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "红色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 2, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "h色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            },
-            {
-              //类型：Object  必有字段  备注：无
-              id: 3, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "l色", //类型：String  必有字段  备注：规格参考值名称
               seq: 10 //类型：Number  必有字段  备注：无
             }
           ]
         }
+       */
       ],
 
       paly_id: 1,
@@ -277,32 +221,26 @@ export default {
       showWaitPaymentDialog: {
         show: false
       },
-      myAddress: {
-        //类型：Object  必有字段  备注：无
-        username: "mock", //类型：String  必有字段  备注：用户名
-        telephone: "mock", //类型：String  必有字段  备注：手机号
-        id: 1, //类型：Number  必有字段  备注：id
-        address_one: "mock", //类型：String  必有字段  备注：一级地址
-        address_two: "mock", //类型：String  必有字段  备注：二级地址
-        is_default: 1, //类型：Number  必有字段  备注：是否默认地址（1：默认 0：常规）
-        email: "mock", //类型：String  必有字段  备注：无
-        country: "mock", //类型：String  必有字段  备注：无
-        region: "mock", //类型：String  必有字段  备注：无
-        city: "mock", //类型：String  必有字段  备注：无
-        zip: "mock" //类型：String  必有字段  备注：无
-      },
+      myAddress: {},
       info: {
         content: "Konfirmasikan untuk melunasi?",
         cancleText: "Menyerah",
         okText: "Terus bayar"
       },
-      dialogVisible: false
+      dialogVisible: false,
+
+      exchangeRateDat: {
+        //类型：Object  必有字段  备注：无
+        currency_code: "IDR", //类型：String  必有字段  备注：货币符号
+        exchange_rate: 1 //类型：Number  必有字段  备注：汇率
+      }
     };
   },
   created() {
     this.init();
     this.getMyAddressInfo();
     this.curSpuSpecs();
+    this.initExchangeRate();
 
     // 支付失败回调进入的
     if (this.$route.query.payment === "failed") {
@@ -314,6 +252,12 @@ export default {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
       if (result) {
         this.spu = result.data.spu;
+      }
+    },
+    async initExchangeRate() {
+      let result = await getExchangeRate({ currency_code: "IDR" });
+      if (result && result.data) {
+        this.exchangeRateDat=result.data;
       }
     },
     async getMyAddressInfo() {
@@ -344,21 +288,31 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
-      let spu_spec_items = [];
-      this.specs.forEach(item => {
-        spu_spec_items.push(item.id);
-      });
-      console.log("spu_spec_items----------", spu_spec_items);
-      let param = {
-        spu_spec_items,
+       let param = {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
         // pay_type: this.paly_id
-        pay_type: 1,
+        pay_type: 1, // 暂时写死
         spu_name: this.spu.title
       };
+      let spu_spec_items = "";
+      this.specs.forEach(item => {
+        spu_spec_items =
+          spu_spec_items +
+          item.spec_name +
+          ":" +
+          item.spu_spec_items.find(typeItem => typeItem.id == item.id)
+            .item_name +
+          " ";
+      });
+      console.log("spu_spec_items----------", spu_spec_items);
+     
+      if(spu_spec_items){
+        param.spu_spec_items=spu_spec_items;
+      }
+
       if (this.$route.query.bargainId) {
-        param = { ...param, bargain_id: this.$route.query.bargainId };
+        param.bargain_id=this.$route.query.bargainId;
       }
       console.log("param--------------", param);
       let result = await orderCreate(param);
@@ -366,20 +320,25 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
-        // window.location.href=pay_url;
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     },
     /**
      * @description: 继续支付
      */
-    async goRepaidPay(){
-      let result=await repaidOrder({order_no:this.$route.query.orderNo, spu_name:this.spu.title, pay_type:1});
-      if(result&&result.data){
-          let { pay_url, order_no } = result.data;
+    async goRepaidPay() {
+      let result = await repaidOrder({
+        order_no: this.$route.query.orderNo,
+        spu_name: this.spu.title,
+        pay_type: 1
+      });
+      if (result && result.data) {
+        let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     },
     goShippingAddressList() {
@@ -389,7 +348,6 @@ export default {
   watch: {
     showShippingAddressPage(val) {
       if (!val) {
-        console.log("66666666666666");
         this.getMyAddressInfo();
       }
     }

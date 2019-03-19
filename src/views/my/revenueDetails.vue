@@ -8,19 +8,18 @@
     </header>
     <div class="revenue-content">
       <ul>
-        <li
-          v-for="(item,index) in detailList"
-          :key="index"
-        >
+        <li v-for="(item,index) in detailList"
+          :key="index">
           <div>
             <img :src="item.icon">
           </div>
           <div class="con">
             <div class="intro">
-              <p>{{item.name}}</p>
-              <p>{{item.time}}</p>
+              <p>{{item.summary}}</p>
+              <p>{{item.update_time}}</p>
             </div>
-            <div class="count" :class="{cash:item.isCash}">{{item.count}}</div>
+            <div class="count"
+              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}{{item.amount}}</div>
           </div>
         </li>
       </ul>
@@ -29,35 +28,28 @@
 </template>
 
 <script>
+import { getFundRecordList } from "@/server/finance.js";
 export default {
   data() {
     return {
-      detailList: [
-        {
-          icon: "",
-          name: "Newcomer  reward",
-          time: "2019-02-15 13:24:56",
-          count: "+5.00",
-          isCash:false
-        },
-        {
-          icon: "",
-          name: "Newcomer  reward",
-          time: "2019-02-15 13:24:56",
-          count: "+5.00",
-          isCash:true
-        }
-      ]
+      detailList: [],
+      curPageDat:{
+        page_size:10,
+        page_num:1
+      }
     };
   },
-
-  components: {},
-
-  computed: {},
-
-  mounted() {},
-
-  methods: {}
+  created () {
+    this.init();
+  },
+  methods: {
+    async init(){
+      let result=await getFundRecordList(this.curPageDat);
+      if(result&&result.data){
+        this.detailList=result.data;
+      }
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -96,23 +88,23 @@ export default {
           padding: 30px 0;
           &.count {
             width: 100px;
-            color: #D30C05;
+            color: #d30c05;
             font-size: 36px;
-            &.cash{
-                color: #323232;
+            &.cash {
+              color: #323232;
             }
           }
           &.intro {
             flex: 1;
-            p{
-                line-height: 40px;
-                color: #323232;
-                font-size: 30px;
-                &:last-child{
-                    color: #888888;
-                    font-size: 24px;
-                    margin-top: 15px;
-                }
+            p {
+              line-height: 40px;
+              color: #323232;
+              font-size: 30px;
+              &:last-child {
+                color: #888888;
+                font-size: 24px;
+                margin-top: 15px;
+              }
             }
           }
         }

@@ -155,8 +155,8 @@ export default {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          axios.defaults.headers.common["user_id"] = userInfo.user_id;
-          axios.defaults.headers.common["access_token"] = userInfo.access_token;
+          axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+          axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
           // this.$emit("update:dialogVisible", { show: false });
           this.$store.commit("setLoginSelectShow", false);
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {

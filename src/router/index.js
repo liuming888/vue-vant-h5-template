@@ -66,11 +66,11 @@ const curRouter = new Router({
                     name: '提现记录',
                     component: resolve => require(['../views/withdrawRelated/withdrawalsRecord.vue'], resolve),
                 },
-                {
+               /*  {
                     path: '/withdrawRelated/incomeBreakdown',
                     name: '收益明细',
                     component: resolve => require(['../views/withdrawRelated/incomeBreakdown.vue'], resolve),
-                },
+                }, */
             ],
         },
         {

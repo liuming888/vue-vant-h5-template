@@ -85,7 +85,7 @@ export function formatMoney(coin) {
  * @return {false | 格式化后的时间对象}
  */
 export function expiration(expire_time) {
-    if (isNaN(expire_time)) {
+    if (isNaN(expire_time) || expire_time<0) {
         return false;
     }
 
@@ -100,7 +100,7 @@ export function expiration(expire_time) {
     // m = m < 10 ? "0" + m : m;
     // this.expirationDat = { h, p, m };
 
-    let expirationNum = new Date(expire_time);
+    let expirationNum = expire_time;
     let h = Math.floor(expirationNum / (1000 * 60 * 60));
     h = h < 10 ? '0' + h : h;
     let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));

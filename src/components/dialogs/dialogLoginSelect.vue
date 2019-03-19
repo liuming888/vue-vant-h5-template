@@ -68,15 +68,6 @@
 
 <template>
   <div class="dialogLoginSelect-container">
-    <!-- <van-popup v-model="dialogVisible.show"
-      :close-on-click-overlay="false">
-      <h3 style="margin-bottom:30px;">通过以下方式登录</h3>
-      <div style="text-align:center;font-size:36px"
-        @click="checkLogin">
-        FB
-      </div>
-    </van-popup> -->
-
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/login-dialog.png')">
       <div class="tips">
@@ -157,14 +148,15 @@ export default {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          axios.defaults.headers.common["user_id"] = userInfo.user_id;
-          axios.defaults.headers.common["access_token"] = userInfo.access_token;
+          axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+          axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
           // this.$emit("update:dialogVisible", { show: false });
           this.$store.commit("setLoginSelectShow", false);
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
-            this.$router.push({
-              path: this.$store.state.dialogs.loginSelect.jumpUrl
-            });
+            // this.$router.push({
+            //   path: this.$store.state.dialogs.loginSelect.jumpUrl
+            // });
+            window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
           }
 
           // if (this.$route.path == "/forBargain") {

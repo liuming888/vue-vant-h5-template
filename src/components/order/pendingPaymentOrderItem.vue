@@ -105,11 +105,11 @@
 <template>
   <div>
     <div class="order-header">
-      <span>2019-02-27 12:20</span>
+      <span>{{curDat.create_time}}</span>
       <label>Pending payment</label>
     </div>
     <div class="info-box">
-      <img src="./../../assets/images/good-large.png"
+      <img v-lazy="curDat.spu_url"
         alt>
       <div class="info">
         <div class="info-top">
@@ -117,8 +117,7 @@
           <div class="price">Rp{{curDat.amount}}</div>
         </div>
         <p class="info-description">
-          &nbsp;
-          &nbsp;
+          {{curDat.sku_attr}}
         </p>
         <p class="address">Order Number:{{curDat.order_no}}</p>
       </div>
@@ -126,7 +125,7 @@
     <div class="ctrl-box">
       <div class="pay-time">
         Please
-        <span>10:05:30</span> complete payment
+        <span>{{exitTime}}</span> complete payment
       </div>
       <div class="btn"
         @click="goRepaidPay">Go buy</div>
@@ -151,6 +150,16 @@ export default {
       }
     }
   },
+  computed: {
+    exitTime() {
+      let { h, p, m } = this.$util.expiration(this.curDat.expire_time);
+      if (h || p || m) {
+        return `${h}:${p}:${m}`;
+      } else {
+        return "00:00:00";
+      }
+    }
+  },
   methods: {
     /**
      * @description: 继续支付
@@ -165,7 +174,8 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         // this.showWaitPaymentDialog.show = true;
-        window.open(pay_url);
+        // window.open(pay_url);
+        window.location.href=pay_url;
       }
     }
   }

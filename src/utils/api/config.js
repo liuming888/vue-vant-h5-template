@@ -17,7 +17,7 @@ export default {
                 // url = 'http://test-ht-zdd-api.batmobi.cn:43321';
                 break;
             case 'production':
-                url = 'https://api.istarbuy.com';
+                url = 'http://127.0.0.1:9078';
                 break;
         }
         return url;
