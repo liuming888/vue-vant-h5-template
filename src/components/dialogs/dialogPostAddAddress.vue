@@ -206,16 +206,14 @@ export default {
     async simpan() {
       let { username, telephone, country, region, city, zip } = this.curAddress;
       let operation = 1;
-      let is_default = 0;
       if (this.showType == "add") {
         operation = 1;
-        is_default = 1;
+        this.curAddress.is_default = 1;
       } else if (this.showType == "edit") {
         operation = 2;
       }
       let result = await dealMyAddress({
         operation,
-        is_default,
         user_address: this.curAddress
       });
       if (result) {
