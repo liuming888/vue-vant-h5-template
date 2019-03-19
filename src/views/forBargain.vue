@@ -274,8 +274,8 @@ export default {
       }
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
-      if (result&&result.data) {
-        const chop_info = result.data.chop_info;
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         // this.$router.push({
         //   path: "/bargain",
@@ -284,6 +284,12 @@ export default {
         //     bargainId: chop_info.bargain_id
         //   }
         // });
+      } else {
+        // 已经帮砍过了
+        this.$router.push({ path: "/bargain" ,query: {
+            ...this.$route.query,
+            helpCur: 'ok'
+          }});
       }
     },
     /**
@@ -309,6 +315,13 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
+        
+        if(this.bargain_user_info){  // 如果已经帮砍过了
+            this.$router.push({ path: "/bargain" ,query: {
+            ...this.$route.query,
+            helpCur: 'ok'
+          }});
+        }
         console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
     },
