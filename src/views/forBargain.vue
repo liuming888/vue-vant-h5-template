@@ -67,9 +67,9 @@
 
             <!-- 用户第N次进入帮砍界面,不管该商品是否砍价成功 bargain_user_info无的话就没帮砍 -->
             <div class="share-btn"
-              v-if="!$route.query.helpCur&&bargain_user_info.type==2">Receive reward</div>
+              v-if="bargain_user_info.type==2">Receive reward</div>
             <p class="old-txt"
-              v-if="!$route.query.helpCur&&bargain_user_info.type==2">TIP: Go to the personal interface and check out the benefits
+              v-if="bargain_user_info.type==2">TIP: Go to the personal interface and check out the benefits
               immediately </p>
           </div>
         </div>
@@ -304,7 +304,7 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
-        console.log("this.bargain_info: ", this.bargain_info);
+        console.log('this.bargain_user_info: ', this.bargain_user_info);
       }
     },
     /**
@@ -391,6 +391,7 @@ export default {
   beforeRouteUpdate(to, from, next) {
     const { helpCur } = to.query;
     if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
+       this.dialogs.oldUsersHelpCutSuccessfully.show = true;
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
