@@ -59,10 +59,10 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type!=2||isOne"
+              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
-              v-else-if="$route.query.helpCur=='ok'&&bargain_user_info&&bargain_user_info.type!=2"
+              v-else-if="$route.query.helpCur=='ok'&&bargain_user_info&&bargain_user_info.type==2"
               onclick="window.location.href='#helpCurOk'">Also take it for free</div>
             <template v-else>
               <div class="share-btn">Receive reward</div>
@@ -275,7 +275,7 @@ export default {
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
       if (result&&result.data) {
-        const chop_info = result.data.bargain_info;
+        const chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         // this.$router.push({
         //   path: "/bargain",
