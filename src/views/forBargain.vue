@@ -75,7 +75,7 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-      <div class="team-box" v-if="help_bargain_list.length>0">
+      <div class="team-box" v-if="help_bargain_list&&help_bargain_list.length>0">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -323,7 +323,7 @@ export default {
       let stateGoodsList = this.$store.state.goodsList.filter(
         item => !item.isBargain
       );
-      if (stateGoodsList.length > 6) {
+      if (stateGoodsList&&stateGoodsList.length > 6) {
         this.spu_list = stateGoodsList;
         return;
       }
