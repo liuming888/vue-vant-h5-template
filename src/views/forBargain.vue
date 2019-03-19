@@ -59,17 +59,17 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              v-if="$route.query.helpCur!='ok'&&bargain_user_info.type!=2"
+              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type!=2"
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
-              v-if="$route.query.helpCur=='ok'&&bargain_user_info.type!=2"
+              v-if="$route.query.helpCur=='ok'&&bargain_user_info&&bargain_user_info.type!=2"
               onclick="window.location.href='#helpCurOk'">Also take it for free</div>
 
             <!-- 用户第N次进入帮砍界面,不管该商品是否砍价成功 bargain_user_info无的话就没帮砍 -->
             <div class="share-btn"
-              v-if="bargain_user_info.type==2">Receive reward</div>
+              v-if="bargain_user_info&&bargain_user_info.type==2">Receive reward</div>
             <p class="old-txt"
-              v-if="bargain_user_info.type==2">TIP: Go to the personal interface and check out the benefits
+              v-if="bargain_user_info&&bargain_user_info.type==2">TIP: Go to the personal interface and check out the benefits
               immediately </p>
           </div>
         </div>
