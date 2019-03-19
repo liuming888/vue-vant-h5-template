@@ -234,6 +234,14 @@ export default {
       this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
+
+
+      // 用户帮砍按钮点击登录后重新进入页面时
+      const { helpCur } = this.$route.query;
+      if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
+        this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
+        this.goBargainChop();
+      }
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -304,7 +312,7 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
-        console.log('this.bargain_user_info: ', this.bargain_user_info);
+        console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
     },
     /**
@@ -391,7 +399,6 @@ export default {
   beforeRouteUpdate(to, from, next) {
     const { helpCur } = to.query;
     if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
-       this.dialogs.oldUsersHelpCutSuccessfully.show = true;
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
