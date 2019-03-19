@@ -67,9 +67,9 @@
 
             <!-- 用户第N次进入帮砍界面,不管该商品是否砍价成功 bargain_user_info无的话就没帮砍 -->
             <div class="share-btn"
-              v-if="bargain_info.bargain_user_info&&isOne">Receive reward</div>
+              v-if="$route.query.helpCur!='ok'&&bargain_info.bargain_user_info&&isOne">Receive reward</div>
             <p class="old-txt"
-              v-if="bargain_info.bargain_user_info&&isOne">TIP: Go to the personal interface and check out the benefits
+              v-if="$route.query.helpCur!='ok'&&bargain_info.bargain_user_info&&isOne">TIP: Go to the personal interface and check out the benefits
               immediately </p>
           </div>
         </div>
