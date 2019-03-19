@@ -43,12 +43,12 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate||0+'%'}"></div>
               <div class="schedule-item">
-                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
+                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate||0}}%</span></span>
               </div>
               <div class="schedule-item ball ball-right">
                 <!-- <span class="description">Take it free</span> -->
@@ -274,7 +274,7 @@ export default {
       }
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
-      if (result) {
+      if (result&&result.data) {
         const chop_info = result.data.bargain_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         // this.$router.push({
