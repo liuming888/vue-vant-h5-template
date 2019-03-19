@@ -78,7 +78,7 @@ instance.interceptors.response.use(
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
-                Vue.prototype.$toast(response.data.msg);
+                Vue.prototype.$toast('Anda belum login');
                 localStorage.clear();
                 Vue.prototype.$curRouter.replace('/');
             } else {
