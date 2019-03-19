@@ -112,7 +112,7 @@
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||require('./../assets/images/good-large.png')"
             class="products-photo">
-          <p class="products-title">{{item.title}}</p> 
+          <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
@@ -137,7 +137,7 @@ import countDown from "@/components/countDown.vue";
 // import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
-import { shareSpu, shareInfo } from "@/server/share.js";
+import { shareBargain, shareInfo } from "@/server/share.js";
 import {
   getBargainInfo,
   getHelpBargainList,
@@ -162,7 +162,7 @@ export default {
       shareInfo: {},
 
       spu: {
-        spu_pics:[]
+        spu_pics: []
       },
 
       bargain_info: {},
@@ -275,7 +275,7 @@ export default {
         bargain_id: this.$route.query.bargainId
       });
       if (result) {
-        this.bargain_info = result.data.bargain_info||result.data;
+        this.bargain_info = result.data.bargain_info || result.data;
         this.bargain_user_info = result.data.bargain_user_info;
         console.log("this.bargain_info: ", this.bargain_info);
       }
@@ -323,7 +323,10 @@ export default {
       }
     },
     async openSharingFriendsDialog() {
-      if (!this.$store.state.userInfo.user_id&&process.env.VUE_APP_ENV !='development') {
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV != "development"
+      ) {
         const { pathname, search } = window.location;
         this.$store.commit(
           "setLoginJumpUrl",
@@ -333,7 +336,9 @@ export default {
         return;
       }
 
-      let result = await shareSpu({ spu_id: this.$route.query.spuId });
+      let result = await shareBargain({
+        bargain_id: this.$route.query.bargainId
+      });
       if (result) {
         this.shareInfo = result.data;
       }
