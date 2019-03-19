@@ -2,9 +2,9 @@
   <div>
     <!-- 未完成订单 -->
     <ul class="all-order"
-      v-if="orderList.length>0">
+      v-if="orderListDat.length>0">
       <li class="all-order-item"
-        v-for="item of orderList"
+        v-for="item of orderListDat"
         :key="item.order_no">
         <pending-payment-order-item :curDat="item" />
       </li>
@@ -31,16 +31,7 @@ export default {
   },
   data() {
     return {
-      orderList: [
-        //类型：Array  必有字段  备注：无
-        {
-          //类型：Object  必有字段  备注：无
-          order_no: "", //类型：String  必有字段  备注：订单号
-          spu_title: "", //类型：String  必有字段  备注：商品标题
-          sku_attr: "", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
-          amount: "" //类型：String  必有字段  备注：订单金额
-        }
-      ],
+      orderListDat: [],
       orderPageDat: {
         page_num: 1,
         page_size: 5
@@ -54,7 +45,7 @@ export default {
     async init() {
       let result = await orderList({ ...this.orderPageDat, type: 1 });
       if (result && result.data) {
-        this.orderList = result.data;
+        this.orderListDat = result.data;
       }
     }
   }

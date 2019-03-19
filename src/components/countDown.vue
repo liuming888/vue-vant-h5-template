@@ -62,7 +62,7 @@ export default {
       // 创建计时器
       this.newTime = this.dateDiff
       this.setIntervalBox = setInterval(() => {
-        if (this.newTime > 0) {
+        if (this.newTime > 1000) {
           this.newTime -= 1000
           this.getDifferTime(this.newTime)
         } else {
