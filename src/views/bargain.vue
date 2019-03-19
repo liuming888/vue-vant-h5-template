@@ -112,7 +112,7 @@
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||require('./../assets/images/good-large.png')"
             class="products-photo">
-          <p class="products-title">{{item.title}}</p>
+          <p class="products-title">{{item.title}}</p> 
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
@@ -161,7 +161,9 @@ export default {
 
       shareInfo: {},
 
-      spu: {},
+      spu: {
+        spu_pics:[]
+      },
 
       bargain_info: {},
       bargain_user_info: {},
@@ -321,7 +323,7 @@ export default {
       }
     },
     async openSharingFriendsDialog() {
-      if (!this.$store.state.userInfo.user_id) {
+      if (!this.$store.state.userInfo.user_id&&process.env.VUE_APP_ENV !='development') {
         const { pathname, search } = window.location;
         this.$store.commit(
           "setLoginJumpUrl",

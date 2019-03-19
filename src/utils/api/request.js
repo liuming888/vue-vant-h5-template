@@ -13,8 +13,10 @@ if (userStr) {
     access_token = userInfo.access_token;
 }
 
-user_id = 1;
-access_token = '486dcad761f8425e8aa2a49e964a984c';
+if (process.env.VUE_APP_ENV =='development'){
+    user_id = 1;
+    access_token = '486dcad761f8425e8aa2a49e964a984c';
+}
 
 console.log("666666666666", process.env.VUE_APP_ENV);
 

@@ -188,7 +188,7 @@ export default {
 
       shareInfo: {},
 
-      spu: {},
+      spu: {spu_pics:[]},
 
       bargain_info: {},
       bargain_user_info: {},

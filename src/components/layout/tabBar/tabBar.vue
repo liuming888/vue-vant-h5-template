@@ -7,7 +7,7 @@
   align-items: center;
   font-size: 20px;
   text-align: center;
-  color: #C2C2C2;
+  color: #c2c2c2;
   // line-height: 93px;
   > .tabBar-item {
     flex: 1;
@@ -16,21 +16,25 @@
     // align-items: center;
     color: inherit;
     text-decoration: none;
-     > .tabBar-item-img {
-       width: 44px;
-       height: auto;
-     }
+    > .tabBar-item-img {
+      width: 44px;
+      height: auto;
+    }
   }
   > .active {
-    color: #D30C05
+    color: #d30c05;
   }
 }
 </style>
 
 <template>
   <div class="tabBar-container">
-    <span v-for="(item, index) in tabBarList" :key="index" :class="{'tabBar-item': true, 'active': activeRouter === item.path}" @click="jumpPage(item.path)">
-      <img class="tabBar-item-img" v-lazy="activeRouter === item.path ? item.imgActiveUrl : item.imgUrl">
+    <span v-for="(item, index) in tabBarList"
+      :key="index"
+      :class="{'tabBar-item': true, 'active': activeRouter === item.path}"
+      @click="jumpPage(item.path)">
+      <img class="tabBar-item-img"
+        v-lazy="activeRouter === item.path ? item.imgActiveUrl : item.imgUrl">
       <p>{{item.title}}</p>
     </span>
   </div>
@@ -42,32 +46,33 @@ export default {
     return {
       tabBarList: [
         {
-          path: '/',
-          title: 'Home',
-          imgUrl: require('../../../assets/images/tabBar-home.png'),
-          imgActiveUrl: require('../../../assets/images/tabBar-home-active.png')
+          path: "/",
+          title: "Home",
+          imgUrl: require("../../../assets/images/tabBar-home.png"),
+          imgActiveUrl: require("../../../assets/images/tabBar-home-active.png")
         },
         {
-          path: '/my',
-          title: 'Me',
-          imgUrl: require('../../../assets/images/tabBar-me.png'),
-          imgActiveUrl: require('../../../assets/images/tabBar-me-active.png')
+          path: "/my",
+          title: "Me",
+          imgUrl: require("../../../assets/images/tabBar-me.png"),
+          imgActiveUrl: require("../../../assets/images/tabBar-me-active.png")
         }
       ]
-    }
+    };
   },
   computed: {
     activeRouter() {
-      return this.$route.path
+      return this.$route.path;
     }
   },
-  methods:{
-    jumpPage(path){
-      if(path=='/my'&&!this.$store.state.userInfo.user_id){
-        this.$store.commit(
-          "setLoginJumpUrl",
-         '/my'
-        );
+  methods: {
+    jumpPage(path) {
+      if (
+        path == "/my" &&
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV != "development"
+      ) {
+        this.$store.commit("setLoginJumpUrl", "/my");
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -75,6 +80,6 @@ export default {
       this.$router.push(path);
     }
   }
-}
+};
 </script>
 
