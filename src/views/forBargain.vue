@@ -267,8 +267,8 @@ export default {
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
-      const { bargainId/* , spuId */ } = this.$route.query;
-      let result = await bargainChop({ bargain_id: bargainId/* , spu_id: spuId */ });
+      const { bargainId, spuId } = this.$route.query;
+      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
       if (result) {
         const chop_info = result.data.bargain_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
