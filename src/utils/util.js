@@ -4,7 +4,7 @@
  * @return {false | 格式化后的时间对象}
  */
 export function expiration(expire_time) {
-    if (isNaN(expire_time) || expire_time<0) {
+    if (isNaN(expire_time) || expire_time < 0) {
         return false;
     }
 
@@ -24,7 +24,7 @@ export function expiration(expire_time) {
     h = h < 10 ? '0' + h : h;
     let p = Math.floor((expirationNum - 1000 * 60 * 60 * h) / (1000 * 60));
     p = p < 10 ? '0' + p : p;
-    let m = expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p;
+    let m = ~~((expirationNum - 1000 * 60 * 60 * h - 1000 * 60 * p) / 1000);
     m = m < 10 ? '0' + m : m;
     this.expirationDat = { h, p, m };
     return { h, p, m };
