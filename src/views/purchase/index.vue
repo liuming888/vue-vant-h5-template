@@ -350,6 +350,11 @@ export default {
       if (!val) {
         this.getMyAddressInfo();
       }
+    },
+    "showAddressDialog.show"(val){
+      if(!val){
+        this.getMyAddressInfo();
+      }
     }
   }
 };
