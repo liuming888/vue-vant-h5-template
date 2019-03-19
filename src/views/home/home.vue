@@ -153,9 +153,9 @@
         <div class="freebing-box"
           v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
           <div class="freebing-title">Ongoing Freebies</div>
-          <template v-for="item of spuBargainList">
+          <template v-for="(item,index) of spuBargainList">
             <!-- 抢购商品 -->
-            <freebing-box :key="item.bargain_info.spu_id"
+            <freebing-box :key="index"
               :spuBargainItem="{...item.bargain_info,...item.spu}"
               v-if="item.bargain_info.status==1" />
           </template>
