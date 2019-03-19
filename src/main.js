@@ -11,6 +11,7 @@ Vue.use(Popup);
 Vue.use(Lazyload);
 
 Vue.prototype.$curStore = store;
+Vue.prototype.$curRouter = router;
 Vue.prototype.$util = $util;
 // Vue.prototype.$request = $request;
 

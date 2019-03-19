@@ -13,13 +13,12 @@ if (userStr) {
     access_token = userInfo.access_token;
 }
 
-if (process.env.VUE_APP_ENV =='development'){
+if (process.env.VUE_APP_ENV == 'development') {
     user_id = 1;
     access_token = '486dcad761f8425e8aa2a49e964a984c';
 }
 
-console.log("666666666666", process.env.VUE_APP_ENV);
-
+console.log('666666666666', process.env.VUE_APP_ENV);
 
 axios.defaults.headers.common['User-Id'] = user_id;
 axios.defaults.headers.common['Access-Token'] = access_token;
@@ -76,6 +75,9 @@ instance.interceptors.response.use(
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
+                Vue.prototype.$toast(response.data.msg);
+                localStorage.clear();
+                Vue.prototype.$curRouter.replace('/');
             } else {
                 throw response.data;
             }
