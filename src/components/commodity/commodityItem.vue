@@ -236,6 +236,12 @@ export default {
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
+      if (!this.$store.state.userInfo.user_id) {
+        this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${this.itemData.spu_id}`);
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
       this.$router.push({
         path: "/bargain",
         query: {
