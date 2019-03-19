@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-.van-popup {
+.cur-popup {
   width: 610px;
   height: 630px;
   overflow: visible;
@@ -101,7 +101,8 @@
 <template>
   <div class="dialogPostAddAddress-container">
     <van-popup v-model="dialogVisible.show"
-      :close-on-click-overlay="false">
+      :close-on-click-overlay="false"
+      class="cur-popup">
       <img src="~@/assets/images/delete-1.png"
         class="close"
         @click="closeDialog">
@@ -166,7 +167,7 @@ const defaultAddress = {
   address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
   address_two: "", //类型：String  必有字段  备注：配送地址-二级
   is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
-  country_code:"ID"
+  country_code: "ID"
 };
 
 export default {
@@ -203,7 +204,7 @@ export default {
   created() {},
   methods: {
     async simpan() {
-      let {username,telephone,country,region,city,zip}=this.curAddress;
+      let { username, telephone, country, region, city, zip } = this.curAddress;
       let operation = 1;
       if (this.showType == "add") {
         operation = 1;
@@ -228,7 +229,7 @@ export default {
       if (val == "add") {
         this.curAddress = defaultAddress;
       }
-    },
+    }
     // "dialogVisible.show"(val) {
     //   if (val) {
     //     if (this.curAddress.city) {
