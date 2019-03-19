@@ -67,7 +67,10 @@
 
             <!-- 用户第N次进入帮砍界面,不管该商品是否砍价成功 bargain_user_info无的话就没帮砍 -->
             <div class="share-btn"
-              v-if="bargain_info.bargain_user_info">Receive reward</div>
+              v-if="bargain_info.bargain_user_info&&isOne">Receive reward</div>
+            <p class="old-txt"
+              v-if="bargain_info.bargain_user_info&&isOne">TIP: Go to the personal interface and check out the benefits
+              immediately </p>
           </div>
         </div>
       </div>
@@ -75,7 +78,8 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-      <div class="team-box" v-if="help_bargain_list&&help_bargain_list.length>0">
+      <div class="team-box"
+        v-if="help_bargain_list&&help_bargain_list.length>0">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -120,7 +124,8 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products" v-if="spu_list.length>0">
+      <div class="recommend-products"
+        v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="require('./../assets/images/start.png')">
           <span>More Products</span>
@@ -188,7 +193,7 @@ export default {
 
       shareInfo: {},
 
-      spu: {spu_pics:[]},
+      spu: { spu_pics: [] },
 
       bargain_info: {},
       bargain_user_info: {},
@@ -323,7 +328,7 @@ export default {
       let stateGoodsList = this.$store.state.goodsList.filter(
         item => !item.isBargain
       );
-      if (stateGoodsList&&stateGoodsList.length > 6) {
+      if (stateGoodsList && stateGoodsList.length > 6) {
         this.spu_list = stateGoodsList;
         return;
       }
