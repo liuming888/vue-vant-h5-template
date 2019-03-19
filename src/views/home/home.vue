@@ -146,8 +146,7 @@
           indicator-color="white"
           class="home-banner">
           <van-swipe-item>
-            <img v-lazy="require('@/assets/images/home-banner.png')"
-              @click="testLogin">
+            <img v-lazy="require('@/assets/images/home-banner.png')">
           </van-swipe-item>
         </van-swipe>
 

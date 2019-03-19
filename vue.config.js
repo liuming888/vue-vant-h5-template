@@ -1,25 +1,3 @@
-// getUrl(VUE_APP_ENV) {
-//     let url = '';
-//     switch (VUE_APP_ENV) {
-//         case 'mock':
-//             url = '';
-//         case 'development':
-//             break;
-//         case 'dev': // 开发域名环境
-//             url = 'https://dev-ht-zdd-api.istarbuy.com/';
-//             // 阳
-//             // url = 'http://192.168.4.32:8024';
-//             break;
-//         case 'test':
-//             // url =' https://test-ht-zdd-api.istarbuy.com/';
-//             url = 'https://test-zdd-api.istarbuy.cn:8443/';
-//             break;
-//         case 'production':
-//             url = 'https://api.istarbuy.com';
-//             break;
-//     }
-//     return url;
-// }
 
 function getUrl(VUE_APP_ENV) {
     let url = '';
@@ -39,7 +17,7 @@ function getUrl(VUE_APP_ENV) {
             // url = 'https://test-ht-zdd-api.istarbuy.com/api';
 
             // 测试环境外网
-            url ='https://test-ht-zdd-api.istarbuy.com:8443/api'
+            // url ='https://test-ht-zdd-api.istarbuy.com:8443/api'
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
