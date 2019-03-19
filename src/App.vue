@@ -28,7 +28,7 @@ export default {
     "zdd-layout": zddMain
   },
   created() {
-    if(process.env.NODE_ENV=='development'||process.env.NODE_ENV=='mock') return;
+    if(process.env.VUE_APP_ENV=='development'||process.env.VUE_APP_ENV=='mock') return;
     this.initToken();
     this.initFB();
   },

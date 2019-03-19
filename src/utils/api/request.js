@@ -13,15 +13,18 @@ if (userStr) {
     access_token = userInfo.access_token;
 }
 
-user_id = 1;
-access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
+// user_id = 1;
+// access_token = 'd06ba9ad12724f458d6cdd615cab76ac';
+
+console.log("666666666666", process.env.VUE_APP_ENV);
+
 
 axios.defaults.headers.common['User-Id'] = user_id;
 axios.defaults.headers.common['Access-Token'] = access_token;
 
 var instance = axios.create();
 
-let url = config.getUrl(process.env.NODE_ENV);
+let url = config.getUrl(process.env.VUE_APP_ENV);
 console.log('url: ', url);
 instance.defaults.baseURL = url;
 instance.defaults.timeout = 6000;
@@ -29,7 +32,7 @@ instance.defaults.withCredentials = true;
 
 Vue.prototype.$loaddingNum = 0;
 
-const curCode = process.env.NODE_ENV == 'mock' ? 1 : 0; // 当前代表成功的code (mock 1为成功)
+const curCode = process.env.VUE_APP_ENV == 'mock' ? 1 : 0; // 当前代表成功的code (mock 1为成功)
 console.log('curCode: ', curCode);
 
 // 请求拦截

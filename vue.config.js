@@ -1,8 +1,6 @@
-console.log('111111111111111', process.env.NODE_ENV);
-
-function getUrl(NODE_ENV) {
+function getUrl(VUE_APP_ENV) {
     let url = '';
-    switch (NODE_ENV) {
+    switch (VUE_APP_ENV) {
         case 'mock':
             url = 'http://doclever.batmobi.cn/mock/5c7f95350fcb632d8754e6bf/api';
             break;
@@ -37,7 +35,7 @@ module.exports = {
         // disableHostCheck: true,
         proxy: {
             '/api': {
-                target: getUrl(process.env.NODE_ENV),
+                target: getUrl(process.env.VUE_APP_ENV),
 
                 ws: true,
 

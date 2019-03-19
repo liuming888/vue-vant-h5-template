@@ -1,13 +1,13 @@
 export default {
-    getUrl(NODE_ENV) {
+    getUrl(VUE_APP_ENV) {
         let url = '';
-        switch (NODE_ENV) {
+        switch (VUE_APP_ENV) {
             case 'mock':
                 url = '';
             case 'development':
                 // url = 'http://dev-ht-zdd-api.batmobi.net';
                 break;
-            case 'dev':  // 开发域名环境
+            case 'dev': // 开发域名环境
                 url = 'https://dev-ht-zdd-api.batmobi.net';
                 // 阳
                 // url = 'http://192.168.4.32:8024';
@@ -21,5 +21,5 @@ export default {
                 break;
         }
         return url;
-    }
+    },
 };
