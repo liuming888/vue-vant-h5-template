@@ -46,9 +46,9 @@
             <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate||0+'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
               <div class="schedule-item">
-                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate||0}}%</span></span>
+                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
               </div>
               <div class="schedule-item ball ball-right">
                 <!-- <span class="description">Take it free</span> -->
