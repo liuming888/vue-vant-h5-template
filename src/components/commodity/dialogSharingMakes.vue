@@ -12,52 +12,6 @@
   align-items: center;
 }
 
-// .share-types {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-bottom: 41px;
-//   position: relative;
-
-//   img {
-//     width: 100px;
-//     margin-right: 20px;
-//     height: auto;
-//   }
-// }
-
-// .tip {
-//   width: 400px;
-//   margin: 0 auto;
-//   text-align: center;
-//   margin-bottom: 135px;
-//   font-size: 26px;
-// }
-// .copy-link {
-//   display: block;
-//   background: none;
-//   // padding-left: 230px;
-//   font-size: 34px;
-//   font-weight: bold;
-//   color: rgba(211, 12, 5, 1);
-//   position: absolute;
-//   left: 230px;
-//   bottom: 50px;
-// }
-
-// .close-img {
-//   display: block;
-//   width: 70px;
-//   height: auto;
-//   // margin: 96px auto 0;
-//   position: absolute;
-//   bottom: -90px;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-// }
-
 .share-box {
   width: 610px;
   height: 828px;
