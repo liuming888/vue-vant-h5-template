@@ -132,9 +132,7 @@
 <script>
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-// import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
 import countDown from "@/components/countDown.vue";
-// import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";

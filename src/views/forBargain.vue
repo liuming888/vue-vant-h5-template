@@ -277,16 +277,10 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-        // this.$router.push({
-        //   path: "/bargain",
-        //   query: {
-        //     ...this.$route.query,
-        //     bargainId: chop_info.bargain_id
-        //   }
-        // });
+       
       } else {
         // 已经帮砍过了
-        this.$router.push({ path: "/bargain" ,query: {
+        this.$router.push({ path: "/forBargain" ,query: {
             ...this.$route.query,
             helpCur: 'ok'
           }});
@@ -317,7 +311,7 @@ export default {
         this.bargain_user_info = result.data.bargain_user_info;
         
         if(this.bargain_user_info){  // 如果已经帮砍过了
-            this.$router.push({ path: "/bargain" ,query: {
+            this.$router.push({ path: "/forBargain" ,query: {
             ...this.$route.query,
             helpCur: 'ok'
           }});
@@ -377,13 +371,13 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${spu_id}`);
+        this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
 
       this.$router.push({
-        path: "/bargain",
+        path: "/forBargain",
         query: {
           spuId: spu_id
         }
