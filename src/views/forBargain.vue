@@ -59,7 +59,7 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type!=2||!isOne"
+              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type!=2||isOne"
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
               v-else-if="$route.query.helpCur=='ok'&&bargain_user_info&&bargain_user_info.type!=2"
