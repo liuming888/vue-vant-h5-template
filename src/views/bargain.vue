@@ -97,7 +97,7 @@
         v-if="!$route.query.bargainId">
         <!-- 商品详情图 -->
         <p class="page-title">Product Petails</p>
-        <img v-lazy="spu.spu_pics[0]">
+        <img v-lazy="spu&&spu.spu_pics[0]">
       </div>
 
       <!-- 推荐商品 -->
