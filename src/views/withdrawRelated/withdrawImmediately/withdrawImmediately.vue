@@ -200,6 +200,11 @@
   }
   > .schedule-item:last-of-type {
     text-align: right;
+
+    &.ball-center-cur::after {
+      margin: 0;
+      left: calc(50% - 20px);
+    }
   }
   > .ball::after {
     content: "";
@@ -222,7 +227,7 @@
     left: calc(50% - 12px);
   }
   > .ball-center-1 {
-    text-indent: -25%;
+    // text-indent: -25%;
   }
   > .ball-center-1::after {
     left: calc(30% - 12px);
@@ -233,10 +238,19 @@
     top: -25px;
     background: url("~@/assets/images/coin.gif") no-repeat center;
     background-size: 60px;
-    left: calc(50% - 20px);
+    // left: calc(50% - 20px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
   > .ball-center-2 {
-    text-indent: 10%;
+    position: relative;
+
+    &::after {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
   }
   > .ball-center-3::after {
     left: calc(70% - 12px);
@@ -365,7 +379,6 @@
         <div @click="cashOk">I know</div>
       </div>
     </div>
-
 
     <div class="balance-box">
       <div class="current-balance">
@@ -534,18 +547,18 @@ export default {
       if (!account_name || !account_no) {
         Dialog.alert({
           message: "Informasi akun tidak boleh kosong",
-          confirmButtonText:"Tentukan"
+          confirmButtonText: "Tentukan"
         });
         return;
       }
-      if(account_name!==account_no){
-          Dialog.alert({
+      if (account_name !== account_no) {
+        Dialog.alert({
           message: "Akun tidak konsisten dimasukkan dua kali",
-          confirmButtonText:"Tentukan"
+          confirmButtonText: "Tentukan"
         });
         return;
       }
-      
+
       console.log("this.withdrawParam", this.withdrawParam);
 
       let result = await applyWithdraw(this.withdrawParam);
