@@ -13,7 +13,7 @@
 
     <!-- 弹窗 -->
     <dialog-login-select v-if="$store.state.dialogs.loginSelect.show" />
-    <!-- <dialog-new-gift-bag/> -->
+    <!-- <dialog-new-gift-bag v-if="$store.state.dialogs.newGiftBag.show" /> -->
   </div>
 </template>
 
@@ -33,6 +33,11 @@ export default {
     dialogBidPriceCompleted, // 砍价完成弹窗
     dialogLoginSelect, // 登录选择弹窗
     dialogNewGiftBag // 新人礼包
+  },
+  created() {
+    if (localStorage.getItem("newUser") == "1") {
+      this.$store.commit("setNewGiftBagShow",true);
+    }
   }
 };
 </script>
