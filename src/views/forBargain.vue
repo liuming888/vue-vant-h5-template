@@ -236,7 +236,6 @@ export default {
 
       // 用户帮砍按钮点击登录后重新进入页面时
       const { helpCur } = this.$route.query;
-      console.log('init----------------------------------helpCur: ', helpCur);
       if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
         this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
         this.goBargainChop();
@@ -253,7 +252,7 @@ export default {
         } = result.data;
 
         this.$router.push({
-          // path: "/forBargain",
+          path: "/forBargain",
           query: {
             ...this.$route.query,
             bargainId,
@@ -263,7 +262,7 @@ export default {
           }
         });
       }
-      return Promise.resolve();
+      return Promise.resolve()
     },
     async goBargainChop() {
       if (!this.$store.state.userInfo.user_id) {
@@ -313,13 +312,13 @@ export default {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
         
-        // if(this.bargain_user_info){  // 如果已经帮砍过了
-        //     this.$router.push({ path: "/forBargain" ,query: {
-        //     ...this.$route.query,
-        //     helpCur: 'ok'
-        //   }});
-        // }
-        // console.log("this.bargain_user_info: ", this.bargain_user_info);
+        if(!this.bargain_user_info){  // 如果没有帮砍 （没bargain_user_info返回就是没帮砍）
+            this.$router.push({ path: "/forBargain" ,query: {
+            ...this.$route.query,
+            helpCur: 'ok'
+          }});
+        }
+        console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
     },
     /**
@@ -404,13 +403,13 @@ export default {
       });
     }
   },
- /*  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     const { helpCur } = to.query;
     if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
     next();
-  } */
+  }
 };
 </script>
