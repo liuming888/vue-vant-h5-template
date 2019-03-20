@@ -15,10 +15,3 @@ export const FBConfig = {
     xfbml: true,
     version: 'v3.2',
 };
-
-exports.FBConfig = {
-    appId,
-    cookie: true,
-    xfbml: true,
-    version: 'v3.2',
-};
