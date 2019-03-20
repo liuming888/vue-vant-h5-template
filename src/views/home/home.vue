@@ -8,18 +8,18 @@
     position: relative;
     width: 100vw;
     overflow: hidden;
-    // &::after {
-    //   content: "";
-    //   display: block;
-    //   height: 39px;
-    //   width: 100%;
-    //   position: absolute;
-    //   bottom: 0;
-    //   left: 0;
-    //   background: url("./../../assets/images/clapboard.png") no-repeat top
-    //     center;
-    //   background-size: 100% auto;
-    // }
+    &::after {
+      content: "";
+      display: block;
+      height: 36px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      // background: url("./../../assets/images/clapboard.png") no-repeat top
+      //   center;
+      // background-size: 100% auto;
+    }
     > .home-top-msg {
       position: absolute;
       top: 21px;
