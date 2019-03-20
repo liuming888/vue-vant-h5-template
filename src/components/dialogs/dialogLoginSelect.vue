@@ -94,6 +94,15 @@
 </template>
 
 <script>
+import { FBConfig } from "@/config/index.js";
+import "@/utils/faceBookSdk.js";
+window.fbAsyncInit = async function() {
+  FB.init(FBConfig);
+  FB.AppEvents.logPageView();
+  console.warn("已经初始化FB了");
+};
+
+
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
 export default {
@@ -156,9 +165,9 @@ export default {
             // this.$router.push({
             //   path: this.$store.state.dialogs.loginSelect.jumpUrl
             // });
-            window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
-          }else{
-            window.location.reload();  // 刷新当前页
+            window.location.href = this.$store.state.dialogs.loginSelect.jumpUrl;
+          } else {
+            window.location.reload(); // 刷新当前页
           }
 
           // if (this.$route.path == "/forBargain") {

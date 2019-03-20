@@ -30,7 +30,7 @@ export default {
   created() {
     if(process.env.VUE_APP_ENV=='development'||process.env.VUE_APP_ENV=='mock') return;
     this.initToken();
-    this.initFB();
+    // this.initFB();
   },
   mounted () {
     document.getElementById("mainApp").classList.remove("pre-app");
@@ -39,7 +39,7 @@ export default {
     /**
      * @description: 初始化FB
      */
-    initFB() {
+   /*  initFB() {
       const vm = this;
       window.fbAsyncInit = async function() {
         FB.init(FBConfig);
@@ -76,7 +76,7 @@ export default {
         //   // console.log('loginInfo: ', loginInfo);
         // }
       };
-    },
+    }, */
     /**
      * @description: 刷新下登录token
      */
