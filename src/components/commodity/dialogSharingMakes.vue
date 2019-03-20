@@ -219,8 +219,9 @@
 
 <script>
 import share from "@/mixins/share.js";
+import fbInit from '@/mixins/fbInit.js';
 export default {
-  mixins: [share],
+  mixins: [share,fbInit],
   name: "dialogSharingMakes",
   props: {
     dialogVisible: {
