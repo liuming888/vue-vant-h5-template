@@ -126,8 +126,8 @@
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo" />
-    <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully"
-      :chopInfo="chop_info" />
+    <dialog-potong-sendiri :chopInfo="chop_info"
+      :dialogVisible.sync="dialogs.potongSendiri" />
   </div>
 </template>
 
@@ -135,7 +135,7 @@
 import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
 import countDown from "@/components/countDown.vue";
-import dialogOldUsersHelpCutSuccessfully from "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue";
+import dialogPotongSendiri from "@/components/dialogs/dialogPotongSendiri.vue";
 
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
@@ -149,7 +149,7 @@ export default {
     bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
     countDown,
-    dialogOldUsersHelpCutSuccessfully // 帮砍成功弹窗
+    dialogPotongSendiri // 自砍成功弹窗
   },
   data() {
     return {
@@ -157,7 +157,7 @@ export default {
         sharingFriends: {
           show: false
         },
-        oldUsersHelpCutSuccessfully: {
+        potongSendiri: {
           show: false
         }
       },
@@ -224,7 +224,6 @@ export default {
         } = result.data;
 
         this.$router.push({
-          // path: "/bargain",
           query: {
             ...this.$route.query,
             bargainId,
@@ -239,7 +238,7 @@ export default {
       let result = await bargainChop({ bargain_id, spu_id });
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
-        this.chop_info=chop_info;
+        this.chop_info = chop_info;
         console.log("chop_info: ", chop_info);
         this.$router.push({
           query: {
@@ -255,7 +254,7 @@ export default {
           }
         });
         this.$store.commit("setGoodsList", arr);
-        this.dialogs.oldUsersHelpCutSuccessfully.show=true;
+        this.dialogs.potongSendiri.show = true;
         return Promise.resolve();
       }
     },
@@ -333,7 +332,7 @@ export default {
         process.env.VUE_APP_ENV != "development"
       ) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl",'');  // 不跳，防止有登陆后有问题
+        this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止有登陆后有问题
         // this.$store.commit(
         //   "setLoginJumpUrl",
         //   pathname + search + "&loginGoShare=ok"
@@ -353,7 +352,7 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl",''); // 不跳，防止登录后有问题
+        this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止登录后有问题
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -372,7 +371,7 @@ export default {
       // 上线时不能注释
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", '');
+        this.$store.commit("setLoginJumpUrl", "");
         // this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
