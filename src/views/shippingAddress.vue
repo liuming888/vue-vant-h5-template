@@ -131,7 +131,7 @@
     <!-- 弹窗 -->
     <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress"
       ref="address_dialog"
-      :showType="addressDialogType" />
+      :showType="addressDialogType" v-if="dialogs.postAddAddress.show"/>
     <!-- 删除地址弹窗 -->
     <dialog-default :info="dialogDefaultInfo"
       :dialogVisible.sync="dialogDefaultShow"
@@ -216,7 +216,6 @@ export default {
     },
     openAddressDialog(type) {
       this.addressDialogType = type;
-      console.log("this.addressDialogType: ", this.addressDialogType);
       this.dialogs.postAddAddress.show = true;
     },
     // 关闭当前
