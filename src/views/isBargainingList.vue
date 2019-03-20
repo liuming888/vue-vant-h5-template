@@ -340,9 +340,10 @@
               <div class="price-item go-on-item-btn">
                 <div class="btn go-on"
                   style="margin:0;"
-                  @click="jumpCurBargainPage(item.spu.spu_id)">Go On</div>
+                  @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">Go On</div>
 
-                <div class="btn" v-show="item.bargain_info.can_buy==1"
+                <div class="btn"
+                  v-show="item.bargain_info.can_buy==1"
                   @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
               </div>
             </div>
@@ -397,11 +398,12 @@ export default {
         );
       } catch (error) {}
     },
-    jumpCurBargainPage(spu_id) {
+    jumpCurBargainPage(spu_id, bargain_id) {
       this.$router.push({
         path: "/bargain",
         query: {
-          spuId: spu_id
+          spuId: spu_id,
+          bargainId: bargain_id
         }
       });
     },
