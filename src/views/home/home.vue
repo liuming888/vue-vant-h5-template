@@ -48,7 +48,7 @@
     }
     > .home-banner img {
       width: 100%;
-      height: auto;
+      max-height: 500px;
     }
   }
   > .home-goods {
@@ -140,12 +140,19 @@
     <div class="home-container">
       <section class="home-top-container">
         <!-- 用户消息 -->
-        <user-picking-up-message :messageList="messageList" v-if="messageList.length>0"></user-picking-up-message>
+        <user-picking-up-message :messageList="messageList"
+          v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="3000"
+        <van-swipe :autoplay="5000"
           indicator-color="white"
           class="home-banner">
-          <van-swipe-item>
+          <template v-if="bannerList.length>0">
+            <van-swipe-item v-for="item of bannerList"
+              :key="item.id">
+              <img v-lazy="item.url">
+            </van-swipe-item>
+          </template>
+          <van-swipe-item v-else>
             <img v-lazy="require('@/assets/images/home-banner.png')">
           </van-swipe-item>
         </van-swipe>
@@ -199,7 +206,7 @@ import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue
 import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import axios from "axios";
-import { getHomeTip } from "@/server/other.js";
+import { getHomeTip, getBanners } from "@/server/other.js";
 import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
@@ -213,6 +220,7 @@ export default {
   data() {
     return {
       messageList: [], // 顶部滚动消息
+      bannerList: [], // banner列表
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [],
       goodsList: [],
@@ -223,11 +231,21 @@ export default {
     };
   },
   created() {
-    this.initHomeTip();
-    this.initMybargainSpus();
-    this.initGoodsList({ ...this.goodsListPageDat });
+    this.init();
   },
   methods: {
+    init() {
+      this.initBanners();
+      this.initHomeTip();
+      this.initMybargainSpus();
+      this.initGoodsList({ ...this.goodsListPageDat });
+    },
+    async initBanners() {
+      let result = await getBanners();
+      if (result && result.data) {
+        this.bannerList = result.data;
+      }
+    },
     async initHomeTip() {
       let result = await getHomeTip();
       if (result) {
