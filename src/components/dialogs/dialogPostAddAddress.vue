@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import { Field, Icon } from "vant";
+import { Field, Icon, Dialog } from "vant";
 import dialogArea from "./dialogArea.vue";
 
 import { dealMyAddress } from "@/server/user.js";
@@ -205,6 +205,14 @@ export default {
   methods: {
     async simpan() {
       let { username, telephone, country, region, city, zip } = this.curAddress;
+      if (!username || !telephone || !country || !region || !city || !zip) {
+        Dialog.alert({
+          message: "Silakan isi informasi alamat lengkap",
+          confirmButtonText: "Tentukan"
+        });
+        return;
+      }
+
       let operation = 1;
       if (this.showType == "add") {
         operation = 1;
