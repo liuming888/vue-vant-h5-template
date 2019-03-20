@@ -11,7 +11,10 @@ export default {
     setLoginJumpUrl(state, payload) {
         state.dialogs.loginSelect.jumpUrl = payload;
     },
-    setGoodsList(state,payload){
+    setGoodsList(state, payload) {
         state.goodsList = payload;
-    }
+    },
+    setNewGiftBagShow(state, payload) {
+        state.dialogs.newGiftBag.show = payload;
+    },
 };
