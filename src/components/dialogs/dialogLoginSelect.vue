@@ -158,7 +158,7 @@ export default {
             // });
             window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
           }else{
-            window.location.href=window.location.pathname;  // 刷新当前页
+            window.location.reload();  // 刷新当前页
           }
 
           // if (this.$route.path == "/forBargain") {
