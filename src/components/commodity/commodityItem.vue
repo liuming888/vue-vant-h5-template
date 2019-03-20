@@ -116,7 +116,7 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="3000"
+          :autoplay="3000"  :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
             :key="swipeIdx">
@@ -153,7 +153,7 @@
     <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
-      v-if="dialogs.sharingFriends.show" />
+      v-if="dialogs.sharingFriends.show" :itemData="itemData"/>
   </div>
 </template>
 
@@ -217,8 +217,12 @@ export default {
      * @description: 分享赚
      */
     async cashBack() {
-      if (!this.$store.state.userInfo.user_id) {
-        this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV != "development"
+      ) {
+        this.$store.commit("setLoginJumpUrl", ``); 
+        // this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -236,6 +240,15 @@ export default {
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV != "development"
+      ) {
+        this.$store.commit("setLoginJumpUrl",'');  // 不跳砍价页面，因为登录后这商品可能被这用户砍了
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
       this.$router.push({
         path: "/bargain",
         query: {
@@ -243,7 +256,7 @@ export default {
         }
       });
     }
-  },
+  }/* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {
@@ -251,6 +264,6 @@ export default {
       this.cashBack();
     }
     next();
-  }
+  } */
 };
 </script>

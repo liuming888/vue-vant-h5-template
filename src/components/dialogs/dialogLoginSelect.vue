@@ -96,8 +96,10 @@
 <script>
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
+import fbInit from '@/mixins/fbInit.js';
 export default {
   name: "dialogLoginSelect",
+  mixins: [fbInit],
   data() {
     return {};
   },
@@ -156,7 +158,9 @@ export default {
             // this.$router.push({
             //   path: this.$store.state.dialogs.loginSelect.jumpUrl
             // });
-            window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
+            window.location.href = this.$store.state.dialogs.loginSelect.jumpUrl;
+          } else {
+            window.location.reload(); // 刷新当前页
           }
 
           // if (this.$route.path == "/forBargain") {

@@ -11,14 +11,14 @@
     &::after {
       content: "";
       display: block;
-      height: 39px;
+      height: 36px;
       width: 100%;
       position: absolute;
       bottom: 0;
       left: 0;
-      background: url("./../../assets/images/clapboard.png") no-repeat top
-        center;
-      background-size: 100% auto;
+      // background: url("./../../assets/images/clapboard.png") no-repeat top
+      //   center;
+      // background-size: 100% auto;
     }
     > .home-top-msg {
       position: absolute;
@@ -48,7 +48,7 @@
     }
     > .home-banner img {
       width: 100%;
-      height: auto;
+      max-height: 500px;
     }
   }
   > .home-goods {
@@ -140,23 +140,29 @@
     <div class="home-container">
       <section class="home-top-container">
         <!-- 用户消息 -->
-        <user-picking-up-message :messageList="messageList" v-if="messageList.length>0"></user-picking-up-message>
+        <user-picking-up-message :messageList="messageList"
+          v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="3000"
+        <van-swipe :autoplay="5000" :show-indicators="false"
           indicator-color="white"
           class="home-banner">
-          <van-swipe-item>
-            <img v-lazy="require('@/assets/images/home-banner.png')"
-              @click="testLogin">
+          <template v-if="bannerList.length>0">
+            <van-swipe-item v-for="item of bannerList"
+              :key="item.id">
+              <img v-lazy="item.url">
+            </van-swipe-item>
+          </template>
+          <van-swipe-item v-else>
+            <img v-lazy="require('@/assets/images/home-banner.png')">
           </van-swipe-item>
         </van-swipe>
 
         <div class="freebing-box"
           v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
           <div class="freebing-title">Ongoing Freebies</div>
-          <template v-for="item of spuBargainList">
+          <template v-for="(item,index) of spuBargainList">
             <!-- 抢购商品 -->
-            <freebing-box :key="item.bargain_info.spu_id"
+            <freebing-box :key="index"
               :spuBargainItem="{...item.bargain_info,...item.spu}"
               v-if="item.bargain_info.status==1" />
           </template>
@@ -200,7 +206,7 @@ import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue
 import commodityItem from "@/components/commodity/commodityItem.vue";
 
 import axios from "axios";
-import { getHomeTip } from "@/server/other.js";
+import { getHomeTip, getBanners } from "@/server/other.js";
 import { login } from "@/server/user.js";
 import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
 export default {
@@ -214,6 +220,7 @@ export default {
   data() {
     return {
       messageList: [], // 顶部滚动消息
+      bannerList: [], // banner列表
       // 正在砍价的商品列表（默认最多展示两条）
       spuBargainList: [],
       goodsList: [],
@@ -224,11 +231,21 @@ export default {
     };
   },
   created() {
-    this.initHomeTip();
-    this.initMybargainSpus();
-    this.initGoodsList({ ...this.goodsListPageDat });
+    this.init();
   },
   methods: {
+    init() {
+      this.initBanners();
+      this.initHomeTip();
+      this.initMybargainSpus();
+      this.initGoodsList({ ...this.goodsListPageDat });
+    },
+    async initBanners() {
+      let result = await getBanners();
+      if (result && result.data) {
+        this.bannerList = result.data;
+      }
+    },
     async initHomeTip() {
       let result = await getHomeTip();
       if (result) {

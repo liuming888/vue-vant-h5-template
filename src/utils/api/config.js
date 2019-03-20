@@ -1,25 +1,24 @@
 export default {
-    getUrl(NODE_ENV) {
+    getUrl(VUE_APP_ENV) {
         let url = '';
-        switch (NODE_ENV) {
+        switch (VUE_APP_ENV) {
             case 'mock':
                 url = '';
             case 'development':
-                // url = 'http://dev-ht-zdd-api.batmobi.net';
                 break;
-            case 'dev':  // 开发域名环境
-                url = 'https://dev-ht-zdd-api.batmobi.net';
+            case 'dev': // 开发域名环境
+               url = 'https://dev-ht-zdd-api.istarbuy.com/';
                 // 阳
                 // url = 'http://192.168.4.32:8024';
                 break;
             case 'test':
-                url = 'https://test-ht-zdd-api.batmobi.net';
-                // url = 'http://test-ht-zdd-api.batmobi.cn:43321';
+                // url =' https://test-ht-zdd-api.istarbuy.com/';
+                url = 'https://test-ht-zdd-api.istarbuy.com:8443';
                 break;
             case 'production':
                 url = 'https://api.istarbuy.com';
                 break;
         }
         return url;
-    }
+    },
 };

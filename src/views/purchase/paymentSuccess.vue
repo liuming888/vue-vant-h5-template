@@ -82,7 +82,7 @@ export default {
   mounted () {
     setTimeout(() => {
         this.$router.push("/");
-    }, 2000);
+    }, 6000);
   },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {

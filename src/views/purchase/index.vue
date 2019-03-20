@@ -178,39 +178,8 @@ export default {
   },
   data() {
     return {
-      spu: {
-        //类型：Object  必有字段  备注：商品
-        spu_id: 1, //类型：Number  必有字段  备注：商品id
-        title: "mock", //类型：String  必有字段  备注：商品标题
-        spu_pics: [],
-        price: "mock", //类型：String  必有字段  备注：商品售价
-        original_price: "mock", //类型：String  必有字段  备注：原价
-        desp: "mock", //类型：String  必有字段  备注：商品详情描述
-        expire_ttl: "mock" //类型：String  必有字段  备注：商品砍价过期时间（剩余的时间）单位：秒
-      },
-      specs: [
-        /* 
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：无
-          spu_id: 1, //类型：Number  必有字段  备注：商品id
-          spec_name: "颜色", //类型：String  必有字段  备注：规格类名称
-          seq: 10, //类型：Number  必有字段  备注：无
-          create_time: "2019-03-10 00:29:27", //类型：String  必有字段  备注：无
-          update_time: "2019-03-10 00:37:50", //类型：String  必有字段  备注：无
-          spu_spec_items: [
-            //类型：Array  必有字段  备注：规格可选参考值列表
-            {
-              //类型：Object  必有字段  备注：无
-              id: 1, //类型：Number  必有字段  备注：规格参考值id（下单，需要上报服务端）
-              spec_id: 1, //类型：Number  必有字段  备注：规格类id
-              item_name: "红色", //类型：String  必有字段  备注：规格参考值名称
-              seq: 10 //类型：Number  必有字段  备注：无
-            }
-          ]
-        }
-       */
-      ],
+      spu: {},
+      specs: [],
 
       paly_id: 1,
 
@@ -348,6 +317,11 @@ export default {
   watch: {
     showShippingAddressPage(val) {
       if (!val) {
+        this.getMyAddressInfo();
+      }
+    },
+    "showAddressDialog.show"(val){
+      if(!val){
         this.getMyAddressInfo();
       }
     }

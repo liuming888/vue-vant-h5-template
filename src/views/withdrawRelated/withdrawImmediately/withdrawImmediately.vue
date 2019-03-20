@@ -200,6 +200,11 @@
   }
   > .schedule-item:last-of-type {
     text-align: right;
+
+    &.ball-center-cur::after {
+      margin: 0;
+      left: calc(50% - 20px);
+    }
   }
   > .ball::after {
     content: "";
@@ -222,7 +227,7 @@
     left: calc(50% - 12px);
   }
   > .ball-center-1 {
-    text-indent: -25%;
+    // text-indent: -25%;
   }
   > .ball-center-1::after {
     left: calc(30% - 12px);
@@ -231,12 +236,21 @@
     width: 60px;
     height: 60px;
     top: -25px;
-    background: url("./../../../assets/images/coin.gif") no-repeat center;
+    background: url("~@/assets/images/coin.gif") no-repeat center;
     background-size: 60px;
-    left: calc(50% - 20px);
+    // left: calc(50% - 20px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
   > .ball-center-2 {
-    text-indent: 10%;
+    position: relative;
+
+    &::after {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
   }
   > .ball-center-3::after {
     left: calc(70% - 12px);
@@ -366,7 +380,6 @@
       </div>
     </div>
 
-
     <div class="balance-box">
       <div class="current-balance">
         <h5 class="tit">Current balance</h5>
@@ -417,13 +430,13 @@
         </li>
         <li>
           <span>Account Name</span>
-          <input v-model="withdrawParam.account_name"
+          <input v-model.trim="withdrawParam.account_name"
             type="text"
             placeholder="Papal110">
         </li>
         <li>
           <span>Confirm the account</span>
-          <input v-model="withdrawParam.account_no"
+          <input v-model.trim="withdrawParam.account_no"
             type="text"
             placeholder="Papal110">
         </li>
@@ -434,7 +447,7 @@
       <div class="progress-box">
         <div class="schedule">
           <div class="active"
-            :style="{'width':user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%'}"></div>
+            :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div>
 
           <div class="schedule-item ball"
             v-for="(item,index) of rule"
@@ -504,59 +517,8 @@ export default {
         amount: "" //类型：String  必有字段  备注：金额
       },
 
-      rule: [
-        //类型：Array  必有字段  备注：提现规则
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：规则id
-          threshold: 8, //类型：Number  必有字段  备注：提现门槛
-          amount: 1, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 2, //类型：Number  必有字段  备注：规则id
-          threshold: 138, //类型：Number  必有字段  备注：提现门槛
-          amount: 5, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 3, //类型：Number  必有字段  备注：规则id
-          threshold: 188, //类型：Number  必有字段  备注：提现门槛
-          amount: 10, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 4, //类型：Number  必有字段  备注：规则id
-          threshold: 238, //类型：Number  必有字段  备注：提现门槛
-          amount: 15, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 5, //类型：Number  必有字段  备注：规则id
-          threshold: 288, //类型：Number  必有字段  备注：提现门槛
-          amount: 30, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        }
-      ],
-      pay_type: [
-        //类型：Array  必有字段  备注：支付类型
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：类型id
-          type: 1, //类型：Number  必有字段  备注：支付类型
-          name: "paypal" //类型：String  必有字段  备注：支付类型名
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 2, //类型：Number  必有字段  备注：类型id
-          type: 2, //类型：Number  必有字段  备注：支付类型
-          name: "ceshi" //类型：String  必有字段  备注：支付类型名
-        }
-      ],
+      rule: [],
+      pay_type: [],
       user_fund: {
         //类型：Object  必有字段  备注：用户金额
         balance: 0, //类型：Number  必有字段  备注：用户余额
@@ -585,10 +547,18 @@ export default {
       if (!account_name || !account_no) {
         Dialog.alert({
           message: "Informasi akun tidak boleh kosong",
-          confirmButtonText:"Tentukan"
+          confirmButtonText: "Tentukan"
         });
         return;
       }
+      if (account_name !== account_no) {
+        Dialog.alert({
+          message: "Akun tidak konsisten dimasukkan dua kali",
+          confirmButtonText: "Tentukan"
+        });
+        return;
+      }
+
       console.log("this.withdrawParam", this.withdrawParam);
 
       let result = await applyWithdraw(this.withdrawParam);
@@ -608,7 +578,7 @@ export default {
             (index > 0 &&
               withdrawAmount > this.rule[index - 1].amount &&
               withdrawAmount < item.amount) ||
-            (withdrawAmount < item.amount && index == 0)
+            (withdrawAmount < item.amount && index == 1)
         }
       ];
     },

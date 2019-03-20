@@ -2,9 +2,9 @@
   <div class="count-down">
     <span class="time">{{time.h}}</span>
     :
-    <span class="time">{{time.m}}</span>
+    <span class="time">{{time.p}}</span>
     :
-    <span class="time">{{time.s}}</span>
+    <span class="time">{{time.m}}</span>
     <span class="dec">overdued</span>
   </div>
 </template>
@@ -40,30 +40,30 @@ export default {
   methods: {
     
     getDifferTime(dateDiff) {//di作为一个变量传进来
-      // const dateDiff = moment(dateDiff, "YYYYMMDD h:mm:ss").unix() - moment().unix();//时间差的毫秒数
-      const dayDiff = Math.floor(dateDiff / (24 * 3600));//计算出相差天数
-      const leave1=dateDiff%(24*3600)    //计算天数后剩余的毫秒数
-      const hour=Math.floor(dateDiff/(3600))//计算出小时数
-      //计算相差分钟数
-      const leave2=leave1%(3600)    //计算小时数后剩余的毫秒数
-      const minute=Math.floor(leave2/(60))//计算相差分钟数
-      //计算相差秒数
-      const leave3=leave2%(60)      //计算分钟数后剩余的毫秒数
-      const second=Math.round(leave3)
-      // console.log(" 相差 "+dayDiff+"天 "+hour+"小时 "+minute+" 分钟"+second+" 秒")
-      this.time =  {
-        h: hour,
-        m: minute,
-        s: second,
-      }
+      // // const dateDiff = moment(dateDiff, "YYYYMMDD h:mm:ss").unix() - moment().unix();//时间差的毫秒数
+      // const dayDiff = Math.floor(dateDiff / (24 * 3600));//计算出相差天数
+      // const leave1=dateDiff%(24*3600)    //计算天数后剩余的毫秒数
+      // const hour=Math.floor(dateDiff/(3600))//计算出小时数
+      // //计算相差分钟数
+      // const leave2=leave1%(3600)    //计算小时数后剩余的毫秒数
+      // const minute=Math.floor(leave2/(60))//计算相差分钟数
+      // //计算相差秒数
+      // const leave3=leave2%(60)      //计算分钟数后剩余的毫秒数
+      // const second=Math.round(leave3)
+      // // console.log(" 相差 "+dayDiff+"天 "+hour+"小时 "+minute+" 分钟"+second+" 秒")
+
+
+      // const {h,p,m}=this.$util.expiration(dateDiff);
+
+      this.time =  this.$util.expiration(dateDiff);
     },
     startCountDown() {
       clearInterval(this.setIntervalBox)
       // 创建计时器
       this.newTime = this.dateDiff
       this.setIntervalBox = setInterval(() => {
-        if (this.newTime > 0) {
-          this.newTime -= 1
+        if (this.newTime > 1000) {
+          this.newTime -= 1000
           this.getDifferTime(this.newTime)
         } else {
           clearInterval(this.setIntervalBox)

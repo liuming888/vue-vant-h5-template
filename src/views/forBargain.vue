@@ -43,7 +43,7 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
@@ -59,15 +59,16 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              v-if="$route.query.helpCur!='ok'"
+              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
-              v-if="$route.query.helpCur=='ok'"
+              v-else-if="$route.query.helpCur=='ok'"
               onclick="window.location.href='#helpCurOk'">Also take it for free</div>
-
-            <!-- 用户第N次进入帮砍界面,不管该商品是否砍价成功 bargain_user_info无的话就没帮砍 -->
-            <div class="share-btn"
-              v-if="bargain_info.bargain_user_info">Receive reward</div>
+            <template v-else>
+              <div class="share-btn">Receive reward</div>
+              <p class="old-txt">TIP: Go to the personal interface and check out the benefits
+                immediately </p>
+            </template>
           </div>
         </div>
       </div>
@@ -75,7 +76,8 @@
     <div class="bargain-content">
 
       <!-- 帮砍团队 -->
-      <div class="team-box" v-if="help_bargain_list.length>0">
+      <div class="team-box"
+        v-if="help_bargain_list&&help_bargain_list.length>0">
         <p class="page-title">Bargaining team</p>
         <ul class="team-list">
           <li class="team-list-item"
@@ -120,7 +122,8 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products" v-if="spu_list.length>0">
+      <div class="recommend-products"
+        v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="require('./../assets/images/start.png')">
           <span>More Products</span>
@@ -181,14 +184,14 @@ export default {
         sharingFriends: {
           show: false
         },
-        oldUsersHelpCutSuccessfully: {
+        oldUsersHelpCutSuccessfully: {  // 砍价完成
           show: false
         }
       },
 
       shareInfo: {},
 
-      spu: {},
+      spu: { spu_pics: [] },
 
       bargain_info: {},
       bargain_user_info: {},
@@ -229,6 +232,13 @@ export default {
       this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
+
+      // 用户帮砍按钮点击登录后重新进入页面时
+      const { helpCur } = this.$route.query;
+      if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
+        this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
+        this.goBargainChop();
+      }
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -255,25 +265,26 @@ export default {
     async goBargainChop() {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          pathname + search + "&helpCur=ok"
-        );
+        this.$store.commit("setLoginJumpUrl",'');  // 登陆成功后不跳，刷新当前页
+        // this.$store.commit(
+        //   "setLoginJumpUrl",
+        //   pathname + search + "&helpCur=ok"
+        // );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
-      if (result) {
-        const chop_info = result.data.bargain_info;
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-        // this.$router.push({
-        //   path: "/bargain",
-        //   query: {
-        //     ...this.$route.query,
-        //     bargainId: chop_info.bargain_id
-        //   }
-        // });
+       
+      } else {
+        // 已经帮砍过了
+        this.$router.push({ path: "/forBargain" ,query: {
+            ...this.$route.query,
+            helpCur: 'ok'
+          }});
       }
     },
     /**
@@ -299,7 +310,14 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
-        console.log("this.bargain_info: ", this.bargain_info);
+        
+        if(this.bargain_user_info){  // 如果已经帮砍过了
+            this.$router.push({ path: "/forBargain" ,query: {
+            ...this.$route.query,
+            helpCur: 'ok'
+          }});
+        }
+        console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
     },
     /**
@@ -323,7 +341,7 @@ export default {
       let stateGoodsList = this.$store.state.goodsList.filter(
         item => !item.isBargain
       );
-      if (stateGoodsList.length > 6) {
+      if (stateGoodsList && stateGoodsList.length > 6) {
         this.spu_list = stateGoodsList;
         return;
       }
@@ -354,13 +372,14 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `/bargain?spuId=${spu_id}`);
+        this.$store.commit("setLoginJumpUrl", '');  // 登陆成功后不跳，刷新当前页
+        // this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
 
       this.$router.push({
-        path: "/bargain",
+        path: "/forBargain",
         query: {
           spuId: spu_id
         }

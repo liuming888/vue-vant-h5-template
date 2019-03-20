@@ -139,7 +139,7 @@ const curRouter = new Router({
 curRouter.beforeEach((to, from, next) => {
     let userStr = localStorage.getItem('userInfo');
     // 第一次进页面时，得先刷新token接口调用了后才行
-    if (process.env.NODE_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
+    if (process.env.VUE_APP_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
         Vue.prototype.$curStore.watch(
             // 当返回结果改变...
             function(state) {

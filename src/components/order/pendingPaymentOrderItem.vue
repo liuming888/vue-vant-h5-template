@@ -142,10 +142,10 @@ export default {
       default() {
         return {
           //类型：Object  必有字段  备注：无
-          order_no: "mock", //类型：String  必有字段  备注：订单号
-          spu_title: "mock", //类型：String  必有字段  备注：商品标题
-          sku_attr: "mock", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
-          amount: "mock" //类型：String  必有字段  备注：订单金额
+          order_no: "", //类型：String  必有字段  备注：订单号
+          spu_title: "", //类型：String  必有字段  备注：商品标题
+          sku_attr: "", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
+          amount: "" //类型：String  必有字段  备注：订单金额
         };
       }
     }
@@ -166,8 +166,8 @@ export default {
      */
     async goRepaidPay() {
       let result = await repaidOrder({
-        order_no: curDat.order_no,
-        spu_name: curDat.spu_title,
+        order_no: this.curDat.order_no,
+        spu_name: this.curDat.spu_title,
         pay_type: 1
       });
       if (result && result.data) {
@@ -175,7 +175,7 @@ export default {
         console.log("pay_url: ", pay_url);
         // this.showWaitPaymentDialog.show = true;
         // window.open(pay_url);
-        window.location.href=pay_url;
+        window.location.href = pay_url;
       }
     }
   }

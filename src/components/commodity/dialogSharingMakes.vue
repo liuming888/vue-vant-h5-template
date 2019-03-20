@@ -12,52 +12,6 @@
   align-items: center;
 }
 
-// .share-types {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-bottom: 41px;
-//   position: relative;
-
-//   img {
-//     width: 100px;
-//     margin-right: 20px;
-//     height: auto;
-//   }
-// }
-
-// .tip {
-//   width: 400px;
-//   margin: 0 auto;
-//   text-align: center;
-//   margin-bottom: 135px;
-//   font-size: 26px;
-// }
-// .copy-link {
-//   display: block;
-//   background: none;
-//   // padding-left: 230px;
-//   font-size: 34px;
-//   font-weight: bold;
-//   color: rgba(211, 12, 5, 1);
-//   position: absolute;
-//   left: 230px;
-//   bottom: 50px;
-// }
-
-// .close-img {
-//   display: block;
-//   width: 70px;
-//   height: auto;
-//   // margin: 96px auto 0;
-//   position: absolute;
-//   bottom: -90px;
-//   left: 0;
-//   right: 0;
-//   margin: 0 auto;
-// }
-
 .share-box {
   width: 610px;
   height: 828px;
@@ -104,12 +58,18 @@
         width: 320px;
 
         .good-tit {
+          width: 282px;
+          height: 60px;
           font-size: 24px;
           font-family: Helvetica;
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
           margin-bottom: 25px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
         }
 
         .old-m {
@@ -200,15 +160,15 @@
 
       <div class="content">
         <div class="good-box">
-          <img v-lazy="require('@/assets/images/bargain-finish-banner.png')"
+          <img v-lazy="itemData.spu_pics&&itemData.spu_pics[0]"
             class="good-img">
           <div class="right-box">
             <div class="good-tit">
-              Casual Large Capacity Copartment Handbag women
+              {{itemData.title}}
             </div>
-            <div class="old-m">Rp280.000</div>
+            <div class="old-m">Rp{{itemData.original_price}}</div>
             <div class="cur-n">
-              <span class="rp">Rp</span>0.00
+              <span class="rp">Rp</span>{{itemData.price}}
             </div>
           </div>
         </div>
@@ -259,8 +219,9 @@
 
 <script>
 import share from "@/mixins/share.js";
+import fbInit from '@/mixins/fbInit.js';
 export default {
-  mixins: [share],
+  mixins: [share,fbInit],
   name: "dialogSharingMakes",
   props: {
     dialogVisible: {
@@ -284,6 +245,9 @@ export default {
           // hashtag:"FB分享的tag标签"
         };
       }
+    },
+    itemData: {
+      type: Object
     }
   },
   methods: {

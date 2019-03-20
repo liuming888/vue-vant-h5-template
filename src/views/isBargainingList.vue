@@ -343,7 +343,7 @@
                   @click="jumpCurBargainPage(item.spu.spu_id)">Go On</div>
 
                 <div class="btn" v-show="item.bargain_info.can_buy==1"
-                  @click="jumpCurBargainPage(item.spu.spu_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
               </div>
             </div>
 
