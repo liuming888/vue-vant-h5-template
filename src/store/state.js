@@ -26,5 +26,8 @@ export default {
             // 砍价完成弹窗
             show: false,
         },
+        newGiftBag:{  // 新手礼包弹窗
+            show:false
+        }
     },
 };

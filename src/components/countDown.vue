@@ -54,7 +54,6 @@ export default {
 
 
       // const {h,p,m}=this.$util.expiration(dateDiff);
-
       this.time =  this.$util.expiration(dateDiff);
     },
     startCountDown() {
@@ -72,7 +71,7 @@ export default {
     }
   },
   watch: {
-    dateDiff() {
+    dateDiff(val) {
       this.startCountDown()
     }
   }

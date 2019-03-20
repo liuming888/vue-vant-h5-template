@@ -24,6 +24,11 @@
     transform: rotate(2deg) scale(0.7) translateX(100px);
     animation: move2 1s infinite alternate;
   }
+
+
+  .num{
+    font-size:12px;
+  }
 }
 
 @keyframes move1 {
@@ -54,7 +59,7 @@
     @click="setShow"
     v-lazy:background-image="require('@/assets/images/fudai.png')">
     <p class="income">Income</p>
-    <p class="num">$6.00</p>
+    <p class="num">RP6.00</p>
   </div>
 </template>
 
