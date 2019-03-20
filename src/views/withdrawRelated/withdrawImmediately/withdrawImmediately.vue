@@ -431,14 +431,12 @@
         <li>
           <span>Account Name</span>
           <input v-model.trim="withdrawParam.account_name"
-            type="text"
-            placeholder="Papal110">
+            type="text">
         </li>
         <li>
           <span>Confirm the account</span>
           <input v-model.trim="withdrawParam.account_no"
-            type="text"
-            placeholder="Papal110">
+            type="text">
         </li>
       </ul>
     </div>
