@@ -157,6 +157,8 @@ export default {
             //   path: this.$store.state.dialogs.loginSelect.jumpUrl
             // });
             window.location.href= this.$store.state.dialogs.loginSelect.jumpUrl;
+          }else{
+            window.location.href=window.location.pathname;  // 刷新当前页
           }
 
           // if (this.$route.path == "/forBargain") {

@@ -333,10 +333,11 @@ export default {
         process.env.VUE_APP_ENV != "development"
       ) {
         const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          pathname + search + "&loginGoShare=ok"
-        );
+        this.$store.commit("setLoginJumpUrl",'');  // 不跳，防止有登陆后有问题
+        // this.$store.commit(
+        //   "setLoginJumpUrl",
+        //   pathname + search + "&loginGoShare=ok"
+        // );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -351,11 +352,8 @@ export default {
     },
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
-        const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          `/bargain?spuId=${spu_id}&bargainType=another`
-        );
+        // const { pathname, search } = window.location;
+        this.$store.commit("setLoginJumpUrl",''); // 不跳，防止登录后有问题
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -373,8 +371,9 @@ export default {
     jumpBuyPage() {
       // 上线时不能注释
       if (!this.$store.state.userInfo.user_id) {
-        const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
+        // const { pathname, search } = window.location;
+        this.$store.commit("setLoginJumpUrl", '');
+        // this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }

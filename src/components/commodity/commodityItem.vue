@@ -221,7 +221,8 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
+        this.$store.commit("setLoginJumpUrl", ``); 
+        // this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -243,10 +244,7 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit(
-          "setLoginJumpUrl",
-          `/bargain?spuId=${this.itemData.spu_id}`
-        );
+        this.$store.commit("setLoginJumpUrl",'');  // 不跳砍价页面，因为登录后这商品可能被这用户砍了
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -258,7 +256,7 @@ export default {
         }
       });
     }
-  },
+  }/* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {
@@ -266,6 +264,6 @@ export default {
       this.cashBack();
     }
     next();
-  }
+  } */
 };
 </script>

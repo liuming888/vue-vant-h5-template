@@ -265,10 +265,11 @@ export default {
     async goBargainChop() {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          pathname + search + "&helpCur=ok"
-        );
+        this.$store.commit("setLoginJumpUrl",'');  // 登陆成功后不跳，刷新当前页
+        // this.$store.commit(
+        //   "setLoginJumpUrl",
+        //   pathname + search + "&helpCur=ok"
+        // );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -371,7 +372,8 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
+        this.$store.commit("setLoginJumpUrl", '');  // 登陆成功后不跳，刷新当前页
+        // this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
