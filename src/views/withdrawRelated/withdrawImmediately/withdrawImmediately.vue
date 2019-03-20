@@ -417,13 +417,13 @@
         </li>
         <li>
           <span>Account Name</span>
-          <input v-model="withdrawParam.account_name"
+          <input v-model.trim="withdrawParam.account_name"
             type="text"
             placeholder="Papal110">
         </li>
         <li>
           <span>Confirm the account</span>
-          <input v-model="withdrawParam.account_no"
+          <input v-model.trim="withdrawParam.account_no"
             type="text"
             placeholder="Papal110">
         </li>
@@ -589,6 +589,14 @@ export default {
         });
         return;
       }
+      if(account_name!==account_no){
+          Dialog.alert({
+          message: "Akun tidak konsisten dimasukkan dua kali",
+          confirmButtonText:"Tentukan"
+        });
+        return;
+      }
+      
       console.log("this.withdrawParam", this.withdrawParam);
 
       let result = await applyWithdraw(this.withdrawParam);
