@@ -30,12 +30,13 @@
           margin: 34px 0 20px 0;
           font-size: 36px;
           line-height: 40px;
+          white-space:nowrap;
           span {
             background: url("./../../assets/images/member.png") left top
               no-repeat;
             background-size: 100% auto;
             display: inline-block;
-            width: 144px;
+            width: 160px;
             height: 36px;
             line-height: 36px;
             padding-left: 40px;
