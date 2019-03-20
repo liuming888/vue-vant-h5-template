@@ -63,7 +63,7 @@
               @click="goBargainChop">Help friend cut a knife</div>
             <div class="share-btn"
               v-else-if="$route.query.helpCur=='ok'"
-              onclick="window.location.href='#helpCurOk'">Also take it for free</div>
+              @click="$router.push('/')">Also take it for free</div>
             <template v-else>
               <div class="share-btn">Receive reward</div>
               <p class="old-txt">TIP: Go to the personal interface and check out the benefits
