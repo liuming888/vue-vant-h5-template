@@ -185,7 +185,6 @@
     //     };
     // };
     
-    
-    if (process.env.VUE_APP_ENV == 'development' || process.env.VUE_APP_ENV == 'mock') return;
+
     window.$faceBookApi = new FBsdk();
 })();

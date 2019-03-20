@@ -95,13 +95,6 @@
 
 <script>
 import { FBConfig } from "@/config/index.js";
-import "@/utils/faceBookSdk.js";
-window.fbAsyncInit = async function() {
-  FB.init(FBConfig);
-  FB.AppEvents.logPageView();
-  console.warn("已经初始化FB了");
-};
-
 
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
@@ -109,6 +102,20 @@ export default {
   name: "dialogLoginSelect",
   data() {
     return {};
+  },
+  beforeCreate() {
+    if (
+      process.env.VUE_APP_ENV == "development" ||
+      process.env.VUE_APP_ENV == "mock"||window.FB
+    ){
+      return;
+    }
+    require("@/utils/faceBookSdk.js");
+    window.fbAsyncInit = async function() {
+      FB.init(FBConfig);
+      FB.AppEvents.logPageView();
+      console.warn("已经初始化FB了");
+    };
   },
   methods: {
     close() {
