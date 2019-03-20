@@ -231,7 +231,7 @@
     width: 60px;
     height: 60px;
     top: -25px;
-    background: url("./../../../assets/images/coin.gif") no-repeat center;
+    background: url("~@/assets/images/coin.gif") no-repeat center;
     background-size: 60px;
     left: calc(50% - 20px);
   }
@@ -434,7 +434,7 @@
       <div class="progress-box">
         <div class="schedule">
           <div class="active"
-            :style="{'width':user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%'}"></div>
+            :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div>
 
           <div class="schedule-item ball"
             v-for="(item,index) of rule"
@@ -504,59 +504,8 @@ export default {
         amount: "" //类型：String  必有字段  备注：金额
       },
 
-      rule: [
-        //类型：Array  必有字段  备注：提现规则
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：规则id
-          threshold: 8, //类型：Number  必有字段  备注：提现门槛
-          amount: 1, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 2, //类型：Number  必有字段  备注：规则id
-          threshold: 138, //类型：Number  必有字段  备注：提现门槛
-          amount: 5, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 3, //类型：Number  必有字段  备注：规则id
-          threshold: 188, //类型：Number  必有字段  备注：提现门槛
-          amount: 10, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 4, //类型：Number  必有字段  备注：规则id
-          threshold: 238, //类型：Number  必有字段  备注：提现门槛
-          amount: 15, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 5, //类型：Number  必有字段  备注：规则id
-          threshold: 288, //类型：Number  必有字段  备注：提现门槛
-          amount: 30, //类型：Number  必有字段  备注：可提现金额
-          arrival_time: 1 //类型：Number  必有字段  备注：到账时间（小时）
-        }
-      ],
-      pay_type: [
-        //类型：Array  必有字段  备注：支付类型
-        {
-          //类型：Object  必有字段  备注：无
-          id: 1, //类型：Number  必有字段  备注：类型id
-          type: 1, //类型：Number  必有字段  备注：支付类型
-          name: "paypal" //类型：String  必有字段  备注：支付类型名
-        },
-        {
-          //类型：Object  必有字段  备注：无
-          id: 2, //类型：Number  必有字段  备注：类型id
-          type: 2, //类型：Number  必有字段  备注：支付类型
-          name: "ceshi" //类型：String  必有字段  备注：支付类型名
-        }
-      ],
+      rule: [],
+      pay_type: [],
       user_fund: {
         //类型：Object  必有字段  备注：用户金额
         balance: 0, //类型：Number  必有字段  备注：用户余额
@@ -616,7 +565,7 @@ export default {
             (index > 0 &&
               withdrawAmount > this.rule[index - 1].amount &&
               withdrawAmount < item.amount) ||
-            (withdrawAmount < item.amount && index == 0)
+            (withdrawAmount < item.amount && index == 1)
         }
       ];
     },
