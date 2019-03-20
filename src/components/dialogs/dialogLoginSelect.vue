@@ -140,39 +140,19 @@ export default {
         }
 
         let result = await login(param);
-        //   let result = await login({
-        //   tp_id: "104497707249033",
-        //   tp_token: "EAAMALQt1F2EBANKqB2pizpPVMyiV7JQ3ZA4nPBNPT1BwwfUdWVZBi0nwjtv6kNEZBZCr3v1XzmZCvgnmBZAd3DHI362pDGzHTRNQiZADK8IqsMgZCvZCSvdhFeL6ZBz3sFIoigZBGtLOlnzuQeEIrUKcqcdYyLAVn4QzhnQIZAyCkQlJqHRZAgUjE5OP2KG9t0v3zmZC5ZBEneAEW03iwZDZD",
-        //   tp_type: 1
-        // });
         console.log("result: ", result);
-        if (result) {
+        if (result&&result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
           axios.defaults.headers.common["User-Id"] = userInfo.user_id;
           axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
-          // this.$emit("update:dialogVisible", { show: false });
           this.$store.commit("setLoginSelectShow", false);
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
-            // this.$router.push({
-            //   path: this.$store.state.dialogs.loginSelect.jumpUrl
-            // });
             window.location.href = this.$store.state.dialogs.loginSelect.jumpUrl;
           } else {
             window.location.reload(); // 刷新当前页
           }
-
-          // if (this.$route.path == "/forBargain") {
-          //   // 如果是帮砍页面用户登录
-          //   this.$router.push({
-          //     path: this.$route.path,
-          //     query: {
-          //       ...this.$route.query,
-          //       helpCur: "ok"
-          //     }
-          //   });
-          // }
 
           return true;
         }

@@ -9,7 +9,7 @@
           v-lazy="spuBargainItem.spu_pics[0]">
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
-          <count-down :dateDiff="3333"></count-down>
+          <count-down :dateDiff="spuBargainItem.expire_ttl"></count-down>
 
           <div class="left-box">
             <div class="num-box">
