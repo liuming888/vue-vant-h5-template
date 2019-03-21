@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     async init() {
-      let result = await orderList({ ...this.orderPageDat, type: 3 });
+      let result = await orderList({ ...this.orderPageDat, type: 2 });
       if (result && result.data) {
         this.orderList = result.data;
       }
