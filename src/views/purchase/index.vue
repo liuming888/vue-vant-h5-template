@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { Icon } from "vant";
+import { Icon ,Dialog} from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
@@ -222,7 +222,7 @@ export default {
     async initExchangeRate() {
       let result = await getExchangeRate({ currency_code: "IDR" });
       if (result && result.data) {
-        this.exchangeRateDat=result.data;
+        this.exchangeRateDat = result.data;
       }
     },
     async getMyAddressInfo() {
@@ -253,7 +253,7 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
-       let param = {
+      let param = {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
         // pay_type: this.paly_id
@@ -271,13 +271,19 @@ export default {
           " ";
       });
       console.log("spu_spec_items----------", spu_spec_items);
-     
-      if(spu_spec_items){
-        param.spu_spec_items=spu_spec_items;
+
+      if (!spu_spec_items) {
+         Dialog.alert({
+          message: "Silakan pilih alamat pengiriman",
+          confirmButtonText: "Tentukan"
+        });
+        return;
       }
 
+      param.spu_spec_items = spu_spec_items;
+
       if (this.$route.query.bargainId) {
-        param.bargain_id=this.$route.query.bargainId;
+        param.bargain_id = this.$route.query.bargainId;
       }
       console.log("param--------------", param);
       let result = await orderCreate(param);
@@ -286,7 +292,7 @@ export default {
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
         // window.open(pay_url);
-        window.location.href=pay_url;
+        window.location.href = pay_url;
       }
     },
     /**
@@ -303,7 +309,7 @@ export default {
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
         // window.open(pay_url);
-        window.location.href=pay_url;
+        window.location.href = pay_url;
       }
     },
     goShippingAddressList() {
@@ -316,8 +322,8 @@ export default {
         this.getMyAddressInfo();
       }
     },
-    "showAddressDialog.show"(val){
-      if(!val){
+    "showAddressDialog.show"(val) {
+      if (!val) {
         this.getMyAddressInfo();
       }
     }
