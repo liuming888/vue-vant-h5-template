@@ -58,17 +58,35 @@
           <count-down :dateDiff="spu.expire_ttl"
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
-            <div class="share-btn"
+            <!-- <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
-              @click="goBargainChop">Help friend cut a knife</div>
+              @click="goBargainChop">Help my friend to get freebies</div>
             <div class="share-btn"
               v-else-if="$route.query.helpCur=='ok'"
               @click="$router.push('/')">Also take it for free</div>
             <template v-else>
-              <div class="share-btn">Receive reward</div>
+              <div class="share-btn"
+                @click="$router.push('/my')">Receive reward</div>
+              <p class="old-txt">TIP: Go to the personal interface and check out the benefits
+                immediately </p>
+            </template> -->
+
+            <!-- 没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆-->
+            <div class="share-btn"
+              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_info.status==1||isOne"
+              @click="goBargainChop">Help my friend to get freebies</div>
+
+            <template v-else-if="$route.query.helpCur=='ok'">
+              <!-- 帮砍完成 -->
+              <div class="share-btn"
+                @click="$router.push('/my')">Receive reward</div>
               <p class="old-txt">TIP: Go to the personal interface and check out the benefits
                 immediately </p>
             </template>
+
+            <div class="share-btn"
+              v-else
+              @click="$router.push('/')">Also take it for free</div>
           </div>
         </div>
       </div>
@@ -165,7 +183,7 @@ import {
   getHelpBargainList,
   bargainChop
 } from "@/server/bargain.js";
-import { Promise } from 'q';
+import { Promise } from "q";
 export default {
   components: {
     bargainingProgressBar, // 砍价进度条
@@ -183,7 +201,8 @@ export default {
         sharingFriends: {
           show: false
         },
-        oldUsersHelpCutSuccessfully: {  // 砍价完成
+        oldUsersHelpCutSuccessfully: {
+          // 砍价完成
           show: false
         }
       },
@@ -222,9 +241,16 @@ export default {
   },
   methods: {
     async init() {
-      // 分享链接点击进入的
-      if (this.$route.query.relationId) {
-        await this.initShareInfo(this.$route.query.relationId);
+      // 分享链接直接点击进入的，而不是第二次刷新时
+      const {
+        relationId,
+        bargainId,
+        spuId,
+        type,
+        inviteUserId
+      } = this.$route.query;
+      if (relationId && !bargainId && !spuId && !type && !inviteUserId) {
+        await this.initShareInfo(relationId);
       }
 
       this.initBargainInfo();
@@ -260,7 +286,7 @@ export default {
           }
         });
       }
-      return Promise.resolve()
+      return Promise.resolve();
     },
     async goBargainChop() {
       if (!this.$store.state.userInfo.user_id) {
@@ -277,13 +303,14 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-       
       } else {
         // 已经帮砍过了
-        this.$router.push({ path: "/forBargain" ,query: {
+        this.$router.push({
+          query: {
             ...this.$route.query,
-            helpCur: 'ok'
-          }});
+            helpCur: "ok"
+          }
+        });
       }
     },
     /**
@@ -309,12 +336,16 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
-        
-        if(!this.bargain_user_info){  // 如果没有帮砍 （没bargain_user_info返回就是没帮砍）
-            this.$router.push({ path: "/forBargain" ,query: {
-            ...this.$route.query,
-            helpCur: 'ok'
-          }});
+
+        if (!this.bargain_user_info) {
+          // 如果没有帮砍 （没bargain_user_info返回就是没帮砍）
+          this.$router.push({
+            path: "/forBargain",
+            query: {
+              ...this.$route.query,
+              helpCur: "ok"
+            }
+          });
         }
         console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
@@ -371,7 +402,7 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", '');  // 登陆成功后不跳，刷新当前页
+        this.$store.commit("setLoginJumpUrl", ""); // 登陆成功后不跳，刷新当前页
         // this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -400,14 +431,14 @@ export default {
         clearInterval(timer);
       });
     }
-  },
-  beforeRouteUpdate(to, from, next) {
+  }
+  /*  beforeRouteUpdate(to, from, next) {
     const { helpCur } = to.query;
     if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
     next();
-  }
+  } */
 };
 </script>

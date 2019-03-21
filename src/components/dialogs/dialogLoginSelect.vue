@@ -18,8 +18,8 @@
     position: relative;
 
     .tips {
-      width: 463px;
-      font-size: 30px;
+      width: 600px;
+      font-size: 26px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       line-height: 38px;
@@ -71,7 +71,7 @@
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/login-dialog.png')">
       <div class="tips">
-        Tips: If you help cut, you will get the income.
+        Tips: If you help your friend cut down the price, you will get cash rewards.
       </div>
 
       <div class="login-types">

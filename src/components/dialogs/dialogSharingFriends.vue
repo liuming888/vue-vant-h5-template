@@ -51,7 +51,7 @@
   height: 836px;
   background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
     100%;
-  padding-top: 210px;
+  padding-top: 220px;
   box-sizing: border-box;
   position: relative;
 
@@ -62,7 +62,7 @@
     color: rgba(255, 255, 255, 1);
     line-height: 38px;
     margin: 0 auto;
-    margin-bottom: 76px;
+    margin-bottom: 66px;
   }
 
   .tit {
@@ -128,10 +128,10 @@
     @click.stop="abc=1">
     <div class="share-box">
       <div class="tip">
-        Tip: Sharing to new friends will cut faster and more.
+        Tip: Share to friends and you can get freebies faster.
       </div>
 
-      <h5 class="tit">Share To</h5>
+      <h5 class="tit">Share on</h5>
 
       <!-- <div class="share-types">
         <img src="@/assets/images/messenger.png"
