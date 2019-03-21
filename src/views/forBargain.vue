@@ -273,6 +273,8 @@ export default {
         this.goBargainChop();
       });
     }
+
+    document.title="Getting Freebies";
   },
   methods: {
     async init() {

@@ -48,7 +48,7 @@
     position: relative;
     width: 70px;
     height: 70px;
-    margin: 100px auto 0 auto;
+    margin: 0 auto;
     background: url("./../../assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
