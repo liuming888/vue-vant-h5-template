@@ -83,7 +83,7 @@
       float: right;
       font-size: 28px;
       color: #fff;
-      text-indent: 84px;
+      text-indent: 64px;
       line-height: 70px;
       width: 260px;
       height: 70px;
@@ -101,7 +101,7 @@
         height: 34px;
         position: absolute;
         top: 18px;
-        left: 39px;
+        left: 19px;
         background: url("./../../assets/images/btn-2.png") no-repeat;
         background-size: 100% auto;
       }
