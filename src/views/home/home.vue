@@ -80,7 +80,7 @@
   z-index: 10;
   margin: 0 30px;
   padding-bottom: 30px;
-  margin-top:30px;
+  margin-top:42px;
   background-color: #fff;
   border-radius: 20px;
   // height: 300px;

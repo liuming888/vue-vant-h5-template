@@ -89,8 +89,8 @@
       height: 70px;
       background: linear-gradient(
         90deg,
-        rgba(211, 12, 5, 1) 0%,
-        rgba(246, 78, 1, 1) 100%
+        rgba(246, 78, 1, 1) 0%,
+        rgba(211, 12, 5, 1) 100%
       );
       border-radius: 35px;
       text-decoration: none;
@@ -116,7 +116,8 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="3000"  :show-indicators="false"
+          :autoplay="3000"
+          :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
             :key="swipeIdx">
@@ -153,7 +154,8 @@
     <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
-      v-if="dialogs.sharingFriends.show" :itemData="itemData"/>
+      v-if="dialogs.sharingFriends.show"
+      :itemData="itemData" />
   </div>
 </template>
 
@@ -221,7 +223,7 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit("setLoginJumpUrl", ``); 
+        this.$store.commit("setLoginJumpUrl", ``);
         // this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -244,7 +246,7 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit("setLoginJumpUrl",'');  // 不跳砍价页面，因为登录后这商品可能被这用户砍了
+        this.$store.commit("setLoginJumpUrl", ""); // 不跳砍价页面，因为登录后这商品可能被这用户砍了
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -256,7 +258,7 @@ export default {
         }
       });
     }
-  }/* ,
+  } /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {

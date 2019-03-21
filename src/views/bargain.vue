@@ -56,12 +56,15 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              @click="openSharingFriendsDialog">Share friends to cut</div>
+              @click="openSharingFriendsDialog">SHARE FRIEDNS FOR FREEBIES</div>
             <div class="buy-btn"
               v-if="bargain_info.can_buy&&bargain_info.can_buy!=2"
               @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
             <div class="buy-btn cur"
-              v-else>Rp {{bargain_info.left_amount}} buy now</div>
+              v-else>
+              <!-- Rp {{bargain_info.left_amount}} buy now -->
+              BUY NOW
+            </div>
           </div>
         </div>
       </div>
