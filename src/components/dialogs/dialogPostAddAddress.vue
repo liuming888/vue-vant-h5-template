@@ -166,7 +166,7 @@ const defaultAddress = {
   zip: "", //类型：String  必有字段  备注：邮编 1和2时必须
   address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
   address_two: "", //类型：String  必有字段  备注：配送地址-二级
-  // is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
+  is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
   country_code: "ID"
 };
 
