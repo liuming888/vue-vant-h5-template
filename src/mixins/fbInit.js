@@ -11,7 +11,7 @@ export default {
             FB.AppEvents.logPageView();
             console.warn('已经初始化FB了');
         }else{
-            window.fbAsyncInit = async function() {
+            window.fbAsyncInit =function() {
                 FB.init(FBConfig);
                 FB.AppEvents.logPageView();
                 console.warn('已经初始化FB了');
