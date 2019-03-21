@@ -138,7 +138,7 @@
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
               class="btn"
-              @click="jumpCurBargainPage(item.spu_id)">Get Freebie</a>
+              @click="jumpCurBargainPage(item.spu_id)">Get a freebie</a>
           </div>
         </div>
       </div>
