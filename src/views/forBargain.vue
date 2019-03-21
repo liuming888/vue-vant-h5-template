@@ -162,9 +162,9 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
     <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully"
-      :chopInfo="chop_info" />
+      :chopInfo="chop_info" v-if="dialogs.oldUsersHelpCutSuccessfully.show"/>
   </div>
 </template>
 
@@ -260,11 +260,49 @@ export default {
 
       // 用户帮砍按钮点击登录后重新进入页面时
       const { helpCur } = this.$route.query;
-      if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
+      if (helpCur == "ok"/*  && window.location.hash != "#helpCurOk" */) {
+        console.log("login kan  ok--------")
         this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
-        this.goBargainChop();
+        this.$nextTick(()=>{
+          this.goBargainChop();
+        // this.dialogs.oldUsersHelpCutSuccessfully.show = true;
+        })
       }
     },
+
+    async goBargainChop() {
+      // vuex里的状态，如果直接有登陆会在localStorage缓存，下次进入时会全局先刷新登陆状态（目前商品砍价时间是24小时，token过期是7天，所以这里判断没登陆的就是没帮砍过的）
+      if (!this.$store.state.userInfo.user_id) {
+        const { pathname, search } = window.location;
+
+        // 原型要求登陆后直接弹起帮砍弹窗
+        this.$store.commit(
+          "setLoginJumpUrl",
+          pathname + search + "&helpCur=ok"
+        );
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
+      const { bargainId, spuId } = this.$route.query;
+      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
+      if (result && result.data) {
+        console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+        this.chop_info = result.data.chop_info;
+        this.dialogs.oldUsersHelpCutSuccessfully.show = true;
+      } /* else {
+        // 已经帮砍过了
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            helpCur: "ok"
+          }
+        });
+      } */
+
+      return Promise.resolve();
+    },
+
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
       if (result && result.data) {
@@ -288,31 +326,7 @@ export default {
       }
       return Promise.resolve();
     },
-    async goBargainChop() {
-      if (!this.$store.state.userInfo.user_id) {
-        const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          pathname + search + "&helpCur=ok"
-        );
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
-      const { bargainId, spuId } = this.$route.query;
-      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
-      if (result && result.data) {
-        this.chop_info = result.data.chop_info;
-        this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-      } else {
-        // 已经帮砍过了
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            helpCur: "ok"
-          }
-        });
-      }
-    },
+
     /**
      * @description: 获取商品信息
      */
