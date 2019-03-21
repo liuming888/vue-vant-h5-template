@@ -31,7 +31,7 @@
                   <p class="p-t-3">244d Sent</p>
                   <p class="p-t-1">
                     Price
-                    <span>$</span><span>{{spu.original_price}}</span>
+                    <span>RP</span><span>{{spu.original_price}}</span>
                   </p>
                   <p class="p-t-2">current price</p>
                 </div>
@@ -43,19 +43,29 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
+            <p class="title"
+              v-if="!isNGo&&$route.query.helpCur!='ok'"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
+            <p class="title"
+              v-else-if="!isNGo&&$route.query.helpCur=='ok'">Successfully help your friend cut down<span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
-              <div class="schedule-item">
-                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
+              <div class="schedule-item"
+                v-if="!isNGo">
+                <span class="description"><span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
               </div>
               <div class="schedule-item ball ball-right">
                 <!-- <span class="description">Take it free</span> -->
               </div>
             </div>
+            <p v-if="isNGo">
+              Congratulations! Your friend got this freebie
+              successfully, you will get half of the price
+              you bargained on your friend’s freebies.
+            </p>
           </div>
           <count-down :dateDiff="spu.expire_ttl"
+            v-if="!isNGo"
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <!-- <div class="share-btn"
@@ -75,18 +85,19 @@
             <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&!bargain_user_info&&bargain_info.status==1||isOne"
               @click="goBargainChop">Help my friend to get freebies</div>
-
-            <template v-else-if="$route.query.helpCur=='ok'">
-              <!-- 帮砍完成 -->
+            <div class="share-btn"
+              v-else-if="$route.query.helpCur=='ok'"
+              @click="$router.push('/')">I want this for free too</div>
+            <template v-else-if="isNGo">
               <div class="share-btn"
-                @click="$router.push('/my')">Receive reward</div>
-              <p class="old-txt">TIP: Go to the personal interface and check out the benefits
-                immediately </p>
+                @click="$router.push('/my')">Receive bonus</div>
+              <p class="old-txt">Check your bonus in [ME]-[Earning Details]</p>
             </template>
-
+            <!-- 别的情况统一显示这个 -->
             <div class="share-btn"
               v-else
-              @click="$router.push('/')">Also take it for free</div>
+              @click="$router.push('/')">I want this for free too</div>
+
           </div>
         </div>
       </div>
@@ -120,7 +131,7 @@
         v-if="isOne"
         id="helpCurOk">
         <!-- 帮助 -->
-        <p class="page-title">How to get a free gift</p>
+        <p class="page-title">How to get a freebie</p>
         <ul class="help-list">
           <li class="help-item">
             <img v-lazy="require('./../assets/images/shouji@2x.png')">
@@ -233,6 +244,17 @@ export default {
       spu_list: []
     };
   },
+  computed: {
+    // 是否是第N次进入
+    isNGo() {
+      return (
+        this.isOne &&
+        this.bargain_user_info &&
+        this.bargain_info.status != 2 &&
+        !this.$route.query.helpCur
+      );
+    }
+  },
   created() {
     if (!localStorage.getItem("userInfo")) {
       // 用户第一次进入砍价页面
@@ -249,7 +271,6 @@ export default {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.$nextTick(() => {
         this.goBargainChop();
-        // this.dialogs.oldUsersHelpCutSuccessfully.show = true;
       });
     }
   },
@@ -289,18 +310,9 @@ export default {
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
       if (result && result.data) {
-        console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-      } /* else {
-        // 已经帮砍过了
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            helpCur: "ok"
-          }
-        });
-      } */
+      }
 
       return Promise.resolve();
     },
