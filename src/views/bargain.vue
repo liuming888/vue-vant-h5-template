@@ -108,7 +108,7 @@
         <p class="page-title">
           <img src="./../assets/images/start.png"
             alt="">
-          <span>More Products</span>
+          <span>You might like</span>
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
