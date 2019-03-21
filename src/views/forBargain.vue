@@ -85,13 +85,11 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img src="./../assets/images/good-large.png"
-                  alt="">
-                <!-- <img v-lazy="item.avatar"> -->
+                <img v-lazy="item.avatar||require('./../assets/images/good-large.png')">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
-                <p class="team-date">2019-03-11 10:36:54</p>
+                <p class="team-date">{{item.bargain_time}}</p>
               </div>
             </div>
             <div class="column">
