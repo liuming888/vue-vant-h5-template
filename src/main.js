@@ -17,6 +17,10 @@ Vue.prototype.$util = $util;
 
 Vue.config.productionTip = false;
 
+setTimeout(() => {
+    require('@/utils/faceBookSdk.js');
+}, 500);
+
 new Vue({
     router,
     store,

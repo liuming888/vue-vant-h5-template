@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 .tabBar-container {
+  width: 100vw;
   height: 93px;
   box-sizing: border-box;
   display: flex;
@@ -9,6 +10,9 @@
   text-align: center;
   color: #c2c2c2;
   // line-height: 93px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   > .tabBar-item {
     flex: 1;
     // display: flex;

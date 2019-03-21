@@ -28,7 +28,7 @@
               <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3">244d Sent</p>
+                  <p class="p-t-3"></p>
                   <p class="p-t-1">
                     Price
                     <span>RP</span><span>{{spu.original_price}}</span>
@@ -52,13 +52,13 @@
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
               <div class="schedule-item"
                 v-if="!isNGo">
-                <span class="description"><span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
+                <span class="description">cut<span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
               </div>
               <div class="schedule-item ball ball-right">
                 <!-- <span class="description">Take it free</span> -->
               </div>
             </div>
-            <p v-if="isNGo">
+            <p v-if="isNGo" class="n-go-p">
               Congratulations! Your friend got this freebie
               successfully, you will get half of the price
               you bargained on your friend’s freebies.
