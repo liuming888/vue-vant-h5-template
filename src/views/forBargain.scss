@@ -201,7 +201,9 @@
                     display: inline-block;
                 }
                 > .ctrl-box {
-                    margin-top: 38px;  // 用户第一次进入
+                    // margin-top: 38px;  // 用户第一次进入
+                    // margin-top:48px;   // 用户砍价完成
+                    margin-top: 68px; // 用户第N次进入
                     > .share-btn {
                         color: #a53a06;
                         font-size: 36px;
@@ -486,14 +488,18 @@
     }
 }
 
-.n-go-p{
-    width:500px;
-height:103px;
-font-size:26px;
-font-family:Helvetica;
-font-weight:400;
-color:rgba(50,50,50,1);
-line-height:39px;
-margin: 0 auto;
-margin-top: 20px;
+.n-go-p {
+    width: 500px;
+    height: 103px;
+    font-size: 26px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
+    line-height: 39px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.old-txt {
+    margin-top: 36px;
 }
