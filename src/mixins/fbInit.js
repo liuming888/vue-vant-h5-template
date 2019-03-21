@@ -5,10 +5,17 @@ export default {
             return;
         }
         // require('@/utils/faceBookSdk.js');
-        window.fbAsyncInit = async function() {
+
+        if (window.FB){
             FB.init(FBConfig);
             FB.AppEvents.logPageView();
             console.warn('已经初始化FB了');
-        };
+        }else{
+            window.fbAsyncInit = async function() {
+                FB.init(FBConfig);
+                FB.AppEvents.logPageView();
+                console.warn('已经初始化FB了');
+            };
+        }
     },
 };
