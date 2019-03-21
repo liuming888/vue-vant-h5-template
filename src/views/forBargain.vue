@@ -73,7 +73,7 @@
 
             <!-- 没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆-->
             <div class="share-btn"
-              v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_info.status==1||isOne"
+              v-if="$route.query.helpCur!='ok'&&!bargain_user_info&&bargain_info.status==1||isOne"
               @click="goBargainChop">Help my friend to get freebies</div>
 
             <template v-else-if="$route.query.helpCur=='ok'">
