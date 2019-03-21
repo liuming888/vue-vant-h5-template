@@ -6,7 +6,7 @@
         "serve:mock": "cross-env VUE_APP_ENV=mock vue-cli-service serve --copy",
         "serve": "cross-env VUE_APP_ENV=development vue-cli-service serve --copy",
         "build": "vue-cli-service build",
-        "build:dev": "cross-env VUE_APP_ENV=dev vue-cli-service build",
+        "build:dev": "cross-env VUE_APP_ENV=dev vue-cli-service build --modern",
         "build:test": "cross-env VUE_APP_ENV=test vue-cli-service build",
         "build:prod": "cross-env VUE_APP_ENV=production vue-cli-service build",
         "lint": "vue-cli-service lint"
