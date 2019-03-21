@@ -96,10 +96,10 @@
 <script>
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
-import fbInit from '@/mixins/fbInit.js';
+// import fbInit from '@/mixins/fbInit.js';
 export default {
   name: "dialogLoginSelect",
-  mixins: [fbInit],
+  // mixins: [fbInit],
   data() {
     return {};
   },
