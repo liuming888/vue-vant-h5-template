@@ -9,8 +9,8 @@
                     return;
                 }
                 js = d.createElement(s);
-                js.defer = 'defer';
-                js.async = "async";
+                // js.defer = 'defer';
+                // js.async = "async";
                 js.id = id;
                 // 默认美式英文
                 js.src = 'https://connect.facebook.net/en_US/sdk.js';
