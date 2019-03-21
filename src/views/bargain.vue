@@ -37,7 +37,7 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
@@ -102,7 +102,8 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products" v-if="spu_list.length>0">
+      <div class="recommend-products"
+        v-if="spu_list.length>0">
         <p class="page-title">
           <img src="./../assets/images/start.png"
             alt="">
@@ -193,6 +194,7 @@ export default {
   },
   mounted() {
     document.getElementsByClassName("content-container")[0].scroll(0, 0);
+    document.title = "Getting Freebies";
   },
   methods: {
     async init() {

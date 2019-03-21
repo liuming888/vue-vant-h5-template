@@ -248,7 +248,7 @@ export default {
     // 是否是第N次进入
     isNGo() {
       return (
-        this.isOne &&
+        !this.isOne &&
         this.bargain_user_info &&
         this.bargain_info.status != 2 &&
         !this.$route.query.helpCur
@@ -273,6 +273,8 @@ export default {
         this.goBargainChop();
       });
     }
+
+    document.title="Getting Freebies";
   },
   methods: {
     async init() {

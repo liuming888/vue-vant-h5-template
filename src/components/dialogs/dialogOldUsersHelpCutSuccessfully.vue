@@ -48,7 +48,7 @@
     position: relative;
     width: 70px;
     height: 70px;
-    margin: 100px auto 0 auto;
+    margin:0 auto;
     background: url("./../../assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
@@ -65,9 +65,9 @@
           alt=""
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help Him Cut </p>
+          <p class="top-tips">Help him cut down</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
-          <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p>
+          <p class="bottom-tips">After your friend closed the deal, you will get<span><span>Rp</span> {{chopInfo.reward_amount}}</span>rewards on your account</p>
         </div>
         <div class="close"
           @click="closeDialog"></div>

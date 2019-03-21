@@ -212,6 +212,9 @@ export default {
       this.dialogVisible = true;
     }
   },
+  mounted () {
+    document.title="Check out";
+  },
   methods: {
     async init() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
