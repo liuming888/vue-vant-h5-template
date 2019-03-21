@@ -102,7 +102,7 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products">
+      <div class="recommend-products" v-if="spu_list.length>0">
         <p class="page-title">
           <img src="./../assets/images/start.png"
             alt="">

@@ -201,7 +201,7 @@
                     display: inline-block;
                 }
                 > .ctrl-box {
-                    margin-top: 20px;
+                    margin-top: 38px;  // 用户第一次进入
                     > .share-btn {
                         color: #a53a06;
                         font-size: 36px;
@@ -486,9 +486,14 @@
     }
 }
 
-// {
-//           path: '/',
-//           title: 'Home',
-//           imgUrl: require('../../../assets/images/tabBar-home.png'),
-//           imgActiveUrl: require('../../../assets/images/tabBar-home-active.png')
-//         },
+.n-go-p{
+    width:500px;
+height:103px;
+font-size:26px;
+font-family:Helvetica;
+font-weight:400;
+color:rgba(50,50,50,1);
+line-height:39px;
+margin: 0 auto;
+margin-top: 20px;
+}
