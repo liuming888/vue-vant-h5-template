@@ -146,7 +146,7 @@
         </a>
         <a href="javascrip:;"
           class="button-r"
-          @click="jumpBargain">Get Freebie</a>
+          @click="jumpBargain">Get a freebie</a>
       </div>
     </div>
 
