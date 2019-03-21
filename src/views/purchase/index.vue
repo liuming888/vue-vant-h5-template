@@ -39,7 +39,7 @@
       @click="showAddressDialog.show = true">
       <img v-lazy="require('@/assets/images/add.png')"
         class="add-icon">
-      <div class="txt">Tambahkan alamat secara manual</div>
+      <div class="txt">Add shipping address</div>
       <van-icon name="arrow" />
     </div>
 
@@ -116,13 +116,9 @@
         <div class="l-d-box">About ${{(spu.price/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
       </div>
 
-      <!-- <div class="pay-immediately"
-        @click="dialogVisible = true">
-        pay immediately
-      </div> -->
       <div class="pay-immediately"
         @click="goPaly">
-        pay immediately
+        Place Oder
       </div>
     </div>
 

@@ -107,7 +107,7 @@
         class="close"
         @click="closeDialog">
 
-      <h5 class="tit">Tambahkan alamat panen</h5>
+      <h5 class="tit">Add address</h5>
 
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
@@ -138,7 +138,7 @@
 
       <div class="simpan-btn"
         @click="simpan">
-        Simpan
+        Confirm
       </div>
     </van-popup>
 
