@@ -1,11 +1,11 @@
 <!--  -->
 <template>
   <div class="revenue_detail">
-    <header>
+    <!-- <header>
       Revenue Rp
       <span>9.886.587</span>Expenses Rp
       <span>9.886.587</span>
-    </header>
+    </header> -->
     <div class="revenue-content">
       <ul>
         <li v-for="(item,index) in detailList"

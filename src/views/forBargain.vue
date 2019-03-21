@@ -90,7 +90,7 @@
               @click="$router.push('/')">I want this for free too</div>
             <template v-else-if="isNGo">
               <div class="share-btn"
-                @click="$router.push('/my')">Receive bonus</div>
+                @click="$router.push('/my/revenueDetails')">Receive bonus</div>
               <p class="old-txt">Check your bonus in [ME]-[Earning Details]</p>
             </template>
             <!-- 别的情况统一显示这个 -->
