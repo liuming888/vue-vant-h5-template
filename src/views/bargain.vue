@@ -160,7 +160,7 @@ export default {
           show: false
         },
         potongSendiri: {
-          show: false
+          show: true
         }
       },
       chop_info: {},

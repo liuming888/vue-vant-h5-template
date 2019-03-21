@@ -14,9 +14,12 @@
     height: 100%;
     text-align: center;
     > .top-tips {
-      margin-top: 437px;
+      margin-top: 400px;
       font-size: 28px;
-      color: #6c0c06;
+      font-family: Helvetica;
+      font-weight: bold;
+      color: rgba(108, 12, 6, 1);
+      line-height: 47px;
     }
     > .cut-num {
       margin: 0 auto;

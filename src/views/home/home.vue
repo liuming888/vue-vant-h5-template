@@ -12,7 +12,7 @@
     &::after {
       content: "";
       display: block;
-      height: 36px;
+      height: 66px;
       width: 100%;
       position: absolute;
       bottom: 0;
