@@ -162,9 +162,11 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
+      :shareInfo="shareInfo"
+      v-if="dialogs.sharingFriends.show" />
     <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully"
-      :chopInfo="chop_info" v-if="dialogs.oldUsersHelpCutSuccessfully.show"/>
+      :chopInfo="chop_info"
+      v-if="dialogs.oldUsersHelpCutSuccessfully.show" />
   </div>
 </template>
 
@@ -239,6 +241,18 @@ export default {
 
     this.init();
   },
+  mounted() {
+    // 用户帮砍按钮点击登录后重新进入页面时
+    const helpCur = this.$util.getQueryVariable("helpCur");
+    if (helpCur == "ok" /*  && window.location.hash != "#helpCurOk" */) {
+      console.log("login kan  ok--------");
+      this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
+      this.$nextTick(() => {
+        this.goBargainChop();
+        // this.dialogs.oldUsersHelpCutSuccessfully.show = true;
+      });
+    }
+  },
   methods: {
     async init() {
       // 分享链接直接点击进入的，而不是第二次刷新时
@@ -252,22 +266,10 @@ export default {
       if (relationId && !bargainId && !spuId && !type && !inviteUserId) {
         await this.initShareInfo(relationId);
       }
-
       this.initBargainInfo();
       this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
-
-      // 用户帮砍按钮点击登录后重新进入页面时
-      const { helpCur } = this.$route.query;
-      if (helpCur == "ok"/*  && window.location.hash != "#helpCurOk" */) {
-        console.log("login kan  ok--------")
-        this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
-        this.$nextTick(()=>{
-          this.goBargainChop();
-        // this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-        })
-      }
     },
 
     async goBargainChop() {
@@ -356,8 +358,7 @@ export default {
           this.$router.push({
             path: "/forBargain",
             query: {
-              ...this.$route.query,
-              helpCur: "ok"
+              ...this.$route.query
             }
           });
         }
