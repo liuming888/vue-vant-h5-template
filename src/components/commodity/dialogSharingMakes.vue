@@ -61,7 +61,6 @@
           width: 282px;
           height: 60px;
           font-size: 24px;
-          font-family: Helvetica;
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
@@ -74,7 +73,6 @@
 
         .old-m {
           font-size: 16px;
-          font-family: Helvetica;
           font-weight: 400;
           text-decoration: line-through;
           color: rgba(136, 136, 136, 1);

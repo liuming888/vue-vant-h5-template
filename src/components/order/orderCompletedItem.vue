@@ -84,7 +84,6 @@
     font-size: 28px;
     text-align: center;
     font-size: 30px;
-    font-family: Helvetica;
     font-weight: 400;
     color: rgba(211, 12, 5, 1);
     border: 1px solid rgba(211, 12, 5, 1);

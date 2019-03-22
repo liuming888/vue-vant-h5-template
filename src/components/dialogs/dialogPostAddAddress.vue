@@ -52,7 +52,6 @@
 
   .txt {
     font-size: 28px;
-    font-family: Helvetica;
     font-weight: 400;
     color: rgba(50, 50, 50, 1);
   }

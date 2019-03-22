@@ -36,7 +36,6 @@
     h5.tit {
       margin-bottom: 29px;
       font-size: 22px;
-      font-family: Helvetica;
       font-weight: 400;
       color: rgba(136, 136, 136, 1);
     }
@@ -86,7 +85,6 @@
     box-sizing: border-box;
     display: flex;
     font-size: 28px;
-    font-family: Helvetica;
     font-weight: 400;
 
     .cash-withdrawal-method {
@@ -123,7 +121,6 @@
       border: 1px solid rgba(236, 236, 236, 1);
       border-radius: 10px;
       font-size: 28px;
-      font-family: Helvetica;
       font-weight: 400;
       color: rgba(50, 50, 50, 1);
 
@@ -148,7 +145,6 @@
 
   .precautions {
     font-size: 28px;
-    font-family: Helvetica;
     font-weight: 400;
     color: rgba(50, 50, 50, 1);
     margin-bottom: 26px;
@@ -329,7 +325,6 @@
     h1 {
       height: 34px;
       font-size: 36px;
-      font-family: Helvetica-Bold;
       font-weight: bold;
       color: rgba(50, 50, 50, 1);
       line-height: 40px;
@@ -339,7 +334,6 @@
     p {
       height: 141px;
       font-size: 28px;
-      font-family: Helvetica;
       font-weight: 400;
       color: rgba(50, 50, 50, 1);
       line-height: 40px;
@@ -347,7 +341,6 @@
     }
     div {
       font-size: 32px;
-      font-family: Helvetica-Bold;
       font-weight: bold;
       color: rgba(211, 12, 5, 1);
       height: 100px;
