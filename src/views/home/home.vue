@@ -250,7 +250,7 @@ export default {
         bargainOrderSpusList.length > 0 &&
         bargainOrderSpusList.length < 2
       ) {
-        let arr = bargainOrderSpusList[0];
+        let arr = [bargainOrderSpusList[0]];
         if (spuBargainList.length > 0) {
           arr.push(spuBargainList[0]);
         }
@@ -279,15 +279,18 @@ export default {
       this.initGoodsList({ ...this.goodsListPageDat });
     },
     async initBargainOrderSpusList() {
-      let result = await getMyBargainOrderSpus();
+      let result = await getMyBargainOrderSpus({page_size:2,page_num:1});
       if (result && result.data) {
         this.bargainOrderSpusList = result.data.filter(item => {
-          if (item.order_expire_time > 0 && item.order_status == 1) {
+          // 正式不能注释
+          if (/* item.bargain_info.order_expire_time > 0 && */ item.bargain_info.order_status == 1) {
             return true;
           } else {
             return false;
           }
         });
+        console.log("this.bargainOrderSpusList",this.bargainOrderSpusList);
+        
       }
     },
     async initBanners() {

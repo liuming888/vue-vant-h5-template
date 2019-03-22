@@ -41,8 +41,9 @@ export function getSpuSpecs({ spu_id }) {
 }
 
 // 获取处理中砍价订单列表
-export function getMyBargainOrderSpus() {
+export function getMyBargainOrderSpus({ page_size, page_num }) {
     return $request.post({
         url: '/api/v1/spu/get_my_bargain_order_spus',
+        data: { page_size, page_num },
     });
 }
