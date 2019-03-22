@@ -7,7 +7,7 @@
   > .home-top-container {
     position: relative;
     width: 100vw;
-   
+
     overflow: hidden;
     // &::after {
     //   content: "";
@@ -47,13 +47,12 @@
         left: 16px;
       }
     }
-    > .home-banner{
-        width: 100%;
-        margin-bottom: 30px;
-      img{
+    > .home-banner {
       width: 100%;
-      max-height: 500px;
-
+      margin-bottom: 30px;
+      img {
+        width: 100%;
+        max-height: 500px;
       }
     }
   }
@@ -85,7 +84,7 @@
   z-index: 10;
   margin: 0 30px;
   padding-bottom: 30px;
-  margin-top:42px;
+  margin-top: 42px;
   background-color: #fff;
   border-radius: 20px;
   // height: 300px;
@@ -150,7 +149,8 @@
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="5000" :show-indicators="false"
+        <van-swipe :autoplay="5000"
+          :show-indicators="false"
           indicator-color="white"
           class="home-banner">
           <template v-if="bannerList.length>0">
@@ -215,7 +215,11 @@ import commodityItem from "@/components/commodity/commodityItem.vue";
 import axios from "axios";
 import { getHomeTip, getBanners } from "@/server/other.js";
 import { login } from "@/server/user.js";
-import { getMybargainSpus, getBargainSpus,getMyBargainOrderSpus } from "@/server/goods.js";
+import {
+  getMybargainSpus,
+  getBargainSpus,
+  getMyBargainOrderSpus
+} from "@/server/goods.js";
 export default {
   components: {
     tabBar, // 底部tab
@@ -228,8 +232,8 @@ export default {
     return {
       messageList: [], // 顶部滚动消息
       bannerList: [], // banner列表
-      bargainOrderSpusList:[], // 获取处理中砍价订单列表
-      spuBargainList: [],  // 正在砍价的商品列表（默认最多展示两条）
+      bargainOrderSpusList: [], // 获取处理中砍价订单列表
+      spuBargainList: [], // 正在砍价的商品列表（默认最多展示两条）
       goodsList: [],
       goodsListPageDat: {
         page_size: 10,
@@ -238,19 +242,22 @@ export default {
     };
   },
   computed: {
-    homeBargainList(){
-      const {bargainOrderSpusList,spuBargainList}=this;
-      if(bargainOrderSpusList.length>=2){
-        return bargainOrderSpusList.slice(0,2);
-      }else if(bargainOrderSpusList.length>0&&bargainOrderSpusList.length<2){
-        let arr=bargainOrderSpusList[0];
-        if(spuBargainList.length>0){
+    homeBargainList() {
+      const { bargainOrderSpusList, spuBargainList } = this;
+      if (bargainOrderSpusList.length >= 2) {
+        return bargainOrderSpusList.slice(0, 2);
+      } else if (
+        bargainOrderSpusList.length > 0 &&
+        bargainOrderSpusList.length < 2
+      ) {
+        let arr = bargainOrderSpusList[0];
+        if (spuBargainList.length > 0) {
           arr.push(spuBargainList[0]);
         }
         return arr;
-      }else if(spuBargainList.length>0){
+      } else if (spuBargainList.length > 0) {
         return spuBargainList;
-      }else{
+      } else {
         return [];
       }
     }
@@ -262,20 +269,25 @@ export default {
     init() {
       this.initBanners();
       this.initHomeTip();
-      this.initBargainOrderSpusList();
-      this.initMybargainSpus();
+      if (
+        localStorage.getItem("userInfo") ||
+        process.env.VUE_APP_ENV == "development"
+      ) {
+        this.initBargainOrderSpusList();
+        this.initMybargainSpus();
+      }
       this.initGoodsList({ ...this.goodsListPageDat });
     },
-    async initBargainOrderSpusList(){
-      let result=await getMyBargainOrderSpus();
-      if(result&&result.data){
-        this.bargainOrderSpusList=result.data.filter(item=>{
-          if(item.order_expire_time>0&&item.order_status==1){
+    async initBargainOrderSpusList() {
+      let result = await getMyBargainOrderSpus();
+      if (result && result.data) {
+        this.bargainOrderSpusList = result.data.filter(item => {
+          if (item.order_expire_time > 0 && item.order_status == 1) {
             return true;
-          }else{
+          } else {
             return false;
           }
-        })
+        });
       }
     },
     async initBanners() {
