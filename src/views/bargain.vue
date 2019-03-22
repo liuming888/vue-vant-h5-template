@@ -3,8 +3,8 @@
 <template>
   <div class="bargain-container">
     <!-- 返回首页 -->
-    <!-- <div class="turn-home"
-      @click="$router.push('/')"></div> -->
+    <div class="turn-home"
+      @click="$router.push('/')"></div>
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
@@ -225,7 +225,7 @@ export default {
           invite_user_id: inviteUserId
         } = result.data;
 
-        this.$router.push({
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId,
@@ -242,7 +242,7 @@ export default {
         const chop_info = result.data.chop_info;
         this.chop_info = chop_info;
         console.log("chop_info: ", chop_info);
-        this.$router.push({
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId: chop_info.bargain_id
@@ -359,8 +359,7 @@ export default {
         return;
       }
 
-      this.$router.push({
-        path: "/bargain",
+      this.$router.replace({
         query: {
           spuId: spu_id
         }
