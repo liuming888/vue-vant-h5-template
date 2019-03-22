@@ -126,9 +126,9 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
     <dialog-potong-sendiri :chopInfo="chop_info"
-      :dialogVisible.sync="dialogs.potongSendiri" />
+      :dialogVisible.sync="dialogs.potongSendiri" v-if="dialogs.potongSendiri.show"/>
   </div>
 </template>
 
@@ -159,7 +159,7 @@ export default {
           show: false
         },
         potongSendiri: {
-          show: true
+          show: false
         }
       },
       chop_info: {},
