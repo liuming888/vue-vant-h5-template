@@ -359,6 +359,12 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
+        this.$router.replace({
+          query:{
+            ...this.$router.query,
+            helpCur:'ok'
+          }
+        })
       }
 
       return Promise.resolve();
@@ -374,8 +380,7 @@ export default {
           invite_user_id: inviteUserId
         } = result.data;
 
-        this.$router.push({
-          path: "/forBargain",
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId,
@@ -414,8 +419,7 @@ export default {
 
         if (!this.bargain_user_info) {
           // 如果没有帮砍 （没bargain_user_info返回就是没帮砍）
-          this.$router.push({
-            path: "/forBargain",
+          this.$router.replace({
             query: {
               ...this.$route.query
             }
@@ -482,8 +486,7 @@ export default {
         return;
       }
 
-      this.$router.push({
-        path: "/forBargain",
+      this.$router.replace({
         query: {
           spuId: spu_id
         }

@@ -283,7 +283,7 @@ export default {
       if (result && result.data) {
         this.bargainOrderSpusList = result.data.filter(item => {
           // 正式不能注释
-          if (/* item.bargain_info.order_expire_time > 0 && */ item.bargain_info.order_status == 1) {
+          if (item.bargain_info.order_expire_time > 0 && item.bargain_info.order_status == 1) {
             return true;
           } else {
             return false;

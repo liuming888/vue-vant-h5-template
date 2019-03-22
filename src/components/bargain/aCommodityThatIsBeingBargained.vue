@@ -27,7 +27,8 @@
           </div>
 
           <div class="goods-control">
-            <a href="javascrip:;"
+            <a v-if="spuBargainItem.status==1"
+              href="javascrip:;"
               class="go-on-btn"
               :class="{'r-b':spuBargainItem.can_buy==2}"
               @click="jumpBargain">
@@ -50,16 +51,12 @@
 </template>
 
 <script>
-// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-// import dialogSharingMakes from "@/components/commodity/dialogSharingMakes.vue";
 import countDown from "@/components/countDown.vue";
 
 import { shareBargain } from "@/server/share.js";
 export default {
   name: "aCommodityThatIsBeingBargained",
   components: {
-    // dialogSharingFriends, // 分享好友弹窗
-    // dialogSharingMakes, // 分享赚弹起浮窗
     countDown
   },
   props: {
