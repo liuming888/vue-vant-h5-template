@@ -131,7 +131,7 @@
     <!-- 弹窗 -->
     <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress"
       ref="address_dialog"
-      :showType="addressDialogType" v-if="dialogs.postAddAddress.show"/>
+      :showType="addressDialogType" v-show="dialogs.postAddAddress.show"/>
     <!-- 删除地址弹窗 -->
     <dialog-default :info="dialogDefaultInfo"
       :dialogVisible.sync="dialogDefaultShow"
@@ -173,18 +173,7 @@ export default {
         delId: 0
       },
 
-      address_list: [
-        //类型：Array  必有字段  备注：用户地址列表
-        {
-          //类型：Object  必有字段  备注：无
-          username: "mock", //类型：String  必有字段  备注：用户名
-          telephone: "mock", //类型：String  必有字段  备注：手机号
-          id: 1, //类型：Number  必有字段  备注：id
-          address_one: "mock", //类型：String  必有字段  备注：一级地址
-          address_two: "mock", //类型：String  必有字段  备注：二级地址
-          is_default: 1 //类型：Number  必有字段  备注：是否默认地址（1：默认 0：常规）
-        }
-      ]
+      address_list: []
     };
   },
   created() {
@@ -195,9 +184,8 @@ export default {
       let result = await getMyAddress({
         page_size: 10,
         page_num: 1,
-        is_default: 0
       });
-      if (result) {
+      if (result&&result.data) {
         this.address_list = result.data;
       }
     },
@@ -210,7 +198,7 @@ export default {
         operation: -1,
         user_address: this.address_list.find(item => item.id == id)
       });
-      if (result && result.data) {
+      if (result && result.code==0) {
         this.address_list = this.address_list.filter(item => item.id != id);
       }
     },
