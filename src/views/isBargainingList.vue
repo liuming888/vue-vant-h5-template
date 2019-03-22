@@ -288,12 +288,11 @@
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
-        <img src="./../assets/images/bargain-finish-banner.png"
-          alt="">
+        <img v-lazy="require('./../assets/images/bargain-finish-banner.png')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
-          v-for="(item, index) in mapListDat.finishList"
+          v-for="(item, index) in finishList"
           :key="index">
           <div class="img-box">
             <img v-lazy="item.spu.spu_pics[0]">
@@ -307,7 +306,7 @@
               </div>
               <div class="price-item">
                 <div class="btn"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id,item.bargain_info.order_no)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
                 <p class="completed">completed</p>
               </div>
             </div>
@@ -322,7 +321,7 @@
       </div>
       <ul class="goods-list">
         <li class="goods-item"
-          v-for="(item, index) in mapListDat.ingList"
+          v-for="(item, index) in ingList"
           :key="index">
           <div class="img-box">
             <img v-lazy="item.spu.spu_pics[0]">
@@ -343,7 +342,7 @@
 
                 <div class="btn"
                   v-show="item.bargain_info.can_buy==1"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
               </div>
             </div>
 
@@ -364,7 +363,7 @@
 <script>
 import aCommodityThatIsBeingBargained from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
 import countDown from "@/components/countDown.vue";
-import { getMyBargainSpus, getMyBargainOrderSpus } from "@/server/bargain.js";
+import { getMyBargainSpus } from "@/server/bargain.js";
 export default {
   components: {
     aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
@@ -373,73 +372,30 @@ export default {
   data() {
     return {
       finishList: [],
-      ingList: [],
-
-      bargainOrderSpusList: [], // 获取处理中砍价订单列表
-      spuBargainList: [], // 正在砍价的商品列表
-      spuBargainDat: {
-        page_size: 10,
-        page_num: 1
-      }
+      ingList: []
     };
   },
-  computed: {
-    mapListDat() {
-      var obj = { finishList: [], ingList: [] };
-      let arr = [...this.bargainOrderSpusList, ...this.spuBargainList];
-      obj.finishList = arr.filter(item => {
-        return (
-          item.bargain_info.can_buy === 1 && item.bargain_info.status === 2
-        );
-      });
-      obj.ingList = arr.filter(item => item.bargain_info.status === 1);
-    }
-  },
   created() {
-    this.initBargainOrderSpusList();
-    this.initMybargainSpus();
-    // this.getMyBargainInfo();
+    this.getMyBargainInfo();
   },
   methods: {
-    async initBargainOrderSpusList() {
-      let result = await getMyBargainOrderSpus();
-      if (result && result.data) {
-        this.bargainOrderSpusList = result.data.filter(item => {
-          if (item.order_expire_time > 0 && item.order_status == 1) {
-            return true;
-          } else {
-            return false;
-          }
+    async getMyBargainInfo() {
+      const params = {
+        page_size: 10,
+        page_num: 1
+      };
+      try {
+        const result = await getMyBargainSpus(params);
+        this.finishList = result.data.filter(item => {
+          return (
+            item.bargain_info.can_buy === 1 && item.bargain_info.status === 2
+          );
         });
-      }
+        this.ingList = result.data.filter(
+          item => item.bargain_info.status === 1
+        );
+      } catch (error) {}
     },
-    async initMybargainSpus() {
-      let result = await getMybargainSpus(this.spuBargainDat);
-      console.log("result: ", result);
-      if (result && result.data) {
-        this.spuBargainList = result.data;
-      }
-    },
-
-    // async getMyBargainInfo() {
-    // const params = {
-    //   page_size: 10,
-    //   page_num: 1
-    // };
-    // try {
-    //   const result = await getMyBargainSpus(params);
-    //   this.finishList = result.data.filter(item => {
-    //     return (
-    //       item.bargain_info.can_buy === 1 && item.bargain_info.status === 2
-    //     );
-    //   });
-    //   this.ingList = result.data.filter(
-    //     item => item.bargain_info.status === 1
-    //   );
-    // } catch (error) {
-    //   console.log("error: ", error);
-    // }
-    // },
     jumpCurBargainPage(spu_id, bargain_id) {
       this.$router.push({
         path: "/bargain",
@@ -449,13 +405,11 @@ export default {
         }
       });
     },
-    jumpPurchasePage(spu_id,bargain_id, order_no) {
+    jumpPurchasePage(spu_id) {
       this.$router.push({
         path: "/purchase",
         query: {
-          spuId: spu_id,
-          bargainId:bargain_id,
-          orderNo: order_no
+          spuId: spu_id
         }
       });
     }
