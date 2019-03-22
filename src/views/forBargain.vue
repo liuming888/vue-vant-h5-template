@@ -375,7 +375,7 @@ export default {
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         this.$router.replace({
           query: {
-            ...this.$router.query,
+            ...this.$route.query,
             helpCur: "ok"
           }
         });
