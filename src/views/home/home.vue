@@ -165,9 +165,9 @@
         </van-swipe>
 
         <div class="freebing-box"
-          v-if="spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
+          v-if="homeBargainList.length">
           <div class="freebing-title">Ongoing Freebies</div>
-          <template v-for="(item,index) of spuBargainList">
+          <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
             <freebing-box :key="index"
               :spuBargainItem="{...item.bargain_info,...item.spu}"
@@ -215,7 +215,7 @@ import commodityItem from "@/components/commodity/commodityItem.vue";
 import axios from "axios";
 import { getHomeTip, getBanners } from "@/server/other.js";
 import { login } from "@/server/user.js";
-import { getMybargainSpus, getBargainSpus } from "@/server/goods.js";
+import { getMybargainSpus, getBargainSpus,getMyBargainOrderSpus } from "@/server/goods.js";
 export default {
   components: {
     tabBar, // 底部tab
@@ -228,14 +228,32 @@ export default {
     return {
       messageList: [], // 顶部滚动消息
       bannerList: [], // banner列表
-      // 正在砍价的商品列表（默认最多展示两条）
-      spuBargainList: [],
+      bargainOrderSpusList:[], // 获取处理中砍价订单列表
+      spuBargainList: [],  // 正在砍价的商品列表（默认最多展示两条）
       goodsList: [],
       goodsListPageDat: {
         page_size: 10,
         page_num: 1
       }
     };
+  },
+  computed: {
+    homeBargainList(){
+      const {bargainOrderSpusList,spuBargainList}=this;
+      if(bargainOrderSpusList.length>=2){
+        return bargainOrderSpusList.slice(0,2);
+      }else if(bargainOrderSpusList.length>0&&bargainOrderSpusList.length<2){
+        let arr=bargainOrderSpusList[0];
+        if(spuBargainList.length>0){
+          arr.push(spuBargainList[0]);
+        }
+        return arr;
+      }else if(spuBargainList.length>0){
+        return spuBargainList;
+      }else{
+        return [];
+      }
+    }
   },
   created() {
     this.init();
@@ -244,8 +262,21 @@ export default {
     init() {
       this.initBanners();
       this.initHomeTip();
+      this.initBargainOrderSpusList();
       this.initMybargainSpus();
       this.initGoodsList({ ...this.goodsListPageDat });
+    },
+    async initBargainOrderSpusList(){
+      let result=await getMyBargainOrderSpus();
+      if(result&&result.data){
+        this.bargainOrderSpusList=result.data.filter(item=>{
+          if(item.order_expire_time>0&&item.order_status==1){
+            return true;
+          }else{
+            return false;
+          }
+        })
+      }
     },
     async initBanners() {
       let result = await getBanners();

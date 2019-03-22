@@ -61,11 +61,11 @@ const curRouter = new Router({
                     name: '立即提现',
                     component: resolve => require(['../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'], resolve),
                 },
-                {
-                    path: '/withdrawRelated/withdrawalsRecord',
-                    name: '提现记录',
-                    component: resolve => require(['../views/withdrawRelated/withdrawalsRecord.vue'], resolve),
-                },
+                // {
+                //     path: '/withdrawRelated/withdrawalsRecord',
+                //     name: '提现记录',
+                //     component: resolve => require(['../views/withdrawRelated/withdrawalsRecord.vue'], resolve),
+                // },
                /*  {
                     path: '/withdrawRelated/incomeBreakdown',
                     name: '收益明细',
@@ -73,11 +73,11 @@ const curRouter = new Router({
                 }, */
             ],
         },
-        {
-            path: '/withdrawRelated/toWithdraw',
-            name: '我要提现',
-            component: resolve => require(['../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'], resolve),
-        },
+        // {
+        //     path: '/withdrawRelated/toWithdraw',
+        //     name: '我要提现',
+        //     component: resolve => require(['../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'], resolve),
+        // },
         // 以下为v0.2版本得做的页面
         {
             path: '/my/myFriends',
@@ -117,11 +117,11 @@ const curRouter = new Router({
             name: '如何赚钱',
             component: resolve => require(['../views/my/howToMakeMoney.vue'], resolve),
         },
-        {
-            path: '/my/billboard',
-            name: '排行榜1',
-            component: resolve => require(['../views/my/billboard.vue'], resolve),
-        },
+        // {
+        //     path: '/my/billboard',
+        //     name: '排行榜1',
+        //     component: resolve => require(['../views/my/billboard.vue'], resolve),
+        // },
         {
             path: '/my/Tutorial',
             name: '排行榜',
@@ -129,7 +129,7 @@ const curRouter = new Router({
         },
         {
             path: '/my/revenueDetails',
-            name: '收益明细2',
+            name: '收益明细',
             component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
         },
     ],
