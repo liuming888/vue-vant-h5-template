@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     goPath(index) {
-      this.$router.push(this.tabList[index].path);
+      this.$router.replace(this.tabList[index].path);
     }
   }
 };
