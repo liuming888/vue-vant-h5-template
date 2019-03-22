@@ -135,7 +135,7 @@
     }
     .active {
       border: 1px solid #d30c05;
-      background: url("./../../../assets/images/Selected.png") no-repeat 0 0;
+      background: url("~@/assets/images/Selected.png") no-repeat 0 0;
       background-size: 28px;
     }
   }
@@ -178,7 +178,7 @@
     left: 0;
     width: 30%;
     height: 100%;
-    background: url("./../../../assets/images/progress-bar-2.png") no-repeat;
+    background: url("~@/assets/images/progress-bar-2.png") no-repeat;
     background-size: 100%;
     background-color: #f65e10;
     border-radius: 9px;

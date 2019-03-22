@@ -52,33 +52,10 @@ const curRouter = new Router({
         },
         {
             path: '/withdrawRelated',
-            name: '提现相关tab主页面',
-            component: resolve => require(['../views/withdrawRelated/index.vue'], resolve),
-            redirect: '/withdrawRelated/withdrawImmediately',
-            children: [
-                {
-                    path: '/withdrawRelated/withdrawImmediately',
-                    name: '立即提现',
-                    component: resolve => require(['../views/withdrawRelated/withdrawImmediately/withdrawImmediately.vue'], resolve),
-                },
-                // {
-                //     path: '/withdrawRelated/withdrawalsRecord',
-                //     name: '提现记录',
-                //     component: resolve => require(['../views/withdrawRelated/withdrawalsRecord.vue'], resolve),
-                // },
-               /*  {
-                    path: '/withdrawRelated/incomeBreakdown',
-                    name: '收益明细',
-                    component: resolve => require(['../views/withdrawRelated/incomeBreakdown.vue'], resolve),
-                }, */
-            ],
+            name: '立即提现',
+            component: resolve => require(['../views/withdrawRelated/withdrawImmediately.vue'], resolve),
         },
-        // {
-        //     path: '/withdrawRelated/toWithdraw',
-        //     name: '我要提现',
-        //     component: resolve => require(['../views/withdrawRelated/withdrawImmediately/toWithdraw.vue'], resolve),
-        // },
-        // 以下为v0.2版本得做的页面
+     
         {
             path: '/my/myFriends',
             name: '我的好友',
@@ -108,30 +85,16 @@ const curRouter = new Router({
             ],
         },
         {
-            path: '/my/inviteFriends',
-            name: '邀请好友',
-            component: resolve => require(['../views/my/inviteFriends.vue'], resolve),
-        },
-        {
-            path: '/my/howToMakeMoney',
-            name: '如何赚钱',
-            component: resolve => require(['../views/my/howToMakeMoney.vue'], resolve),
-        },
-        // {
-        //     path: '/my/billboard',
-        //     name: '排行榜1',
-        //     component: resolve => require(['../views/my/billboard.vue'], resolve),
-        // },
-        {
-            path: '/my/Tutorial',
-            name: '排行榜',
-            component: resolve => require(['../views/my/Tutorial.vue'], resolve),
-        },
-        {
             path: '/my/revenueDetails',
             name: '收益明细',
             component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
         },
+        {
+            path: '/my/Tutorial',
+            name: '新手教程',
+            component: resolve => require(['../views/my/Tutorial.vue'], resolve),
+        },
+       
     ],
 });
 
