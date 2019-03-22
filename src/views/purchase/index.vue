@@ -232,7 +232,7 @@ export default {
     },
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result&&result.data) {
         this.spu = result.data.spu;
       }
     },

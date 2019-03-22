@@ -232,7 +232,7 @@ export default {
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
-      if (result) {
+      if (result&&result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
       }

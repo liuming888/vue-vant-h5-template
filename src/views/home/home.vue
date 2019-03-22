@@ -170,8 +170,7 @@
           <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
             <freebing-box :key="index"
-              :spuBargainItem="{...item.bargain_info,...item.spu}"
-              v-if="item.bargain_info.status==1" />
+              :spuBargainItem="{...item.bargain_info,...item.spu}" />
           </template>
 
           <a href="javascript:;"
@@ -244,6 +243,7 @@ export default {
   computed: {
     homeBargainList() {
       const { bargainOrderSpusList, spuBargainList } = this;
+      console.log('bargainOrderSpusList, spuBargainList: ', bargainOrderSpusList, spuBargainList);
       if (bargainOrderSpusList.length >= 2) {
         return bargainOrderSpusList.slice(0, 2);
       } else if (
@@ -289,8 +289,6 @@ export default {
             return false;
           }
         });
-        console.log("this.bargainOrderSpusList",this.bargainOrderSpusList);
-        
       }
     },
     async initBanners() {
@@ -301,7 +299,7 @@ export default {
     },
     async initHomeTip() {
       let result = await getHomeTip();
-      if (result) {
+      if (result&&result.data) {
         this.messageList = result.data.home_tips;
         console.log("this.messageList: ", this.messageList);
       }

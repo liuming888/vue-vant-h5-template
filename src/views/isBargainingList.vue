@@ -295,7 +295,7 @@
           v-for="(item, index) in finishList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
@@ -324,7 +324,7 @@
           v-for="(item, index) in ingList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
