@@ -280,7 +280,7 @@ export default {
       let result = await getBargainInfo({
         bargain_id: this.$route.query.bargainId
       });
-      if (result) {
+      if (result&&result.data) {
         this.bargain_info = result.data.bargain_info || result.data;
         this.bargain_user_info = result.data.bargain_user_info;
         console.log("this.bargain_info: ", this.bargain_info);
@@ -346,7 +346,7 @@ export default {
       let result = await shareBargain({
         bargain_id: this.$route.query.bargainId
       });
-      if (result) {
+      if (result&&result.data) {
         this.shareInfo = result.data;
       }
       this.dialogs.sharingFriends.show = true;

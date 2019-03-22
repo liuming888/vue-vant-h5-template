@@ -412,7 +412,7 @@ export default {
      */
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result&&result.data) {
         let spu = result.data.spu;
         for (let k in spu) {
           this.spu[k] = spu[k];
@@ -450,7 +450,7 @@ export default {
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
       });
-      if (result) {
+      if (result&&result.data) {
         this.help_bargain_list = result.data;
       }
     },
@@ -486,7 +486,7 @@ export default {
     },
     async openSharingFriendsDialog() {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result&&result.data) {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       }

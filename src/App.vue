@@ -89,7 +89,7 @@ export default {
 
         let result = await refreshToken(JSON.parse(userStr));
         this.$store.commit("setIsreFreshToken", true);
-        if (result) {
+        if (result&&result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));

@@ -301,7 +301,7 @@ export default {
     },
     async initHomeTip() {
       let result = await getHomeTip();
-      if (result) {
+      if (result&&result.data) {
         this.messageList = result.data.home_tips;
         console.log("this.messageList: ", this.messageList);
       }
