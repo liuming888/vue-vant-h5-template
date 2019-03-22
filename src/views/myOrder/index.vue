@@ -61,10 +61,11 @@
       <van-tab v-for="(item, index) in tabList"
         :title="item.tit"
         :key="index">
-        <router-view></router-view>
+
       </van-tab>
     </van-tabs>
 
+    <router-view></router-view>
   </div>
 </template>
 <script>
