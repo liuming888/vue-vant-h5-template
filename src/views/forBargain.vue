@@ -58,7 +58,8 @@
                 <!-- <span class="description">Take it free</span> -->
               </div>
             </div>
-            <p v-if="isNGo" class="n-go-p">
+            <p v-if="isNGo"
+              class="n-go-p">
               Congratulations! Your friend got this freebie
               successfully, you will get half of the price
               you bargained on your friend’s freebies.
@@ -67,7 +68,8 @@
           <count-down :dateDiff="spu.expire_ttl"
             v-if="!isNGo"
             class="spu-count-down"></count-down>
-          <div class="ctrl-box" :class="ctrlBoxCls">
+          <div class="ctrl-box"
+            :class="ctrlBoxCls">
             <!-- <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
               @click="goBargainChop">Help my friend to get freebies</div>
@@ -80,7 +82,6 @@
               <p class="old-txt">TIP: Go to the personal interface and check out the benefits
                 immediately </p>
             </template> -->
-
 
             <!-- 没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆-->
             <!-- <div class="share-btn"
@@ -98,7 +99,6 @@
             <!-- <div class="share-btn"
               v-else
               @click="$router.push('/')">I want this for free too</div> -->
-
 
             <div class="share-btn"
               v-if="isBargain"
@@ -264,12 +264,17 @@ export default {
   },
   computed: {
     //  没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆
-    isBargain(){
-      return this.$route.query.helpCur!='ok'&&!this.bargain_user_info&&this.bargain_info.status==1||this.isOne;
+    isBargain() {
+      return (
+        (this.$route.query.helpCur != "ok" &&
+          !this.bargain_user_info &&
+          this.bargain_info.status == 1) ||
+        this.isOne
+      );
     },
     // 是否帮砍成功
-    isHelpOk(){
-      return this.$route.query.helpCur=='ok';
+    isHelpOk() {
+      return this.$route.query.helpCur == "ok";
     },
     // 是否是第N次进入
     isNGo() {
@@ -280,23 +285,23 @@ export default {
         !this.$route.query.helpCur
       );
     },
-    ctrlBoxCls(){
-      if(this.isBargain){
+    ctrlBoxCls() {
+      if (this.isBargain) {
         return {
-          isBargainCur:true
-        }
-      }else if(this.isNGo){
+          isBargainCur: true
+        };
+      } else if (this.isNGo) {
         return {
-          isNGoCur:true
-        }
-      }else if(this.isHelpOk){
+          isNGoCur: true
+        };
+      } else if (this.isHelpOk) {
         return {
-          isHelpOkCur:true
-        }
-      }else{
+          isHelpOkCur: true
+        };
+      } else {
         return {
-           isHelpOkCur:true
-        }
+          isHelpOkCur: true
+        };
       }
     }
   },
@@ -319,7 +324,7 @@ export default {
       });
     }
 
-    document.title="Getting Freebies";
+    document.title = "Getting Freebies";
   },
   methods: {
     async init() {
@@ -334,10 +339,19 @@ export default {
       if (relationId && !bargainId && !spuId && !type && !inviteUserId) {
         await this.initShareInfo(relationId);
       }
-      this.initBargainInfo();
-      this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
+
+      // 用户帮砍按钮点击登录后重新进入页面时
+      const helpCur = this.$util.getQueryVariable("helpCur");
+      if (helpCur == "ok" /*  && window.location.hash != "#helpCurOk" */) {
+        console.log("login kan  ok--------");
+        this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
+        await this.goBargainChop();
+      }
+
+      this.initBargainInfo();
+      this.initHelpBargainList();
     },
 
     async goBargainChop() {
@@ -360,11 +374,11 @@ export default {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         this.$router.replace({
-          query:{
+          query: {
             ...this.$router.query,
-            helpCur:'ok'
+            helpCur: "ok"
           }
-        })
+        });
       }
 
       return Promise.resolve();
