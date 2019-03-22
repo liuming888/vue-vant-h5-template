@@ -13,6 +13,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  border-top:1px solid #dfdede; 
   > .tabBar-item {
     flex: 1;
     // display: flex;

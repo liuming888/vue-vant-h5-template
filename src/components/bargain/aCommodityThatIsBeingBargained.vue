@@ -13,7 +13,7 @@
 
           <div class="left-box">
             <div class="num-box">
-              <span class="rp-box">Rp{{spuBargainItem.bargain_amount}}</span> <span class="compeled">compeled</span>
+              <span class="rp-box">Rp{{spuBargainItem.bargain_amount}}</span> <span class="compeled">completed</span>
             </div>
 
             <div class="progress">

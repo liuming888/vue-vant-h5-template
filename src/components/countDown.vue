@@ -2,7 +2,6 @@
 .dec {
   margin-right: 10px;
   font-size: 20px;
-  font-family: Helvetica;
   font-weight: 400;
   color: rgba(88, 88, 88, 1);
   line-height: 42px;
