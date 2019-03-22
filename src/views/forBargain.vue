@@ -314,16 +314,6 @@ export default {
     this.init();
   },
   mounted() {
-    // 用户帮砍按钮点击登录后重新进入页面时
-    // const helpCur = this.$util.getQueryVariable("helpCur");
-    // if (helpCur == "ok" /*  && window.location.hash != "#helpCurOk" */) {
-    //   console.log("login kan  ok--------");
-    //   this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
-    //   this.$nextTick(() => {
-    //     this.goBargainChop();
-    //   });
-    // }
-
     document.title = "Getting Freebies";
   },
   methods: {
