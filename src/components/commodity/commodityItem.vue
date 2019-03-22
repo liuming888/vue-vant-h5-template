@@ -135,8 +135,8 @@
         <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">
-          <span class="discount">$ {{itemData.price || 0}}</span>
-          <span class="real">${{itemData.original_price || 0}}</span>
+          <span class="discount">RP {{itemData.price || 0}}</span>
+          <span class="real">RP{{itemData.original_price || 0}}</span>
         </div>
       </div>
       <div class="goods-control">

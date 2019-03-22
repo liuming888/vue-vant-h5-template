@@ -25,7 +25,7 @@
                   <p class="p-t-3">244d Sent</p>
                   <p class="p-t-1">
                     Price
-                    <span>$</span><span>{{spu.original_price}}</span>
+                    <span>RP</span><span>{{spu.original_price}}</span>
                   </p>
                   <p class="p-t-2">current price</p>
                 </div>

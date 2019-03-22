@@ -154,7 +154,8 @@
     @click.stop="abc=1">
 
     <div class="share-box">
-      <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5>
+      <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
+      <h5 class="tit">Share to your friends.You will gain bonus if your friends buy it.</h5>
 
       <div class="content">
         <div class="good-box">
@@ -217,9 +218,9 @@
 
 <script>
 import share from "@/mixins/share.js";
-import fbInit from '@/mixins/fbInit.js';
+import fbInit from "@/mixins/fbInit.js";
 export default {
-  mixins: [share,fbInit],
+  mixins: [share, fbInit],
   name: "dialogSharingMakes",
   props: {
     dialogVisible: {

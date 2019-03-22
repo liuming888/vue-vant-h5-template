@@ -244,7 +244,7 @@
           <li class="hero-list-title">
             <div class="column">Rankings</div>
             <div class="column">Number of fans</div>
-            <div class="column">Cumulative income($)</div>
+            <div class="column">Cumulative income(RP)</div>
           </li>
           <FriendListCommon v-for="(item, index) in hero_tips"
             :key="index"
