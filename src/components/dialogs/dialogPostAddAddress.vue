@@ -204,8 +204,24 @@ export default {
   created() {},
   methods: {
     async simpan() {
-      let { username, telephone, country, region, city, zip } = this.curAddress;
-      if (!username || !telephone || !country || !region || !city || !zip) {
+      let {
+        username,
+        telephone,
+        country,
+        region,
+        city,
+        zip,
+        address_one
+      } = this.curAddress;
+      if (
+        !username ||
+        !telephone ||
+        !country ||
+        !region ||
+        !city ||
+        !zip ||
+        !address_one
+      ) {
         Dialog.alert({
           message: "Silakan isi informasi alamat lengkap",
           confirmButtonText: "Tentukan"
