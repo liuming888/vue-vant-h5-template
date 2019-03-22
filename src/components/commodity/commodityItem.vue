@@ -4,7 +4,7 @@
   background-color: #fff;
   overflow: hidden;
   & + .home-goods-item {
-    margin-top: 30px;
+    margin-top: 60px;
   }
   > .goods-img {
     img {

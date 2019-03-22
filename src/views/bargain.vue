@@ -58,7 +58,7 @@
             <div class="share-btn"
               @click="openSharingFriendsDialog">SHARE FRIEDNS FOR FREEBIES</div>
             <div class="buy-btn"
-              v-if="bargain_info.can_buy&&bargain_info.can_buy!=2"
+              v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
               @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
             <div class="buy-btn cur"
               v-else>
@@ -105,8 +105,7 @@
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
-          <img src="./../assets/images/start.png"
-            alt="">
+          <img v-lazy="require('./../assets/images/start.png')">
           <span>You might like</span>
         </p>
         <div class="recommend-item"
@@ -127,9 +126,9 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo" v-if="dialogs.sharingFriends.show"/>
     <dialog-potong-sendiri :chopInfo="chop_info"
-      :dialogVisible.sync="dialogs.potongSendiri" />
+      :dialogVisible.sync="dialogs.potongSendiri" v-if="dialogs.potongSendiri.show"/>
   </div>
 </template>
 

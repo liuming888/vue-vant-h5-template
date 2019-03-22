@@ -201,9 +201,15 @@
                     display: inline-block;
                 }
                 > .ctrl-box {
-                    // margin-top: 38px;  // 用户第一次进入
-                    // margin-top:48px;   // 用户砍价完成
-                    margin-top: 108px; // 用户第N次进入
+                    &.isBargainCur{
+                        margin-top: 38px;  // 用户第一次进入
+                    }
+                    &.isNGoCur{
+                        margin-top:48px;   // 用户砍价完成
+                    }
+                    &.isHelpOkCur{
+                        margin-top: 108px; // 用户第N次进入
+                    }
                     > .share-btn {
                         color: #a53a06;
                         font-size: 36px;

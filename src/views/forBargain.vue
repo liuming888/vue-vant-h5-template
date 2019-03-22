@@ -67,7 +67,7 @@
           <count-down :dateDiff="spu.expire_ttl"
             v-if="!isNGo"
             class="spu-count-down"></count-down>
-          <div class="ctrl-box">
+          <div class="ctrl-box" :class="ctrlBoxCls">
             <!-- <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
               @click="goBargainChop">Help my friend to get freebies</div>
@@ -81,12 +81,30 @@
                 immediately </p>
             </template> -->
 
+
             <!-- 没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆-->
-            <div class="share-btn"
+            <!-- <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&!bargain_user_info&&bargain_info.status==1||isOne"
               @click="goBargainChop">Help my friend to get freebies</div>
             <div class="share-btn"
               v-else-if="$route.query.helpCur=='ok'"
+              @click="$router.push('/')">I want this for free too</div>
+            <template v-else-if="isNGo">
+              <div class="share-btn"
+                @click="$router.push('/my/revenueDetails')">Receive bonus</div>
+              <p class="old-txt">Check your bonus in [ME]-[Earning Details]</p>
+            </template> -->
+            <!-- 别的情况统一显示这个 -->
+            <!-- <div class="share-btn"
+              v-else
+              @click="$router.push('/')">I want this for free too</div> -->
+
+
+            <div class="share-btn"
+              v-if="isBargain"
+              @click="goBargainChop">Help my friend to get freebies</div>
+            <div class="share-btn"
+              v-else-if="isHelpOk"
               @click="$router.push('/')">I want this for free too</div>
             <template v-else-if="isNGo">
               <div class="share-btn"
@@ -245,6 +263,14 @@ export default {
     };
   },
   computed: {
+    //  没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆
+    isBargain(){
+      return this.$route.query.helpCur!='ok'&&!this.bargain_user_info&&this.bargain_info.status==1||this.isOne;
+    },
+    // 是否帮砍成功
+    isHelpOk(){
+      return this.$route.query.helpCur=='ok';
+    },
     // 是否是第N次进入
     isNGo() {
       return (
@@ -253,6 +279,25 @@ export default {
         this.bargain_info.status != 2 &&
         !this.$route.query.helpCur
       );
+    },
+    ctrlBoxCls(){
+      if(this.isBargain){
+        return {
+          isBargainCur:true
+        }
+      }else if(this.isNGo){
+        return {
+          isNGoCur:true
+        }
+      }else if(this.isHelpOk){
+        return {
+          isHelpOkCur:true
+        }
+      }else{
+        return {
+           isHelpOkCur:true
+        }
+      }
     }
   },
   created() {
