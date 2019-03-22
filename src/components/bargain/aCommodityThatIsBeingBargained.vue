@@ -101,12 +101,17 @@ export default {
       this.refreshTime();
     },
     jumpPurchasePage() {
-      const { spu_id: spuId, bargain_id: bargainId } = this.spuBargainItem;
+      const {
+        spu_id: spuId,
+        bargain_id: bargainId,
+        order_no: orderNo
+      } = this.spuBargainItem;
       this.$router.push({
         path: "/purchase",
         query: {
           spuId,
-          bargainId
+          bargainId,
+          orderNo
         }
       });
     },

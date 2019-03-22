@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { Icon ,Dialog} from "vant";
+import { Icon, Dialog } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
@@ -212,8 +212,8 @@ export default {
       this.dialogVisible = true;
     }
   },
-  mounted () {
-    document.title="Check out";
+  mounted() {
+    document.title = "Check out";
   },
   methods: {
     async init() {
@@ -275,27 +275,35 @@ export default {
       });
       console.log("spu_spec_items----------", spu_spec_items);
 
-      if (!spu_spec_items) {
-         Dialog.alert({
-          message: "Silakan pilih alamat pengiriman",
-          confirmButtonText: "Tentukan"
-        });
-        return;
+      // if (!spu_spec_items) {
+      //   Dialog.alert({
+      //     message: "Silakan pilih alamat pengiriman",
+      //     confirmButtonText: "Tentukan"
+      //   });
+      //   return;
+      // }
+
+      if(spu_spec_items){
+        param.spu_spec_items = spu_spec_items;
       }
 
-      param.spu_spec_items = spu_spec_items;
 
       if (this.$route.query.bargainId) {
         param.bargain_id = this.$route.query.bargainId;
       }
       console.log("param--------------", param);
-      let result = await orderCreate(param);
-      if (result && result.data) {
-        let { pay_url, order_no } = result.data;
-        console.log("pay_url: ", pay_url);
-        this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
-        window.location.href = pay_url;
+
+      if (this.$route.query.orderNo) {  // 跳转过来继续支付的
+        this.goRepaidPay();
+      } else {
+        let result = await orderCreate(param);
+        if (result && result.data) {
+          let { pay_url, order_no } = result.data;
+          console.log("pay_url: ", pay_url);
+          this.showWaitPaymentDialog.show = true;
+          // window.open(pay_url);
+          window.location.href = pay_url;
+        }
       }
     },
     /**
