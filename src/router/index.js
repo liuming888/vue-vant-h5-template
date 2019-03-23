@@ -7,7 +7,7 @@ const curRouter = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
-        // { path: '*', redirect: '/' },
+        { path: '*', redirect: '/' },
         {
             path: '/',
             name: '首页',
@@ -119,7 +119,7 @@ curRouter.beforeEach((to, from, next) => {
 });
 
 // 全局后置钩子
-curRouter.afterEach(() => {
+// curRouter.afterEach(() => {
     // quicklink({
     //     // 默认2秒
     //     // timeout: 2000,
@@ -139,6 +139,6 @@ curRouter.afterEach(() => {
     // const urls = ['1.html', '2.html'];
     // const promises = urls.map(url => prefetch(url));
     // Promise.all(promises);
-});
+// });
 
 export default curRouter;
