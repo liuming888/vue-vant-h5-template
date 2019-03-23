@@ -71,6 +71,12 @@ module.exports = {
         if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production') {
             config.plugins = [...config.plugins, ...plugins];
         }
+
+        config.externals = {
+            vue: 'Vue',
+            vuex: 'Vuex',
+            'vue-router': 'VueRouter',
+        };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: config => {

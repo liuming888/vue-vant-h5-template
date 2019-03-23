@@ -1,7 +1,7 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 import Router from 'vue-router';
 // import quicklink from 'quicklink/dist/quicklink.mjs';
-Vue.use(Router);
+// Vue.use(Router);
 
 const curRouter = new Router({
     mode: 'history',
