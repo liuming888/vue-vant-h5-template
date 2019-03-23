@@ -13,7 +13,7 @@
 
     <!-- 弹窗 -->
     <dialog-login-select v-if="$store.state.dialogs.loginSelect.show" />
-    <!-- <dialog-new-gift-bag v-if="$store.state.dialogs.newGiftBag.show" /> -->
+    <dialog-new-gift-bag v-if="$store.state.dialogs.newGiftBag.show" />
   </div>
 </template>
 
@@ -34,9 +34,17 @@ export default {
     dialogLoginSelect, // 登录选择弹窗
     dialogNewGiftBag // 新人礼包
   },
-  created() {
-    if (localStorage.getItem("newUser") == "1") {
-      this.$store.commit("setNewGiftBagShow",true);
+  mounted() {},
+  watch: {
+    $route(val) {
+      console.log("当前路径", val.path);
+      // 如果登陆成功后刷新界面发现登陆的是新用户并且不是在帮砍页
+      if (
+        localStorage.getItem("newUserInfo")&&
+        this.$route.path != "/forBargain"
+      ) {
+        this.$store.commit("setNewGiftBagShow", true);
+      }
     }
   }
 };

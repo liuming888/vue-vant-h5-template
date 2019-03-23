@@ -48,16 +48,23 @@ export function getMyAccount() {
 }
 
 // 获取我的好友明细
-export function getMyFriends({ page_size, page_num}) {
-           return $request.post({
-               url: '/api/v1/user/account/get_my_friends',
-               data: { page_size, page_num }
-           });
-       }
+export function getMyFriends({ page_size, page_num }) {
+    return $request.post({
+        url: '/api/v1/user/account/get_my_friends',
+        data: { page_size, page_num },
+    });
+}
 
 // 获取英雄榜
 export function getHeroList() {
     return $request.post({
         url: '/api/v1/tip/get_hero_list',
+    });
+}
+
+// 用户首次登录领取新人礼包 
+export function getMyNewRp() {
+    return $request.post({
+        url: '/api/v1/user/get_my_new_rp',
     });
 }

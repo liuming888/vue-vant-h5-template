@@ -14,11 +14,11 @@ if (userStr) {
 }
 
 if (process.env.VUE_APP_ENV == 'development') {
-    //   user_id = 1;
-    //   access_token = '486dcad761f8425e8aa2a49e964a984c';
+      user_id = 1;
+      access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    user_id = 121;
-    access_token = '0d1e91cf584746fba2f61c8728f96d3d';
+    // user_id = 121;
+    // access_token = '0d1e91cf584746fba2f61c8728f96d3d';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);

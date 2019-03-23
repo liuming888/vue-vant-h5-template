@@ -307,7 +307,7 @@ export default {
   },
   created() {
     if (!localStorage.getItem("userInfo")) {
-      // 用户第一次进入砍价页面
+      // 用户第一次进入帮砍页面
       this.isOne = true;
     }
 
@@ -363,12 +363,15 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            helpCur: "ok"
-          }
-        });
+        const helpCur = this.$util.getQueryVariable("helpCur");
+        if (!helpCur) {  // 之前有登陆的用户帮好友砍（不是新用户登陆刷新后的）
+          this.$router.replace({
+            query: {
+              ...this.$route.query,
+              helpCur: "ok"
+            }
+          });
+        }
       }
 
       return Promise.resolve();
@@ -402,7 +405,7 @@ export default {
      */
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result&&result.data) {
+      if (result && result.data) {
         let spu = result.data.spu;
         for (let k in spu) {
           this.spu[k] = spu[k];
@@ -440,7 +443,7 @@ export default {
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
       });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.help_bargain_list = result.data;
       }
     },
@@ -476,7 +479,7 @@ export default {
     },
     async openSharingFriendsDialog() {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       }

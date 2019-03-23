@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 .box {
   position: relative;
+  z-index: 999;
   padding: 0 10px;
   > img {
     width: 100%;
@@ -50,8 +51,8 @@
     position: relative;
     width: 70px;
     height: 70px;
-    margin:0 auto;
-    background: url("./../../assets/images/guanbi@2x.png") no-repeat;
+    margin: 0 auto;
+    background: url("~@/assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
 }
@@ -108,6 +109,7 @@ export default {
   },
   methods: {
     closeDialog() {
+      this.$store.commit("setNewGiftBagShow", true);  // 帮砍完成弹出新人礼包
       this.$emit("update:dialogVisible", { show: false });
     }
   }

@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 .box {
   position: relative;
+  z-index: 999;
   padding: 0 10px;
   > img {
     width: 100%;

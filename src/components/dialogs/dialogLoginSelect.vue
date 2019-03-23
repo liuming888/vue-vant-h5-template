@@ -150,7 +150,7 @@ export default {
           this.$store.commit("setLoginSelectShow", false);
 
           if(userInfo.is_new==1){  // 如果是新用户
-            window.localStorage.setItem("newUser",1);
+            window.localStorage.setItem("newUserInfo",JSON.stringify(userInfo));
           }
 
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
