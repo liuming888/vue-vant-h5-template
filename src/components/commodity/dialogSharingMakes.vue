@@ -9,7 +9,9 @@
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 20vh;
+  box-sizing: border-box;
 }
 
 .share-box {
@@ -61,7 +63,6 @@
           width: 282px;
           height: 60px;
           font-size: 24px;
-          font-family: Helvetica;
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
@@ -74,7 +75,6 @@
 
         .old-m {
           font-size: 16px;
-          font-family: Helvetica;
           font-weight: 400;
           text-decoration: line-through;
           color: rgba(136, 136, 136, 1);
@@ -156,7 +156,8 @@
     @click.stop="abc=1">
 
     <div class="share-box">
-      <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5>
+      <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
+      <h5 class="tit">Share to your friends.You will gain bonus if your friends buy it.</h5>
 
       <div class="content">
         <div class="good-box">
@@ -178,25 +179,25 @@
         <div class="share-types">
 
           <div class="share-item">
-            <img src="@/assets/images/facbook.png"
+            <img v-lazy="require('@/assets/images/facbook.png')"
               @click="mx_shareFacebook">
             <p>Facebook</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/line.png"
+            <img v-lazy="require('@/assets/images/line.png')"
               @click="mx_shareLine">
             <p>LINE</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/whatsapp.png"
+            <img v-lazy="require('@/assets/images/whatsapp.png')"
               @click="mx_shareWhatsapp">
             <p>WhatsApp</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/messenger.png"
+            <img v-lazy="require('@/assets/images/messenger.png')"
               @click="mx_shareMessenger">
             <p>Messenger</p>
           </div>
@@ -210,7 +211,7 @@
           @click="mx_copyLink"></button>
       </div>
 
-      <img src="~@/assets/images/guanbi@2x.png"
+      <img v-lazy="require('@/assets/images/guanbi@2x.png')"
         class="close-img"
         @click="closeDialog">
     </div>
@@ -219,9 +220,9 @@
 
 <script>
 import share from "@/mixins/share.js";
-import fbInit from '@/mixins/fbInit.js';
+import fbInit from "@/mixins/fbInit.js";
 export default {
-  mixins: [share,fbInit],
+  mixins: [share, fbInit],
   name: "dialogSharingMakes",
   props: {
     dialogVisible: {

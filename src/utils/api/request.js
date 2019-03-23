@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 import axios from 'axios';
 // import qs from 'qs';
 // import md5 from 'md5';
@@ -14,11 +14,11 @@ if (userStr) {
 }
 
 if (process.env.VUE_APP_ENV == 'development') {
-    user_id = 1;
-    access_token = '486dcad761f8425e8aa2a49e964a984c';
+      user_id = 1;
+      access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    // user_id = 106;
-    // access_token = '9344ed02c52e472ba18e6a7fe5a25b56';
+    // user_id = 121;
+    // access_token = '0d1e91cf584746fba2f61c8728f96d3d';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);
@@ -46,7 +46,7 @@ instance.interceptors.request.use(
         Vue.prototype.$toast.loading({
             mask: true, // 是否显示背景蒙层
             duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
-            forbidClick: 0, // 是否禁止背景点击
+            forbidClick: true, // 是否禁止背景点击
         });
         return config;
     },
@@ -80,7 +80,7 @@ instance.interceptors.response.use(
             } else if (response.data.code == 3) {
                 Vue.prototype.$toast('Anda belum login');
                 localStorage.clear();
-                Vue.prototype.$curRouter.replace('/');
+                // Vue.prototype.$curRouter.replace('/');
             } else {
                 throw response.data;
             }

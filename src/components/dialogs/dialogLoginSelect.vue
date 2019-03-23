@@ -18,8 +18,8 @@
     position: relative;
 
     .tips {
-      width: 463px;
-      font-size: 30px;
+      width: 600px;
+      font-size: 26px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       line-height: 38px;
@@ -71,19 +71,19 @@
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/login-dialog.png')">
       <div class="tips">
-        Tips: If you help cut, you will get the income.
+        Tips: If you help your friend cut down the price, you will get cash rewards.
       </div>
 
       <div class="login-types">
 
         <div class="login-item"
           @click="loginFB">
-          <img src="~@/assets/images/facbook.png">
+          <img v-lazy="require('@/assets/images/facbook.png')">
           <p>Facebook login</p>
         </div>
       </div>
 
-      <img src="@/assets/images/guanbi@2x.png"
+      <img v-lazy="require('@/assets/images/guanbi@2x.png')"
         class="close-img"
         @click="close">
     </div>
@@ -150,7 +150,7 @@ export default {
           this.$store.commit("setLoginSelectShow", false);
 
           if(userInfo.is_new==1){  // 如果是新用户
-            window.localStorage.setItem("newUser",1);
+            window.localStorage.setItem("newUserInfo",JSON.stringify(userInfo));
           }
 
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {

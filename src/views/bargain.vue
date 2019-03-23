@@ -1,10 +1,11 @@
 <style lang="scss" scoped src="./bargain.scss"></style>
 
 <template>
-  <div class="bargain-container">
+  <div class="bargain-container"
+    ref="bargainContainer">
     <!-- 返回首页 -->
-    <!-- <div class="turn-home"
-      @click="$router.push('/')"></div> -->
+    <div class="turn-home"
+      @click="$router.push('/')"></div>
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
@@ -25,7 +26,7 @@
                   <p class="p-t-3">244d Sent</p>
                   <p class="p-t-1">
                     Price
-                    <span>$</span><span>{{spu.original_price}}</span>
+                    <span>RP</span><span>{{spu.original_price}}</span>
                   </p>
                   <p class="p-t-2">current price</p>
                 </div>
@@ -37,7 +38,7 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
@@ -56,12 +57,19 @@
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
-              @click="openSharingFriendsDialog">Share friends to cut</div>
+              @click="openSharingFriendsDialog"
+              v-if="!isShareEarningEntry">SHARE FRIEDNS FOR FREEBIES</div>
+            <div class="share-btn"
+              v-else
+              @click="goBargainChop({ bargain_id:$route.query.bargainId, spu_id:$route.query.spuId })">POTONG PISAU</div>
             <div class="buy-btn"
-              v-if="bargain_info.can_buy&&bargain_info.can_buy!=2"
+              v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
               @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
             <div class="buy-btn cur"
-              v-else>Rp {{bargain_info.left_amount}} buy now</div>
+              v-else>
+              <!-- Rp {{bargain_info.left_amount}} buy now -->
+              BUY NOW
+            </div>
           </div>
         </div>
       </div>
@@ -78,13 +86,11 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img src="./../assets/images/good-large.png"
-                  alt="">
-                <!-- <img v-lazy="item.avatar"> -->
+                <img v-lazy="item.avatar||require('./../assets/images/good-large.png')">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
-                <p class="team-date">2019-03-11 10:36:54</p>
+                <p class="team-date">{{item.bargain_time}}</p>
               </div>
             </div>
             <div class="column">
@@ -101,11 +107,11 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products">
+      <div class="recommend-products"
+        v-if="spu_list.length>0">
         <p class="page-title">
-          <img src="./../assets/images/start.png"
-            alt="">
-          <span>More Products</span>
+          <img v-lazy="require('./../assets/images/start.png')">
+          <span>You might like</span>
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
@@ -117,7 +123,7 @@
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
               class="btn"
-              @click="jumpCurBargainPage(item.spu_id)">Get Freebie</a>
+              @click="jumpCurBargainPage(item.spu_id)">Get a freebie</a>
           </div>
         </div>
       </div>
@@ -125,18 +131,18 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo"
+      v-if="dialogs.sharingFriends.show" />
     <dialog-potong-sendiri :chopInfo="chop_info"
-      :dialogVisible.sync="dialogs.potongSendiri" />
+      :dialogVisible.sync="dialogs.potongSendiri"
+      v-if="dialogs.potongSendiri.show" />
+    <!-- <dialog-share-earning-entry :chopInfo="chop_info"
+      :dialogVisible.sync="dialogs.shareEarningEntry"
+      v-if="dialogs.shareEarningEntry.show" /> -->
   </div>
 </template>
 
 <script>
-import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
-import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import countDown from "@/components/countDown.vue";
-import dialogPotongSendiri from "@/components/dialogs/dialogPotongSendiri.vue";
-
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -146,10 +152,13 @@ import {
 } from "@/server/bargain.js";
 export default {
   components: {
-    bargainingProgressBar, // 砍价进度条
-    dialogSharingFriends, // 分享好友弹窗
-    countDown,
-    dialogPotongSendiri // 自砍成功弹窗
+    dialogSharingFriends: resolve =>
+      require(["@/components/dialogs/dialogSharingFriends.vue"], resolve), // 分享好友弹窗
+    countDown: resolve => require(["@/components/countDown.vue"], resolve), // 倒计时
+    dialogPotongSendiri: resolve =>
+      require(["@/components/dialogs/dialogPotongSendiri.vue"], resolve), // 自砍成功弹窗
+    dialogShareEarningEntry: resolve =>
+      require(["@/components/dialogs/dialogShareEarningEntry.vue"], resolve) // 分享赚链接首次进入弹窗
   },
   data() {
     return {
@@ -158,6 +167,9 @@ export default {
           show: false
         },
         potongSendiri: {
+          show: false
+        },
+        shareEarningEntry: {
           show: false
         }
       },
@@ -184,25 +196,47 @@ export default {
         page_num: 1
       },
 
-      spu_list: []
+      spu_list: [],
+
+      isShareEarningEntry: false // 是否是分享赚链接进入的
     };
   },
   created() {
     this.init();
   },
   mounted() {
-    document.getElementsByClassName("content-container")[0].scroll(0, 0);
+    if (this.$refs.bargainContainer.scrollTo) {
+      // 0  false
+      this.$refs.bargainContainer.scroll(0, 0);
+    }
+    document.title = "Getting Freebies";
   },
   methods: {
     async init() {
+      const {
+        relationId,
+        showShareEarningEntry,
+        bargainId,
+        spuId
+      } = this.$route.query;
       // 分享链接点击进入的
-      if (this.$route.query.relationId) {
-        await this.initShareInfo(this.$route.query.relationId);
+      if (relationId) {
+        this.isShareEarningEntry = true;
+        if (showShareEarningEntry != "no") {
+          // 分享赚链接进入
+
+          this.dialogs.shareEarningEntry.show = true;
+        } else {
+          // 分享赚进入后登陆刷新进入时  不显示dialogShareEarningEntry
+          this.dialogs.shareEarningEntry.show = false;
+        }
+
+        await this.initShareInfo(relationId);
       } else {
-        if (!this.$route.query.bargainId) {
-          // 自砍
+        if (!bargainId) {
+          // 系统自砍
           await this.goBargainChop({
-            spu_id: this.$route.query.spuId
+            spu_id: spuId
           });
         }
 
@@ -223,7 +257,7 @@ export default {
           invite_user_id: inviteUserId
         } = result.data;
 
-        this.$router.push({
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId,
@@ -235,12 +269,23 @@ export default {
       }
     },
     async goBargainChop({ bargain_id, spu_id }) {
+      console.log("spu_id: ", spu_id);
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV !== "development"
+      ) {
+        console.log("666");
+        this.$store.commit("setLoginJumpUrl", "");
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
       let result = await bargainChop({ bargain_id, spu_id });
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.chop_info = chop_info;
         console.log("chop_info: ", chop_info);
-        this.$router.push({
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId: chop_info.bargain_id
@@ -254,7 +299,13 @@ export default {
           }
         });
         this.$store.commit("setGoodsList", arr);
-        this.dialogs.potongSendiri.show = true;
+        if (this.$route.query.relationId) {
+          // 分享赚自己点击按钮自砍成功
+          this.isShareEarningEntry = false;
+        } else {
+          // 系统自砍成功
+          this.dialogs.potongSendiri.show = true;
+        }
         return Promise.resolve();
       }
     },
@@ -278,7 +329,7 @@ export default {
       let result = await getBargainInfo({
         bargain_id: this.$route.query.bargainId
       });
-      if (result) {
+      if (result && result.data) {
         this.bargain_info = result.data.bargain_info || result.data;
         this.bargain_user_info = result.data.bargain_user_info;
         console.log("this.bargain_info: ", this.bargain_info);
@@ -344,7 +395,7 @@ export default {
       let result = await shareBargain({
         bargain_id: this.$route.query.bargainId
       });
-      if (result) {
+      if (result && result.data) {
         this.shareInfo = result.data;
       }
       this.dialogs.sharingFriends.show = true;
@@ -352,13 +403,12 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止登录后有问题
+        this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
 
-      this.$router.push({
-        path: "/bargain",
+      this.$router.replace({
         query: {
           spuId: spu_id
         }

@@ -52,7 +52,6 @@
 
   .txt {
     font-size: 28px;
-    font-family: Helvetica;
     font-weight: 400;
     color: rgba(50, 50, 50, 1);
   }
@@ -107,7 +106,7 @@
         class="close"
         @click="closeDialog">
 
-      <h5 class="tit">Tambahkan alamat panen</h5>
+      <h5 class="tit">Add address</h5>
 
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
@@ -138,7 +137,7 @@
 
       <div class="simpan-btn"
         @click="simpan">
-        Simpan
+        Confirm
       </div>
     </van-popup>
 
@@ -150,7 +149,7 @@
 </template>
 
 <script>
-import { Field, Icon } from "vant";
+import { Field, Icon, Dialog } from "vant";
 import dialogArea from "./dialogArea.vue";
 
 import { dealMyAddress } from "@/server/user.js";
@@ -161,12 +160,12 @@ const defaultAddress = {
   telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
   // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
   country: "Indonesia", //类型：String  必有字段  备注：国家1和2时必须
-  region: "福建", //类型：String  必有字段  备注：省州 1和2时必须
-  city: "福州", //类型：String  必有字段  备注：城市 1和2时必须
+  region: "", //类型：String  必有字段  备注：省州 1和2时必须
+  city: "", //类型：String  必有字段  备注：城市 1和2时必须
   zip: "", //类型：String  必有字段  备注：邮编 1和2时必须
   address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
   address_two: "", //类型：String  必有字段  备注：配送地址-二级
-  // is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
+  is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
   country_code: "ID"
 };
 
@@ -188,7 +187,7 @@ export default {
     },
     showType: {
       type: String,
-      default: "add"
+      default: ""
     }
   },
   data() {
@@ -198,13 +197,37 @@ export default {
           show: false
         }
       },
-      curAddress: defaultAddress
+      curAddress: JSON.parse(JSON.stringify(defaultAddress))
     };
   },
   created() {},
   methods: {
     async simpan() {
-      let { username, telephone, country, region, city, zip } = this.curAddress;
+      let {
+        username,
+        telephone,
+        country,
+        region,
+        city,
+        zip,
+        address_one
+      } = this.curAddress;
+      if (
+        !username ||
+        !telephone ||
+        !country ||
+        !region ||
+        !city ||
+        !zip ||
+        !address_one
+      ) {
+        Dialog.alert({
+          message: "Silakan isi informasi alamat lengkap",
+          confirmButtonText: "Tentukan"
+        });
+        return;
+      }
+
       let operation = 1;
       if (this.showType == "add") {
         operation = 1;
@@ -226,18 +249,30 @@ export default {
     }
   },
   watch: {
-    showType(val) {
-      if (val == "add") {
-        this.curAddress = defaultAddress;
+    "dialogVisible.show": {
+      deep: true,
+      immediate: true,
+      handler(val) {
+        console.log("val: ", val, this.showType);
+        if (val && this.showType == "add") {
+          this.curAddress = {
+            //类型：Object  必有字段  备注：无
+            // id: "mixed", //类型：Mixed  必有字段  备注：operation 2和-1时必须
+            username: "", //类型：String  必有字段  备注：用户名 1和2时必须
+            telephone: "", //类型：String  必有字段  备注：电话号码 1和2时必须
+            // email: "617639941@qq.com", //类型：String  必有字段  备注：邮箱 选填
+            country: "Indonesia", //类型：String  必有字段  备注：国家1和2时必须
+            region: "", //类型：String  必有字段  备注：省州 1和2时必须
+            city: "", //类型：String  必有字段  备注：城市 1和2时必须
+            zip: "", //类型：String  必有字段  备注：邮编 1和2时必须
+            address_one: "", //类型：String  必有字段  备注：配送地址-一级 1和2时必须
+            address_two: "", //类型：String  必有字段  备注：配送地址-二级
+            // is_default: 0, //类型：Number  必有字段  备注：默认（0：正常 1：默认）
+            country_code: "ID"
+          };
+        }
       }
     }
-    // "dialogVisible.show"(val) {
-    //   if (val) {
-    //     if (this.curAddress.city) {
-    //       // this.dialogs.area.show = true;
-    //     }
-    //   }
-    // }
   }
 };
 </script>

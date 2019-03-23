@@ -1,3 +1,5 @@
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {
     let url = '';
@@ -17,7 +19,7 @@ function getUrl(VUE_APP_ENV) {
             // url = 'https://test-ht-zdd-api.istarbuy.com/api';
 
             // 测试环境外网
-            // url ='https://test-ht-zdd-api.istarbuy.com:8443/api'
+            // url = 'https://test-ht-zdd-api.istarbuy.com:8443/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
@@ -30,11 +32,75 @@ function getUrl(VUE_APP_ENV) {
 }
 
 module.exports = {
-    lintOnSave: false,
     productionSourceMap: false,
+    lintOnSave: process.env.NODE_ENV !== 'production',
+    css: {
+        // 将组件内部的css提取到一个单独的css文件（只用在生产环境）
+
+        // 也可以是传递给 extract-text-webpack-plugin 的选项对象
+
+        extract: false, // 允许生成 CSS source maps?
+
+        sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use { sass: { ... } }
+
+        loaderOptions: {}, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
+
+        modules: false,
+    },
+    configureWebpack: config => {
+        //入口文件
+        config.entry.app = ['babel-polyfill', './src/main.js'];
+        //删除console插件
+        let plugins = [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false, // Must be set to true if using source-maps in production
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                        drop_debugger: true,
+                    },
+                    output: {
+                        comments: false,
+                    },
+                },
+            }),
+        ];
+        //打包将console删除
+        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production') {
+            config.plugins = [...config.plugins, ...plugins];
+        }
+
+        config.externals = {
+            vue: 'Vue',
+            vuex: 'Vuex',
+            'vue-router': 'VueRouter',
+            // 暂时随便命名（没影响）
+            vant: 'vant',
+            axios:'axios'
+        };
+    },
+    //允许对内部的 webpack 配置进行更细粒度的修改。
+    chainWebpack: config => {
+        config.module
+            .rule('vue')
+            .use('vue-loader')
+            .loader('vue-loader')
+            .tap(options => {
+                options.compilerOptions.preserveWhitespace = false;
+                return options;
+            });
+        config.module
+            .rule('images')
+            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+            .use('url-loader')
+            .loader('url-loader')
+            .tap(options => Object.assign(options, { limit: 10240 }));
+    },
     devServer: {
         port: 8088,
-        // disableHostCheck: true,
+        disableHostCheck: true,
         proxy: {
             '/api': {
                 target: getUrl(process.env.VUE_APP_ENV),
@@ -48,5 +114,5 @@ module.exports = {
                 },
             },
         },
-    }
+    },
 };

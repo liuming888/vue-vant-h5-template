@@ -1,11 +1,8 @@
 <style lang="scss">
-  #app{
-    width: 100vw;
-    // position: fixed;
-    // left: 0;
-    // top: 0;
-    overflow: hidden;
-  }
+#app {
+  width: 100vw;
+  overflow: hidden;
+}
 </style>
 
 <style lang="scss" src="./assets/css/init.scss"></style>
@@ -28,18 +25,19 @@ export default {
     "zdd-layout": zddMain
   },
   created() {
-    if(process.env.VUE_APP_ENV=='development'||process.env.VUE_APP_ENV=='mock') return;
+    if (
+      process.env.VUE_APP_ENV == "development" ||
+      process.env.VUE_APP_ENV == "mock"
+    )
+      return;
     this.initToken();
     // this.initFB();
-  },
-  mounted () {
-    document.getElementById("mainApp").classList.remove("pre-app");
   },
   methods: {
     /**
      * @description: 初始化FB
      */
-   /*  initFB() {
+    /*  initFB() {
       const vm = this;
       window.fbAsyncInit = async function() {
         FB.init(FBConfig);
@@ -89,7 +87,7 @@ export default {
 
         let result = await refreshToken(JSON.parse(userStr));
         this.$store.commit("setIsreFreshToken", true);
-        if (result) {
+        if (result && result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));

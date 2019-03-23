@@ -17,9 +17,8 @@
     background-size: 100% 100%;
     position: relative;
     padding-top: 280px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     text-align: center;
-
 
     .close-img {
       display: block;
@@ -50,21 +49,21 @@
       line-height: 86px;
     }
 
-    .tit{
-        font-size: 24px;
-        color:#e5e8ee;
-        margin-bottom: 20px;
+    .tit {
+      font-size: 24px;
+      color: #e5e8ee;
+      margin-bottom: 20px;
     }
 
-    .num{
-        font-size: 80px;
-        color:gold;
+    .num {
+      font-size: 80px;
+      color: gold;
 
-        .dw{
-            font-size:20px;
-            position: relative;
-            top:-50px;
-        }
+      .dw {
+        font-size: 20px;
+        position: relative;
+        top: -50px;
+      }
     }
   }
 }
@@ -72,23 +71,15 @@
 
 <template>
   <div class="dialogLoginSelect-container">
-    <!-- <van-popup v-model="dialogVisible.show"
-      :close-on-click-overlay="false">
-      <h3 style="margin-bottom:30px;">通过以下方式登录</h3>
-      <div style="text-align:center;font-size:36px"
-        @click="checkLogin">
-        FB
-      </div>
-    </van-popup> -->
-
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/xinrenlibao.png')">
 
       <div class="tit">Newcomer Gift Bag</div>
 
-      <div class="num"><span class="dw">Rp</span>8.888</div>
+      <div class="num"><span class="dw">Rp</span>{{reward_amount}}</div>
 
-      <div class="receive">Receive</div>
+      <div class="receive"
+        @click="goReceive">Receive</div>
 
       <img src="@/assets/images/guanbi@2x.png"
         class="close-img"
@@ -101,17 +92,35 @@
 </template>
 
 <script>
-import axios from "axios";
-import { login, check_login } from "@/server/user.js";
+import { Dialog } from "vant";
+import { getMyNewRp } from "@/server/user.js";
 export default {
   name: "dialogLoginSelect",
   data() {
-    return {};
+    return {
+      reward_amount: 1 //类型：Number  必有字段  备注：登录奖励金额
+    };
+  },
+  created() {
+    let str = window.localStorage.getItem("newUserInfo");
+    let newUserInfo = str ? JSON.parse(str) : {};
+    this.reward_amount = newUserInfo.reward_amount || 8888;
   },
   methods: {
     close() {
-    //   this.$store.commit("setLoginSelectShow", false);
+      this.$store.commit("setNewGiftBagShow", false);
     },
+    async goReceive() {
+      let result = await getMyNewRp();
+      if (result && result.data) {
+        Dialog.alert({
+          message: "Anda telah berhasil menerima paket hadiah baru",
+          confirmButtonText: "Tentukan"
+        });
+        window.localStorage.removeItem("newUserInfo");
+        this.$store.commit("setNewGiftBagShow", false);
+      }
+    }
   }
 };
 </script>

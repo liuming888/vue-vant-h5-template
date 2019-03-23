@@ -201,7 +201,15 @@
                     display: inline-block;
                 }
                 > .ctrl-box {
-                    margin-top: 20px;
+                    &.isBargainCur{
+                        margin-top: 38px;  // 用户第一次进入
+                    }
+                    &.isNGoCur{
+                        margin-top:48px;   // 用户砍价完成
+                    }
+                    &.isHelpOkCur{
+                        margin-top: 108px; // 用户第N次进入
+                    }
                     > .share-btn {
                         color: #a53a06;
                         font-size: 36px;
@@ -226,7 +234,6 @@
                         width: 580px;
                         height: 55px;
                         font-size: 22px;
-                        font-family: Helvetica;
                         font-weight: 400;
                         color: rgba(255, 255, 255, 1);
                         line-height: 34px;
@@ -448,7 +455,6 @@
         justify-content: center;
         box-sizing: border-box;
         font-size: 18px;
-        font-family: Helvetica;
         font-weight: 400;
         color: rgba(194, 194, 194, 1);
 
@@ -480,15 +486,22 @@
         align-items: center;
         justify-content: center;
         font-size: 32px;
-        font-family: Helvetica;
         font-weight: 400;
         color: rgba(255, 255, 255, 1);
     }
 }
 
-// {
-//           path: '/',
-//           title: 'Home',
-//           imgUrl: require('../../../assets/images/tabBar-home.png'),
-//           imgActiveUrl: require('../../../assets/images/tabBar-home-active.png')
-//         },
+.n-go-p {
+    width: 500px;
+    height: 103px;
+    font-size: 26px;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
+    line-height: 39px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.old-txt {
+    margin-top: 16px;
+}

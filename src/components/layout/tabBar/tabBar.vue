@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .tabBar-container {
+  width: 100vw;
   height: 93px;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +9,12 @@
   text-align: center;
   color: #c2c2c2;
   // line-height: 93px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-top:1px solid #dfdede; 
+  z-index: 100;
   > .tabBar-item {
     flex: 1;
     // display: flex;
@@ -28,7 +34,7 @@
 </style>
 
 <template>
-  <div class="tabBar-container">
+  <div class="tabBar-container" @touchmove.prevent>
     <span v-for="(item, index) in tabBarList"
       :key="index"
       :class="{'tabBar-item': true, 'active': activeRouter === item.path}"
@@ -66,6 +72,9 @@ export default {
     }
   },
   methods: {
+    stopDefault(event){
+      event.stopPropagation();
+    },
     jumpPage(path) {
       if (
         path == "/my" &&

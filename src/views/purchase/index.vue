@@ -39,7 +39,7 @@
       @click="showAddressDialog.show = true">
       <img v-lazy="require('@/assets/images/add.png')"
         class="add-icon">
-      <div class="txt">Tambahkan alamat secara manual</div>
+      <div class="txt">Add shipping address</div>
       <van-icon name="arrow" />
     </div>
 
@@ -62,7 +62,7 @@
         <div class="price-quantity">
           <span class="current-price">
             <b style="font-size:1px;">Rp</b>
-            {{spu.price}}
+            {{bargain_info.bargain_after}}
           </span>
 
           <span class="original-price">
@@ -109,20 +109,16 @@
         <div class="l-t-box">
           Actual payment:
           <div class="num-box">
-            <b>Rp</b>{{spu.price}}
+            <b>Rp</b>{{bargain_info.bargain_after}}
           </div>
         </div>
 
-        <div class="l-d-box">About ${{(spu.price/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
+        <div class="l-d-box">About ${{(bargain_info.bargain_after/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
       </div>
 
-      <!-- <div class="pay-immediately"
-        @click="dialogVisible = true">
-        pay immediately
-      </div> -->
       <div class="pay-immediately"
         @click="goPaly">
-        pay immediately
+        Place Oder
       </div>
     </div>
 
@@ -134,7 +130,7 @@
     </div>
 
     <!-- 弹窗 --------------------------------->
-    <dialog-post-add-address :dialogVisible.sync="showAddressDialog"></dialog-post-add-address>
+    <dialog-post-add-address :dialogVisible.sync="showAddressDialog" showType="add"></dialog-post-add-address>
     <!-- <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
       @continuePlay="goPaly"
       @playfail="dialogVisible = true" /> -->
@@ -152,7 +148,7 @@
 </template>
 
 <script>
-import { Icon } from "vant";
+import { Icon, Dialog } from "vant";
 
 import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
@@ -168,6 +164,7 @@ import { getInfo, getSpuSpecs } from "@/server/goods.js";
 import { orderCreate, repaidOrder } from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
 import { getExchangeRate } from "@/server/finance.js";
+import { getBargainInfo } from "@/server/bargain.js";
 export default {
   components: {
     DialogDefault,
@@ -180,6 +177,8 @@ export default {
     return {
       spu: {},
       specs: [],
+      bargain_info: {},
+      bargain_user_info: {},
 
       paly_id: 1,
 
@@ -216,17 +215,41 @@ export default {
       this.dialogVisible = true;
     }
   },
+  mounted() {
+    document.title = "Check out";
+  },
   methods: {
     async init() {
+      // let result = await getInfo({ spu_id: this.$route.query.spuId });
+      // if (result) {
+      //   this.spu = result.data.spu;
+      // }
+      this.initSpuInfo();
+      this.initBargainInfo();
+      this.getMyAddressInfo();
+      this.curSpuSpecs();
+      this.initExchangeRate();
+    },
+    async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result&&result.data) {
         this.spu = result.data.spu;
+      }
+    },
+    async initBargainInfo() {
+      let result = await getBargainInfo({
+        bargain_id: this.$route.query.bargainId
+      });
+      if (result && result.data) {
+        const { bargain_info, bargain_user_info } = result.data;
+        this.bargain_info = bargain_info;
+        this.bargain_user_info = bargain_user_info;
       }
     },
     async initExchangeRate() {
       let result = await getExchangeRate({ currency_code: "IDR" });
       if (result && result.data) {
-        this.exchangeRateDat=result.data;
+        this.exchangeRateDat = result.data;
       }
     },
     async getMyAddressInfo() {
@@ -257,7 +280,7 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
-       let param = {
+      let param = {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
         // pay_type: this.paly_id
@@ -275,22 +298,36 @@ export default {
           " ";
       });
       console.log("spu_spec_items----------", spu_spec_items);
-     
-      if(spu_spec_items){
-        param.spu_spec_items=spu_spec_items;
+
+      // if (!spu_spec_items) {
+      //   Dialog.alert({
+      //     message: "Silakan pilih alamat pengiriman",
+      //     confirmButtonText: "Tentukan"
+      //   });
+      //   return;
+      // }
+
+      if (spu_spec_items) {
+        param.spu_spec_items = spu_spec_items;
       }
 
       if (this.$route.query.bargainId) {
-        param.bargain_id=this.$route.query.bargainId;
+        param.bargain_id = this.$route.query.bargainId;
       }
       console.log("param--------------", param);
-      let result = await orderCreate(param);
-      if (result && result.data) {
-        let { pay_url, order_no } = result.data;
-        console.log("pay_url: ", pay_url);
-        this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
-        window.location.href=pay_url;
+
+      if (this.$route.query.orderNo) {
+        // 跳转过来继续支付的
+        this.goRepaidPay();
+      } else {
+        let result = await orderCreate(param);
+        if (result && result.data) {
+          let { pay_url, order_no } = result.data;
+          console.log("pay_url: ", pay_url);
+          this.showWaitPaymentDialog.show = true;
+          // window.open(pay_url);
+          window.location.href = pay_url;
+        }
       }
     },
     /**
@@ -307,7 +344,7 @@ export default {
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
         // window.open(pay_url);
-        window.location.href=pay_url;
+        window.location.href = pay_url;
       }
     },
     goShippingAddressList() {
@@ -320,8 +357,8 @@ export default {
         this.getMyAddressInfo();
       }
     },
-    "showAddressDialog.show"(val){
-      if(!val){
+    "showAddressDialog.show"(val) {
+      if (!val) {
         this.getMyAddressInfo();
       }
     }

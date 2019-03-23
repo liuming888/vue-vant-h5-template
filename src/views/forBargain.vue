@@ -28,10 +28,10 @@
               <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3">244d Sent</p>
+                  <p class="p-t-3"></p>
                   <p class="p-t-1">
                     Price
-                    <span>$</span><span>{{spu.original_price}}</span>
+                    <span>RP</span><span>{{spu.original_price}}</span>
                   </p>
                   <p class="p-t-2">current price</p>
                 </div>
@@ -43,32 +43,79 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title">Has been cut <span class="n-1"><span class="dollar">$</span>{{bargain_info.bargain_amount||0}}</span>, leaving <span class="n-2"><span class="dollar">$</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
+            <p class="title"
+              v-if="!isNGo&&$route.query.helpCur!='ok'"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
+            <p class="title"
+              v-else-if="!isNGo&&$route.query.helpCur=='ok'">Successfully help your friend cut down<span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':bargain_info.bargain_rate+'%'}"></div>
-              <div class="schedule-item">
-                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
+              <div class="schedule-item"
+                v-if="!isNGo">
+                <span class="description">cut<span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
               </div>
               <div class="schedule-item ball ball-right">
                 <!-- <span class="description">Take it free</span> -->
               </div>
             </div>
+            <p v-if="isNGo"
+              class="n-go-p">
+              Congratulations! Your friend got this freebie
+              successfully, you will get half of the price
+              you bargained on your friend’s freebies.
+            </p>
           </div>
           <count-down :dateDiff="spu.expire_ttl"
+            v-if="!isNGo"
             class="spu-count-down"></count-down>
-          <div class="ctrl-box">
-            <div class="share-btn"
+          <div class="ctrl-box"
+            :class="ctrlBoxCls">
+            <!-- <div class="share-btn"
               v-if="$route.query.helpCur!='ok'&&bargain_user_info&&bargain_user_info.type==2||isOne"
-              @click="goBargainChop">Help friend cut a knife</div>
+              @click="goBargainChop">Help my friend to get freebies</div>
             <div class="share-btn"
               v-else-if="$route.query.helpCur=='ok'"
               @click="$router.push('/')">Also take it for free</div>
             <template v-else>
-              <div class="share-btn">Receive reward</div>
+              <div class="share-btn"
+                @click="$router.push('/my')">Receive reward</div>
               <p class="old-txt">TIP: Go to the personal interface and check out the benefits
                 immediately </p>
+            </template> -->
+
+            <!-- 没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆-->
+            <!-- <div class="share-btn"
+              v-if="$route.query.helpCur!='ok'&&!bargain_user_info&&bargain_info.status==1||isOne"
+              @click="goBargainChop">Help my friend to get freebies</div>
+            <div class="share-btn"
+              v-else-if="$route.query.helpCur=='ok'"
+              @click="$router.push('/')">I want this for free too</div>
+            <template v-else-if="isNGo">
+              <div class="share-btn"
+                @click="$router.push('/my/revenueDetails')">Receive bonus</div>
+              <p class="old-txt">Check your bonus in [ME]-[Earning Details]</p>
+            </template> -->
+            <!-- 别的情况统一显示这个 -->
+            <!-- <div class="share-btn"
+              v-else
+              @click="$router.push('/')">I want this for free too</div> -->
+
+            <div class="share-btn"
+              v-if="isBargain"
+              @click="goBargainChop">Help my friend to get freebies</div>
+            <div class="share-btn"
+              v-else-if="isHelpOk"
+              @click="$router.push('/')">I want this for free too</div>
+            <template v-else-if="isNGo">
+              <div class="share-btn"
+                @click="$router.push('/my/revenueDetails')">Receive bonus</div>
+              <p class="old-txt">Check your bonus in [ME]-[Earning Details]</p>
             </template>
+            <!-- 别的情况统一显示这个 -->
+            <div class="share-btn"
+              v-else
+              @click="$router.push('/')">I want this for free too</div>
+
           </div>
         </div>
       </div>
@@ -85,13 +132,11 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img src="./../assets/images/good-large.png"
-                  alt="">
-                <!-- <img v-lazy="item.avatar"> -->
+                <img v-lazy="item.avatar||require('./../assets/images/good-large.png')">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
-                <p class="team-date">2019-03-11 10:36:54</p>
+                <p class="team-date">{{item.bargain_time}}</p>
               </div>
             </div>
             <div class="column">
@@ -104,7 +149,7 @@
         v-if="isOne"
         id="helpCurOk">
         <!-- 帮助 -->
-        <p class="page-title">How to get a free gift</p>
+        <p class="page-title">How to get a freebie</p>
         <ul class="help-list">
           <li class="help-item">
             <img v-lazy="require('./../assets/images/shouji@2x.png')">
@@ -138,7 +183,7 @@
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
               class="btn"
-              @click="jumpCurBargainPage(item.spu_id)">Get Freebie</a>
+              @click="jumpCurBargainPage(item.spu_id)">Get a freebie</a>
           </div>
         </div>
       </div>
@@ -146,16 +191,18 @@
 
     <!-- 弹窗 -->
     <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
-      :shareInfo="shareInfo" />
+      :shareInfo="shareInfo"
+      v-if="dialogs.sharingFriends.show" />
     <dialog-old-users-help-cut-successfully :dialogVisible.sync="dialogs.oldUsersHelpCutSuccessfully"
-      :chopInfo="chop_info" />
+      :chopInfo="chop_info"
+      v-if="dialogs.oldUsersHelpCutSuccessfully.show" />
   </div>
 </template>
 
 <script>
-import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
+// import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
+// import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
 import countDown from "@/components/countDown.vue";
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import dialogOldUsersHelpCutSuccessfully from "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue";
@@ -167,11 +214,12 @@ import {
   getHelpBargainList,
   bargainChop
 } from "@/server/bargain.js";
+import { Promise } from "q";
 export default {
   components: {
-    bargainingProgressBar, // 砍价进度条
+    // bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
-    bargainingHelpInformation, // 砍价帮
+    // bargainingHelpInformation, // 砍价帮
     countDown,
     userPickingUpMessage,
     dialogOldUsersHelpCutSuccessfully // 帮砍成功弹窗
@@ -184,7 +232,8 @@ export default {
         sharingFriends: {
           show: false
         },
-        oldUsersHelpCutSuccessfully: {  // 砍价完成
+        oldUsersHelpCutSuccessfully: {
+          // 砍价完成
           show: false
         }
       },
@@ -213,33 +262,121 @@ export default {
       spu_list: []
     };
   },
+  computed: {
+    //  没砍价以及可以帮好友砍（之前没砍过的）以及该商品还在砍价中时  或   没登陆
+    isBargain() {
+      return (
+        (this.$route.query.helpCur != "ok" &&
+          !this.bargain_user_info &&
+          this.bargain_info.status == 1) ||
+        this.isOne
+      );
+    },
+    // 是否帮砍成功
+    isHelpOk() {
+      return this.$route.query.helpCur == "ok";
+    },
+    // 是否是第N次进入
+    isNGo() {
+      return (
+        !this.isOne &&
+        this.bargain_user_info &&
+        this.bargain_info.status != 2 &&
+        !this.$route.query.helpCur
+      );
+    },
+    ctrlBoxCls() {
+      if (this.isBargain) {
+        return {
+          isBargainCur: true
+        };
+      } else if (this.isNGo) {
+        return {
+          isNGoCur: true
+        };
+      } else if (this.isHelpOk) {
+        return {
+          isHelpOkCur: true
+        };
+      } else {
+        return {
+          isHelpOkCur: true
+        };
+      }
+    }
+  },
   created() {
     if (!localStorage.getItem("userInfo")) {
-      // 用户第一次进入砍价页面
+      // 用户第一次进入帮砍页面
       this.isOne = true;
     }
 
     this.init();
   },
+  mounted() {
+    document.title = "Getting Freebies";
+  },
   methods: {
     async init() {
-      // 分享链接点击进入的
-      if (this.$route.query.relationId) {
-        await this.initShareInfo(this.$route.query.relationId);
+      // 分享链接直接点击进入的，而不是第二次刷新时
+      const {
+        relationId,
+        bargainId,
+        spuId,
+        type,
+        inviteUserId
+      } = this.$route.query;
+      if (relationId && !bargainId && !spuId && !type && !inviteUserId) {
+        await this.initShareInfo(relationId);
       }
-
-      this.initBargainInfo();
-      this.initHelpBargainList();
       this.initSpuInfo();
       this.initSpuList();
 
       // 用户帮砍按钮点击登录后重新进入页面时
-      const { helpCur } = this.$route.query;
-      if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
+      const helpCur = this.$util.getQueryVariable("helpCur");
+      if (helpCur == "ok" /*  && window.location.hash != "#helpCurOk" */) {
+        console.log("login kan  ok--------");
         this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
-        this.goBargainChop();
+        await this.goBargainChop();
       }
+
+      this.initBargainInfo();
+      this.initHelpBargainList();
     },
+
+    async goBargainChop() {
+      // vuex里的状态，如果直接有登陆会在localStorage缓存，下次进入时会全局先刷新登陆状态（目前商品砍价时间是24小时，token过期是7天，所以这里判断没登陆的就是没帮砍过的）
+      if (!this.$store.state.userInfo.user_id) {
+        const { pathname, search } = window.location;
+
+        // 原型要求登陆后直接弹起帮砍弹窗
+        this.$store.commit(
+          "setLoginJumpUrl",
+          pathname + search + "&helpCur=ok"
+        );
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
+      const { bargainId, spuId } = this.$route.query;
+      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
+        this.dialogs.oldUsersHelpCutSuccessfully.show = true;
+        const helpCur = this.$util.getQueryVariable("helpCur");
+        if (!helpCur) {  // 之前有登陆的用户帮好友砍（不是新用户登陆刷新后的）
+          this.$router.replace({
+            query: {
+              ...this.$route.query,
+              helpCur: "ok"
+            }
+          });
+        }
+      }
+
+      return Promise.resolve();
+    },
+
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
       if (result && result.data) {
@@ -250,8 +387,7 @@ export default {
           invite_user_id: inviteUserId
         } = result.data;
 
-        this.$router.push({
-          path: "/forBargain",
+        this.$router.replace({
           query: {
             ...this.$route.query,
             bargainId,
@@ -261,37 +397,15 @@ export default {
           }
         });
       }
+      return Promise.resolve();
     },
-    async goBargainChop() {
-      if (!this.$store.state.userInfo.user_id) {
-        const { pathname, search } = window.location;
-        this.$store.commit(
-          "setLoginJumpUrl",
-          pathname + search + "&helpCur=ok"
-        );
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
-      const { bargainId, spuId } = this.$route.query;
-      let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
-      if (result && result.data) {
-        this.chop_info = result.data.chop_info;
-        this.dialogs.oldUsersHelpCutSuccessfully.show = true;
-       
-      } else {
-        // 已经帮砍过了
-        this.$router.push({ path: "/forBargain" ,query: {
-            ...this.$route.query,
-            helpCur: 'ok'
-          }});
-      }
-    },
+
     /**
      * @description: 获取商品信息
      */
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result && result.data) {
         let spu = result.data.spu;
         for (let k in spu) {
           this.spu[k] = spu[k];
@@ -309,12 +423,14 @@ export default {
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info;
         this.bargain_user_info = result.data.bargain_user_info;
-        
-        if(this.bargain_user_info){  // 如果已经帮砍过了
-            this.$router.push({ path: "/forBargain" ,query: {
-            ...this.$route.query,
-            helpCur: 'ok'
-          }});
+
+        if (!this.bargain_user_info) {
+          // 如果没有帮砍 （没bargain_user_info返回就是没帮砍）
+          this.$router.replace({
+            query: {
+              ...this.$route.query
+            }
+          });
         }
         console.log("this.bargain_user_info: ", this.bargain_user_info);
       }
@@ -327,7 +443,7 @@ export default {
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
       });
-      if (result) {
+      if (result && result.data) {
         this.help_bargain_list = result.data;
       }
     },
@@ -363,7 +479,7 @@ export default {
     },
     async openSharingFriendsDialog() {
       let result = await shareSpu({ spu_id: this.$route.query.spuId });
-      if (result) {
+      if (result && result.data) {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       }
@@ -371,14 +487,13 @@ export default {
     jumpCurBargainPage(spu_id) {
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", '');  // 登陆成功后不跳，刷新当前页
+        this.$store.commit("setLoginJumpUrl", ""); // 登陆成功后不跳，刷新当前页
         // this.$store.commit("setLoginJumpUrl", `/forBargain?spuId=${spu_id}`);
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
 
-      this.$router.push({
-        path: "/forBargain",
+      this.$router.replace({
         query: {
           spuId: spu_id
         }
@@ -400,14 +515,14 @@ export default {
         clearInterval(timer);
       });
     }
-  },
-  beforeRouteUpdate(to, from, next) {
+  }
+  /*  beforeRouteUpdate(to, from, next) {
     const { helpCur } = to.query;
     if (helpCur == "ok" && window.location.hash != "#helpCurOk") {
       this.$store.commit("setLoginSelectShow", false); // 测试（上线后可去掉）
       this.goBargainChop();
     }
     next();
-  }
+  } */
 };
 </script>

@@ -88,9 +88,7 @@
       rgba(211, 12, 5, 1) 0%,
       rgba(255, 54, 47, 1) 100%
     );
-
     font-size: 30px;
-    font-family: Helvetica;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
   }

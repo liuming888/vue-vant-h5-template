@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 .box {
   position: relative;
+  z-index: 999;
   padding: 0 10px;
   > img {
     width: 100%;
@@ -14,9 +15,11 @@
     height: 100%;
     text-align: center;
     > .top-tips {
-      margin-top: 437px;
+      margin-top: 400px;
       font-size: 28px;
-      color: #6c0c06;
+      font-weight: bold;
+      color: rgba(108, 12, 6, 1);
+      line-height: 47px;
     }
     > .cut-num {
       margin: 0 auto;
@@ -48,8 +51,8 @@
     position: relative;
     width: 70px;
     height: 70px;
-    margin: 100px auto 0 auto;
-    background: url("./../../assets/images/guanbi@2x.png") no-repeat;
+    margin: 0 auto;
+    background: url("~@/assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
 }
@@ -65,9 +68,9 @@
           alt=""
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help Him Cut </p>
+          <p class="top-tips">Help him cut down</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
-          <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p>
+          <p class="bottom-tips">After your friend closed the deal, you will get<span><span>Rp</span> {{chopInfo.reward_amount}}</span>rewards on your account</p>
         </div>
         <div class="close"
           @click="closeDialog"></div>
@@ -78,7 +81,7 @@
 
 <script>
 export default {
-  name: "dialogOldUsersHelpCutSuccessfully",
+  name: "dialogOldUsersHelpCutSuccessfully",  // 好友帮砍成功弹窗（暂时没分是不是新老用户）
   props: {
     dialogVisible: {
       type: Object,
@@ -106,6 +109,7 @@ export default {
   },
   methods: {
     closeDialog() {
+      this.$store.commit("setNewGiftBagShow", true);  // 帮砍完成弹出新人礼包
       this.$emit("update:dialogVisible", { show: false });
     }
   }

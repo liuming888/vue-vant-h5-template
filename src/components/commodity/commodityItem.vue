@@ -4,7 +4,7 @@
   background-color: #fff;
   overflow: hidden;
   & + .home-goods-item {
-    margin-top: 30px;
+    margin-top: 60px;
   }
   > .goods-img {
     img {
@@ -74,7 +74,7 @@
         position: absolute;
         top: 18px;
         left: 39px;
-        background: url("./../../assets/images/btn-1.png") no-repeat;
+        background: url("~@/assets/images/btn-1.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -83,14 +83,14 @@
       float: right;
       font-size: 28px;
       color: #fff;
-      text-indent: 84px;
+      text-indent: 64px;
       line-height: 70px;
       width: 260px;
       height: 70px;
       background: linear-gradient(
         90deg,
-        rgba(211, 12, 5, 1) 0%,
-        rgba(246, 78, 1, 1) 100%
+        rgba(246, 78, 1, 1) 0%,
+        rgba(211, 12, 5, 1) 100%
       );
       border-radius: 35px;
       text-decoration: none;
@@ -101,8 +101,8 @@
         height: 34px;
         position: absolute;
         top: 18px;
-        left: 39px;
-        background: url("./../../assets/images/btn-2.png") no-repeat;
+        left: 19px;
+        background: url("~@/assets/images/btn-2.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -116,7 +116,8 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="3000"  :show-indicators="false"
+          :autoplay="3000"
+          :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
             :key="swipeIdx">
@@ -134,8 +135,8 @@
         <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">
-          <span class="discount">$ {{itemData.price || 0}}</span>
-          <span class="real">${{itemData.original_price || 0}}</span>
+          <span class="discount">RP {{itemData.price || 0}}</span>
+          <span class="real">RP{{itemData.original_price || 0}}</span>
         </div>
       </div>
       <div class="goods-control">
@@ -146,14 +147,15 @@
         </a>
         <a href="javascrip:;"
           class="button-r"
-          @click="jumpBargain">Get Freebie</a>
+          @click="jumpBargain">Get a freebie</a>
       </div>
     </div>
 
     <!-- <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"  :shareInfo="shareInfo"/> -->
     <dialog-sharing-makes :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
-      v-if="dialogs.sharingFriends.show" :itemData="itemData"/>
+      v-if="dialogs.sharingFriends.show"
+      :itemData="itemData" />
   </div>
 </template>
 
@@ -165,15 +167,12 @@ for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
 
-// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import dialogSharingMakes from "./dialogSharingMakes.vue";
-
 import { shareSpu } from "@/server/share.js";
 export default {
   name: "commodityItem",
   components: {
-    // dialogSharingFriends, // 分享好友弹窗
-    dialogSharingMakes, // 分享赚弹起浮窗
+    dialogSharingMakes: resolve =>
+      require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
 
     ...vantCom
   },
@@ -221,7 +220,7 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit("setLoginJumpUrl", ``); 
+        this.$store.commit("setLoginJumpUrl", ``);
         // this.$store.commit("setLoginJumpUrl", `/?loginShare=ok`);
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -230,7 +229,7 @@ export default {
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
-      if (result) {
+      if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
       }
@@ -244,7 +243,7 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        this.$store.commit("setLoginJumpUrl",'');  // 不跳砍价页面，因为登录后这商品可能被这用户砍了
+        this.$store.commit("setLoginJumpUrl", ""); // 不跳砍价页面，因为登录后这商品可能被这用户砍了
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -256,7 +255,7 @@ export default {
         }
       });
     }
-  }/* ,
+  } /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {

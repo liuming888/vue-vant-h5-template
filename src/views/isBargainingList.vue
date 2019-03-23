@@ -288,15 +288,14 @@
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
-        <img src="./../assets/images/bargain-finish-banner.png"
-          alt="">
+        <img v-lazy="require('./../assets/images/bargain-finish-banner.png')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
           v-for="(item, index) in finishList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
@@ -318,15 +317,14 @@
     <div class="ing-box"
       v-if="ingList.length > 0">
       <div class="banner">
-        <img src="./../assets/images/bargin-active-banner.png"
-          alt="">
+        <img v-lazy="require('./../assets/images/bargin-active-banner.png')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
           v-for="(item, index) in ingList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
