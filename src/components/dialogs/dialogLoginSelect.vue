@@ -78,12 +78,12 @@
 
         <div class="login-item"
           @click="loginFB">
-          <img src="~@/assets/images/facbook.png">
+          <img v-lazy="require('@/assets/images/facbook.png')">
           <p>Facebook login</p>
         </div>
       </div>
 
-      <img src="@/assets/images/guanbi@2x.png"
+      <img v-lazy="require('@/assets/images/guanbi@2x.png')"
         class="close-img"
         @click="close">
     </div>

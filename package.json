@@ -16,7 +16,6 @@
     "babel-polyfill": "^6.26.0",
     "clipboard": "^2.0.4",
     "cross-env": "^5.2.0",
-    "moment": "^2.24.0",
     "quicklink": "^1.0.0",
     "vant": "^1.6.7",
     "vue": "^2.6.6",

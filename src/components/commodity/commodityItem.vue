@@ -74,7 +74,7 @@
         position: absolute;
         top: 18px;
         left: 39px;
-        background: url("./../../assets/images/btn-1.png") no-repeat;
+        background: url("~@/assets/images/btn-1.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -102,7 +102,7 @@
         position: absolute;
         top: 18px;
         left: 19px;
-        background: url("./../../assets/images/btn-2.png") no-repeat;
+        background: url("~@/assets/images/btn-2.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -167,15 +167,12 @@ for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
 
-// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import dialogSharingMakes from "./dialogSharingMakes.vue";
-
 import { shareSpu } from "@/server/share.js";
 export default {
   name: "commodityItem",
   components: {
-    // dialogSharingFriends, // 分享好友弹窗
-    dialogSharingMakes, // 分享赚弹起浮窗
+    dialogSharingMakes: resolve =>
+      require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
 
     ...vantCom
   },
@@ -232,7 +229,7 @@ export default {
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
       }

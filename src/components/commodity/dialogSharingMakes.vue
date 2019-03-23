@@ -179,25 +179,25 @@
         <div class="share-types">
 
           <div class="share-item">
-            <img src="@/assets/images/facbook.png"
+            <img v-lazy="require('@/assets/images/facbook.png')"
               @click="mx_shareFacebook">
             <p>Facebook</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/line.png"
+            <img v-lazy="require('@/assets/images/line.png')"
               @click="mx_shareLine">
             <p>LINE</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/whatsapp.png"
+            <img v-lazy="require('@/assets/images/whatsapp.png')"
               @click="mx_shareWhatsapp">
             <p>WhatsApp</p>
           </div>
 
           <div class="share-item">
-            <img src="@/assets/images/messenger.png"
+            <img v-lazy="require('@/assets/images/messenger.png')"
               @click="mx_shareMessenger">
             <p>Messenger</p>
           </div>
@@ -211,7 +211,7 @@
           @click="mx_copyLink"></button>
       </div>
 
-      <img src="~@/assets/images/guanbi@2x.png"
+      <img v-lazy="require('@/assets/images/guanbi@2x.png')"
         class="close-img"
         @click="closeDialog">
     </div>

@@ -9,7 +9,8 @@
           v-lazy="spuBargainItem.spu_pics[0]">
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
-          <count-down :dateDiff="spuBargainItem.expire_ttl"></count-down>
+          <count-down :dateDiff="spuBargainItem.expire_ttl"
+            v-if="spuBargainItem.expire_ttl"></count-down>
 
           <div class="left-box">
             <div class="num-box">
@@ -51,13 +52,11 @@
 </template>
 
 <script>
-import countDown from "@/components/countDown.vue";
-
 import { shareBargain } from "@/server/share.js";
 export default {
   name: "aCommodityThatIsBeingBargained",
   components: {
-    countDown
+    countDown: resolve => require(["@/components/countDown.vue"], resolve)
   },
   props: {
     spuBargainItem: {
