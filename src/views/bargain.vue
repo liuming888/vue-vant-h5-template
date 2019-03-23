@@ -135,9 +135,9 @@
     <dialog-potong-sendiri :chopInfo="chop_info"
       :dialogVisible.sync="dialogs.potongSendiri"
       v-if="dialogs.potongSendiri.show" />
-    <dialog-share-earning-entry :chopInfo="chop_info"
+    <!-- <dialog-share-earning-entry :chopInfo="chop_info"
       :dialogVisible.sync="dialogs.shareEarningEntry"
-      v-if="dialogs.shareEarningEntry.show" />
+      v-if="dialogs.shareEarningEntry.show" /> -->
   </div>
 </template>
 
@@ -204,7 +204,9 @@ export default {
     this.init();
   },
   mounted() {
-    document.getElementsByClassName("content-container")[0].scroll(0, 0);
+    if(document.getElementsByClassName("content-container")[0].scrollTop){  // 0  false
+      document.getElementsByClassName("content-container")[0].scroll(0, 0);
+    }
     document.title = "Getting Freebies";
   },
   methods: {
@@ -265,7 +267,9 @@ export default {
       }
     },
     async goBargainChop({ bargain_id, spu_id }) {
-      if (!this.$store.state.userInfo.user_id) {
+      console.log('spu_id: ', spu_id);
+      if (!this.$store.state.userInfo.user_id&&process.env.VUE_APP_ENV!=="development") {
+        console.log("666")
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;
