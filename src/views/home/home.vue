@@ -139,11 +139,28 @@
     color: #585858;
   }
 }
+
+.go-top-btn {
+  position: fixed;
+  bottom: 292px;
+  right: 12px;
+  width: 96px;
+  height: 96px;
+  z-index: 100;
+  border-radius: 50%;
+}
 </style>
 
 <template>
   <div>
-    <div class="home-container">
+    <img v-lazy="require('@/assets/images/top.png')"
+      class="go-top-btn"
+      v-if="showGoTopBtn"
+      @click="goPageTop" />
+
+    <div class="home-container"
+      @scroll="scrollEvent"
+      ref="homeContainer">
       <section class="home-top-container">
         <!-- 用户消息 -->
         <user-picking-up-message :messageList="messageList"
@@ -207,11 +224,7 @@ for (let k in obj) {
 }
 
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
-import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
-import FreebingBox from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
-import commodityItem from "@/components/commodity/commodityItem.vue";
 
-import axios from "axios";
 import { getHomeTip, getBanners } from "@/server/other.js";
 import { login } from "@/server/user.js";
 import {
@@ -222,9 +235,14 @@ import {
 export default {
   components: {
     tabBar, // 底部tab
-    userPickingUpMessage, // 用户领取消息播放
-    FreebingBox, // 一件正在进行砍价商品
-    commodityItem, // 商品列表展示的商品X
+    userPickingUpMessage: resolve =>
+      require(["@/components/userPickingUpMessage.vue"], resolve), // 用户领取消息播放
+    FreebingBox: resolve =>
+      require([
+        "@/components/bargain/aCommodityThatIsBeingBargained.vue"
+      ], resolve), // 一件正在进行砍价商品
+    commodityItem: resolve =>
+      require(["@/components/commodity/commodityItem.vue"], resolve), // 商品列表展示的商品X
     ...vantCom // vant组件
   },
   data() {
@@ -237,13 +255,18 @@ export default {
       goodsListPageDat: {
         page_size: 10,
         page_num: 1
-      }
+      },
+      showGoTopBtn: false // 是否显示回到顶部按钮
     };
   },
   computed: {
     homeBargainList() {
       const { bargainOrderSpusList, spuBargainList } = this;
-      console.log('bargainOrderSpusList, spuBargainList: ', bargainOrderSpusList, spuBargainList);
+      console.log(
+        "bargainOrderSpusList, spuBargainList: ",
+        bargainOrderSpusList,
+        spuBargainList
+      );
       if (bargainOrderSpusList.length >= 2) {
         return bargainOrderSpusList.slice(0, 2);
       } else if (
@@ -266,6 +289,16 @@ export default {
     this.init();
   },
   methods: {
+    scrollEvent(event) {
+      if (event.target.scrollTop) {
+        this.showGoTopBtn = true;
+      } else {
+        this.showGoTopBtn = false;
+      }
+    },
+    goPageTop() {
+      this.$refs.homeContainer.scroll(0, 0);
+    },
     init() {
       this.initBanners();
       this.initHomeTip();
@@ -279,11 +312,14 @@ export default {
       this.initGoodsList({ ...this.goodsListPageDat });
     },
     async initBargainOrderSpusList() {
-      let result = await getMyBargainOrderSpus({page_size:2,page_num:1});
+      let result = await getMyBargainOrderSpus({ page_size: 2, page_num: 1 });
       if (result && result.data) {
         this.bargainOrderSpusList = result.data.filter(item => {
           // 正式不能注释
-          if (item.bargain_info.order_expire_time > 0 && item.bargain_info.order_status == 1) {
+          if (
+            item.bargain_info.order_expire_time > 0 &&
+            item.bargain_info.order_status == 1
+          ) {
             return true;
           } else {
             return false;
@@ -299,7 +335,7 @@ export default {
     },
     async initHomeTip() {
       let result = await getHomeTip();
-      if (result&&result.data) {
+      if (result && result.data) {
         this.messageList = result.data.home_tips;
         console.log("this.messageList: ", this.messageList);
       }
@@ -334,45 +370,6 @@ export default {
           this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
         }
       }
-    },
-    async testLogin() {
-      let loginInfo = await window.$faceBookApi.loginFB();
-      console.warn("loginInfo: ", loginInfo);
-      if (loginInfo) {
-        let {
-          authResponse: { accessToken },
-          id,
-          name,
-          pic_square
-        } = loginInfo;
-
-        let result = await login({
-          tp_id: id,
-          tp_token: accessToken,
-          tp_type: 1,
-          tp_username: name,
-          tp_avatar: pic_square
-        });
-        //   let result = await login({
-        //   tp_id: "104497707249033",
-        //   tp_token: "EAAMALQt1F2EBAPIkLNSuTpi4YftnZBUoQPo0OI0Y3Ea9g00LoA2N0w78YV1xYI8KdQ1XIoOEzE6iEFVP702l0mTKzsASYn1jSqCcOeBlNrzgt80PWbNXrKrEpgnmrRdxMcjVXG6Kjd5LQDDYsXmLJWMSRVofQqwIahzoAAmRCWyRwb6UadzUyT368lug39CWd8Oje3gZDZD",
-        //   tp_type: 1
-        // });
-        console.log("result: ", result);
-        if (result && result.data) {
-          let userInfo = result.data;
-          this.$store.commit("setUserInfo", userInfo);
-          localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          axios.defaults.headers.common["User-Id"] = userInfo.user_id;
-          axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
-          this.$emit("update:dialogVisible", { show: false });
-          if (this.jumpUrl) {
-            this.$router.push({ path: this.jumpUrl });
-          }
-          return true;
-        }
-      }
-      return false;
     }
   }
 };

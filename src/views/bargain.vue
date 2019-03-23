@@ -1,7 +1,8 @@
 <style lang="scss" scoped src="./bargain.scss"></style>
 
 <template>
-  <div class="bargain-container">
+  <div class="bargain-container"
+    ref="bargainContainer">
     <!-- 返回首页 -->
     <div class="turn-home"
       @click="$router.push('/')"></div>
@@ -204,8 +205,9 @@ export default {
     this.init();
   },
   mounted() {
-    if(document.getElementsByClassName("content-container")[0].scrollTop){  // 0  false
-      document.getElementsByClassName("content-container")[0].scroll(0, 0);
+    if (this.$refs.bargainContainer.scrollTo) {
+      // 0  false
+      this.$refs.bargainContainer.scroll(0, 0);
     }
     document.title = "Getting Freebies";
   },
@@ -267,9 +269,12 @@ export default {
       }
     },
     async goBargainChop({ bargain_id, spu_id }) {
-      console.log('spu_id: ', spu_id);
-      if (!this.$store.state.userInfo.user_id&&process.env.VUE_APP_ENV!=="development") {
-        console.log("666")
+      console.log("spu_id: ", spu_id);
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV !== "development"
+      ) {
+        console.log("666");
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;

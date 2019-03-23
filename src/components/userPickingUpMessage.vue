@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .home-top-msg {
-  width: 355px;
+  width: 380px;
   height: 48px;
   position: absolute;
   top: 21px;

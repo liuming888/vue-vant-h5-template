@@ -6,7 +6,7 @@
   // height: (224px / 1.5);
   background-size: 100% 100%;
   position: fixed;
-  bottom: 200px;
+  bottom: 380px;
   right: -30px;
   z-index: 100;
   font-size: 14px;
