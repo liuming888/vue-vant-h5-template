@@ -76,6 +76,9 @@ module.exports = {
             vue: 'Vue',
             vuex: 'Vuex',
             'vue-router': 'VueRouter',
+            // 暂时随便命名（没影响）
+            vant: 'vant',
+            axios:'axios'
         };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
