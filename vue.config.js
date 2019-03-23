@@ -1,7 +1,4 @@
 const path = require('path');
-function resolve(dir) {
-    return path.join(__dirname, dir);
-}
 const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {
@@ -54,10 +51,10 @@ module.exports = {
                 },
             }),
         ];
-        //只有打包生产环境才需要将console删除
-        // if (process.env.VUE_APP_build_type == 'production') {
-        config.plugins = [...config.plugins, ...plugins];
-        // }
+        //打包将console删除
+        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV =='production') {
+            config.plugins = [...config.plugins, ...plugins];
+        }
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: config => {
