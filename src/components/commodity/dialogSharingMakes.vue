@@ -9,7 +9,9 @@
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 20vh;
+  box-sizing: border-box;
 }
 
 .share-box {

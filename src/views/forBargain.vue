@@ -200,9 +200,9 @@
 </template>
 
 <script>
-import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
+// import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
 import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
+// import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
 import countDown from "@/components/countDown.vue";
 import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
 import dialogOldUsersHelpCutSuccessfully from "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue";
@@ -217,9 +217,9 @@ import {
 import { Promise } from "q";
 export default {
   components: {
-    bargainingProgressBar, // 砍价进度条
+    // bargainingProgressBar, // 砍价进度条
     dialogSharingFriends, // 分享好友弹窗
-    bargainingHelpInformation, // 砍价帮
+    // bargainingHelpInformation, // 砍价帮
     countDown,
     userPickingUpMessage,
     dialogOldUsersHelpCutSuccessfully // 帮砍成功弹窗

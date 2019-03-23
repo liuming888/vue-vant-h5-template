@@ -1,7 +1,6 @@
 <style lang="scss" scoped>
 .box {
   position: relative;
-  z-index: 999;
   padding: 0 10px;
   > img {
     width: 100%;
@@ -32,19 +31,22 @@
         font-size: 34px;
       }
     }
-    > .bottom-tips {
-      margin: 90px auto 0 auto;
-      width: 420px;
-      font-size: 24px;
-      color: #ffeebb;
-      font-weight: lighter;
-      > span {
-        font-weight: bold;
-        color: #fff;
-        > span {
-          font-size: 20px;
-        }
-      }
+
+    .go-buy-btn {
+      width: 429px;
+      height: 81px;
+      line-height: 81px;
+      text-align: center;
+      background: linear-gradient(
+        0deg,
+        rgba(255, 229, 89, 1) 0%,
+        rgba(255, 215, 0, 1) 100%
+      );
+      border-radius: 40px;
+      margin: 88px auto 0;
+      font-size: 34px;
+      font-weight: bold;
+      color: rgba(211, 12, 5, 1);
     }
   }
   > .close {
@@ -52,24 +54,25 @@
     width: 70px;
     height: 70px;
     margin: 0 auto;
-    background: url("./../../assets/images/guanbi@2x.png") no-repeat;
+    background: url("~@/assets/images/guanbi@2x.png") no-repeat;
     background-size: 100% auto;
   }
 }
 </style>
 
 <template>
-  <div class="dialogPotongSendiri-container">
+  <div class="dialogShareEarningEntry-container">
     <van-popup v-model="dialogVisible.show"
+      :close-on-click-overlay="false"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img src="@/assets/images/$@2x.png"
-          alt=""
+        <img v-lazy="require('@/assets/images/fenxiangzhuang.png')"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help him cut down</p>
+          <p class="top-tips">Your friends help you save</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
-          <!-- <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p> -->
+
+          <div class="go-buy-btn" @click="goBuyNow">Go buy now</div>
         </div>
         <div class="close"
           @click="closeDialog"></div>
@@ -80,7 +83,7 @@
 
 <script>
 export default {
-  name: "dialogPotongSendiri",  // 自砍一刀成功弹窗
+  name: "dialogShareEarningEntry", //从分享赚点击进入时弹出的弹窗
   props: {
     dialogVisible: {
       type: Object,
@@ -107,6 +110,15 @@ export default {
     return {};
   },
   methods: {
+    goBuyNow() {
+      this.closeDialog();
+      if (!this.$store.state.userInfo.user_id) {
+          const { pathname, search } = window.location;
+        this.$store.commit("setLoginJumpUrl", `${pathname + search}&showShareEarningEntry=no`);
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+    },
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
     }

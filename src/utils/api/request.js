@@ -80,7 +80,7 @@ instance.interceptors.response.use(
             } else if (response.data.code == 3) {
                 Vue.prototype.$toast('Anda belum login');
                 localStorage.clear();
-                Vue.prototype.$curRouter.replace('/');
+                // Vue.prototype.$curRouter.replace('/');
             } else {
                 throw response.data;
             }

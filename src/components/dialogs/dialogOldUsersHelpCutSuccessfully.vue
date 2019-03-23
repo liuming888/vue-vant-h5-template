@@ -81,7 +81,7 @@
 
 <script>
 export default {
-  name: "dialogOldUsersHelpCutSuccessfully",
+  name: "dialogOldUsersHelpCutSuccessfully",  // 好友帮砍成功弹窗（暂时没分是不是新老用户）
   props: {
     dialogVisible: {
       type: Object,
