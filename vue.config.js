@@ -2,7 +2,7 @@ const path = require('path');
 function resolve(dir) {
     return path.join(__dirname, dir);
 }
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {
     let url = '';
@@ -42,20 +42,16 @@ module.exports = {
         config.entry.app = ['babel-polyfill', './src/main.js'];
         //删除console插件
         let plugins = [
-            new UglifyJsPlugin({
-                uglifyOptions: {
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false, // Must be set to true if using source-maps in production
+                terserOptions: {
                     compress: {
-                        warnings: false,
                         drop_console: true,
                         drop_debugger: true,
                     },
-                    output: {
-                        // 去掉注释内容
-                        comments: false,
-                    },
                 },
-                sourceMap: false,
-                parallel: true,
             }),
         ];
         //只有打包生产环境才需要将console删除
@@ -74,18 +70,17 @@ module.exports = {
         //     .set('UTIL', resolve('src/utils'))
         //     .set('SERVICE', resolve('src/services'));
         //打包文件带hash
-        config.output.filename('[name].[hash].js').end();
-
+        // config.output.filename('[name].[hash].js').end();
         //为了补删除换行而加的配置
-        config.module
-            .rule('vue')
-            .use('vue-loader')
-            .loader('vue-loader')
-            .tap(options => {
-                // modify the options...
-                options.compilerOptions.preserveWhitespace = true;
-                return options;
-            });
+        // config.module
+        //     .rule('vue')
+        //     .use('vue-loader')
+        //     .loader('vue-loader')
+        //     .tap(options => {
+        //         // modify the options...
+        //         options.compilerOptions.preserveWhitespace = true;
+        //         return options;
+        //     });
     },
     devServer: {
         port: 8088,

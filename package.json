@@ -6,7 +6,7 @@
     "serve:mock": "cross-env VUE_APP_ENV=mock vue-cli-service serve --copy",
     "serve": "cross-env VUE_APP_ENV=development vue-cli-service serve --copy",
     "build": "vue-cli-service build",
-    "build:dev": "cross-env VUE_APP_ENV=dev vue-cli-service build",
+    "build:dev": "cross-env VUE_APP_ENV=dev vue-cli-service build --modern",
     "build:test": "cross-env VUE_APP_ENV=test vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production vue-cli-service build --modern",
     "lint": "vue-cli-service lint"
@@ -31,7 +31,7 @@
     "node-sass": "^4.9.0",
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
-    "uglifyjs-webpack-plugin": "^2.1.2",
+    "terser-webpack-plugin": "^1.2.3",
     "vue-template-compiler": "^2.5.21"
   }
 }
