@@ -155,25 +155,25 @@
 
         <div class="share-item">
           <img src="@/assets/images/facbook.png"
-            @click="mx_shareFacebook">
+            @click="share(mx_shareFacebook)">
           <p>Facebook</p>
         </div>
 
         <div class="share-item">
           <img src="@/assets/images/line.png"
-            @click="mx_shareLine">
+            @click="shareshare(mx_shareLine)">
           <p>LINE</p>
         </div>
 
         <div class="share-item">
           <img src="@/assets/images/whatsapp.png"
-            @click="mx_shareWhatsapp">
+            @click="share(mx_shareWhatsapp)">
           <p>WhatsApp</p>
         </div>
 
         <div class="share-item">
           <img src="@/assets/images/messenger.png"
-            @click="mx_shareMessenger">
+            @click="share(mx_shareMessenger)">
           <p>Messenger</p>
         </div>
 
@@ -220,11 +220,23 @@ export default {
           // hashtag:"FB分享的tag标签"
         };
       }
+    },
+    itemData: {
+      type: Object,
     }
   },
   methods: {
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
+    },
+    share(fun){
+      fun();
+      //统计
+      this.$gaSend({
+        eventCategory: "分享好友帮砍浮窗_分享按钮",
+        eventAction: "点击",
+        eventLabel: this.itemData.title.substr(0, 10)
+      });
     }
   }
 };

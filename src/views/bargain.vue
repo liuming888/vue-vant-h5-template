@@ -123,14 +123,14 @@
             <span class="money">{{item.deliver_count}} Sent</span>
             <a href="javascrip:;"
               class="btn"
-              @click="jumpCurBargainPage(item.spu_id)">Get a freebie</a>
+              @click="jumpCurBargainPage(item)">Get a freebie</a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- 弹窗 -->
-    <dialog-sharing-friends :dialogVisible.sync="dialogs.sharingFriends"
+    <dialog-sharing-friends :itemData="spu" :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
       v-if="dialogs.sharingFriends.show" />
     <dialog-potong-sendiri :chopInfo="chop_info"
@@ -213,6 +213,7 @@ export default {
   },
   methods: {
     async init() {
+      // console.log(this.spu);
       const {
         relationId,
         showShareEarningEntry,
@@ -378,6 +379,12 @@ export default {
       }
     },
     async openSharingFriendsDialog() {
+      // 统计
+      this.$gaSend({
+        eventCategory: "砍价详情页_分享给好友",
+        eventAction: "点击",
+        eventLabel: this.spu.title.substr(0, 10)
+      });
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -400,7 +407,13 @@ export default {
       }
       this.dialogs.sharingFriends.show = true;
     },
-    jumpCurBargainPage(spu_id) {
+    jumpCurBargainPage(item) {
+      // 统计
+      this.$gaSend({
+        eventCategory: "砍价详情页_底部商品列表",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", "");
@@ -410,7 +423,7 @@ export default {
 
       this.$router.replace({
         query: {
-          spuId: spu_id
+          spuId: item.spu_id
         }
       });
       document.getElementsByClassName("content-container")[0].scroll(0, 0);
@@ -418,6 +431,12 @@ export default {
     },
 
     jumpBuyPage() {
+      // 统计
+      this.$gaSend({
+        eventCategory: "砍价详情页_去购买",
+        eventAction: "点击",
+        eventLabel: this.spu.title.substr(0, 10)
+      });
       // 上线时不能注释
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
@@ -458,12 +477,29 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
+    
     next(vm => {
       // 通过 `vm` 访问组件实例
       if (from.path == "/purchase") {
         vm.$util.paymentCancellationPrompt();
       }
     });
+  },
+  watch: {
+    spu: {
+      handler() {
+        if (this.spu.hasOwnProperty("title")) {
+          // 统计
+          this.$gaSend({
+            eventCategory: "砍价详情页",
+            eventAction: "页面展示",
+            eventLabel: this.spu.title.substr(0, 10)
+          });
+        }
+      },
+      immediate: true,
+      deep: true
+    }
   }
 };
 </script>

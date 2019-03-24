@@ -72,7 +72,8 @@
           <p class="top-tips">Your friends help you save</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
 
-          <div class="go-buy-btn" @click="goBuyNow">Go buy now</div>
+          <div class="go-buy-btn"
+            @click="goBuyNow">Go buy now</div>
         </div>
         <div class="close"
           @click="closeDialog"></div>
@@ -112,15 +113,38 @@ export default {
   methods: {
     goBuyNow() {
       this.closeDialog();
+      //统计
+      this.$gaSend({
+        eventCategory: "砍价完成浮窗_去购买",
+        eventAction: "点击"
+      });
       if (!this.$store.state.userInfo.user_id) {
-          const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", `${pathname + search}&showShareEarningEntry=no`);
+        const { pathname, search } = window.location;
+        this.$store.commit(
+          "setLoginJumpUrl",
+          `${pathname + search}&showShareEarningEntry=no`
+        );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
     },
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
+    }
+  },
+  watch: {
+    dialogVisible: {
+      handler() {
+        if (this.dialogVisible.show) {
+          //统计
+          this.$gaSend({
+            eventCategory: "砍价完成浮窗",
+            eventAction: "浮窗展示"
+          });
+        }
+      },
+      immediate: true,
+      deep: true
     }
   }
 };
