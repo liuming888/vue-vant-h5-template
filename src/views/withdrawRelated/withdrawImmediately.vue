@@ -21,6 +21,10 @@
 .withdrawImmediately-container {
   width: 100%;
   box-sizing: border-box;
+  .border-bttom {
+    padding-bottom: 40px;
+    border-bottom: 20px solid #eee;
+  }
 }
 
 .balance-box {
@@ -30,7 +34,6 @@
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 1);
-  margin-bottom: 20px;
 
   > div {
     h5.tit {
@@ -77,11 +80,10 @@
   background: #fff;
   padding: 0 30px 1px 30px;
   box-sizing: border-box;
-  margin-bottom: 26px;
 
   .top-txt {
-    height: 102px;
-    line-height: 102px;
+    height: 130px;
+    line-height: 130px;
     box-sizing: border-box;
     display: flex;
     font-size: 28px;
@@ -102,7 +104,7 @@
       border: 1px solid rgba(246, 94, 16, 1);
       border-radius: 29px;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
     }
   }
   .play-types {
@@ -110,7 +112,7 @@
     height: 88px;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 70px;
+    // margin-bottom: 10px;
 
     .play-item {
       width: 210px;
@@ -285,7 +287,7 @@
       flex: 1;
     }
     input {
-      width: 250px;
+      width: 300px;
       text-align: right;
       color: #919395;
     }
@@ -373,7 +375,7 @@
       </div>
     </div>
 
-    <div class="balance-box">
+    <div class="balance-box border-bttom">
       <div class="current-balance">
         <h5 class="tit">Current balance</h5>
         <div class="balance-item">
@@ -390,30 +392,47 @@
         </div>
       </div>
     </div>
+    <div class="border-bttom">
+      <div class="play-box">
+        <div class="top-txt">
+          <div class="cash-withdrawal-method">Cash withdrawal method</div>
+          <div class="embodiment-statement"
+            @click="dialogVisible = true">Introduction</div>
+        </div>
 
-    <div class="play-box">
-      <div class="top-txt">
-        <div class="cash-withdrawal-method">Cash withdrawal method</div>
-        <div class="embodiment-statement"
-          @click="dialogVisible = true">Introduction</div>
+        <div class="play-types">
+          <div class="play-item"
+            v-for="(item,index) of pay_type"
+            :class="{active:item.type==withdrawParam.pay_type}"
+            @click="withdrawParam.pay_type=item.type"
+            :key="index">
+            <img :src="item.icon"
+              class="play-img">
+            <!-- <span class="play-txt">{{item.name}}</span> -->
+          </div>
+        </div>
       </div>
 
-      <div class="play-types">
-        <div class="play-item"
-          v-for="(item,index) of pay_type"
-          :class="{active:item.type==withdrawParam.pay_type}"
-          @click="withdrawParam.pay_type=item.type"
-          :key="index">
-          <img class="play-img"
-            v-lazy="item.icon">
-          <!-- <span class="play-txt">{{item.name}}</span> -->
+      <div class="play-box" v-if="withdrawParam.pay_type === 2">
+        <div class="top-txt">
+          <div class="cash-withdrawal-method">Recharge denomination</div>
+        </div>
+        <div class="play-types">
+          <div class="play-item"
+            v-for="(item,index) of rechargeDenominations"
+            :class="{active:currentRechargeDenomination===item}"
+            @click="currentRechargeDenomination=item"
+            :key="index">
+            <span>Rp </span><span>{{moneyFormat(item)}}</span>
+            <!-- <span class="play-txt">{{item.name}}</span> -->
+          </div>
         </div>
 
       </div>
     </div>
 
-    <div class="list">
-      <ul>
+    <div class="list border-bttom">
+      <ul v-if="withdrawParam.pay_type !== 2">
         <li>
           <span>Withdrawal Amount</span>
           <!-- <input v-model="amount"
@@ -424,16 +443,31 @@
         <li>
           <span>Account Name</span>
           <input v-model.trim="withdrawParam.account_name"
+            placeholder="Enter the amount"
             type="text">
         </li>
         <li>
           <span>Confirm the account</span>
           <input v-model.trim="withdrawParam.account_no"
+            placeholder="Confirm the amount"
             type="text">
         </li>
       </ul>
+      <ul v-else>
+        <li>
+          <span>Phone number</span>
+          <input v-model.trim="withdrawParam.account_name"
+            placeholder="Enter phone number"
+            type="text">
+
+        </li>
+        <li> <span>Confirm phone number</span>
+          <input v-model.trim="withdrawParam.account_no"
+            placeholder="Confirm phone number"
+            type="text"></li>
+      </ul>
     </div>
-    <div class="cash-withdrawal-box">
+    <div class="cash-withdrawal-box border-bttom">
       <p class="cash-withdrawal-tit">Cash withdrawal method</p>
       <div class="progress-box">
         <div class="schedule">
@@ -514,7 +548,11 @@ export default {
         //类型：Object  必有字段  备注：用户金额
         balance: 0, //类型：Number  必有字段  备注：用户余额
         withdraw_amount: 0 //类型：Number  必有字段  备注：用户可提现金额
-      }
+      },
+      //充值面额
+      rechargeDenominations: [5000, 59800, 9878000],
+      // 当前面额
+      currentRechargeDenomination: 5000
     };
   },
   created() {
@@ -551,7 +589,9 @@ export default {
       }
 
       console.log("this.withdrawParam", this.withdrawParam);
-
+      if (withdrawParam.pay_type === 2) {
+        // this.withdrawParam.
+      }
       let result = await applyWithdraw(this.withdrawParam);
       if (result && result.code == 0) {
         this.showAlert = true;
@@ -577,6 +617,24 @@ export default {
     cashOk() {
       console.log("ok");
       this.$router.push("/my");
+    },
+    //货币格式化，
+    moneyFormat(value) {
+      const arr = [];
+      value = value
+        .toString()
+        .split("")
+        .reverse()
+        .join("");
+      for (let i = 0; i < Math.ceil(value.length / 3); i++) {
+        const str = value.substr(3 * i, 3);
+        arr.push(str);
+      }
+      return arr
+        .join(".")
+        .split("")
+        .reverse()
+        .join("");
     }
   }
 };

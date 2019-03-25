@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {
@@ -34,6 +34,19 @@ function getUrl(VUE_APP_ENV) {
 module.exports = {
     productionSourceMap: false,
     lintOnSave: process.env.NODE_ENV !== 'production',
+    css: {
+        // 将组件内部的css提取到一个单独的css文件（只用在生产环境）
+
+        // 也可以是传递给 extract-text-webpack-plugin 的选项对象
+
+        extract: false, // 允许生成 CSS source maps?
+
+        sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use { sass: { ... } }
+
+        loaderOptions: {}, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
+
+        modules: false,
+    },
     configureWebpack: config => {
         //入口文件
         config.entry.app = ['babel-polyfill', './src/main.js'];
@@ -48,36 +61,42 @@ module.exports = {
                         drop_console: true,
                         drop_debugger: true,
                     },
+                    output: {
+                        comments: false,
+                    },
                 },
             }),
         ];
         //打包将console删除
-        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV =='production') {
+        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production') {
             config.plugins = [...config.plugins, ...plugins];
         }
+
+        config.externals = {
+            vue: 'Vue',
+            vuex: 'Vuex',
+            'vue-router': 'VueRouter',
+            // 暂时随便命名（没影响）
+            vant: 'vant',
+            axios:'axios'
+        };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: config => {
-        //命名
-        // config.resolve.alias
-        //     .set('SRC', resolve('src'))
-        //     .set('ASSET', resolve('src/assets'))
-        //     .set('VIEW', resolve('src/components/page'))
-        //     .set('COMPONENT', resolve('src/components/common'))
-        //     .set('UTIL', resolve('src/utils'))
-        //     .set('SERVICE', resolve('src/services'));
-        //打包文件带hash
-        // config.output.filename('[name].[hash].js').end();
-        //为了补删除换行而加的配置
-        // config.module
-        //     .rule('vue')
-        //     .use('vue-loader')
-        //     .loader('vue-loader')
-        //     .tap(options => {
-        //         // modify the options...
-        //         options.compilerOptions.preserveWhitespace = true;
-        //         return options;
-        //     });
+        config.module
+            .rule('vue')
+            .use('vue-loader')
+            .loader('vue-loader')
+            .tap(options => {
+                options.compilerOptions.preserveWhitespace = false;
+                return options;
+            });
+        config.module
+            .rule('images')
+            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+            .use('url-loader')
+            .loader('url-loader')
+            .tap(options => Object.assign(options, { limit: 10240 }));
     },
     devServer: {
         port: 8088,

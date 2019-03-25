@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$store.commit("setNewGiftBagShow", true);  // 帮砍完成弹出新人礼包
+      // this.$store.commit("setNewGiftBagShow", true);  // 帮砍完成弹出新人礼包
       this.$emit("update:dialogVisible", { show: false });
     }
   }

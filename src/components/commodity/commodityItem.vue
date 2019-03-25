@@ -74,7 +74,7 @@
         position: absolute;
         top: 18px;
         left: 39px;
-        background: url("./../../assets/images/btn-1.png") no-repeat;
+        background: url("~@/assets/images/btn-1.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -102,7 +102,7 @@
         position: absolute;
         top: 18px;
         left: 19px;
-        background: url("./../../assets/images/btn-2.png") no-repeat;
+        background: url("~@/assets/images/btn-2.png") no-repeat;
         background-size: 100% auto;
       }
     }
@@ -167,15 +167,12 @@ for (let k in obj) {
   vantCom[obj[k].name] = obj[k];
 }
 
-// import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-import dialogSharingMakes from "./dialogSharingMakes.vue";
-
 import { shareSpu } from "@/server/share.js";
 export default {
   name: "commodityItem",
   components: {
-    // dialogSharingFriends, // 分享好友弹窗
-    dialogSharingMakes, // 分享赚弹起浮窗
+    dialogSharingMakes: resolve =>
+      require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
 
     ...vantCom
   },
@@ -195,6 +192,9 @@ export default {
           ]
         };
       }
+    },
+    gaInfo: {
+      type: Object,
     }
   },
   data() {
@@ -208,7 +208,9 @@ export default {
         }
       },
 
-      shareInfo: {}
+      shareInfo: {},
+      // ga填充信息
+      gaInfo: {},
     };
   },
   created() {
@@ -219,6 +221,8 @@ export default {
      * @description: 分享赚
      */
     async cashBack() {
+      
+      this.$emit('cashBackGa', this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -232,16 +236,19 @@ export default {
       let result = await shareSpu({
         spu_id: this.itemData.spu_id
       });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
       }
       this.dialogs.sharingFriends.show = true;
+      
     },
     /**
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
+      
+      this.$emit('jumpBargainGa', this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -257,8 +264,10 @@ export default {
           spuId: this.itemData.spu_id
         }
       });
+      
     }
-  } /* ,
+  },
+  /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {

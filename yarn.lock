@@ -1230,12 +1230,34 @@ babel-plugin-dynamic-import-node@^2.2.0:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-dynamic-import-webpack@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/babel-plugin-dynamic-import-webpack/download/babel-plugin-dynamic-import-webpack-1.1.0.tgz#955306608cdae6191cd1d3f50cf93826ff69f4e1"
+  integrity sha1-lVMGYIza5hkc0dP1DPk4Jv9p9OE=
+
 babel-plugin-import@^1.11.0:
   version "1.11.0"
   resolved "http://maven.batcloud.cn/nexus/content/groups/npm/babel-plugin-import/-/babel-plugin-import-1.11.0.tgz#78ac908e6b225206babb734e19eae5f78d6d1035"
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/runtime" "^7.0.0"
+
+babel-polyfill@^6.26.0:
+  version "6.26.0"
+  resolved "http://maven.batcloud.cn/nexus/content/groups/npm/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
+  integrity sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=
+  dependencies:
+    babel-runtime "^6.26.0"
+    core-js "^2.5.0"
+    regenerator-runtime "^0.10.5"
+
+babel-runtime@^6.26.0:
+  version "6.26.0"
+  resolved "http://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+  integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.11.0"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -1883,9 +1905,10 @@ copy-webpack-plugin@^4.6.0:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-core-js@^2.5.7, core-js@^2.6.5:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7, core-js@^2.6.5:
   version "2.6.5"
-  resolved "http://maven.batcloud.cn/nexus/content/groups/npm/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  resolved "http://registry.npm.taobao.org/core-js/download/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  integrity sha1-RLyNJJ5/sv9dAOA0Gn/7lPv2eJU=
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -4140,10 +4163,6 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-moment@^2.24.0:
-  version "2.24.0"
-  resolved "http://maven.batcloud.cn/nexus/content/groups/npm/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "http://maven.batcloud.cn/nexus/content/groups/npm/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -5293,6 +5312,16 @@ regenerate@^1.2.1, regenerate@^1.4.0:
   version "1.4.0"
   resolved "http://maven.batcloud.cn/nexus/content/groups/npm/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
 
+regenerator-runtime@^0.10.5:
+  version "0.10.5"
+  resolved "http://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+  integrity sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
+
+regenerator-runtime@^0.11.0:
+  version "0.11.1"
+  resolved "http://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+  integrity sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
+
 regenerator-runtime@^0.12.0:
   version "0.12.1"
   resolved "http://maven.batcloud.cn/nexus/content/groups/npm/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
@@ -6091,7 +6120,7 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-terser-webpack-plugin@^1.1.0, terser-webpack-plugin@^1.2.2:
+terser-webpack-plugin@^1.1.0, terser-webpack-plugin@^1.2.2, terser-webpack-plugin@^1.2.3:
   version "1.2.3"
   resolved "http://maven.batcloud.cn/nexus/content/groups/npm/terser-webpack-plugin/-/terser-webpack-plugin-1.2.3.tgz#3f98bc902fac3e5d0de730869f50668561262ec8"
   dependencies:

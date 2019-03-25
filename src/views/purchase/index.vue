@@ -95,12 +95,12 @@
 
     <ul class="paly-type-list">
       <li class="paly-item"
-        v-for="(item,idx) in 1"
-        @click="paly_id=item"
-        :key="idx">
-        <span class="paly-txt">Papal payment</span>
+        v-for="item in payTypes"
+        @click="handlePayType(item)"
+        :key="item.id">
+        <span class="paly-txt">{{item.name}}</span>
         <img class="paly-select-icon"
-          :src="paly_id==item?require('@/assets/images/select-fill.png'):require('@/assets/images/select.png')">
+          :src="currentType.id===item.id?require('@/assets/images/select-fill.png'):require('@/assets/images/select.png')">
       </li>
     </ul>
 
@@ -130,7 +130,8 @@
     </div>
 
     <!-- 弹窗 --------------------------------->
-    <dialog-post-add-address :dialogVisible.sync="showAddressDialog" showType="add"></dialog-post-add-address>
+    <dialog-post-add-address :dialogVisible.sync="showAddressDialog"
+      showType="add"></dialog-post-add-address>
     <!-- <dialog-wait-payment :dialogVisible.sync="showWaitPaymentDialog"
       @continuePlay="goPaly"
       @playfail="dialogVisible = true" /> -->
@@ -161,7 +162,7 @@ for (let k in obj) {
 }
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
-import { orderCreate, repaidOrder } from "@/server/pay.js";
+import { orderCreate, repaidOrder, getPayType } from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
 import { getExchangeRate } from "@/server/finance.js";
 import { getBargainInfo } from "@/server/bargain.js";
@@ -201,7 +202,11 @@ export default {
         //类型：Object  必有字段  备注：无
         currency_code: "IDR", //类型：String  必有字段  备注：货币符号
         exchange_rate: 1 //类型：Number  必有字段  备注：汇率
-      }
+      },
+      // 支付类型列表
+      payTypes: [],
+      // 当前支付类型
+      currentType: ""
     };
   },
   created() {
@@ -229,10 +234,26 @@ export default {
       this.getMyAddressInfo();
       this.curSpuSpecs();
       this.initExchangeRate();
+      this.getPayType();
+    },
+    // 获取支付渠道信息
+    async getPayType() {
+      const res = await getPayType();
+      this.payTypes = res.data.pay_types;
+      this.currentType = this.payTypes[0];
+      // 统计
+      this.$gaSend({
+        eventCategory: "支付_选择支付方式",
+        eventAction: "点击"
+      });
+    },
+    // 支付类型选择
+    handlePayType(item) {
+      this.currentType = item;
     },
     async initSpuInfo() {
       let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.spu = result.data.spu;
       }
     },
@@ -284,7 +305,8 @@ export default {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
         // pay_type: this.paly_id
-        pay_type: 1, // 暂时写死
+        pay_type: this.currentType.type, // 暂时写死
+        pay_product: this.currentType.product,
         spu_name: this.spu.title
       };
       let spu_spec_items = "";
@@ -360,6 +382,15 @@ export default {
     "showAddressDialog.show"(val) {
       if (!val) {
         this.getMyAddressInfo();
+      }
+    },
+    dialogVisible(val) {
+      if (val) {
+        // 统计
+        this.$gaSend({
+          eventCategory: "支付失败页面",
+          eventAction: "页面展示"
+        });
       }
     }
   }

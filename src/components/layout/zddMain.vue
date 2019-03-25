@@ -37,7 +37,8 @@ export default {
       // 如果登陆成功后刷新界面发现登陆的是新用户并且不是在帮砍页
       if (
         localStorage.getItem("newUserInfo") &&
-        this.$route.path != "/forBargain"
+        // this.$route.path != "/forBargain" &&
+        this.$route.path == "/"
       ) {
         this.$store.commit("setNewGiftBagShow", true);
       }
