@@ -9,7 +9,7 @@
     width: 100vw;
 
     overflow: hidden;
-   
+
     > .home-top-msg {
       position: absolute;
       top: 21px;
@@ -160,7 +160,8 @@
           indicator-color="white"
           class="home-banner">
           <template v-if="bannerList.length>0">
-            <van-swipe-item v-for="item of bannerList"
+            <van-swipe-item @click="handleBannerClick"
+              v-for="item of bannerList"
               :key="item.id">
               <img v-lazy="item.url">
             </van-swipe-item>
@@ -181,7 +182,7 @@
 
           <a href="javascript:;"
             class="freebing-more"
-            @click="$router.push({path:'/isBargainingList'})">More About ></a>
+            @click="handleMoreAbout">More About ></a>
         </div>
 
       </section>
@@ -193,6 +194,8 @@
         </div>
         <ul class="home-goods-list">
           <commodity-item v-for="(item, index) of goodsList"
+            @cashBackGa = cashBackGa
+            @jumpBargainGa = jumpBargainGa
             :key="index"
             :itemData="item" />
         </ul>
@@ -359,8 +362,54 @@ export default {
           this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
         }
       }
+    },
+    // banner点击
+    handleBannerClick() {
+      // console.log(1);
+      this.$gaSend({
+        eventCategory: "banner",
+        eventAction: "页面展示"
+      });
+    },
+    // 更多砍价点击
+    handleMoreAbout(){
+      this.$router.push({path:'/isBargainingList'});
+      this.$gaSend({
+        eventCategory: "首页_更多砍价",
+        eventAction: "点击"
+      });
+    },
+    //ga统计商品列表点击
+    cashBackGa(item){
+      //统计
+      this.$gaSend({
+        eventCategory: "首页_分享赚",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
+    },
+    jumpBargainGa(item){
+      //统计
+      this.$gaSend({
+        eventCategory: "首页_免费拿",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
     }
-  }
+  },
+  watch: {
+      goodsList() {
+        if (this.goodsList.length > 0) {
+          this.goodsList.forEach(item => {
+            this.$gaSend({
+              eventCategory: "首页_商品",
+              eventAction: "商品展示",
+              eventLabel: item.title.substr(0,10)
+            });
+          });
+        }
+      }
+    }
 };
 </script>
 

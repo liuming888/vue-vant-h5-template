@@ -180,25 +180,25 @@
 
           <div class="share-item">
             <img v-lazy="require('@/assets/images/facbook.png')"
-              @click="mx_shareFacebook">
+              @click="share(mx_shareFacebook)">
             <p>Facebook</p>
           </div>
 
           <div class="share-item">
             <img v-lazy="require('@/assets/images/line.png')"
-              @click="mx_shareLine">
+              @click="share(mx_shareLine)">
             <p>LINE</p>
           </div>
 
           <div class="share-item">
             <img v-lazy="require('@/assets/images/whatsapp.png')"
-              @click="mx_shareWhatsapp">
+              @click="share(mx_shareWhatsapp)">
             <p>WhatsApp</p>
           </div>
 
           <div class="share-item">
             <img v-lazy="require('@/assets/images/messenger.png')"
-              @click="mx_shareMessenger">
+              @click="share(mx_shareMessenger)">
             <p>Messenger</p>
           </div>
 
@@ -254,6 +254,15 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
+    },
+    share(fun){
+      fun();
+      //统计
+      this.$gaSend({
+        eventCategory: "分享赚浮窗_分享按钮",
+        eventAction: "点击",
+        eventLabel: this.itemData.title.substr(0, 10)
+      });
     }
   }
 };

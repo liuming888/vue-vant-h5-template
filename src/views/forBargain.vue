@@ -105,7 +105,7 @@
               @click="goBargainChop">Help my friend to get freebies</div>
             <div class="share-btn"
               v-else-if="isHelpOk"
-              @click="$router.push('/')">I want this for free too</div>
+              @click="handleGetFree">I want this for free too</div>
             <template v-else-if="isNGo">
               <div class="share-btn"
                 @click="$router.push('/my/revenueDetails')">Receive bonus</div>
@@ -114,7 +114,7 @@
             <!-- 别的情况统一显示这个 -->
             <div class="share-btn"
               v-else
-              @click="$router.push('/')">I want this for free too</div>
+              @click="handleGetFree">I want this for free too</div>
 
           </div>
         </div>
@@ -345,6 +345,10 @@ export default {
     },
 
     async goBargainChop() {
+      this.$gaSend({
+        eventCategory: "帮砍页面_帮好友砍一刀",
+        eventAction: "点击"
+      });
       // vuex里的状态，如果直接有登陆会在localStorage缓存，下次进入时会全局先刷新登陆状态（目前商品砍价时间是24小时，token过期是7天，所以这里判断没登陆的就是没帮砍过的）
       if (!this.$store.state.userInfo.user_id) {
         const { pathname, search } = window.location;
@@ -364,7 +368,8 @@ export default {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
         const helpCur = this.$util.getQueryVariable("helpCur");
-        if (!helpCur) {  // 之前有登陆的用户帮好友砍（不是新用户登陆刷新后的）
+        if (!helpCur) {
+          // 之前有登陆的用户帮好友砍（不是新用户登陆刷新后的）
           this.$router.replace({
             query: {
               ...this.$route.query,
@@ -372,6 +377,10 @@ export default {
             }
           });
         }
+        this.$gaSend({
+          eventCategory: "帮砍成功浮窗",
+          eventAction: "浮窗展示"
+        });
       }
 
       return Promise.resolve();
@@ -514,6 +523,14 @@ export default {
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
       });
+    },
+    // 我也要免费拿
+    handleGetFree() {
+      this.$gaSend({
+        eventCategory: "帮砍页面_我也要免费拿",
+        eventAction: "点击"
+      });
+      this.$router.push("/");
     }
   }
   /*  beforeRouteUpdate(to, from, next) {

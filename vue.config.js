@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {

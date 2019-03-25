@@ -96,12 +96,32 @@
 <script>
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
-import fbInit from '@/mixins/fbInit.js';
+import fbInit from "@/mixins/fbInit.js";
 export default {
   name: "dialogLoginSelect",
   mixins: [fbInit],
   data() {
     return {};
+  },
+  conputed: {
+    setLoginSelectShow() {
+      return this.$store.state.dialogs.loginSelect.show;
+    }
+  },
+  watch: {
+    setLoginSelectShow: {
+      handler() {
+        console.log(this.$route);
+        if (this.$route.path === "forBargain" && this.setLoginSelectShow) {
+          this.$gaSend({
+            eventCategory: "帮砍_第三方登陆浮窗",
+            eventAction: "浮窗展示"
+          });
+        }
+      },
+      deep: true,
+      immediate: true
+    }
   },
   methods: {
     close() {
@@ -141,7 +161,7 @@ export default {
 
         let result = await login(param);
         console.log("result: ", result);
-        if (result&&result.data) {
+        if (result && result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
           localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -149,8 +169,12 @@ export default {
           axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
           this.$store.commit("setLoginSelectShow", false);
 
-          if(userInfo.is_new==1){  // 如果是新用户
-            window.localStorage.setItem("newUserInfo",JSON.stringify(userInfo));
+          if (userInfo.is_new == 1) {
+            // 如果是新用户
+            window.localStorage.setItem(
+              "newUserInfo",
+              JSON.stringify(userInfo)
+            );
           }
 
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {

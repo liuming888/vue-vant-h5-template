@@ -219,10 +219,11 @@
         height: 92px;
         line-height: 92px;
         overflow: hidden;
-        margin-bottom: 62px;
-
         &:nth-last-of-type(1) {
             margin-bottom: 0;
+        }
+        &:last-of-type{
+            margin-bottom: 62px;
         }
 
         .paly-select-icon {

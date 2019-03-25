@@ -13,10 +13,13 @@ Vue.use(Lazyload);
 Vue.prototype.$curStore = store;
 Vue.prototype.$curRouter = router;
 Vue.prototype.$util = $util;
+Vue.prototype.$gaSend = $util.gaSend;
 // Vue.prototype.$request = $request;
 
 Vue.config.productionTip = false;
-
+// router.afterEach(current => {
+    
+// })
 new Vue({
     router,
     store,

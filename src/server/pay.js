@@ -1,10 +1,10 @@
 import $request from '../utils/api/request.js';
 
 // 下单接口
-export function orderCreate({ spu_spec_items, address_id, spu_id, bargain_id, pay_type, spu_name }) {
+export function orderCreate(params={}) {
     return $request.post({
         url: '/api/v1/order/create_order',
-        data: { spu_spec_items, address_id, spu_id, bargain_id, pay_type, spu_name },
+        data: params,
     });
 }
 // 订单列表
@@ -20,5 +20,12 @@ export function repaidOrder({ order_no, spu_name, pay_type }) {
     return $request.post({
         url: '/api/v1/order/repaid_order',
         data: { order_no, spu_name, pay_type },
+    });
+}
+
+// 重新支付
+export function getPayType() {
+    return $request.post({
+        url: '/api/v1/pay/get_pay_type',
     });
 }

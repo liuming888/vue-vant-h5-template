@@ -192,6 +192,9 @@ export default {
           ]
         };
       }
+    },
+    gaInfo: {
+      type: Object,
     }
   },
   data() {
@@ -205,7 +208,9 @@ export default {
         }
       },
 
-      shareInfo: {}
+      shareInfo: {},
+      // ga填充信息
+      gaInfo: {},
     };
   },
   created() {
@@ -216,6 +221,8 @@ export default {
      * @description: 分享赚
      */
     async cashBack() {
+      
+      this.$emit('cashBackGa', this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -234,11 +241,14 @@ export default {
         console.log("this.shareInfo: ", this.shareInfo);
       }
       this.dialogs.sharingFriends.show = true;
+      
     },
     /**
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
+      
+      this.$emit('jumpBargainGa', this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -254,8 +264,10 @@ export default {
           spuId: this.itemData.spu_id
         }
       });
+      
     }
-  } /* ,
+  },
+  /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {
