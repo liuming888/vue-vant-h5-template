@@ -63,11 +63,10 @@
     <van-popup v-model="dialogVisible.show"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img src="@/assets/images/$@2x.png"
-          alt=""
+        <img v-lazy="require('@/assets/images/zikanyidaotanchuang.png')"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help him cut down</p>
+          <p class="top-tips">Help yourself cut down</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
           <!-- <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p> -->
         </div>
