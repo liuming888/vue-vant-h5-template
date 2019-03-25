@@ -206,7 +206,7 @@ export default {
       // 支付类型列表
       payTypes: [],
       // 当前支付类型
-      currentType: '',
+      currentType: ""
     };
   },
   created() {
@@ -244,7 +244,7 @@ export default {
       // 统计
       this.$gaSend({
         eventCategory: "支付_选择支付方式",
-        eventAction: "点击",
+        eventAction: "点击"
       });
     },
     // 支付类型选择
@@ -382,6 +382,15 @@ export default {
     "showAddressDialog.show"(val) {
       if (!val) {
         this.getMyAddressInfo();
+      }
+    },
+    dialogVisible(val) {
+      if (val) {
+        // 统计
+        this.$gaSend({
+          eventCategory: "支付失败页面",
+          eventAction: "页面展示"
+        });
       }
     }
   }
