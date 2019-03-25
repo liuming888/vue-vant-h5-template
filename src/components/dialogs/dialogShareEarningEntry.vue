@@ -70,7 +70,7 @@
           class="bg">
         <div class="box-info">
           <p class="top-tips">Your friends help you save</p>
-          <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
+          <p class="cut-num"><span>Rp</span> {{preAmount}}</p>
 
           <div class="go-buy-btn"
             @click="goBuyNow">Go buy now</div>
@@ -94,17 +94,9 @@ export default {
         };
       }
     },
-    chopInfo: {
-      type: Object,
-      default() {
-        return {
-          //类型：Object  必有字段  备注：无
-          bargain_id: 1, //类型：Number  必有字段  备注：砍价号
-          bargain_amount: 1, //类型：Number  必有字段  备注：砍价金额
-          bargain_rate: 1, //类型：Number  必有字段  备注：砍价比例
-          reward_amount: "mock" //类型：String  必有字段  备注：下单能获取的金额
-        };
-      }
+    preAmount:{
+      type:String,
+      default:"903.879"
     }
   },
   data() {
