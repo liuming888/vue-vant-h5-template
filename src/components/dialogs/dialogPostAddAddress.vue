@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .cur-popup {
   width: 610px;
-  height: 630px;
+  min-height: 650px;
   overflow: visible;
   top: 36%;
 }
@@ -44,7 +44,7 @@
 
 .alamat-pengiriman {
   width: 100%;
-  height: 90px;
+  min-height: 90px;
   display: flex;
   padding: 30px;
   box-sizing: border-box;
@@ -121,7 +121,8 @@
 
       <div class="alamat-pengiriman"
         @click="dialogs.area.show=true;">
-        <span class="txt">Pilih alamat pengiriman</span>
+        <!-- <span class="txt">Pilih alamat pengiriman</span> -->
+        <span class="txt">{{addressTxt}}</span>
         <div class="arrow-icon">
           <van-icon name="arrow" />
         </div>
@@ -197,6 +198,7 @@ export default {
           show: false
         }
       },
+      addressTxt: "Pilih alamat pengiriman",
       curAddress: JSON.parse(JSON.stringify(defaultAddress))
     };
   },
@@ -249,6 +251,15 @@ export default {
     }
   },
   watch: {
+    "dialogs.area.show"(val) {
+      if (!val) {
+        const { region, city } = this.curAddress;
+        console.log("{region,city}: ", { region, city });
+        if (region && city) {
+          this.addressTxt = region + "," + city;
+        }
+      }
+    },
     "dialogVisible.show": {
       deep: true,
       immediate: true,

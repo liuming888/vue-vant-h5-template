@@ -81,9 +81,9 @@ export default {
     this.initGoodsList({ ...this.goodsListPageDat });
   },
   mounted () {
-    // setTimeout(() => {
-    //     this.$router.push("/");
-    // }, 6000);
+    setTimeout(() => {
+        this.$router.push("/");
+    }, 6000);
   },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {

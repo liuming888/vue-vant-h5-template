@@ -119,7 +119,7 @@
     </div>
     <div class="ctrl-box">
       <div class="pay-time"></div>
-      <div class="btn">Customer Service</div>
+      <div class="btn" @click="handleCustomerService">Customer Service</div>
     </div>
   </div>
 </template>
@@ -141,7 +141,11 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    handleCustomerService(){
+      this.$emit('on-customer-service');
+    }
+  }
 };
 </script>
 

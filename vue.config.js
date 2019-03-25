@@ -32,6 +32,7 @@ function getUrl(VUE_APP_ENV) {
 }
 
 module.exports = {
+    // publicPath: process.env.NODE_ENV === 'production' ? '/production-sub-path/' : '/',
     productionSourceMap: false,
     lintOnSave: process.env.NODE_ENV !== 'production',
     css: {
@@ -78,7 +79,7 @@ module.exports = {
             'vue-router': 'VueRouter',
             // 暂时随便命名（没影响）
             vant: 'vant',
-            axios:'axios'
+            axios: 'axios',
         };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。

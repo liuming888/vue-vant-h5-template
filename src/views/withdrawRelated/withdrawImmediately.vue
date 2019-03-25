@@ -20,6 +20,7 @@
 
 .withdrawImmediately-container {
   width: 100%;
+  padding-bottom: 98px;
   box-sizing: border-box;
   .border-bttom {
     padding-bottom: 40px;
@@ -85,12 +86,12 @@
     height: 130px;
     line-height: 130px;
     box-sizing: border-box;
-    display: flex;
+    // display: flex;
     font-size: 28px;
     font-weight: 400;
 
     .cash-withdrawal-method {
-      flex: 1;
+      // flex: 1;
       text-align: left;
       color: #323232;
     }
@@ -105,17 +106,18 @@
       border-radius: 29px;
       text-align: center;
       margin-top: 30px;
+      float: right;
     }
   }
   .play-types {
     width: 100%;
-    height: 88px;
-    display: flex;
-    justify-content: space-around;
+    // height: 88px;
+    // display: flex;
+    // justify-content: space-around;
     // margin-bottom: 10px;
 
     .play-item {
-      width: 210px;
+      width: 330px;
       height: 88px;
       line-height: 88px;
       text-align: center;
@@ -125,17 +127,29 @@
       font-size: 28px;
       font-weight: 400;
       color: rgba(50, 50, 50, 1);
-
+      float: left;
+      &:nth-of-type(2n){
+        float: right;
+      }
+      margin-top: 20px;
+      &:nth-of-type(1),&:nth-of-type(2){
+        margin-top: 0;
+      }
       .play-img {
         width: 100%;
         height: 100%;
-        margin-right: 12px;
+        // margin-right: 12px;
       }
     }
     .active {
       border: 1px solid #d30c05;
       background: url("~@/assets/images/Selected.png") no-repeat 0 0;
       background-size: 28px;
+    }
+    .invalid {
+      background: none;
+      border: 1px solid rgba(236, 236, 236, 1);
+      color: #828282;
     }
   }
 }
@@ -162,10 +176,13 @@
     }
   }
 }
+.progress-box {
+  padding: 0 30px;
+}
 .schedule {
   position: relative;
   margin: 0 auto;
-  width: 580px;
+  // width: 580px;
   height: 10px;
   border-radius: 9px;
   background-color: #fececa;
@@ -274,7 +291,7 @@
 
 .list {
   overflow: hidden;
-  margin: 20px 0;
+  // margin: 20px 0;
   background: #fff;
   padding: 0 30px;
   li {
@@ -295,11 +312,11 @@
 }
 
 .cash-withdrawal-box {
-  height: 362px;
+  height: 200px;
   background: #fff;
   .cash-withdrawal-tit {
     font-size: 28px;
-    padding: 40px;
+    padding: 30px;
     margin-bottom: 20px;
   }
 }
@@ -356,6 +373,26 @@
     }
   }
 }
+.cash-withdrawal-rule {
+  padding: 30px;
+}
+.cash-withdrawal-rule-title {
+  font-size: 28px;
+  color: #323232;
+}
+.cash-withdrawal-rule-text {
+  margin-top: 32px;
+  font-size: 24px;
+  color: #323232;
+  line-height: 44px;
+}
+.cash-withdrawal-rule-img{
+  margin-top: 30px;
+  min-height: 935px;
+  img{
+    width: 100%;
+  }
+}
 </style>
 
 
@@ -396,11 +433,11 @@
       <div class="play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
-          <div class="embodiment-statement"
-            @click="dialogVisible = true">Introduction</div>
+          <!-- <div class="embodiment-statement"
+            @click="dialogVisible = true">Introduction</div> -->
         </div>
 
-        <div class="play-types">
+        <div class="play-types clearfix">
           <div class="play-item"
             v-for="(item,index) of pay_type"
             :class="{active:item.type==withdrawParam.pay_type}"
@@ -413,15 +450,19 @@
         </div>
       </div>
 
-      <div class="play-box" v-if="withdrawParam.pay_type === 2">
+      <div class="play-box"
+        v-if="withdrawParam.pay_type === 2">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Recharge denomination</div>
         </div>
-        <div class="play-types">
+        <div class="play-types clearfix">
           <div class="play-item"
             v-for="(item,index) of rechargeDenominations"
-            :class="{active:currentRechargeDenomination===item}"
-            @click="currentRechargeDenomination=item"
+            :class="{
+              active:currentRechargeDenomination===item,
+              invalid: user_fund.withdraw_amount<item,
+            }"
+            @click="handleRechargeDenominations(item)"
             :key="index">
             <span>Rp </span><span>{{moneyFormat(item)}}</span>
             <!-- <span class="play-txt">{{item.name}}</span> -->
@@ -456,15 +497,15 @@
       <ul v-else>
         <li>
           <span>Phone number</span>
-          <input v-model.trim="withdrawParam.account_name"
+          <input v-model.trim.number="withdrawParam.account_name"
             placeholder="Enter phone number"
-            type="text">
+            type="number">
 
         </li>
         <li> <span>Confirm phone number</span>
-          <input v-model.trim="withdrawParam.account_no"
+          <input v-model.trim.number="withdrawParam.account_no"
             placeholder="Confirm phone number"
-            type="text"></li>
+            type="number"></li>
       </ul>
     </div>
     <div class="cash-withdrawal-box border-bttom">
@@ -482,6 +523,15 @@
           </div>
 
         </div>
+      </div>
+    </div>
+    <div class="cash-withdrawal-rule border-bttom">
+      <div class="cash-withdrawal-rule-title">Withdrawal rules</div>
+      <div class="cash-withdrawal-rule-text">
+        The balance is over 88 rounds, and 8 rounds can be withdrawn. the arrival time is the same day and over 88 rounds,The arrival time is the same day
+      </div>
+      <div class="cash-withdrawal-rule-img">
+        <img src="../../assets/images/withdrawRule.png">
       </div>
     </div>
     <!-- 
@@ -550,9 +600,9 @@ export default {
         withdraw_amount: 0 //类型：Number  必有字段  备注：用户可提现金额
       },
       //充值面额
-      rechargeDenominations: [5000, 59800, 9878000],
+      rechargeDenominations: [],
       // 当前面额
-      currentRechargeDenomination: 5000
+      currentRechargeDenomination: 0
     };
   },
   created() {
@@ -569,7 +619,24 @@ export default {
 
         this.withdrawParam.pay_type = this.pay_type[0].type;
         this.withdrawParam.amount = this.user_fund.withdraw_amount;
+        // 提现方式配置处理
+        this.payTypeConfig(pay_type, user_fund.withdraw_amount);
       }
+    },
+    // 提现方式配置处理
+    payTypeConfig(payType, withdrawAmount) {
+      payType.forEach(item => {
+        // 充值卡提现
+        if (item.type === 2) {
+          this.rechargeDenominations = item.config.split(",");
+          const isCanWirhdraw = this.rechargeDenominations.some(
+            current => current <= withdrawAmount
+          );
+          if (isCanWirhdraw && this.rechargeDenominations.length > 0) {
+            this.currentRechargeDenomination = this.rechargeDenominations[0];
+          }
+        }
+      });
     },
     async goApplyWithdraw() {
       const { account_name, account_no } = this.withdrawParam;
@@ -589,10 +656,12 @@ export default {
       }
 
       console.log("this.withdrawParam", this.withdrawParam);
-      if (withdrawParam.pay_type === 2) {
-        // this.withdrawParam.
+      const params = Object.assign({}, this.withdrawParam);
+      if (this.withdrawParam.pay_type === 2) {
+        params.amount = parseInt(this.currentRechargeDenomination);
       }
-      let result = await applyWithdraw(this.withdrawParam);
+      // console.log(1);
+      let result = await applyWithdraw(params);
       if (result && result.code == 0) {
         this.showAlert = true;
       }
@@ -618,7 +687,7 @@ export default {
       console.log("ok");
       this.$router.push("/my");
     },
-    //货币格式化，
+    // 货币格式化，
     moneyFormat(value) {
       const arr = [];
       value = value
@@ -635,6 +704,12 @@ export default {
         .split("")
         .reverse()
         .join("");
+    },
+    // 充值面额选择
+    handleRechargeDenominations(item) {
+      if (this.user_fund.withdraw_amount >= item) {
+        this.currentRechargeDenomination = item;
+      }
     }
   }
 };
