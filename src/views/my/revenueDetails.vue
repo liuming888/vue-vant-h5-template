@@ -1,11 +1,12 @@
 <!--  -->
 <template>
   <div class="revenue_detail">
-    <!-- <header>
+    <header>
       Revenue Rp
-      <span>9.886.587</span>Expenses Rp
-      <span>9.886.587</span>
-    </header> -->
+      <span>{{total_revenue}}</span> &nbsp; &nbsp;
+      Expenses Rp
+      <span>{{total_expenses}}</span>
+    </header>
     <div class="revenue-content">
       <ul>
         <li v-for="(item,index) in detailList"
@@ -33,20 +34,25 @@ export default {
   data() {
     return {
       detailList: [],
-      curPageDat:{
-        page_size:10,
-        page_num:1
-      }
+      curPageDat: {
+        page_size: 10,
+        page_num: 1
+      },
+      total_revenue: 0,
+      total_expenses: 0
     };
   },
-  created () {
+  created() {
     this.init();
   },
   methods: {
-    async init(){
-      let result=await getFundRecordList(this.curPageDat);
-      if(result&&result.data){
-        this.detailList=result.data;
+    async init() {
+      let result = await getFundRecordList(this.curPageDat);
+      if (result && result.data) {
+        const { total_revenue, total_expenses, fund_records } = result.data;
+        this.detailList = fund_records;
+        this.total_revenue=total_revenue;
+        this.total_expenses=total_expenses;
       }
     }
   }
