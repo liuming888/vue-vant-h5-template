@@ -89,7 +89,7 @@
     // display: flex;
     font-size: 28px;
     font-weight: 400;
-
+    position: relative;
     .cash-withdrawal-method {
       // flex: 1;
       text-align: left;
@@ -107,6 +107,9 @@
       text-align: center;
       margin-top: 30px;
       float: right;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
   .play-types {
@@ -433,8 +436,7 @@
       <div class="play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
-          <!-- <div class="embodiment-statement"
-            @click="dialogVisible = true">Introduction</div> -->
+          <div class="embodiment-statement">Introduction</div>
         </div>
 
         <div class="play-types clearfix">
@@ -527,9 +529,9 @@
     </div>
     <div class="cash-withdrawal-rule border-bttom">
       <div class="cash-withdrawal-rule-title">Withdrawal rules</div>
-      <div class="cash-withdrawal-rule-text">
+      <!-- <div class="cash-withdrawal-rule-text">
         The balance is over 88 rounds, and 8 rounds can be withdrawn. the arrival time is the same day and over 88 rounds,The arrival time is the same day
-      </div>
+      </div> -->
       <div class="cash-withdrawal-rule-img">
         <img src="../../assets/images/withdrawRule.png">
       </div>
