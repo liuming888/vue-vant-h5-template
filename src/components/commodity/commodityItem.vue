@@ -116,7 +116,7 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="3000"
+          :autoplay="10000"
           :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"

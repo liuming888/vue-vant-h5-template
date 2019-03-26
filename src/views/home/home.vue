@@ -155,7 +155,7 @@
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="5000"
+        <van-swipe :autoplay="6000"
           :show-indicators="false"
           indicator-color="white"
           class="home-banner">
@@ -209,11 +209,11 @@
 
 <script>
 import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 
@@ -235,7 +235,9 @@ export default {
       ], resolve), // 一件正在进行砍价商品
     commodityItem: resolve =>
       require(["@/components/commodity/commodityItem.vue"], resolve), // 商品列表展示的商品X
-    ...vantCom // vant组件
+    // ...vantCom, // vant组件
+    [Swipe.name]:Swipe,
+    [SwipeItem.name]:SwipeItem
   },
   data() {
     return {
