@@ -74,6 +74,8 @@ html { overflow-y: scroll; }
 .clearfix:before,
 .clearfix:after {  display: table;  line-height: 0;  content: "";  }
 .clearfix:after {  clear: both;  }
+.left { float: left;}
+.right { float: right;}
 
 input,button,select,textarea{outline:none;border:0;}
 textarea{resize:none}

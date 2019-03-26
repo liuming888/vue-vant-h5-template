@@ -121,11 +121,11 @@
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
             :key="swipeIdx">
-            <img v-lazy="swipeItem || require('@/assets/images/good-large.png')">
+            <img v-lazy="swipeItem||''">
           </van-swipe-item>
         </van-swipe>
         <img v-else
-          v-lazy="itemData.imgUrl || require('@/assets/images/good-large.png')">
+          v-lazy="itemData.imgUrl||''">
       </div>
 
       <div class="goods-detail">
@@ -239,8 +239,10 @@ export default {
       if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
+       this.dialogs.sharingFriends.show = true;
+      }else{
+        this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      this.dialogs.sharingFriends.show = true;
       
     },
     /**

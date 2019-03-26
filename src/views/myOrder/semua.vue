@@ -13,7 +13,8 @@
         <li class="all-order-item"
           :key="item.order_no+'2'"
           v-if="item.order_status==2||item.order_status==3">
-          <order-completed-item :curDat="item" @on-customer-service="handleCustomerService"
+          <order-completed-item :curDat="item"
+            @on-customer-service="handleCustomerService"
             :key="item.order_no" />
         </li>
       </template>
@@ -28,7 +29,8 @@
       <div class="btn">Buka halaman beranda dan lihat</div>
     </div>
     <!-- 联系我们弹窗 -->
-    <div class="alertBox" v-if="contactVisible">
+    <div class="alertBox"
+      v-if="contactVisible">
       <div class="alertWrap">
         <h1>Contact us by</h1>
         <ul>
@@ -71,7 +73,7 @@ export default {
         page_size: 10
       },
       //联系我们弹窗
-      contactVisible: false,
+      contactVisible: false
     };
   },
   created() {
@@ -85,7 +87,7 @@ export default {
       }
     },
     // 联系我们弹窗
-    handleCustomerService(){
+    handleCustomerService() {
       this.contactVisible = true;
     }
   }
@@ -113,7 +115,7 @@ export default {
     bottom: 0;
     margin: auto;
     position: absolute;
-    .alertWrap-item{
+    .alertWrap-item {
       height: 45px;
       text-indent: 67px;
       line-height: 45px;
@@ -121,13 +123,13 @@ export default {
       background-size: auto 100%;
       background-position: 30px center;
       &:nth-of-type(1) {
-        background-image: url('../../assets/images/facbookIcon.png');
+        background-image: url("../../assets/images/facbookIcon.png");
       }
       &:nth-of-type(2) {
-        background-image: url('../../assets/images/weixinIcon.png');
+        background-image: url("../../assets/images/weixinIcon.png");
       }
       &:nth-of-type(3) {
-        background-image: url('../../assets/images/lineIcon.png');
+        background-image: url("../../assets/images/lineIcon.png");
       }
     }
     h1 {
@@ -139,12 +141,14 @@ export default {
       margin: 40px 0;
       text-align: center;
     }
-    li{
+    li {
       font-size: 28px;
       color: #323232;
       margin-top: 30px;
-      padding: 0 30px;
-      &:first-of-type{
+      padding: 0 20px;
+      white-space: nowrap;
+
+      &:first-of-type {
         margin-top: 0;
       }
     }

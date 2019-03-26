@@ -17,8 +17,8 @@ if (process.env.VUE_APP_ENV == 'development') {
       user_id = 1;
       access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    // user_id = 121;
-    // access_token = '0d1e91cf584746fba2f61c8728f96d3d';
+    // user_id = 132;
+    // access_token = '82d5788b42de4714b55fd41099072b26';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);
@@ -82,9 +82,11 @@ instance.interceptors.response.use(
                 localStorage.clear();
                 // Vue.prototype.$curRouter.replace('/');
             } else {
+                console.log("test11111111111111111111111111");
                 throw response.data;
             }
         } catch (error) {
+            console.log('test22222222222222222222222222');
             if (error.code) {
                 Vue.prototype.$toast(error.msg);
                 if (error.code == '-1') {
@@ -98,6 +100,7 @@ instance.interceptors.response.use(
         }
     },
     error => {
+        console.log('test33333333333333333333333333');
         Vue.prototype.$loaddingNum--;
         if (Vue.prototype.$loaddingNum <= 0) {
             Vue.prototype.$toast.clear();

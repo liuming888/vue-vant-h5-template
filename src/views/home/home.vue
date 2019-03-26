@@ -135,7 +135,7 @@
   right: 12px;
   width: 96px;
   height: 96px;
-  z-index: 100;
+  z-index: 1000;
   border-radius: 50%;
 }
 </style>
@@ -145,7 +145,7 @@
     <img v-lazy="require('@/assets/images/top.png')"
       class="go-top-btn"
       v-if="showGoTopBtn"
-      @click="goPageTop" />
+      @click.stop="goPageTop" />
 
     <div class="home-container"
       @scroll="scrollEvent"
@@ -172,7 +172,7 @@
         </van-swipe>
 
         <div class="freebing-box"
-          v-if="homeBargainList.length">
+          v-if="homeBargainList.length>0">
           <div class="freebing-title">Ongoing Freebies</div>
           <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
@@ -254,11 +254,6 @@ export default {
   computed: {
     homeBargainList() {
       const { bargainOrderSpusList, spuBargainList } = this;
-      console.log(
-        "bargainOrderSpusList, spuBargainList: ",
-        bargainOrderSpusList,
-        spuBargainList
-      );
       if (bargainOrderSpusList.length >= 2) {
         return bargainOrderSpusList.slice(0, 2);
       } else if (

@@ -18,7 +18,7 @@
     position: relative;
 
     .tips {
-      width: 600px;
+      width: 500px;
       font-size: 26px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
@@ -46,7 +46,7 @@
       align-items: center;
       // margin-bottom: 41px;
       position: absolute;
-      bottom: 80px;
+      bottom: 50px;
 
       .login-item {
         // width: 100px;
@@ -57,7 +57,7 @@
         color: #323232;
 
         img {
-          width: 100px;
+          width: 130px;
           height: auto;
         }
       }

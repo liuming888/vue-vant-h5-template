@@ -16,7 +16,7 @@
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
             <div class="img-box">
-              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('./../assets/images/good-large.png')">
+              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''">
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
@@ -61,7 +61,7 @@
               v-if="!isShareEarningEntry">SHARE FRIEDNS FOR FREEBIES</div>
             <div class="share-btn"
               v-else
-              @click="goBargainChop({ bargain_id:$route.query.bargainId, spu_id:$route.query.spuId })">POTONG PISAU</div>
+              @click="goChopShare">POTONG PISAU</div>
             <div class="buy-btn"
               v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
               @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
@@ -86,7 +86,7 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img v-lazy="item.avatar||require('./../assets/images/good-large.png')">
+                <img v-lazy="item.avatar||''">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
@@ -116,7 +116,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||require('./../assets/images/good-large.png')"
+          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
             class="products-photo">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
@@ -130,15 +130,16 @@
     </div>
 
     <!-- 弹窗 -->
-    <dialog-sharing-friends :itemData="spu" :dialogVisible.sync="dialogs.sharingFriends"
+    <dialog-sharing-friends :itemData="spu"
+      :dialogVisible.sync="dialogs.sharingFriends"
       :shareInfo="shareInfo"
       v-if="dialogs.sharingFriends.show" />
     <dialog-potong-sendiri :chopInfo="chop_info"
       :dialogVisible.sync="dialogs.potongSendiri"
       v-if="dialogs.potongSendiri.show" />
-    <!-- <dialog-share-earning-entry :chopInfo="chop_info"
+    <dialog-share-earning-entry :preAmount="shareInfo.pre_bargain_amount"
       :dialogVisible.sync="dialogs.shareEarningEntry"
-      v-if="dialogs.shareEarningEntry.show" /> -->
+      v-if="dialogs.shareEarningEntry.show" />
   </div>
 </template>
 
@@ -148,7 +149,8 @@ import { shareBargain, shareInfo } from "@/server/share.js";
 import {
   getBargainInfo,
   getHelpBargainList,
-  bargainChop
+  bargainChop,
+  chopShare
 } from "@/server/bargain.js";
 export default {
   components: {
@@ -251,6 +253,7 @@ export default {
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
       if (result && result.data) {
+        this.shareInfo = result.data;
         const {
           bargain_id: bargainId,
           spu_id: spuId,
@@ -300,15 +303,37 @@ export default {
           }
         });
         this.$store.commit("setGoodsList", arr);
-        if (this.$route.query.relationId) {
-          // 分享赚自己点击按钮自砍成功
-          this.isShareEarningEntry = false;
-        } else {
-          // 系统自砍成功
-          this.dialogs.potongSendiri.show = true;
-        }
+        // if (this.$route.query.relationId) {
+        //   // 分享赚自己点击按钮自砍成功
+        //   this.isShareEarningEntry = false;
+        // } else {
+        // 系统自砍成功
+        this.dialogs.potongSendiri.show = true;
+        // }
         return Promise.resolve();
       }
+    },
+    /**
+     * @description: 分享赚自砍
+     */
+    async goChopShare() {
+      if (
+        !this.$store.state.userInfo.user_id &&
+        process.env.VUE_APP_ENV !== "development"
+      ) {
+        this.$store.commit("setLoginJumpUrl", "");
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+      let result = await chopShare({
+        relation_id: this.$route.query.relationId
+      });
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
+        this.dialogs.potongSendiri.show = true;
+      }
+      // 分享赚自己点击按钮自砍
+      this.isShareEarningEntry = false;
     },
     /**
      * @description: 获取商品信息
@@ -477,7 +502,6 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
-    
     next(vm => {
       // 通过 `vm` 访问组件实例
       if (from.path == "/purchase") {

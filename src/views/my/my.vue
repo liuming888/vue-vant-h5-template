@@ -197,15 +197,15 @@
             @click="handleCashOut">Cash out</a>
           <div class="top">
             <p class="title">Cumulative estimated return(Rp)</p>
-            <p class="number">{{accountInfo.total_future_price}}</p>
+            <p class="number">{{accountInfo.total_future_price||0}}</p>
           </div>
           <div class="bottom">
             <div class="bottom-item">
-              <p class="number">{{accountInfo.today_future_price}}</p>
+              <p class="number">{{accountInfo.today_future_price||0}}</p>
               <p class="title">Estimated earnings today</p>
             </div>
             <div class="bottom-item">
-              <p class="number">{{accountInfo.today_received_price}}</p>
+              <p class="number">{{accountInfo.today_received_price||0}}</p>
               <p class="title">Revenue arrived today(Rp)</p>
             </div>
           </div>
@@ -263,20 +263,20 @@ import FriendListCommon from "@/components/FriendListCommon.vue";
 
 import { getMyAccount, getHeroList } from "@/server/user.js";
 export default {
-  components: {
+  components: { 
     tabBar,
     FriendListCommon
   },
   data() {
     return {
       accountInfo: {
-        user_id: "mock", //类型：String  可有字段  备注：用户ID
-        user_name: "mock", //类型：String  必有字段  备注：用户名
+        user_id: "", //类型：String  可有字段  备注：用户ID
+        user_name: "", //类型：String  必有字段  备注：用户名
         vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
-        avatar: "mock", //类型：String  必有字段  备注：头像地址
-        total_future_price: "mock", //类型：String  必有字段  备注：累计预估收益
-        today_future_price: "mock", //类型：String  必有字段  备注：今日预估收益
-        today_received_price: "mock" //类型：String  必有字段  备注：今日到账收益
+        avatar: "", //类型：String  必有字段  备注：头像地址
+        total_future_price: 0, //类型：String  必有字段  备注：累计预估收益
+        today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
+        today_received_price: 0 //类型：String  必有字段  备注：今日到账收益
       },
       heroList: [
         {
