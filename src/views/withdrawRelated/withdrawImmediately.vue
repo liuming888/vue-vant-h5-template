@@ -37,7 +37,8 @@
       <div class="play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
-          <div class="embodiment-statement" @click="goHash">Introduction</div>
+          <div class="embodiment-statement"
+            @click="goHash">Introduction</div>
         </div>
 
         <div class="play-types clearfix">
@@ -151,7 +152,8 @@
       </div>
     </div>
     <div class="cash-withdrawal-rule border-bttom">
-      <div class="cash-withdrawal-rule-title"  id="cashWithdrawalRule">Withdrawal rules</div>
+      <div class="cash-withdrawal-rule-title"
+        id="cashWithdrawalRule">Withdrawal rules</div>
       <!-- <div class="cash-withdrawal-rule-text">
         The balance is over 88 rounds, and 8 rounds can be withdrawn. the arrival time is the same day and over 88 rounds,The arrival time is the same day
       </div> -->
@@ -300,8 +302,12 @@ export default {
         { "schedule-item-cur": withdrawAmount >= item.amount },
         {
           "ball-cur":
-            index != 0 &&
-            withdrawAmount > this.rule[index - 1].amount&&withdrawAmoun<=this.rule[index].amount|| index == this.rule.length - 1&&withdrawAmount>=this.rule[index].amount
+            (index != 0 &&
+              withdrawAmount > this.rule[index - 1].amount &&
+              withdrawAmoun <= this.rule[index].amount) ||
+            (index == this.rule.length - 1 &&
+              withdrawAmount >= this.rule[index].amount) ||
+            (index == 0 && withdrawAmount == 0)
         }
       ];
       // return [
@@ -347,8 +353,8 @@ export default {
         this.currentRechargeDenomination = item;
       }
     },
-    goHash(){
-      window.location.href='#cashWithdrawalRule';
+    goHash() {
+      window.location.href = "#cashWithdrawalRule";
     }
   }
 };
