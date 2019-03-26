@@ -51,8 +51,8 @@ export default {
       if (result && result.data) {
         const { total_revenue, total_expenses, fund_records } = result.data;
         this.detailList = fund_records;
-        this.total_revenue=total_revenue;
-        this.total_expenses=total_expenses;
+        this.total_revenue = total_revenue;
+        this.total_expenses = total_expenses;
       }
     }
   }
@@ -93,7 +93,8 @@ export default {
           border-bottom: 1px solid #ececec;
           padding: 30px 0;
           &.count {
-            width: 100px;
+            flex: 1;
+            text-align: right;
             color: #d30c05;
             font-size: 36px;
             &.cash {
