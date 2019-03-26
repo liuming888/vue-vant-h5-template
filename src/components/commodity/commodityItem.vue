@@ -239,8 +239,10 @@ export default {
       if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
+       this.dialogs.sharingFriends.show = true;
+      }else{
+        this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      this.dialogs.sharingFriends.show = true;
       
     },
     /**
