@@ -253,6 +253,7 @@ export default {
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
       if (result && result.data) {
+        this.shareInfo=result.data;
         const {
           bargain_id: bargainId,
           spu_id: spuId,
