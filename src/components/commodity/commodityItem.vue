@@ -116,7 +116,7 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="10000"
+          :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
@@ -209,14 +209,16 @@ export default {
           show: false
         }
       },
-
+      bannerAutoPlayTime: 1000000, // banner自动播放时间
       shareInfo: {},
       // ga填充信息
       gaInfo: {}
     };
   },
-  created() {
-    // console.log("66666666666666666666", this.itemData);
+  mounted() {
+    this.$nextTick(() => {
+      this.bannerAutoPlayTime = 6000; // 首屏渲染后才设置为6秒自动轮播
+    });
   },
   methods: {
     /**

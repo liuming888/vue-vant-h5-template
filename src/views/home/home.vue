@@ -155,7 +155,7 @@
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="6000"
+        <van-swipe :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white"
           class="home-banner">
@@ -242,6 +242,7 @@ export default {
   data() {
     return {
       messageList: [], // 顶部滚动消息
+      bannerAutoPlayTime:1000000,  // banner自动播放时间
       bannerList: [], // banner列表
       bargainOrderSpusList: [], // 获取处理中砍价订单列表
       spuBargainList: [], // 正在砍价的商品列表（默认最多展示两条）
@@ -276,6 +277,11 @@ export default {
   },
   created() {
     this.init();
+  },
+  mounted () {
+    this.$nextTick(()=>{
+      this.bannerAutoPlayTime=8000;  // 首屏渲染后才设置为8秒自动轮播
+    })
   },
   methods: {
     scrollEvent(event) {
