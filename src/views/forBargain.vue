@@ -376,6 +376,8 @@ export default {
               helpCur: "ok"
             }
           });
+          this.initBargainInfo();
+          this.initHelpBargainList();
         }
         this.$gaSend({
           eventCategory: "帮砍成功浮窗",
