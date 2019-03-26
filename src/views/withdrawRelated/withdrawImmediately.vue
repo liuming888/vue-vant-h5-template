@@ -300,8 +300,8 @@ export default {
         { "schedule-item-cur": withdrawAmount >= item.amount },
         {
           "ball-cur":
-            index != this.rule.length - 1 &&
-            withdrawAmount < this.rule[index + 1].amount|| index == this.rule.length - 1&&withdrawAmount>=this.rule[index].amount
+            index != 0 &&
+            withdrawAmount > this.rule[index - 1].amount&&withdrawAmoun<=this.rule[index].amount|| index == this.rule.length - 1&&withdrawAmount>=this.rule[index].amount
         }
       ];
       // return [
