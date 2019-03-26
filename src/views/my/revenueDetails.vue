@@ -3,9 +3,9 @@
   <div class="revenue_detail">
     <header>
       Revenue Rp
-      <span>{{total_revenue}}</span> &nbsp; &nbsp;
+      <span>{{total_revenue||0}}</span> &nbsp; &nbsp;
       Expenses Rp
-      <span>{{total_expenses}}</span>
+      <span>{{total_expenses||0}}</span>
     </header>
     <div class="revenue-content">
       <ul>
