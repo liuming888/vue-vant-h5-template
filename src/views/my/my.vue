@@ -197,15 +197,15 @@
             @click="handleCashOut">Cash out</a>
           <div class="top">
             <p class="title">Cumulative estimated return(Rp)</p>
-            <p class="number">{{accountInfo.total_future_price}}</p>
+            <p class="number">{{accountInfo.total_future_price||0}}</p>
           </div>
           <div class="bottom">
             <div class="bottom-item">
-              <p class="number">{{accountInfo.today_future_price}}</p>
+              <p class="number">{{accountInfo.today_future_price||0}}</p>
               <p class="title">Estimated earnings today</p>
             </div>
             <div class="bottom-item">
-              <p class="number">{{accountInfo.today_received_price}}</p>
+              <p class="number">{{accountInfo.today_received_price||0}}</p>
               <p class="title">Revenue arrived today(Rp)</p>
             </div>
           </div>

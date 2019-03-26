@@ -247,7 +247,7 @@ export default {
         this.withdrawParam.pay_type = this.pay_type[0].type;
         this.withdrawParam.amount = this.user_fund.withdraw_amount;
         // 提现方式配置处理
-        this.payTypeConfig(pay_type, user_fund.withdraw_amount);
+        this.payTypeConfig(pay_type, user_fund.withdraw_amount||0);
       }
     },
     // 提现方式配置处理
@@ -294,7 +294,8 @@ export default {
       }
     },
     setScheduleItemCls(item, index) {
-      let withdrawAmount = this.user_fund.withdraw_amount;
+      let withdrawAmount = this.user_fund.withdraw_amount||0;
+      console.log('withdrawAmount: ', withdrawAmount);
       return [
         { "schedule-item": index != this.rule.length - 1 },
         { "schedule-item-1": index == 0 },
@@ -304,7 +305,7 @@ export default {
           "ball-cur":
             (index != 0 &&
               withdrawAmount > this.rule[index - 1].amount &&
-              withdrawAmoun <= this.rule[index].amount) ||
+              withdrawAmount <= this.rule[index].amount) ||
             (index == this.rule.length - 1 &&
               withdrawAmount >= this.rule[index].amount) ||
             (index == 0 && withdrawAmount == 0)

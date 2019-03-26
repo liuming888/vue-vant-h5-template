@@ -135,7 +135,7 @@
   right: 12px;
   width: 96px;
   height: 96px;
-  z-index: 100;
+  z-index: 1000;
   border-radius: 50%;
 }
 </style>
@@ -145,7 +145,7 @@
     <img v-lazy="require('@/assets/images/top.png')"
       class="go-top-btn"
       v-if="showGoTopBtn"
-      @click="goPageTop" />
+      @click.stop="goPageTop" />
 
     <div class="home-container"
       @scroll="scrollEvent"
