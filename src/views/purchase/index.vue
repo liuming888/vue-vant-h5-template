@@ -155,11 +155,11 @@ import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
 import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
-const obj = { Icon };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// const obj = { Icon };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
 import { orderCreate, repaidOrder, getPayType } from "@/server/pay.js";
@@ -172,7 +172,8 @@ export default {
     shippingAddress, // 地址列表组件
     dialogPostAddAddress,
     dialogWaitPayment, // 等待用户付款弹窗
-    ...vantCom
+    // ...vantCom,
+    [Icon.name]:Icon
   },
   data() {
     return {

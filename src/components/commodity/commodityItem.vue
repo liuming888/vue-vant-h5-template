@@ -161,11 +161,11 @@
 
 <script>
 import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import { shareSpu } from "@/server/share.js";
 export default {
@@ -174,7 +174,9 @@ export default {
     dialogSharingMakes: resolve =>
       require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
 
-    ...vantCom
+    // ...vantCom,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   props: {
     itemData: {
@@ -194,7 +196,7 @@ export default {
       }
     },
     gaInfo: {
-      type: Object,
+      type: Object
     }
   },
   data() {
@@ -210,7 +212,7 @@ export default {
 
       shareInfo: {},
       // ga填充信息
-      gaInfo: {},
+      gaInfo: {}
     };
   },
   created() {
@@ -221,8 +223,7 @@ export default {
      * @description: 分享赚
      */
     async cashBack() {
-      
-      this.$emit('cashBackGa', this.itemData);
+      this.$emit("cashBackGa", this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -239,18 +240,16 @@ export default {
       if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
-       this.dialogs.sharingFriends.show = true;
-      }else{
+        this.dialogs.sharingFriends.show = true;
+      } else {
         this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      
     },
     /**
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
-      
-      this.$emit('jumpBargainGa', this.itemData);
+      this.$emit("jumpBargainGa", this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -266,9 +265,8 @@ export default {
           spuId: this.itemData.spu_id
         }
       });
-      
     }
-  },
+  }
   /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
