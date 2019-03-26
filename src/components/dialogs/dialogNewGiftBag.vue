@@ -105,6 +105,7 @@ export default {
     let str = window.localStorage.getItem("newUserInfo");
     let newUserInfo = str ? JSON.parse(str) : {};
     this.reward_amount = newUserInfo.reward_amount || 8888;
+     window.localStorage.removeItem("newUserInfo");  // 弹了次后就不弹了
   },
   methods: {
     close() {
@@ -117,7 +118,7 @@ export default {
           message: "Anda telah berhasil menerima paket hadiah baru",
           confirmButtonText: "Tentukan"
         });
-        window.localStorage.removeItem("newUserInfo");
+        // window.localStorage.removeItem("newUserInfo");
         this.$store.commit("setNewGiftBagShow", false);
       }
     }
