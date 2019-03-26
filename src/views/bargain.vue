@@ -253,7 +253,7 @@ export default {
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
       if (result && result.data) {
-        this.shareInfo=result.data;
+        this.shareInfo = result.data;
         const {
           bargain_id: bargainId,
           spu_id: spuId,
@@ -328,10 +328,12 @@ export default {
       let result = await chopShare({
         relation_id: this.$route.query.relationId
       });
-      if (result) {
-        // 分享赚自己点击按钮自砍成功
-        this.isShareEarningEntry = false;
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
+        this.dialogs.potongSendiri.show = true;
       }
+      // 分享赚自己点击按钮自砍
+      this.isShareEarningEntry = false;
     },
     /**
      * @description: 获取商品信息
