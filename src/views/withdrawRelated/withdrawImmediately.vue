@@ -37,8 +37,7 @@
       <div class="play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
-          <!-- <div class="embodiment-statement"
-            @click="dialogVisible = true">Introduction</div> -->
+          <div class="embodiment-statement" @click="goHash">Introduction</div>
         </div>
 
         <div class="play-types clearfix">
@@ -152,10 +151,10 @@
       </div>
     </div>
     <div class="cash-withdrawal-rule border-bttom">
-      <div class="cash-withdrawal-rule-title">Withdrawal rules</div>
-      <div class="cash-withdrawal-rule-text">
+      <div class="cash-withdrawal-rule-title"  id="cashWithdrawalRule">Withdrawal rules</div>
+      <!-- <div class="cash-withdrawal-rule-text">
         The balance is over 88 rounds, and 8 rounds can be withdrawn. the arrival time is the same day and over 88 rounds,The arrival time is the same day
-      </div>
+      </div> -->
       <div class="cash-withdrawal-rule-img">
         <img src="../../assets/images/withdrawRule.png">
       </div>
@@ -347,9 +346,10 @@ export default {
       if (this.user_fund.withdraw_amount >= item) {
         this.currentRechargeDenomination = item;
       }
+    },
+    goHash(){
+      window.location.href='#cashWithdrawalRule';
     }
   }
 };
 </script>
-
-

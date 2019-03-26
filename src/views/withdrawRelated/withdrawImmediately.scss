@@ -77,33 +77,36 @@
     padding: 0 30px 1px 30px;
     box-sizing: border-box;
 
-    .top-txt {
-        height: 130px;
-        line-height: 130px;
-        box-sizing: border-box;
-        // display: flex;
-        font-size: 28px;
-        font-weight: 400;
-
-        .cash-withdrawal-method {
-            // flex: 1;
-            text-align: left;
-            color: #323232;
-        }
-
-        .embodiment-statement {
-            width: 170px;
-            height: 58px;
-            line-height: 58px;
-            color: #f65e10;
-            background: rgba(255, 255, 255, 1);
-            border: 1px solid rgba(246, 94, 16, 1);
-            border-radius: 29px;
-            text-align: center;
-            margin-top: 30px;
-            float: right;
-        }
+   .top-txt {
+    height: 130px;
+    line-height: 130px;
+    box-sizing: border-box;
+    // display: flex;
+    font-size: 28px;
+    font-weight: 400;
+    position: relative;
+    .cash-withdrawal-method {
+      // flex: 1;
+      text-align: left;
+      color: #323232;
     }
+
+    .embodiment-statement {
+      width: 170px;
+      height: 58px;
+      line-height: 58px;
+      color: #f65e10;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(246, 94, 16, 1);
+      border-radius: 29px;
+      text-align: center;
+      margin-top: 30px;
+      float: right;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
     .play-types {
         width: 100%;
         // height: 88px;
