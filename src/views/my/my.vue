@@ -293,7 +293,7 @@ export default {
           //类型：Object  必有字段  备注：无
           username: "用户1", //类型：String  必有字段  备注：无
           avatar:
-            "https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=2a5524e6e8cd7b89f66c3c833f244291/1e30e924b899a901b25a7f1a13950a7b0208f5ab.jpg", //类型：String  必有字段  备注：无
+            "", //类型：String  必有字段  备注：无
           fans_count: 5131, //类型：Number  必有字段  备注：无
           sum_amount: 1229 //类型：Number  必有字段  备注：无
         }
