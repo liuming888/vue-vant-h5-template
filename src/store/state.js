@@ -19,7 +19,7 @@ export default {
         // 全局弹窗
         loginSelect: {
             // 登录选择弹窗
-            show: true,
+            show: false,
             jumpUrl: '', // 登录成功后跳转的链接
         },
         bidPriceCompleted: {
