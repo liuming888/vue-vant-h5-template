@@ -6,7 +6,7 @@
     padding-bottom: (50px + 93px);
     overflow: hidden;
 }
-
+.border
 .top-info {
     height: 48px;
     padding: 0 30px;
@@ -170,7 +170,7 @@
             font-size: 28px;
             font-weight: 400;
             color: rgba(50, 50, 50, 1);
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
         }
 
         .type-box {
@@ -179,8 +179,8 @@
             //   align-items: center;
 
             .type-item-box {
-                margin-right: 30px;
-                width: 110px;
+                margin: 20px 20px 0 0;
+                // width: 110px;
                 height: 64px;
                 text-align: center;
                 line-height: 64px;
@@ -189,17 +189,18 @@
                 font-size: 24px;
                 font-weight: 400;
                 color: rgba(50, 50, 50, 1);
-                margin-bottom: 26px;
-
+                border: 1px solid rgba(245, 245, 245, 1);
+                // margin-bottom: 26px;
+                padding: 0 10px;
                 &.cur {
                     background: rgba(255, 251, 251, 1);
                     border: 1px solid rgba(211, 12, 5, 1);
                     color: rgba(211, 12, 5, 1);
                 }
 
-                &:nth-of-type(5n) {
-                    margin-right: 0;
-                }
+                // &:nth-of-type(5n) {
+                //     margin-right: 0;
+                // }
             }
         }
     }
@@ -219,10 +220,11 @@
         height: 92px;
         line-height: 92px;
         overflow: hidden;
-        margin-bottom: 62px;
-
         &:nth-last-of-type(1) {
             margin-bottom: 0;
+        }
+        &:last-of-type{
+            margin-bottom: 62px;
         }
 
         .paly-select-icon {

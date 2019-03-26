@@ -6,7 +6,7 @@
     <div class="freebing-container">
       <div class="good-box">
         <img class="good-img"
-          v-lazy="spuBargainItem.spu_pics[0]">
+          v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
           <count-down :dateDiff="spuBargainItem.expire_ttl"

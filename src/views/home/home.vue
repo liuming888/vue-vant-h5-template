@@ -9,7 +9,7 @@
     width: 100vw;
 
     overflow: hidden;
-   
+
     > .home-top-msg {
       position: absolute;
       top: 21px;
@@ -135,7 +135,7 @@
   right: 12px;
   width: 96px;
   height: 96px;
-  z-index: 100;
+  z-index: 1000;
   border-radius: 50%;
 }
 </style>
@@ -145,7 +145,7 @@
     <img v-lazy="require('@/assets/images/top.png')"
       class="go-top-btn"
       v-if="showGoTopBtn"
-      @click="goPageTop" />
+      @click.stop="goPageTop" />
 
     <div class="home-container"
       @scroll="scrollEvent"
@@ -155,12 +155,13 @@
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="5000"
+        <van-swipe :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white"
           class="home-banner">
           <template v-if="bannerList.length>0">
-            <van-swipe-item v-for="item of bannerList"
+            <van-swipe-item @click="handleBannerClick"
+              v-for="item of bannerList"
               :key="item.id">
               <img v-lazy="item.url">
             </van-swipe-item>
@@ -171,7 +172,7 @@
         </van-swipe>
 
         <div class="freebing-box"
-          v-if="homeBargainList.length">
+          v-if="homeBargainList.length>0">
           <div class="freebing-title">Ongoing Freebies</div>
           <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
@@ -181,7 +182,7 @@
 
           <a href="javascript:;"
             class="freebing-more"
-            @click="$router.push({path:'/isBargainingList'})">More About ></a>
+            @click="handleMoreAbout">More About ></a>
         </div>
 
       </section>
@@ -193,6 +194,8 @@
         </div>
         <ul class="home-goods-list">
           <commodity-item v-for="(item, index) of goodsList"
+            @cashBackGa = cashBackGa
+            @jumpBargainGa = jumpBargainGa
             :key="index"
             :itemData="item" />
         </ul>
@@ -206,11 +209,11 @@
 
 <script>
 import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 
@@ -232,11 +235,14 @@ export default {
       ], resolve), // 一件正在进行砍价商品
     commodityItem: resolve =>
       require(["@/components/commodity/commodityItem.vue"], resolve), // 商品列表展示的商品X
-    ...vantCom // vant组件
+    // ...vantCom, // vant组件
+    [Swipe.name]:Swipe,
+    [SwipeItem.name]:SwipeItem
   },
   data() {
     return {
       messageList: [], // 顶部滚动消息
+      bannerAutoPlayTime:1000000,  // banner自动播放时间
       bannerList: [], // banner列表
       bargainOrderSpusList: [], // 获取处理中砍价订单列表
       spuBargainList: [], // 正在砍价的商品列表（默认最多展示两条）
@@ -251,11 +257,6 @@ export default {
   computed: {
     homeBargainList() {
       const { bargainOrderSpusList, spuBargainList } = this;
-      console.log(
-        "bargainOrderSpusList, spuBargainList: ",
-        bargainOrderSpusList,
-        spuBargainList
-      );
       if (bargainOrderSpusList.length >= 2) {
         return bargainOrderSpusList.slice(0, 2);
       } else if (
@@ -276,6 +277,11 @@ export default {
   },
   created() {
     this.init();
+  },
+  mounted () {
+    this.$nextTick(()=>{
+      this.bannerAutoPlayTime=8000;  // 首屏渲染后才设置为8秒自动轮播
+    })
   },
   methods: {
     scrollEvent(event) {
@@ -359,8 +365,54 @@ export default {
           this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
         }
       }
+    },
+    // banner点击
+    handleBannerClick() {
+      // console.log(1);
+      this.$gaSend({
+        eventCategory: "banner",
+        eventAction: "页面展示"
+      });
+    },
+    // 更多砍价点击
+    handleMoreAbout(){
+      this.$router.push({path:'/isBargainingList'});
+      this.$gaSend({
+        eventCategory: "首页_更多砍价",
+        eventAction: "点击"
+      });
+    },
+    //ga统计商品列表点击
+    cashBackGa(item){
+      //统计
+      this.$gaSend({
+        eventCategory: "首页_分享赚",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
+    },
+    jumpBargainGa(item){
+      //统计
+      this.$gaSend({
+        eventCategory: "首页_免费拿",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
     }
-  }
+  },
+  watch: {
+      goodsList() {
+        if (this.goodsList.length > 0) {
+          this.goodsList.forEach(item => {
+            this.$gaSend({
+              eventCategory: "首页_商品",
+              eventAction: "商品展示",
+              eventLabel: item.title.substr(0,10)
+            });
+          });
+        }
+      }
+    }
 };
 </script>
 

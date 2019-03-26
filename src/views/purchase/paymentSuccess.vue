@@ -53,6 +53,7 @@
 
       <ul class="like-goods-list">
         <commodity-item v-for="(item, index) of goodsList"
+          @jumpBargain ="jumpBargain"
           :key="index"
           :itemData="item" />
       </ul>
@@ -105,6 +106,12 @@ export default {
           this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
         }
       }
+    },
+    jumpBargain(){
+      this.$gaSend({
+        eventCategory: "支付成功页面_商品列表点击",
+        eventAction: "点击",
+      });
     }
   },
   //  beforeRouteLeave (to, from, next) {

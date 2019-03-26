@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +10,16 @@
     <meta property="og:type" content="article"/>
     <meta property="og:title" class="share_title" content="share to your friens. make more money"/>
     <meta property="og:description" content="分享的链接描素内容111"/>
-    <meta property="og:image" content="https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=c8a9d4e2841363270aedc433a18fa056/11385343fbf2b2114a65cd70c48065380cd78e41.jpg"/>
+    <meta property="og:image" content="<%= BASE_URL %>timg.jpg"/>
     <meta http-equiv="x-dns-prefetch-control" content="on"/>
-    <link rel="dns-prefetch" href="//dev-ht-zdd-api.istarbuy.com">
+    <link rel="preconnect" href="https://api.istarbuy.com">
+    <link rel="preconnect" href="https://rscdn.istarbuy.com">
+    <link rel="dns-prefetch" href="http://rscdn.istarbuy.com">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.6/lib/index.css">
+    <!-- <link rel="stylesheet" href="https://rscdn.istarbuy.com/i/20190325/6340df41b83a4462a80d9890344404e2.vant.css"> -->
+    <!-- <link rel="stylesheet" href="<%= BASE_URL %>static/lib/vant.css"> -->
     <title>opl-zdd-h5</title>
     <style>
-      * {
-        -webkit-overflow-scrolling: touch;
-      }
-
       .pre-app,
       body,
       html {
@@ -59,6 +59,7 @@
       }
     </script>
   </head>
+
   <body>
     <div class="pre-app" id="mainApp"></div>
     <noscript>
@@ -66,10 +67,22 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <script src="https://unpkg.com/vue@2.5.16/dist/vue.runtime.min.js"></script>
-    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
-    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vant@1.6/lib/vant.min.js"></script>
-     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <!-- <script src="https://rscdn.istarbuy.com/i/20190325/02c79810c62a465b988faeaa536a9ad6.vue.runtime.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/23fe18ba5e7342cfb5bd2fd977bff3e1.vuex.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/eb653d8a4b8340859d03b931404dc4ce.vue-router.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/c21365437b6c47f48bc99cc9095b728b.vant.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/baeb0f15605746258f3fef645511cc6e.axios.min.js"></script> -->
+    <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
+    <script async="async" src="<%= BASE_URL %>static/lib/vue-router.min.js"></script>
+    <script async="async" src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
+    <script async="async" src="<%= BASE_URL %>static/lib/axios.min.js"></script>
+    <!-- <script src="<%= BASE_URL %>static/lib/vant.min.js"></script> -->
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-136763280-1"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-136763280-1');
+    </script>
   </body>
+
 </html>

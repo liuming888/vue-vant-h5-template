@@ -1,13 +1,19 @@
 // import Vue from 'vue';
-import Router from 'vue-router';
+// import Router from 'vue-router';
+import {
+    gaSend
+} from '../utils/util.js';
 // import quicklink from 'quicklink/dist/quicklink.mjs';
 // Vue.use(Router);
 
-const curRouter = new Router({
+const curRouter = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
-        { path: '*', redirect: '/' },
+        {
+            path: '*',
+            redirect: '/',
+        },
         {
             path: '/',
             name: '首页',
@@ -15,23 +21,23 @@ const curRouter = new Router({
         },
         {
             path: '/bargain',
-            name: '砍价页',
+            name: '砍价详情页',
             component: resolve => require(['../views/bargain.vue'], resolve),
         },
         {
             path: '/isBargainingList',
-            name: '正在砍价列表页',
+            name: '更多砍价内页',
             component: resolve => require(['../views/isBargainingList.vue'], resolve),
         },
 
         {
             path: '/forBargain',
-            name: '好友帮砍页',
+            name: '帮砍页面',
             component: resolve => require(['../views/forBargain.vue'], resolve),
         },
         {
             path: '/purchase',
-            name: '购买商品页',
+            name: '支付页面',
             component: resolve => require(['../views/purchase/index.vue'], resolve),
         },
         {
@@ -41,21 +47,21 @@ const curRouter = new Router({
         },
         {
             path: '/purchase/paymentSuccess',
-            name: '支付成功页',
+            name: '支付成功页面',
             component: resolve => require(['../views/purchase/paymentSuccess.vue'], resolve),
         },
 
         {
             path: '/my',
-            name: '我的',
+            name: '我的账户页面',
             component: resolve => require(['../views/my/my.vue'], resolve),
         },
         {
             path: '/withdrawRelated',
-            name: '立即提现',
+            name: '提现页面',
             component: resolve => require(['../views/withdrawRelated/withdrawImmediately.vue'], resolve),
         },
-     
+
         {
             path: '/my/myFriends',
             name: '我的好友',
@@ -94,7 +100,6 @@ const curRouter = new Router({
             name: '新手教程',
             component: resolve => require(['../views/my/Tutorial.vue'], resolve),
         },
-       
     ],
 });
 
@@ -105,11 +110,11 @@ curRouter.beforeEach((to, from, next) => {
     if (process.env.VUE_APP_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
         Vue.prototype.$curStore.watch(
             // 当返回结果改变...
-            function(state) {
+            function (state) {
                 return state.isreFreshToken;
             },
             // 执行回调函数
-            function() {
+            function () {
                 next();
             }
         );
@@ -117,9 +122,17 @@ curRouter.beforeEach((to, from, next) => {
         next();
     }
 });
-
+// 需要统计的页面展示
+const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
 // 全局后置钩子
-// curRouter.afterEach(() => {
+curRouter.afterEach(current => {
+    const path = current.path;
+    if (routerShows.includes(path)) {
+        gaSend({
+            eventCategory: current.name,
+            eventAction: '页面展示'
+        });
+    }
     // quicklink({
     //     // 默认2秒
     //     // timeout: 2000,
@@ -139,6 +152,6 @@ curRouter.beforeEach((to, from, next) => {
     // const urls = ['1.html', '2.html'];
     // const promises = urls.map(url => prefetch(url));
     // Promise.all(promises);
-// });
+});
 
 export default curRouter;

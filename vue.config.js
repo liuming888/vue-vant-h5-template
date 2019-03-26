@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
 function getUrl(VUE_APP_ENV) {
@@ -32,6 +32,7 @@ function getUrl(VUE_APP_ENV) {
 }
 
 module.exports = {
+    // publicPath: process.env.NODE_ENV === 'production' ? '/production-sub-path/' : '/',
     productionSourceMap: false,
     lintOnSave: process.env.NODE_ENV !== 'production',
     css: {
@@ -77,8 +78,8 @@ module.exports = {
             vuex: 'Vuex',
             'vue-router': 'VueRouter',
             // 暂时随便命名（没影响）
-            vant: 'vant',
-            axios:'axios'
+            // vant: 'vant',
+            axios: 'axios',
         };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
@@ -99,7 +100,7 @@ module.exports = {
             .tap(options => Object.assign(options, { limit: 10240 }));
     },
     devServer: {
-        port: 8088,
+        port: 8099,
         disableHostCheck: true,
         proxy: {
             '/api': {

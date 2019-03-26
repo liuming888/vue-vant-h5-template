@@ -116,16 +116,16 @@
     <div class="home-goods-item">
       <div class="goods-img">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
-          :autoplay="3000"
+          :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white">
           <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
             :key="swipeIdx">
-            <img v-lazy="swipeItem || require('@/assets/images/good-large.png')">
+            <img v-lazy="swipeItem||''">
           </van-swipe-item>
         </van-swipe>
         <img v-else
-          v-lazy="itemData.imgUrl || require('@/assets/images/good-large.png')">
+          v-lazy="itemData.imgUrl||''">
       </div>
 
       <div class="goods-detail">
@@ -161,11 +161,11 @@
 
 <script>
 import { Swipe, SwipeItem } from "vant";
-const obj = { Swipe, SwipeItem };
-const vantCom = {};
-for (let k in obj) {
-  vantCom[obj[k].name] = obj[k];
-}
+// const obj = { Swipe, SwipeItem };
+// const vantCom = {};
+// for (let k in obj) {
+//   vantCom[obj[k].name] = obj[k];
+// }
 
 import { shareSpu } from "@/server/share.js";
 export default {
@@ -174,7 +174,9 @@ export default {
     dialogSharingMakes: resolve =>
       require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
 
-    ...vantCom
+    // ...vantCom,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   props: {
     itemData: {
@@ -192,6 +194,9 @@ export default {
           ]
         };
       }
+    },
+    gaInfo: {
+      type: Object
     }
   },
   data() {
@@ -204,18 +209,23 @@ export default {
           show: false
         }
       },
-
-      shareInfo: {}
+      bannerAutoPlayTime: 1000000, // banner自动播放时间
+      shareInfo: {},
+      // ga填充信息
+      gaInfo: {}
     };
   },
-  created() {
-    // console.log("66666666666666666666", this.itemData);
+  mounted() {
+    this.$nextTick(() => {
+      this.bannerAutoPlayTime = 6000; // 首屏渲染后才设置为6秒自动轮播
+    });
   },
   methods: {
     /**
      * @description: 分享赚
      */
     async cashBack() {
+      this.$emit("cashBackGa", this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -232,13 +242,16 @@ export default {
       if (result && result.data) {
         this.shareInfo = result.data;
         console.log("this.shareInfo: ", this.shareInfo);
+        this.dialogs.sharingFriends.show = true;
+      } else {
+        this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      this.dialogs.sharingFriends.show = true;
     },
     /**
      * @description: 跳转到砍价页（商品详情页）
      */
     jumpBargain() {
+      this.$emit("jumpBargainGa", this.itemData);
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
@@ -255,7 +268,8 @@ export default {
         }
       });
     }
-  } /* ,
+  }
+  /* ,
   beforeRouteUpdate(to, from, next) {
     const { loginShare } = to.query;
     if (loginShare == "ok") {
