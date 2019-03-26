@@ -82,9 +82,11 @@ instance.interceptors.response.use(
                 localStorage.clear();
                 // Vue.prototype.$curRouter.replace('/');
             } else {
+                console.log("test11111111111111111111111111");
                 throw response.data;
             }
         } catch (error) {
+            console.log('test22222222222222222222222222');
             if (error.code) {
                 Vue.prototype.$toast(error.msg);
                 if (error.code == '-1') {
@@ -98,6 +100,7 @@ instance.interceptors.response.use(
         }
     },
     error => {
+        console.log('test33333333333333333333333333');
         Vue.prototype.$loaddingNum--;
         if (Vue.prototype.$loaddingNum <= 0) {
             Vue.prototype.$toast.clear();
