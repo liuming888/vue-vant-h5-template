@@ -100,7 +100,7 @@ module.exports = {
             .tap(options => Object.assign(options, { limit: 10240 }));
     },
     devServer: {
-        port: 8088,
+        port: 8099,
         disableHostCheck: true,
         proxy: {
             '/api': {
