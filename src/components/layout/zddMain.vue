@@ -30,7 +30,6 @@ export default {
     dialogNewGiftBag: resolve =>
       require(["@/components/dialogs/dialogNewGiftBag.vue"], resolve) // 新人礼包
   },
-  mounted() {},
   watch: {
     $route(val) {
       console.log("当前路径", val.path);

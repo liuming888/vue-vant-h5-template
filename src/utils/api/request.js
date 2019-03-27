@@ -14,8 +14,8 @@ if (userStr) {
 }
 
 if (process.env.VUE_APP_ENV == 'development') {
-      user_id = 1;
-      access_token = '486dcad761f8425e8aa2a49e964a984c';
+    user_id = 1;
+    access_token = '486dcad761f8425e8aa2a49e964a984c';
 
     // user_id = 132;
     // access_token = '82d5788b42de4714b55fd41099072b26';
@@ -48,6 +48,10 @@ instance.interceptors.request.use(
             duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
             forbidClick: true, // 是否禁止背景点击
         });
+        if (!Vue.prototype.$mainAppLoad && document.getElementById('mainApp').style.display != 'none') {
+            document.getElementById('mainApp').style.display = 'none';
+            Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
+        }
         return config;
     },
     error => {
@@ -82,7 +86,7 @@ instance.interceptors.response.use(
                 localStorage.clear();
                 // Vue.prototype.$curRouter.replace('/');
             } else {
-                console.log("test11111111111111111111111111");
+                console.log('test11111111111111111111111111');
                 throw response.data;
             }
         } catch (error) {

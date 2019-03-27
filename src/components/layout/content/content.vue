@@ -18,12 +18,9 @@
 
 <script>
 export default {
-  components: {
-    // incomeWindow: resolve => require(["../../incomeWindow.vue"], resolve) //收益浮窗
-  },
-  mounted() {
-    document.getElementById("mainApp").style.display = "none";
-  }
+  // components: {
+  //   // incomeWindow: resolve => require(["../../incomeWindow.vue"], resolve) //收益浮窗
+  // }
 };
 </script>
 
