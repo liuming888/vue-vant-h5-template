@@ -193,11 +193,13 @@
           <img v-lazy="require('@/assets/images/gengduotop.png')">
         </div>
         <ul class="home-goods-list">
-          <commodity-item v-for="(item, index) of goodsList"
-            @cashBackGa = cashBackGa
-            @jumpBargainGa = jumpBargainGa
+          <li is="commodity-item"
+            v-for="(item, index) of goodsList"
+            @cashBackGa=cashBackGa
+            @jumpBargainGa=jumpBargainGa
             :key="index"
-            :itemData="item" />
+            :itemData="item">
+          </li>
         </ul>
       </section>
 
@@ -236,13 +238,13 @@ export default {
     commodityItem: resolve =>
       require(["@/components/commodity/commodityItem.vue"], resolve), // 商品列表展示的商品X
     // ...vantCom, // vant组件
-    [Swipe.name]:Swipe,
-    [SwipeItem.name]:SwipeItem
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   data() {
     return {
       messageList: [], // 顶部滚动消息
-      bannerAutoPlayTime:1000000,  // banner自动播放时间
+      bannerAutoPlayTime: 1000000, // banner自动播放时间
       bannerList: [], // banner列表
       bargainOrderSpusList: [], // 获取处理中砍价订单列表
       spuBargainList: [], // 正在砍价的商品列表（默认最多展示两条）
@@ -278,10 +280,10 @@ export default {
   created() {
     this.init();
   },
-  mounted () {
-    this.$nextTick(()=>{
-      this.bannerAutoPlayTime=8000;  // 首屏渲染后才设置为8秒自动轮播
-    })
+  mounted() {
+    this.$nextTick(() => {
+      this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
+    });
   },
   methods: {
     scrollEvent(event) {
@@ -375,15 +377,15 @@ export default {
       });
     },
     // 更多砍价点击
-    handleMoreAbout(){
-      this.$router.push({path:'/isBargainingList'});
+    handleMoreAbout() {
+      this.$router.push({ path: "/isBargainingList" });
       this.$gaSend({
         eventCategory: "首页_更多砍价",
         eventAction: "点击"
       });
     },
     //ga统计商品列表点击
-    cashBackGa(item){
+    cashBackGa(item) {
       //统计
       this.$gaSend({
         eventCategory: "首页_分享赚",
@@ -391,7 +393,7 @@ export default {
         eventLabel: item.title.substr(0, 10)
       });
     },
-    jumpBargainGa(item){
+    jumpBargainGa(item) {
       //统计
       this.$gaSend({
         eventCategory: "首页_免费拿",
@@ -401,18 +403,18 @@ export default {
     }
   },
   watch: {
-      goodsList() {
-        if (this.goodsList.length > 0) {
-          this.goodsList.forEach(item => {
-            this.$gaSend({
-              eventCategory: "首页_商品",
-              eventAction: "商品展示",
-              eventLabel: item.title.substr(0,10)
-            });
+    goodsList() {
+      if (this.goodsList.length > 0) {
+        this.goodsList.forEach(item => {
+          this.$gaSend({
+            eventCategory: "首页_商品",
+            eventAction: "商品展示",
+            eventLabel: item.title.substr(0, 10)
           });
-        }
+        });
       }
     }
+  }
 };
 </script>
 
