@@ -26,7 +26,7 @@ export function getWithdrawList({ page_size, page_num }) {
 // 获取明细列表
 export function getFundRecordList({ page_size, page_num }) {
     return $request.post({
-        url: '/api/v1/withdraw/get_fund_record_list',
+        url: '/api/v1/fund/get_fund_record_list',
         data: { page_size, page_num },
     });
 }

@@ -1,5 +1,5 @@
 // import Vue from 'vue';
-import axios from 'axios';
+// import axios from 'axios';
 // import qs from 'qs';
 // import md5 from 'md5';
 import config from './config';
@@ -17,8 +17,8 @@ if (process.env.VUE_APP_ENV == 'development') {
       user_id = 1;
       access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    // user_id = 121;
-    // access_token = '0d1e91cf584746fba2f61c8728f96d3d';
+    // user_id = 132;
+    // access_token = '82d5788b42de4714b55fd41099072b26';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);

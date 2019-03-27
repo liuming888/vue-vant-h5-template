@@ -1,17 +1,18 @@
 // import Vue from 'vue';
-import Router from 'vue-router';
+// import Router from 'vue-router';
 import {
     gaSend
 } from '../utils/util.js';
 // import quicklink from 'quicklink/dist/quicklink.mjs';
 // Vue.use(Router);
 
-const curRouter = new Router({
+const curRouter = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: [{
+    routes: [
+        {
             path: '*',
-            redirect: '/'
+            redirect: '/',
         },
         {
             path: '/',
@@ -71,7 +72,8 @@ const curRouter = new Router({
             name: '我的订单',
             component: resolve => require(['../views/myOrder/index.vue'], resolve),
             redirect: '/my/myOrder/semua',
-            children: [{
+            children: [
+                {
                     path: '/my/myOrder/semua',
                     name: '所有订单',
                     component: resolve => require(['../views/myOrder/semua.vue'], resolve),
@@ -98,7 +100,6 @@ const curRouter = new Router({
             name: '新手教程',
             component: resolve => require(['../views/my/Tutorial.vue'], resolve),
         },
-
     ],
 });
 

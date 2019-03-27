@@ -21,7 +21,7 @@
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
             <div class="img-box">
-              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('./../assets/images/good-large.png')">
+              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''">
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
@@ -132,7 +132,7 @@
             :key="index">
             <div class="column">
               <div :class="`team-img huangguan${index + 1}`">
-                <img v-lazy="item.avatar||require('./../assets/images/good-large.png')">
+                <img v-lazy="item.avatar">
               </div>
               <div class="team-info">
                 <p class="team-name">{{item.username}}</p>
@@ -176,7 +176,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||require('./../assets/images/good-large.png')"
+          <img v-lazy="item.spu_pics&&item.spu_pics[0]"
             class="products-photo">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">

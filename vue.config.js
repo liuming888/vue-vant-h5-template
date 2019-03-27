@@ -78,7 +78,7 @@ module.exports = {
             vuex: 'Vuex',
             'vue-router': 'VueRouter',
             // 暂时随便命名（没影响）
-            vant: 'vant',
+            // vant: 'vant',
             axios: 'axios',
         };
     },
