@@ -116,13 +116,13 @@
 
         .play-item {
             width: 330px;
-            height: 88px;
-            line-height: 88px;
-            text-align: center;
+            // height: 88px;
+            // line-height: 88px;
+            // text-align: center;
             background: rgba(255, 255, 255, 1);
             border: 1px solid rgba(236, 236, 236, 1);
             border-radius: 10px;
-            font-size: 28px;
+            // font-size: 28px;
             font-weight: 400;
             color: rgba(50, 50, 50, 1);
             float: left;
@@ -136,7 +136,7 @@
             }
             .play-img {
                 width: 100%;
-                height: 100%;
+                height: auto;
                 // margin-right: 12px;
             }
         }
