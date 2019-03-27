@@ -38,12 +38,12 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate||50+'%'}"></div>
               <div class="schedule-item">
-                <span class="description">cut <span class="highlight">{{bargain_info.bargain_rate}}%</span></span>
+                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||0}}%</span> off</span>
               </div>
               <div class="schedule-item ball ball-center">
                 <span class="description">Available for purchase</span>
@@ -58,7 +58,7 @@
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
-              v-if="!isShareEarningEntry">SHARE FRIEDNS FOR FREEBIES</div>
+              v-if="!isShareEarningEntry">Share friends for freebies</div>
             <div class="share-btn"
               v-else
               @click="goChopShare">POTONG PISAU</div>
@@ -68,7 +68,7 @@
             <div class="buy-btn cur"
               v-else>
               <!-- Rp {{bargain_info.left_amount}} buy now -->
-              BUY NOW
+              Buy now
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
       <div class="goods-detail"
         v-if="!$route.query.bargainId">
         <!-- 商品详情图 -->
-        <p class="page-title">Product Petails</p>
+        <p class="page-title">Product details</p>
         <img v-lazy="spu&&spu.spu_pics[0]">
       </div>
 
@@ -110,8 +110,7 @@
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
-          <img v-lazy="require('./../assets/images/start.png')">
-          <span>You might like</span>
+          <img v-lazy="require('@/assets/images/xingzhuang.png')">
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
@@ -429,8 +428,10 @@ export default {
       });
       if (result && result.data) {
         this.shareInfo = result.data;
+        this.dialogs.sharingFriends.show = true;
+      } else {
+        this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(item) {
       // 统计

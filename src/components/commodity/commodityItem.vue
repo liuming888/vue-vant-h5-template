@@ -108,6 +108,11 @@
     }
   }
 }
+
+.good-img{
+      border-radius: 20px;
+
+}
 </style>
 
 
@@ -122,12 +127,12 @@
           <template v-for="(swipeItem,swipeIdx) of itemData.spu_pics">
             <van-swipe-item :key="swipeIdx"
               v-if="!isLoad&&index==0||isLoad">
-              <img v-lazy="swipeItem||''">
+              <img v-lazy="swipeItem||''" class="good-img">
             </van-swipe-item>
           </template>
         </van-swipe>
         <img v-else
-          v-lazy="itemData.imgUrl||''">
+          v-lazy="itemData.imgUrl||''"  class="good-img">
       </div>
 
       <div class="goods-detail">
