@@ -52,10 +52,12 @@
       </div>
 
       <ul class="like-goods-list">
-        <commodity-item v-for="(item, index) of goodsList"
-          @jumpBargain ="jumpBargain"
+        <li is="commodity-item"
+          v-for="(item, index) of goodsList"
+          @jumpBargain="jumpBargain"
           :key="index"
-          :itemData="item" />
+          :itemData="item">
+        </li>
       </ul>
     </section>
   </div>
@@ -80,14 +82,14 @@ export default {
   created() {
     this.initGoodsList({ ...this.goodsListPageDat });
   },
-  mounted () {
+  mounted() {
     setTimeout(() => {
-        this.$router.push("/");
+      this.$router.push("/");
     }, 6000);
   },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
-       // 看看vuex里有木有缓存6条没砍价的
+      // 看看vuex里有木有缓存6条没砍价的
       let stateGoodsList = this.$store.state.goodsList.filter(
         item => !item.isBargain
       );
@@ -99,7 +101,7 @@ export default {
       let result = await getBargainSpus({ page_size, page_num, is_all });
       if (result && result.data) {
         this.goodsList = result.data.spu_list;
-         if (page_num == 1) {
+        if (page_num == 1) {
           this.$store.commit("setGoodsList", this.goodsList);
         } else {
           let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
@@ -107,13 +109,13 @@ export default {
         }
       }
     },
-    jumpBargain(){
+    jumpBargain() {
       this.$gaSend({
         eventCategory: "支付成功页面_商品列表点击",
-        eventAction: "点击",
+        eventAction: "点击"
       });
     }
-  },
+  }
   //  beforeRouteLeave (to, from, next) {
   //   // 导航离开该组件的对应路由时调用
   //   // 可以访问组件实例 `this`

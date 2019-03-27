@@ -119,10 +119,12 @@
           :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white">
-          <van-swipe-item v-for="(swipeItem,swipeIdx) of itemData.spu_pics"
-            :key="swipeIdx">
-            <img v-lazy="swipeItem||''">
-          </van-swipe-item>
+          <template v-for="(swipeItem,swipeIdx) of itemData.spu_pics">
+            <van-swipe-item :key="swipeIdx"
+              v-if="!isLoad&&index==0||isLoad">
+              <img v-lazy="swipeItem||''">
+            </van-swipe-item>
+          </template>
         </van-swipe>
         <img v-else
           v-lazy="itemData.imgUrl||''">
@@ -212,12 +214,14 @@ export default {
       bannerAutoPlayTime: 1000000, // banner自动播放时间
       shareInfo: {},
       // ga填充信息
-      gaInfo: {}
+      gaInfo: {},
+      isLoad: false // 页面是否已经加载的差不多了
     };
   },
   mounted() {
     this.$nextTick(() => {
       this.bannerAutoPlayTime = 6000; // 首屏渲染后才设置为6秒自动轮播
+      this.isLoad = true; // 页面是否已经加载的差不多了
     });
   },
   methods: {

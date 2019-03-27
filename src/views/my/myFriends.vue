@@ -11,10 +11,12 @@
     <div class="friendsContent"
       v-if="friendList.length>0">
       <ul>
-        <FriendListCommon v-for="(item, index) in friendList"
+        <li is="FriendListCommon"
+          v-for="(item, index) in friendList"
           :key="index"
           :item="item"
-          :index="index" />
+          :index="index">
+        </li>
       </ul>
     </div>
   </div>
