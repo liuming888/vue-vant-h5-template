@@ -429,8 +429,10 @@ export default {
       });
       if (result && result.data) {
         this.shareInfo = result.data;
+        this.dialogs.sharingFriends.show = true;
+      } else {
+        this.$toast("Gagal mendapatkan informasi berbagi");
       }
-      this.dialogs.sharingFriends.show = true;
     },
     jumpCurBargainPage(item) {
       // 统计
