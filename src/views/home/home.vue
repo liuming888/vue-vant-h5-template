@@ -284,7 +284,7 @@ export default {
     setTimeout(() => {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
       this.isLoad = true;
-    }, 1000);
+    }, 3000);
   },
   methods: {
     scrollEvent(event) {
