@@ -302,6 +302,14 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
+      if (!this.myAddress.id) {
+        Dialog.alert({
+          message: "Silakan pilih alamat pengiriman",
+          confirmButtonText: "Tentukan"
+        });
+        return;
+      }
+
       let param = {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
