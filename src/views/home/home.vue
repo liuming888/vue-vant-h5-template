@@ -168,9 +168,6 @@
               </van-swipe-item>
             </template>
           </template>
-          <van-swipe-item v-else>
-            <img v-lazy="require('@/assets/images/home-banner.png')">
-          </van-swipe-item>
         </van-swipe>
 
         <div class="freebing-box"
@@ -284,10 +281,10 @@ export default {
     this.init();
   },
   mounted() {
-    this.$nextTick(() => {
+    setTimeout(() => {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
       this.isLoad = true;
-    });
+    }, 1000);
   },
   methods: {
     scrollEvent(event) {

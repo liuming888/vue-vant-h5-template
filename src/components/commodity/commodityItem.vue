@@ -219,10 +219,10 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.bannerAutoPlayTime = 6000; // 首屏渲染后才设置为6秒自动轮播
+    setTimeout(() => {
+      this.bannerAutoPlayTime = 12000; // 首屏渲染后才设置为12秒自动轮播
       this.isLoad = true; // 页面是否已经加载的差不多了
-    });
+    }, 1000);
   },
   methods: {
     /**
