@@ -72,6 +72,7 @@
   position: relative;
   z-index: 10;
   margin: 0 30px;
+  margin-bottom: 55px;
   padding-bottom: 30px;
   margin-top: 42px;
   background-color: #fff;
@@ -188,7 +189,7 @@
       <section class="home-goods"
         v-if="goodsList.length>0">
         <div class="home-goods-title"
-          v-if="goodsList.length>0&&spuBargainList.length>0&&spuBargainList.some(item=>item.bargain_info.status==1)">
+          v-if="goodsList.length>0&&homeBargainList.length>0">
           <img v-lazy="require('@/assets/images/gengduotop.png')">
         </div>
         <ul class="home-goods-list">
