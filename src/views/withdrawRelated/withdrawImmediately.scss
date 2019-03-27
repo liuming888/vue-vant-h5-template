@@ -77,36 +77,36 @@
     padding: 0 30px 1px 30px;
     box-sizing: border-box;
 
-   .top-txt {
-    height: 130px;
-    line-height: 130px;
-    box-sizing: border-box;
-    // display: flex;
-    font-size: 28px;
-    font-weight: 400;
-    position: relative;
-    .cash-withdrawal-method {
-      // flex: 1;
-      text-align: left;
-      color: #323232;
-    }
+    .top-txt {
+        height: 130px;
+        line-height: 130px;
+        box-sizing: border-box;
+        // display: flex;
+        font-size: 28px;
+        font-weight: 400;
+        position: relative;
+        .cash-withdrawal-method {
+            // flex: 1;
+            text-align: left;
+            color: #323232;
+        }
 
-    .embodiment-statement {
-      width: 170px;
-      height: 58px;
-      line-height: 58px;
-      color: #f65e10;
-      background: rgba(255, 255, 255, 1);
-      border: 1px solid rgba(246, 94, 16, 1);
-      border-radius: 29px;
-      text-align: center;
-      margin-top: 30px;
-      float: right;
-      position: absolute;
-      right: 0;
-      top: 0;
+        .embodiment-statement {
+            width: 170px;
+            height: 58px;
+            line-height: 58px;
+            color: #f65e10;
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(246, 94, 16, 1);
+            border-radius: 29px;
+            text-align: center;
+            margin-top: 30px;
+            float: right;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
     }
-  }
     .play-types {
         width: 100%;
         // height: 88px;
@@ -115,14 +115,14 @@
         // margin-bottom: 10px;
 
         .play-item {
-            width: 330px;
+            // width: 330px;
             height: 88px;
-            line-height: 88px;
-            text-align: center;
+            // line-height: 88px;
+            // text-align: center;
             background: rgba(255, 255, 255, 1);
             border: 1px solid rgba(236, 236, 236, 1);
             border-radius: 10px;
-            font-size: 28px;
+            // font-size: 28px;
             font-weight: 400;
             color: rgba(50, 50, 50, 1);
             float: left;
@@ -135,7 +135,7 @@
                 margin-top: 0;
             }
             .play-img {
-                width: 100%;
+                width: auto;
                 height: 100%;
                 // margin-right: 12px;
             }
@@ -175,178 +175,106 @@
         }
     }
 }
-.progress-box {
-    padding: 0 30px;
-}
-.schedule {
-    position: relative;
-    margin: 0 auto;
-    // width: 580px;
-    height: 10px;
-    border-radius: 9px;
-    background-color: #fececa;
-    display: flex;
-    font-size: 24px;
-    font-weight: 400;
-    color: rgba(50, 50, 50, 1);
 
-    > .active {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 30%;
-        height: 100%;
-        background: url('~@/assets/images/progress-bar-2.png') no-repeat;
-        background-size: 100%;
-        background-color: #f65e10;
-        border-radius: 9px;
-    }
+.progress-content-box {
+    width: 100%;
+    height: 100px;
+    padding-top: 30px;
+    overflow-x: scroll;
 
-    > .schedule-item {
-        flex: 1;
-        padding-top: 45px;
-        position: relative;
-        text-indent: -20px;
+    .progress-box {
+        display: inline-block;
+        width: auto;
+        padding: 0 30px;
 
-        &::after {
-            content: '';
-            position: absolute;
-            top: -14px;
-            left: 0;
-            min-width: 40px;
-            min-height: 40px;
-            border-radius: 50%;
-            background: #ffece6;
-            z-index: 10;
+        .schedule {
+            position: relative;
+            margin: 0 auto;
+            height: 10px;
+            border-radius: 9px;
+            background-color: #fececa;
+            display: flex;
+            font-size: 24px;
+            font-weight: 400;
+            color: rgba(50, 50, 50, 1);
 
-            // background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
+            > .active {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 30%;
+                height: 100%;
+                background: url('~@/assets/images/progress-bar-2.png') no-repeat;
+                background-size: 100%;
+                background-color: #f65e10;
+                border-radius: 9px;
+            }
+
+            > .schedule-item {
+                width: 240px;
+                padding-top: 45px;
+                position: relative;
+                text-indent: -40px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -14px;
+                    left: 0;
+                    min-width: 40px;
+                    min-height: 40px;
+                    border-radius: 50%;
+                    background: #ffece6;
+                    z-index: 10;
+
+                    // background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
+                }
+            }
+
+            .schedule-item-1 {
+                text-indent: 0;
+            }
+
+            > .schedule-item-last {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding-top: 45px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -14px;
+                    right: 0;
+                    min-width: 40px;
+                    min-height: 40px;
+                    border-radius: 20px;
+                    background: #ffece6;
+                }
+            }
+
+            .schedule-item-cur {
+                &::after {
+                    display: block;
+                    width: 40px !important;
+                    height: 40px !important;
+                    background: linear-gradient(-45deg, rgba(246, 94, 16, 1) 0%, rgba(255, 141, 83, 1) 100%) !important;
+                    border-radius: 50% !important;
+                    z-index: 100;
+                }
+            }
+
+            .ball-cur {
+                &::after {
+                    background: url('~@/assets/images/coin.gif') no-repeat 0 0/60px 62px !important;
+                    top: -24px !important;
+                    right: -20px !important;
+                    width: 60px !important;
+                    height: 62px !important;
+                }
+            }
         }
     }
-
-    .schedule-item-1 {
-        text-indent: 0;
-    }
-
-    > .schedule-item-last {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding-top: 45px;
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: -14px;
-            right: 0;
-            min-width: 40px;
-            min-height: 40px;
-            border-radius: 20px;
-            background: #ffece6;
-        }
-    }
-
-    .schedule-item-cur {
-        &::after {
-            display: block;
-            width: 40px !important;
-            height: 40px !important;
-            background: linear-gradient(-45deg, rgba(246, 94, 16, 1) 0%, rgba(255, 141, 83, 1) 100%) !important;
-            border-radius: 50% !important;
-            z-index: 100;
-        }
-    }
-
-    .ball-cur {
-        &::after {
-            background: url('~@/assets/images/coin.gif') no-repeat 0 0/60px 62px !important;
-            top: -24px !important;
-            right: -20px !important;
-            width: 60px !important;
-            height: 62px !important;
-        }
-    }
-
-    // > .schedule-item {
-    //   position: relative;
-    //   flex: 1;
-    //   padding-top: 40px;
-    //   text-align: center;
-    //   font-size: 18px;
-    //   color: #323232;
-    //   .highlight {
-    //     color: #d30c05;
-    //     font-size: 20px;
-    //   }
-    // }
-    // > .schedule-item:nth-of-type(2) {
-    //   text-align: left;
-    // }
-    // > .schedule-item:last-of-type {
-    //   text-align: right;
-
-    //   &.ball-center-cur::after {
-    //     margin: 0;
-    //     left: calc(50% - 20px);
-    //   }
-    // }
-    // > .ball::after {
-    //   content: "";
-    //   position: absolute;
-    //   top: -14px;
-    //   // left: 0;
-    //   width: 40px;
-    //   height: 40px;
-    //   border-radius: 20px;
-    //   background: #ffece6;
-    // }
-    // > .ball-active::after {
-    //   background: linear-gradient(
-    //     -45deg,
-    //     rgba(238, 93, 47, 1),
-    //     rgba(255, 155, 4, 1)
-    //   );
-    // }
-    // > .ball-center::after {
-    //   left: calc(50% - 12px);
-    // }
-    // > .ball-center-1 {
-    //   // text-indent: -25%;
-    // }
-    // > .ball-center-1::after {
-    //   left: calc(30% - 12px);
-    // }
-    // > .ball-center-cur::after {
-    //   width: 60px;
-    //   height: 60px;
-    //   top: -25px;
-    //   background: url("~@/assets/images/coin.gif") no-repeat center;
-    //   background-size: 60px;
-    //   // left: calc(50% - 20px);
-    //   left: 0;
-    //   right: 0;
-    //   margin: 0 auto;
-    // }
-    // > .ball-center-2 {
-    //   position: relative;
-
-    //   &::after {
-    //     left: 0;
-    //     right: 0;
-    //     margin: 0 auto;
-    //   }
-    // }
-    // > .ball-center-3::after {
-    //   left: calc(70% - 12px);
-    // }
-    // > .ball-center-3 {
-    //   text-indent: 50%;
-    // }
-    // > .ball-right::after {
-    //   right: 0;
-    // }
-    // > .ball-left::after {
-    //   left: 0;
-    // }
 }
 .cash-description {
     margin-top: 50px;
@@ -385,7 +313,7 @@
     .cash-withdrawal-tit {
         font-size: 28px;
         padding: 30px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
     }
 }
 .alertBox {

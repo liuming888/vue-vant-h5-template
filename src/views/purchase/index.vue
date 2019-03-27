@@ -162,7 +162,7 @@ import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
 // }
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
-import { orderCreate, repaidOrder, getPayType } from "@/server/pay.js";
+import { orderCreate, repaidOrder, getPayType ,getOrderByBargainId} from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
 import { getExchangeRate } from "@/server/finance.js";
 import { getBargainInfo } from "@/server/bargain.js";
@@ -236,6 +236,23 @@ export default {
       this.curSpuSpecs();
       this.initExchangeRate();
       this.getPayType();
+      this.initOrderByBargainIdDat(this.$route.query.bargainId);
+    },
+    /**
+     * @description: 根据砍价号获取订单信息  看之前有支付下单没
+     */
+    async initOrderByBargainIdDat(bargain_id){
+      let result=await getOrderByBargainId({bargain_id});
+      if(result&&result.data){
+        if(result.data.can_pay){
+          this.$router.replace({
+            query:{
+              ...this.$route.query,
+              orderNo:result.data.order_no
+            }
+          });
+        }
+      }
     },
     // 获取支付渠道信息
     async getPayType() {
@@ -302,6 +319,14 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
+      if (!this.myAddress.id) {
+        Dialog.alert({
+          message: "Silakan pilih alamat pengiriman",
+          confirmButtonText: "Tentukan"
+        });
+        return;
+      }
+
       let param = {
         address_id: this.myAddress.id,
         spu_id: this.spu.spu_id,
@@ -360,7 +385,7 @@ export default {
       let result = await repaidOrder({
         order_no: this.$route.query.orderNo,
         spu_name: this.spu.title,
-        pay_type: 1
+        pay_type: this.currentType.type
       });
       if (result && result.data) {
         let { pay_url, order_no } = result.data;

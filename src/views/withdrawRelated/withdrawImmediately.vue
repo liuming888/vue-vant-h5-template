@@ -114,61 +114,33 @@
     </div>
     <div class="cash-withdrawal-box border-bttom">
       <p class="cash-withdrawal-tit">Cash withdrawal method</p>
-      <div class="progress-box">
-        <div class="schedule">
-          <div class="active"
-            :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div>
 
-          <!-- <div class="schedule-item ball"
-            v-for="(item,index) of rule"
-            :key="index"
-            :class="setScheduleItemCls(item,index)">
-            <span class="description">Rp{{item.threshold}}</span>
-          </div> -->
+      <div class="progress-content-box">
+        <div class="progress-box">
+          <div class="schedule">
+            <div class="active"
+              :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div>
 
-          <!-- <div class="schedule-item schedule-item-1">
-            Rp8
-          </div>
-          <div class="schedule-item ball-cur">
-            Rp128
-          </div>
-          <div class="schedule-item">
-            Rp138
-          </div>
-          <div class="schedule-item  schedule-item-cur">
-            Rp188
-          </div>
-          <div class="schedule-item-last">
-            Rp258
-          </div> -->
+            <div v-for="(item,index) of rule"
+              :key="index"
+              :class="setScheduleItemCls(item,index)">
+              Rp{{item.threshold}}
+            </div>
 
-          <div v-for="(item,index) of rule"
-            :key="index"
-            :class="setScheduleItemCls(item,index)">
-            Rp{{item.threshold}}
           </div>
-
         </div>
       </div>
+
     </div>
     <div class="cash-withdrawal-rule border-bttom">
       <div class="cash-withdrawal-rule-title"
         id="cashWithdrawalRule">Withdrawal rules</div>
-      <!-- <div class="cash-withdrawal-rule-text">
-        The balance is over 88 rounds, and 8 rounds can be withdrawn. the arrival time is the same day and over 88 rounds,The arrival time is the same day
-      </div> -->
+     
       <div class="cash-withdrawal-rule-img">
         <img src="../../assets/images/withdrawRule.png">
       </div>
     </div>
-    <!-- 
-    <div class="precautions-box">
-      <h5 class="precautions">Precautions</h5>
-      <div class="precautions-txt">
-        <p>1. The first withdrawal will arrive within 1 second. If you encounter the peak period, you may delay the payment. Please be patient.</p>
-        <p>2. Please pay attention to the "My - Withdrawal Record" to check the status of the redemption record.</p>
-      </div>
-    </div>-->
+   
     <div class="cash-out-btn"
       @click.stop="goApplyWithdraw">Cash out</div>
     <dialog-default :info="info"
@@ -247,7 +219,7 @@ export default {
         this.withdrawParam.pay_type = this.pay_type[0].type;
         this.withdrawParam.amount = this.user_fund.withdraw_amount;
         // 提现方式配置处理
-        this.payTypeConfig(pay_type, user_fund.withdraw_amount||0);
+        this.payTypeConfig(pay_type, user_fund.withdraw_amount || 0);
       }
     },
     // 提现方式配置处理
@@ -294,8 +266,8 @@ export default {
       }
     },
     setScheduleItemCls(item, index) {
-      let withdrawAmount = this.user_fund.withdraw_amount||0;
-      console.log('withdrawAmount: ', withdrawAmount);
+      let withdrawAmount = this.user_fund.withdraw_amount || 0;
+      console.log("withdrawAmount: ", withdrawAmount);
       return [
         { "schedule-item": index != this.rule.length - 1 },
         { "schedule-item-1": index == 0 },
@@ -304,8 +276,8 @@ export default {
         {
           "ball-cur":
             (index != 0 &&
-              withdrawAmount > this.rule[index - 1].amount &&
-              withdrawAmount <= this.rule[index].amount) ||
+              withdrawAmount >= this.rule[index - 1].amount &&
+              withdrawAmount < this.rule[index].amount) ||
             (index == this.rule.length - 1 &&
               withdrawAmount >= this.rule[index].amount) ||
             (index == 0 && withdrawAmount == 0)

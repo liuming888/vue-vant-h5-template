@@ -25,11 +25,22 @@ export default {
     "zdd-layout": zddMain
   },
   created() {
+    let newUserStr = localStorage.getItem("newUserInfo");
+    if (newUserStr) {
+      let userInfo = JSON.parse(newUserStr);
+      this.$store.commit("setUserInfo", userInfo);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+      axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
+      return;
+    }
+
     if (
       process.env.VUE_APP_ENV == "development" ||
       process.env.VUE_APP_ENV == "mock"
-    )
+    ) {
       return;
+    }
     this.initToken();
     // this.initFB();
   },
