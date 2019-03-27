@@ -160,11 +160,13 @@
           indicator-color="white"
           class="home-banner">
           <template v-if="bannerList.length>0">
-            <van-swipe-item @click="handleBannerClick"
-              v-for="item of bannerList"
-              :key="item.id">
-              <img v-lazy="item.url">
-            </van-swipe-item>
+            <template v-for="(item,index) of bannerList">
+              <van-swipe-item @click="handleBannerClick"
+                :key="item.id"
+                v-if="!isLoad&&index==0||isLoad">
+                <img v-lazy="item.url">
+              </van-swipe-item>
+            </template>
           </template>
           <van-swipe-item v-else>
             <img v-lazy="require('@/assets/images/home-banner.png')">
@@ -253,7 +255,8 @@ export default {
         page_size: 10,
         page_num: 1
       },
-      showGoTopBtn: false // 是否显示回到顶部按钮
+      showGoTopBtn: false, // 是否显示回到顶部按钮
+      isLoad: false // 页面是否已经加载的差不多了
     };
   },
   computed: {
@@ -283,6 +286,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
+      this.isLoad = true;
     });
   },
   methods: {
