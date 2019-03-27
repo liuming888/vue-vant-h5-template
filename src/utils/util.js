@@ -66,7 +66,8 @@ export function getQueryVariable(variable) {
 
 export function gaSend(params = {}) {
     if (window.ga) {
-        ga('send', {
+        console.log('ga');
+        ga('event', {
             ...params,
             hitType: params.hitType || 'event',
         })
