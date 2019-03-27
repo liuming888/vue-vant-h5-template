@@ -14,11 +14,11 @@ if (userStr) {
 }
 
 if (process.env.VUE_APP_ENV == 'development') {
-      user_id = 1;
-      access_token = '486dcad761f8425e8aa2a49e964a984c';
+    //   user_id = 1;
+    //   access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    // user_id = 132;
-    // access_token = '82d5788b42de4714b55fd41099072b26';
+    user_id = 137;
+    access_token = 'e639dc4beb6e449fa8430514ee10aec3';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);
@@ -82,7 +82,7 @@ instance.interceptors.response.use(
                 localStorage.clear();
                 // Vue.prototype.$curRouter.replace('/');
             } else {
-                console.log("test11111111111111111111111111");
+                console.log('test11111111111111111111111111');
                 throw response.data;
             }
         } catch (error) {
