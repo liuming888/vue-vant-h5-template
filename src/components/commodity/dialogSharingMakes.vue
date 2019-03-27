@@ -5,29 +5,31 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1010;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 20vh;
+  // align-items: flex-end;
+  padding-top: 2vh;
   box-sizing: border-box;
 }
 
 .share-box {
   width: 610px;
-  height: 828px;
+  height: 966px;
   background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
     100%;
-  padding-top: 180px;
+  padding-top: 220px;
   box-sizing: border-box;
   position: relative;
 
   .tit {
-    width: 438px;
+    // width: 438px;
+    padding: 0 35px;
+    box-sizing: border-box;
     text-align: center;
     margin: 0 auto;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
     line-height: 38px;
@@ -37,36 +39,43 @@
     width: 560px;
     height: 480px;
     margin: 0 auto;
+    margin-top: 30px;
 
     .good-box {
-      width: 514px;
-      height: 195px;
-      margin: 24px auto 0;
-      // background: pink;
+      width: 570px;
+      height: 210px;
+      margin: 0 auto;
+      background: #fff6f5;
       display: flex;
       align-items: center;
       padding-left: 12px;
       box-sizing: border-box;
       transform: scale(0.9);
+      position: relative;
+      left: -6px;
 
       .good-img {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
       }
 
       .right-box {
         margin-left: 20px;
         height: 150px;
-        width: 320px;
+        width: 420px;
 
         .good-tit {
-          width: 282px;
+          // width: 282px;
+          width: 100%;
+          padding-right: 10px;
+          box-sizing: border-box;
           height: 60px;
           font-size: 24px;
           font-weight: 400;
           color: rgba(50, 50, 50, 1);
           line-height: 32px;
           margin-bottom: 25px;
+          word-break: break-all;
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
@@ -106,8 +115,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 100px;
       margin-bottom: 41px;
       position: relative;
+      padding-left: 10px;
 
       .share-item {
         width: 100px;
@@ -157,7 +168,10 @@
 
     <div class="share-box">
       <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
-      <h5 class="tit">Share to your friends.You will gain bonus if your friends buy it.</h5>
+      <h5 class="tit">
+        <p>Share to your friends.</p>
+        <p> You will gain bonus if your friends buy it.</p>
+      </h5>
 
       <div class="content">
         <div class="good-box">
@@ -174,7 +188,7 @@
           </div>
         </div>
 
-        <div class="share-to">Share To</div>
+        <!-- <div class="share-to">Share To</div> -->
 
         <div class="share-types">
 
@@ -191,15 +205,15 @@
           </div>
 
           <div class="share-item">
-            <img v-lazy="require('@/assets/images/whatsapp.png')"
-              @click="share(mx_shareWhatsapp)">
-            <p>WhatsApp</p>
-          </div>
-
-          <div class="share-item">
             <img v-lazy="require('@/assets/images/messenger.png')"
               @click="share(mx_shareMessenger)">
             <p>Messenger</p>
+          </div>
+
+          <div class="share-item">
+            <img v-lazy="require('@/assets/images/whatsapp.png')"
+              @click="share(mx_shareWhatsapp)">
+            <p>WhatsApp</p>
           </div>
 
         </div>
@@ -255,7 +269,7 @@ export default {
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
     },
-    share(fun){
+    share(fun) {
       fun();
       //统计
       this.$gaSend({
