@@ -2,7 +2,8 @@
 
 <template>
   <div class="bargain-container"
-    ref="bargainContainer">
+    ref="bargainContainer"
+    id="bargainContainer">
     <!-- 返回首页 -->
     <div class="turn-home"
       @click="$router.push('/')"></div>
@@ -207,9 +208,13 @@ export default {
   },
   mounted() {
     if (this.$refs.bargainContainer.scrollTo) {
-      // 0  false
       this.$refs.bargainContainer.scroll(0, 0);
     }
+
+    if (document.getElementById("contentContainer").scrollTop) {
+      document.getElementById("contentContainer").scroll(0, 0);
+    }
+
     document.title = "Getting Freebies";
   },
   methods: {
