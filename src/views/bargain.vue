@@ -62,7 +62,7 @@
               v-if="!isShareEarningEntry">Share friends for freebies</div>
             <div class="share-btn"
               v-else
-              @click="goChopShare">POTONG PISAU</div>
+              @click="goChopShare">Cut a knife</div>
             <div class="buy-btn"
               v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
               @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>

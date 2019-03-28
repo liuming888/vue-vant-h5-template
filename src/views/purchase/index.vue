@@ -321,8 +321,8 @@ export default {
 
       if (!this.myAddress.id) {
         Dialog.alert({
-          message: "Silakan pilih alamat pengiriman",
-          confirmButtonText: "Tentukan"
+          message: "Please choose a shipping address",
+          confirmButtonText: "ok"
         });
         return;
       }
@@ -347,13 +347,6 @@ export default {
       });
       console.log("spu_spec_items----------", spu_spec_items);
 
-      // if (!spu_spec_items) {
-      //   Dialog.alert({
-      //     message: "Silakan pilih alamat pengiriman",
-      //     confirmButtonText: "Tentukan"
-      //   });
-      //   return;
-      // }
 
       if (spu_spec_items) {
         param.spu_spec_items = spu_spec_items;

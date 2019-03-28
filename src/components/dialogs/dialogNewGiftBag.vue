@@ -117,8 +117,8 @@ export default {
       let result = await getMyNewRp();
       if (result && result.data) {
         Dialog.alert({
-          message: "Anda telah berhasil menerima paket hadiah baru",
-          confirmButtonText: "Tentukan"
+          message: "You have successfully received a new gift package",
+          confirmButtonText: "ok"
         });
         window.localStorage.removeItem("newUserInfo");  // 点击领取后不弹了
         this.$store.commit("setNewGiftBagShow", false);

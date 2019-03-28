@@ -176,9 +176,9 @@ export default {
       // 删除按钮弹窗信息
       dialogDefaultShow: false,
       dialogDefaultInfo: {
-        content: "Anda yakin ingin menghapus alamatnya?",
-        cancelText: "Batalkan",
-        okText: "Tentukan",
+        content: "You are sure you want to delete the address?",
+        cancelText: "Cancel",
+        okText: "Determine",
         delId: 0
       },
 
