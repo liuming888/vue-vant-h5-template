@@ -35,10 +35,25 @@
     }
   }
 }
+
+.turn-home {
+  position: fixed;
+  top: 80%;
+  right: 10px;
+  width: 96px;
+  height: 96px;
+  background: url("~@/assets/images/home@2x(1).png") no-repeat;
+  background-size: 100%;
+  z-index: 9999;
+}
 </style>
 
 <template>
   <div class="purchase-container">
+    <!-- 返回首页 -->
+    <div class="turn-home"
+      @click="$router.push('/')"></div>
+
     <div class="info-box">
       <img src="@/assets/images/success.png"
         alt
@@ -83,9 +98,9 @@ export default {
     this.initGoodsList({ ...this.goodsListPageDat });
   },
   mounted() {
-    setTimeout(() => {
-      this.$router.push("/");
-    }, 6000);
+    // setTimeout(() => {
+    //   this.$router.push("/");
+    // }, 6000);
   },
   methods: {
     async initGoodsList({ page_size, page_num, is_all = 0 }) {
