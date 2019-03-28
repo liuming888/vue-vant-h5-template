@@ -27,6 +27,7 @@ export default {
   created() {
     let newUserStr = localStorage.getItem("newUserInfo");
     if (newUserStr) {
+      this.$store.commit("setIsreFreshToken", true);
       let userInfo = JSON.parse(newUserStr);
       this.$store.commit("setUserInfo", userInfo);
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
