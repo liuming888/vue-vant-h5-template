@@ -168,17 +168,20 @@
 }
 
 .privacy-agreement-box{
+  margin-top: 20px;
   text-align:center;
   color:#fff;
 
   p{
     margin-bottom: 10px;
+    font-size:26px;
   }
 
   ul{
     width: 90%;
     margin: 0 auto;
     display: flex;
+     font-size:20px;
 
     li{
         flex:3;

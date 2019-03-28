@@ -166,7 +166,8 @@ export default {
       let result = await repaidOrder({
         order_no: this.curDat.order_no,
         spu_name: this.curDat.spu_title,
-        pay_type: 1
+        pay_type: this.curDat.type||1,
+        pay_product: this.curDat.product
       });
       if (result && result.data) {
         let { pay_url, order_no } = result.data;

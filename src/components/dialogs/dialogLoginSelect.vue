@@ -148,7 +148,7 @@ export default {
           tp_username: name,
           tp_avatar: pic_square
         };
-        const { spuId, bargainId, inviteUserId } = this.$route.query;
+        const { spuId, bargainId, inviteUserId, source } = this.$route.query;
         if (spuId) {
           param.spu_id = spuId;
         }
@@ -157,6 +157,9 @@ export default {
         }
         if (inviteUserId) {
           param.invite_user_id = inviteUserId;
+        }
+        if (source) {
+          param.source = source;
         }
 
         let result = await login(param);

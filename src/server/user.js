@@ -1,26 +1,26 @@
 import $request from '../utils/api/request.js';
 
 // login
-export function login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar }) {
+export function login(params={}) {
     return $request.post({
         url: '/api/v1/user/login',
-        data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar },
+        data: params,
     });
 }
 
 // 测试登录
-export function check_login({ tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar }) {
+export function check_login(params = {}) {
     return $request.post({
         url: '/api/v1/user/check_login',
-        data: { tp_id, tp_token, tp_type, invite_user_id, spu_id, bargain_id, tp_username, tp_avatar },
+        data: params,
     });
 }
 
 // 用户凭证刷新接口
-export function refreshToken({ user_id, access_token }) {
+export function refreshToken(params = {}) {
     return $request.post({
         url: '/api/v1/user/refresh_token',
-        data: { user_id, access_token },
+        data: params,
     });
 }
 
@@ -68,3 +68,5 @@ export function getMyNewRp() {
         url: '/api/v1/user/get_my_new_rp',
     });
 }
+
+

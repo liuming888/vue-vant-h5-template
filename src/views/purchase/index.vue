@@ -162,7 +162,12 @@ import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
 // }
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
-import { orderCreate, repaidOrder, getPayType ,getOrderByBargainId} from "@/server/pay.js";
+import {
+  orderCreate,
+  repaidOrder,
+  getPayType,
+  getOrderByBargainId
+} from "@/server/pay.js";
 import { getMyAddress } from "@/server/user.js";
 import { getExchangeRate } from "@/server/finance.js";
 import { getBargainInfo } from "@/server/bargain.js";
@@ -173,7 +178,7 @@ export default {
     dialogPostAddAddress,
     dialogWaitPayment, // 等待用户付款弹窗
     // ...vantCom,
-    [Icon.name]:Icon
+    [Icon.name]: Icon
   },
   data() {
     return {
@@ -241,14 +246,14 @@ export default {
     /**
      * @description: 根据砍价号获取订单信息  看之前有支付下单没
      */
-    async initOrderByBargainIdDat(bargain_id){
-      let result=await getOrderByBargainId({bargain_id});
-      if(result&&result.data){
-        if(result.data.can_pay){
+    async initOrderByBargainIdDat(bargain_id) {
+      let result = await getOrderByBargainId({ bargain_id });
+      if (result && result.data) {
+        if (result.data.can_pay) {
           this.$router.replace({
-            query:{
+            query: {
               ...this.$route.query,
-              orderNo:result.data.order_no
+              orderNo: result.data.order_no
             }
           });
         }
@@ -347,7 +352,6 @@ export default {
       });
       console.log("spu_spec_items----------", spu_spec_items);
 
-
       if (spu_spec_items) {
         param.spu_spec_items = spu_spec_items;
       }
@@ -378,7 +382,8 @@ export default {
       let result = await repaidOrder({
         order_no: this.$route.query.orderNo,
         spu_name: this.spu.title,
-        pay_type: this.currentType.type
+        pay_type: this.currentType.type,
+        pay_product: this.currentType.product
       });
       if (result && result.data) {
         let { pay_url, order_no } = result.data;
