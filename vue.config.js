@@ -76,25 +76,25 @@ module.exports = {
             config.plugins = [...config.plugins, ...plugins];
         }
 
-        // config.externals = {
-            // vue: 'Vue',
-            // vuex: 'Vuex',
-            // 'vue-router': 'VueRouter',
+        config.externals = {
+            vue: 'Vue',
+            vuex: 'Vuex',
+            'vue-router': 'VueRouter',
             // 暂时随便命名（没影响）
             // vant: 'vant',
             // axios: 'axios',
-        // };
+        };
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: config => {
-        // config.module
-        //     .rule('vue')
-        //     .use('vue-loader')
-        //     .loader('vue-loader')
-        //     .tap(options => {
-        //         options.compilerOptions.preserveWhitespace = false;
-        //         return options;
-        //     });
+        config.module
+            .rule('vue')
+            .use('vue-loader')
+            .loader('vue-loader')
+            .tap(options => {
+                options.compilerOptions.preserveWhitespace = false;
+                return options;
+            });
         config.module
             .rule('images')
             .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
