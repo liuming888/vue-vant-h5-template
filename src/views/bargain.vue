@@ -334,6 +334,12 @@ export default {
       });
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
+        this.$router.replace({
+            query: {
+            ...this.$route.query,
+            bargainId: this.chop_info.bargain_id
+          }
+        });
         this.dialogs.potongSendiri.show = true;
       }
       // 分享赚自己点击按钮自砍
