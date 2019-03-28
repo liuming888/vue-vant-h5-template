@@ -23,6 +23,9 @@
   z-index: 9999;
 
   .info-box {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transform: translateY(50px);
     animation: mes 6s infinite;
 
@@ -46,8 +49,8 @@
     transform: translateY(0);
   }
 
-  90%{
-     transform: translateY(0);
+  90% {
+    transform: translateY(0);
   }
 
   100% {
@@ -62,7 +65,7 @@
     <div class="info-box">
       <img class="home-top-msg-img"
         v-lazy="curDat&&curDat.avatar">
-      <span>{{curDat&&curDat.username}} got a freebie just now</span>
+      <span>{{curDat.content}}</span>
     </div>
   </div>
 </template>
