@@ -171,7 +171,7 @@
         v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="require('./../assets/images/start.png')">
-          <span>More Products</span>
+          <span>you might like</span>
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
