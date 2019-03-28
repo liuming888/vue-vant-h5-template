@@ -163,19 +163,28 @@ export default {
      * @description: 继续支付
      */
     async goRepaidPay() {
-      let result = await repaidOrder({
-        order_no: this.curDat.order_no,
-        spu_name: this.curDat.spu_title,
-        pay_type: this.curDat.type||1,
-        pay_product: this.curDat.product
-      });
-      if (result && result.data) {
-        let { pay_url, order_no } = result.data;
-        console.log("pay_url: ", pay_url);
-        // this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
-        window.location.href = pay_url;
-      }
+      // let result = await repaidOrder({
+      //   order_no: this.curDat.order_no,
+      //   spu_name: this.curDat.spu_title,
+      //   pay_type: this.curDat.type||1,
+      //   pay_product: this.curDat.product
+      // });
+      // if (result && result.data) {
+      //   let { pay_url, order_no } = result.data;
+      //   console.log("pay_url: ", pay_url);
+      //   // this.showWaitPaymentDialog.show = true;
+      //   // window.open(pay_url);
+      //   window.location.href = pay_url;
+      // }
+
+      this.$router.push({
+        path:'/purchase',
+        query:{
+          orderNo:this.curDat.order_no,
+          bargainId:this.curDat.bargain_id,
+          spuId:this.curDat.spu_id
+        }
+      })
     }
   }
 };
