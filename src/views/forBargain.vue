@@ -504,7 +504,8 @@ export default {
         return;
       }
 
-      this.$router.replace({
+      this.$router.push({
+        path:"/bargain",
         query: {
           spuId: spu_id
         }
