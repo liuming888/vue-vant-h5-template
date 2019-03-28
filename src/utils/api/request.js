@@ -1,5 +1,5 @@
 // import Vue from 'vue';
-// import axios from 'axios';
+import axios from 'axios';
 // import qs from 'qs';
 // import md5 from 'md5';
 import config from './config';

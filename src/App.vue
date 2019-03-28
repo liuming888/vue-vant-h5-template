@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import { FBConfig } from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
 
