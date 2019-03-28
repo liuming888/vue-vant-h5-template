@@ -111,7 +111,7 @@
           <p>Receiving address: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
 
           <div class="close"
-            @click.stop="delItem(item.id)">
+            @click.stop="delItem(item.id)" v-if="item.is_default!==1">
             <img src="@/assets/images/delete.png">
           </div>
         </div>
