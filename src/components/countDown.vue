@@ -8,6 +8,24 @@
   position: relative;
   top:3px;
 }
+
+.count-down {
+  margin: 22px 0;
+  font-size: 24px;
+  color: #585858;
+  line-height: 31px;
+  > .time {
+    display: inline-block;
+    background-color: #585858;
+    color: #fff;
+    border-radius: 8px;
+    padding: 0 6px;
+  }
+  > .dec {
+    // font-weight: lighter;
+    padding-left: 12px;
+  }
+}
 </style>
 
 
@@ -76,22 +94,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.count-down {
-  margin: 22px 0;
-  font-size: 24px;
-  color: #585858;
-  line-height: 31px;
-  > .time {
-    display: inline-block;
-    background-color: #585858;
-    color: #fff;
-    border-radius: 8px;
-    padding: 0 6px;
-  }
-  > .dec {
-    font-weight: lighter;
-    padding-left: 12px;
-  }
-}
-</style>

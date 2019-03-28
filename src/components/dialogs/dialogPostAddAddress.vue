@@ -224,8 +224,8 @@ export default {
         !address_one
       ) {
         Dialog.alert({
-          message: "Silakan isi informasi alamat lengkap",
-          confirmButtonText: "Tentukan"
+          message: "Please complete the full address information",
+          confirmButtonText: "ok"
         });
         return;
       }

@@ -59,7 +59,7 @@
         <div class="top-txt">
           <div class="cash-withdrawal-method">Recharge denomination</div>
         </div>
-        <div class="play-types clearfix">
+        <div class="play-types clearfix play-types2">
           <div class="play-item"
             v-for="(item,index) of rechargeDenominations"
             :class="{
@@ -241,15 +241,15 @@ export default {
       const { account_name, account_no } = this.withdrawParam;
       if (!account_name || !account_no) {
         Dialog.alert({
-          message: "Informasi akun tidak boleh kosong",
-          confirmButtonText: "Tentukan"
+          message: "Account information cannot be empty",
+          confirmButtonText: "ok"
         });
         return;
       }
       if (account_name !== account_no) {
         Dialog.alert({
-          message: "Akun tidak konsisten dimasukkan dua kali",
-          confirmButtonText: "Tentukan"
+          message: "Inconsistent accounts are entered twice",
+          confirmButtonText: "ok"
         });
         return;
       }

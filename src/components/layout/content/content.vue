@@ -9,7 +9,7 @@
 </style>
 
 <template>
-  <div class="content-container">
+  <div class="content-container" id="contentContainer">
     <router-view></router-view>
 
     <!-- <income-window /> -->

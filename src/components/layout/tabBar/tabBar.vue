@@ -53,13 +53,13 @@ export default {
       tabBarList: [
         {
           path: "/",
-          title: "Home",
+          title: "HOME",
           imgUrl: require("../../../assets/images/tabBar-home.png"),
           imgActiveUrl: require("../../../assets/images/tabBar-home-active.png")
         },
         {
           path: "/my",
-          title: "Me",
+          title: "ME",
           imgUrl: require("../../../assets/images/tabBar-me.png"),
           imgActiveUrl: require("../../../assets/images/tabBar-me-active.png")
         }

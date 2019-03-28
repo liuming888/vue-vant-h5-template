@@ -6,8 +6,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
-  padding-top: 200px;
+  z-index: 10000;
+  padding-top: 180px;
   display: flex;
   justify-content: center;
 
@@ -26,7 +26,7 @@
       height: auto;
       // margin: 96px auto 0;
       position: absolute;
-      bottom: -228px;
+      bottom: -250px;
       left: 0;
       right: 0;
       margin: 0 auto;
@@ -38,7 +38,7 @@
       background: rgba(255, 194, 31, 1);
       border-radius: 43px;
       position: absolute;
-      bottom: -118px;
+      bottom: -120px;
       left: 0;
       right: 0;
       margin: 0 auto;
@@ -53,10 +53,12 @@
       font-size: 24px;
       color: #e5e8ee;
       margin-bottom: 20px;
+      padding-left: 20px;
     }
 
     .num {
       font-size: 80px;
+      font-weight: 600;
       color: gold;
 
       .dw {
@@ -115,8 +117,8 @@ export default {
       let result = await getMyNewRp();
       if (result && result.data) {
         Dialog.alert({
-          message: "Anda telah berhasil menerima paket hadiah baru",
-          confirmButtonText: "Tentukan"
+          message: "You have successfully received a new gift package",
+          confirmButtonText: "ok"
         });
         window.localStorage.removeItem("newUserInfo");  // 点击领取后不弹了
         this.$store.commit("setNewGiftBagShow", false);
