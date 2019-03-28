@@ -24,7 +24,7 @@
               <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3">244d Sent</p>
+                  <p class="p-t-3">{{spu.deliver_count || 1}} Sent</p>
                   <p class="p-t-1">
                     Price
                     <span>RP</span><span>{{spu.original_price}}</span>
@@ -39,10 +39,10 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate  +'%'}"></div>
               <div class="schedule-item">
                 <span class="description"><span class="highlight">{{bargain_info.bargain_rate||0}}%</span> off</span>
               </div>
@@ -183,7 +183,9 @@ export default {
         spu_pics: []
       },
 
-      bargain_info: {},
+      bargain_info: {
+        bargain_rate: 5 // 给个默认值
+      },
       bargain_user_info: {},
 
       expirationDat: {
@@ -335,12 +337,14 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.$router.replace({
-            query: {
+          query: {
             ...this.$route.query,
             bargainId: this.chop_info.bargain_id
           }
         });
         this.dialogs.potongSendiri.show = true;
+        this.initBargainInfo();
+        this.initHelpBargainList();
       }
       // 分享赚自己点击按钮自砍
       this.isShareEarningEntry = false;
