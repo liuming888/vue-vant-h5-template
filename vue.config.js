@@ -77,9 +77,9 @@ module.exports = {
         }
 
         config.externals = {
-            vue: 'Vue',
-            vuex: 'Vuex',
-            'vue-router': 'VueRouter',
+            // vue: 'Vue',
+            // vuex: 'Vuex',
+            // 'vue-router': 'VueRouter',
             // 暂时随便命名（没影响）
             // vant: 'vant',
             // axios: 'axios',
