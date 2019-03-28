@@ -6,9 +6,9 @@
         position: fixed;
         top: 80%;
         right: 10px;
-        width: 90px;
-        height: 90px;
-        background: url('./../assets/images/home@2x(1).png') no-repeat;
+        width: 96px;
+        height: 96px;
+        background: url('~@/assets/images/home@2x(1).png') no-repeat;
         background-size: 100%;
         z-index: 9999;
     }
@@ -16,7 +16,7 @@
         position: relative;
         padding: 40px 10px 10px 10px;
         // height: 400px;
-        background: url('./../assets/images/bargain-bg-1.png') no-repeat;
+        background: url('~@/assets/images/bargain-bg-1.png') no-repeat;
         background-size: 100%;
         > .bargain-info-box {
             position: relative;
@@ -285,7 +285,7 @@
                     }
                 }
                 > .team-list-item {
-                    background: url('./../assets/images/dollar-icon.png') no-repeat 100% center;
+                    background: url('~@/assets/images/dollar-icon.png') no-repeat 100% center;
                     background-size: 41px 41px;
                     .team-img > img {
                         width: 74px;
