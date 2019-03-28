@@ -1,6 +1,10 @@
 <!--  -->
 <template>
   <div class="revenue_detail">
+    <!-- 返回首页 -->
+    <div class="turn-home"
+      @click="$router.push('/')"></div>
+
     <header>
       Revenue Rp
       <span>{{total_revenue||0}}</span> &nbsp; &nbsp;
@@ -118,5 +122,16 @@ export default {
       }
     }
   }
+}
+
+.turn-home {
+  position: fixed;
+  top: 80%;
+  right: 10px;
+  width: 96px;
+  height: 96px;
+  background: url("~@/assets/images/home@2x(1).png") no-repeat;
+  background-size: 100%;
+  z-index: 9999;
 }
 </style>
