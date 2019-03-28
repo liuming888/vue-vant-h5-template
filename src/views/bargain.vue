@@ -41,7 +41,7 @@
             <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate||50+'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate+'%'}"></div>
               <div class="schedule-item">
                 <span class="description"><span class="highlight">{{bargain_info.bargain_rate||0}}%</span> off</span>
               </div>
