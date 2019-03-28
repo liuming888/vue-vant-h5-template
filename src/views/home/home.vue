@@ -1,3 +1,28 @@
+<style lang="scss">
+.freebing-box {
+  .freebing-container {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 24px;
+      width: 638px;
+      height: 1px;
+      background: rgba(242, 242, 242, 1);
+    }
+  }
+
+  .freebing-big-box:nth-last-of-type(1) {
+      .freebing-container{
+        &::after{
+          display: none;
+        }
+      }
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .home-container {
   background-color: #d30c05;
@@ -141,33 +166,32 @@
   z-index: 1000;
   border-radius: 50%;
 }
-</style>
 
-<style lang="scss">
-.freebing-box {
-  .freebing-container {
-    position: relative;
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 24px;
-      width: 638px;
-      height: 1px;
-      background: rgba(242, 242, 242, 1);
-    }
+.privacy-agreement-box{
+  text-align:center;
+  color:#fff;
+
+  p{
+    margin-bottom: 10px;
   }
 
-  .freebing-big-box:nth-last-of-type(1) {
-      .freebing-container{
-        &::after{
-          display: none;
+  ul{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+
+    li{
+        flex:3;
+        border-left: 1px solid #fff;
+        line-height:30px;
+
+        &:nth-of-type(1){
+          border-left:0;
         }
-      }
+    }
   }
 }
 </style>
-
 
 <template>
   <div>
@@ -231,6 +255,17 @@
         </ul>
       </section>
 
+
+      <div class="privacy-agreement-box">
+        <p>Copyright © 2019 Istarbuy</p>
+
+        <ul>
+          <li onclick="window.open('Privacy Policy.html');">Privacy Policy</li>
+          <li onclick="window.open('Terms & Conditions.html');">T&Cs</li>
+          <li onclick="window.open('About us.html');">About Us</li>
+          <li onclick="window.open('Contact us.html');">Contact Us</li>
+        </ul>
+      </div>
     </div>
     <tabBar></tabBar>
 
