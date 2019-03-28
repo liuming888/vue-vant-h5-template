@@ -301,12 +301,12 @@
             <p class="title">{{item.spu.title}}</p>
             <div class="price-box">
               <div class="price-item">
-                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater}}</p>
-                <p class="real-price"><span>Rp</span>{{item.bargain_info.price}}</p>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater||0}}</p>
+                <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item">
                 <div class="btn"
-                  @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
                 <p class="completed">completed</p>
               </div>
             </div>
@@ -331,9 +331,9 @@
             <count-down :dateDiff="item.spu.expire_ttl"></count-down>
             <div class="price-box go-on-price-box">
               <div class="price-item">
-                <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount}}</div>
-                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater}}</p>
-                <p class="real-price"><span>Rp</span>{{item.bargain_info.price}}</p>
+                <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount||0}}</div>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater||0}}</p>
+                <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item go-on-item-btn">
                 <div class="btn go-on"
@@ -342,7 +342,7 @@
 
                 <div class="btn"
                   v-show="item.bargain_info.can_buy==1"
-                  @click="jumpPurchasePage(item.spu.spu_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
               </div>
             </div>
 
@@ -405,11 +405,12 @@ export default {
         }
       });
     },
-    jumpPurchasePage(spu_id) {
+    jumpPurchasePage(spu_id,bargain_id) {
       this.$router.push({
         path: "/purchase",
         query: {
-          spuId: spu_id
+          spuId: spu_id,
+          bargainId:bargain_id
         }
       });
     }
