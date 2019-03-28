@@ -161,7 +161,7 @@
           </li>
           <li class="help-item">
             <img v-lazy="require('./../assets/images/liwu@2x.png')">
-            <p>Cut into free</p>
+            <p>take it for free</p>
           </li>
         </ul>
       </div>
