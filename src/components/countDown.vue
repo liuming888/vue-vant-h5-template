@@ -23,7 +23,7 @@
   }
   > .dec {
     // font-weight: lighter;
-    padding-left: 12px;
+    // padding-left: 12px;
   }
 }
 </style>

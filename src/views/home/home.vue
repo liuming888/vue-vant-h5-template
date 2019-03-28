@@ -48,6 +48,7 @@
   > .home-goods {
     > .home-goods-title {
       padding: 37px 0;
+      padding-bottom: 47px;
       font-size: 28px;
       color: #fff;
       display: flex;
@@ -72,7 +73,7 @@
   position: relative;
   z-index: 10;
   margin: 0 30px;
-  margin-bottom: 55px;
+  margin-bottom: 10px;
   padding-bottom: 30px;
   margin-top: 42px;
   background-color: #fff;
@@ -92,6 +93,7 @@
     );
     border-radius: 0px 0px 8px 8px;
     font-size: 28px;
+    font-weight: 600;
     text-align: center;
     line-height: 60px;
     color: #fff;
@@ -103,7 +105,7 @@
       left: -21px;
       width: 0;
       height: 0;
-      border-color: #ac4d07 transparent;
+      border-color: #f06904 transparent;
       border-width: 0px 0px 21px 21px;
       border-style: solid;
     }
@@ -115,7 +117,7 @@
       right: -21px;
       width: 0;
       height: 0;
-      border-color: #ac4d07 transparent;
+      border-color: #f06904 transparent;
       border-width: 0px 21px 21px 0;
       border-style: solid;
     }
@@ -140,6 +142,32 @@
   border-radius: 50%;
 }
 </style>
+
+<style lang="scss">
+.freebing-box {
+  .freebing-container {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 24px;
+      width: 638px;
+      height: 1px;
+      background: rgba(242, 242, 242, 1);
+    }
+  }
+
+  .freebing-big-box:nth-last-of-type(1) {
+      .freebing-container{
+        &::after{
+          display: none;
+        }
+      }
+  }
+}
+</style>
+
 
 <template>
   <div>

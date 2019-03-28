@@ -3,6 +3,7 @@
   border-radius: 20px;
   background-color: #fff;
   overflow: hidden;
+  
   & + .home-goods-item {
     margin-top: 60px;
   }
@@ -109,10 +110,6 @@
   }
 }
 
-.good-img{
-      border-radius: 20px;
-
-}
 </style>
 
 
@@ -127,12 +124,12 @@
           <template v-for="(swipeItem,swipeIdx) of itemData.spu_pics">
             <van-swipe-item :key="swipeIdx"
               v-if="!isLoad&&index==0||isLoad">
-              <img v-lazy="swipeItem||''" class="good-img">
+              <img v-lazy="swipeItem||''">
             </van-swipe-item>
           </template>
         </van-swipe>
         <img v-else
-          v-lazy="itemData.imgUrl||''"  class="good-img">
+          v-lazy="itemData.imgUrl||''">
       </div>
 
       <div class="goods-detail">

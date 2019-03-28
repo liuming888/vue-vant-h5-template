@@ -1,7 +1,7 @@
 <style lang='scss' scoped src="./aCommodityThatIsBeingBargained.scss"></style>
 
 <template>
-  <div>
+  <div class="freebing-big-box">
     <!-- <div class="freebing-title">Ongoing Freebies</div> -->
     <div class="freebing-container">
       <div class="good-box">
@@ -21,7 +21,7 @@
               <img v-lazy="require('@/assets/images/progress-bar.png')"
                 :width="spuBargainItem.bargain_rate+'%'">
               <div class="progress-content">
-                <span>has been cut {{spuBargainItem.bargain_amount}}</span>
+                <!-- <span>has been cut {{spuBargainItem.bargain_amount}}</span> -->
                 <span>{{spuBargainItem.bargain_rate}}%</span>
               </div>
             </div>

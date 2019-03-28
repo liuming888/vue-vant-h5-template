@@ -5,7 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
   color: #c2c2c2;
   // line-height: 93px;
@@ -25,6 +26,7 @@
     > .tabBar-item-img {
       width: 44px;
       height: auto;
+      margin-bottom: 10px;
     }
   }
   > .active {
