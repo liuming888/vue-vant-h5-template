@@ -301,7 +301,7 @@
             <p class="title">{{item.spu.title}}</p>
             <div class="price-box">
               <div class="price-item">
-                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater||0}}</p>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after||0}}</p>
                 <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item">
@@ -332,7 +332,7 @@
             <div class="price-box go-on-price-box">
               <div class="price-item">
                 <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount||0}}</div>
-                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_ater||0}}</p>
+                <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after||0}}</p>
                 <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item go-on-item-btn">
