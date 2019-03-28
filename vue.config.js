@@ -87,14 +87,14 @@ module.exports = {
     },
     //允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: config => {
-        config.module
-            .rule('vue')
-            .use('vue-loader')
-            .loader('vue-loader')
-            .tap(options => {
-                options.compilerOptions.preserveWhitespace = false;
-                return options;
-            });
+        // config.module
+        //     .rule('vue')
+        //     .use('vue-loader')
+        //     .loader('vue-loader')
+        //     .tap(options => {
+        //         options.compilerOptions.preserveWhitespace = false;
+        //         return options;
+        //     });
         config.module
             .rule('images')
             .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
