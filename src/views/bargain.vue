@@ -441,7 +441,7 @@ export default {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       } else {
-        this.$toast("Gagal mendapatkan informasi berbagi");
+        this.$toast("Failed to get sharing information");
       }
     },
     jumpCurBargainPage(item) {

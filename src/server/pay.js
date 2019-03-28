@@ -23,7 +23,7 @@ export function repaidOrder(params = {}) {
     });
 }
 
-// 重新支付
+// 获取支付渠道信息 
 export function getPayType() {
     return $request.post({
         url: '/api/v1/pay/get_pay_type',

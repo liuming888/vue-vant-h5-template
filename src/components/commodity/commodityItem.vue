@@ -250,7 +250,7 @@ export default {
         console.log("this.shareInfo: ", this.shareInfo);
         this.dialogs.sharingFriends.show = true;
       } else {
-        this.$toast("Gagal mendapatkan informasi berbagi");
+        this.$toast("Failed to get sharing information");
       }
     },
     /**
