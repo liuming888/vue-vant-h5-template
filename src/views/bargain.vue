@@ -24,7 +24,7 @@
               <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3">244d Sent</p>
+                  <p class="p-t-3">{{spu.deliver_count || 1}} Sent</p>
                   <p class="p-t-1">
                     Price
                     <span>RP</span><span>{{spu.original_price}}</span>
@@ -183,7 +183,9 @@ export default {
         spu_pics: []
       },
 
-      bargain_info: {},
+      bargain_info: {
+        bargain_rate: 5 // 给个默认值
+      },
       bargain_user_info: {},
 
       expirationDat: {
@@ -246,10 +248,10 @@ export default {
             spu_id: spuId
           });
         }
-      }
 
-      this.initBargainInfo();
-      this.initHelpBargainList();
+        this.initBargainInfo();
+        this.initHelpBargainList();
+      }
 
       this.initSpuInfo();
       this.initSpuList();
@@ -341,6 +343,8 @@ export default {
           }
         });
         this.dialogs.potongSendiri.show = true;
+        this.initBargainInfo();
+        this.initHelpBargainList();
       }
       // 分享赚自己点击按钮自砍
       this.isShareEarningEntry = false;
