@@ -223,7 +223,7 @@
         &:nth-last-of-type(1) {
             margin-bottom: 0;
         }
-        &:last-of-type{
+        &:last-of-type {
             margin-bottom: 62px;
         }
 
@@ -307,4 +307,11 @@
     font-size: 24px;
     color: #888;
     line-height: 30px;
+}
+
+.receiving-address {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }

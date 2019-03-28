@@ -88,6 +88,13 @@
     }
   }
 }
+
+.address-txt-box {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 </style>
 
 <template>
@@ -108,10 +115,11 @@
         @click="setActiveCls(item)">
         <div class="info-box">
           <p>{{item.username}}, {{item.telephone}} </p>
-          <p>Receiving address: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
+          <p class="address-txt-box">Receiving address: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
 
           <div class="close"
-            @click.stop="delItem(item.id)" v-if="item.is_default!==1">
+            @click.stop="delItem(item.id)"
+            v-if="item.is_default!==1">
             <img src="@/assets/images/delete.png">
           </div>
         </div>
@@ -131,7 +139,8 @@
     <!-- 弹窗 -->
     <dialog-post-add-address :dialogVisible.sync="dialogs.postAddAddress"
       ref="address_dialog"
-      :showType="addressDialogType" v-show="dialogs.postAddAddress.show"/>
+      :showType="addressDialogType"
+      v-show="dialogs.postAddAddress.show" />
     <!-- 删除地址弹窗 -->
     <dialog-default :info="dialogDefaultInfo"
       :dialogVisible.sync="dialogDefaultShow"
@@ -183,9 +192,9 @@ export default {
     async init() {
       let result = await getMyAddress({
         page_size: 10,
-        page_num: 1,
+        page_num: 1
       });
-      if (result&&result.data) {
+      if (result && result.data) {
         this.address_list = result.data;
       }
     },
@@ -198,7 +207,7 @@ export default {
         operation: -1,
         user_address: this.address_list.find(item => item.id == id)
       });
-      if (result && result.code==0) {
+      if (result && result.code == 0) {
         this.address_list = this.address_list.filter(item => item.id != id);
       }
     },
