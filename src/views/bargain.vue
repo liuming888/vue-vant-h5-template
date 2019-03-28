@@ -246,10 +246,10 @@ export default {
             spu_id: spuId
           });
         }
-
-        this.initBargainInfo();
-        this.initHelpBargainList();
       }
+
+      this.initBargainInfo();
+      this.initHelpBargainList();
 
       this.initSpuInfo();
       this.initSpuList();
@@ -335,7 +335,7 @@ export default {
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.$router.replace({
-            query: {
+          query: {
             ...this.$route.query,
             bargainId: this.chop_info.bargain_id
           }
