@@ -1,12 +1,12 @@
 // import Vue from 'vue';
-// import Router from 'vue-router';
+import Router from 'vue-router';
 import {
     gaSend
 } from '../utils/util.js';
 // import quicklink from 'quicklink/dist/quicklink.mjs';
 // Vue.use(Router);
 
-const curRouter = new VueRouter({
+const curRouter = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
