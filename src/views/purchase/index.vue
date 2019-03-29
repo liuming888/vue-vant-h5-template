@@ -324,6 +324,14 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
+      const { bargain_after } = this.bargain_info;
+      if (bargain_after < this.currentType.min_amount) {
+        this.$toast(
+          "The payment amount is too small, please try again by alternative payment method."
+        );
+        return;
+      }
+
       fbq("track", "InitiateCheckout");
 
       if (!this.myAddress.id) {
@@ -369,13 +377,12 @@ export default {
       } else {
         let result = await orderCreate(param);
         if (result && result.data) {
-
-          fbq('track', 'Purchase', {value: 0.00, currency: 'USD'});
+          fbq("track", "Purchase", { value: 0.0, currency: "USD" });
 
           let { pay_url, order_no } = result.data;
           console.log("pay_url: ", pay_url);
           this.showWaitPaymentDialog.show = true;
-          
+
           this.mx_showLoad();
 
           window.location.href = pay_url;
@@ -388,6 +395,14 @@ export default {
      * @description: 继续支付
      */
     async goRepaidPay() {
+      const { bargain_after } = this.bargain_info;
+      if (bargain_after < this.currentType.min_amount) {
+        this.$toast(
+          "The payment amount is too small, please try again by alternative payment method."
+        );
+        return;
+      }
+
       let result = await repaidOrder({
         order_no: this.$route.query.orderNo,
         spu_name: this.spu.title,
@@ -398,8 +413,8 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        
-         this.mx_showLoad();
+
+        this.mx_showLoad();
 
         window.location.href = pay_url;
 
