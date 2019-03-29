@@ -290,6 +290,13 @@ export default {
       }
 
       let result = await bargainChop({ bargain_id, spu_id });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: spu_id
+      });
+
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.chop_info = chop_info;
@@ -333,6 +340,13 @@ export default {
       let result = await chopShare({
         relation_id: this.$route.query.relationId
       });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: this.$route.query.spuId
+      });
+
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.$router.replace({

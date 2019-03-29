@@ -357,6 +357,9 @@ export default {
 
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
+
+       fbq('track', 'StartTrial', {value: this.spu.title, currency: 'USD', predicted_ltv: spuId});
+
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;
