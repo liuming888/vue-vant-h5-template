@@ -1,7 +1,7 @@
 import $request from '../utils/api/request.js';
 
 // login
-export function login(params={}) {
+export function login(params = {}) {
     return $request.post({
         url: '/api/v1/user/login',
         data: params,
@@ -25,18 +25,18 @@ export function refreshToken(params = {}) {
 }
 
 // 我的配送地址管理
-export function dealMyAddress({ operation, user_address }) {
+export function dealMyAddress(params = {}) {
     return $request.post({
         url: '/api/v1/user/addresses/deal_my_address ',
-        data: { operation, user_address },
+        data: params,
     });
 }
 
 // 获取我的配送地址列表
-export function getMyAddress({ page_size, page_num, is_default }) {
+export function getMyAddress(params = {}) {
     return $request.post({
         url: '/api/v1/user/addresses/get_my_address',
-        data: { page_size, page_num, is_default },
+        data: params,
     });
 }
 
@@ -48,10 +48,10 @@ export function getMyAccount() {
 }
 
 // 获取我的好友明细
-export function getMyFriends({ page_size, page_num }) {
+export function getMyFriends(params = {}) {
     return $request.post({
         url: '/api/v1/user/account/get_my_friends',
-        data: { page_size, page_num },
+        data: params,
     });
 }
 
@@ -62,11 +62,9 @@ export function getHeroList() {
     });
 }
 
-// 用户首次登录领取新人礼包 
+// 用户首次登录领取新人礼包
 export function getMyNewRp() {
     return $request.post({
         url: '/api/v1/user/get_my_new_rp',
     });
 }
-
-

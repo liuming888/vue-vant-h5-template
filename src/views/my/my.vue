@@ -30,7 +30,7 @@
           margin: 34px 0 20px 0;
           font-size: 36px;
           line-height: 40px;
-          white-space:nowrap;
+          white-space: nowrap;
           span {
             background: url("./../../assets/images/member.png") left top
               no-repeat;
@@ -214,31 +214,31 @@
       <ul class="my-control">
         <li class="my-control-item"
           @click="handleToMyFriend">
-          <img src="@/assets/images/Myfriends@2x.png"
+          <img v-lazy="require('@/assets/images/Myfriends@2x.png')"
             alt>
           <p>Friends</p>
         </li>
         <li class="my-control-item"
           @click="handleToMyOrder">
-          <img src="@/assets/images/Myorder@2x.png"
+          <img v-lazy="require('@/assets/images/Myorder@2x.png')"
             alt>
           <p>My order</p>
         </li>
         <li class="my-control-item"
           @click="handleMyIncomeDetail">
-          <img src="@/assets/images/Revenuedetails@2x.png"
+          <img v-lazy="require('@/assets/images/Revenuedetails@2x.png')"
             alt>
           <p>Revenue details</p>
         </li>
         <li class="my-control-item"
           @click="hadnleToTutorial">
-          <img src="@/assets/images/Tutorial@2x.png"
+          <img v-lazy="require('@/assets/images/Tutorial@2x.png')"
             alt>
           <p>Tutorial</p>
         </li>
       </ul>
       <div class="hero-rank"
-        v-if="heroList.length>0">
+        v-if="hero_tips.length>0">
         <p class="title">Heroes</p>
         <ul class="hero-list">
           <li class="hero-list-title">
@@ -259,13 +259,13 @@
 </template>
 <script>
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
-import FriendListCommon from "@/components/FriendListCommon.vue";
 
 import { getMyAccount, getHeroList } from "@/server/user.js";
 export default {
-  components: { 
+  components: {
     tabBar,
-    FriendListCommon
+    FriendListCommon: resolve =>
+      require(["@/components/FriendListCommon.vue"], resolve)
   },
   data() {
     return {
@@ -278,26 +278,8 @@ export default {
         today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
         today_received_price: 0 //类型：String  必有字段  备注：今日到账收益
       },
-      heroList: [
-        {
-          name: "Zoe",
-          options1: 10000,
-          options2: 20000,
-          imgUrl: require("@/assets/images/tabBar-me-active.png")
-        }
-      ],
 
-      hero_tips: [
-        //类型：Array  必有字段  备注：无
-        {
-          //类型：Object  必有字段  备注：无
-          username: "用户1", //类型：String  必有字段  备注：无
-          avatar:
-            "", //类型：String  必有字段  备注：无
-          fans_count: 5131, //类型：Number  必有字段  备注：无
-          sum_amount: 1229 //类型：Number  必有字段  备注：无
-        }
-      ]
+      hero_tips: []
     };
   },
   created() {
@@ -320,50 +302,50 @@ export default {
       }
     },
     // 去支付
-    handleCashOut(){
+    handleCashOut() {
       //统计
       this.$gaSend({
         eventCategory: "我的账户页面_立即提现",
-        eventAction: "点击",
+        eventAction: "点击"
       });
-      this.$router.push('/withdrawRelated');
+      this.$router.push("/withdrawRelated");
     },
     // 我的朋友
     handleToMyFriend() {
       //统计
       this.$gaSend({
         eventCategory: "我的账户_我的好友",
-        eventAction: "点击",
+        eventAction: "点击"
       });
-      this.$router.push('/my/myFriends')
+      this.$router.push("/my/myFriends");
     },
     // 我的订单
-    handleToMyOrder(){
+    handleToMyOrder() {
       //统计
       this.$gaSend({
         eventCategory: "我的账户_我的订单",
-        eventAction: "点击",
+        eventAction: "点击"
       });
-      this.$router.push('/my/myOrder');
+      this.$router.push("/my/myOrder");
     },
     // 收入明细
     handleMyIncomeDetail() {
       //统计
       this.$gaSend({
         eventCategory: "我的账户_收益明细",
-        eventAction: "点击",
+        eventAction: "点击"
       });
-      this.$router.push('/my/revenueDetails');
+      this.$router.push("/my/revenueDetails");
     },
     // 新手教程
     hadnleToTutorial() {
       //统计
       this.$gaSend({
         eventCategory: "我的账户_新手教程",
-        eventAction: "点击",
+        eventAction: "点击"
       });
-      this.$router.push('/my/Tutorial');
-    },
+      this.$router.push("/my/Tutorial");
+    }
     // 立即提现
   }
 };

@@ -14,40 +14,6 @@
   box-sizing: border-box;
 }
 
-// .share-types {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-bottom: 41px;
-//   position: relative;
-
-//   img {
-//     width: 100px;
-//     margin-right: 20px;
-//     height: auto;
-//   }
-// }
-
-// .tip {
-//   width: 400px;
-//   margin: 0 auto;
-//   text-align: center;
-//   margin-bottom: 135px;
-//   font-size: 26px;
-// }
-// .copy-link {
-//   display: block;
-//   background: none;
-//   // padding-left: 230px;
-//   font-size: 34px;
-//   font-weight: bold;
-//   color: rgba(211, 12, 5, 1);
-//   position: absolute;
-//   left: 230px;
-//   bottom: 50px;
-// }
-
 .share-box {
   width: 571px;
   height: 836px;
@@ -135,44 +101,28 @@
 
       <h5 class="tit">Share on</h5>
 
-      <!-- <div class="share-types">
-        <img src="@/assets/images/messenger.png"
-          class="fb"
-          alt="fb"
-          @click="mx_shareMessenger">
-
-        <img src="@/assets/images/line.png"
-          @click="mx_shareLine">
-
-        <img src="@/assets/images/whatsapp.png"
-          @click="mx_shareWhatsapp">
-
-        <img src="@/assets/images/facbook.png"
-          @click="mx_shareFacebook">
-      </div> -->
-
       <div class="share-types">
 
         <div class="share-item">
-          <img src="@/assets/images/facbook.png"
+          <img v-lazy="require('@/assets/images/facbook.png')"
             @click="share(mx_shareFacebook)">
           <p>Facebook</p>
         </div>
 
         <div class="share-item">
-          <img src="@/assets/images/line.png"
+          <img v-lazy="require('@/assets/images/line.png')"
             @click="shareshare(mx_shareLine)">
           <p>LINE</p>
         </div>
 
         <div class="share-item">
-          <img src="@/assets/images/whatsapp.png"
+          <img v-lazy="require('@/assets/images/whatsapp.png')"
             @click="share(mx_shareWhatsapp)">
           <p>WhatsApp</p>
         </div>
 
         <div class="share-item">
-          <img src="@/assets/images/messenger.png"
+          <img v-lazy="require('@/assets/images/messenger.png')"
             @click="share(mx_shareMessenger)">
           <p>Messenger</p>
         </div>
@@ -185,7 +135,7 @@
         :data-clipboard-text="shareInfo.share_url"
         @click="mx_copyLink"></button>
 
-      <img src="@/assets/images/guanbi@2x.png"
+      <img v-lazy="require('@/assets/images/guanbi@2x.png')"
         class="close-img"
         @click="closeDialog">
     </div>
@@ -222,14 +172,14 @@ export default {
       }
     },
     itemData: {
-      type: Object,
+      type: Object
     }
   },
   methods: {
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });
     },
-    share(fun){
+    share(fun) {
       fun();
       //统计
       this.$gaSend({
