@@ -228,6 +228,8 @@ export default {
   },
   mounted() {
     document.title = "Check out";
+
+    fbq("track", "AddToCart");
   },
   methods: {
     async init() {
@@ -324,6 +326,8 @@ export default {
     async goPaly() {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
+      fbq("track", "InitiateCheckout");
+
       if (!this.myAddress.id) {
         Dialog.alert({
           message: "Please choose a shipping address",
@@ -367,6 +371,9 @@ export default {
       } else {
         let result = await orderCreate(param);
         if (result && result.data) {
+
+          fbq('track', 'Purchase', {value: 0.00, currency: 'USD'});
+
           let { pay_url, order_no } = result.data;
           console.log("pay_url: ", pay_url);
           this.showWaitPaymentDialog.show = true;

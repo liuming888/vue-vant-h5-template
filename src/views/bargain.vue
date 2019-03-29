@@ -11,8 +11,7 @@
     <div class="bargain-header">
       <div class="bargain-info-box">
         <img class="bg"
-          src="./../assets/images/bargain-bg-2.png"
-          alt="">
+          v-lazy="require('./../assets/images/bargain-bg-2.png')">
         <div class="bargain-content">
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
@@ -291,6 +290,13 @@ export default {
       }
 
       let result = await bargainChop({ bargain_id, spu_id });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: spu_id
+      });
+
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.chop_info = chop_info;
@@ -334,6 +340,13 @@ export default {
       let result = await chopShare({
         relation_id: this.$route.query.relationId
       });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: this.$route.query.spuId
+      });
+
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.$router.replace({

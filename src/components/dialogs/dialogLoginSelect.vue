@@ -97,9 +97,10 @@
 import axios from "axios";
 import { login, check_login } from "@/server/user.js";
 import fbInit from "@/mixins/fbInit.js";
+import loadings from "@/mixins/loadings.js";
 export default {
   name: "dialogLoginSelect",
-  mixins: [fbInit],
+  mixins: [fbInit, loadings],
   data() {
     return {};
   },
@@ -132,6 +133,8 @@ export default {
      * @return: true 登录成功   false 登录失败
      */
     async loginFB() {
+      this.mx_showLoad();
+
       let loginInfo = await window.$faceBookApi.loginFB();
       console.warn("loginInfo: ", loginInfo);
       if (loginInfo) {
@@ -164,6 +167,8 @@ export default {
 
         let result = await login(param);
         console.log("result: ", result);
+        this.mx_closeLoad();
+
         if (result && result.data) {
           let userInfo = result.data;
           this.$store.commit("setUserInfo", userInfo);
@@ -178,6 +183,8 @@ export default {
               "newUserInfo",
               JSON.stringify(userInfo)
             );
+
+            fbq("track", "CompleteRegistration");
           }
 
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
@@ -189,6 +196,8 @@ export default {
           return true;
         }
       }
+
+      this.mx_closeLoad();
       return false;
     }
   }

@@ -125,9 +125,6 @@ export default {
     }
   },
   watch: {
-    preAmount(val){
-      console.log('111111111111111111111val: ', val);
-    },
     dialogVisible: {
       handler() {
         if (this.dialogVisible.show) {
