@@ -345,9 +345,9 @@ export default {
         this.dialogs.potongSendiri.show = true;
         this.initBargainInfo();
         this.initHelpBargainList();
+        // 分享赚自己点击按钮自砍
+        this.isShareEarningEntry = false;
       }
-      // 分享赚自己点击按钮自砍
-      this.isShareEarningEntry = false;
     },
     /**
      * @description: 获取商品信息
