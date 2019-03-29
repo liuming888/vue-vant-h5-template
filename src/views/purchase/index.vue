@@ -380,7 +380,7 @@ export default {
 
           window.location.href = pay_url;
 
-          this.mx_closeLoad();
+          // this.mx_closeLoad();
         }
       }
     },
@@ -403,7 +403,7 @@ export default {
 
         window.location.href = pay_url;
 
-         this.mx_closeLoad();
+        //  this.mx_closeLoad();
       }
     },
     goShippingAddressList() {
