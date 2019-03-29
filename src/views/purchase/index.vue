@@ -155,11 +155,8 @@ import shippingAddress from "../shippingAddress.vue";
 import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
 import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
-// const obj = { Icon };
-// const vantCom = {};
-// for (let k in obj) {
-//   vantCom[obj[k].name] = obj[k];
-// }
+
+import loadings from "@/mixins/loadings.js";
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
 import {
@@ -172,6 +169,7 @@ import { getMyAddress } from "@/server/user.js";
 import { getExchangeRate } from "@/server/finance.js";
 import { getBargainInfo } from "@/server/bargain.js";
 export default {
+  mixins: [loadings],
   components: {
     DialogDefault,
     shippingAddress, // 地址列表组件
@@ -377,8 +375,12 @@ export default {
           let { pay_url, order_no } = result.data;
           console.log("pay_url: ", pay_url);
           this.showWaitPaymentDialog.show = true;
-          // window.open(pay_url);
+          
+          this.mx_showLoad();
+
           window.location.href = pay_url;
+
+          this.mx_closeLoad();
         }
       }
     },
@@ -396,8 +398,12 @@ export default {
         let { pay_url, order_no } = result.data;
         console.log("pay_url: ", pay_url);
         this.showWaitPaymentDialog.show = true;
-        // window.open(pay_url);
+        
+         this.mx_showLoad();
+
         window.location.href = pay_url;
+
+         this.mx_closeLoad();
       }
     },
     goShippingAddressList() {
