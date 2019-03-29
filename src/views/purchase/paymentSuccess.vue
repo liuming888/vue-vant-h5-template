@@ -69,7 +69,7 @@
       <ul class="like-goods-list">
         <li is="commodity-item"
           v-for="(item, index) of goodsList"
-          @jumpBargain="jumpBargain"
+          @jumpBargainGa="jumpBargain"
           :key="index"
           :itemData="item">
         </li>

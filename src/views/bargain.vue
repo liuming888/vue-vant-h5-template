@@ -462,18 +462,19 @@ export default {
       }
     },
     jumpCurBargainPage(item) {
-      // 统计
-      this.$gaSend({
-        eventCategory: "砍价详情页_底部商品列表",
-        eventAction: "点击",
-        eventLabel: item.title.substr(0, 10)
-      });
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
+
+      // 统计
+      this.$gaSend({
+        eventCategory: "砍价详情页_底部商品列表",
+        eventAction: "点击",
+        eventLabel: item.title.substr(0, 10)
+      });
 
       this.$router.replace({
         query: {
@@ -485,12 +486,6 @@ export default {
     },
 
     jumpBuyPage() {
-      // 统计
-      this.$gaSend({
-        eventCategory: "砍价详情页_去购买",
-        eventAction: "点击",
-        eventLabel: this.spu.title.substr(0, 10)
-      });
       // 上线时不能注释
       if (!this.$store.state.userInfo.user_id) {
         // const { pathname, search } = window.location;
@@ -500,6 +495,13 @@ export default {
         return;
       }
       if (this.bargain_info.can_buy != 1) return;
+
+      // 统计
+      this.$gaSend({
+        eventCategory: "砍价详情页_去购买",
+        eventAction: "点击",
+        eventLabel: this.spu.title.substr(0, 10)
+      });
 
       this.$router.push({ path: "/purchase", query: { ...this.$route.query } });
     },
