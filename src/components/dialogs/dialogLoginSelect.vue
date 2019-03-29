@@ -109,6 +109,12 @@ export default {
       return this.$store.state.dialogs.loginSelect.show;
     }
   },
+  mounted() {
+    this.$gaSend({
+      eventCategory: "第三方登陆浮窗",
+      eventAction: "浮窗展示"
+    });
+  },
   watch: {
     setLoginSelectShow: {
       handler() {

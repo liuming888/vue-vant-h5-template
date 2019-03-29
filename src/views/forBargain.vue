@@ -209,14 +209,15 @@ import {
 } from "@/server/bargain.js";
 export default {
   components: {
-    dialogSharingFriends:resolve =>
+    dialogSharingFriends: resolve =>
       require(["@/components/dialogs/dialogSharingFriends.vue"], resolve), // 分享好友弹窗
-    countDown:resolve =>
-      require(["@/components/countDown.vue"], resolve),
-    userPickingUpMessage:resolve =>
+    countDown: resolve => require(["@/components/countDown.vue"], resolve),
+    userPickingUpMessage: resolve =>
       require(["@/components/userPickingUpMessage.vue"], resolve),
-    dialogOldUsersHelpCutSuccessfully:resolve =>
-      require(["@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue"], resolve) // 帮砍成功弹窗
+    dialogOldUsersHelpCutSuccessfully: resolve =>
+      require([
+        "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue"
+      ], resolve) // 帮砍成功弹窗
   },
   data() {
     return {
@@ -308,6 +309,11 @@ export default {
   },
   mounted() {
     document.title = "Getting Freebies";
+
+    this.$gaSend({
+      eventCategory: "帮砍页面",
+      eventAction: "页面展示"
+    });
   },
   methods: {
     async init() {
@@ -358,7 +364,11 @@ export default {
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
 
-       fbq('track', 'StartTrial', {value: this.spu.title, currency: 'USD', predicted_ltv: spuId});
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: spuId
+      });
 
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
@@ -501,7 +511,7 @@ export default {
       }
 
       this.$router.push({
-        path:"/bargain",
+        path: "/bargain",
         query: {
           spuId: spu_id
         }
