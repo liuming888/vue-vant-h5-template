@@ -42,9 +42,9 @@
             <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate  +'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)  +'%'}"></div>
               <div class="schedule-item">
-                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||0}}%</span> off</span>
+                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)||0}}%</span> off</span>
               </div>
               <div class="schedule-item ball ball-center">
                 <span class="description">Available for purchase</span>
@@ -184,7 +184,7 @@ export default {
       },
 
       bargain_info: {
-        bargain_rate: 5 // 给个默认值
+        // bargain_rate: 5 // 给个默认值
       },
       bargain_user_info: {},
 
