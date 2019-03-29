@@ -178,6 +178,8 @@ export default {
               "newUserInfo",
               JSON.stringify(userInfo)
             );
+
+            fbq('track', 'CompleteRegistration');
           }
 
           if (this.$store.state.dialogs.loginSelect.jumpUrl) {
