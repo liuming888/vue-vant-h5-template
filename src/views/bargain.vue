@@ -11,8 +11,7 @@
     <div class="bargain-header">
       <div class="bargain-info-box">
         <img class="bg"
-          src="./../assets/images/bargain-bg-2.png"
-          alt="">
+          v-lazy="require('./../assets/images/bargain-bg-2.png')">
         <div class="bargain-content">
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
@@ -42,9 +41,9 @@
             <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate  +'%'}"></div>
+                :style="{'width':bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)  +'%'}"></div>
               <div class="schedule-item">
-                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||0}}%</span> off</span>
+                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)||0}}%</span> off</span>
               </div>
               <div class="schedule-item ball ball-center">
                 <span class="description">Available for purchase</span>
@@ -184,7 +183,7 @@ export default {
       },
 
       bargain_info: {
-        bargain_rate: 5 // 给个默认值
+        // bargain_rate: 5 // 给个默认值
       },
       bargain_user_info: {},
 
@@ -291,6 +290,13 @@ export default {
       }
 
       let result = await bargainChop({ bargain_id, spu_id });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: spu_id
+      });
+
       if (result && result.data && result.data.chop_info) {
         const chop_info = result.data.chop_info;
         this.chop_info = chop_info;
@@ -334,6 +340,13 @@ export default {
       let result = await chopShare({
         relation_id: this.$route.query.relationId
       });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: this.$route.query.spuId
+      });
+
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.$router.replace({
@@ -345,9 +358,9 @@ export default {
         this.dialogs.potongSendiri.show = true;
         this.initBargainInfo();
         this.initHelpBargainList();
+        // 分享赚自己点击按钮自砍
+        this.isShareEarningEntry = false;
       }
-      // 分享赚自己点击按钮自砍
-      this.isShareEarningEntry = false;
     },
     /**
      * @description: 获取商品信息

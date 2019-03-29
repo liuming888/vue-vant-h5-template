@@ -8,26 +8,26 @@ export function getWithdrawInfo() {
 }
 
 // 申请提现
-export function applyWithdraw({ pay_type, account_name, account_no, amount }) {
+export function applyWithdraw(params = {}) {
     return $request.post({
         url: '/api/v1/withdraw/apply_withdraw',
-        data: { pay_type, account_name, account_no, amount },
+        data: params,
     });
 }
 
 // 获取提现列表
-export function getWithdrawList({ page_size, page_num }) {
+export function getWithdrawList(params = {}) {
     return $request.post({
         url: '/api/v1/withdraw/get_withdraw_list',
-        data: { page_size, page_num },
+        data: params,
     });
 }
 
 // 获取明细列表
-export function getFundRecordList({ page_size, page_num }) {
+export function getFundRecordList(params = {}) {
     return $request.post({
         url: '/api/v1/fund/get_fund_record_list',
-        data: { page_size, page_num },
+        data: params,
     });
 }
 

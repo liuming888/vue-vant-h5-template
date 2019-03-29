@@ -16,7 +16,7 @@
       </div>
       <div class="bargain-info-box">
         <img class="bg"
-          src="./../assets/images/bargain-2.png">
+          v-lazy="require('./../assets/images/bargain-2.png')">
         <div class="bargain-content">
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
@@ -200,13 +200,6 @@
 </template>
 
 <script>
-// import bargainingProgressBar from "@/components/bargain/bargainingProgressBar.vue";
-import dialogSharingFriends from "@/components/dialogs/dialogSharingFriends.vue";
-// import bargainingHelpInformation from "@/components/bargain/bargainingHelpInformation.vue";
-import countDown from "@/components/countDown.vue";
-import userPickingUpMessage from "@/components/userPickingUpMessage.vue";
-import dialogOldUsersHelpCutSuccessfully from "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue";
-
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareSpu, shareInfo } from "@/server/share.js";
 import {
@@ -214,16 +207,16 @@ import {
   getHelpBargainList,
   bargainChop
 } from "@/server/bargain.js";
-import { Promise } from "q";
 export default {
   components: {
-    // bargainingProgressBar, // 砍价进度条
-    dialogSharingFriends, // 分享好友弹窗
-    // bargainingHelpInformation, // 砍价帮
-    countDown,
-    userPickingUpMessage,
-    dialogOldUsersHelpCutSuccessfully // 帮砍成功弹窗
-    // commodityItem // 商品列表展示的商品X
+    dialogSharingFriends:resolve =>
+      require(["@/components/dialogs/dialogSharingFriends.vue"], resolve), // 分享好友弹窗
+    countDown:resolve =>
+      require(["@/components/countDown.vue"], resolve),
+    userPickingUpMessage:resolve =>
+      require(["@/components/userPickingUpMessage.vue"], resolve),
+    dialogOldUsersHelpCutSuccessfully:resolve =>
+      require(["@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue"], resolve) // 帮砍成功弹窗
   },
   data() {
     return {
@@ -364,6 +357,9 @@ export default {
 
       const { bargainId, spuId } = this.$route.query;
       let result = await bargainChop({ bargain_id: bargainId, spu_id: spuId });
+
+       fbq('track', 'StartTrial', {value: this.spu.title, currency: 'USD', predicted_ltv: spuId});
+
       if (result && result.data) {
         this.chop_info = result.data.chop_info;
         this.dialogs.oldUsersHelpCutSuccessfully.show = true;

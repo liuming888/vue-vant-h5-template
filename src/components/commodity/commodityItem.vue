@@ -3,7 +3,7 @@
   border-radius: 20px;
   background-color: #fff;
   overflow: hidden;
-  
+
   & + .home-goods-item {
     margin-top: 60px;
   }
@@ -109,7 +109,6 @@
     }
   }
 }
-
 </style>
 
 
@@ -165,11 +164,6 @@
 
 <script>
 import { Swipe, SwipeItem } from "vant";
-// const obj = { Swipe, SwipeItem };
-// const vantCom = {};
-// for (let k in obj) {
-//   vantCom[obj[k].name] = obj[k];
-// }
 
 import { shareSpu } from "@/server/share.js";
 export default {
@@ -232,6 +226,9 @@ export default {
      */
     async cashBack() {
       this.$emit("cashBackGa", this.itemData);
+      
+      fbq('track', 'Subscribe', {value: this.itemData.title, currency: 'USD', predicted_ltv: this.itemData.spu_id});
+
       if (
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
