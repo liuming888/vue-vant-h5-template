@@ -41,9 +41,9 @@
             <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
-                :style="{'width':bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)  +'%'}"></div>
+                :style="{'width':curRate+'%'}"></div>
               <div class="schedule-item">
-                <span class="description"><span class="highlight">{{bargain_info.bargain_rate||parseInt(shareInfo.pre_bargain_amount/spu.price*100)||0}}%</span> off</span>
+                <span class="description"><span class="highlight">{{curRate}}%</span> off</span>
               </div>
               <div class="schedule-item ball ball-center">
                 <span class="description">Available for purchase</span>
@@ -203,6 +203,14 @@ export default {
 
       isShareEarningEntry: false // 是否是分享赚链接进入的
     };
+  },
+  computed: {
+    /**
+     * @description:  当前砍价比例
+     */
+    curRate(){
+      return this.bargain_info.bargain_rate||parseInt(this.shareInfo.pre_bargain_amount/this.spu.price*100);
+    }
   },
   created() {
     this.init();
