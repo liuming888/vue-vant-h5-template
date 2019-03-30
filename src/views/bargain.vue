@@ -209,7 +209,7 @@ export default {
      * @description:  当前砍价比例
      */
     curRate(){
-      return this.bargain_info.bargain_rate||parseInt(this.shareInfo.pre_bargain_amount/this.spu.price*100);
+      return this.bargain_info.bargain_rate||parseInt(this.shareInfo.pre_bargain_amount/this.spu.price*100)||0;
     }
   },
   created() {
