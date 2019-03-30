@@ -425,7 +425,7 @@ export default {
       if (result && result.data) {
         let spu = result.data.spu;
         for (let k in spu) {
-          this.spu[k] = spu[k];
+          this.$set(this.spu, k, spu[k]);
         }
         // this.refreshTime();
       }
