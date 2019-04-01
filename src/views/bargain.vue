@@ -208,8 +208,12 @@ export default {
     /**
      * @description:  当前砍价比例
      */
-    curRate(){
-      return this.bargain_info.bargain_rate||parseInt(this.shareInfo.pre_bargain_amount/this.spu.price*100)||0;
+    curRate() {
+      return (
+        this.bargain_info.bargain_rate ||
+        parseInt((this.shareInfo.pre_bargain_amount / this.spu.price) * 100) ||
+        0
+      );
     }
   },
   created() {
@@ -378,8 +382,15 @@ export default {
       if (result && result.data && result.data.spu) {
         let spu = result.data.spu;
         for (let k in spu) {
-          this.$set(this.spu,k,spu[k]);
+          this.$set(this.spu, k, spu[k]);
         }
+
+        // 统计
+        this.$gaSend({
+          eventCategory: "砍价详情页",
+          eventAction: "页面展示",
+          eventLabel: this.spu.title.substr(0, 10)
+        });
         // this.refreshTime();
       }
     },
@@ -548,21 +559,21 @@ export default {
       }
     });
   },
-  watch: {
-    spu: {
-      handler() {
-        if (this.spu.hasOwnProperty("title")) {
-          // 统计
-          this.$gaSend({
-            eventCategory: "砍价详情页",
-            eventAction: "页面展示",
-            eventLabel: this.spu.title.substr(0, 10)
-          });
-        }
-      },
-      immediate: true,
-      deep: true
-    }
-  }
+  // watch: {
+  //   spu: {
+  //     handler() {
+  //       if (this.spu.hasOwnProperty("title")) {
+  //         // 统计
+  //         this.$gaSend({
+  //           eventCategory: "砍价详情页",
+  //           eventAction: "页面展示",
+  //           eventLabel: this.spu.title.substr(0, 10)
+  //         });
+  //       }
+  //     },
+  //     immediate: true,
+  //     deep: true
+  //   }
+  // }
 };
 </script>
