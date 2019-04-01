@@ -8,6 +8,7 @@
     margin-top: 60px;
   }
   > .goods-img {
+    min-height: 690px;
     img {
       width: 100%;
       height: 690px;
