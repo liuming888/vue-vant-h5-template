@@ -104,7 +104,7 @@ export default {
   data() {
     return {};
   },
-  conputed: {
+  computed: {
     setLoginSelectShow() {
       return this.$store.state.dialogs.loginSelect.show;
     }
