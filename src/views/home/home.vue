@@ -441,7 +441,7 @@ export default {
       // console.log(1);
       this.$gaSend({
         eventCategory: "banner",
-        eventAction: "页面展示"
+        eventAction: "点击"
       });
     },
     // 更多砍价点击
