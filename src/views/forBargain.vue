@@ -24,11 +24,10 @@
               <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''">
             </div>
             <div class="detail">
-              <p class="title">{{spu.title}}</p>
-              <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
+              <div class="title"  lang="en">{{spu.title}}</div>
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3"></p>
+                  <p class="p-t-3">{{spu.deliver_count || 1}} Sent</p>
                   <p class="p-t-1">
                     Price
                     <span>RP</span><span>{{spu.original_price}}</span>
@@ -44,7 +43,7 @@
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
             <p class="title"
-              v-if="!isNGo&&$route.query.helpCur!='ok'"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span>cheaper now, leaving<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
+              v-if="!isNGo&&$route.query.helpCur!='ok'"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price||0}}</span>&nbsp; cheaper now, leaving<span class="n-2"><span class="dollar">&nbsp;RP</span>{{bargain_info.bargain_amount||0}}</span></p>
             <p class="title"
               v-else-if="!isNGo&&$route.query.helpCur=='ok'">Successfully help your friend cut down<span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||0}}</span></p>
             <div class="schedule">
