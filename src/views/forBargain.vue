@@ -491,6 +491,7 @@ export default {
      * @description: 帮砍列表
      */
     async initHelpBargainList() {
+      if(!this.$store.state.userInfo.user_id) return;
       let result = await getHelpBargainList({
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
