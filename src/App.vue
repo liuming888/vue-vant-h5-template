@@ -43,13 +43,14 @@ export default {
       return;
     }
     this.initToken();
-    // this.initFB();
+    this.initFB();
   },
   methods: {
     /**
      * @description: 初始化FB
      */
-    /*  initFB() {
+    initFB() {
+      require("@/utils/faceBookSdk.js");
       const vm = this;
       window.fbAsyncInit = async function() {
         FB.init(FBConfig);
@@ -86,7 +87,7 @@ export default {
         //   // console.log('loginInfo: ', loginInfo);
         // }
       };
-    }, */
+    },
     /**
      * @description: 刷新下登录token
      */
