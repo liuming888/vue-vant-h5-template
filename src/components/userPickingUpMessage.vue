@@ -17,7 +17,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  // animation: mes 20s infinite;
   z-index: 10000;
 
   .info-box {

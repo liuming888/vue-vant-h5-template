@@ -297,13 +297,13 @@ export default {
         this.isOne
       );
     },
-    // 是否是第N次帮砍的老用户
+    // 是否是老用户帮砍完成的
     isNGo() {
       return (
         !this.isOne &&
         this.bargain_user_info &&
         this.bargain_info.status != 2 &&
-        !this.$route.query.helpCur
+        this.isHelpOk
       );
     },
     // 新用户帮砍成功
