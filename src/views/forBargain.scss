@@ -31,6 +31,8 @@
         padding: 20px 20px 42px;
         box-sizing: border-box;
         position: relative;
+        transform-style: preserve-3d;
+        perspective: 200px;
 
         .spu-box {
             width: 652px;
@@ -200,9 +202,20 @@
             }
         }
 
+        @keyframes btnmove {
+            0% {
+                transform: translateZ(0);
+            }
+
+            100% {
+                transform: translateZ(1px);
+            }
+        }
+
         .main-btn {
             width: 656px;
             height: 90px;
+            box-shadow: 0px 2px 2px 2px #ff890a;
             line-height: 90px;
             text-align: center;
             background: linear-gradient(0deg, rgba(255, 229, 89, 1) 0%, rgba(255, 215, 0, 1) 100%);
@@ -213,6 +226,8 @@
             font-weight: 600;
             color: rgba(211, 12, 5, 1);
             margin-bottom: 53px;
+            transform: translateZ(0);
+            animation:btnmove 0.3s ease-in-out infinite alternate;
         }
 
         .team-box {
