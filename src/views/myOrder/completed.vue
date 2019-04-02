@@ -6,7 +6,7 @@
       <li class="all-order-item"
         v-for="item of orderList"
         :key="item.order_no">
-        <order-completed-item :curDat="item" />
+        <order-completed-item :curDat="item"  @on-customer-service="handleCustomerService" :key="item.order_no"/>
       </li>
     </ul>
     <!-- 无订单 -->
@@ -17,6 +17,20 @@
         class="none-file-icon">
       <p>Tidak ada pesanan terkait</p>
       <div class="btn">Buka halaman beranda dan lihat</div>
+    </div>
+
+     <!-- 联系我们弹窗 -->
+    <div class="alertBox"
+      v-if="contactVisible">
+      <div class="alertWrap">
+        <h1>Contact us by</h1>
+        <ul>
+          <li class="alertWrap-item">facebook fanpage : @Lovingistarbuy</li>
+          <li class="alertWrap-item">Wechat : ISTARBUY</li>
+          <li class="alertWrap-item">Line : ISTARBUY</li>
+        </ul>
+        <div @click="contactVisible=false">I know</div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +49,8 @@ export default {
       orderPageDat: {
         page_num: 1,
         page_size: 5
-      }
+      },
+      contactVisible:false
     };
   },
   created() {
@@ -47,6 +62,10 @@ export default {
       if (result && result.data) {
         this.orderList = result.data;
       }
+    },
+     // 联系我们弹窗
+    handleCustomerService() {
+      this.contactVisible = true;
     }
   }
 };
