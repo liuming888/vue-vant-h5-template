@@ -383,15 +383,15 @@ export default {
         !this.$store.state.userInfo.user_id &&
         process.env.VUE_APP_ENV != "development"
       ) {
-        /* const { pathname, search } = window.location;
+        const { pathname, search } = window.location;
            // 原型要求登陆后直接弹起帮砍弹窗
         this.$store.commit(
           "setLoginJumpUrl",
           pathname + search + "&helpCur=ok"
-        ); */
+        );
 
-        // 刷新当前页面
-        this.$store.commit("setLoginJumpUrl", "");
+       /*  // 刷新当前页面
+        this.$store.commit("setLoginJumpUrl", ""); */
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
