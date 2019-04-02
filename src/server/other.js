@@ -16,7 +16,7 @@ export function getBanners() {
 
 // 世界消息接口
 export function getWorldTip(params={}) {
-    return $request.get({
+    return $request.post({
         url: '/api/v1/tip/get_world_tip',
         data:params
     });
