@@ -1,127 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta property="og:url" class="share_url" content="https://www.istarbuy.com" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" class="share_title" content="Just a little bit, I really want this goods, please help me get it for free." />
+        <meta property="og:description" content="can buy directly for test mode." />
+        <meta property="og:image" content="<%= BASE_URL %>bitbug_favicon.ico" />
+        <!-- <meta http-equiv="x-dns-prefetch-control" content="on"/> -->
+        <link rel="preconnect" href="https://api.istarbuy.com" />
+        <link rel="preconnect" href="https://rscdn.istarbuy.com" />
+        <link rel="preconnect" href="https://staticxx.facebook.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <meta property="og:url" class="share_url" content="https://www.istarbuy.com"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:title" class="share_title" content="Just a little bit, I really want this goods, please help me get it for free."/>
-    <meta property="og:description" content="can buy directly for test mode."/>
-    <meta property="og:image" content="<%= BASE_URL %>bitbug_favicon.ico"/>
-    <!-- <meta http-equiv="x-dns-prefetch-control" content="on"/> -->
-    <link rel="dns-prefetch" href="//api.istarbuy.com">
-    <link rel="dns-prefetch" href="//staticxx.facebook.com">
-    <link rel="dns-prefetch" href="//connect.facebook.net">
-    <link rel="dns-prefetch" href="//rscdn.istarbuy.com">
-    <link rel="icon" href="<%= BASE_URL %>bitbug_favicon.ico">
-    <title>ISTARBUY</title>
-    <style>
-      .pre-app,
-      body,
-      html {
-        width: 100vw;
-        overflow: hidden;
-        overflow-y: auto;
-      }
+        <link rel="dns-prefetch" href="https://api.istarbuy.com" />
+        <link rel="dns-prefetch" href="https://rscdn.istarbuy.com" />
+        <link rel="dns-prefetch" href="https://staticxx.facebook.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+       
+        <link rel="icon" href="<%= BASE_URL %>bitbug_favicon.ico" />
+        <title>ISTARBUY</title>
+        <style>
+            .pre-app,
+            body,
+            html {
+                width: 100vw;
+                overflow: hidden;
+                overflow-y: auto;
+            }
 
-      .pre-app::before {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 80px;
-        background: url("<%= BASE_URL %>timg.jpg") no-repeat;
-        background-size: 80px 80px;
-        position: fixed;
-        z-index: 9999;
-        top: 42vh;
-        left: 40vw;
-      }
-    </style>
-    <script>
-      // 基准大小
-      var baseSize = 75;
-      // 设置 rem 函数
-      function setRem() {
-        // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
-        var scale = document.documentElement.clientWidth / 750;
-        // 设置页面根节点字体大小
-        document.documentElement.style.fontSize = baseSize * Math.min(scale, 2) + 'px';
-      }
-      // 初始化
-      setRem();
-      // 改变窗口大小时重新设置 rem
-      window.onresize = function () {
-        setRem();
-      }
-    </script>
+            .pre-app::before {
+                content: '';
+                display: block;
+                width: 80px;
+                height: 80px;
+                background: url('<%= BASE_URL %>timg.jpg') no-repeat;
+                background-size: 80px 80px;
+                position: fixed;
+                z-index: 9999;
+                top: 42vh;
+                left: 40vw;
+            }
+        </style>
+        <script>
+            // 基准大小
+            var baseSize = 75;
+            // 设置 rem 函数
+            function setRem() {
+                // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
+                var scale = document.documentElement.clientWidth / 750;
+                // 设置页面根节点字体大小
+                document.documentElement.style.fontSize = baseSize * Math.min(scale, 2) + 'px';
+            }
+            // 初始化
+            setRem();
+            // 改变窗口大小时重新设置 rem
+            window.onresize = function() {
+                setRem();
+            };
+        </script>
 
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function (f, b, e, v, n, t, s) {
-        if (f.fbq) 
-          return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n
-              .callMethod
-              .apply(n, arguments)
-            : n
-              .queue
-              .push(arguments)
-        };
-        if (!f._fbq) 
-          f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s
-          .parentNode
-          .insertBefore(t, s)
-      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '318284192219723');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=318284192219723&ev=PageView&noscript=1"/></noscript>
-    <!-- End Facebook Pixel Code -->
-  </head>
+        <!-- Facebook Pixel Code -->
+        <script>
+            !(function(f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function() {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '318284192219723');
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=318284192219723&ev=PageView&noscript=1"/></noscript>
+        <!-- End Facebook Pixel Code -->
+    </head>
 
-  <body>
-    <div class="pre-app" id="mainApp"></div>
-    <noscript>
-      <strong>We're sorry but ISTARBUY doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-    <!-- <script src="https://rscdn.istarbuy.com/i/20190325/02c79810c62a465b988faeaa536a9ad6.vue.runtime.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/23fe18ba5e7342cfb5bd2fd977bff3e1.vuex.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/eb653d8a4b8340859d03b931404dc4ce.vue-router.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/c21365437b6c47f48bc99cc9095b728b.vant.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/baeb0f15605746258f3fef645511cc6e.axios.min.js"></script> -->
-    <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
-    <script src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
-    <script src="<%= BASE_URL %>static/lib/vue-router.min.js"></script>
-    <!-- <script src="<%= BASE_URL %>static/lib/axios.min.js"></script> -->
-    <script>
-      (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        },
-        i[r].l = 1 * new Date();
-        a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m
-          .parentNode
-          .insertBefore(a, m)
-      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    <body>
+        <div class="pre-app" id="mainApp"></div>
+        <noscript>
+            <strong>We're sorry but ISTARBUY doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+        <!-- <script src="https://rscdn.istarbuy.com/i/20190325/02c79810c62a465b988faeaa536a9ad6.vue.runtime.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/23fe18ba5e7342cfb5bd2fd977bff3e1.vuex.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/eb653d8a4b8340859d03b931404dc4ce.vue-router.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/c21365437b6c47f48bc99cc9095b728b.vant.min.js"></script> <script src="https://rscdn.istarbuy.com/i/20190325/baeb0f15605746258f3fef645511cc6e.axios.min.js"></script> -->
+        <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vue-router.min.js"></script>
+        <!-- <script src="<%= BASE_URL %>static/lib/axios.min.js"></script> -->
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-136763280-1', 'auto');
-      ga('send', window.location.href);
-    </script>
-  </body>
+            ga('create', 'UA-136763280-1', 'auto');
+            ga('send', window.location.href);
+        </script>
+    </body>
 </html>
