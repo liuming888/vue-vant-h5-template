@@ -23,7 +23,7 @@
     }
     > .cut-num {
       margin: 0 auto;
-      width: 420px;
+      width: 426px;
       height: 88px;
       line-height: 88px;
       font-size: 64px;
