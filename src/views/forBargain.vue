@@ -294,7 +294,7 @@ export default {
         (this.$route.query.helpCur != "ok" &&
           !this.bargain_user_info &&
           this.bargain_info.status == 1) ||
-        !this.userInfo.user_id
+        !this.$store.state.userInfo.user_id
       );
     },
     // 是否是老用户帮砍过的
