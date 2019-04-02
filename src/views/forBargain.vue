@@ -312,7 +312,7 @@ export default {
     }
   },
   created() {
-    if (!localStorage.getItem("newUserInfo")) {
+    if (localStorage.getItem("newUserInfo")) {
       // 是否新用户
       this.isOne = true;
     }

@@ -67,7 +67,7 @@
       left: 0;
       right: 0;
       margin: 0 auto;
-      bottom: 135px;
+      bottom: 142px;
       font-size: 30px;
       font-family: "Helvetica_cyr-Bold";
       font-weight: bold;
