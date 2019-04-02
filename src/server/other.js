@@ -13,3 +13,11 @@ export function getBanners() {
         url: '/api/v1/sys/get_banners ',
     });
 }
+
+// 世界消息接口
+export function getWorldTip(params={}) {
+    return $request.get({
+        url: '/api/v1/tip/get_world_tip',
+        data:params
+    });
+}

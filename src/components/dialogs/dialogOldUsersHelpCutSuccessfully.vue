@@ -15,7 +15,7 @@
     height: 100%;
     text-align: center;
     > .top-tips {
-      margin-top: 400px;
+      margin-top: 380px;
       font-size: 28px;
       font-weight: bold;
       color: rgba(108, 12, 6, 1);
@@ -24,20 +24,25 @@
     > .cut-num {
       margin: 0 auto;
       width: 420px;
-      height: 105px;
-      line-height: 105px;
-      font-size: 70px;
+      height: 88px;
+      line-height: 88px;
+      font-size: 64px;
       color: #d30c05;
+      background: #fff;
+      font-weight: 600;
       > span {
-        font-size: 34px;
+        font-size: 31px;
+        font-weight: 500;
       }
     }
     > .bottom-tips {
-      margin: 90px auto 0 auto;
+      margin: 70px auto 0 auto;
       width: 420px;
       font-size: 24px;
-      color: #ffeebb;
-      font-weight: lighter;
+      font-weight: 500;
+      color: rgba(255, 238, 187, 1);
+      line-height: 30px;
+
       > span {
         font-weight: bold;
         color: #fff;
@@ -45,6 +50,28 @@
           font-size: 20px;
         }
       }
+    }
+
+    .take-btn {
+      width: 429px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      background: linear-gradient(
+        0deg,
+        rgba(255, 229, 89, 1) 0%,
+        rgba(255, 215, 0, 1) 100%
+      );
+      border-radius: 40px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      bottom: 165px;
+      font-size: 30px;
+      font-family: "Helvetica_cyr-Bold";
+      font-weight: bold;
+      color: rgba(211, 12, 5, 1);
     }
   }
   > .close {
@@ -64,13 +91,18 @@
       :close-on-click-overlay="false"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img src="@/assets/images/$@2x.png"
-          alt=""
+        <img src="~@/assets/images/forBargain-sucess.png"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help him cut down</p>
+          <p class="top-tips">You help him cut down</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
-          <p class="bottom-tips">After your friend closed the deal, you will get<span><span>Rp</span> {{chopInfo.reward_amount}}</span>rewards on your account</p>
+          <p class="bottom-tips">After your friend order, you will get<span><span>Rp</span>{{chopInfo.reward_amount}}</span>rewards on your account</p>
+
+          <div class="take-btn"
+            @click="$router.push('/')">
+            Also take it for free
+          </div>
+
         </div>
         <div class="close"
           @click="closeDialog"></div>
@@ -81,7 +113,7 @@
 
 <script>
 export default {
-  name: "dialogOldUsersHelpCutSuccessfully",  // 好友帮砍成功弹窗（暂时没分是不是新老用户）
+  name: "dialogOldUsersHelpCutSuccessfully", // 好友帮砍成功弹窗（暂时没分是不是新老用户）
   props: {
     dialogVisible: {
       type: Object,
@@ -103,9 +135,6 @@ export default {
         };
       }
     }
-  },
-  data() {
-    return {};
   },
   methods: {
     closeDialog() {
