@@ -116,10 +116,11 @@ export default {
     async goReceive() {
       let result = await getMyNewRp();
       if (result && result.data) {
-        Dialog.alert({
-          message: "You have successfully received a new gift package",
-          confirmButtonText: "ok"
-        });
+        // Dialog.alert({
+        //   message: "You have successfully received a new gift package",
+        //   confirmButtonText: "ok"
+        // });
+        this.$toast("You have successfully received a new gift package");
         window.localStorage.removeItem("newUserInfo");  // 点击领取后不弹了
         this.$store.commit("setNewGiftBagShow", false);
       }

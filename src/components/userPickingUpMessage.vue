@@ -4,11 +4,9 @@
   height: 48px;
   position: absolute;
   top: 21px;
-  left: 100vw;
-  // width: 355px;
+  left: 0;
   margin: 0 23px;
   padding-right: 16px;
-  height: 48px;
   line-height: 48px;
   border-radius: 24px;
   text-indent: 65px;
@@ -19,8 +17,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  // animation: mes 20s infinite;
-  z-index: 9999;
+  z-index: 10000;
 
   .info-box {
     width: 100%;

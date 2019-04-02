@@ -1,267 +1,238 @@
 .bargain-container {
-    // background: #f9f9f9;
-    background: linear-gradient(45deg, rgba(253, 84, 72, 1), rgba(232, 43, 35, 1));
-    > .bargain-header {
-        position: relative;
-        padding: 50px 10px 10px 10px;
-        > .bargain-banner {
-            > img {
-                width: 100%;
-                height: auto;
-            }
-        }
-        > .turn-home {
-            position: absolute;
-            top: -1px;
-            right: 10px;
-            width: 90px;
-            height: 90px;
-        }
-        > .bargain-info-box {
-            position: relative;
-            border-radius: 20px;
-            > .bg {
-                // position: absolute;
-                // top: 0;
-                // left: 0;
-                width: 100%;
-                height: auto;
-            }
-            > .bargain-content {
-                position: absolute;
-                top: 25px;
-                left: 35px;
-                text-align: center;
-                > .bargain-info {
-                    // position: relative;
-                    // margin: 25px 0 0 35px;
-                    width: 660px;
-                    background: #fff;
-                    border-radius: 10px;
-                    padding: 26px 26px 0 26px;
-                    box-sizing: border-box;
-                    display: flex;
-                    text-align: left;
-                    > .img-box {
-                        width: 220px;
-                        height: 220px;
-                        margin-right: 24px;
-                        > img {
-                            width: 100%;
-                            height: 212px;
-                            // height: 100%;
-                        }
-                    }
-                    > .detail {
-                        flex: 1;
-                        > .title {
-                            font-size: 26px;
-                            color: #323232;
-                            line-height: 37px;
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            overflow: hidden;
-                        }
-                        > .price-box {
-                            display: flex;
-                            align-items: flex-end;
-                            > .price-box-item {
-                                width: 100px;
-                                flex: 1;
-                                &:nth-of-type(2) {
-                                    width: 100px;
-                                    margin-left: 10px;
-                                }
-                                > .p-t-1 {
-                                    font-size: 18px;
-                                    color: #888;
-                                    > span:first-child {
-                                        font-size: 16px;
-                                        color: #f77e18;
-                                        // text-decoration: line-through;
-                                    }
-                                    > span:last-child {
-                                        font-size: 24px;
-                                        color: #f77e18;
-                                        text-decoration: line-through;
-                                    }
-                                }
-                                > .p-t-2 {
-                                    // min-width: 160px;
-                                    display: inline-block;
-                                    padding: 0 17px;
-                                    background-color: #d30c05;
-                                    line-height: 24px;
-                                    color: #fff;
-                                    font-size: 18px;
-                                    border-radius: 6px;
-                                }
-                                > .p-t-3 {
-                                    font-size: 24px;
-                                    color: #888;
-                                    margin: 27px 0;
-                                }
-                                > .p-n-1 {
-                                    color: #d30c05;
-                                    font-size: 41px;
-                                    position: relative;
-                                    // left: 30px;
-                                    top: 10px;
-                                    > span {
-                                        font-size: 22px;
-                                    }
-                                }
-                                > .p-n-2 {
-                                    color: #888;
-                                    font-size: 24px;
-                                    margin-bottom: 6px;
-                                    position: relative;
-                                    top: 10px;
-                                }
-                            }
-                        }
-                    }
-                }
-                > .bargain-schedule {
-                    margin: 35px 0 65px 0;
-                    > .title {
-                        font-size: 25px;
-                        color: #323232;
-                        text-align: center;
-                        margin-bottom: 25px;
-                        .dollar {
-                            font-size: 21px;
-                        }
-                        > .n-1 {
-                            font-size: 32px;
-                            color: #f75e10;
-                        }
-                        > .n-2 {
-                            font-size: 32px;
-                            color: #d30c05;
-                        }
-                    }
-                    .schedule {
-                        position: relative;
-                        margin: 0 auto;
-                        width: 580px;
-                        height: 20px;
-                        border-radius: 10px;
-                        background-color: #fececa;
-                        display: flex;
-                        > .active {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 30%;
-                            height: 100%;
-                            background: url('./../assets/images/progress-bar-2.png') no-repeat;
-                            background-size: 100%;
-                            background-color: #d30c05;
-                            border-radius: 10px;
-                        }
-                        > .schedule-item {
-                            position: relative;
-                            flex: 1;
-                            padding-top: 40px;
-                            text-align: center;
-                            font-size: 18px;
-                            color: #323232;
-                            .highlight {
-                                color: #d30c05;
-                                font-size: 20px;
-                            }
-                        }
-                        > .schedule-item:nth-of-type(2) {
-                            text-align: left;
-                        }
-                        > .schedule-item:last-of-type {
-                            text-align: right;
-                        }
-                        > .ball::after {
-                            content: '';
-                            position: absolute;
-                            top: -2px;
-                            // left: 0;
-                            width: 24px;
-                            height: 24px;
-                            border-radius: 12px;
-                            background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
-                        }
-                        > .ball-center::after {
-                            left: calc(50% - 12px);
-                        }
-                        > .ball-right::after {
-                            right: 0;
-                        }
-                    }
-                }
-                > .spu-count-down {
-                    display: inline-block;
-                }
-                > .ctrl-box {
-                    &.isBargainCur{
-                        margin-top: 38px;  // 用户第一次进入
-                    }
-                    &.isNGoCur{
-                        margin-top:48px;   // 用户砍价完成
-                    }
-                    &.isHelpOkCur{
-                        margin-top: 108px; // 用户第N次进入
-                    }
-                    > .share-btn {
-                        color: #a53a06;
-                        font-size: 36px;
-                        height: 103px;
-                        line-height: 103px;
-                        background: linear-gradient(180deg, rgba(248, 229, 163, 1), rgba(244, 204, 109, 1));
-                        box-shadow: 0px 9px 9px 0px rgba(174, 36, 5, 0.66);
-                        border-radius: 52px;
-                    }
-                    > .buy-btn {
-                        margin-top: 24px;
-                        color: #fce0dd;
-                        font-size: 36px;
-                        height: 103px;
-                        line-height: 103px;
-                        background: linear-gradient(180deg, rgba(251, 162, 132, 1), rgba(249, 102, 69, 1));
-                        box-shadow: 0px 9px 9px 0px rgba(174, 36, 5, 0.66);
-                        border-radius: 52px;
-                    }
+    background: linear-gradient(45deg, rgba(232, 43, 35, 1), rgba(253, 84, 72, 1));
 
-                    .old-txt {
-                        width: 580px;
-                        height: 55px;
-                        font-size: 22px;
-                        font-weight: 400;
-                        color: rgba(255, 255, 255, 1);
-                        line-height: 34px;
-                    }
-                }
-            }
+    .banner-box {
+        padding-top: 31px;
+        width: 100vw;
+        height: 293px;
+        text-align: center;
+        position: relative;
+
+        .turn-home {
+            width: 83px;
+            height: auto;
+            position: absolute;
+            top: 0;
+            right: 29px;
+        }
+
+        .banner-img {
+            width: 717px;
+            height: auto;
         }
     }
-    > .bargain-content {
-        > .team-box {
-            background: linear-gradient(180deg, rgba(229, 57, 49, 1), rgba(233, 72, 64, 1));
-            box-shadow: 0px 2px 4px 0px rgba(152, 19, 0, 0.46);
+
+    .main-content {
+        // height: 800px;
+        width: 691px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px 20px 42px;
+        box-sizing: border-box;
+        position: relative;
+
+        .spu-box {
+            width: 652px;
+            height: 198px;
+            background: rgba(245, 245, 245, 1);
             border-radius: 10px;
-            margin: 0 30px;
+            padding: 20px 26px 24px 17px;
+            box-sizing: border-box;
+            display: flex;
+            margin-bottom: 46px;
+
+            .spu-img {
+                width: 160px;
+                height: 154px;
+                margin-right: 20px;
+            }
+
+            .spu-info {
+                width: 430px;
+
+                .spu-tit {
+                    width: 100%;
+                    font-size: 26px;
+                    font-weight: 400;
+                    color: rgba(50, 50, 50, 1);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    margin-bottom: 10px;
+                }
+
+                .time-and-sum {
+                    display: flex;
+
+                    .spu-num {
+                        flex: 1;
+                        text-align: right;
+
+                        width: 105px;
+                        height: 19px;
+                        font-size: 24px;
+                        font-family: 'DIN-Medium';
+                        font-weight: 500;
+                        color: rgba(136, 136, 136, 1);
+                    }
+                }
+
+                .rp-box {
+                    font-size: 20px;
+                    font-family: 'DIN-Light';
+                    font-weight: 500;
+                    color: rgba(211, 12, 5, 1);
+                    line-height: 37px;
+                    margin-top: 30px;
+                    display: flex;
+
+                    .rp {
+                        position: relative;
+                        top: 2px;
+                    }
+
+                    .original-price {
+                        margin-left: 16px;
+                        height: 22px;
+                        font-size: 16px;
+                        font-family: 'DIN-Light';
+                        font-weight: 500;
+                        text-decoration: line-through;
+                        color: rgba(136, 136, 136, 1);
+                        line-height: 37px;
+                    }
+                }
+            }
+        }
+
+        > .bargain-schedule {
+            margin: 35px 0 65px 0;
+            > .title {
+                font-size: 34px;
+                // color: #323232;
+                color: #000;
+                text-align: center;
+                margin-bottom: 25px;
+                font-size: 24px;
+                font-family: 'DIN-Medium';
+                font-weight: 500;
+                line-height: 54px;
+
+                .dollar {
+                    font-size: 18px;
+                    position: relative;
+                    top: 2px;
+                    font-weight: 400;
+                }
+                > .n-1 {
+                    font-size: 28px;
+                    color: #f75e10;
+                    font-weight: 600;
+                }
+                > .n-2 {
+                    font-size: 28px;
+                    color: #d30c05;
+                    font-weight: 600;
+                }
+            }
+
+            .schedule {
+                position: relative;
+                margin: 0 auto;
+                width: 578px;
+                height: 28px;
+                // overflow: hidden;
+                border-radius: 28px;
+                background-color: #fececa;
+                display: flex;
+                margin-bottom: 50px;
+                > .active {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    background: url('~@/assets/images/progress-bar-2.png') no-repeat 0 0/100% 100%, linear-gradient(-45deg, rgba(213, 16, 5, 1), rgba(245, 75, 1, 1));
+                    border-radius: 28px;
+                }
+
+                .highlight {
+                    color: #d30c05;
+                    font-size: 24px;
+                    font-family: 'MyriadPro-Regular';
+                    font-weight: 400;
+                    color: rgba(255, 255, 255, 1);
+                    line-height: 28px;
+                    position: relative;
+                    left: 100px;
+                }
+
+                > .schedule-item {
+                    position: relative;
+                    flex: 1;
+                    padding-top: 40px;
+                    text-align: center;
+                    font-size: 18px;
+                    color: #323232;
+                }
+                > .schedule-item:nth-of-type(2) {
+                    text-align: left;
+                }
+                > .schedule-item:last-of-type {
+                    text-align: right;
+                }
+                > .ball::after {
+                    content: '';
+                    position: absolute;
+                    top: -2px;
+                    right: 0;
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 12px;
+                    background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
+                }
+                > .ball-center::after {
+                    left: calc(50% - 12px);
+                }
+                > .ball-right::after {
+                    right: 0;
+                }
+            }
+        }
+
+        .main-btn {
+            width: 656px;
+            height: 90px;
+            line-height: 90px;
+            text-align: center;
+            background: linear-gradient(0deg, rgba(255, 229, 89, 1) 0%, rgba(255, 215, 0, 1) 100%);
+            border-radius: 45px;
+            margin: 0 auto;
+            font-size: 32px;
+            font-family: Helvetica;
+            font-weight: 600;
+            color: rgba(211, 12, 5, 1);
+            margin-bottom: 53px;
+        }
+
+        .team-box {
+            width: 653px;
+            background: rgba(249, 249, 249, 1);
+            border-radius: 10px;
+            border-radius: 10px;
+            color: #323232;
+
             > .page-title {
                 position: relative;
                 width: 100%;
                 display: block;
                 height: 100px;
                 line-height: 100px;
-                // margin: 50px 0;
+                background: rgba(242, 242, 242, 1);
                 font-size: 32px;
                 text-align: center;
-                color: #fff;
             }
             > .team-list {
-                // background: #fff;
-                margin-bottom: 38px;
                 padding-bottom: 30px;
                 max-height: 600px;
                 overflow-y: scroll;
@@ -271,8 +242,7 @@
                     margin: 0 50px;
                     display: flex;
                     align-items: center;
-                    border-top: 1px dotted #ffb893;
-                    color: #fff;
+
                     > .column {
                         flex: 2;
                         display: flex;
@@ -289,9 +259,10 @@
                     .team-img > img {
                         width: 74px;
                         height: 74px;
-                        border-radius: 37px;
+                        border-radius: 50%;
                         overflow: hidden;
                         margin: 0 12px 0 6px;
+                        background: #fff;
                     }
                     .team-name {
                         font-size: 25px;
@@ -299,14 +270,160 @@
                     }
                     .team-date {
                         font-size: 19px;
+                        color: #888888;
                     }
                     .dollar {
                         font-size: 25px;
-                        margin-right: 150px;
+                        margin-right: 57px;
+                        color: #f75e10;
+                        position: relative;
+                        top: 6px;
                     }
                 }
             }
         }
+
+        .world-news {
+            width: 653px;
+            color: #323232;
+            background: rgba(254, 247, 234, 1);
+            border-radius: 10px;
+
+            .world-info-tit {
+                width: 100%;
+                height: 100px;
+                line-height: 100px;
+                background: #ffefd0;
+                text-align: center;
+                font-size: 28px;
+                font-family: Helvetica;
+                font-weight: 600;
+                color: rgba(113, 81, 12, 1);
+            }
+
+            .world-list {
+                width: 100%;
+                padding: 42px 28px 37px;
+                box-sizing: border-box;
+                max-height: 600px;
+                overflow-y: scroll;
+
+                .world-item {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 44px;
+
+                    &:nth-of-type(1) {
+                        margin: 0;
+                    }
+
+                    .cur-user-icon {
+                        width: 66px;
+                        height: 66px;
+                        border-radius: 50%;
+                        margin-right: 19px;
+                    }
+
+                    .info-box {
+                        width: 508px;
+
+                        .info-txt {
+                            height: 25px;
+                            font-size: 26px;
+                            font-family: Helvetica;
+                            font-weight: 400;
+                            color: #666;
+                            line-height: 32px;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+
+                        .time {
+                            margin-top: 10px;
+                            height: 18px;
+                            font-size: 19px;
+                            font-family: Helvetica;
+                            font-weight: 400;
+                            color: #9d9d9d;
+                            line-height: 32px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .team-end-n {
+            width: 653px;
+            background: rgba(249, 249, 249, 1);
+            border-radius: 10px;
+            border-radius: 10px;
+            color: #323232;
+
+            > .team-end-title {
+                position: relative;
+                width: 100%;
+                display: block;
+                height: 100px;
+                line-height: 100px;
+                background: rgba(242, 242, 242, 1);
+                font-size: 32px;
+                text-align: center;
+            }
+            .team-n-list {
+                padding-bottom: 30px;
+                max-height: 600px;
+                overflow-y: scroll;
+
+                .team-n-list-item {
+                    height: 100px;
+                    margin: 0 50px;
+                    display: flex;
+                    align-items: center;
+
+                    .team-img > img {
+                        width: 74px;
+                        height: 74px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        background: #fff;
+                        margin-right: 19px;
+                    }
+
+                    .info-box {
+                        width: 500px;
+
+                        .info-txt {
+                            height: 28px;
+                            font-size: 26px;
+                            font-family: Helvetica;
+                            font-weight: 400;
+                            color: #666;
+                            line-height: 32px;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+
+                        .time {
+                            margin-top: 10px;
+                            height: 18px;
+                            font-size: 19px;
+                            font-family: Helvetica;
+                            font-weight: 400;
+                            color: #9d9d9d;
+                            line-height: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    > .bargain-content {
+        margin-top: 38px;
+
         > .recommend-products {
             display: flex;
             flex-wrap: wrap;
@@ -320,6 +437,7 @@
                 line-height: 100px;
                 // margin: 50px 0;
                 font-size: 34px;
+                font-weight: 600;
                 text-align: center;
                 color: rgba(230, 81, 55, 1);
                 background: linear-gradient(180deg, rgba(244, 74, 2, 1) 0.2685546875%, rgba(212, 14, 5, 1) 100%);
