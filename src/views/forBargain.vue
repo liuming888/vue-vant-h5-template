@@ -186,7 +186,7 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products"
+      <!-- <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="require('./../assets/images/start.png')">
@@ -203,6 +203,27 @@
             <a href="javascrip:;"
               class="btn"
               @click="jumpCurBargainPage(item.spu_id)">Get a freebie</a>
+          </div>
+        </div>
+      </div> -->
+
+       <!-- 推荐商品 -->
+      <div class="recommend-products"
+        v-if="spu_list.length>0">
+        <p class="page-title">
+          <img v-lazy="require('@/assets/images/xingzhuang.png')">
+        </p>
+        <div class="recommend-item"
+          v-for="item in spu_list"
+          :key="item.spu_id">
+          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
+            class="products-photo">
+          <p class="products-title">{{item.title}}</p>
+          <div class="products-ctrl">
+            <span class="money">{{item.deliver_count}} Sent</span>
+            <a href="javascrip:;"
+              class="btn"
+              @click="jumpCurBargainPage(item)">Get a freebie</a>
           </div>
         </div>
       </div>
