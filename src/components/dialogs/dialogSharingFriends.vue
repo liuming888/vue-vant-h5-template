@@ -132,7 +132,7 @@
       <button ref="copy"
         class="copy-link"
         data-clipboard-action="copy"
-        :data-clipboard-text="shareInfo.share_url"
+        :data-clipboard-text="mx_copyTxt"
         @click="mx_copyLink"></button>
 
       <img v-lazy="require('@/assets/images/guanbi@2x.png')"
