@@ -163,7 +163,7 @@
   right: 12px;
   width: 96px;
   height: 96px;
-  z-index: 1000;
+  z-index: 99;
   border-radius: 50%;
 }
 
