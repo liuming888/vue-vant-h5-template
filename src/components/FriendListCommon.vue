@@ -2,8 +2,8 @@
 <template>
   <li class="hero-list-item">
     <div class="column">
-      <div class="hero-img first">
-        <img v-lazy="item.avatar"
+      <div class="hero-img first" :class="'first'+index">
+        <img v-lazy="item.avatar" class="avatar-img"
           alt>
       </div>
       <div class="hero-info">
@@ -15,8 +15,8 @@
         <p class="hero-name">{{item.username}}</p>
       </div>
     </div>
-    <div class="column">{{item.joinTime||item.fans_count}}</div>
-    <div class="column">{{item.profit||item.sum_amount}}</div>
+    <div class="column column-time">{{item.joinTime||item.fans_count}}</div>
+    <div class="column">{{item.profit||item.sum_amount||0}}</div>
   </li>
 </template>
 
@@ -53,12 +53,15 @@ export default {
   }
 }
 .hero-list-item {
+  height: 148px;
   border-bottom: 1px solid #ececec;
   -webkit-box-align: center;
   -webkit-align-items: center;
   align-items: center;
   display: flex;
-  padding: 10px;
+  box-sizing: border-box;
+  padding-left: 37px;
+
   & > .column:nth-child(2) {
     text-align: center;
     display: block;
@@ -74,8 +77,15 @@ export default {
   > .column {
     display: flex;
     flex: 1;
+    align-items: center;
+
+    &.column-time{
+      font-size: 20px;
+      
+    }
+
     > .hero-img {
-      padding: 17px 0 0 9px;
+      // padding: 17px 0 0 9px;
       margin-right: 15px;
       display: inline-block;
       > img {
@@ -85,18 +95,51 @@ export default {
       }
     }
     .first {
-      background: url("../assets/images/huangguan1.png") no-repeat 0 0;
-      background-size: 44px 44px;
+      position: relative;
+
+      &::before {
+        content: "";
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: -8px;
+        top: -18px;
+      }
+
+      .avatar-img{
+        position: relative;
+        z-index: 10;
+      }
     }
+
+    .first0{
+        &::before {
+        background: url("../assets/images/huangguan1.png") no-repeat 0 0/36px 36px;
+      }
+    }
+
+    .first1{
+        &::before {
+        background: url("../assets/images/huangguan2.png") no-repeat 0 0/36px 36px;
+      }
+    }
+
+    .first2{
+        &::before {
+        background: url("../assets/images/huangguan3.png") no-repeat 0 0/36px 36px;
+      }
+    }
+
     > .hero-info {
       flex: 1;
       > .hero-no {
         display: block;
         width: auto;
         height: 34px;
-        margin: 29px 0 12px 0;
+        // margin: 29px 0 12px 0;
         color: #323232;
         font-size: 24px;
+        text-align: left;
       }
       > .hero-no-1 {
         background: url("../assets/images/no.1.png") no-repeat;
@@ -111,9 +154,13 @@ export default {
         background-size: auto 100%;
       }
       > .hero-name {
+        width: 120px;
         font-size: 24px;
         color: #888;
         text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }

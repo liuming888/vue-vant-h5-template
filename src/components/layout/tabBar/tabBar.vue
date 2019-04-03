@@ -14,7 +14,7 @@
   left: 0;
   bottom: 0;
   background: #fff;
-  border-top:1px solid #dfdede; 
+  border-top:1px solid #ececec; 
   z-index: 100;
   > .tabBar-item {
     flex: 1;

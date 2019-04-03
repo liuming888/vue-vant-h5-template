@@ -2,8 +2,7 @@
 <template>
   <div class="revenue_detail">
     <!-- 返回首页 -->
-    <div class="turn-home"
-      @click="$router.push('/')"></div>
+    <turn-home />
 
     <header>
       Revenue Rp
@@ -35,6 +34,9 @@
 <script>
 import { getFundRecordList } from "@/server/finance.js";
 export default {
+  components: {
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+  },
   data() {
     return {
       detailList: [],
@@ -93,14 +95,27 @@ export default {
         flex: 1;
         padding-left: 20px;
         display: flex;
+        position: relative;
+
+        &::after {
+          content: "";
+          width: 606px;
+          height: 1px;
+          background: rgba(236, 236, 236, 1);
+          position: absolute;
+          bottom: 0;
+          right: -30px;
+        }
+
         > div {
-          border-bottom: 1px solid #ececec;
+          // border-bottom: 1px solid #ececec;
           padding: 30px 0;
           &.count {
             flex: 1;
             text-align: right;
             color: #d30c05;
             font-size: 36px;
+            padding-top: 60px;
             &.cash {
               color: #323232;
             }
@@ -122,16 +137,5 @@ export default {
       }
     }
   }
-}
-
-.turn-home {
-  position: fixed;
-  top: 80%;
-  right: 10px;
-  width: 96px;
-  height: 96px;
-  background: url("~@/assets/images/home@2x(1).png") no-repeat;
-  background-size: 100%;
-  z-index: 9999;
 }
 </style>

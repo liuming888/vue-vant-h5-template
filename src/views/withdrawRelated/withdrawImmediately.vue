@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="border-bttom">
+    <div class="border-bttom border-bttom2">
       <div class="play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="list border-bttom">
+    <div class="list border-bttom border-bttom-no">
       <ul v-if="withdrawParam.pay_type !== 2">
         <li>
           <span>Withdrawal Amount</span>
@@ -112,7 +112,7 @@
             type="number"></li>
       </ul>
     </div>
-    <div class="cash-withdrawal-box border-bttom">
+    <div class="cash-withdrawal-box border-bttom border-bttom2">
       <p class="cash-withdrawal-tit">Cash withdrawal method</p>
 
       <div class="progress-content-box">

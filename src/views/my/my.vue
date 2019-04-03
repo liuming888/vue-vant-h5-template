@@ -167,53 +167,59 @@
     margin: 0 30px;
     background: #fff;
     > .title {
-      padding: 28px 0 0 0;
+      padding: 28px 0 16px 0;
       font-size: 40px;
       color: #323232;
       text-align: center;
-    }
-    > .hero-list {
-      height: 480px;
-      overflow-y: auto;
-      margin: 38px 0;
+      position: relative;
 
-      .hero-list-title{
-        display: flex;
-        height: 77px;
-        line-height: 77px;
-        font-size: 22px;
-
-        .column:nth-of-type(1){
-          flex:3 !important;
-        }
-        .column:nth-of-type(2){
-          flex:4 !important;
-        }
-        .column:nth-of-type(3){
-          flex:5 !important;
-        }
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        width: 80px;
+        height: 2px;
+        background: rgba(237, 238, 243, 1);
+        border-radius: 1px;
       }
+    }
+
+    .hero-list-title {
+      width: 100%;
+      font-size: 22px;
+      height: 77px;
+      // line-height: 77px;
+      display: flex;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #F2F2F2;
+
+      > .column {
+        flex: 1;
+        color: #888888;
+        font-size: 22px;
+      }
+    }
+
+    > .hero-list {
+      max-height: 765px;
+      overflow-y: auto;
+      margin-bottom: 27px;
 
       > li {
         text-align: center;
         display: flex;
         align-items: center;
-        padding-bottom: 10px;
+        // padding-bottom: 10px;
         border-bottom: 1px solid #f2f2f2;
-        // > .column {
-        //   flex: 1;
-        //   color: #888888;
-        //   font-size: 22px;
-        // }
-
-          .column:nth-of-type(1){
-          flex:3 !important;
-        }
-        .column:nth-of-type(2){
-          flex:4 !important;
-        }
-        .column:nth-of-type(3){
-          flex:5 !important;
+        > .column {
+          flex: 1;
+          color: #888888;
+          font-size: 22px;
         }
       }
     }
@@ -284,12 +290,13 @@
       <div class="hero-rank"
         v-if="hero_tips.length>0">
         <p class="title">Heroes</p>
+        <div class="hero-list-title">
+          <div class="column">Rankings</div>
+          <div class="column">Number of fans</div>
+          <div class="column">Cumulative return(RP)</div>
+        </div>
         <ul class="hero-list">
-          <li class="hero-list-title">
-            <div class="column">Rankings</div>
-            <div class="column">Number of fans</div>
-            <div class="column">Cumulative return(RP)</div>
-          </li>
+
           <FriendListCommon v-for="(item, index) in hero_tips"
             :key="index"
             :item="item"

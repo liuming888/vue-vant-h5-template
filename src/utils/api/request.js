@@ -17,8 +17,8 @@ if (process.env.VUE_APP_ENV == 'development') {
     //   user_id = 1;
     //   access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    user_id = 753;
-    access_token = 'c3ebbe6eda7a4fe09b2c8d3def9aa95e';
+    user_id = 330;
+    access_token = 'de18174efd38456b942f58b9f8fdff48';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);

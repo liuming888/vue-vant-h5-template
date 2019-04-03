@@ -62,16 +62,16 @@
                 width: 168px;
                 height: 66px;
                 line-height: 66px;
+                text-align: center;
                 background: linear-gradient(
                   90deg,
                   rgba(246, 173, 1, 1) 0%,
                   rgba(246, 77, 1, 1) 100%
                 );
                 border-radius: 34px;
-                text-align: center;
-                font-size: 34px;
+                font-size: 28px;
                 color: #fff;
-                margin: 50px 0 14px 0;
+                margin: 50px 0 24px 0;
                 display: inline-block;
               }
               > .completed {
@@ -172,9 +172,9 @@
               }
 
               > .btn {
-                width: 168px;
-                height: 66px;
-                line-height: 66px;
+                width: 158px;
+                height: 56px;
+                line-height: 56px;
                 background: linear-gradient(
                   90deg,
                   rgba(246, 173, 1, 1) 0%,
@@ -182,7 +182,7 @@
                 );
                 border-radius: 34px;
                 text-align: center;
-                font-size: 34px;
+                font-size: 28px;
                 color: #fff;
                 margin: 40px 0 14px 0;
                 display: inline-block;
@@ -223,10 +223,10 @@
 .go-on {
   background: linear-gradient(
     90deg,
-    rgba(211, 12, 5, 1) 0%,
-    rgba(246, 77, 1, 1) 100%
+    rgba(246, 77, 1, 1) 0%,
+    rgba(211, 12, 5, 1) 100%,
   ) !important;
-  margin-top: 0 !important;
+  margin-top: -10px !important;
 }
 
 .cut-schedule {
@@ -242,15 +242,15 @@
     }
   }
   > .schedule {
-    line-height: 20px;
+    line-height: 10px;
     display: inline-block;
     margin-left: 10px;
     position: relative;
-    width: 340px;
-    height: 16px;
+    width: 352px;
+    height: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(252, 123, 119, 1);
-    border-radius: 8px;
+    border-radius: 10px;
     > .active {
       position: absolute;
       top: 0;
@@ -268,7 +268,7 @@
 }
 
 .go-on-price-box {
-  margin-top: 40px;
+  margin-top: 30px;
   position: relative;
 
   .go-on-item-btn {
@@ -337,10 +337,9 @@
               </div>
               <div class="price-item go-on-item-btn">
                 <div class="btn go-on"
-                  style="margin:0;"
                   @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">Go On</div>
 
-                <div class="btn"
+                <div class="btn"  style="position: relative;top: -5px;"
                   v-show="item.bargain_info.can_buy==1"
                   @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
               </div>

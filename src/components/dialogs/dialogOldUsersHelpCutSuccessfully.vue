@@ -94,7 +94,7 @@
         <img src="~@/assets/images/forBargain-sucess.png"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">You help him cut down</p>
+          <p class="top-tips">You help him/her cut down</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
           <p class="bottom-tips">After your friend order, you will get<span><span>Rp</span>{{chopInfo.reward_amount}}</span>rewards on your account</p>
 

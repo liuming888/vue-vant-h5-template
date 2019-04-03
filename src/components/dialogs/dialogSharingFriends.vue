@@ -9,17 +9,17 @@
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 20vh;
+  // align-items: flex-end;
+  padding-top: 10vh;
   box-sizing: border-box;
 }
 
 .share-box {
-  width: 571px;
-  height: 836px;
+  width: 610px;
+  height: 749px;
   background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
     100%;
-  padding-top: 220px;
+  padding-top: 200px;
   box-sizing: border-box;
   position: relative;
 
@@ -27,6 +27,7 @@
     width: 463px;
     font-size: 30px;
     font-weight: bold;
+    text-align: center;
     color: rgba(255, 255, 255, 1);
     line-height: 38px;
     margin: 0 auto;
@@ -39,7 +40,7 @@
     font-weight: bold;
     color: rgba(211, 12, 5, 1);
     text-align: center;
-    margin-bottom: 41px;
+    margin-bottom: 21px;
   }
 
   .share-types {
@@ -49,6 +50,7 @@
     align-items: center;
     margin-bottom: 41px;
     position: relative;
+    left: 10px;
 
     .share-item {
       width: 100px;
@@ -99,7 +101,7 @@
         Tip: Share to friends and you can get freebies faster.
       </div>
 
-      <h5 class="tit">Share on</h5>
+      <h5 class="tit"><!-- Share on --></h5>
 
       <div class="share-types">
 

@@ -20,9 +20,7 @@
         v-if="messageList.length>0"></user-picking-up-message>
 
       <!-- 头部返回首页 -->
-      <img v-lazy="require('./../assets/images/HOME@2x.png')"
-        class="turn-home"
-        @click="$router.push('/')">
+      <turn-home />
 
       <img v-lazy="require('@/assets/images/forBargain-banner.png')"
         class="banner-img">
@@ -207,7 +205,7 @@
         </div>
       </div> -->
 
-       <!-- 推荐商品 -->
+      <!-- 推荐商品 -->
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
@@ -258,7 +256,8 @@ export default {
     dialogOldUsersHelpCutSuccessfully: resolve =>
       require([
         "@/components/dialogs/dialogOldUsersHelpCutSuccessfully.vue"
-      ], resolve) // 帮砍成功弹窗
+      ], resolve), // 帮砍成功弹窗
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
   },
   data() {
     return {
@@ -405,13 +404,13 @@ export default {
         process.env.VUE_APP_ENV != "development"
       ) {
         const { pathname, search } = window.location;
-           // 原型要求登陆后直接弹起帮砍弹窗
+        // 原型要求登陆后直接弹起帮砍弹窗
         this.$store.commit(
           "setLoginJumpUrl",
           pathname + search + "&helpCur=ok"
         );
 
-       /*  // 刷新当前页面
+        /*  // 刷新当前页面
         this.$store.commit("setLoginJumpUrl", ""); */
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -512,7 +511,7 @@ export default {
      * @description: 帮砍列表
      */
     async initHelpBargainList() {
-      if(!this.$store.state.userInfo.user_id) return;
+      if (!this.$store.state.userInfo.user_id) return;
       let result = await getHelpBargainList({
         bargain_id: this.$route.query.bargainId,
         ...this.helpBargainPageDat
@@ -544,7 +543,7 @@ export default {
         this.spu_list = result.data.spu_list;
 
         //  if (page_num == 1) {
-        this.$store.commit("setGoodsList", this.spu_list);
+        // this.$store.commit("setGoodsList", this.spu_list);  // 不缓存，防止没登陆的用户到首页展示有问题
         // } else {
         //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
         //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
