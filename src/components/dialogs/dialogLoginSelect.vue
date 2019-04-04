@@ -82,9 +82,8 @@
           <p>Facebook login</p>
         </div> -->
 
-        <div class="login-item"
-          @click="jumpLogin">
-              去登录
+        <div class="login-item">
+          去登录
         </div>
       </div>
 
@@ -100,14 +99,17 @@
 
 <script>
 import axios from "axios";
-import { login, check_login } from "@/server/user.js";
+import { login, check_login, telLogin, sendCode } from "@/server/user.js";
 import fbInit from "@/mixins/fbInit.js";
 import loadings from "@/mixins/loadings.js";
 export default {
   name: "dialogLoginSelect",
   mixins: [fbInit, loadings],
   data() {
-    return {};
+    return {
+      phone: "",
+      authCode:""
+    };
   },
   computed: {
     setLoginSelectShow() {
@@ -120,27 +122,58 @@ export default {
       eventAction: "浮窗展示"
     });
   },
-  watch: {
-    setLoginSelectShow: {
-      handler() {
-        console.log(this.$route);
-        if (this.$route.path === "forBargain" && this.setLoginSelectShow) {
-          this.$gaSend({
-            eventCategory: "帮砍_第三方登陆浮窗",
-            eventAction: "浮窗展示"
-          });
-        }
-      },
-      deep: true,
-      immediate: true
-    }
-  },
   methods: {
     close() {
       this.$store.commit("setLoginSelectShow", false);
     },
-    jumpLogin(){
-      this.$router.push("/login");
+    async getCode(){
+      let params={
+        phone:this.phone
+      };
+      if (process.env.VUE_APP_ENV == "development") {
+        params.user = "zztest";
+      }
+      const result=await sendCode(params);
+      if(result&&result.data&&process.env.VUE_APP_ENV == "development"){
+        this.authCode=result.data;
+      }
+    },
+    /**
+     * @description: 登录接口返回正常
+     */
+    loginApiEnd(userInfo) {
+      this.$store.commit("setUserInfo", userInfo);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      axios.defaults.headers.common["User-Id"] = userInfo.user_id;
+      axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
+      this.$store.commit("setLoginSelectShow", false);
+
+      if (userInfo.is_new == 1) {
+        // 如果是新用户
+        window.localStorage.setItem("newUserInfo", JSON.stringify(userInfo));
+
+        fbq("track", "CompleteRegistration");
+      }
+
+      if (this.$store.state.dialogs.loginSelect.jumpUrl) {
+        window.location.href = this.$store.state.dialogs.loginSelect.jumpUrl;
+      } else {
+        window.location.reload(); // 刷新当前页
+      }
+    },
+    /**
+     * @description: 手机号码 验证码登录
+     */
+    async loginTel() {
+      let params = {
+        phone: this.phone,
+        authCode: this.authCode
+      };
+
+      let result = await telLogin(params);
+      if (result && result.data) {
+        this.loginApiEnd(result.data);
+      }
     },
     /**
      * @description: FB登录
@@ -184,35 +217,27 @@ export default {
         this.mx_closeLoad();
 
         if (result && result.data) {
-          let userInfo = result.data;
-          this.$store.commit("setUserInfo", userInfo);
-          localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          axios.defaults.headers.common["User-Id"] = userInfo.user_id;
-          axios.defaults.headers.common["Access-Token"] = userInfo.access_token;
-          this.$store.commit("setLoginSelectShow", false);
-
-          if (userInfo.is_new == 1) {
-            // 如果是新用户
-            window.localStorage.setItem(
-              "newUserInfo",
-              JSON.stringify(userInfo)
-            );
-
-            fbq("track", "CompleteRegistration");
-          }
-
-          if (this.$store.state.dialogs.loginSelect.jumpUrl) {
-            window.location.href = this.$store.state.dialogs.loginSelect.jumpUrl;
-          } else {
-            window.location.reload(); // 刷新当前页
-          }
-
+          this.loginApiEnd(result.data);
           return true;
         }
       }
-
       this.mx_closeLoad();
       return false;
+    }
+  },
+  watch: {
+    setLoginSelectShow: {
+      handler() {
+        console.log(this.$route);
+        if (this.$route.path === "forBargain" && this.setLoginSelectShow) {
+          this.$gaSend({
+            eventCategory: "帮砍_第三方登陆浮窗",
+            eventAction: "浮窗展示"
+          });
+        }
+      },
+      deep: true,
+      immediate: true
     }
   }
 };

@@ -1,6 +1,6 @@
 import $request from '../utils/api/request.js';
 
-// login
+// 用户第三方登录
 export function login(params = {}) {
     return $request.post({
         url: '/api/v1/user/login',
@@ -66,5 +66,21 @@ export function getHeroList() {
 export function getMyNewRp() {
     return $request.post({
         url: '/api/v1/user/get_my_new_rp',
+    });
+}
+
+// 根据手机号登录
+export function telLogin(params = {}) {
+    return $request.post({
+        url: '/api/v1/user/telLogin',
+        data: params,
+    });
+}
+
+// 发送短信验证码
+export function sendCode(params = {}) {
+    return $request.post({
+        url: '/api/v1/user/send',
+        data: params,
     });
 }

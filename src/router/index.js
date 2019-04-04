@@ -15,11 +15,6 @@ const curRouter = new VueRouter({
             redirect: '/',
         },
         {
-            path: '/login',
-            name: '登录注册',
-            component: resolve => require(['../views/login.vue'], resolve),
-        },
-        {
             path: '/',
             name: '首页',
             component: resolve => require(['../views/home/home.vue'], resolve),
