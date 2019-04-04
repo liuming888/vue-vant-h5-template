@@ -35,24 +35,12 @@
     }
   }
 }
-
-.turn-home {
-  position: fixed;
-  top: 80%;
-  right: 10px;
-  width: 96px;
-  height: 96px;
-  background: url("~@/assets/images/home@2x(1).png") no-repeat;
-  background-size: 100%;
-  z-index: 9999;
-}
 </style>
 
 <template>
   <div class="purchase-container">
     <!-- 返回首页 -->
-    <div class="turn-home"
-      @click="$router.push('/')"></div>
+    <turn-home />
 
     <div class="info-box">
       <img src="@/assets/images/success.png"
@@ -83,7 +71,8 @@ import commodityItem from "@/components/commodity/commodityItem.vue";
 import { getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
-    commodityItem //商品列表展示的商品X
+    commodityItem, //商品列表展示的商品X
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
   },
   data() {
     return {

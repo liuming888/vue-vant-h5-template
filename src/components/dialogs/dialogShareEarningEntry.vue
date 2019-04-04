@@ -21,14 +21,27 @@
       line-height: 47px;
     }
     > .cut-num {
+      // margin: 0 auto;
+      // width: 420px;
+      // height: 105px;
+      // line-height: 105px;
+      // font-size: 70px;
+      // color: #d30c05;
+      // > span {
+      //   font-size: 34px;
+      // }
+
+       display: inline-block;
       margin: 0 auto;
-      width: 420px;
-      height: 105px;
-      line-height: 105px;
-      font-size: 70px;
+      margin-top: 6px;
+      padding: 0 58px 0 56px;
+      height: 95px;
+      line-height: 95px;
+      font-size: 50px;
       color: #d30c05;
+      background: #fff;
       > span {
-        font-size: 34px;
+        // font-size: 34px;
       }
     }
 
@@ -43,7 +56,7 @@
         rgba(255, 215, 0, 1) 100%
       );
       border-radius: 40px;
-      margin: 88px auto 0;
+      margin: 68px auto 0;
       font-size: 34px;
       font-weight: bold;
       color: rgba(211, 12, 5, 1);

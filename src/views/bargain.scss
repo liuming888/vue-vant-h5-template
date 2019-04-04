@@ -2,16 +2,6 @@
     // background: #f9f9f9;
     background: linear-gradient(45deg, rgba(253, 84, 72, 1), rgba(232, 43, 35, 1));
 
-    > .turn-home {
-        position: fixed;
-        top: 80%;
-        right: 10px;
-        width: 96px;
-        height: 96px;
-        background: url('~@/assets/images/home@2x(1).png') no-repeat;
-        background-size: 100%;
-        z-index: 9999;
-    }
     > .bargain-header {
         position: relative;
         padding: 40px 10px 10px 10px;
@@ -155,22 +145,17 @@
                         margin: 0 auto;
                         width: 580px;
                         height: 20px;
-                        border-radius: 10px;
+                        border-radius: 20px;
                         background-color: #fececa;
                         display: flex;
                         > .active {
                             position: absolute;
                             top: 0;
                             left: 0;
-                            // width: 30%;
                             height: 100%;
                             background:url('~@/assets/images/progress-bar-2.png') no-repeat 0 0/100% 100%,
                             linear-gradient(-45deg,rgba(213,16,5,1),rgba(245,75,1,1));
-                            // background: url('~@/assets/images/progress-bar-2.png') no-repeat;
-                            // background-size: 100%;
-                            // background-color: #d30c05;
-
-                            border-radius: 10px;
+                            border-radius: 20px;
                         }
                         > .schedule-item {
                             position: relative;

@@ -8,14 +8,6 @@
         text-align: center;
         position: relative;
 
-        .turn-home {
-            width: 83px;
-            height: auto;
-            position: absolute;
-            top: 0;
-            right: 29px;
-        }
-
         .banner-img {
             width: 717px;
             height: auto;
@@ -448,11 +440,10 @@
                 position: relative;
                 width: 100%;
                 display: block;
-                height: 100px;
-                line-height: 100px;
+                height: 160px;
+                line-height: 160px;
                 // margin: 50px 0;
                 font-size: 34px;
-                font-weight: 600;
                 text-align: center;
                 color: rgba(230, 81, 55, 1);
                 background: linear-gradient(180deg, rgba(244, 74, 2, 1) 0.2685546875%, rgba(212, 14, 5, 1) 100%);
@@ -462,8 +453,8 @@
                 align-items: center;
                 justify-content: center;
                 > img {
-                    width: 40px;
-                    height: 40px;
+                    width: 281px;
+                    height: auto;
                     margin-right: 24px;
                 }
             }
@@ -472,8 +463,8 @@
                 box-sizing: border-box;
                 width: calc(50% - 10px);
                 height: 500px;
-                // border: 1px solid rgba(229, 229, 229, 1);
-                border-radius: 10px 10px 0px 0px;
+                border: 1px solid #f1ecec;
+                border-radius: 10px;
                 overflow: hidden;
                 margin-bottom: 28px;
                 > .products-photo {
@@ -493,7 +484,7 @@
                     line-height: 50px;
                     color: #888;
                     font-size: 24px;
-                    padding: 0 14px;
+                    padding: 0 10px;
                     margin-bottom: 45px;
                     > .btn {
                         display: block;
@@ -503,7 +494,7 @@
                         text-align: center;
                         width: 160px;
                         height: 50px;
-                        background: linear-gradient(90deg, rgba(211, 12, 5, 1) 0%, rgba(246, 78, 1, 1) 100%);
+                        background: linear-gradient(90deg, rgba(246, 78, 1, 1) 0%, rgba(211, 12, 5, 1) 100%);
                         border-radius: 25px;
                         text-decoration: none;
                     }

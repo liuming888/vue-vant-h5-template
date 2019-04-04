@@ -46,7 +46,7 @@
       align-items: center;
       // margin-bottom: 41px;
       position: absolute;
-      bottom: 50px;
+      bottom: 70px;
 
       .login-item {
         // width: 100px;

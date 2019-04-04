@@ -22,14 +22,17 @@
       line-height: 47px;
     }
     > .cut-num {
+      display: inline-block;
       margin: 0 auto;
-      width: 420px;
-      height: 105px;
-      line-height: 105px;
-      font-size: 70px;
+      margin-top: 20px;
+      padding: 0 58px 0 56px;
+      height: 95px;
+      line-height: 95px;
+      font-size: 50px;
       color: #d30c05;
+      background: #fff;
       > span {
-        font-size: 34px;
+        // font-size: 34px;
       }
     }
     > .bottom-tips {
@@ -61,7 +64,7 @@
 <template>
   <div class="dialogPotongSendiri-container">
     <van-popup v-model="dialogVisible.show"
-      style="background-color: transparent;width: 100%">
+      style="background-color: transparent;width: 100%" position="top">
       <div class="box">
         <img v-lazy="require('@/assets/images/zikanyidaotanchuang.png')"
           class="bg">
@@ -79,7 +82,7 @@
 
 <script>
 export default {
-  name: "dialogPotongSendiri",  // 自砍一刀成功弹窗
+  name: "dialogPotongSendiri", // 自砍一刀成功弹窗
   props: {
     dialogVisible: {
       type: Object,
@@ -105,7 +108,7 @@ export default {
   data() {
     return {};
   },
- 
+
   methods: {
     closeDialog() {
       this.$emit("update:dialogVisible", { show: false });

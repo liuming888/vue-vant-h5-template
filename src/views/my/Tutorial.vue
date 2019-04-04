@@ -64,6 +64,25 @@
   }
   .totorial-ct-li {
     margin-top: 80px;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 604px;
+      height: 1px;
+      background: rgba(242, 242, 242, 1);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom:-44px;
+    }
+
+    &:nth-last-of-type(1){
+      &::before{
+        display: none;
+      }
+    }
+
     &:first-of-type {
       margin-top: 0;
     }
@@ -78,7 +97,9 @@
     color: #888888;
     line-height: 45px;
     margin-top: 10px;
-    img{
+    word-break:break-all; 
+    
+    img {
       width: 100%;
     }
   }

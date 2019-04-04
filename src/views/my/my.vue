@@ -4,42 +4,44 @@
   height: 92vh;
   overflow-y: auto;
   > .my-header {
-    padding: 40px 30px 0 30px;
+    padding: 32px 30px 0 30px;
     position: relative;
     background: url("./../../assets/images/my-background.png") no-repeat;
     background-size: 100% 100%;
-    height: 400px;
+    height: 356px;
     > .my-info {
       display: flex;
+      align-items: center;
       > .my-img {
         margin-right: 27px;
-        width: 110px;
-        height: 110px;
+        width: 88px;
+        height: 88px;
         border-radius: 50%;
         overflow: hidden;
         background-color: #fff;
         > img {
           width: 100%;
-          height: auto;
+          height: 88px;
         }
       }
       > .my-info-detail {
         flex: 1;
         color: #fff;
         > .name {
-          margin: 34px 0 20px 0;
+          // margin: 34px 0 20px 0;
           font-size: 36px;
-          line-height: 40px;
+          // line-height: 40px;
           white-space: nowrap;
           span {
             background: url("./../../assets/images/member.png") left top
               no-repeat;
             background-size: 100% auto;
             display: inline-block;
-            width: 160px;
+            // width: 160px;
             height: 36px;
             line-height: 36px;
             padding-left: 40px;
+            padding-right: 15px;
             font-size: 22px;
             vertical-align: middle;
           }
@@ -68,7 +70,7 @@
       left: 30px;
       right: 30px;
       height: 393px;
-      top: 180px;
+      top: 141px;
       background: linear-gradient(
         90deg,
         rgba(255, 226, 166, 1) 0%,
@@ -90,6 +92,7 @@
         font-size: 28px;
       }
       > .top {
+        margin-bottom: 40px;
         > .title {
           font-size: 26px;
           color: #94671d;
@@ -108,6 +111,7 @@
         > .bottom-item {
           flex: 1;
           text-align: left;
+          position: relative;
 
           > .title {
             font-size: 20px;
@@ -121,16 +125,28 @@
             margin-bottom: 10px;
           }
         }
+
+        .bottom-item-1::after {
+          content: "";
+          width: 1px;
+          height: 50px;
+          background: #211f1d;
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto 0;
+        }
       }
     }
   }
   > .my-control {
-    margin: 158px 30px 20px 30px;
+    margin: 168px 30px 24px 30px;
     border-radius: 20px;
-    height: 158px;
+    height: 190px;
     display: flex;
     background: #fff;
-    // align-items: center;
+    align-items: center;
     > .my-control-item {
       flex: 1;
       display: block;
@@ -140,9 +156,9 @@
       height: 100%;
       cursor: pointer;
       > img {
-        padding-top: 38px;
-        width: auto;
-        height: 50px;
+        padding-top: 48px;
+        width: 64px;
+        height: auto;
       }
     }
   }
@@ -151,20 +167,54 @@
     margin: 0 30px;
     background: #fff;
     > .title {
-      padding: 28px 0 0 0;
+      padding: 28px 0 16px 0;
       font-size: 40px;
       color: #323232;
       text-align: center;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        width: 80px;
+        height: 2px;
+        background: rgba(237, 238, 243, 1);
+        border-radius: 1px;
+      }
     }
+
+    .hero-list-title {
+      width: 100%;
+      font-size: 22px;
+      height: 77px;
+      // line-height: 77px;
+      display: flex;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #F2F2F2;
+
+      > .column {
+        flex: 1;
+        color: #888888;
+        font-size: 22px;
+      }
+    }
+
     > .hero-list {
-      height: 480px;
+      max-height: 765px;
       overflow-y: auto;
-      margin: 38px 0;
+      margin-bottom: 27px;
+
       > li {
         text-align: center;
         display: flex;
         align-items: center;
-        padding-bottom: 10px;
+        // padding-bottom: 10px;
         border-bottom: 1px solid #f2f2f2;
         > .column {
           flex: 1;
@@ -196,11 +246,11 @@
           <a class="my-right-btn"
             @click="handleCashOut">Cash out</a>
           <div class="top">
-            <p class="title">Cumulative estimated return(Rp)</p>
+            <p class="title">Cumulative return(Rp)</p>
             <p class="number">{{accountInfo.total_future_price||0}}</p>
           </div>
           <div class="bottom">
-            <div class="bottom-item">
+            <div class="bottom-item bottom-item-1">
               <p class="number">{{accountInfo.today_future_price||0}}</p>
               <p class="title">Estimated earnings today</p>
             </div>
@@ -240,12 +290,13 @@
       <div class="hero-rank"
         v-if="hero_tips.length>0">
         <p class="title">Heroes</p>
+        <div class="hero-list-title">
+          <div class="column">Rankings</div>
+          <div class="column">Number of fans</div>
+          <div class="column">Cumulative return(RP)</div>
+        </div>
         <ul class="hero-list">
-          <li class="hero-list-title">
-            <div class="column">Rankings</div>
-            <div class="column">Number of fans</div>
-            <div class="column">Cumulative income(RP)</div>
-          </li>
+
           <FriendListCommon v-for="(item, index) in hero_tips"
             :key="index"
             :item="item"

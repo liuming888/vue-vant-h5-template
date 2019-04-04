@@ -5,8 +5,8 @@
     ref="bargainContainer"
     id="bargainContainer">
     <!-- 返回首页 -->
-    <div class="turn-home"
-      @click="$router.push('/')"></div>
+    <turn-home />
+
     <!-- 头部信息 -->
     <div class="bargain-header">
       <div class="bargain-info-box">
@@ -159,7 +159,8 @@ export default {
     dialogPotongSendiri: resolve =>
       require(["@/components/dialogs/dialogPotongSendiri.vue"], resolve), // 自砍成功弹窗
     dialogShareEarningEntry: resolve =>
-      require(["@/components/dialogs/dialogShareEarningEntry.vue"], resolve) // 分享赚链接首次进入弹窗
+      require(["@/components/dialogs/dialogShareEarningEntry.vue"], resolve), // 分享赚链接首次进入弹窗
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
   },
   data() {
     return {
@@ -442,7 +443,7 @@ export default {
         this.spu_list = result.data.spu_list;
 
         // if (page_num == 1) {
-        this.$store.commit("setGoodsList", this.spu_list);
+        // this.$store.commit("setGoodsList", this.spu_list);  // 不缓存，防止没登陆的用户到首页展示有问题
         // } else {
         //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
         //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
@@ -558,7 +559,7 @@ export default {
         vm.$util.paymentCancellationPrompt();
       }
     });
-  },
+  }
   // watch: {
   //   spu: {
   //     handler() {

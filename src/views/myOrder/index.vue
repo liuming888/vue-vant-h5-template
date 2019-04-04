@@ -154,7 +154,7 @@ export default {
     return {
       tabList: [
         {
-          tit: "Semua",
+          tit: "My oders",
           path: "/my/myOrder/semua"
         },
         {
