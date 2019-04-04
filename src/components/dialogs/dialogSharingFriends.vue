@@ -103,11 +103,11 @@
 
       <div class="share-types">
 
-        <div class="share-item">
+        <!-- <div class="share-item">
           <img v-lazy="require('@/assets/images/facbook.png')"
             @click="share(mx_shareFacebook)">
           <p>Facebook</p>
-        </div>
+        </div> -->
 
         <div class="share-item">
           <img v-lazy="require('@/assets/images/line.png')"
