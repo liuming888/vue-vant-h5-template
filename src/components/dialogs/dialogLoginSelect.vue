@@ -76,10 +76,15 @@
 
       <div class="login-types">
 
-        <div class="login-item"
+        <!-- <div class="login-item"
           @click="loginFB">
           <img v-lazy="require('@/assets/images/facbook.png')">
           <p>Facebook login</p>
+        </div> -->
+
+        <div class="login-item"
+          @click="jumpLogin">
+              去登录
         </div>
       </div>
 
@@ -133,6 +138,9 @@ export default {
   methods: {
     close() {
       this.$store.commit("setLoginSelectShow", false);
+    },
+    jumpLogin(){
+      this.$router.push("/login");
     },
     /**
      * @description: FB登录
