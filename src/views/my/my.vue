@@ -196,7 +196,7 @@
       text-align: center;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #F2F2F2;
+      border-bottom: 1px solid #f2f2f2;
 
       > .column {
         flex: 1;
@@ -223,6 +223,20 @@
         }
       }
     }
+  }
+
+  .sing-out {
+    width: 690px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    margin: 20px auto 25px;
+    font-size: 32px;
+    font-family: Helvetica;
+    font-weight: 400;
+    color: rgba(212, 13, 5, 1);
   }
 }
 </style>
@@ -303,12 +317,18 @@
             :index="index" />
         </ul>
       </div>
+
+      <div class="sing-out"
+        @click="signOut">
+        Sign out
+      </div>
     </div>
 
     <tabBar></tabBar>
   </div>
 </template>
 <script>
+import axios from "axios";
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 
 import { getMyAccount, getHeroList } from "@/server/user.js";
@@ -340,6 +360,30 @@ export default {
     // }
   },
   methods: {
+    /**
+     * @description: 退出登录
+     */
+    signOut() {
+      this.$store.commit("setUserInfo", {});
+      axios.defaults.headers.common["User-Id"] = "";
+      axios.defaults.headers.common["Access-Token"] = "";
+      localStorage.clear();
+      this.accountInfo = {
+        user_id: "", //类型：String  可有字段  备注：用户ID
+        user_name: "", //类型：String  必有字段  备注：用户名
+        vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
+        avatar: "", //类型：String  必有字段  备注：头像地址
+        total_future_price: 0, //类型：String  必有字段  备注：累计预估收益
+        today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
+        today_received_price: 0 //类型：String  必有字段  备注：今日到账收益
+      };
+      this.hero_tips = [];
+      this.$toast({
+        message: "please login again !",
+        duration:1000
+      });
+      this.$store.commit("setLoginSelectShow", true);
+    },
     async initHeroTips() {
       let result = await getHeroList();
       if (result && result.data) {
