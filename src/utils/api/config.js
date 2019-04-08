@@ -16,6 +16,7 @@ export default {
                 // url = 'https://test-ht-zdd-api.istarbuy.com:8443';
                 url = 'https://pubtest-ht-zdd-api.istarbuy.com';
                 break;
+            case 'newProduction':
             case 'production':
                 url = 'https://api.istarbuy.com';
                 break;
