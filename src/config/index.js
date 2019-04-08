@@ -7,6 +7,8 @@ if (process.env.VUE_APP_ENV == 'dev') {
     appId = '411009183037605'; // 公司测试的
 } else if (process.env.VUE_APP_ENV == 'production') {
     appId = '2292102501067089'; // 公司正式的
+} else if (process.env.VUE_APP_ENV=='newProduction'){
+    appId='';
 }
 
 export const FBConfig = {

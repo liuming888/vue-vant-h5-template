@@ -9,6 +9,7 @@
     "build:dev": "cross-env VUE_APP_ENV=dev vue-cli-service build --modern",
     "build:test": "cross-env VUE_APP_ENV=test vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production vue-cli-service build --modern",
+    "build:newprod": "cross-env VUE_APP_ENV=newProduction vue-cli-service build --modern --dest new_dist",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
