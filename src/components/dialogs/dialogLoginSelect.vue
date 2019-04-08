@@ -14,7 +14,7 @@
   .dialog-content {
     width: 610px;
     height: 672px;
-    border-radius:20px; 
+    border-radius: 20px;
     background: #fff;
     padding-top: 64px;
     box-sizing: border-box;
@@ -114,9 +114,11 @@
 </style>
 
 <template>
-  <div class="dialogLoginSelect-container" @click="close">
+  <div class="dialogLoginSelect-container"
+    @click="close">
 
-    <div class="dialog-content" @click.stop>
+    <div class="dialog-content"
+      @click.stop>
       <img src="~@/assets/images/xxicon.png"
         alt=""
         class="close-icon"
@@ -147,7 +149,10 @@
           v-model="authCode">
 
         <span class="send"
+          v-if="!initCodeTime"
           @click.stop="getCode">Send</span>
+        <span class="send"
+          v-else>{{initCodeTime}} s</span>
       </div>
 
       <div class="login-btn"
@@ -170,13 +175,17 @@ export default {
   data() {
     return {
       phone: "",
-      authCode: ""
+      authCode: "",
+      initCodeTime: 0 // 初始化验证码时间（单位S）
     };
   },
   computed: {
     setLoginSelectShow() {
       return this.$store.state.dialogs.loginSelect.show;
     }
+  },
+  created() {
+    this.init();
   },
   mounted() {
     this.$gaSend({
@@ -185,6 +194,11 @@ export default {
     });
   },
   methods: {
+    init() {
+      this.phone = "";
+      this.authCode = "";
+      this.initCodeTime = 0;
+    },
     close() {
       this.$store.commit("setLoginSelectShow", false);
     },
@@ -200,8 +214,27 @@ export default {
         params.user = "zztest";
       }
       const result = await sendCode(params);
-      if (result && result.data && process.env.VUE_APP_ENV == "development") {
-        this.authCode = result.data;
+      if (result) {
+        if (result.data && process.env.VUE_APP_ENV == "development") {
+          this.$toast({
+            message: "Verification code sent !",
+            duration: 1000
+          });
+          this.authCode = result.data;
+        }
+
+        // 开始倒计时（60s）
+        this.initCodeTime = 60;
+        let timer = setInterval(() => {
+          if (this.initCodeTime <= 0) {
+            clearInterval(timer);
+            return;
+          }
+          this.initCodeTime--;
+        }, 1000);
+        this.$once("hook:beforeDestroy", () => {
+          clearInterval(timer);
+        });
       }
     },
     /**
@@ -241,8 +274,12 @@ export default {
       }
       let params = {
         phone: this.phone,
-        authCode: this.authCode
+        auth_code: this.authCode
       };
+
+      if (process.env.VUE_APP_ENV == "development") {
+        params.user = "zztest";
+      }
 
       let result = await telLogin(params);
       if (result && result.data) {

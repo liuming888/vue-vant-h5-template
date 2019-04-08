@@ -10,7 +10,7 @@ function getUrl(VUE_APP_ENV) {
             // 锦涛
             // url = 'http://192.168.4.128:8024/api';
             // 阳
-            // url = 'http://192.168.4.32:8024/api';
+      uk      // url = 'http://192.168.4.32:8024/api';
 
             // 开发环境
             url = 'https://dev-ht-zdd-api.istarbuy.com/api';
