@@ -318,7 +318,8 @@
         </ul>
       </div>
 
-      <div class="sing-out"
+      <div v-if="$store.state.userInfo.user_id"
+        class="sing-out"
         @click="signOut">
         Sign out
       </div>
@@ -380,7 +381,7 @@ export default {
       this.hero_tips = [];
       this.$toast({
         message: "please login again !",
-        duration:1000
+        duration: 1000
       });
       this.$store.commit("setLoginSelectShow", true);
     },

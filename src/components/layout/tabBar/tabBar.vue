@@ -81,8 +81,8 @@ export default {
       if (
         path == "/my" &&
         !this.$store.state.userInfo.user_id /* &&
-        process.env.VUE_APP_ENV != "development" */
-      ) {
+        process.env.VUE_APP_ENV != "development"
+       */) {
         this.$store.commit("setLoginJumpUrl", "/my");
         this.$store.commit("setLoginSelectShow", true);
         return;
