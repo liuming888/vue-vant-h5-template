@@ -14,6 +14,7 @@
   .dialog-content {
     width: 610px;
     height: 672px;
+    // height: 732px;
     border-radius: 20px;
     background: #fff;
     padding-top: 64px;
@@ -109,6 +110,28 @@
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
     }
+
+    .login-types {
+      margin-top: 30px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .login-item {
+        flex: 1;
+        margin-right: 20px;
+        text-align: center;
+        font-size: 20px;
+        color: #323232;
+
+        img {
+          width: 80px;
+          height: auto;
+          border-radius:50%; 
+        }
+      }
+    }
   }
 }
 </style>
@@ -159,6 +182,14 @@
         @click.stop="loginTel">
         Sign in / Register
       </div>
+
+      <!-- <div class="login-types">
+
+        <div class="login-item"
+          @click="loginFB">
+          <img v-lazy="require('@/assets/images/facbookIcon.png')">
+        </div>
+      </div> -->
     </div>
 
   </div>
