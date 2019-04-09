@@ -17,14 +17,14 @@ if (process.env.VUE_APP_ENV == 'development') {
     //   user_id = 1;
     //   access_token = '486dcad761f8425e8aa2a49e964a984c';
 
-    user_id = 753;
-    access_token = '5e85d1f6eb354ee79693edc1295a70ec';
+    // user_id = 753;
+    // access_token = '5e85d1f6eb354ee79693edc1295a70ec';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);
 
-axios.defaults.headers.common['User-Id'] = user_id;
-axios.defaults.headers.common['Access-Token'] = access_token;
+// axios.defaults.headers.common['User-Id'] = user_id;
+// axios.defaults.headers.common['Access-Token'] = access_token;
 
 var instance = axios.create();
 
@@ -82,8 +82,12 @@ instance.interceptors.response.use(
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
-                // Vue.prototype.$toast('Anda belum login');
+                Vue.prototype.$toast('please log in first !');
+                Vue.prototype.$curStore.commit('setUserInfo', {});
+                axios.defaults.headers.common['User-Id'] = '';
+                axios.defaults.headers.common['Access-Token'] = '';
                 localStorage.clear();
+                Vue.prototype.$curStore.commit('setLoginSelectShow', true);
                 // Vue.prototype.$curRouter.replace('/');
             } else {
                 console.log('test11111111111111111111111111');

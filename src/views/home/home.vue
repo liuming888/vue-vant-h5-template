@@ -368,8 +368,8 @@ export default {
       this.initBanners();
       this.initHomeTip();
       if (
-        localStorage.getItem("userInfo") ||
-        process.env.VUE_APP_ENV == "development"
+        localStorage.getItem("userInfo") /* ||
+        process.env.VUE_APP_ENV == "development" */
       ) {
         this.initBargainOrderSpusList();
         this.initMybargainSpus();
