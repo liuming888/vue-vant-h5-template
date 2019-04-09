@@ -38,3 +38,10 @@ export function getExchangeRate({ currency_code = 'IDR' }) {
         data: { currency_code },
     });
 }
+
+// 获取手机提现拥有的运营商列表
+export function getOperatorList() {
+    return $request.get({
+        url: '/api/v1/withdraw/get_operator_list',
+    });
+}

@@ -13,7 +13,7 @@ function getUrl(VUE_APP_ENV) {
           // url = 'http://192.168.4.32:8024/api';
 
             // 开发环境
-            // url = 'https://dev-ht-zdd-api.istarbuy.com/api';
+            url = 'https://dev-ht-zdd-api.istarbuy.com/api';
 
             // 测试环境内网
             // url = 'https://test-ht-zdd-api.istarbuy.com/api';
@@ -22,7 +22,7 @@ function getUrl(VUE_APP_ENV) {
             // url = 'https://test-ht-zdd-api.istarbuy.com:8443/api';
 
             // 最新测试环境
-            url = 'https://pubtest-ht-zdd-api.istarbuy.com/api';
+            // url = 'https://pubtest-ht-zdd-api.istarbuy.com/api';
 
             // url = 'https://api.istarbuy.com/api';
             break;

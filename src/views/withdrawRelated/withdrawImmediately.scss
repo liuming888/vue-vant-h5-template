@@ -187,7 +187,17 @@
             }
         }
     }
+
+    &.operator-type{
+       .play-types{
+           .play-item{
+               height: 63px;
+           }
+       }
+    }
 }
+
+
 
 .precautions-box {
     margin-top: 170px;

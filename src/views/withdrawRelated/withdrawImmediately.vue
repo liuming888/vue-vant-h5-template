@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="border-bttom border-bttom2">
-      <div class="play-box">
+      <div class="play-box ">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Cash withdrawal method</div>
           <div class="embodiment-statement"
@@ -50,6 +50,22 @@
             <img :src="item.icon"
               class="play-img">
             <!-- <span class="play-txt">{{item.name}}</span> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="operator-type play-box">
+        <div class="top-txt">
+          <div class="cash-withdrawal-method">Operator</div>
+        </div>
+        <div class="play-types clearfix">
+          <div class="play-item"
+            v-for="(item,index) of operatorList"
+            :class="{active:item.product_id==withdrawParam.product_id||!withdrawParam.product_id&&index==0}"
+            @click="setProduct(item,index)"
+            :key="index">
+            <img :src="item.product_pic"
+              class="play-img">
           </div>
         </div>
       </div>
@@ -135,12 +151,12 @@
     <div class="cash-withdrawal-rule border-bttom">
       <div class="cash-withdrawal-rule-title"
         id="cashWithdrawalRule">Withdrawal rules</div>
-     
+
       <div class="cash-withdrawal-rule-img">
         <img src="../../assets/images/withdrawRule.png">
       </div>
     </div>
-   
+
     <div class="cash-out-btn"
       @click.stop="goApplyWithdraw">Cash out</div>
     <dialog-default :info="info"
@@ -162,7 +178,11 @@
 import { Icon, Dialog } from "vant";
 import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 
-import { getWithdrawInfo, applyWithdraw } from "@/server/finance.js";
+import {
+  getWithdrawInfo,
+  applyWithdraw,
+  getOperatorList
+} from "@/server/finance.js";
 export default {
   components: {
     DialogDefault,
@@ -186,10 +206,12 @@ export default {
 
       withdrawParam: {
         pay_type: 1, //类型：Number  必有字段  备注：支付类型
+        product_id: "", // 当前充值卡运营商ID
         account_name: "", //类型：String  必有字段  备注：账号名称
         account_no: "", //类型：String  必有字段  备注：账号
         amount: "" //类型：String  必有字段  备注：金额
       },
+      operatorList: [], // 运营商列表
 
       rule: [],
       pay_type: [],
@@ -205,9 +227,19 @@ export default {
     };
   },
   created() {
-    this.initWithdrawInfo();
+    this.init();
   },
   methods: {
+    async init() {
+      await Promise.all([this.initWithdrawInfo(), this.initOperatorList()]);
+      // 提现方式初始配置处理
+      this.payTypeConfig(
+        this.operatorList &&
+          this.operatorList[0] &&
+          this.operatorList[0].config,
+        this.user_fund.withdraw_amount || 0
+      );
+    },
     async initWithdrawInfo() {
       let result = await getWithdrawInfo();
       if (result && result.data) {
@@ -219,23 +251,47 @@ export default {
         this.withdrawParam.pay_type = this.pay_type[0].type;
         this.withdrawParam.amount = this.user_fund.withdraw_amount;
         // 提现方式配置处理
-        this.payTypeConfig(pay_type, user_fund.withdraw_amount || 0);
+        // this.payTypeConfig(pay_type, user_fund.withdraw_amount || 0);
       }
     },
+    async initOperatorList() {
+      let result = await getOperatorList();
+      if (result && result.data) {
+        this.operatorList = result.data;
+      }
+    },
+    setProduct(item, index) {
+      this.withdrawParam.product_id = item.product_id;
+      // 提现方式配置处理
+      this.payTypeConfig(
+        this.operatorList &&
+          this.operatorList[index] &&
+          this.operatorList[index].config,
+        this.user_fund.withdraw_amount || 0
+      );
+    },
     // 提现方式配置处理
-    payTypeConfig(payType, withdrawAmount) {
-      payType.forEach(item => {
-        // 充值卡提现
-        if (item.type === 2) {
-          this.rechargeDenominations = item.config.split(",");
-          const isCanWirhdraw = this.rechargeDenominations.some(
-            current => current <= withdrawAmount
-          );
-          if (isCanWirhdraw && this.rechargeDenominations.length > 0) {
-            this.currentRechargeDenomination = this.rechargeDenominations[0];
-          }
-        }
-      });
+    payTypeConfig(config, withdrawAmount) {
+      this.rechargeDenominations = config.split(",");
+      const isCanWirhdraw = this.rechargeDenominations.some(
+        current => current <= withdrawAmount
+      );
+      if (isCanWirhdraw && this.rechargeDenominations.length > 0) {
+        this.currentRechargeDenomination = this.rechargeDenominations[0];
+      }
+
+      // payType.forEach(item => {
+      //   // 充值卡提现
+      //   if (item.type === 2) {
+      //     this.rechargeDenominations = item.config.split(",");
+      //     const isCanWirhdraw = this.rechargeDenominations.some(
+      //       current => current <= withdrawAmount
+      //     );
+      //     if (isCanWirhdraw && this.rechargeDenominations.length > 0) {
+      //       this.currentRechargeDenomination = this.rechargeDenominations[0];
+      //     }
+      //   }
+      // });
     },
     async goApplyWithdraw() {
       const { account_name, account_no } = this.withdrawParam;
