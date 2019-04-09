@@ -80,10 +80,12 @@
     }
 
     .sms-box {
+      .code-input {
+        width: 340px;
+        margin-right: 10px;
+      }
+
       .send {
-        margin-left: 24px;
-        position: relative;
-        left: 26px;
         font-size: 26px;
         font-family: "PingFangSC-Regular";
         font-weight: 400;
@@ -195,7 +197,7 @@
           alt=""
           class="icon">
         <input type="text"
-          class="input"
+          class="input code-input"
           onfocus="this.select();"
           placeholder="Enter Code SMS"
           v-model="authCode">
@@ -275,26 +277,26 @@ export default {
       }
       const result = await sendCode(params);
       if (result) {
-        if (result.data && process.env.VUE_APP_ENV == "development") {
+        if (result.code==0) {
           this.$toast({
             message: "Verification code sent !",
             duration: 1000
           });
           this.authCode = result.data;
-        }
 
-        // 开始倒计时（60s）
-        this.initCodeTime = 60;
-        let timer = setInterval(() => {
-          if (this.initCodeTime <= 0) {
+          // 开始倒计时（60s）
+          this.initCodeTime = 60;
+          let timer = setInterval(() => {
+            if (this.initCodeTime <= 0) {
+              clearInterval(timer);
+              return;
+            }
+            this.initCodeTime--;
+          }, 1000);
+          this.$once("hook:beforeDestroy", () => {
             clearInterval(timer);
-            return;
-          }
-          this.initCodeTime--;
-        }, 1000);
-        this.$once("hook:beforeDestroy", () => {
-          clearInterval(timer);
-        });
+          });
+        }
       }
     },
     /**
