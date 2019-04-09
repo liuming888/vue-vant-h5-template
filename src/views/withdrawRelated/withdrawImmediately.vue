@@ -278,10 +278,12 @@ export default {
     },
     // 提现方式配置处理
     payTypeConfig(config, withdrawAmount) {
-      this.rechargeDenominations = config&&config.split(",");
-      const isCanWirhdraw = this.rechargeDenominations.some(
-        current => current <= withdrawAmount
-      );
+      if(config){
+        this.rechargeDenominations = config.split(",");
+        const isCanWirhdraw = this.rechargeDenominations.some(
+          current => current <= withdrawAmount
+        );
+      }
       if (isCanWirhdraw && this.rechargeDenominations.length > 0) {
         this.currentRechargeDenomination = this.rechargeDenominations[0];
       }
