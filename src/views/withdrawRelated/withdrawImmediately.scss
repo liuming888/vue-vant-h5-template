@@ -63,7 +63,7 @@
     }
 
     .current-balance {
-        flex: 1;
+        flex: 2;
         text-align: left;
 
         .balance-item {
@@ -187,7 +187,25 @@
             }
         }
     }
+
+    &.operator-type{
+       .play-types{
+           display: flex;
+           align-items: center;
+           .play-item{
+               height: 63px;
+               margin-top: 0;
+               margin-right: 24px;
+
+               &:nth-last-of-type(1){
+                   margin-right: 0;
+               }
+           }
+       }
+    }
 }
+
+
 
 .precautions-box {
     margin-top: 170px;
@@ -250,7 +268,7 @@
                 width: 240px;
                 padding-top: 45px;
                 position: relative;
-                text-indent: -40px;
+                text-indent: -20px;
 
                 &::after {
                     content: '';

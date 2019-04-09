@@ -14,7 +14,7 @@
   .dialog-content {
     width: 610px;
     height: 672px;
-    // height: 732px;
+    // height: 847px;
     border-radius: 20px;
     background: #fff;
     padding-top: 64px;
@@ -102,16 +102,44 @@
         rgba(245, 78, 1, 1)
       );
       border-radius: 42px;
-      margin: 0 auto;
-      margin-top: 58px;
+      margin: 58px auto;
       font-size: 32px;
       font-family: "Helvetica_cyr-Bold";
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
     }
 
+    .other-log {
+      font-size: 24px;
+      font-family: "PingFangSC-Regular";
+      font-weight: 400;
+      color: rgba(136, 136, 136, 1);
+      text-align: center;
+      position: relative;
+
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        width: 112px;
+        height: 1px;
+        background: rgba(242, 242, 242, 1);
+      }
+
+      &::after {
+        left: 66px;
+      }
+
+      &::before {
+        right: 66px;
+      }
+    }
+
     .login-types {
-      margin-top: 30px;
+      margin-top: 36px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -184,8 +212,8 @@
         Sign in / Register
       </div>
 
-      <!-- <div class="login-types">
-
+      <!-- <p class="other-log">Other ways to log in</p>
+      <div class="login-types">
         <div class="login-item"
           @click="loginFB">
           <img v-lazy="require('@/assets/images/facbookIcon.png')">
