@@ -74,7 +74,7 @@ module.exports = {
             }),
         ];
         //打包将console删除
-        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production') {
+        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production' || process.env.VUE_APP_ENV =='newProduction') {
             config.plugins = [...config.plugins, ...plugins];
         }
 
