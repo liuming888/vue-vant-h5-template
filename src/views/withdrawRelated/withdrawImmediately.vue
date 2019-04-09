@@ -54,7 +54,8 @@
         </div>
       </div>
 
-      <div class="operator-type play-box">
+      <div v-if="withdrawParam.pay_type === 2"
+        class="operator-type play-box">
         <div class="top-txt">
           <div class="cash-withdrawal-method">Operator</div>
         </div>
@@ -104,12 +105,14 @@
         <li>
           <span>Account Name</span>
           <input v-model.trim="withdrawParam.account_name"
+            onfocus="this.select();"
             placeholder="Enter the amount"
             type="text">
         </li>
         <li>
           <span>Confirm the account</span>
           <input v-model.trim="withdrawParam.account_no"
+            onfocus="this.select();"
             placeholder="Confirm the amount"
             type="text">
         </li>
@@ -118,12 +121,14 @@
         <li>
           <span>Phone number</span>
           <input v-model.trim.number="withdrawParam.account_name"
+            onfocus="this.select();"
             placeholder="Enter phone number"
             type="number">
 
         </li>
         <li> <span>Confirm phone number</span>
           <input v-model.trim.number="withdrawParam.account_no"
+            onfocus="this.select();"
             placeholder="Confirm phone number"
             type="number"></li>
       </ul>
@@ -186,8 +191,8 @@ import {
 export default {
   components: {
     DialogDefault,
-    [Icon.name]: Icon,
-    [Dialog.name]: Dialog
+    [Icon.name]: Icon
+    // [Dialog.name]: Dialog
   },
   data() {
     return {
@@ -258,6 +263,7 @@ export default {
       let result = await getOperatorList();
       if (result && result.data) {
         this.operatorList = result.data;
+        this.withdrawParam.product_id = this.operatorList[0].product_id;
       }
     },
     setProduct(item, index) {
@@ -272,7 +278,7 @@ export default {
     },
     // 提现方式配置处理
     payTypeConfig(config, withdrawAmount) {
-      this.rechargeDenominations = config.split(",");
+      this.rechargeDenominations = config&&config.split(",");
       const isCanWirhdraw = this.rechargeDenominations.some(
         current => current <= withdrawAmount
       );
@@ -296,17 +302,19 @@ export default {
     async goApplyWithdraw() {
       const { account_name, account_no } = this.withdrawParam;
       if (!account_name || !account_no) {
-        Dialog.alert({
-          message: "Account information cannot be empty",
-          confirmButtonText: "ok"
-        });
+        // Dialog.alert({
+        //   message: "Account information cannot be empty",
+        //   confirmButtonText: "ok"
+        // });
+        this.$toast("Account information cannot be empty");
         return;
       }
       if (account_name !== account_no) {
-        Dialog.alert({
-          message: "Inconsistent accounts are entered twice",
-          confirmButtonText: "ok"
-        });
+        // Dialog.alert({
+        //   message: "Inconsistent accounts are entered twice",
+        //   confirmButtonText: "ok"
+        // });
+        this.$toast("Inconsistent accounts are entered twice");
         return;
       }
 
@@ -315,7 +323,7 @@ export default {
       if (this.withdrawParam.pay_type === 2) {
         params.amount = parseInt(this.currentRechargeDenomination);
       }
-      // console.log(1);
+      console.log("1111111111111111111111111", params);
       let result = await applyWithdraw(params);
       if (result && result.code == 0) {
         this.showAlert = true;
@@ -323,7 +331,6 @@ export default {
     },
     setScheduleItemCls(item, index) {
       let withdrawAmount = this.user_fund.withdraw_amount || 0;
-      console.log("withdrawAmount: ", withdrawAmount);
       return [
         { "schedule-item": index != this.rule.length - 1 },
         { "schedule-item-1": index == 0 },
@@ -339,19 +346,6 @@ export default {
             (index == 0 && withdrawAmount == 0)
         }
       ];
-      // return [
-      //   { "ball-left": index == 0 },
-      //   { "ball-active": withdrawAmount >= item.amount },
-      //   `ball-center-${index}`,
-      //   { "ball-right": index == this.rule.length - 1 },
-      //   {
-      //     "ball-center-cur":
-      //       (index > 0 &&
-      //         withdrawAmount > this.rule[index - 1].amount &&
-      //         withdrawAmount < item.amount) ||
-      //       (withdrawAmount < item.amount && index == 1)
-      //   }
-      // ];
     },
     // 提现ok
     cashOk() {
