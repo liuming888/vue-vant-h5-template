@@ -128,7 +128,7 @@
         img {
           width: 80px;
           height: auto;
-          border-radius:50%; 
+          border-radius: 50%;
         }
       }
     }
@@ -159,6 +159,7 @@
         <input type="number"
           class="input"
           placeholder="Enter Mobile Number"
+          onfocus="this.select();"
           v-model="phone">
       </div>
 
@@ -168,6 +169,7 @@
           class="icon">
         <input type="text"
           class="input"
+          onfocus="this.select();"
           placeholder="Enter Code SMS"
           v-model="authCode">
 
