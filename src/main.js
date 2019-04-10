@@ -18,19 +18,6 @@ Vue.prototype.$gaSend = $util.gaSend;
 
 Vue.config.productionTip = false;
 
-var googleUser = {};
-var startApp = function () {
-    gapi.load('auth2', function () {
-        // Retrieve the singleton for the GoogleAuth library and set up the client.
-        auth2 = gapi.auth2.init({
-            client_id: 'xxxx', //客户端ID
-            cookiepolicy: 'single_host_origin',
-            scope: 'profile' //可以请求除了默认的'profile' and 'email'之外的数据
-        });
-        attachSignin(document.getElementById('customBtn'));
-    });
-};
-
 new Vue({
     router,
     store,

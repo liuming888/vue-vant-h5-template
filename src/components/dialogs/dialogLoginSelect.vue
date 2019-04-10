@@ -225,8 +225,9 @@
             @click="loginFB">
             <img v-lazy="require('@/assets/images/facbookIcon.png')">
           </div>
+
           <div class="login-item"
-            @click="loginFB">
+            id="customBtn">
             goole login
           </div>
         </div>
@@ -274,12 +275,47 @@ export default {
       eventCategory: "第三方登陆浮窗",
       eventAction: "浮窗展示"
     });
+
+    this.startApp();
   },
   methods: {
     init() {
       this.phone = "";
       this.authCode = "";
       this.initCodeTime = 0;
+    },
+    startApp() {
+      var vm = this;
+      vm.auth2 = null;
+      gapi.load("auth2", function() {
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        vm.auth2 = gapi.auth2.init({
+          client_id:
+            "1003879582574-d1k8jo3b1m55m7pfhvqlvfug5gqk3omg.apps.googleusercontent.com", //客户端ID
+          cookiepolicy: "single_host_origin",
+          scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
+        });
+        vm.attachSignin(document.getElementById("customBtn"));
+      });
+    },
+    attachSignin(element) {
+      let vm = this;
+      vm.auth2.attachClickHandler(
+        element,
+        {},
+        function(googleUser) {
+          var profile = vm.auth2.currentUser.get().getBasicProfile();
+          console.log("ID: " + profile.getId());
+          console.log("Full Name: " + profile.getName());
+          console.log("Given Name: " + profile.getGivenName());
+          console.log("Family Name: " + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+        },
+        function(error) {
+          console.log(JSON.stringify(error, undefined, 2));
+        }
+      );
     },
     close() {
       this.$store.commit("setLoginSelectShow", false);
