@@ -14,11 +14,11 @@
   }
 
   .freebing-big-box:nth-last-of-type(1) {
-      .freebing-container{
-        &::after{
-          display: none;
-        }
+    .freebing-container {
+      &::after {
+        display: none;
       }
+    }
   }
 }
 </style>
@@ -167,30 +167,30 @@
   border-radius: 50%;
 }
 
-.privacy-agreement-box{
+.privacy-agreement-box {
   margin-top: 20px;
-  text-align:center;
-  color:#fff;
+  text-align: center;
+  color: #fff;
 
-  p{
+  p {
     margin-bottom: 10px;
-    font-size:26px;
+    font-size: 26px;
   }
 
-  ul{
+  ul {
     width: 90%;
     margin: 0 auto;
     display: flex;
-     font-size:20px;
+    font-size: 20px;
 
-    li{
-        flex:3;
-        border-left: 1px solid #fff;
-        line-height:30px;
+    li {
+      flex: 3;
+      border-left: 1px solid #fff;
+      line-height: 30px;
 
-        &:nth-of-type(1){
-          border-left:0;
-        }
+      &:nth-of-type(1) {
+        border-left: 0;
+      }
     }
   }
 }
@@ -202,11 +202,11 @@
       class="go-top-btn"
       v-if="showGoTopBtn"
       @click.stop="goPageTop" />
-
     <div class="home-container"
       @scroll="scrollEvent"
       ref="homeContainer">
-      <section class="home-top-container">
+      <section class="home-top-container"
+       id="customBtn">
         <!-- 用户消息 -->
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
@@ -257,7 +257,6 @@
           </li>
         </ul>
       </section>
-
 
       <div class="privacy-agreement-box">
         <p>Copyright © 2019 Istarbuy</p>
@@ -352,8 +351,42 @@ export default {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
       this.isLoad = true;
     }, 3000);
+
+    this.startApp();
   },
   methods: {
+    startApp() {
+      var vm=this;
+      vm.auth2=null;
+      gapi.load("auth2", function() {
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        vm.auth2 = gapi.auth2.init({
+          client_id: "1003879582574-d1k8jo3b1m55m7pfhvqlvfug5gqk3omg.apps.googleusercontent.com", //客户端ID
+          cookiepolicy: "single_host_origin",
+          scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
+        });
+        vm.attachSignin(document.getElementById("customBtn"));
+      });
+    },
+    attachSignin(element) {
+      let vm=this;
+      vm.auth2.attachClickHandler(
+        element,
+        {},
+        function(googleUser) {
+          var profile = vm.auth2.currentUser.get().getBasicProfile();
+          console.log("ID: " + profile.getId());
+          console.log("Full Name: " + profile.getName());
+          console.log("Given Name: " + profile.getGivenName());
+          console.log("Family Name: " + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+        },
+        function(error) {
+          console.log(JSON.stringify(error, undefined, 2));
+        }
+      );
+    },
     scrollEvent(event) {
       if (event.target.scrollTop) {
         this.showGoTopBtn = true;
@@ -368,7 +401,9 @@ export default {
       this.initBanners();
       this.initHomeTip();
       if (
-        localStorage.getItem("userInfo") /* ||
+        localStorage.getItem(
+          "userInfo"
+        ) /* ||
         process.env.VUE_APP_ENV == "development" */
       ) {
         this.initBargainOrderSpusList();

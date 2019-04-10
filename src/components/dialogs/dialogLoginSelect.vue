@@ -225,6 +225,10 @@
             @click="loginFB">
             <img v-lazy="require('@/assets/images/facbookIcon.png')">
           </div>
+          <div class="login-item"
+            @click="loginFB">
+            goole login
+          </div>
         </div>
       </template>
     </div>
