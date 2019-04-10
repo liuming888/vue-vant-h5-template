@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve:mock": "cross-env VUE_APP_ENV=mock vue-cli-service serve --copy",
-    "serve": "cross-env VUE_APP_ENV=development VUE_APP_URL=https://dev-ht-zdd.istarbuy.com vue-cli-service serve --copy",
+    "serve:mock": "cross-env VUE_APP_ENV=mock VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com vue-cli-service serve --copy",
+    "serve": "cross-env VUE_APP_ENV=development VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com vue-cli-service serve --copy",
     "build": "vue-cli-service build",
-    "build:dev": "cross-env VUE_APP_ENV=dev VUE_APP_URL=https://dev-ht-zdd.istarbuy.com vue-cli-service build --modern",
-    "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.istarbuy.com vue-cli-service build --modern",
+    "build:dev": "cross-env VUE_APP_ENV=dev VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com vue-cli-service build --modern",
+    "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.lovingistarbuy.com vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com vue-cli-service build --modern",
-    "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://lovingistarbuy.com vue-cli-service build --modern --dest new_dist",
+    "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com vue-cli-service build --modern --dest new_dist",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
