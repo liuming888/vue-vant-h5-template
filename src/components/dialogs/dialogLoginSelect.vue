@@ -14,12 +14,15 @@
   .dialog-content {
     width: 610px;
     height: 672px;
-    // height: 847px;
     border-radius: 20px;
     background: #fff;
     padding-top: 64px;
     box-sizing: border-box;
     position: relative;
+
+    &.show-fb {
+      height: 847px;
+    }
 
     .close-icon {
       position: absolute;
@@ -170,6 +173,7 @@
     @click="close">
 
     <div class="dialog-content"
+      :class="{'show-fb':showFB}"
       @click.stop>
       <img src="~@/assets/images/xxicon.png"
         alt=""
@@ -214,13 +218,15 @@
         Sign in / Register
       </div>
 
-      <!-- <p class="other-log">Other ways to log in</p>
-      <div class="login-types">
-        <div class="login-item"
-          @click="loginFB">
-          <img v-lazy="require('@/assets/images/facbookIcon.png')">
+      <template v-if="showFB">
+        <p class="other-log">Other ways to log in</p>
+        <div class="login-types">
+          <div class="login-item"
+            @click="loginFB">
+            <img v-lazy="require('@/assets/images/facbookIcon.png')">
+          </div>
         </div>
-      </div> -->
+      </template>
     </div>
 
   </div>
@@ -244,6 +250,16 @@ export default {
   computed: {
     setLoginSelectShow() {
       return this.$store.state.dialogs.loginSelect.show;
+    },
+    /**
+     * @description: 显示FB相关（旧dsp投放的环境不显示）
+     */
+    showFB() {
+      if (process.env.VUE_APP_ENV != "production") {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   created() {
@@ -277,7 +293,7 @@ export default {
       }
       const result = await sendCode(params);
       if (result) {
-        if (result.code==0) {
+        if (result.code == 0) {
           this.$toast({
             message: "Verification code sent !",
             duration: 1000
