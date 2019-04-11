@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   z-index: 100;
-  padding-top: 200px;
+  padding-top: 180px;
   display: flex;
   justify-content: center;
 
