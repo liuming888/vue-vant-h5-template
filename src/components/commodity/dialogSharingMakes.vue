@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   // align-items: flex-end;
-  padding-top: 2vh;
+  // padding-top: 1vh;
   box-sizing: border-box;
 }
 
@@ -153,7 +153,7 @@
     height: auto;
     // margin: 96px auto 0;
     position: absolute;
-    bottom: -110px;
+    bottom: -90px;
     left: 0;
     right: 0;
     margin: 0 auto;
