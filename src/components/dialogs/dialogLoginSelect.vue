@@ -339,6 +339,24 @@ export default {
       }
     },
     /**
+     * @description:  根据情况添加载荷参数
+     */
+    setParams(param) {
+      const { spuId, bargainId, inviteUserId, source } = this.$route.query;
+      if (spuId) {
+        param.spu_id = spuId;
+      }
+      if (bargainId) {
+        param.bargain_id = bargainId;
+      }
+      if (inviteUserId) {
+        param.invite_user_id = inviteUserId;
+      }
+      if (source) {
+        param.source = source;
+      }
+    },
+    /**
      * @description: 手机号码 验证码登录
      */
     async loginTel() {
@@ -350,16 +368,19 @@ export default {
         this.$toast("verification code must be filled !");
         return;
       }
-      let params = {
+
+      let param = {
         phone: this.phone,
         auth_code: this.authCode
       };
+      
+      this.setParams(param);
 
       if (process.env.VUE_APP_ENV == "development") {
-        params.user = "zztest";
+        param.user = "zztest";
       }
 
-      let result = await telLogin(params);
+      let result = await telLogin(param);
       if (result && result.data) {
         this.loginApiEnd(result.data);
       }
@@ -387,19 +408,7 @@ export default {
           tp_username: name,
           tp_avatar: pic_square
         };
-        const { spuId, bargainId, inviteUserId, source } = this.$route.query;
-        if (spuId) {
-          param.spu_id = spuId;
-        }
-        if (bargainId) {
-          param.bargain_id = bargainId;
-        }
-        if (inviteUserId) {
-          param.invite_user_id = inviteUserId;
-        }
-        if (source) {
-          param.source = source;
-        }
+        this.setParams(param);
 
         let result = await login(param);
         console.log("result: ", result);
