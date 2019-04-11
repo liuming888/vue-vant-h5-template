@@ -13,7 +13,7 @@
 
   .dialog-content {
     width: 610px;
-    height: 672px;
+    height: 600px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;
