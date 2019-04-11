@@ -112,7 +112,7 @@
         .send {
           display: block;
           background: #d30c05;
-          width: 406px;
+          width: 105px;
           height: 50px;
           line-height: 50px;
           border-radius: 50px;
