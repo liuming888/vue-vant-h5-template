@@ -9,7 +9,7 @@
     "build:dev": "cross-env VUE_APP_ENV=dev VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723  vue-cli-service build --modern",
     "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
-    "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=1217935141713878 vue-cli-service build --modern --dest new_dist",
+    "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=2408818452475633 vue-cli-service build --modern --dest new_dist",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
