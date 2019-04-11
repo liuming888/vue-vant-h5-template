@@ -116,7 +116,7 @@
 <template>
   <div class="commodityItem-container">
     <div class="home-goods-item">
-      <div class="goods-img">
+      <div class="goods-img" @click="jumpBargain">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
           :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
