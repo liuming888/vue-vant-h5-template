@@ -31,7 +31,7 @@
     }
 
     &.show-fb {
-      height: 800px;
+      height: 780px;
     }
 
     .login-tit{
@@ -65,7 +65,7 @@
 
       .input-box {
         padding: 0 26px 0 21px;
-        height: 115px;
+        height: 130px;
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -105,14 +105,14 @@
         }
 
         .code-input {
-          width: 500px;
+          width: 300px;
           margin-right: 10px;
         }
 
         .send {
           display: block;
           background: #d30c05;
-          width: 206px;
+          width: 406px;
           height: 50px;
           line-height: 50px;
           border-radius: 50px;
@@ -142,7 +142,7 @@
         rgba(255, 229, 89, 1) 100%
       );
       border-radius: 40px;
-      margin: 58px auto;
+      margin: 38px auto;
       font-size: 32px;
       font-family: "Helvetica_cyr-Bold";
       font-weight: bold;
@@ -166,7 +166,7 @@
         margin: auto 0;
         width: 112px;
         height: 1px;
-        background: #c5c2c2;
+        background:  #F2F2F2 ;
       }
 
       &::after {
