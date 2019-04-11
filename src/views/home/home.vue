@@ -214,7 +214,7 @@
         <van-swipe :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white"
-          class="home-banner">
+          class="home-banner" @click.native="$router.push('/my/Tutorial')">
           <template v-if="bannerList.length>0">
             <template v-for="(item,index) of bannerList">
               <van-swipe-item @click="handleBannerClick"
