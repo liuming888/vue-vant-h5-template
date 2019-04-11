@@ -334,13 +334,13 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message: "Verification code sent !",
+            message: "Please be patient，Your SMS code will be sent in 120 second!",
             duration: 1000
           });
           this.authCode = result.data;
 
-          // 开始倒计时（60s）
-          this.initCodeTime = 60;
+          // 开始倒计时（120s）
+          this.initCodeTime = 120;
           let timer = setInterval(() => {
             if (this.initCodeTime <= 0) {
               clearInterval(timer);
