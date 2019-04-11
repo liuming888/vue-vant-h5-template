@@ -335,7 +335,7 @@ export default {
         if (result.code == 0) {
           this.$toast({
             message: "Please be patient，Your SMS code will be sent in 120 second!",
-            duration: 1000
+            duration: 2000
           });
           this.authCode = result.data;
 
