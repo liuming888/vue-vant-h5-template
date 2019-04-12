@@ -142,7 +142,8 @@
 </template>
 
 <script>
-const {Toast}=require('vant');
+const { Toast } = require("vant");
+console.warn("Toast: ", Toast);
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -404,8 +405,10 @@ export default {
      * @description: 获取砍价信息
      */
     async initBargainInfo() {
+      const { bargainId } = this.$route.query;
+      if (!bargainId) return;
       let result = await getBargainInfo({
-        bargain_id: this.$route.query.bargainId
+        bargain_id: bargainId
       });
       if (result && result.data) {
         this.bargain_info = result.data.bargain_info || result.data;
@@ -417,8 +420,10 @@ export default {
      * @description: 帮砍列表
      */
     async initHelpBargainList() {
+      const { bargainId } = this.$route.query;
+      if (!bargainId) return;
       let result = await getHelpBargainList({
-        bargain_id: this.$route.query.bargainId,
+        bargain_id: bargainId,
         ...this.helpBargainPageDat
       });
       if (result && result.data) {
