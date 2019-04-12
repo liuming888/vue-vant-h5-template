@@ -364,7 +364,7 @@ export default {
     /**
      * @description: 退出登录
      */
-    signOut() {
+    async signOut() {
       this.$store.commit("setUserInfo", {});
       axios.defaults.headers.common["User-Id"] = "";
       axios.defaults.headers.common["Access-Token"] = "";
@@ -384,7 +384,7 @@ export default {
         duration: 1000
       });
       try {
-        window.$faceBookApi.logoutFB();
+        await window.$faceBookApi.logoutFB();
       } catch (error) {
         console.warn("FB退出登录无效", error);
       }
