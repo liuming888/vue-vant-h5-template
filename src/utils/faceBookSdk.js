@@ -147,6 +147,7 @@
     FBsdk.prototype.logoutFB = function logoutFB() {
         FB.logout(function(response) {
             // Person is now logged out
+            console.log('已成功退出登录', response);
         });
     };
 

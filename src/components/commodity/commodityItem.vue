@@ -144,14 +144,14 @@
         </div>
       </div>
       <div class="goods-control">
-        <a href="javascrip:;"
+        <span 
           class="button-l"
           @click="cashBack">
           Cash Back
-        </a>
-        <a href="javascrip:;"
+        </span>
+        <span
           class="button-r"
-          @click="jumpBargain">Get a freebie</a>
+          @click="jumpBargain">Get a freebie</span>
       </div>
     </div>
 

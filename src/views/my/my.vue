@@ -383,6 +383,11 @@ export default {
         message: "please login again !",
         duration: 1000
       });
+      try {
+        window.$faceBookApi.logoutFB(); 
+      } catch (error) {
+        console.warn("FB退出登录无效",error);
+      }
       this.$store.commit("setLoginSelectShow", true);
     },
     async initHeroTips() {
