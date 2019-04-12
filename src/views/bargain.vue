@@ -120,9 +120,8 @@
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
-            <a href="javascrip:;"
-              class="btn"
-              @click="jumpCurBargainPage(item)">Get a freebie</a>
+            <span class="btn"
+              @click="jumpCurBargainPage(item)">Get a freebie</span>
           </div>
         </div>
       </div>

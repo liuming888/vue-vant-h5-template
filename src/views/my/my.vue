@@ -333,7 +333,10 @@ import axios from "axios";
 import tabBar from "@/components/layout/tabBar/tabBar.vue";
 
 import { getMyAccount, getHeroList } from "@/server/user.js";
+
+import loadings from "@/mixins/loadings.js";
 export default {
+  mixins: [loadings],
   components: {
     tabBar,
     FriendListCommon: resolve =>
@@ -364,7 +367,9 @@ export default {
     /**
      * @description: 退出登录
      */
-    signOut() {
+    async signOut() {
+      this.mx_showLoad();
+
       this.$store.commit("setUserInfo", {});
       axios.defaults.headers.common["User-Id"] = "";
       axios.defaults.headers.common["Access-Token"] = "";
@@ -383,7 +388,18 @@ export default {
         message: "please login again !",
         duration: 1000
       });
+
+      // 退出FB接口暂时无效
+      // try {
+      //   await window.$faceBookApi.logoutFB();
+      // } catch (error) {
+      //   console.warn("FB退出登录无效", error);
+      // }
+      
+      this.$util.deleteAllCookies();
       this.$store.commit("setLoginSelectShow", true);
+
+      this.mx_closeLoad();
     },
     async initHeroTips() {
       let result = await getHeroList();

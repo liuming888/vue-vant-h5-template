@@ -116,7 +116,8 @@
 <template>
   <div class="commodityItem-container">
     <div class="home-goods-item">
-      <div class="goods-img" @click="jumpBargain">
+      <div class="goods-img"
+        @click="jumpBargain">
         <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
           :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
@@ -144,14 +145,12 @@
         </div>
       </div>
       <div class="goods-control">
-        <a href="javascrip:;"
-          class="button-l"
+        <span class="button-l"
           @click="cashBack">
           Cash Back
-        </a>
-        <a href="javascrip:;"
-          class="button-r"
-          @click="jumpBargain">Get a freebie</a>
+        </span>
+        <span class="button-r"
+          @click="jumpBargain">Get a freebie</span>
       </div>
     </div>
 
@@ -227,8 +226,12 @@ export default {
      */
     async cashBack() {
       this.$emit("cashBackGa", this.itemData);
-      
-      fbq('track', 'Subscribe', {value: this.itemData.title, currency: 'USD', predicted_ltv: this.itemData.spu_id});
+
+      fbq("track", "Subscribe", {
+        value: this.itemData.title,
+        currency: "USD",
+        predicted_ltv: this.itemData.spu_id
+      });
 
       if (
         !this.$store.state.userInfo.user_id &&
