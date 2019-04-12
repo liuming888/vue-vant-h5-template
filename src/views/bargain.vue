@@ -340,6 +340,8 @@ export default {
         this.dialogs.potongSendiri.show = true;
         // }
         return Promise.resolve();
+      }else if(result.code==-1){
+        this.$toast(result.msg);
       }
     },
     /**

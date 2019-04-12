@@ -97,7 +97,7 @@ instance.interceptors.response.use(
             if (error.code) {
                 Vue.prototype.$toast(error.msg);
                 if (error.code == '-1') {
-                    return error.code;
+                    return error;
                 }
             } else {
                 Vue.prototype.$toast('The request failed. Please try again later!');
