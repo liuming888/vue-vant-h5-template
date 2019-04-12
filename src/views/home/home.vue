@@ -31,6 +31,7 @@
   padding-bottom: 36px;
   > .home-top-container {
     position: relative;
+      min-height: 20vh;
     width: 100vw;
 
     overflow: hidden;
@@ -63,7 +64,6 @@
     }
     > .home-banner {
       width: 100%;
-      min-height: 20vh;
       margin-bottom: 30px;
       img {
         width: 100%;
