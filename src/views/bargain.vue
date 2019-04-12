@@ -214,6 +214,9 @@ export default {
         parseInt((this.shareInfo.pre_bargain_amount / this.spu.price) * 100) ||
         0
       );
+    },
+    isLogin(){
+      return this.$store.state.userInfo.user_id;
     }
   },
   created() {
@@ -253,14 +256,14 @@ export default {
 
         await this.initShareInfo(relationId);
       } else {
-        if (!bargainId&&this.$store.state.userInfo.user_id) {
+        if (!bargainId&&this.isLogin) {
           // 已登录用户系统自砍
           await this.goBargainChop({
             spu_id: spuId
           });
         }
 
-        if(this.$store.state.userInfo.user_id){
+        if(this.isLogin){
           this.initBargainInfo();
           this.initHelpBargainList();
         }
@@ -294,7 +297,7 @@ export default {
     async goBargainChop({ bargain_id, spu_id }) {
       console.log("spu_id: ", spu_id);
       if (
-        !this.$store.state.userInfo.user_id &&
+        !this.isLogin &&
         process.env.VUE_APP_ENV !== "development"
       ) {
         console.log("666");
@@ -344,7 +347,7 @@ export default {
      */
     async goChopShare() {
       if (
-        !this.$store.state.userInfo.user_id &&
+        !this.isLogin &&
         process.env.VUE_APP_ENV !== "development"
       ) {
         this.$store.commit("setLoginJumpUrl", "");
@@ -459,7 +462,7 @@ export default {
         eventLabel: this.spu.title.substr(0, 10)
       });
       if (
-        !this.$store.state.userInfo.user_id &&
+        !this.isLogin &&
         process.env.VUE_APP_ENV != "development"
       ) {
         const { pathname, search } = window.location;
@@ -483,12 +486,12 @@ export default {
       }
     },
     jumpCurBargainPage(item) {
-      if (!this.$store.state.userInfo.user_id) {
-        // const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", "");
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
+      // if (!this.isLogin) {
+      //   // const { pathname, search } = window.location;
+      //   this.$store.commit("setLoginJumpUrl", "");
+      //   this.$store.commit("setLoginSelectShow", true);
+      //   return;
+      // }
 
       // 统计
       this.$gaSend({
@@ -508,7 +511,7 @@ export default {
 
     jumpBuyPage() {
       // 上线时不能注释
-      if (!this.$store.state.userInfo.user_id) {
+      if (!this.isLogin) {
         // const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", "");
         // this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
