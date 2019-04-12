@@ -388,11 +388,14 @@ export default {
         message: "please login again !",
         duration: 1000
       });
-      try {
-        await window.$faceBookApi.logoutFB();
-      } catch (error) {
-        console.warn("FB退出登录无效", error);
-      }
+
+      // 退出FB接口暂时无效
+      // try {
+      //   await window.$faceBookApi.logoutFB();
+      // } catch (error) {
+      //   console.warn("FB退出登录无效", error);
+      // }
+      
       this.$util.deleteAllCookies();
       this.$store.commit("setLoginSelectShow", true);
 
