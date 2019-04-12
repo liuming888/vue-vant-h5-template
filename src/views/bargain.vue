@@ -253,8 +253,8 @@ export default {
 
         await this.initShareInfo(relationId);
       } else {
-        if (!bargainId) {
-          // 系统自砍
+        if (!bargainId&&this.$store.state.userInfo.user_id) {
+          // 已登录用户系统自砍
           await this.goBargainChop({
             spu_id: spuId
           });
