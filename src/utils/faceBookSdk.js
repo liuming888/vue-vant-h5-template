@@ -145,9 +145,16 @@
      * @msg: 退出登录
      */
     FBsdk.prototype.logoutFB = function logoutFB() {
+        var that=this;
         FB.logout(function(response) {
-            // Person is now logged out
-            console.log('已成功退出登录', response);
+            that.statusChangeCallback(response)
+                .then(res => {
+                    // console.log('哈哈哈');
+                    resolve(res);
+                })
+                .catch(e => {
+                    rejcet(false);
+                });
         });
     };
 
