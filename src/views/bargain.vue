@@ -341,6 +341,7 @@ export default {
         // }
         return Promise.resolve();
       }else if(result.code==-1){
+        this.$loaddingNum++;
         this.$toast(result.msg);
 
         console.log("11111111111111111111111111111111111111111已经砍价了！");
