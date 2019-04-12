@@ -9,7 +9,7 @@
                     return;
                 }
                 js = d.createElement(s);
-
+               
                 js.id = id;
                 // 默认美式英文
                 js.src = 'https://connect.facebook.net/en_US/sdk.js';
@@ -144,12 +144,16 @@
     /**
      * @msg: 退出登录
      */
-    FBsdk.prototype.logoutFB = function logoutFB(response) {
-        if (response && !response.session) {
-            window.location = '/mysite/Login.aspx';
-            return;
-        }
-        FB.logout(this.logoutFB);
+    FBsdk.prototype.logoutFB = function logoutFB() {
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // var accessToken = response.authResponse.accessToken;
+                FB.logout(function(response) {
+                    // Person is now logged out
+                    console.log('已成功退出登录', response);
+                });
+            }
+        });
     };
 
     /**
@@ -158,10 +162,10 @@
     //  * @param quote  分享的默认显示文字
     //  * @param hashtag  FB分享的tag标签(注意必须有#)
      */
-    FBsdk.prototype.shareFB = function(invite_url, quote /* , hashtag */) {
+    FBsdk.prototype.shareFB = function(invite_url , quote/* , hashtag */) {
         // console.log('当前执行分享的用户ID为', user_id);
         return new Promise(resolve => {
-            FB.ui({ method: 'share', href: invite_url, quote /* mobile_iframe: true, */ /* quote, hashtag: '#' + (hashtag || document.title) */ }, function(response) {
+            FB.ui({ method: 'share', href: invite_url, quote/* mobile_iframe: true, */ /* quote, hashtag: '#' + (hashtag || document.title) */ }, function(response) {
                 if (response && !response.error_message) {
                     // console.log('Posting completed.');
                     resolve(response);
@@ -185,6 +189,7 @@
     //         callBack();
     //     };
     // };
+    
 
     window.$faceBookApi = new FBsdk();
 })();
