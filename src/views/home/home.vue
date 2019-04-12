@@ -31,7 +31,7 @@
   padding-bottom: 36px;
   > .home-top-container {
     position: relative;
-      min-height: 20vh;
+    min-height: 20vh;
     width: 100vw;
 
     overflow: hidden;
@@ -245,21 +245,22 @@
         </div>
 
       </section>
-      <section class="home-goods"
-        v-if="goodsList.length>0">
-        <div class="home-goods-title"
-          v-if="goodsList.length>0&&homeBargainList.length>0">
-          <img v-lazy="require('@/assets/images/gengduotop.png')">
-        </div>
-        <ul class="home-goods-list">
-          <li is="commodity-item"
-            v-for="(item, index) of goodsList"
-            @cashBackGa=cashBackGa
-            @jumpBargainGa=jumpBargainGa
-            :key="index"
-            :itemData="item">
-          </li>
-        </ul>
+      <section class="home-goods">
+        <template v-if="goodsList.length>0">
+          <div class="home-goods-title"
+            v-if="goodsList.length>0&&homeBargainList.length>0">
+            <img v-lazy="require('@/assets/images/gengduotop.png')">
+          </div>
+          <ul class="home-goods-list">
+            <li is="commodity-item"
+              v-for="(item, index) of goodsList"
+              @cashBackGa=cashBackGa
+              @jumpBargainGa=jumpBargainGa
+              :key="index"
+              :itemData="item">
+            </li>
+          </ul>
+        </template>
       </section>
 
       <div class="privacy-agreement-box">
