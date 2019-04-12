@@ -142,8 +142,7 @@
 </template>
 
 <script>
-const { Toast } = require("vant");
-console.warn("Toast: ", Toast);
+import { Dialog } from 'vant';
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -340,8 +339,9 @@ export default {
         // }
         return Promise.resolve();
       } else if (result.code == -1) {
-        Toast({
-          message: result.msg
+        Dialog({
+          message: result.msg,
+          confirmButtonText:'ok'
         });
 
         console.log("11111111111111111111111111111111111111111已经砍价了！");
