@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import { Dialog } from 'vant';
+import { Dialog } from "vant";
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -295,92 +295,6 @@ export default {
         });
       }
     },
-    async goBargainChop({ bargain_id, spu_id }) {
-      console.log("spu_id: ", spu_id);
-      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        console.log("666");
-        this.$store.commit("setLoginJumpUrl", "");
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
-
-      let result = await bargainChop({ bargain_id, spu_id });
-
-      fbq("track", "StartTrial", {
-        value: this.spu.title,
-        currency: "USD",
-        predicted_ltv: spu_id
-      });
-
-      if (result && result.data && result.data.chop_info) {
-        const chop_info = result.data.chop_info;
-        this.chop_info = chop_info;
-        console.log("chop_info: ", chop_info);
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            bargainId: chop_info.bargain_id
-          }
-        });
-
-        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
-        arr.forEach(item => {
-          if (item.spu_id == spu_id) {
-            item.isBargain = true;
-          }
-        });
-        this.$store.commit("setGoodsList", arr);
-        // if (this.$route.query.relationId) {
-        //   // 分享赚自己点击按钮自砍成功
-        //   this.isShareEarningEntry = false;
-        // } else {
-        // 系统自砍成功
-        this.dialogs.potongSendiri.show = true;
-        // }
-        return Promise.resolve();
-      } else if (result.code == -1) {
-        Dialog({
-          message: result.msg,
-          confirmButtonText:'ok'
-        });
-
-        console.log("11111111111111111111111111111111111111111已经砍价了！");
-      }
-    },
-    /**
-     * @description: 分享赚自砍
-     */
-    async goChopShare() {
-      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        this.$store.commit("setLoginJumpUrl", "");
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
-      let result = await chopShare({
-        relation_id: this.$route.query.relationId
-      });
-
-      fbq("track", "StartTrial", {
-        value: this.spu.title,
-        currency: "USD",
-        predicted_ltv: this.$route.query.spuId
-      });
-
-      if (result && result.data) {
-        this.chop_info = result.data.chop_info;
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            bargainId: this.chop_info.bargain_id
-          }
-        });
-        this.dialogs.potongSendiri.show = true;
-        this.initBargainInfo();
-        this.initHelpBargainList();
-        // 分享赚自己点击按钮自砍
-        this.isShareEarningEntry = false;
-      }
-    },
     /**
      * @description: 获取商品信息
      */
@@ -430,7 +344,6 @@ export default {
         this.help_bargain_list = result.data;
       }
     },
-
     /**
      * @description: 更多商品列表（目前后端没做分页，前端暂时也不做）
      */
@@ -458,6 +371,95 @@ export default {
         //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
         //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
         // }
+      }
+    },
+    async goBargainChop({ bargain_id, spu_id }) {
+      console.log("spu_id: ", spu_id);
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
+        console.log("666");
+        this.$store.commit("setLoginJumpUrl", "");
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+
+      let result = await bargainChop({ bargain_id, spu_id });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: spu_id
+      });
+
+      if (result && result.data && result.data.chop_info) {
+        const chop_info = result.data.chop_info;
+        this.chop_info = chop_info;
+        console.log("chop_info: ", chop_info);
+        this.$router.replace({
+          query: {
+            ...this.$route.query,
+            bargainId: chop_info.bargain_id
+          }
+        });
+
+        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        arr.forEach(item => {
+          if (item.spu_id == spu_id) {
+            item.isBargain = true;
+          }
+        });
+        this.$store.commit("setGoodsList", arr);
+        // if (this.$route.query.relationId) {
+        //   // 分享赚自己点击按钮自砍成功
+        //   this.isShareEarningEntry = false;
+        // } else {
+        // 系统自砍成功
+        this.dialogs.potongSendiri.show = true;
+        // }
+        return Promise.resolve();
+      } else if (result.code == -1) {
+        Dialog({
+          message:
+            "Please return to the homepage and re-select the product to enter !",
+          confirmButtonText: "ok"
+        }).then(() => {
+          this.$router.replace("/");
+        });
+
+        console.log("11111111111111111111111111111111111111111已经砍价了！");
+      }
+    },
+    /**
+     * @description: 分享赚自砍
+     */
+    async goChopShare() {
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
+        this.$store.commit("setLoginJumpUrl", "");
+        this.$store.commit("setLoginSelectShow", true);
+        return;
+      }
+      let result = await chopShare({
+        relation_id: this.$route.query.relationId
+      });
+
+      fbq("track", "StartTrial", {
+        value: this.spu.title,
+        currency: "USD",
+        predicted_ltv: this.$route.query.spuId
+      });
+
+      if (result && result.data) {
+        this.chop_info = result.data.chop_info;
+        this.$router.replace({
+          query: {
+            ...this.$route.query,
+            bargainId: this.chop_info.bargain_id
+          }
+        });
+        this.dialogs.potongSendiri.show = true;
+        this.initBargainInfo();
+        this.initHelpBargainList();
+        // 分享赚自己点击按钮自砍
+        this.isShareEarningEntry = false;
       }
     },
     async openSharingFriendsDialog() {
