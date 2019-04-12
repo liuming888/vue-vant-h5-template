@@ -260,8 +260,10 @@ export default {
           });
         }
 
-        this.initBargainInfo();
-        this.initHelpBargainList();
+        if(this.$store.state.userInfo.user_id){
+          this.initBargainInfo();
+          this.initHelpBargainList();
+        }
       }
 
       this.initSpuInfo();
