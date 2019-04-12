@@ -384,9 +384,9 @@ export default {
         duration: 1000
       });
       try {
-        window.$faceBookApi.logoutFB(); 
+        window.$faceBookApi.logoutFB();
       } catch (error) {
-        console.warn("FB退出登录无效",error);
+        console.warn("FB退出登录无效", error);
       }
       this.$store.commit("setLoginSelectShow", true);
     },

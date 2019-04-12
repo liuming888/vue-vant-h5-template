@@ -28,17 +28,15 @@
           </div>
 
           <div class="goods-control">
-            <a v-if="spuBargainItem.status==1"
-              href="javascrip:;"
+            <span v-if="spuBargainItem.status==1"
               class="go-on-btn"
               :class="{'r-b':spuBargainItem.can_buy==2}"
               @click="jumpBargain">
               Go On
-            </a>
-            <a href="javascrip:;"
-              class="buy-btn r-b"
+            </span>
+            <span class="buy-btn r-b"
               v-if="spuBargainItem.can_buy==1"
-              @click="jumpPurchasePage">Buy</a>
+              @click="jumpPurchasePage">Buy</span>
           </div>
         </div>
       </div>
