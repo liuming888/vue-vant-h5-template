@@ -14,11 +14,11 @@
   }
 
   .freebing-big-box:nth-last-of-type(1) {
-      .freebing-container{
-        &::after{
-          display: none;
-        }
+    .freebing-container {
+      &::after {
+        display: none;
       }
+    }
   }
 }
 </style>
@@ -71,6 +71,8 @@
     }
   }
   > .home-goods {
+    min-height: 60vh;
+
     > .home-goods-title {
       padding: 37px 0;
       padding-bottom: 47px;
@@ -167,30 +169,30 @@
   border-radius: 50%;
 }
 
-.privacy-agreement-box{
+.privacy-agreement-box {
   margin-top: 20px;
-  text-align:center;
-  color:#fff;
+  text-align: center;
+  color: #fff;
 
-  p{
+  p {
     margin-bottom: 10px;
-    font-size:26px;
+    font-size: 26px;
   }
 
-  ul{
+  ul {
     width: 90%;
     margin: 0 auto;
     display: flex;
-     font-size:20px;
+    font-size: 20px;
 
-    li{
-        flex:3;
-        border-left: 1px solid #fff;
-        line-height:30px;
+    li {
+      flex: 3;
+      border-left: 1px solid #fff;
+      line-height: 30px;
 
-        &:nth-of-type(1){
-          border-left:0;
-        }
+      &:nth-of-type(1) {
+        border-left: 0;
+      }
     }
   }
 }
@@ -214,7 +216,8 @@
         <van-swipe :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white"
-          class="home-banner" @click.native="$router.push('/my/Tutorial')">
+          class="home-banner"
+          @click.native="$router.push('/my/Tutorial')">
           <template v-if="bannerList.length>0">
             <template v-for="(item,index) of bannerList">
               <van-swipe-item @click="handleBannerClick"
@@ -257,7 +260,6 @@
           </li>
         </ul>
       </section>
-
 
       <div class="privacy-agreement-box">
         <p>Copyright © 2019 Istarbuy</p>
@@ -368,7 +370,9 @@ export default {
       this.initBanners();
       this.initHomeTip();
       if (
-        localStorage.getItem("userInfo") /* ||
+        localStorage.getItem(
+          "userInfo"
+        ) /* ||
         process.env.VUE_APP_ENV == "development" */
       ) {
         this.initBargainOrderSpusList();
