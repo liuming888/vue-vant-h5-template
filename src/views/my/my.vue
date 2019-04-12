@@ -388,6 +388,7 @@ export default {
       } catch (error) {
         console.warn("FB退出登录无效", error);
       }
+      this.$util.deleteAllCookies();
       this.$store.commit("setLoginSelectShow", true);
     },
     async initHeroTips() {
