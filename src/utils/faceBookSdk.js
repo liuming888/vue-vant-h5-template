@@ -144,18 +144,11 @@
     /**
      * @msg: 退出登录
      */
-    FBsdk.prototype.logoutFB = function logoutFB() {
-        var that=this;
-        FB.logout(function(response) {
-            that.statusChangeCallback(response)
-                .then(res => {
-                    // console.log('哈哈哈');
-                    resolve(res);
-                })
-                .catch(e => {
-                    rejcet(false);
-                });
-        });
+    FBsdk.prototype.logoutFB = function logoutFB(response) {
+          if (!response.session) {
+              return;
+          }
+        FB.logout(this.logoutFB);
     };
 
     /**
