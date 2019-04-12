@@ -145,15 +145,12 @@
         </div>
       </div>
       <div class="goods-control">
-        <a   href="javascript:;"
-        class="button-l"
+        <span class="button-l"
           @click="cashBack">
           Cash Back
-        </a>
-        <a 
-        href="javascrip:;"
-        class="button-r"
-          @click="jumpBargain">Get a freebie</a>
+        </span>
+        <span class="button-r"
+          @click="jumpBargain">Get a freebie</span>
       </div>
     </div>
 
