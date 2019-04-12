@@ -63,6 +63,7 @@
     }
     > .home-banner {
       width: 100%;
+      min-height: 20vh;
       margin-bottom: 30px;
       img {
         width: 100%;
@@ -71,7 +72,7 @@
     }
   }
   > .home-goods {
-    min-height: 60vh;
+    min-height: 70vh;
 
     > .home-goods-title {
       padding: 37px 0;
