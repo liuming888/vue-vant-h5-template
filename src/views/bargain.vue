@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -215,7 +216,7 @@ export default {
         0
       );
     },
-    isLogin(){
+    isLogin() {
       return this.$store.state.userInfo.user_id;
     }
   },
@@ -256,14 +257,14 @@ export default {
 
         await this.initShareInfo(relationId);
       } else {
-        if (!bargainId&&this.isLogin) {
+        if (!bargainId && this.isLogin) {
           // 已登录用户系统自砍
           await this.goBargainChop({
             spu_id: spuId
           });
         }
 
-        if(this.isLogin){
+        if (this.isLogin) {
           this.initBargainInfo();
           this.initHelpBargainList();
         }
@@ -296,10 +297,7 @@ export default {
     },
     async goBargainChop({ bargain_id, spu_id }) {
       console.log("spu_id: ", spu_id);
-      if (
-        !this.isLogin &&
-        process.env.VUE_APP_ENV !== "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
         console.log("666");
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
@@ -340,9 +338,10 @@ export default {
         this.dialogs.potongSendiri.show = true;
         // }
         return Promise.resolve();
-      }else if(result.code==-1){
-        this.$loaddingNum++;
-        this.$toast(result.msg);
+      } else if (result.code == -1) {
+        Toast({
+          message: result.msg
+        });
 
         console.log("11111111111111111111111111111111111111111已经砍价了！");
       }
@@ -351,10 +350,7 @@ export default {
      * @description: 分享赚自砍
      */
     async goChopShare() {
-      if (
-        !this.isLogin &&
-        process.env.VUE_APP_ENV !== "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -466,10 +462,7 @@ export default {
         eventAction: "点击",
         eventLabel: this.spu.title.substr(0, 10)
       });
-      if (
-        !this.isLogin &&
-        process.env.VUE_APP_ENV != "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV != "development") {
         const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止有登陆后有问题
         // this.$store.commit(
