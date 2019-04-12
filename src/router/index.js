@@ -130,7 +130,9 @@ curRouter.afterEach(current => {
     if (routerShows.includes(path)) {
         gaSend({
             eventCategory: current.name,
-            eventAction: '页面展示'
+            eventAction: '页面展示',
+            hitType: 'pageview',
+            page: window.location.pathname,
         });
     }
     // quicklink({
