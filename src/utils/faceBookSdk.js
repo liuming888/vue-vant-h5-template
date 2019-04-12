@@ -145,7 +145,7 @@
      * @msg: 退出登录
      */
     FBsdk.prototype.logoutFB = function logoutFB(response) {
-          if (!response.session) {
+          if (response&&!response.session) {
               return;
           }
         FB.logout(this.logoutFB);
