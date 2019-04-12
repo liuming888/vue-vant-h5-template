@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import { Toast } from "vant";
+const {Toast}=require('vant');
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
