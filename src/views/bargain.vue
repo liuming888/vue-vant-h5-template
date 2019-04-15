@@ -415,13 +415,13 @@ export default {
         // 该商品已经过期或者别的
 
         // 强制返回首页去
-        // Dialog({
-        //   message:
-        //     "Please return to the homepage and re-select the product to enter !",
-        //   confirmButtonText: "ok"
-        // }).then(() => {
-        //   this.$router.replace("/");
-        // });
+        Dialog({
+          message:
+            "Please return to the homepage and re-select the product to enter !",
+          confirmButtonText: "ok"
+        }).then(() => {
+          this.$router.replace("/");
+        });
 
         console.warn("该商品已经过期或者别的！ spu_id:", spu_id);
       }
