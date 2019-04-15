@@ -405,7 +405,10 @@ export default {
         if (result.code == 0) {
           // 砍价成功
           this.dialogs.potongSendiri.show = true;
-           console.log("砍价成功！ spu_id:", spu_id);
+          gtag("event", "conversion", {
+            send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
+          });
+          console.log("砍价成功！ spu_id:", spu_id);
         } else if (result.code == 1000) {
           // 该商品之前已经砍过了
           console.warn("该商品已经砍价了！ spu_id:", spu_id);
@@ -423,7 +426,7 @@ export default {
         //   this.$router.replace("/");
         // });
 
-        console.warn("该商品已经过期或者别的！ spu_id:",spu_id);
+        console.warn("该商品已经过期或者别的！ spu_id:", spu_id);
       }
     },
     /**
@@ -479,6 +482,10 @@ export default {
         this.initHelpBargainList();
         // 分享赚自己点击按钮自砍
         this.isShareEarningEntry = false;
+
+        gtag("event", "conversion", {
+          send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
+        });
       }
     },
     async openSharingFriendsDialog() {
