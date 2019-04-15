@@ -1,37 +1,3 @@
-<!--  -->
-<template>
-  <div class="totorial">
-    <div class="totorial-bg">
-      <div class="totorial-ct">
-        <div class="totorial-ct-tit"></div>
-        <ul class="totorial-ct-ul">
-          <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: How long can I receive the goods?</p>
-            <p class="totorial-ct-li-a">A: 3-15 Days.</p>
-          </li>
-          <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: When can I withdraw cash？</p>
-            <p class="totorial-ct-li-a"><img src="../../assets/images/withdrawRule.png"></p>
-          </li>
-          <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: Share & Earn</p>
-            <p class="totorial-ct-li-a">A: Invite your friends to join Istarbuy, and you will get referral bonus.
-              Sharing Istarbuy to one or multiple friends.
-              Copy & paste the invite link to your friends.
-            </p>
-          </li>
-          <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: You can contact us in the way as follow</p>
-            <p class="totorial-ct-li-a">A: ① Facebook fan page: @Lovingistarbuy
-              ② LINE: Istarbuy
-              ③ WeChat: Istarbuy</p>
-          </li>
-        </ul>
-      </div>
-      <div class="totorial-ct-contact"></div>
-    </div>
-  </div>
-</template>
 <style lang="scss" scoped>
 .totorial {
   position: absolute;
@@ -113,18 +79,46 @@
 }
 </style>
 
+<template>
+  <div class="totorial">
+    <turn-home/>
+
+    <div class="totorial-bg">
+      <div class="totorial-ct">
+        <div class="totorial-ct-tit"></div>
+        <ul class="totorial-ct-ul">
+          <li class="totorial-ct-li">
+            <p class="totorial-ct-li-q">Q: How long can I receive the goods?</p>
+            <p class="totorial-ct-li-a">A: 3-15 Days.</p>
+          </li>
+          <li class="totorial-ct-li">
+            <p class="totorial-ct-li-q">Q: When can I withdraw cash？</p>
+            <p class="totorial-ct-li-a"><img src="../../assets/images/withdrawRule.png"></p>
+          </li>
+          <li class="totorial-ct-li">
+            <p class="totorial-ct-li-q">Q: Share & Earn</p>
+            <p class="totorial-ct-li-a">A: Invite your friends to join Istarbuy, and you will get referral bonus.
+              Sharing Istarbuy to one or multiple friends.
+              Copy & paste the invite link to your friends.
+            </p>
+          </li>
+          <li class="totorial-ct-li">
+            <p class="totorial-ct-li-q">Q: You can contact us in the way as follow</p>
+            <p class="totorial-ct-li-a">A: ① Facebook fan page: @Lovingistarbuy
+              ② LINE: Istarbuy
+              ③ WeChat: Istarbuy</p>
+          </li>
+        </ul>
+      </div>
+      <div class="totorial-ct-contact"></div>
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
-  data() {
-    return {};
-  },
-
-  components: {},
-
-  computed: {},
-
-  mounted() {},
-
-  methods: {}
+  components: {
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+  }
 };
 </script>
