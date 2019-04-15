@@ -236,9 +236,6 @@ export default {
   },
   methods: {
     async init() {
-      this.initSpuInfo();
-      this.initSpuList();
-
       const {
         relationId,
         showShareEarningEntry,
@@ -272,8 +269,8 @@ export default {
         }
       }
 
-      // this.initSpuInfo();
-      // this.initSpuList();
+      this.initSpuInfo();  // 必须有spu_id
+      this.initSpuList();
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -418,13 +415,13 @@ export default {
         // 该商品已经过期或者别的
 
         // 强制返回首页去
-        // Dialog({
-        //   message:
-        //     "Please return to the homepage and re-select the product to enter !",
-        //   confirmButtonText: "ok"
-        // }).then(() => {
-        //   this.$router.replace("/");
-        // });
+        Dialog({
+          message:
+            "Please return to the homepage and re-select the product to enter !",
+          confirmButtonText: "ok"
+        }).then(() => {
+          this.$router.replace("/");
+        });
 
         console.warn("该商品已经过期或者别的！ spu_id:", spu_id);
       }
@@ -455,7 +452,8 @@ export default {
      */
     async goChopShare() {
       if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        this.$store.commit("setLoginJumpUrl", "");
+        const {pathname,search}=window.location;
+        this.$store.commit("setLoginJumpUrl", pathname+ search + '&showShareEarningEntry=no');
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
