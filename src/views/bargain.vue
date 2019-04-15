@@ -236,9 +236,6 @@ export default {
   },
   methods: {
     async init() {
-      this.initSpuInfo();
-      this.initSpuList();
-
       const {
         relationId,
         showShareEarningEntry,
@@ -272,8 +269,8 @@ export default {
         }
       }
 
-      // this.initSpuInfo();
-      // this.initSpuList();
+      this.initSpuInfo();  // 必须有spu_id
+      this.initSpuList();
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -455,7 +452,8 @@ export default {
      */
     async goChopShare() {
       if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        this.$store.commit("setLoginJumpUrl", "");
+        const {pathname,search}=window.location;
+        this.$store.commit("setLoginJumpUrl", pathname+ search + '&showShareEarningEntry=no');
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
