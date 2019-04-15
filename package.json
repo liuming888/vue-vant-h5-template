@@ -6,10 +6,14 @@
     "serve:mock": "cross-env VUE_APP_ENV=mock VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service serve --copy",
     "serve": "cross-env VUE_APP_ENV=development VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service serve --copy",
     "build": "vue-cli-service build",
-    "build:dev": "cross-env VUE_APP_ENV=dev VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723  vue-cli-service build --modern",
+    "build:dev": "cross-env VUE_APP_ENV=dev VUE_APP_URL=https://dev-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723  vue-cli-service build",
     "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=2408818452475633 vue-cli-service build --modern --dest new_dist",
+    "git:dev":"git add -A && git commit -am 打个dev包 && git push",
+    "git:test":"git add -A && git commit -am 打个test包 && git push",
+    "git:prod":"git add -A && git commit -am 打个旧域名正式包 && git push",
+    "git:newprod":"git add -A && git commit -am 打个新域名正式包 && git push",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

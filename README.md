@@ -15,11 +15,6 @@ npm run serve
 npm run build
 ```
 
-dialogVisible // 控制弹窗显示隐藏
-
-### v0.1版组件划分
-
-
 
 
 
