@@ -452,7 +452,8 @@ export default {
      */
     async goChopShare() {
       if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        this.$store.commit("setLoginJumpUrl", "");
+        const {pathname,search}=window.location;
+        this.$store.commit("setLoginJumpUrl", pathname+ search + '&showShareEarningEntry=no');
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
