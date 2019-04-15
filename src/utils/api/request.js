@@ -4,6 +4,8 @@ import axios from 'axios';
 // import md5 from 'md5';
 import config from './config';
 
+const { Toast } = require('vant');
+
 let user_id = '';
 let access_token = '';
 let userStr = localStorage.getItem('userInfo');
@@ -16,8 +18,8 @@ if (userStr) {
 if (process.env.VUE_APP_ENV == 'development') {
     //   user_id = 1;
     //   access_token = '486dcad761f8425e8aa2a49e964a984c';
-    user_id = 753;
-    access_token = 'd434876a73e74f9d91c7d8e396ff53e4';
+    // user_id = 753;
+    // access_token = 'd434876a73e74f9d91c7d8e396ff53e4';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);
@@ -81,13 +83,19 @@ instance.interceptors.response.use(
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
-                Vue.prototype.$toast('please log in first !');
+                Toast({
+                    message: 'please login again !',
+                    duration: 1000,
+                });
                 Vue.prototype.$curStore.commit('setUserInfo', {});
                 axios.defaults.headers.common['User-Id'] = '';
                 axios.defaults.headers.common['Access-Token'] = '';
                 localStorage.clear();
                 Vue.prototype.$curStore.commit('setLoginSelectShow', true);
                 // Vue.prototype.$curRouter.replace('/');
+            } else if (response.data.code == 1000) {
+                //  主要砍价接口  前后端约定的
+                return response.data;
             } else {
                 console.log('test11111111111111111111111111');
                 throw response.data;
@@ -95,14 +103,14 @@ instance.interceptors.response.use(
         } catch (error) {
             console.log('test22222222222222222222222222');
             if (error.code) {
-                Vue.prototype.$toast(error.msg);
+                Toast(error.msg);
                 if (error.code == '-1') {
                     return error;
                 }
             } else {
-                Vue.prototype.$toast('The request failed. Please try again later!');
+                Toast('The request failed. Please try again later!');
             }
-            console.error(error);
+            console.error('封装的接口异常处理,', error);
             return false;
         }
     },

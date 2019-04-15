@@ -236,7 +236,9 @@ export default {
   },
   methods: {
     async init() {
-      // console.log(this.spu);
+      this.initSpuInfo();
+      this.initSpuList();
+
       const {
         relationId,
         showShareEarningEntry,
@@ -258,7 +260,7 @@ export default {
         await this.initShareInfo(relationId);
       } else {
         if (!bargainId && this.isLogin) {
-          // 已登录用户系统自砍
+          // 已登录用户系统自砍（自砍成功 和  之前已经砍过了，返回之前的砍价bargain_id等信息）
           await this.goBargainChop({
             spu_id: spuId
           });
@@ -270,8 +272,8 @@ export default {
         }
       }
 
-      this.initSpuInfo();
-      this.initSpuList();
+      // this.initSpuInfo();
+      // this.initSpuList();
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -366,7 +368,7 @@ export default {
         this.spu_list = result.data.spu_list;
 
         // if (page_num == 1) {
-        // this.$store.commit("setGoodsList", this.spu_list);  // 不缓存，防止没登陆的用户到首页展示有问题
+        // this.$store.commit("setGoodsList", this.spu_list);  // 注释掉不缓存，防止没登陆的用户到首页展示有问题
         // } else {
         //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
         //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
@@ -391,32 +393,28 @@ export default {
       });
 
       if (result && result.data && result.data.chop_info) {
-        const chop_info = result.data.chop_info;
-        this.chop_info = chop_info;
-        console.log("chop_info: ", chop_info);
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            bargainId: chop_info.bargain_id
-          }
-        });
+        this.chopSucess(result.data.chop_info, spu_id);
+        // let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        // arr.forEach(item => {
+        //   if (item.spu_id == spu_id) {
+        //     item.isBargain = true;
+        //   }
+        // });
+        // this.$store.commit("setGoodsList", arr);
 
-        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
-        arr.forEach(item => {
-          if (item.spu_id == spu_id) {
-            item.isBargain = true;
-          }
-        });
-        this.$store.commit("setGoodsList", arr);
-        // if (this.$route.query.relationId) {
-        //   // 分享赚自己点击按钮自砍成功
-        //   this.isShareEarningEntry = false;
-        // } else {
-        // 系统自砍成功
-        this.dialogs.potongSendiri.show = true;
-        // }
+        if (result.code == 0) {
+          // 砍价成功
+          this.dialogs.potongSendiri.show = true;
+           console.log("砍价成功！ spu_id:", spu_id);
+        } else if (result.code == 1000) {
+          // 该商品之前已经砍过了
+          console.warn("该商品已经砍价了！ spu_id:", spu_id);
+        }
         return Promise.resolve();
       } else if (result.code == -1) {
+        // 该商品已经过期或者别的
+
+        // 强制返回首页去
         Dialog({
           message:
             "Please return to the homepage and re-select the product to enter !",
@@ -425,8 +423,29 @@ export default {
           this.$router.replace("/");
         });
 
-        console.log("11111111111111111111111111111111111111111已经砍价了！");
+        console.warn("该商品已经过期或者别的！ spu_id:",spu_id);
       }
+    },
+    /**
+     * @description:  砍价接口调用成功后的系列处理
+     */
+    chopSucess(chop_info, spu_id) {
+      this.chop_info = chop_info;
+      console.log("chop_info: ", chop_info);
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          bargainId: chop_info.bargain_id
+        }
+      });
+
+      let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+      arr.forEach(item => {
+        if (item.spu_id == spu_id) {
+          item.isBargain = true;
+        }
+      });
+      this.$store.commit("setGoodsList", arr);
     },
     /**
      * @description: 分享赚自砍
@@ -556,9 +575,6 @@ export default {
       this.openSharingFriendsDialog();
     }
     next();
-    // if(bargainType=='another'){
-    //   this.init();
-    // }
   },
 
   beforeRouteEnter(to, from, next) {
@@ -569,21 +585,5 @@ export default {
       }
     });
   }
-  // watch: {
-  //   spu: {
-  //     handler() {
-  //       if (this.spu.hasOwnProperty("title")) {
-  //         // 统计
-  //         this.$gaSend({
-  //           eventCategory: "砍价详情页",
-  //           eventAction: "页面展示",
-  //           eventLabel: this.spu.title.substr(0, 10)
-  //         });
-  //       }
-  //     },
-  //     immediate: true,
-  //     deep: true
-  //   }
-  // }
 };
 </script>
