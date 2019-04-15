@@ -9,7 +9,6 @@
 
 <template>
   <div id="app">
-  {{ $t("home.test1") }}
     <zdd-layout></zdd-layout>
   </div>
 </template>

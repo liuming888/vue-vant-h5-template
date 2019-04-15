@@ -252,25 +252,25 @@
           <div class="my-info-detail">
             <p class="name">
               {{accountInfo.user_name}}
-              <span>VIP Member</span>
+              <span>{{$t('my.VIPMember')}}</span>
             </p>
           </div>
         </div>
         <div class="my-wallet">
           <a class="my-right-btn"
-            @click="handleCashOut">Cash out</a>
+            @click="handleCashOut">{{$t('my.cashOut')}}</a>
           <div class="top">
-            <p class="title">Cumulative return(Rp)</p>
+            <p class="title">{{$t('my.cumulativeReturn')}}(Rp)</p>
             <p class="number">{{accountInfo.total_future_price||0}}</p>
           </div>
           <div class="bottom">
             <div class="bottom-item bottom-item-1">
               <p class="number">{{accountInfo.today_future_price||0}}</p>
-              <p class="title">Estimated earnings today</p>
+              <p class="title">{{$t('my.estimatedEarningsToday')}}(Rp)</p>
             </div>
             <div class="bottom-item">
               <p class="number">{{accountInfo.today_received_price||0}}</p>
-              <p class="title">Revenue arrived today(Rp)</p>
+              <p class="title">{{$t('my.revenueArrivedToday')}}(Rp)</p>
             </div>
           </div>
         </div>
@@ -280,34 +280,34 @@
           @click="handleToMyFriend">
           <img v-lazy="require('@/assets/images/Myfriends@2x.png')"
             alt>
-          <p>Friends</p>
+          <p>{{$t('my.friendsTxt')}}</p>
         </li>
         <li class="my-control-item"
           @click="handleToMyOrder">
           <img v-lazy="require('@/assets/images/Myorder@2x.png')"
             alt>
-          <p>My order</p>
+          <p>{{$t('my.myOrderTxt')}}</p>
         </li>
         <li class="my-control-item"
           @click="handleMyIncomeDetail">
           <img v-lazy="require('@/assets/images/Revenuedetails@2x.png')"
             alt>
-          <p>Revenue details</p>
+          <p>{{$t('my.revenueDetailsTxt')}}</p>
         </li>
         <li class="my-control-item"
           @click="hadnleToTutorial">
           <img v-lazy="require('@/assets/images/Tutorial@2x.png')"
             alt>
-          <p>Tutorial</p>
+          <p>{{$t('my.tutorialTxt')}}</p>
         </li>
       </ul>
       <div class="hero-rank"
         v-if="hero_tips.length>0">
-        <p class="title">Heroes</p>
+        <p class="title">{{$t('my.heroesTxt')}}</p>
         <div class="hero-list-title">
-          <div class="column">Rankings</div>
-          <div class="column">Number of fans</div>
-          <div class="column">Cumulative return(RP)</div>
+          <div class="column">{{$t('my.rankingsTxt')}}</div>
+          <div class="column">{{$t('my.numberOfFansTxt')}}</div>
+          <div class="column">{{$t('my.cumulativeReturnTxt')}}(RP)</div>
         </div>
         <ul class="hero-list">
 
@@ -321,7 +321,7 @@
       <div v-if="$store.state.userInfo.user_id"
         class="sing-out"
         @click="signOut">
-        Sign out
+        {{$t('my.signOutTxt')}}
       </div>
     </div>
 

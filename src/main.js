@@ -15,6 +15,8 @@ Vue.prototype.$util = $util;
 Vue.prototype.$gaSend = $util.gaSend;
 Vue.prototype.$loadLanguageAsync = loadLanguageAsync;
 
+loadLanguageAsync('idn');  // 设置为印尼语
+
 Vue.config.productionTip = false;
 
 new Vue({
