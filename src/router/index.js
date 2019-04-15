@@ -123,16 +123,18 @@ curRouter.beforeEach((to, from, next) => {
     }
 });
 // 需要统计的页面展示
-const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
+// const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
 // 全局后置钩子
 curRouter.afterEach(current => {
-    const path = current.path;
-    if (routerShows.includes(path)) {
+    // const path = current.path;
+    // if (routerShows.includes(path)) {
         gaSend({
             eventCategory: current.name,
-            eventAction: '页面展示'
+            eventAction: '页面展示',
+            hitType: 'pageview',
+            page: window.location.pathname,
         });
-    }
+    // }
     // quicklink({
     //     // 默认2秒
     //     // timeout: 2000,

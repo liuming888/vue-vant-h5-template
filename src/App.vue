@@ -43,6 +43,8 @@ export default {
       return;
     }
     this.initToken();
+
+    if(process.env.VUE_APP_ENV == "production") return;
     this.initFB();
   },
   methods: {

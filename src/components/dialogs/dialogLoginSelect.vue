@@ -7,21 +7,38 @@
   top: 0;
   left: 0;
   z-index: 100;
-  padding-top: 200px;
+  padding-top: 180px;
   display: flex;
   justify-content: center;
 
   .dialog-content {
     width: 610px;
-    height: 672px;
+    height: 600px;
     border-radius: 20px;
-    background: #fff;
-    padding-top: 64px;
+    background: #d30c05;
+    padding-top: 104px;
     box-sizing: border-box;
     position: relative;
 
+    .login-top-img{
+      width: 563px;
+      height: 210px;
+      position: absolute;
+      left:0;
+      right:0;
+      margin: 0 auto;
+      top:-130px;
+    }
+
     &.show-fb {
-      height: 847px;
+      height: 780px;
+    }
+
+    .login-tit{
+      text-align: center;
+      color:#fff;
+      font-size:30px;
+      margin-bottom: 40px;
     }
 
     .close-icon {
@@ -40,85 +57,103 @@
       margin-bottom: 33px;
     }
 
-    .input-box {
-      width: 490px;
-      height: 100px;
+    .input-big-box {
+      width: 570px;
+      background: #fff;
+      border-radius: 10px;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      position: relative;
 
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+      .input-box {
+        padding: 0 26px 0 21px;
+        height: 130px;
         margin: 0 auto;
-        width: 474px;
-        height: 1px;
-        background: rgba(242, 242, 242, 1);
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          width: 516px;
+          height: 1px;
+          background: rgba(242, 242, 242, 1);
+        }
+
+        .icon {
+          width: 42px;
+          height: auto;
+          margin-right: 10px;
+        }
+
+        .input {
+          font-size: 24px;
+          font-weight: 400;
+        }
       }
 
-      .icon {
-        width: 42px;
-        height: auto;
-        margin-right: 19px;
+      .phone-box {
+        .quhao {
+          font-size: 24px;
+          font-family: "PingFangSC-Regular";
+          font-weight: 400;
+          color: rgba(50, 50, 50, 1);
+          margin-right: 14px;
+        }
+
+        .code-input {
+          width: 300px;
+          margin-right: 10px;
+        }
+
+        .send {
+          display: block;
+          background: #d30c05;
+          width: 105px;
+          height: 50px;
+          line-height: 50px;
+          border-radius: 50px;
+          text-align: center;
+          font-size: 20px;
+          font-family: "PingFangSC-Regular";
+          font-weight: 400;
+          color: #fff;
+        }
       }
 
-      .input {
-        font-size: 28px;
-        font-weight: 400;
-      }
-    }
-
-    .phone-box {
-      .quhao {
-        font-size: 28px;
-        font-family: "PingFangSC-Regular";
-        font-weight: 400;
-        color: rgba(50, 50, 50, 1);
-        margin-right: 24px;
-      }
-    }
-
-    .sms-box {
-      .code-input {
-        width: 340px;
-        margin-right: 10px;
-      }
-
-      .send {
-        font-size: 26px;
-        font-family: "PingFangSC-Regular";
-        font-weight: 400;
-        color: rgba(211, 12, 5, 1);
+      .sms-box {
+        .icon {
+          margin-right: 18px;
+        }
       }
     }
 
     .login-btn {
-      width: 480px;
-      height: 84px;
-      line-height: 84px;
+      width: 570px;
+      height: 80px;
+      line-height: 80px;
       text-align: center;
       background: linear-gradient(
-        -45deg,
-        rgba(211, 12, 5, 1),
-        rgba(245, 78, 1, 1)
+        0deg,
+        rgba(255, 215, 0, 1) 0%,
+        rgba(255, 229, 89, 1) 100%
       );
-      border-radius: 42px;
-      margin: 58px auto;
+      border-radius: 40px;
+      margin: 38px auto;
       font-size: 32px;
       font-family: "Helvetica_cyr-Bold";
       font-weight: bold;
-      color: rgba(255, 255, 255, 1);
+      color: #d30c05;
     }
 
     .other-log {
       font-size: 24px;
       font-family: "PingFangSC-Regular";
-      font-weight: 400;
-      color: rgba(136, 136, 136, 1);
+      font-weight: 500;
+      color: #fff;
       text-align: center;
       position: relative;
 
@@ -131,7 +166,7 @@
         margin: auto 0;
         width: 112px;
         height: 1px;
-        background: rgba(242, 242, 242, 1);
+        background:  #F2F2F2 ;
       }
 
       &::after {
@@ -175,42 +210,46 @@
     <div class="dialog-content"
       :class="{'show-fb':showFB}"
       @click.stop>
-      <img src="~@/assets/images/xxicon.png"
-        alt=""
-        class="close-icon"
-        @click.stop="close">
 
-      <img src="~@/assets/images/logo.png"
-        alt=""
-        class="icon-img">
+       <img src="~@/assets/images/login-top.png" class="login-top-img">
 
-      <div class="phone-box input-box">
-        <img src="~@/assets/images/shoujiicon.png"
-          alt=""
-          class="icon">
-        <span class="quhao">+62</span>
-        <input type="number"
-          class="input"
-          placeholder="Enter Mobile Number"
-          onfocus="this.select();"
-          v-model="phone">
-      </div>
+        <h3 class="login-tit">Sign in can get Rp 5000 phone bill !</h3>
 
-      <div class="sms-box input-box">
-        <img src="~@/assets/images/duanxinicon.png"
-          alt=""
-          class="icon">
-        <input type="text"
-          class="input code-input"
-          onfocus="this.select();"
-          placeholder="Enter Code SMS"
-          v-model="authCode">
+      <div class="input-big-box">
+        <div class="phone-box input-box">
+          <img src="~@/assets/images/shoujiicon.png"
+            alt=""
+            class="icon">
+          <span class="quhao">+62</span>
+          <input type="number"
+            class="input code-input"
+            placeholder="Enter Mobile Number"
+            onfocus="this.select();"
+            v-model="phone">
 
-        <span class="send"
-          v-if="!initCodeTime"
-          @click.stop="getCode">Send</span>
-        <span class="send"
-          v-else>{{initCodeTime}} s</span>
+          <span class="send"
+            v-if="!initCodeTime"
+            @click.stop="getCode">Send</span>
+          <span class="send"
+            v-else>{{initCodeTime}} s</span>
+        </div>
+
+        <div class="sms-box input-box">
+          <img src="~@/assets/images/duanxinicon.png"
+            alt=""
+            class="icon">
+          <input type="text"
+            class="input"
+            onfocus="this.select();"
+            placeholder="Enter Code SMS"
+            v-model="authCode">
+
+          <!-- <span class="send"
+            v-if="!initCodeTime"
+            @click.stop="getCode">Send</span>
+          <span class="send"
+            v-else>{{initCodeTime}} s</span> -->
+        </div>
       </div>
 
       <div class="login-btn"
@@ -335,13 +374,13 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message: "Verification code sent !",
-            duration: 1000
+            message: "Please be patient，Your SMS code will be sent in 120 second!",
+            duration: 2000
           });
           this.authCode = result.data;
 
-          // 开始倒计时（60s）
-          this.initCodeTime = 60;
+          // 开始倒计时（120s）
+          this.initCodeTime = 120;
           let timer = setInterval(() => {
             if (this.initCodeTime <= 0) {
               clearInterval(timer);
@@ -379,6 +418,24 @@ export default {
       }
     },
     /**
+     * @description:  根据情况添加载荷参数
+     */
+    setParams(param) {
+      const { spuId, bargainId, inviteUserId, source } = this.$route.query;
+      if (spuId) {
+        param.spu_id = spuId;
+      }
+      if (bargainId) {
+        param.bargain_id = bargainId;
+      }
+      if (inviteUserId) {
+        param.invite_user_id = inviteUserId;
+      }
+      if (source) {
+        param.source = source;
+      }
+    },
+    /**
      * @description: 手机号码 验证码登录
      */
     async loginTel() {
@@ -390,16 +447,19 @@ export default {
         this.$toast("verification code must be filled !");
         return;
       }
-      let params = {
+
+      let param = {
         phone: this.phone,
         auth_code: this.authCode
       };
 
+      this.setParams(param);
+
       if (process.env.VUE_APP_ENV == "development") {
-        params.user = "zztest";
+        param.user = "zztest";
       }
 
-      let result = await telLogin(params);
+      let result = await telLogin(param);
       if (result && result.data) {
         this.loginApiEnd(result.data);
       }
@@ -427,19 +487,7 @@ export default {
           tp_username: name,
           tp_avatar: pic_square
         };
-        const { spuId, bargainId, inviteUserId, source } = this.$route.query;
-        if (spuId) {
-          param.spu_id = spuId;
-        }
-        if (bargainId) {
-          param.bargain_id = bargainId;
-        }
-        if (inviteUserId) {
-          param.invite_user_id = inviteUserId;
-        }
-        if (source) {
-          param.source = source;
-        }
+        this.setParams(param);
 
         let result = await login(param);
         console.log("result: ", result);
