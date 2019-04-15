@@ -259,14 +259,14 @@ export default {
      */
     jumpBargain() {
       this.$emit("jumpBargainGa", this.itemData);
-      if (
-        !this.$store.state.userInfo.user_id &&
-        process.env.VUE_APP_ENV != "development"
-      ) {
-        this.$store.commit("setLoginJumpUrl", ""); // 不跳砍价页面，因为登录后这商品可能被这用户砍了
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
+      // if (
+      //   !this.$store.state.userInfo.user_id &&
+      //   process.env.VUE_APP_ENV != "development"
+      // ) {
+      //   this.$store.commit("setLoginJumpUrl", ""); // 不跳砍价页面，因为登录后这商品可能被这用户砍了
+      //   this.$store.commit("setLoginSelectShow", true);
+      //   return;
+      // }
 
       this.$router.push({
         path: "/bargain",

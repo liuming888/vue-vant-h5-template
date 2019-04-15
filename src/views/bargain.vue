@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import { Dialog } from "vant";
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -214,6 +215,9 @@ export default {
         parseInt((this.shareInfo.pre_bargain_amount / this.spu.price) * 100) ||
         0
       );
+    },
+    isLogin() {
+      return this.$store.state.userInfo.user_id;
     }
   },
   created() {
@@ -232,7 +236,9 @@ export default {
   },
   methods: {
     async init() {
-      // console.log(this.spu);
+      this.initSpuInfo();
+      this.initSpuList();
+
       const {
         relationId,
         showShareEarningEntry,
@@ -253,19 +259,21 @@ export default {
 
         await this.initShareInfo(relationId);
       } else {
-        if (!bargainId) {
-          // 系统自砍
+        if (!bargainId && this.isLogin) {
+          // 已登录用户系统自砍（自砍成功 和  之前已经砍过了，返回之前的砍价bargain_id等信息）
           await this.goBargainChop({
             spu_id: spuId
           });
         }
 
-        this.initBargainInfo();
-        this.initHelpBargainList();
+        if (this.isLogin) {
+          this.initBargainInfo();
+          this.initHelpBargainList();
+        }
       }
 
-      this.initSpuInfo();
-      this.initSpuList();
+      // this.initSpuInfo();
+      // this.initSpuList();
     },
     async initShareInfo(relationId) {
       let result = await shareInfo({ relation_id: relationId });
@@ -289,12 +297,87 @@ export default {
         });
       }
     },
+    /**
+     * @description: 获取商品信息
+     */
+    async initSpuInfo() {
+      let result = await getInfo({ spu_id: this.$route.query.spuId });
+      if (result && result.data && result.data.spu) {
+        let spu = result.data.spu;
+        for (let k in spu) {
+          this.$set(this.spu, k, spu[k]);
+        }
+
+        // 统计
+        this.$gaSend({
+          eventCategory: "砍价详情页",
+          eventAction: "页面展示",
+          eventLabel: this.spu.title.substr(0, 10)
+        });
+        // this.refreshTime();
+      }
+    },
+    /**
+     * @description: 获取砍价信息
+     */
+    async initBargainInfo() {
+      const { bargainId } = this.$route.query;
+      if (!bargainId) return;
+      let result = await getBargainInfo({
+        bargain_id: bargainId
+      });
+      if (result && result.data) {
+        this.bargain_info = result.data.bargain_info || result.data;
+        this.bargain_user_info = result.data.bargain_user_info;
+        console.log("this.bargain_info: ", this.bargain_info);
+      }
+    },
+    /**
+     * @description: 帮砍列表
+     */
+    async initHelpBargainList() {
+      const { bargainId } = this.$route.query;
+      if (!bargainId) return;
+      let result = await getHelpBargainList({
+        bargain_id: bargainId,
+        ...this.helpBargainPageDat
+      });
+      if (result && result.data) {
+        this.help_bargain_list = result.data;
+      }
+    },
+    /**
+     * @description: 更多商品列表（目前后端没做分页，前端暂时也不做）
+     */
+    async initSpuList() {
+      // 看看vuex里有木有缓存6条没砍价的
+      let stateGoodsList = this.$store.state.goodsList.filter(
+        item => !item.isBargain
+      );
+      if (stateGoodsList.length > 6) {
+        this.spu_list = stateGoodsList;
+        return;
+      }
+
+      let result = await getBargainSpus({
+        page_size: 16,
+        page_num: 1,
+        is_all: 0
+      });
+      if (result && result.data) {
+        this.spu_list = result.data.spu_list;
+
+        // if (page_num == 1) {
+        // this.$store.commit("setGoodsList", this.spu_list);  // 注释掉不缓存，防止没登陆的用户到首页展示有问题
+        // } else {
+        //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
+        // }
+      }
+    },
     async goBargainChop({ bargain_id, spu_id }) {
       console.log("spu_id: ", spu_id);
-      if (
-        !this.$store.state.userInfo.user_id &&
-        process.env.VUE_APP_ENV !== "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
         console.log("666");
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
@@ -310,41 +393,68 @@ export default {
       });
 
       if (result && result.data && result.data.chop_info) {
-        const chop_info = result.data.chop_info;
-        this.chop_info = chop_info;
-        console.log("chop_info: ", chop_info);
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            bargainId: chop_info.bargain_id
-          }
-        });
+        this.chopSucess(result.data.chop_info, spu_id);
+        // let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        // arr.forEach(item => {
+        //   if (item.spu_id == spu_id) {
+        //     item.isBargain = true;
+        //   }
+        // });
+        // this.$store.commit("setGoodsList", arr);
 
-        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
-        arr.forEach(item => {
-          if (item.spu_id == spu_id) {
-            item.isBargain = true;
-          }
-        });
-        this.$store.commit("setGoodsList", arr);
-        // if (this.$route.query.relationId) {
-        //   // 分享赚自己点击按钮自砍成功
-        //   this.isShareEarningEntry = false;
-        // } else {
-        // 系统自砍成功
-        this.dialogs.potongSendiri.show = true;
-        // }
+        if (result.code == 0) {
+          // 砍价成功
+          this.dialogs.potongSendiri.show = true;
+          gtag("event", "conversion", {
+            send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
+          });
+          console.log("砍价成功！ spu_id:", spu_id);
+        } else if (result.code == 1000) {
+          // 该商品之前已经砍过了
+          console.warn("该商品已经砍价了！ spu_id:", spu_id);
+        }
         return Promise.resolve();
+      } else if (result.code == -1) {
+        // 该商品已经过期或者别的
+
+        // 强制返回首页去
+        // Dialog({
+        //   message:
+        //     "Please return to the homepage and re-select the product to enter !",
+        //   confirmButtonText: "ok"
+        // }).then(() => {
+        //   this.$router.replace("/");
+        // });
+
+        console.warn("该商品已经过期或者别的！ spu_id:", spu_id);
       }
+    },
+    /**
+     * @description:  砍价接口调用成功后的系列处理
+     */
+    chopSucess(chop_info, spu_id) {
+      this.chop_info = chop_info;
+      console.log("chop_info: ", chop_info);
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          bargainId: chop_info.bargain_id
+        }
+      });
+
+      let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+      arr.forEach(item => {
+        if (item.spu_id == spu_id) {
+          item.isBargain = true;
+        }
+      });
+      this.$store.commit("setGoodsList", arr);
     },
     /**
      * @description: 分享赚自砍
      */
     async goChopShare() {
-      if (
-        !this.$store.state.userInfo.user_id &&
-        process.env.VUE_APP_ENV !== "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
         this.$store.commit("setLoginJumpUrl", "");
         this.$store.commit("setLoginSelectShow", true);
         return;
@@ -372,81 +482,10 @@ export default {
         this.initHelpBargainList();
         // 分享赚自己点击按钮自砍
         this.isShareEarningEntry = false;
-      }
-    },
-    /**
-     * @description: 获取商品信息
-     */
-    async initSpuInfo() {
-      let result = await getInfo({ spu_id: this.$route.query.spuId });
-      if (result && result.data && result.data.spu) {
-        let spu = result.data.spu;
-        for (let k in spu) {
-          this.$set(this.spu, k, spu[k]);
-        }
 
-        // 统计
-        this.$gaSend({
-          eventCategory: "砍价详情页",
-          eventAction: "页面展示",
-          eventLabel: this.spu.title.substr(0, 10)
+        gtag("event", "conversion", {
+          send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
         });
-        // this.refreshTime();
-      }
-    },
-    /**
-     * @description: 获取砍价信息
-     */
-    async initBargainInfo() {
-      let result = await getBargainInfo({
-        bargain_id: this.$route.query.bargainId
-      });
-      if (result && result.data) {
-        this.bargain_info = result.data.bargain_info || result.data;
-        this.bargain_user_info = result.data.bargain_user_info;
-        console.log("this.bargain_info: ", this.bargain_info);
-      }
-    },
-    /**
-     * @description: 帮砍列表
-     */
-    async initHelpBargainList() {
-      let result = await getHelpBargainList({
-        bargain_id: this.$route.query.bargainId,
-        ...this.helpBargainPageDat
-      });
-      if (result && result.data) {
-        this.help_bargain_list = result.data;
-      }
-    },
-
-    /**
-     * @description: 更多商品列表（目前后端没做分页，前端暂时也不做）
-     */
-    async initSpuList() {
-      // 看看vuex里有木有缓存6条没砍价的
-      let stateGoodsList = this.$store.state.goodsList.filter(
-        item => !item.isBargain
-      );
-      if (stateGoodsList.length > 6) {
-        this.spu_list = stateGoodsList;
-        return;
-      }
-
-      let result = await getBargainSpus({
-        page_size: 16,
-        page_num: 1,
-        is_all: 0
-      });
-      if (result && result.data) {
-        this.spu_list = result.data.spu_list;
-
-        // if (page_num == 1) {
-        // this.$store.commit("setGoodsList", this.spu_list);  // 不缓存，防止没登陆的用户到首页展示有问题
-        // } else {
-        //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
-        //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
-        // }
       }
     },
     async openSharingFriendsDialog() {
@@ -456,10 +495,7 @@ export default {
         eventAction: "点击",
         eventLabel: this.spu.title.substr(0, 10)
       });
-      if (
-        !this.$store.state.userInfo.user_id &&
-        process.env.VUE_APP_ENV != "development"
-      ) {
+      if (!this.isLogin && process.env.VUE_APP_ENV != "development") {
         const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止有登陆后有问题
         // this.$store.commit(
@@ -481,12 +517,12 @@ export default {
       }
     },
     jumpCurBargainPage(item) {
-      if (!this.$store.state.userInfo.user_id) {
-        // const { pathname, search } = window.location;
-        this.$store.commit("setLoginJumpUrl", "");
-        this.$store.commit("setLoginSelectShow", true);
-        return;
-      }
+      // if (!this.isLogin) {
+      //   // const { pathname, search } = window.location;
+      //   this.$store.commit("setLoginJumpUrl", "");
+      //   this.$store.commit("setLoginSelectShow", true);
+      //   return;
+      // }
 
       // 统计
       this.$gaSend({
@@ -506,7 +542,7 @@ export default {
 
     jumpBuyPage() {
       // 上线时不能注释
-      if (!this.$store.state.userInfo.user_id) {
+      if (!this.isLogin) {
         // const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", "");
         // this.$store.commit("setLoginJumpUrl", `/purchase${search}`);
@@ -546,9 +582,6 @@ export default {
       this.openSharingFriendsDialog();
     }
     next();
-    // if(bargainType=='another'){
-    //   this.init();
-    // }
   },
 
   beforeRouteEnter(to, from, next) {
@@ -559,21 +592,5 @@ export default {
       }
     });
   }
-  // watch: {
-  //   spu: {
-  //     handler() {
-  //       if (this.spu.hasOwnProperty("title")) {
-  //         // 统计
-  //         this.$gaSend({
-  //           eventCategory: "砍价详情页",
-  //           eventAction: "页面展示",
-  //           eventLabel: this.spu.title.substr(0, 10)
-  //         });
-  //       }
-  //     },
-  //     immediate: true,
-  //     deep: true
-  //   }
-  // }
 };
 </script>
