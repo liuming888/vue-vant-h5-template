@@ -113,7 +113,7 @@
 
         <div class="share-item">
           <img v-lazy="require('@/assets/images/line.png')"
-            @click="shareshare(mx_shareLine)">
+            @click="share(mx_shareLine)">
           <p>LINE</p>
         </div>
 
