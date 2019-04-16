@@ -74,7 +74,7 @@
   margin-top: 48px;
   min-height: 412px;
   background-repeat: no-repeat;
-  background-image: url("~@/assets/images/contactUs.png");
+  background-image: url("~@/assets/images/tutorial/contact-us.png");
   background-size: 100% auto;
 }
 </style>
