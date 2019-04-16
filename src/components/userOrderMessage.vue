@@ -2,6 +2,7 @@
 .home-top-msg {
   height: 48px;
   background: rgb(231, 212, 212);
+  overflow: hidden;
 
   @keyframes mes {
     0% {
