@@ -328,7 +328,7 @@
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
-            <count-down :dateDiff="item.spu.expire_ttl"></count-down>
+            <count-down :dateDiff="item.bargain_info.expire_ttl"></count-down>
             <div class="price-box go-on-price-box">
               <div class="price-item">
                 <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount||0}}</div>
