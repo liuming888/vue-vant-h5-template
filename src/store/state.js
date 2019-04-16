@@ -1,4 +1,5 @@
 export default {
+    loaddingNum:0,  // 当前loading的请求数
     userInfo: {}, // 当前用户信息
     isreFreshToken: false, // 是否已经请求了刷新token（前提本地存了上次的）
     goodsList: [
