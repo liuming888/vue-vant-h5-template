@@ -41,4 +41,8 @@ export default {
         completePayment: 'complete payment',
         goBuy: 'Go buy',
     },
+    revenueDetails: {
+        revenue: 'Revenue',
+        expenses: 'Expenses',
+    },
 };

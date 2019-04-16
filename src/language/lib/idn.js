@@ -41,4 +41,8 @@ export default {
         completePayment: 'menyelesaikan pembayaran',
         goBuy: 'Pergi beli',
     },
+    revenueDetails: {
+        revenue: 'Pendapatan',
+        expenses: 'Beban',
+    },
 };

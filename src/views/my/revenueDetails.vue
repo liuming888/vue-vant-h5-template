@@ -5,9 +5,9 @@
     <turn-home />
 
     <header>
-      Revenue Rp
+      {{$t('revenueDetails.revenue')}} Rp
       <span>{{total_revenue||0}}</span> &nbsp; &nbsp;
-      Expenses Rp
+      {{$t('revenueDetails.expenses')}} Rp
       <span>{{total_expenses||0}}</span>
     </header>
     <div class="revenue-content">
@@ -23,7 +23,7 @@
               <p>{{item.update_time}}</p>
             </div>
             <div class="count"
-              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}{{item.amount}}</div>
+              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}<span class="rp">Rp</span>{{item.amount}}</div>
           </div>
         </li>
       </ul>
@@ -108,7 +108,6 @@ export default {
         }
 
         > div {
-          // border-bottom: 1px solid #ececec;
           padding: 30px 0;
           &.count {
             flex: 1;
@@ -116,6 +115,7 @@ export default {
             color: #d30c05;
             font-size: 36px;
             padding-top: 60px;
+            font-weight: 500;
             &.cash {
               color: #323232;
             }
@@ -132,6 +132,10 @@ export default {
                 margin-top: 15px;
               }
             }
+          }
+
+          .rp{
+            font-size: 24px;
           }
         }
       }
