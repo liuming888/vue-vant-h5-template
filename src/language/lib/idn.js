@@ -21,4 +21,24 @@ export default {
         cumulativeReturnTxt: 'Cumulative return',
         signOutTxt: 'Sign out',
     },
+    myFriends: {
+        friendNickname: 'Nama panggilan teman',
+        joinTime: 'Jam bergabung',
+        contribution: 'Kontribusi',
+    },
+    myOrder: {
+        myOdersTit: 'Pesanan saya',
+        pendingPaymentTit: 'Pembayaran tertunda',
+        completedTit: 'Lengkap',
+        tidakAdaPesananTerkait: 'Tidak ada pesanan terkait',
+        bukaHalamanBerandaDanLihat: 'Buka halaman beranda dan lihat',
+        contactUsBy: 'Hubungi kami oleh', //1
+        iKnow: 'Saya mengerti',
+        orderNumber: 'Nomor pesanan',
+        customerService: 'Pelayan Pelanggan',
+        pendingPayment: 'Pembayaran tertunda',
+        please: 'Silahkan',
+        completePayment: 'menyelesaikan pembayaran',
+        goBuy: 'Pergi beli',
+    },
 };

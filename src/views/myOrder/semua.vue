@@ -25,20 +25,20 @@
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
-      <p>Tidak ada pesanan terkait</p>
-      <div class="btn">Buka halaman beranda dan lihat</div>
+      <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
+      <div class="btn">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
     <!-- 联系我们弹窗 -->
     <div class="alertBox"
       v-if="contactVisible">
       <div class="alertWrap">
-        <h1>Contact us by</h1>
+        <h1>{{$t('myOrder.contactUsBy')}}</h1>
         <ul>
           <li class="alertWrap-item">facebook fanpage : @Lovingistarbuy</li>
           <li class="alertWrap-item">Wechat : ISTARBUY</li>
           <li class="alertWrap-item">Line : ISTARBUY</li>
         </ul>
-        <div @click="contactVisible=false">I know</div>
+        <div @click="contactVisible=false">{{$t('myOrder.iKnow')}}</div>
       </div>
     </div>
   </div>

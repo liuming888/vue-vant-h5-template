@@ -63,6 +63,7 @@
         color: #d40e07;
         background-color: #fff;
         font-size: 24px;
+        white-space:nowrap; 
       }
     }
     > .my-wallet {
@@ -90,6 +91,7 @@
         border-radius: 14px 0px 0px 14px;
         color: #fff;
         font-size: 28px;
+        white-space:nowrap; 
       }
       > .top {
         margin-bottom: 40px;
