@@ -3,18 +3,45 @@
   width: 100vw;
   overflow: hidden;
 }
+
+.loading-box {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 12000;
+  background: rgba(0, 0, 0, 0.5);
+
+   .van-loading {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+}
 </style>
 
 <style lang="scss" src="./assets/css/init.scss"></style>
 
 <template>
   <div id="app">
+    <div class="loading-box"
+      v-show="loaddingNum>0"
+      @click.stop>
+      <van-loading color="#D30C05"/>
+    </div>
+
     <zdd-layout></zdd-layout>
   </div>
 </template>
 
 <script>
+import { Loading } from 'vant';
 import axios from "axios";
+import { mapState } from "vuex";
 import { FBConfig } from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
 
@@ -22,7 +49,11 @@ import { login, refreshToken } from "@/server/user.js";
 export default {
   name: "App",
   components: {
-    "zdd-layout": zddMain
+    [Loading.name]:Loading,
+    "zdd-layout": zddMain,
+  },
+  computed: {
+    ...mapState(["loaddingNum"])
   },
   created() {
     let newUserStr = localStorage.getItem("newUserInfo");
@@ -44,7 +75,7 @@ export default {
     }
     this.initToken();
 
-    if(process.env.VUE_APP_ENV == "production") return;
+    if (process.env.VUE_APP_ENV == "production") return;
     this.initFB();
   },
   methods: {
