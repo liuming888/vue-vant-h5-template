@@ -5,6 +5,15 @@ export default {
     home: {
         test1: 'en-test',
     },
+    commodityItem: {
+        cashBack: 'Cash Back',
+        getAFreebie: 'Get a freebie',
+    },
+    paymentSuccess: {
+        successTit: 'Congratulations, you have successfully paid!',
+        loveproducts: require('@/assets/images/loveproducts.png'),
+    },
+
     my: {
         VIPMember: ' VIP Member',
         cumulativeReturn: 'Cumulative return',

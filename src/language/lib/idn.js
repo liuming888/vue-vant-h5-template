@@ -5,6 +5,15 @@ export default {
     home: {
         test1: 'idn-test',
     },
+    commodityItem: {
+        cashBack: 'Uang kembali',
+        getAFreebie: 'Dapatkan freebie',
+    },
+    paymentSuccess: {
+        successTit: 'Selamat, Anda telah berhasil membayar!',
+        loveproducts: require('@/assets/images/loveproducts.png'),
+    },
+
     my: {
         VIPMember: ' anggota VIP',
         cumulativeReturn: 'Pengembalian kumulatif',

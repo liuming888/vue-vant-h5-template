@@ -137,7 +137,7 @@
         <a href="javascript:;"
           class="goods-title"
           @click="jumpBargain">{{itemData.title || ''}}</a>
-        <p class="goods-description">{{itemData.sub_title || 'mock'}}</p>
+        <p class="goods-description">{{itemData.sub_title || ''}}</p>
         <p class="goods-description">{{itemData.deliver_count}} Sent</p>
         <div class="goods-price">
           <span class="discount">RP {{itemData.price || 0}}</span>
@@ -147,10 +147,10 @@
       <div class="goods-control">
         <span class="button-l"
           @click="cashBack">
-          Cash Back
+          {{$t('commodityItem.cashBack')}}
         </span>
         <span class="button-r"
-          @click="jumpBargain">Get a freebie</span>
+          @click="jumpBargain">{{$t('commodityItem.getAFreebie')}}</span>
       </div>
     </div>
 
