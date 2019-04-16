@@ -45,4 +45,6 @@ export default {
         revenue: 'Pendapatan',
         expenses: 'Beban',
     },
+    Tutorial: {},
+    withdrawImmediately: {},
 };

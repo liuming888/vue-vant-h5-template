@@ -88,25 +88,20 @@
         <div class="totorial-ct-tit"></div>
         <ul class="totorial-ct-ul">
           <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: How long can I receive the goods?</p>
-            <p class="totorial-ct-li-a">A: 3-15 Days.</p>
+            <p class="totorial-ct-li-q">{{$t('Tutorial.howLongCanIReceiveTheGoods')}}</p>
+            <p class="totorial-ct-li-a">{{$t('Tutorial.da1')}}</p>
           </li>
           <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: When can I withdraw cash？</p>
-            <p class="totorial-ct-li-a"><img src="../../assets/images/withdrawRule.png"></p>
+            <p class="totorial-ct-li-q">{{$t('Tutorial.whenCanIWithdrawCash')}}</p>
+            <p class="totorial-ct-li-a"><img :src="$t('Tutorial.da2')"></p>
           </li>
           <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: Share & Earn</p>
-            <p class="totorial-ct-li-a">A: Invite your friends to join Istarbuy, and you will get referral bonus.
-              Sharing Istarbuy to one or multiple friends.
-              Copy & paste the invite link to your friends.
-            </p>
+            <p class="totorial-ct-li-q">{{$t('Tutorial.shareEarn')}}</p>
+            <p class="totorial-ct-li-a">{{$t('Tutorial.da3')}}</p>
           </li>
           <li class="totorial-ct-li">
-            <p class="totorial-ct-li-q">Q: You can contact us in the way as follow</p>
-            <p class="totorial-ct-li-a">A: ① Facebook fan page: @Lovingistarbuy
-              ② LINE: Istarbuy
-              ③ WeChat: Istarbuy</p>
+            <p class="totorial-ct-li-q">{{$t('Tutorial.theWayAsFollow')}}</p>
+            <p class="totorial-ct-li-a">{{$t('Tutorial.da4')}}</p>
           </li>
         </ul>
       </div>
