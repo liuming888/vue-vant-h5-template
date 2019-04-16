@@ -3,11 +3,8 @@
 <template>
   <div class="purchase-container">
     <div class="top-info">
-      <div class="info-box">
-        <img v-lazy="require('@/assets/images/btn-1.png')"
-          class="head-portrait">
-        <span class="info-txt">Michelle got a freebie just now</span>
-      </div>
+      <user-order-message :messageList="messageList"
+        v-if="messageList.length>0" />
     </div>
     <!-- 显示的收货地址 -->
     <div v-if="myAddress && myAddress.id"
@@ -159,6 +156,7 @@ import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
 import loadings from "@/mixins/loadings.js";
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
+import { getHomeTip } from "@/server/other.js";
 import {
   orderCreate,
   repaidOrder,
@@ -171,6 +169,8 @@ import { getBargainInfo } from "@/server/bargain.js";
 export default {
   mixins: [loadings],
   components: {
+    userOrderMessage: resolve =>
+      require(["@/components/userOrderMessage.vue"], resolve), // 用户订单消息播放
     DialogDefault,
     shippingAddress, // 地址列表组件
     dialogPostAddAddress,
@@ -180,6 +180,7 @@ export default {
   },
   data() {
     return {
+      messageList: [], // 顶部滚动消息
       spu: {},
       specs: [],
       bargain_info: {},
@@ -235,6 +236,7 @@ export default {
       // if (result) {
       //   this.spu = result.data.spu;
       // }
+      this.initHomeTip();
       this.initSpuInfo();
       this.initBargainInfo();
       this.getMyAddressInfo();
@@ -242,6 +244,13 @@ export default {
       this.initExchangeRate();
       this.getPayType();
       this.initOrderByBargainIdDat(this.$route.query.bargainId);
+    },
+    async initHomeTip() {
+      let result = await getHomeTip();
+      if (result && result.data) {
+        this.messageList = result.data.home_tips;
+        console.log("this.messageList: ", this.messageList);
+      }
     },
     /**
      * @description: 根据砍价号获取订单信息  看之前有支付下单没
