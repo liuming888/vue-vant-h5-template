@@ -2,10 +2,17 @@ export default {
     message: {
         hello: 'idn hello world',
     },
-    home: {
-        test1: 'idn-test',
-    },
 
+    /************************ 组件  start *****************************************************/
+    aCommodityThatIsBeingBargained: {
+        completed: 'lengkap',
+        goOn: 'Lanjutkan',
+        buy: 'Beli',
+    },
+    tabBar: {
+        homeTab: 'HOME',
+        meTab: 'ME',
+    },
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Your friends help you save',
         goBuyNow: 'Go buy now',
@@ -13,6 +20,22 @@ export default {
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Bagikan kepada teman dan anda akan mendapatkan freebies lebih cepat.',
         helpYourselfCutDown: 'Help yourself cut down',
+    },
+    commodityItem: {
+        cashBack: 'Uang kembali',
+        getAFreebie: 'Dapatkan freebie',
+    },
+    /************************ 组件  end *****************************************************/
+
+    /************************ 页面  start *****************************************************/
+    home: {
+        ongoingFreebies: 'Ongoing Freebies',
+        moreAbout: 'Lebih banyak tentang',
+        copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
+        privacyPolicy: 'Privacy Policy',
+        tCs: 'T&Cs',
+        aboutUs: 'About Us',
+        contactUs: 'Contact Us',
     },
     bargain: {
         sent: 'terkirim gratis',
@@ -38,7 +61,7 @@ export default {
         goOn: 'Go On',
         toBuy: 'To Buy',
     },
-    forBargain: {},
+    // forBargain: {},
     purchase: {
         receiver: 'Receiver',
         receivingAddress: 'Receiving address',
@@ -77,10 +100,6 @@ export default {
         success: 'success',
         Name: 'Nama',
         phone: 'telepon',
-    },
-    commodityItem: {
-        cashBack: 'Uang kembali',
-        getAFreebie: 'Dapatkan freebie',
     },
     paymentSuccess: {
         successTit: 'Selamat, Anda telah berhasil membayar!',
@@ -126,6 +145,73 @@ export default {
         revenue: 'Pendapatan',
         expenses: 'Beban',
     },
-    Tutorial: {},
-    withdrawImmediately: {},
+    /************************ 页面 end *****************************************************/
+
+    /**
+     * @description:  待翻译的start **********************************************************************************************
+     */
+    Tutorial: { 
+        howLongCanIReceiveTheGoods: 'Q: How long can I receive the goods?',
+        da1: 'A: 3-15 Days.',
+        whenCanIWithdrawCash: 'Q: When can I withdraw cash？',
+        da2: require('@/assets/images/withdrawRule.png'),
+        shareEarn: 'Q: Share & Earn',
+        da3: `A: Invite your friends to join Istarbuy, and you will get referral bonus.
+              Sharing Istarbuy to one or multiple friends.
+              Copy & paste the invite link to your friends.`,
+        theWayAsFollow: 'Q: You can contact us in the way as follow',
+        da4: `A: ① Facebook fan page: @Lovingistarbuy  ② LINE: Istarbuy  ③ WeChat: Istarbuy`,
+    },
+    withdrawImmediately: {
+        currentBalance: 'Current balance',
+        canWithdraw: 'Can withdraw',
+        cashWithdrawalMethod: 'Cash withdrawal method',
+        introduction: 'Introduction',
+        operator: 'Operator',
+        rechargeDenomination: 'Recharge denomination',
+        withdrawalAmount: 'Withdrawal Amount',
+        accountName: 'Account Name',
+        enterTheAmount: 'Enter the amount',
+        confirmTheAccount: 'Confirm the account',
+        confirmTheAmount: 'Confirm the amount',
+        phoneNumber: 'Phone number',
+        enterPhoneNumber: 'Enter phone number',
+        confirmPhoneNumber: 'Confirm phone number',
+        withdrawalRules: 'Withdrawal rules',
+        cashOut: 'Cash out',
+        cashDescriptionList: ['1. The balance is over 88 rounds, and 8 rounds can be withdrawn. The arrival time is the same day;', '2. The balance is 338 rounds, 138 rounds can be withdrawn, and the time of arrival is 3-5 working days;', '3. The balance is 438 rounds, 188 rounds can be withdrawn, and the time of arrival is 7-14 working days;', '4. The balance is 538 rounds, 238 rounds can be withdrawn, and the time of arrival is 15-20 working days;'],
+        info: {
+            content: 'Withdrawal rules',
+            cancleText: 'cancel',
+            okText: 'I know',
+        },
+
+        withdrawalApplication: 'Withdrawal application',
+        pleaseCheckItOut: 'Your withdrawal request has been initiated, please check it out!',
+        pleaseAskCustomerService: 'If you have any questions, please ask customer service',
+        iKnow: 'I know',
+    },
+    forBargain: {
+        cheaperNow: 'cheaper now',
+        leaving: 'leaving',
+        heHadCutDown: 'He had cut down',
+        you: 'you',
+        contributed: 'contributed',
+        off: 'off',
+        youEarnYouSave: 'Help friends bargin, you earn you save',
+        giftPackage: 'Newcomer get Rp8888 gift package',
+        iAlsoTakeItForFree: 'I also take it for free',
+        millionPeopleHaveTakenItForFree: '8 million+ people have taken it for free',
+        howToGetAFreebie: 'How to get a freebie',
+        clickOnFavoriteGoods: 'Click on favorite goods',
+        inviteFriendsToBargain: 'Invite friends to bargain',
+        cutIntoFree: 'Cut into free',
+        Sent: 'Sent',
+        getAFreebie: 'Get a freebie',
+        gettingFreebies: 'Getting Freebies',
+        youHelpHim: 'You help him/her cut down',
+        afterYourFriendOrder: 'After your friend order, you will get',
+        rewardsOnYourAccount: 'rewards on your account',
+        alsoTakeItForFree: 'Also take it for free',
+    },
 };

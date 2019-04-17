@@ -232,7 +232,7 @@
 
         <div class="freebing-box"
           v-if="homeBargainList.length>0">
-          <div class="freebing-title">Ongoing Freebies</div>
+          <div class="freebing-title">{{$t('home.ongoingFreebies')}}</div>
           <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
             <freebing-box :key="index"
@@ -241,7 +241,7 @@
 
           <a href="javascript:;"
             class="freebing-more"
-            @click="handleMoreAbout">More About ></a>
+            @click="handleMoreAbout">{{$t('home.moreAbout')}} ></a>
         </div>
 
       </section>
@@ -264,13 +264,13 @@
       </section>
 
       <div class="privacy-agreement-box">
-        <p>Copyright © 2019 Istarbuy</p>
+        <p>{{$t('home.copyright_2019Istarbuy')}}</p>
 
         <ul>
-          <li onclick="window.open('Privacy Policy.html');">Privacy Policy</li>
-          <li onclick="window.open('Terms & Conditions.html');">T&Cs</li>
-          <li onclick="window.open('About us.html');">About Us</li>
-          <li onclick="window.open('Contact us.html');">Contact Us</li>
+          <li onclick="window.open('Privacy Policy.html');">{{$t('home.privacyPolicy')}}</li>
+          <li onclick="window.open('Terms & Conditions.html');">{{$t('home.tCs')}}</li>
+          <li onclick="window.open('About us.html');">{{$t('home.aboutUs')}}</li>
+          <li onclick="window.open('Contact us.html');">{{$t('home.contactUs')}}</li>
         </ul>
       </div>
     </div>

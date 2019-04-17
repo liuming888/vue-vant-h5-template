@@ -1,11 +1,18 @@
 export default {
     message: {
-        hello: 'hello world',
-    },
-    home: {
-        test1: 'en-test',
+        hello: 'en hello world',
     },
 
+    /************************ 组件  start *****************************************************/
+    aCommodityThatIsBeingBargained: {
+        completed: 'completed',
+        goOn: 'Go On',
+        buy: 'Buy',
+    },
+    tabBar: {
+        homeTab: 'HOME',
+        meTab: 'ME',
+    },
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Your friends help you save',
         goBuyNow: 'Go buy now',
@@ -13,6 +20,22 @@ export default {
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Share to friends and you can get freebies faster.',
         helpYourselfCutDown: 'Help yourself cut down',
+    },
+    commodityItem: {
+        cashBack: 'Cash Back',
+        getAFreebie: 'Get a freebie',
+    },
+    /************************ 组件  end *****************************************************/
+
+    /************************ 页面  start *****************************************************/
+    home: {
+        ongoingFreebies: 'Ongoing Freebies',
+        moreAbout: 'More About',
+        copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
+        privacyPolicy: 'Privacy Policy',
+        tCs: 'T&Cs',
+        aboutUs: 'About Us',
+        contactUs: 'Contact Us',
     },
     bargain: {
         sent: 'Sent',
@@ -99,10 +122,6 @@ export default {
         success: 'success',
         Name: 'name',
         phone: 'phone',
-    },
-    commodityItem: {
-        cashBack: 'Cash Back',
-        getAFreebie: 'Get a freebie',
     },
     paymentSuccess: {
         successTit: 'Congratulations, you have successfully paid!',
