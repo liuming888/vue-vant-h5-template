@@ -48,8 +48,8 @@ export default {
     return {
       time: {
         h: "00",
-        m: "00",
-        s: "00"
+        p: "00",
+        m: "00"
       },
       setIntervalBox: null,
       newTime: 0
