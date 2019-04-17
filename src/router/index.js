@@ -130,11 +130,12 @@ curRouter.afterEach(current => {
      Vue.prototype.$curStore.commit('setLoaddingNum', -1);
     // const path = current.path;
     // if (routerShows.includes(path)) {
+        const { pathname, search } = window.location;
         gaSend({
             eventCategory: current.name,
             eventAction: '页面展示',
             hitType: 'pageview',
-            page: window.location.pathname,
+            page: pathname + search,
         });
     // }
     // quicklink({
