@@ -5,6 +5,24 @@ export default {
     home: {
         test1: 'en-test',
     },
+
+    shippingAddress: {
+        thereIsNoShippingAddress: 'There is no shipping address',
+        receivingAddress: 'Receiving address',
+        tetapkanSebagaiAlamatDefault: 'Set it as the commonly used address',
+        edit: 'Edit',
+        tambahkanAlamat: 'Add address',
+        youAreSureYouWantToDeleteTheAddress: 'Make sure you want to delete the address',
+        cancelText: 'Cancel',
+        determine: 'Determine',
+        addAddress: 'Add address',
+        alamatLengkap: 'Alamat lengkap (jalan, nomor rumah)',
+        zipCode: 'Zip code',
+        confirm: 'Confirm',
+        pilihAlamatPengiriman: 'Pilih alamat pengiriman',
+        pleaseCompleteTheFullAddressInformation: 'Please complete the full address information',
+        success: 'success',
+    },
     commodityItem: {
         cashBack: 'Cash Back',
         getAFreebie: 'Get a freebie',
@@ -13,7 +31,6 @@ export default {
         successTit: 'Congratulations, you have successfully paid!',
         loveproducts: require('@/assets/images/loveproducts.png'),
     },
-
     my: {
         VIPMember: ' VIP Member',
         cumulativeReturn: 'Cumulative return',

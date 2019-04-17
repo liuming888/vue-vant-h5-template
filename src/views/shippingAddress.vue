@@ -104,7 +104,7 @@
       v-if="address_list.length  === 0">
       <img src="@/assets/images/address-none.png"
         alt="">
-      <p>Tidak ada alamat pengiriman</p>
+      <p>{{$t('shippingAddress.thereIsNoShippingAddress')}}</p>
     </div>
     <!-- 有地址 -->
     <ul class="address-list"
@@ -115,7 +115,7 @@
         @click="setActiveCls(item)">
         <div class="info-box">
           <p>{{item.username}}, {{item.telephone}} </p>
-          <p class="address-txt-box">Receiving address: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
+          <p class="address-txt-box">{{$t('shippingAddress.receivingAddress')}}: {{item.address_two}},{{item.address_one}},{{item.city}},{{item.region}},{{item.country}}</p>
 
           <div class="close"
             @click.stop="delItem(item.id)"
@@ -124,16 +124,16 @@
           </div>
         </div>
         <div :class="`info-ctrl ${item.is_default === 1 ? 'active' : ''}`">
-          <div class="default">Tetapkan sebagai alamat default</div>
+          <div class="default">{{$t('shippingAddress.tetapkanSebagaiAlamatDefault')}}</div>
           <div class="edit"
-            @click.stop="editAddress(item)">Edit</div>
+            @click.stop="editAddress(item)">{{$t('shippingAddress.edit')}}</div>
         </div>
       </li>
     </ul>
     <!-- 新增地址按钮 -->
     <div class="add-address-btn"
       @click="openAddressDialog('add')">
-      <span>Tambahkan alamat</span>
+      <span>{{$t('shippingAddress.tambahkanAlamat')}}</span>
     </div>
 
     <!-- 弹窗 -->
@@ -176,9 +176,9 @@ export default {
       // 删除按钮弹窗信息
       dialogDefaultShow: false,
       dialogDefaultInfo: {
-        content: "You are sure you want to delete the address?",
-        cancelText: "Cancel",
-        okText: "Determine",
+        content: this.$t('shippingAddress.youAreSureYouWantToDeleteTheAddress'),
+        cancelText: this.$t('shippingAddress.cancelText'),
+        okText: this.$t('shippingAddress.determine'),
         delId: 0
       },
 
