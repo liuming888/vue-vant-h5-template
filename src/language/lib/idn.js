@@ -6,6 +6,31 @@ export default {
         test1: 'idn-test',
     },
 
+    dialogShareEarningEntry: {
+        yourFriendsHelpYouSave: 'Your friends help you save',
+        goBuyNow: 'Go buy now',
+    },
+    dialogSharingFriends: {
+        shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Bagikan kepada teman dan anda akan mendapatkan freebies lebih cepat.',
+        helpYourselfCutDown: 'Help yourself cut down',
+    },
+    bargain: {
+        sent: 'terkirim gratis',
+        price: 'Price',
+        currentPrice: 'Harga saat ini',
+        cheaperNowLeaving: 'sekarang lebih murah, sisa',
+        off: 'off',
+        availableForPurchase: 'Tersedia untuk pembelian',
+        takeItFree: 'Gratis',
+        shareFriendsForFreebies: 'Tim tawar-menawar untuk dapat freebies',
+        cutAKnife: 'Cut a knife',
+        buyNow: 'beli sekarang',
+        BuyNow: 'Beli sekarang',
+        getAFreebie: 'Get a freebie',
+        gettingFreebies: 'Getting Freebies',
+        pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
+        failedToGetSharingInformation: 'Failed to get sharing information',
+    },
     isBargainingList: {
         toBuy: 'To Buy',
         completed: 'completed',

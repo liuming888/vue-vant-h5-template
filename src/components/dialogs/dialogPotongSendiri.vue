@@ -69,7 +69,7 @@
         <img v-lazy="require('@/assets/images/zikanyidaotanchuang.png')"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Help yourself cut down</p>
+          <p class="top-tips">{{$t('dialogSharingFriends.helpYourselfCutDown')}}</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
           <!-- <p class="bottom-tips">After he bys, you get <span><span>Rp</span> {{chopInfo.reward_amount}}</span> to help cut rewards</p> -->
         </div>
@@ -100,7 +100,7 @@ export default {
           bargain_id: 1, //类型：Number  必有字段  备注：砍价号
           bargain_amount: 1, //类型：Number  必有字段  备注：砍价金额
           bargain_rate: 1, //类型：Number  必有字段  备注：砍价比例
-          reward_amount: "mock" //类型：String  必有字段  备注：下单能获取的金额
+          reward_amount: "" //类型：String  必有字段  备注：下单能获取的金额
         };
       }
     }

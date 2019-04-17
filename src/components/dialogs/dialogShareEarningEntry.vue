@@ -82,11 +82,11 @@
         <img v-lazy="require('@/assets/images/fenxiangzhuang.png')"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Your friends help you save</p>
+          <p class="top-tips">{{$t('dialogShareEarningEntry.yourFriendsHelpYouSave')}}</p>
           <p class="cut-num"><span>Rp</span> {{preAmount}}</p>
 
           <div class="go-buy-btn"
-            @click="goBuyNow">Go buy now</div>
+            @click="goBuyNow">{{$t('dialogShareEarningEntry.goBuyNow')}}</div>
         </div>
         <div class="close"
           @click="closeDialog"></div>

@@ -6,6 +6,31 @@ export default {
         test1: 'en-test',
     },
 
+    dialogShareEarningEntry: {
+        yourFriendsHelpYouSave: 'Your friends help you save',
+        goBuyNow: 'Go buy now',
+    },
+    dialogSharingFriends: {
+        shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Share to friends and you can get freebies faster.',
+        helpYourselfCutDown: 'Help yourself cut down',
+    },
+    bargain: {
+        sent: 'Sent',
+        price: 'Price',
+        currentPrice: 'current price',
+        cheaperNowLeaving: 'cheaper now, leaving',
+        off: 'off',
+        availableForPurchase: 'Available for purchase',
+        takeItFree: 'For free',
+        shareFriendsForFreebies: 'Share friends for freebies',
+        cutAKnife: 'Cut a knife',
+        buyNow: 'buy now',
+        BuyNow: 'Buy now',
+        getAFreebie: 'Get a freebie',
+        gettingFreebies: 'Getting Freebies',
+        pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
+        failedToGetSharingInformation: 'Failed to get sharing information',
+    },
     isBargainingList: {
         toBuy: 'To Buy',
         completed: 'completed',

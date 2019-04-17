@@ -98,7 +98,7 @@
     @click.stop="abc=1">
     <div class="share-box">
       <div class="tip">
-        Tip: Share to friends and you can get freebies faster.
+        {{$t('dialogSharingFriends.shareToFriendsAndYouCanGetFreebiesFaster')}}
       </div>
 
       <h5 class="tit"><!-- Share on --></h5>
