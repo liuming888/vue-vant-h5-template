@@ -106,6 +106,7 @@
           <span>Account Name</span>
           <input v-model.trim="withdrawParam.account_name"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             placeholder="Enter the amount"
             type="text">
         </li>
@@ -113,6 +114,7 @@
           <span>Confirm the account</span>
           <input v-model.trim="withdrawParam.account_no"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             placeholder="Confirm the amount"
             type="text">
         </li>
@@ -122,6 +124,7 @@
           <span>Phone number</span>
           <input v-model.trim.number="withdrawParam.account_name"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             placeholder="Enter phone number"
             type="number">
 
@@ -129,6 +132,7 @@
         <li> <span>Confirm phone number</span>
           <input v-model.trim.number="withdrawParam.account_no"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             placeholder="Confirm phone number"
             type="number"></li>
       </ul>
