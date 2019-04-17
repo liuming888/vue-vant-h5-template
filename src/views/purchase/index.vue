@@ -16,13 +16,13 @@
       <div class="shipping-address-content">
         <div class="top-box">
           <span class="Receiver">
-            Receiver: {{myAddress.username}}
+            {{$t('purchase.receiver')}}: {{myAddress.username}}
           </span>
 
           <span class="phone">{{myAddress.telephone}}</span>
         </div>
         <div class="receiving-address">
-          Receiving address:
+          {{$t('purchase.receivingAddress')}}:
           <!--  {{myAddress.address_two}}, -->{{myAddress.address_one}},{{myAddress.city}},{{myAddress.region}},{{myAddress.country}}
         </div>
       </div>
@@ -36,7 +36,7 @@
       @click="showAddressDialog.show = true">
       <img v-lazy="require('@/assets/images/add.png')"
         class="add-icon">
-      <div class="txt">Add shipping address</div>
+      <div class="txt">{{$t('purchase.addShippingAddress')}}</div>
       <van-icon name="arrow" />
     </div>
 
@@ -104,25 +104,25 @@
     <div class="down-box">
       <div class="left-box">
         <div class="l-t-box">
-          Actual payment:
+          {{$t('purchase.actualPayment')}}:
           <div class="num-box">
-            <b>Rp</b>{{bargain_info.bargain_after}}
+            <b>Rp</b>{{bargain_info.bargain_after||0}}
           </div>
         </div>
 
-        <div class="l-d-box">About ${{(bargain_info.bargain_after/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
+        <div class="l-d-box">{{$t('purchase.about')}} ${{bargain_info.bargain_after?(bargain_info.bargain_after/exchangeRateDat.exchange_rate).toFixed(2):0}}</div>
       </div>
 
       <div class="pay-immediately"
         @click="goPaly">
-        Place Oder
+        {{$t('purchase.placeOder')}}
       </div>
     </div>
 
     <!-- 商品列表页以组件形式  默认阻止点击穿透 -->
     <div class="dialog-box"
       v-if="showShippingAddressPage"
-      @click.stop="abc=1">
+      @click.stop>
       <shipping-address :showAddressPage.sync="showShippingAddressPage" />
     </div>
 
@@ -139,7 +139,7 @@
       @ok="goRepaidPay">
       <div slot="content"
         class="pay-error">
-        <p>Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin</p>
+        <p>{{$t('purchase.harapMembayarSesegeraMungkin')}}</p>
       </div>
     </dialog-default>
   </div>
@@ -196,11 +196,7 @@ export default {
         show: false
       },
       myAddress: {},
-      info: {
-        content: "Konfirmasikan untuk melunasi?",
-        cancleText: "Menyerah",
-        okText: "Terus bayar"
-      },
+      info: this.$t('purchase.info'),
       dialogVisible: false,
 
       exchangeRateDat: {
@@ -226,7 +222,7 @@ export default {
     }
   },
   mounted() {
-    document.title = "Check out";
+    document.title = this.$t('purchase.checkOut');
 
     fbq("track", "AddToCart");
   },
@@ -335,19 +331,14 @@ export default {
 
       const { bargain_after } = this.bargain_info;
       if (bargain_after < this.currentType.min_amount) {
-        this.$toast(
-          "The payment amount is too small, please try again by alternative payment method."
-        );
+        this.$toast(this.$t('purchase.pleaseTryAgainByAlternativePaymentMethod'));
         return;
       }
 
       fbq("track", "InitiateCheckout");
 
       if (!this.myAddress.id) {
-        Dialog.alert({
-          message: "Please choose a shipping address",
-          confirmButtonText: "ok"
-        });
+        Dialog.alert(this.$t('purchase.pleaseChooseAShippingAddressDialog'));
         return;
       }
 
@@ -406,9 +397,7 @@ export default {
     async goRepaidPay() {
       const { bargain_after } = this.bargain_info;
       if (bargain_after < this.currentType.min_amount) {
-        this.$toast(
-          "The payment amount is too small, please try again by alternative payment method."
-        );
+        this.$toast(this.$t('purchase.pleaseTryAgainByAlternativePaymentMethod'));
         return;
       }
 

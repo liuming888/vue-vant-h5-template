@@ -110,11 +110,11 @@
 
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
-          placeholder="name"
+          :placeholder="$t('shippingAddress.Name')"
           class="user-name input-size"
           style="border-right:1px solid #F2F2F2;" />
         <van-field v-model.trim="curAddress.telephone"
-          placeholder="phone"
+          :placeholder="$t('shippingAddress.phone')"
           class="user-phone input-size"
           type="number" />
       </div>

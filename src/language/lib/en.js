@@ -6,6 +6,29 @@ export default {
         test1: 'en-test',
     },
 
+    forBargain:{
+        
+    },
+    purchase: {
+        receiver: 'Receiver',
+        receivingAddress: 'Receiving address',
+        addShippingAddress: 'Add shipping address',
+        actualPayment: 'Actual payment',
+        about: 'About',
+        placeOder: 'Place Oder',
+        harapMembayarSesegeraMungkin: 'Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin',
+        info: {
+            content: 'Konfirmasikan untuk melunasi?',
+            cancleText: 'Menyerah',
+            okText: 'Terus bayar',
+        },
+        checkOut: 'Check out',
+        pleaseTryAgainByAlternativePaymentMethod: 'The payment amount is too small, please try again by alternative payment method.',
+        pleaseChooseAShippingAddressDialog: {
+            message: 'please select an address',
+            confirmButtonText: 'ok',
+        },
+    },
     shippingAddress: {
         thereIsNoShippingAddress: 'There is no shipping address',
         receivingAddress: 'Receiving address',
@@ -22,6 +45,8 @@ export default {
         pilihAlamatPengiriman: 'Pilih alamat pengiriman',
         pleaseCompleteTheFullAddressInformation: 'Please complete the full address information',
         success: 'success',
+        Name: 'name',
+        phone: 'phone',
     },
     commodityItem: {
         cashBack: 'Cash Back',
