@@ -17,9 +17,14 @@ Vue.prototype.$gaSend = $util.gaSend;
 // Vue.prototype.$request = $request;
 
 Vue.config.productionTip = false;
-// router.afterEach(current => {
-    
-// })
+Vue.mixin({
+    methods: {
+        mx_resizeWindow(){
+            console.warn("表单blur");
+            document.body.scrollTop = 0;
+        }
+    },
+});
 new Vue({
     router,
     store,
