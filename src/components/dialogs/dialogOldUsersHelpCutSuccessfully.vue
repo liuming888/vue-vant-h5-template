@@ -94,13 +94,13 @@
         <img src="~@/assets/images/forBargain-sucess.png"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">You help him/her cut down</p>
+          <p class="top-tips">{{$t('forBargain.youHelpHim')}}</p>
           <p class="cut-num"><span>Rp</span> {{chopInfo.bargain_amount}}</p>
-          <p class="bottom-tips">After your friend order, you will get<span><span>Rp</span>{{chopInfo.reward_amount}}</span>rewards on your account</p>
+          <p class="bottom-tips">{{$t('forBargain.afterYourFriendOrder')}}<span><span>Rp</span>{{chopInfo.reward_amount}}</span>{{$t('forBargain.rewardsOnYourAccount')}}</p>
 
           <div class="take-btn"
             @click="$router.push('/')">
-            Also take it for free
+            {{forBargain.alsoTakeItForFree}}
           </div>
 
         </div>
@@ -131,7 +131,7 @@ export default {
           bargain_id: 1, //类型：Number  必有字段  备注：砍价号
           bargain_amount: 1, //类型：Number  必有字段  备注：砍价金额
           bargain_rate: 1, //类型：Number  必有字段  备注：砍价比例
-          reward_amount: "mock" //类型：String  必有字段  备注：下单能获取的金额
+          reward_amount: "" //类型：String  必有字段  备注：下单能获取的金额
         };
       }
     }

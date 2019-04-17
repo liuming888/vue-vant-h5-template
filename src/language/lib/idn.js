@@ -6,6 +6,7 @@ export default {
         test1: 'idn-test',
     },
 
+    forBargain: {},
     purchase: {
         receiver: 'Receiver',
         receivingAddress: 'Receiving address',

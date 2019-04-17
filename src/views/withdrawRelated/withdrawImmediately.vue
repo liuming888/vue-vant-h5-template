@@ -106,6 +106,7 @@
           <span>{{$t('withdrawImmediately.accountName')}}</span>
           <input v-model.trim="withdrawParam.account_name"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             :placeholder="$t('withdrawImmediately.enterTheAmount')"
             type="text">
         </li>
@@ -113,6 +114,7 @@
           <span>{{$t('withdrawImmediately.confirmTheAccount')}}</span>
           <input v-model.trim="withdrawParam.account_no"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             :placeholder="$t('withdrawImmediately.confirmTheAmount')"
             type="text">
         </li>
@@ -122,6 +124,7 @@
           <span>{{$t('withdrawImmediately.phoneNumber')}}</span>
           <input v-model.trim.number="withdrawParam.account_name"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             :placeholder="$t('withdrawImmediately.enterPhoneNumber')"
             type="number">
 
@@ -129,6 +132,7 @@
         <li> <span>{{$t('withdrawImmediately.confirmPhoneNumber')}}</span>
           <input v-model.trim.number="withdrawParam.account_no"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             :placeholder="$t('withdrawImmediately.enterPhoneNumber')"
             type="number"></li>
       </ul>
@@ -196,7 +200,7 @@ export default {
   },
   data() {
     return {
-      info: this.$t('withdrawImmediately.info'),
+      info: this.$t("withdrawImmediately.info"),
       dialogVisible: false,
       username: "",
       password: "",

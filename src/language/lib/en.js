@@ -6,8 +6,31 @@ export default {
         test1: 'en-test',
     },
 
-    forBargain:{
+    isBargainingList:{
         
+    },
+    forBargain: {
+        cheaperNow: 'cheaper now',
+        leaving: 'leaving',
+        heHadCutDown: 'He had cut down',
+        you: 'you',
+        contributed: 'contributed',
+        off: 'off',
+        youEarnYouSave: 'Help friends bargin, you earn you save',
+        giftPackage: 'Newcomer get Rp8888 gift package',
+        iAlsoTakeItForFree: 'I also take it for free',
+        millionPeopleHaveTakenItForFree: '8 million+ people have taken it for free',
+        howToGetAFreebie: 'How to get a freebie',
+        clickOnFavoriteGoods: 'Click on favorite goods',
+        inviteFriendsToBargain: 'Invite friends to bargain',
+        cutIntoFree: 'Cut into free',
+        Sent: 'Sent',
+        getAFreebie: 'Get a freebie',
+        gettingFreebies: 'Getting Freebies',
+        youHelpHim: 'You help him/her cut down',
+        afterYourFriendOrder: 'After your friend order, you will get',
+        rewardsOnYourAccount: 'rewards on your account',
+        alsoTakeItForFree: 'Also take it for free',
     },
     purchase: {
         receiver: 'Receiver',

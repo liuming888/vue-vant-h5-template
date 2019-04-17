@@ -28,7 +28,7 @@
 
     <div class="main-content">
       <div class="spu-box">
-        <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''"
+        <img v-lazy="spu.spu_pics&&spu.spu_pics[0]"
           alt=""
           class="spu-img">
         <div class="spu-info">
@@ -59,18 +59,18 @@
       <!-- 砍价进度 -->
       <div class="bargain-schedule">
         <p v-if="isBargain"
-          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span></p>
+          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>&nbsp; {{$t('forBargain.cheaperNow')}}, {{$t('forBargain.leaving')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span></p>
         <p v-else
           class="title">
-          He had cut down&nbsp;<span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>
-          , you <br> contributed &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>
+          {{$t('forBargain.heHadCutDown')}}&nbsp;<span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>
+          , {{$t('forBargain.you')}} <br> {{$t('forBargain.contributed')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>
         </p>
 
         <div class="schedule">
           <div class="active"
             :style="{'width':bargain_info.bargain_rate+'%'}"></div>
 
-          <div class="highlight">{{bargain_info.bargain_rate||0}}% &nbsp;off</div>
+          <div class="highlight">{{bargain_info.bargain_rate||0}}% &nbsp;{{$t('forBargain.off')}}</div>
 
           <div class="schedule-item ball ball-right">
           </div>
@@ -81,19 +81,19 @@
       <div class="main-btn"
         v-if="isBargain"
         @click="goBargainChop">
-        Help friends bargin, you earn you save
+        {{$t('forBargain.youEarnYouSave')}}
       </div>
 
       <div class="main-btn"
         v-else-if="isNewBargainSucess"
         @click="$router.push('/')">
-        Newcomer get Rp8888 gift package
+        {{$t('forBargain.giftPackage')}}
       </div>
 
       <div class="main-btn"
         v-else-if="isNGo"
         @click="$router.push('/')">
-        I also take it for free
+        {{$t('forBargain.iAlsoTakeItForFree')}}
       </div>
 
       <!-- 好友第一次进入  帮砍团队 -->
@@ -123,7 +123,7 @@
       <!-- 第一次帮砍成功的新用户 世界消息   以及  第n次帮砍的用户帮完成 -->
       <div class="world-news"
         v-else-if="worldTipList.length>0&&(isNewBargainSucess||isNGo)">
-        <p class="world-info-tit">8 million+ people have taken it for free</p>
+        <p class="world-info-tit">{{$t('forBargain.millionPeopleHaveTakenItForFree')}}</p>
 
         <ul class="world-list">
           <li class="world-item"
@@ -166,19 +166,19 @@
       <div class="help-page"
         id="helpCurOk">
         <!-- 帮助 -->
-        <p class="page-title">How to get a freebie</p>
+        <p class="page-title">{{$t('forBargain.howToGetAFreebie')}}</p>
         <ul class="help-list">
           <li class="help-item">
             <img v-lazy="require('./../assets/images/shouji@2x.png')">
-            <p>Click on favorite goods</p>
+            <p>{{$t('forBargain.clickOnFavoriteGoods')}}</p>
           </li>
           <li class="help-item">
             <img v-lazy="require('./../assets/images/yaoqinghaoyou@2x.png')">
-            <p>Invite friends to bargain</p>
+            <p>{{$t('forBargain.inviteFriendsToBargain')}}</p>
           </li>
           <li class="help-item">
             <img v-lazy="require('./../assets/images/liwu@2x.png')">
-            <p>Cut into free</p>
+            <p>{{$t('forBargain.cutIntoFree')}}</p>
           </li>
         </ul>
       </div>
@@ -196,9 +196,9 @@
             class="products-photo">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
-            <span class="money">{{item.deliver_count}} Sent</span>
+            <span class="money">{{item.deliver_count}} {{$t('forBargain.Sent')}}</span>
             <span class="btn"
-              @click="jumpCurBargainPage(item)">Get a freebie</span>
+              @click="jumpCurBargainPage(item)">{{$t('forBargain.getAFreebie')}}</span>
           </div>
         </div>
       </div>
@@ -317,7 +317,7 @@ export default {
     this.init();
   },
   mounted() {
-    document.title = "Getting Freebies";
+    document.title = this.$t('forBargain.gettingFreebies');
 
     this.$gaSend({
       eventCategory: "帮砍页面",

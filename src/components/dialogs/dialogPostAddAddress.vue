@@ -111,10 +111,12 @@
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
           :placeholder="$t('shippingAddress.Name')"
+           @blur.native="mx_resizeWindow"
           class="user-name input-size"
           style="border-right:1px solid #F2F2F2;" />
         <van-field v-model.trim="curAddress.telephone"
           :placeholder="$t('shippingAddress.phone')"
+           @blur.native="mx_resizeWindow"
           class="user-phone input-size"
           type="number" />
       </div>
@@ -134,6 +136,7 @@
 
       <van-field v-model.trim="curAddress.zip"
         :placeholder="$t('shippingAddress.zipCode')"
+         @blur.native="mx_resizeWindow"
         class="input-size zip-code" />
 
       <div class="simpan-btn"

@@ -18,7 +18,14 @@ Vue.prototype.$loadLanguageAsync = loadLanguageAsync;
 loadLanguageAsync('idn');  // 设置为印尼语
 
 Vue.config.productionTip = false;
-
+Vue.mixin({
+    methods: {
+        mx_resizeWindow(){
+            console.warn("表单blur");
+            document.body.scrollTop = 0;
+        }
+    },
+});
 new Vue({
     router,
     store,
