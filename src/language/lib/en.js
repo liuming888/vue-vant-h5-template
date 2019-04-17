@@ -6,8 +6,12 @@ export default {
         test1: 'en-test',
     },
 
-    isBargainingList:{
-        
+    isBargainingList: {
+        toBuy: 'To Buy',
+        completed: 'completed',
+        cut: 'cut',
+        goOn: 'Go On',
+        toBuy: 'To Buy',
     },
     forBargain: {
         cheaperNow: 'cheaper now',

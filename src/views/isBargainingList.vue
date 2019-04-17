@@ -306,8 +306,8 @@
               </div>
               <div class="price-item">
                 <div class="btn"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
-                <p class="completed">completed</p>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.toBuy')}}</div>
+                <p class="completed">{{$t('isBargainingList.completed')}}</p>
               </div>
             </div>
           </div>
@@ -331,22 +331,22 @@
             <count-down :dateDiff="item.bargain_info.expire_ttl"></count-down>
             <div class="price-box go-on-price-box">
               <div class="price-item">
-                <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount||0}}</div>
+                <div class="msg-box">{{$t('isBargainingList.cut')}} Rp {{item.bargain_info.bargain_amount||0}}</div>
                 <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after||0}}</p>
                 <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item go-on-item-btn">
                 <div class="btn go-on"
-                  @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">Go On</div>
+                  @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.goOn')}}</div>
 
                 <div class="btn"  style="position: relative;top: -5px;"
                   v-show="item.bargain_info.can_buy==1"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.toBuy')}}</div>
               </div>
             </div>
 
             <div class="cut-schedule">
-              <span class="cut">cut <span>{{item.bargain_info.bargain_rate}}%</span></span>
+              <span class="cut">{{$t('isBargainingList.cut')}} <span>{{item.bargain_info.bargain_rate}}%</span></span>
               <div class="schedule">
                 <div class="active"
                   :style="{'width': `${item.bargain_info.bargain_rate}%`}"></div>

@@ -6,6 +6,13 @@ export default {
         test1: 'idn-test',
     },
 
+    isBargainingList: {
+        toBuy: 'To Buy',
+        completed: 'completed',
+        cut: 'cut',
+        goOn: 'Go On',
+        toBuy: 'To Buy',
+    },
     forBargain: {},
     purchase: {
         receiver: 'Receiver',
