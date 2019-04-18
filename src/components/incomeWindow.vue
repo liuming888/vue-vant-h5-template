@@ -52,7 +52,6 @@
 }
 </style>
 
-
 <template>
   <div class="incomeWindow-container"
     :class="{cur:showCur}"

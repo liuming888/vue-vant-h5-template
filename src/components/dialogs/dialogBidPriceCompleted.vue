@@ -91,7 +91,6 @@
 }
 </style>
 
-
 <template>
   <div class="dialogBidPriceCompleted-container">
     <van-popup v-model="show"

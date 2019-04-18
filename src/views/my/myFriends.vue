@@ -1,4 +1,20 @@
-<!--  -->
+<style lang='scss' scoped>
+.friendsHeader {
+  line-height: 92px;
+  text-align: center;
+  background: #f5f5f5;
+  ul {
+    display: flex;
+    align-items: center;
+    li {
+      flex: 1;
+      color: #888888;
+      font-size: 24px;
+    }
+  }
+}
+</style>
+
 <template>
   <div class="myFriends-container">
     <div class="friendsHeader">
@@ -50,19 +66,3 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
-.friendsHeader {
-  line-height: 92px;
-  text-align: center;
-  background: #f5f5f5;
-  ul {
-    display: flex;
-    align-items: center;
-    li {
-      flex: 1;
-      color: #888888;
-      font-size: 24px;
-    }
-  }
-}
-</style>

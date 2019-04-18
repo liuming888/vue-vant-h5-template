@@ -56,6 +56,7 @@
     }
   }
 </style>
+
 <template>
   <div class="dialog-default" v-show="dialogVisible">
     <div class="bg" @click.stop="closeDialog()"></div>
