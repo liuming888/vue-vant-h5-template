@@ -193,7 +193,7 @@
           v-for="item in spu_list"
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo">
+            class="products-photo" @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} {{$t('forBargain.Sent')}}</span>

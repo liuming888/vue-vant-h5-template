@@ -20,13 +20,13 @@
       </template>
     </ul>
     <!-- 无订单 -->
-    <div class="without-order"
-      v-if="orderList.length<1">
+    <div v-else
+      class="without-order">
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
       <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
-      <div class="btn">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
+      <div class="btn"  @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
     <!-- 联系我们弹窗 -->
     <div class="alertBox"
@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       orderList: [
+        /* 
         //类型：Array  必有字段  备注：无
         {
           //类型：Object  必有字段  备注：无
@@ -67,6 +68,7 @@ export default {
           expire_time: 1, //类型：Number  必有字段  备注：过期时间，毫秒
           order_status: "" //类型：String  必有字段  备注：订单状态（1：待支付 2：已支付 3：已发货 4：订单超时失效）
         }
+       */
       ],
       orderPageDat: {
         page_num: 1,

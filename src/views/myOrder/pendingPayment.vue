@@ -11,12 +11,12 @@
     </ul>
     <!-- 无订单 -->
     <div class="without-order"
-      v-if="false">
-      <img src="@/assets/images/order-none.png"
+      v-else>
+      <img src="~@/assets/images/order-none.png"
         alt
         class="none-file-icon">
       <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
-      <div class="btn">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
+      <div class="btn"   @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
   </div>
 </template>
