@@ -102,7 +102,21 @@
         v-if="!$route.query.bargainId">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
-        <img v-lazy="spu&&spu.spu_pics[0]">
+        <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
+
+        <van-swipe :autoplay="spuImgPlayTime"
+          :show-indicators="false"
+          indicator-color="#D30C05"
+          class="product-item">
+          <template>
+            <template v-for="(item,index) of spu.spu_pics">
+              <van-swipe-item :key="index"
+                v-if="!isLoad&&index==0||isLoad">
+                <img v-lazy="item">
+              </van-swipe-item>
+            </template>
+          </template>
+        </van-swipe>
       </div>
 
       <!-- 推荐商品 -->
@@ -115,7 +129,8 @@
           v-for="item in spu_list"
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo">
+            class="products-photo"
+            @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
@@ -141,7 +156,7 @@
 </template>
 
 <script>
-import { Dialog } from "vant";
+import { Dialog, Swipe, SwipeItem } from "vant";
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -159,7 +174,10 @@ export default {
       require(["@/components/dialogs/dialogPotongSendiri.vue"], resolve), // 自砍成功弹窗
     dialogShareEarningEntry: resolve =>
       require(["@/components/dialogs/dialogShareEarningEntry.vue"], resolve), // 分享赚链接首次进入弹窗
-    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve), // 返回首页按钮
+
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   data() {
     return {
@@ -174,6 +192,10 @@ export default {
           show: false
         }
       },
+
+      spuImgPlayTime: 1000000, // banner自动播放时间
+      isLoad: false, // 页面是否已经加载的差不多了
+
       chop_info: {},
 
       shareInfo: {},
@@ -232,6 +254,11 @@ export default {
     }
 
     document.title = "Getting Freebies";
+
+    setTimeout(() => {
+      this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
+      this.isLoad = true;
+    }, 1000);
   },
   methods: {
     async init() {
@@ -268,7 +295,7 @@ export default {
         }
       }
 
-      this.initSpuInfo();  // 必须有spu_id
+      this.initSpuInfo(); // 必须有spu_id
       this.initSpuList();
     },
     async initShareInfo(relationId) {
@@ -451,8 +478,11 @@ export default {
      */
     async goChopShare() {
       if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        const {pathname,search}=window.location;
-        this.$store.commit("setLoginJumpUrl", pathname+ search + '&showShareEarningEntry=no');
+        const { pathname, search } = window.location;
+        this.$store.commit(
+          "setLoginJumpUrl",
+          pathname + search + "&showShareEarningEntry=no"
+        );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -492,7 +522,7 @@ export default {
         eventAction: "点击",
         eventLabel: this.spu.title.substr(0, 10)
       });
-      if (!this.isLogin && process.env.VUE_APP_ENV != "development") {
+      if (!this.isLogin /*  && process.env.VUE_APP_ENV != "development" */) {
         const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止有登陆后有问题
         // this.$store.commit(
@@ -561,11 +591,15 @@ export default {
      * @description: 时间定时器
      */
     refreshTime() {
-      let result = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
+      let result = this.$util.expiration(
+        this.bargain_info.expire_ttl || this.spu.ttl
+      );
       if (!result) return;
       this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expirationDat = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
+        this.expirationDat = this.$util.expiration(
+          this.bargain_info.expire_ttl || this.spu.ttl
+        );
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
