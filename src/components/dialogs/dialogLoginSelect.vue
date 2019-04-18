@@ -13,7 +13,8 @@
 
   .dialog-content {
     width: 610px;
-    height: 600px;
+    // height: 600px;
+    height: 780px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;
@@ -30,9 +31,9 @@
       top: -130px;
     }
 
-    &.show-fb {
-      height: 780px;
-    }
+    // &.show-fb {
+    //   height: 780px;
+    // }
 
     .login-tit {
       text-align: center;
@@ -186,14 +187,17 @@
       align-items: center;
 
       .login-item {
-        flex: 1;
-        margin-right: 20px;
+        margin-right: 65px;
         text-align: center;
         font-size: 20px;
         color: #323232;
 
+        &:nth-last-of-type(1) {
+          margin-right: 0;
+        }
+
         img {
-          width: 80px;
+          width: 66px;
           height: auto;
           border-radius: 50%;
         }
@@ -208,7 +212,6 @@
     @click="close">
 
     <div class="dialog-content"
-      :class="{'show-fb':showFB}"
       @click.stop>
 
       <img src="~@/assets/images/login-top.png"
@@ -260,20 +263,19 @@
         Sign in / Register
       </div>
 
-      <template v-if="showFB">
-        <p class="other-log">Other ways to log in</p>
-        <div class="login-types">
-          <div class="login-item"
-            @click="loginFB">
-            <img v-lazy="require('@/assets/images/facbookIcon.png')">
-          </div>
-
-          <div class="login-item"
-            id="customBtn">
-            goole login
-          </div>
+      <p class="other-log">Other ways to log in</p>
+      <div class="login-types">
+        <div class="login-item"
+          id="customBtn">
+          <img src="~@/assets/images/gooleIcon.png">
         </div>
-      </template>
+
+        <div v-if="showFB"
+          class="login-item"
+          @click="loginFB">
+          <img src="~@/assets/images/facbookIcon.png">
+        </div>
+      </div>
     </div>
 
   </div>
