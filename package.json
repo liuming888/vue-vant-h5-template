@@ -10,10 +10,12 @@
     "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=2408818452475633 vue-cli-service build --modern --dest new_dist",
+    "build:allprod":"npm run build:prod && npm run build:newprod",
     "git:dev":"git add -A && git commit -am 打个dev包 && git push",
     "git:test":"git add -A && git commit -am 打个test包 && git push",
-    "git:prod":"git add -A && git commit -am 打个旧域名正式包 && git push",
+    "git:oldprod":"git add -A && git commit -am 打个旧域名正式包 && git push",
     "git:newprod":"git add -A && git commit -am 打个新域名正式包 && git push",
+    "git:allprod":"git add -A && git commit -am 打个最新正式包 && git push",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

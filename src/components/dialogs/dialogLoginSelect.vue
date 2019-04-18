@@ -20,24 +20,24 @@
     box-sizing: border-box;
     position: relative;
 
-    .login-top-img{
+    .login-top-img {
       width: 563px;
       height: 210px;
       position: absolute;
-      left:0;
-      right:0;
+      left: 0;
+      right: 0;
       margin: 0 auto;
-      top:-130px;
+      top: -130px;
     }
 
     &.show-fb {
       height: 780px;
     }
 
-    .login-tit{
+    .login-tit {
       text-align: center;
-      color:#fff;
-      font-size:30px;
+      color: #fff;
+      font-size: 30px;
       margin-bottom: 40px;
     }
 
@@ -166,7 +166,7 @@
         margin: auto 0;
         width: 112px;
         height: 1px;
-        background:  #F2F2F2 ;
+        background: #f2f2f2;
       }
 
       &::after {
@@ -211,9 +211,10 @@
       :class="{'show-fb':showFB}"
       @click.stop>
 
-       <img src="~@/assets/images/login-top.png" class="login-top-img">
+      <img src="~@/assets/images/login-top.png"
+        class="login-top-img">
 
-        <h3 class="login-tit">Sign in can get Rp 5000 phone bill !</h3>
+      <h3 class="login-tit">Sign in can get Rp 5000 phone bill !</h3>
 
       <div class="input-big-box">
         <div class="phone-box input-box">
@@ -225,6 +226,7 @@
             class="input code-input"
             placeholder="Enter Mobile Number"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             v-model="phone">
 
           <span class="send"
@@ -241,6 +243,7 @@
           <input type="text"
             class="input"
             onfocus="this.select();"
+            @blur="mx_resizeWindow"
             placeholder="Enter Code SMS"
             v-model="authCode">
 
@@ -374,7 +377,8 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message: "Please be patient，Your SMS code will be sent in 120 second!",
+            message:
+              "Please be patient，Your SMS code will be sent in 120 second!",
             duration: 2000
           });
           this.authCode = result.data;

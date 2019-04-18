@@ -105,6 +105,7 @@ const curRouter = new VueRouter({
 
 // 全局前置守卫
 curRouter.beforeEach((to, from, next) => {
+    Vue.prototype.$curStore.commit('setLoaddingNum', 1);
     let userStr = localStorage.getItem('userInfo');
     // 第一次进页面时，得先刷新token接口调用了后才行
     if (process.env.VUE_APP_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
@@ -126,13 +127,15 @@ curRouter.beforeEach((to, from, next) => {
 // const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
 // 全局后置钩子
 curRouter.afterEach(current => {
+     Vue.prototype.$curStore.commit('setLoaddingNum', -1);
     // const path = current.path;
     // if (routerShows.includes(path)) {
+        const { pathname, search } = window.location;
         gaSend({
             eventCategory: current.name,
             eventAction: '页面展示',
             hitType: 'pageview',
-            page: window.location.pathname,
+            page: pathname + search,
         });
     // }
     // quicklink({

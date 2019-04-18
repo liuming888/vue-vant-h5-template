@@ -36,9 +36,9 @@
           <p class="spu-tit">{{spu.title}}</p>
 
           <div class="time-and-sum">
-            <count-down :dateDiff="spu.expire_ttl"
+            <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
               class="spu-count-down"
-              v-if="spu.expire_ttl"></count-down>
+              v-if="bargain_info.expire_ttl||spu.ttl"></count-down>
 
             <span class="spu-num">{{spu.deliver_count || 1}} Sent</span>
           </div>
@@ -193,7 +193,7 @@
           v-for="item in spu_list"
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo">
+            class="products-photo" @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
@@ -556,11 +556,11 @@ export default {
      * @description: 时间定时器
      */
     refreshTime() {
-      let result = this.$util.expiration(this.spu.expire_ttl);
+      let result = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
       if (!result) return;
       this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expirationDat = this.$util.expiration(this.spu.expire_ttl);
+        this.expirationDat = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);

@@ -216,7 +216,7 @@
 
         <van-swipe :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
-          indicator-color="white"
+          indicator-color="#D30C05"
           class="home-banner"
           @click.native="$router.push('/my/Tutorial')">
           <template v-if="bannerList.length>0">

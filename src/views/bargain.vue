@@ -20,7 +20,6 @@
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
-              <!-- <count-down :dateDiff="spu.expire_ttl"></count-down> -->
               <div class="price-box">
                 <div class="price-box-item">
                   <p class="p-t-3">{{spu.deliver_count || 1}} Sent</p>
@@ -53,7 +52,7 @@
               </div>
             </div>
           </div>
-          <count-down :dateDiff="spu.expire_ttl"
+          <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
             class="spu-count-down"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
@@ -103,7 +102,21 @@
         v-if="!$route.query.bargainId">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
-        <img v-lazy="spu&&spu.spu_pics[0]">
+        <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
+
+        <van-swipe :autoplay="spuImgPlayTime"
+          :show-indicators="false"
+          indicator-color="#D30C05"
+          class="product-item">
+          <template>
+            <template v-for="(item,index) of spu.spu_pics">
+              <van-swipe-item :key="index"
+                v-if="!isLoad&&index==0||isLoad">
+                <img v-lazy="item">
+              </van-swipe-item>
+            </template>
+          </template>
+        </van-swipe>
       </div>
 
       <!-- 推荐商品 -->
@@ -116,7 +129,8 @@
           v-for="item in spu_list"
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo">
+            class="products-photo"
+            @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} Sent</span>
@@ -142,7 +156,7 @@
 </template>
 
 <script>
-import { Dialog } from "vant";
+import { Dialog, Swipe, SwipeItem } from "vant";
 import { getInfo, getBargainSpus } from "@/server/goods.js";
 import { shareBargain, shareInfo } from "@/server/share.js";
 import {
@@ -160,7 +174,10 @@ export default {
       require(["@/components/dialogs/dialogPotongSendiri.vue"], resolve), // 自砍成功弹窗
     dialogShareEarningEntry: resolve =>
       require(["@/components/dialogs/dialogShareEarningEntry.vue"], resolve), // 分享赚链接首次进入弹窗
-    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve), // 返回首页按钮
+
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   data() {
     return {
@@ -175,6 +192,10 @@ export default {
           show: false
         }
       },
+
+      spuImgPlayTime: 1000000, // banner自动播放时间
+      isLoad: false, // 页面是否已经加载的差不多了
+
       chop_info: {},
 
       shareInfo: {},
@@ -233,10 +254,14 @@ export default {
     }
 
     document.title = "Getting Freebies";
+
+    setTimeout(() => {
+      this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
+      this.isLoad = true;
+    }, 1000);
   },
   methods: {
     async init() {
-      // console.log(this.spu);
       const {
         relationId,
         showShareEarningEntry,
@@ -258,7 +283,7 @@ export default {
         await this.initShareInfo(relationId);
       } else {
         if (!bargainId && this.isLogin) {
-          // 已登录用户系统自砍
+          // 已登录用户系统自砍（自砍成功 和  之前已经砍过了，返回之前的砍价bargain_id等信息）
           await this.goBargainChop({
             spu_id: spuId
           });
@@ -270,7 +295,7 @@ export default {
         }
       }
 
-      this.initSpuInfo();
+      this.initSpuInfo(); // 必须有spu_id
       this.initSpuList();
     },
     async initShareInfo(relationId) {
@@ -366,7 +391,7 @@ export default {
         this.spu_list = result.data.spu_list;
 
         // if (page_num == 1) {
-        // this.$store.commit("setGoodsList", this.spu_list);  // 不缓存，防止没登陆的用户到首页展示有问题
+        // this.$store.commit("setGoodsList", this.spu_list);  // 注释掉不缓存，防止没登陆的用户到首页展示有问题
         // } else {
         //   let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
         //   this.$store.commit("setGoodsList", arr.push(result.data.spu_list));
@@ -391,32 +416,31 @@ export default {
       });
 
       if (result && result.data && result.data.chop_info) {
-        const chop_info = result.data.chop_info;
-        this.chop_info = chop_info;
-        console.log("chop_info: ", chop_info);
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            bargainId: chop_info.bargain_id
-          }
-        });
+        this.chopSucess(result.data.chop_info, spu_id);
+        // let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+        // arr.forEach(item => {
+        //   if (item.spu_id == spu_id) {
+        //     item.isBargain = true;
+        //   }
+        // });
+        // this.$store.commit("setGoodsList", arr);
 
-        let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
-        arr.forEach(item => {
-          if (item.spu_id == spu_id) {
-            item.isBargain = true;
-          }
-        });
-        this.$store.commit("setGoodsList", arr);
-        // if (this.$route.query.relationId) {
-        //   // 分享赚自己点击按钮自砍成功
-        //   this.isShareEarningEntry = false;
-        // } else {
-        // 系统自砍成功
-        this.dialogs.potongSendiri.show = true;
-        // }
+        if (result.code == 0) {
+          // 砍价成功
+          this.dialogs.potongSendiri.show = true;
+          gtag("event", "conversion", {
+            send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
+          });
+          console.log("砍价成功！ spu_id:", spu_id);
+        } else if (result.code == 1000) {
+          // 该商品之前已经砍过了
+          console.warn("该商品已经砍价了！ spu_id:", spu_id);
+        }
         return Promise.resolve();
       } else if (result.code == -1) {
+        // 该商品已经过期或者别的
+
+        // 强制返回首页去
         Dialog({
           message:
             "Please return to the homepage and re-select the product to enter !",
@@ -425,15 +449,40 @@ export default {
           this.$router.replace("/");
         });
 
-        console.log("11111111111111111111111111111111111111111已经砍价了！");
+        console.warn("该商品已经过期或者别的！ spu_id:", spu_id);
       }
+    },
+    /**
+     * @description:  砍价接口调用成功后的系列处理
+     */
+    chopSucess(chop_info, spu_id) {
+      this.chop_info = chop_info;
+      console.log("chop_info: ", chop_info);
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          bargainId: chop_info.bargain_id
+        }
+      });
+
+      let arr = JSON.parse(JSON.stringify(this.$store.state.goodsList));
+      arr.forEach(item => {
+        if (item.spu_id == spu_id) {
+          item.isBargain = true;
+        }
+      });
+      this.$store.commit("setGoodsList", arr);
     },
     /**
      * @description: 分享赚自砍
      */
     async goChopShare() {
       if (!this.isLogin && process.env.VUE_APP_ENV !== "development") {
-        this.$store.commit("setLoginJumpUrl", "");
+        const { pathname, search } = window.location;
+        this.$store.commit(
+          "setLoginJumpUrl",
+          pathname + search + "&showShareEarningEntry=no"
+        );
         this.$store.commit("setLoginSelectShow", true);
         return;
       }
@@ -460,6 +509,10 @@ export default {
         this.initHelpBargainList();
         // 分享赚自己点击按钮自砍
         this.isShareEarningEntry = false;
+
+        gtag("event", "conversion", {
+          send_to: "AW-768708825/ELBKCLuq85gBENmhxu4C"
+        });
       }
     },
     async openSharingFriendsDialog() {
@@ -469,7 +522,7 @@ export default {
         eventAction: "点击",
         eventLabel: this.spu.title.substr(0, 10)
       });
-      if (!this.isLogin && process.env.VUE_APP_ENV != "development") {
+      if (!this.isLogin /*  && process.env.VUE_APP_ENV != "development" */) {
         const { pathname, search } = window.location;
         this.$store.commit("setLoginJumpUrl", ""); // 不跳，防止有登陆后有问题
         // this.$store.commit(
@@ -538,11 +591,15 @@ export default {
      * @description: 时间定时器
      */
     refreshTime() {
-      let result = this.$util.expiration(this.spu.expire_ttl);
+      let result = this.$util.expiration(
+        this.bargain_info.expire_ttl || this.spu.ttl
+      );
       if (!result) return;
       this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expirationDat = this.$util.expiration(this.spu.expire_ttl);
+        this.expirationDat = this.$util.expiration(
+          this.bargain_info.expire_ttl || this.spu.ttl
+        );
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
@@ -556,9 +613,6 @@ export default {
       this.openSharingFriendsDialog();
     }
     next();
-    // if(bargainType=='another'){
-    //   this.init();
-    // }
   },
 
   beforeRouteEnter(to, from, next) {
@@ -569,21 +623,5 @@ export default {
       }
     });
   }
-  // watch: {
-  //   spu: {
-  //     handler() {
-  //       if (this.spu.hasOwnProperty("title")) {
-  //         // 统计
-  //         this.$gaSend({
-  //           eventCategory: "砍价详情页",
-  //           eventAction: "页面展示",
-  //           eventLabel: this.spu.title.substr(0, 10)
-  //         });
-  //       }
-  //     },
-  //     immediate: true,
-  //     deep: true
-  //   }
-  // }
 };
 </script>

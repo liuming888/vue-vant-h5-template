@@ -11,12 +11,12 @@
     </ul>
     <!-- 无订单 -->
     <div class="without-order"
-      v-if="false">
+      v-else>
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
       <p>Tidak ada pesanan terkait</p>
-      <div class="btn">Buka halaman beranda dan lihat</div>
+      <div class="btn" @click="$router.push('/');">Buka halaman beranda dan lihat</div>
     </div>
 
      <!-- 联系我们弹窗 -->
