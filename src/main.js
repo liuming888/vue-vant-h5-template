@@ -8,6 +8,7 @@ import { Toast, Popup, Lazyload } from 'vant';
 Vue.use(Toast);
 Vue.use(Popup);
 Vue.use(Lazyload);
+loadLanguageAsync('idn'); // 设置为印尼语
 
 Vue.prototype.$curStore = store;
 Vue.prototype.$curRouter = router;
@@ -15,18 +16,17 @@ Vue.prototype.$util = $util;
 Vue.prototype.$gaSend = $util.gaSend;
 Vue.prototype.$loadLanguageAsync = loadLanguageAsync;
 
-loadLanguageAsync('idn');  // 设置为印尼语
-
 Vue.config.productionTip = false;
 Vue.mixin({
     methods: {
-        mx_resizeWindow(){
-            console.warn("表单blur");
+        mx_resizeWindow() {
+            console.warn('表单blur');
             document.body.scrollTop = 0;
-        }
+        },
     },
 });
-new Vue({
+
+window.curVueObj=new Vue({
     router,
     store,
     i18n,

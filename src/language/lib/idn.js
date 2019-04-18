@@ -1,6 +1,9 @@
 export default {
-    message: {
-        hello: 'idn hello world',
+    common: {
+        hello: 'en hello world',
+        pleaseLoginAgain: 'please login again !',
+        theRequestFailed: 'The request failed. Please try again later!',
+        youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
     },
 
     /************************ 组件  start *****************************************************/
@@ -24,6 +27,30 @@ export default {
     commodityItem: {
         cashBack: 'Uang kembali',
         getAFreebie: 'Dapatkan freebie',
+    },
+
+    dialogSharingMakes: {
+        shareToYourFriends: 'Bagikan pada teman-teman.',
+        youWillGainBonusIfYourFriendsBuyIt: 'anda akan mendapatkan bonus jika teman membeli itu.',
+    },
+    dialogBidPriceCompleted: {
+        congratulationsOnCompletingTheBargain: 'Selamat telah menyelesaikan penawaran!',
+        goBuy: 'Pergi dan beli',
+        afterThePurchase: 'Setelah selesai pembelian Anda dapat melihat detail di [MY]-[MY Oder].',
+    },
+    dialogLoginSelect: {},
+    dialogNewGiftBag: {
+        newcomerGiftBag: 'Tas hadiah pendatang baru',
+        receive: 'Menerima',
+        youHaveSuccessfullyReceivedANewGiftPackage: 'You have successfully received a new gift package',
+    },
+    dialogWaitPayment: {
+        waitingForBuyerPayment: 'Anda yakin ingin membatalkan pembayaran ini?',
+        continue: 'Lanjutkan',
+        complete: 'Lengkap',
+    },
+    incomeWindow: {
+        income: 'Income',
     },
     /************************ 组件  end *****************************************************/
 
@@ -150,7 +177,7 @@ export default {
     /**
      * @description:  待翻译的start **********************************************************************************************
      */
-    Tutorial: { 
+    Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: How long can I receive the goods?',
         da1: 'A: 3-15 Days.',
         whenCanIWithdrawCash: 'Q: When can I withdraw cash？',

@@ -170,7 +170,7 @@ export default {
   name: "commodityItem",
   components: {
     dialogSharingMakes: resolve =>
-      require(["./dialogSharingMakes.vue"], resolve), // 分享赚弹起浮窗
+      require(["./dialogSharingMakes.vue"], resolve), // 点击分享赚弹起浮窗
 
     // ...vantCom,
     [Swipe.name]: Swipe,

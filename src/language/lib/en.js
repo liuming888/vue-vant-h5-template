@@ -1,6 +1,11 @@
 export default {
-    message: {
+    common: {
         hello: 'en hello world',
+        pleaseLoginAgain: 'please login again !',
+        theRequestFailed: 'The request failed. Please try again later!',
+        youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
+        successfulCopy: 'Successful copy',
+        replicationFailed: 'Replication failed',
     },
 
     /************************ 组件  start *****************************************************/
@@ -25,6 +30,39 @@ export default {
         cashBack: 'Cash Back',
         getAFreebie: 'Get a freebie',
     },
+
+    dialogSharingMakes: {
+        shareToYourFriends: 'Share to your friends.',
+        youWillGainBonusIfYourFriendsBuyIt: 'You will gain bonus if your friends buy it.',
+    },
+    dialogBidPriceCompleted: {
+        congratulationsOnCompletingTheBargain: 'Congratulations on completing the bargain!',
+        goBuy: 'Go buy',
+        afterThePurchase: 'After the purchase is completed, you can view the details in [My] - [My order].',
+    },
+    dialogLoginSelect: {
+        signInCanGetRp_5000PhoneBill: 'Sign in can get Rp 5000 phone bill !',
+        Send: 'Send',
+        signInRegister: 'Sign in / Register',
+        otherWaysToLogIn: 'Other ways to log in',
+        numberCannotBeEmpty: 'Number cannot be empty !',
+        verificationCodeMustBeFilled: 'verification code must be filled !',
+        yourSmsCodeWillBeSent: 'Please be patient，Your SMS code will be sent in 120 second!',
+    },
+    dialogNewGiftBag: {
+        newcomerGiftBag: 'Newcomer Gift Bag',
+        receive: 'Receive',
+        youHaveSuccessfullyReceivedANewGiftPackage: 'You have successfully received a new gift package',
+    },
+    dialogWaitPayment: {
+        waitingForBuyerPayment: 'Waiting for buyer payment~',
+        continue: 'Continue',
+        complete: 'Complete',
+    },
+    incomeWindow: {
+        income: 'Income',
+    },
+
     /************************ 组件  end *****************************************************/
 
     /************************ 页面  start *****************************************************/

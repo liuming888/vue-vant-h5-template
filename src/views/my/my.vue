@@ -387,7 +387,7 @@ export default {
       };
       this.hero_tips = [];
       this.$toast({
-        message: "please login again !",
+        message: this.$t('common.pleaseLoginAgain'),
         duration: 1000
       });
 

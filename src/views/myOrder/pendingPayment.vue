@@ -15,8 +15,8 @@
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
-      <p>Tidak ada pesanan terkait</p>
-      <div class="btn">Buka halaman beranda dan lihat</div>
+      <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
+      <div class="btn">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
   </div>
 </template>

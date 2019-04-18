@@ -35,21 +35,12 @@ instance.defaults.baseURL = url;
 instance.defaults.timeout = 6000;
 instance.defaults.withCredentials = true;
 
-// Vue.prototype.$loaddingNum = 0;
-
 const curCode = process.env.VUE_APP_ENV == 'mock' ? 1 : 0; // 当前代表成功的code (mock 1为成功)
 console.log('curCode: ', curCode);
 
 // 请求拦截
 instance.interceptors.request.use(
     config => {
-        // Vue.prototype.$loaddingNum++;
-        // Vue.prototype.$toast.loading({
-        //     mask: true, // 是否显示背景蒙层
-        //     duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
-        //     forbidClick: true, // 是否禁止背景点击
-        // });
-
         Vue.prototype.$curStore.commit('setLoaddingNum',1);
         if (!Vue.prototype.$mainAppLoad && document.getElementById('mainApp').style.display != 'none') {
             document.getElementById('mainApp').style.display = 'none';
@@ -87,10 +78,15 @@ instance.interceptors.response.use(
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
-                Toast({
-                    message: 'please login again !',
-                    duration: 1000,
-                });
+                try {
+                      Toast({
+                          message: window.curVueObj.$t('common.pleaseLoginAgain'),
+                        //   duration: 1000,
+                      });
+                } catch (error) {
+                    console.warn('请求提示这里出错1', error);
+                }
+              
                 Vue.prototype.$curStore.commit('setUserInfo', {});
                 axios.defaults.headers.common['User-Id'] = '';
                 axios.defaults.headers.common['Access-Token'] = '';
@@ -110,7 +106,14 @@ instance.interceptors.response.use(
                     return error;
                 }
             } else {
-                Toast('The request failed. Please try again later!');
+                 try {
+                     Toast({
+                         message: window.curVueObj.$t('common.theRequestFailed'),
+                        //  duration: 1000,
+                     });
+                 } catch (error) {
+                     console.warn('请求提示这里出错2', error);
+                 }
             }
             console.error('封装的接口异常处理,', error);
             return false;

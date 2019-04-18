@@ -214,7 +214,7 @@
       <img src="~@/assets/images/login-top.png"
         class="login-top-img">
 
-      <h3 class="login-tit">Sign in can get Rp 5000 phone bill !</h3>
+      <h3 class="login-tit">{{$t('dialogLoginSelect.signInCanGetRp_5000PhoneBill')}}</h3>
 
       <div class="input-big-box">
         <div class="phone-box input-box">
@@ -231,7 +231,7 @@
 
           <span class="send"
             v-if="!initCodeTime"
-            @click.stop="getCode">Send</span>
+            @click.stop="getCode">{{$t('dialogLoginSelect.Send')}}</span>
           <span class="send"
             v-else>{{initCodeTime}} s</span>
         </div>
@@ -257,11 +257,11 @@
 
       <div class="login-btn"
         @click.stop="loginTel">
-        Sign in / Register
+        {{$t('dialogLoginSelect.signInRegister')}}
       </div>
 
       <template v-if="showFB">
-        <p class="other-log">Other ways to log in</p>
+        <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
         <div class="login-types">
           <div class="login-item"
             @click="loginFB">
@@ -324,7 +324,7 @@ export default {
     },
     async getCode() {
       if (!this.phone) {
-        this.$toast("Number cannot be empty !");
+        this.$toast(this.$t('dialogLoginSelect.numberCannotBeEmpty'));
         return;
       }
       let params = {
@@ -337,8 +337,7 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message:
-              "Please be patient，Your SMS code will be sent in 120 second!",
+            message:this.$t('dialogLoginSelect.yourSmsCodeWillBeSent'),
             duration: 2000
           });
           this.authCode = result.data;
@@ -404,11 +403,11 @@ export default {
      */
     async loginTel() {
       if (!this.phone) {
-        this.$toast("Number cannot be empty !");
+        this.$toast(this.$t('dialogLoginSelect.numberCannotBeEmpty'));
         return;
       }
       if (!this.authCode) {
-        this.$toast("verification code must be filled !");
+        this.$toast(this.$t('dialogLoginSelect.verificationCodeMustBeFilled'));
         return;
       }
 

@@ -76,12 +76,12 @@
     <div class="dialog-content"
       v-lazy:background-image="require('@/assets/images/xinrenlibao.png')">
 
-      <div class="tit">Newcomer Gift Bag</div>
+      <div class="tit">{{$t('dialogNewGiftBag.newcomerGiftBag')}}</div>
 
       <div class="num"><span class="dw">Rp</span>{{reward_amount}}</div>
 
       <div class="receive"
-        @click="goReceive">Receive</div>
+        @click="goReceive">$t('dialogNewGiftBag.receive')</div>
 
       <img src="@/assets/images/guanbi@2x.png"
         class="close-img"
@@ -97,7 +97,7 @@
 import { Dialog } from "vant";
 import { getMyNewRp } from "@/server/user.js";
 export default {
-  name: "dialogLoginSelect",
+  name: "dialogNewGiftBag",  // 新人礼包弹窗
   data() {
     return {
       reward_amount: 1 //类型：Number  必有字段  备注：登录奖励金额
@@ -120,7 +120,7 @@ export default {
         //   message: "You have successfully received a new gift package",
         //   confirmButtonText: "ok"
         // });
-        this.$toast("You have successfully received a new gift package");
+        this.$toast(this.$t('dialogNewGiftBag.youHaveSuccessfullyReceivedANewGiftPackage'));
         window.localStorage.removeItem("newUserInfo");  // 点击领取后不弹了
         this.$store.commit("setNewGiftBagShow", false);
       }

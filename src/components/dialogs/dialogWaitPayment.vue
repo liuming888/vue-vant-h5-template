@@ -74,13 +74,13 @@
         @click="$emit('update:dialogVisible', { show: false })">
 
       <div class="content">
-        <span>Waiting for buyer payment~</span>
+        <span>{{$t('dialogWaitPayment.waitingForBuyerPayment')}}</span>
       </div>
       <div class="footer">
         <div class="cancel"
-          @click="goContinue">Continue</div>
+          @click="goContinue">{{$t('dialogWaitPayment.continue')}}</div>
         <div class="ok"
-          @click="completeOk">Complete</div>
+          @click="completeOk">{{$t('dialogWaitPayment.complete')}}</div>
       </div>
     </div>
   </div>
@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  name: "dialogWaitPayment",
+  name: "dialogWaitPayment", // 等待用户付款弹窗
   props: {
     dialogVisible: {
       type: Object,
