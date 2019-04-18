@@ -112,7 +112,6 @@
 }
 </style>
 
-
 <template>
   <div class="commodityItem-container">
     <div class="home-goods-item">

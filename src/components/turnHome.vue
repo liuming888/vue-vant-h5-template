@@ -1,8 +1,3 @@
-<template>
-  <div class="turn-home"
-    @click="$router.push('/')"></div>
-</template>
-
 <style scoped>
 .turn-home {
   position: fixed;
@@ -15,4 +10,11 @@
   z-index: 99;
 }
 </style>
+
+<template>
+  <div class="turn-home"
+    @click="$router.push('/')"></div>
+</template>
+
+
 

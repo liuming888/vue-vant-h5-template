@@ -28,7 +28,6 @@
 }
 </style>
 
-
 <template>
   <div class="count-down">
     <span class="dec">End in</span>

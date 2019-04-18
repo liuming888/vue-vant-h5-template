@@ -64,6 +64,7 @@
   }
 }
 </style>
+
 <template>
   <div class="dialogWaitPayment-container"
     v-show="dialogVisible.show">
