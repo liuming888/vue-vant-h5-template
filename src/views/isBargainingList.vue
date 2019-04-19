@@ -241,7 +241,7 @@
     flex:1;
     text-align: left;
     color: #888;
-    font-size: 18px;
+    font-size: 24px;
     > span {
       font-size: 24px;
       margin-right: 10px;
@@ -252,7 +252,7 @@
     display: inline-block;
     margin-left: 10px;
     position: relative;
-    width: 292px;
+    width: 262px;
     height: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(252, 123, 119, 1);
