@@ -113,7 +113,7 @@ export default {
         howToGetAFreebie: 'How to get a freebie',
         clickOnFavoriteGoods: 'Click on favorite goods',
         inviteFriendsToBargain: 'Invite friends to bargain',
-        cutIntoFree: 'Cut into free',
+        cutIntoFree: 'Bargain to free successfully',
         Sent: 'Sent',
         getAFreebie: 'Get a freebie',
         gettingFreebies: 'Getting Freebies',
