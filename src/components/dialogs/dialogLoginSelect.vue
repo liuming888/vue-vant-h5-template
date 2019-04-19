@@ -328,52 +328,7 @@ export default {
       this.authCode = "";
       this.initCodeTime = 0;
     },
-    startApp() {
-      var vm = this;
-      vm.auth2 = null;
-      gapi.load("auth2", function() {
-        // Retrieve the singleton for the GoogleAuth library and set up the client.
-        vm.auth2 = gapi.auth2.init({
-          client_id:
-            "1003879582574-d1k8jo3b1m55m7pfhvqlvfug5gqk3omg.apps.googleusercontent.com", //客户端ID
-          cookiepolicy: "single_host_origin",
-          scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
-        });
-        vm.attachSignin(document.getElementById("customBtn"));
-      });
-    },
-    attachSignin(element) {
-      let vm = this;
-      vm.auth2.attachClickHandler(
-        element,
-        {},
-        function(googleUser) {
-          const { pathname, search } = window.location;
-          vm.$gaSend({
-            eventCategory: "google登陆按钮",
-            eventAction: "点击",
-            eventLabel: pathname + search
-          });
-          console.log("googleUser",googleUser);
-          
-          var profile = vm.auth2.currentUser.get().getBasicProfile();
-          console.log('profile: ', profile);
-          console.log("ID: " + profile.getId());
-          console.log("Full Name: " + profile.getName());
-          console.log("Given Name: " + profile.getGivenName());
-          console.log("Family Name: " + profile.getFamilyName());
-          console.log("Image URL: " + profile.getImageUrl());
-          console.log("Email: " + profile.getEmail());
-          // let param={
-          //   tp_id:profile.getId(),
-            
-          // }
-        },
-        function(error) {
-          console.log(JSON.stringify(error, undefined, 2));
-        }
-      );
-    },
+
     close() {
       this.$store.commit("setLoginSelectShow", false);
     },
@@ -489,6 +444,82 @@ export default {
       if (result && result.data) {
         this.loginApiEnd(result.data);
       }
+    },
+    /**
+     * @description: 初始化goole登录
+     */
+    startApp() {
+      var vm = this;
+      vm.auth2 = null;
+      gapi.load("auth2", function() {
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        vm.auth2 = gapi.auth2.init({
+          client_id:
+            "1003879582574-d1k8jo3b1m55m7pfhvqlvfug5gqk3omg.apps.googleusercontent.com", //客户端ID
+          cookiepolicy: "single_host_origin",
+          scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
+        });
+        vm.attachSignin(document.getElementById("customBtn"));
+      });
+    },
+    /**
+     * @description: 监听点击goole后的
+     */
+    attachSignin(element) {
+      let vm = this;
+      vm.auth2.attachClickHandler(
+        element,
+        {},
+        async function(googleUser) {
+          const { pathname, search } = window.location;
+          vm.$gaSend({
+            eventCategory: "google登陆按钮",
+            eventAction: "点击",
+            eventLabel: pathname + search
+          });
+          console.warn("googleUser", googleUser);
+
+          // var profile = vm.auth2.currentUser.get().getBasicProfile();
+          // console.log('profile: ', profile);
+          // console.log("ID: " + profile.getId());
+          // console.log("Full Name: " + profile.getName());
+          // console.log("Given Name: " + profile.getGivenName());
+          // console.log("Family Name: " + profile.getFamilyName());
+          // console.log("Image URL: " + profile.getImageUrl());
+          // console.log("Email: " + profile.getEmail());
+
+          const {
+            Zi: {
+              access_token: tp_token /* expires_at,expires_in,first_issued_at,id_token,idpId,login_hint,scope,session_state:{extraQueryParams:{authuser}},token_type */
+            },
+            w3: {
+              Eea: tp_id,
+              Paa: tp_avatar,
+              U3: tp_email,
+              ig: tp_username,
+              ofa,
+              wea
+            }
+          } = googleUser;
+          let param = {
+            tp_id,
+            tp_token,
+            tp_type: 3,
+            tp_username,
+            tp_avatar,
+            tp_email
+          };
+          vm.setParams(param);
+          console.log("goole-param", param);
+          let result = await login(param);
+          if (result && result.data) {
+            vm.loginApiEnd(result.data);
+          }
+        },
+        function(error) {
+          console.log(JSON.stringify(error, undefined, 2));
+        }
+      );
     },
     /**
      * @description: FB登录
