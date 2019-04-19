@@ -105,6 +105,10 @@ const curRouter = new VueRouter({
 
 // 全局前置守卫
 curRouter.beforeEach((to, from, next) => {
+    const {lang}=to.query;
+    if(lang){
+        Vue.prototype.$loadLanguageAsync(lang);
+    }
     Vue.prototype.$curStore.commit('setLoaddingNum', 1);
     let userStr = localStorage.getItem('userInfo');
     // 第一次进页面时，得先刷新token接口调用了后才行

@@ -123,7 +123,7 @@
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
-          <img v-lazy="bargain.xingzhuang">
+          <img v-lazy="$t('bargain.xingzhuang')">
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
