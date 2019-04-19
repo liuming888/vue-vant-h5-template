@@ -81,7 +81,7 @@
       <div class="num"><span class="dw">Rp</span>{{reward_amount}}</div>
 
       <div class="receive"
-        @click="goReceive">$t('dialogNewGiftBag.receive')</div>
+        @click="goReceive">{{$t('dialogNewGiftBag.receive')}}</div>
 
       <img src="@/assets/images/guanbi@2x.png"
         class="close-img"
