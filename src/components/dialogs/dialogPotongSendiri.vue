@@ -66,7 +66,7 @@
     <van-popup v-model="dialogVisible.show"
       style="background-color: transparent;width: 100%" position="top">
       <div class="box">
-        <img v-lazy="require('@/assets/images/zikanyidaotanchuang.png')"
+        <img v-lazy="$t('dialogPotongSendiri.zikanyidaotanchuang')"
           class="bg">
         <div class="box-info">
           <p class="top-tips">{{$t('dialogSharingFriends.helpYourselfCutDown')}}</p>

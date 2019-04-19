@@ -162,7 +162,7 @@
         id="cashWithdrawalRule">{{$t('withdrawImmediately.withdrawalRules')}}</div>
 
       <div class="cash-withdrawal-rule-img">
-        <img src="../../assets/images/withdrawRule.png">
+        <img :src="$t('withdrawImmediately.withdrawRule')">
       </div>
     </div>
 

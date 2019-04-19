@@ -91,7 +91,7 @@
       :close-on-click-overlay="false"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img src="~@/assets/images/forBargain-sucess.png"
+        <img :src="$t('dialogOldUsersHelpCutSuccessfully.forBargainSucess')"
           class="bg">
         <div class="box-info">
           <p class="top-tips">{{$t('forBargain.youHelpHim')}}</p>

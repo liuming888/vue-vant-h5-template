@@ -22,7 +22,7 @@
       <!-- 头部返回首页 -->
       <turn-home />
 
-      <img v-lazy="require('@/assets/images/forBargain-banner.png')"
+      <img v-lazy="$t('forBargain.forBargainBanner')"
         class="banner-img">
     </div>
 
@@ -187,7 +187,7 @@
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
-          <img v-lazy="require('@/assets/images/xingzhuang.png')">
+          <img v-lazy="$t('forBargain.xingzhuang')">
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"

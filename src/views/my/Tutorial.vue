@@ -10,7 +10,7 @@
   // width: 100%;
   padding: 485px 30px 60px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/tutorial/theme.png");
+  // background-image: url("../../assets/images/tutorial/theme.png");
   background-size: 100% auto;
   .totorial-ct {
     padding: 20px 44px 60px;
@@ -22,7 +22,7 @@
     height: 80px;
     margin: 0 auto;
     background-repeat: no-repeat;
-    background-image: url("../../assets/images/tutorial/commonProblem.png");
+    // background-image: url("../../assets/images/tutorial/commonProblem.png");
     background-size: 100% auto;
   }
   .totorial-ct-ul {
@@ -74,7 +74,7 @@
   margin-top: 48px;
   min-height: 412px;
   background-repeat: no-repeat;
-  background-image: url("~@/assets/images/tutorial/contact-us.png");
+  // background-image: url("~@/assets/images/tutorial/contact-us.png");
   background-size: 100% auto;
 }
 </style>
@@ -83,9 +83,9 @@
   <div class="totorial">
     <turn-home/>
 
-    <div class="totorial-bg">
+    <div class="totorial-bg" :style="{'background-image':`url(${$t('Tutorial.theme')})`}">
       <div class="totorial-ct">
-        <div class="totorial-ct-tit"></div>
+        <div class="totorial-ct-tit" :style="{'background-image':`url(${$t('Tutorial.commonProblem')})`}"></div>
         <ul class="totorial-ct-ul">
           <li class="totorial-ct-li">
             <p class="totorial-ct-li-q">{{$t('Tutorial.howLongCanIReceiveTheGoods')}}</p>
@@ -105,7 +105,7 @@
           </li>
         </ul>
       </div>
-      <div class="totorial-ct-contact"></div>
+      <div class="totorial-ct-contact"  :style="{'background-image':`url(${$t('Tutorial.contactUs')})`}"></div>
     </div>
   </div>
 </template>

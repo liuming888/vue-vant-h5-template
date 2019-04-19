@@ -17,8 +17,10 @@
 .share-box {
   width: 610px;
   height: 749px;
-  background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
-    100%;
+  // background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
+  //   100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   padding-top: 200px;
   box-sizing: border-box;
   position: relative;
@@ -96,12 +98,15 @@
   <div class="dialogSharingFriends-container"
     v-show="dialogVisible.show"
     @click.stop>
-    <div class="share-box">
+    <div class="share-box"
+      :style="{'background-image':`url(${$t('dialogSharingFriends.shareBackground')})`}">
       <div class="tip">
         {{$t('dialogSharingFriends.shareToFriendsAndYouCanGetFreebiesFaster')}}
       </div>
 
-      <h5 class="tit"><!-- Share on --></h5>
+      <h5 class="tit">
+        <!-- Share on -->
+      </h5>
 
       <div class="share-types">
 

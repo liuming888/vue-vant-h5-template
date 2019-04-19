@@ -79,7 +79,7 @@
       :close-on-click-overlay="false"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img v-lazy="require('@/assets/images/fenxiangzhuang.png')"
+        <img v-lazy="$t('dialogShareEarningEntry.fenxiangzhuang')"
           class="bg">
         <div class="box-info">
           <p class="top-tips">{{$t('dialogShareEarningEntry.yourFriendsHelpYouSave')}}</p>

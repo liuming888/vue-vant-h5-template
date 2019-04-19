@@ -21,10 +21,12 @@ export default {
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Your friends help you save',
         goBuyNow: 'Go buy now',
+        fenxiangzhuang: require('@/assets/images/fenxiangzhuang.png'),
     },
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Share to friends and you can get freebies faster.',
         helpYourselfCutDown: 'Help yourself cut down',
+        shareBackground: require('@/assets/images/share-background.png'),
     },
     commodityItem: {
         cashBack: 'Cash Back',
@@ -34,6 +36,7 @@ export default {
     dialogSharingMakes: {
         shareToYourFriends: 'Share to your friends.',
         youWillGainBonusIfYourFriendsBuyIt: 'You will gain bonus if your friends buy it.',
+        fenxiangzhuanba: require('@/assets/images/fenxiangzhuanba.png'),
     },
     dialogBidPriceCompleted: {
         congratulationsOnCompletingTheBargain: 'Congratulations on completing the bargain!',
@@ -61,6 +64,12 @@ export default {
     },
     incomeWindow: {
         income: 'Income',
+    },
+    dialogOldUsersHelpCutSuccessfully: {
+        forBargainSucess: require('@/assets/images/forBargain-sucess.png'),
+    },
+    dialogPotongSendiri: {
+        zikanyidaotanchuang: require('@/assets/images/zikanyidaotanchuang.png'),
     },
 
     /************************ 组件  end *****************************************************/
@@ -91,6 +100,7 @@ export default {
         gettingFreebies: 'Getting Freebies',
         pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
         failedToGetSharingInformation: 'Failed to get sharing information',
+        xingzhuang: require('@/assets/images/xingzhuang.png'),
     },
     isBargainingList: {
         toBuy: 'To Buy',
@@ -98,6 +108,8 @@ export default {
         cut: 'cut',
         goOn: 'Go On',
         toBuy: 'To Buy',
+        bargainFinishBanner: require('@/assets/images/bargain-finish-banner.png'),
+        barginActiveBanner: require('@/assets/images/bargin-active-banner.png'),
     },
     forBargain: {
         cheaperNow: 'cheaper now',
@@ -121,6 +133,8 @@ export default {
         afterYourFriendOrder: 'After your friend order, you will get',
         rewardsOnYourAccount: 'rewards on your account',
         alsoTakeItForFree: 'Also take it for free',
+        forBargainBanner: require('@/assets/images/forBargain-banner.png'),
+        xingzhuang: require('@/assets/images/xingzhuang.png'),
     },
     purchase: {
         receiver: 'Receiver',
@@ -216,6 +230,9 @@ export default {
               Copy & paste the invite link to your friends.`,
         theWayAsFollow: 'Q: You can contact us in the way as follow',
         da4: `A: ① Facebook fan page: @Lovingistarbuy  ② LINE: Istarbuy  ③ WeChat: Istarbuy`,
+        theme: require('@/assets/images/tutorial/theme.png'),
+        commonProblem: require('@/assets/images/tutorial/commonProblem.png'),
+        contactUs: require('@/assets/images/tutorial/contact-us.png'),
     },
     withdrawImmediately: {
         currentBalance: 'Current balance',
@@ -245,5 +262,6 @@ export default {
         pleaseCheckItOut: 'Your withdrawal request has been initiated, please check it out!',
         pleaseAskCustomerService: 'If you have any questions, please ask customer service',
         iKnow: 'I know',
+        withdrawRule: require('@/assets/images/withdrawRule.png'),
     },
 };

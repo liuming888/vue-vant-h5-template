@@ -17,8 +17,10 @@
 .share-box {
   width: 610px;
   height: 966px;
-  background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
-    100%;
+  // background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
+  //   100%;
+  background-repeat: no-repeat;
+  background-size:100% 100%; 
   padding-top: 220px;
   box-sizing: border-box;
   position: relative;
@@ -164,9 +166,9 @@
 <template>
   <div class="dialogSharingMakes-container"
     v-show="dialogVisible.show"
-    @click.stop="abc=1">
+    @click.stop>
 
-    <div class="share-box">
+    <div class="share-box" :style="{'background-image':`url(${$t('dialogSharingMakes.fenxiangzhuanba')})`}">
       <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
       <h5 class="tit">
         <p>{{$t('dialogSharingMakes.shareToYourFriends')}}</p>

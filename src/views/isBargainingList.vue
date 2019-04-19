@@ -288,7 +288,7 @@
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
-        <img v-lazy="require('./../assets/images/bargain-finish-banner.png')">
+        <img v-lazy="$t('isBargainingList.bargainFinishBanner')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
@@ -317,7 +317,7 @@
     <div class="ing-box"
       v-if="ingList.length > 0">
       <div class="banner">
-        <img v-lazy="require('./../assets/images/bargin-active-banner.png')">
+        <img v-lazy="$t('isBargainingList.barginActiveBanner')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
