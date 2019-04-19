@@ -348,6 +348,13 @@ export default {
         element,
         {},
         function(googleUser) {
+          const { pathname, search } = window.location;
+          vm.$gaSend({
+            eventCategory: "google登陆按钮",
+            eventAction: "点击",
+            eventLabel: pathname + search
+          });
+
           var profile = vm.auth2.currentUser.get().getBasicProfile();
           console.log("ID: " + profile.getId());
           console.log("Full Name: " + profile.getName());
@@ -366,7 +373,7 @@ export default {
     },
     async getCode() {
       if (!this.phone) {
-        this.$toast(this.$t('dialogLoginSelect.numberCannotBeEmpty'));
+        this.$toast(this.$t("dialogLoginSelect.numberCannotBeEmpty"));
         return;
       }
       let params = {
@@ -379,7 +386,7 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message:this.$t('dialogLoginSelect.yourSmsCodeWillBeSent'),
+            message: this.$t("dialogLoginSelect.yourSmsCodeWillBeSent"),
             duration: 2000
           });
           this.authCode = result.data;
@@ -445,11 +452,11 @@ export default {
      */
     async loginTel() {
       if (!this.phone) {
-        this.$toast(this.$t('dialogLoginSelect.numberCannotBeEmpty'));
+        this.$toast(this.$t("dialogLoginSelect.numberCannotBeEmpty"));
         return;
       }
       if (!this.authCode) {
-        this.$toast(this.$t('dialogLoginSelect.verificationCodeMustBeFilled'));
+        this.$toast(this.$t("dialogLoginSelect.verificationCodeMustBeFilled"));
         return;
       }
 
@@ -465,6 +472,14 @@ export default {
       }
 
       let result = await telLogin(param);
+
+      const { pathname, search } = window.location;
+      this.$gaSend({
+        eventCategory: "手机登陆按钮",
+        eventAction: "点击",
+        eventLabel: pathname + search
+      });
+
       if (result && result.data) {
         this.loginApiEnd(result.data);
       }
@@ -497,6 +512,13 @@ export default {
         let result = await login(param);
         console.log("result: ", result);
         this.mx_closeLoad();
+
+        const { pathname, search } = window.location;
+        this.$gaSend({
+          eventCategory: "facebook登陆按钮",
+          eventAction: "点击",
+          eventLabel: pathname + search
+        });
 
         if (result && result.data) {
           this.loginApiEnd(result.data);
