@@ -19,12 +19,12 @@ export default {
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Your friends help you save',
         goBuyNow: 'Go buy now',
-        // fenxiangzhuang: require('@/assets/images/fenxiangzhuang.png'),
+        fenxiangzhuang: require('@/assets/images/id-fenxiangzhuang.png'),
     },
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Bagikan kepada teman dan anda akan mendapatkan freebies lebih cepat.',
         helpYourselfCutDown: 'Help yourself cut down',
-        // shareBackground: require('@/assets/images/share-background.png'),
+        shareBackground: require('@/assets/images/id-share-background.png'),
     },
     commodityItem: {
         cashBack: 'Uang kembali',
@@ -34,7 +34,7 @@ export default {
     dialogSharingMakes: {
         shareToYourFriends: 'Bagikan pada teman-teman.',
         youWillGainBonusIfYourFriendsBuyIt: 'anda akan mendapatkan bonus jika teman membeli itu.',
-        // fenxiangzhuanba: require('@/assets/images/fenxiangzhuanba.png'),
+        fenxiangzhuanba: require('@/assets/images/id-fenxiangzhuanba.png'),
     },
     dialogBidPriceCompleted: {
         congratulationsOnCompletingTheBargain: 'Selamat telah menyelesaikan penawaran!',
@@ -64,10 +64,10 @@ export default {
         income: 'Income',
     },
     dialogOldUsersHelpCutSuccessfully: {
-        // forBargainSucess: require('@/assets/images/forBargain-sucess.png'),
+        forBargainSucess: require('@/assets/images/id-forBargain-sucess.png'),
     },
     dialogPotongSendiri: {
-        // zikanyidaotanchuang: require('@/assets/images/zikanyidaotanchuang.png'),
+        zikanyidaotanchuang: require('@/assets/images/id-zikanyidaotanchuang.png'),
     },
     /************************ 组件  end *****************************************************/
 
@@ -97,7 +97,7 @@ export default {
         gettingFreebies: 'Getting Freebies',
         pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
         failedToGetSharingInformation: 'Failed to get sharing information',
-        // xingzhuang: require('@/assets/images/xingzhuang.png'),
+        xingzhuang: require('@/assets/images/id-xingzhuang.png'),
     },
     isBargainingList: {
         toBuy: 'To Buy',
@@ -105,8 +105,8 @@ export default {
         cut: 'cut',
         goOn: 'Go On',
         toBuy: 'To Buy',
-        // bargainFinishBanner: require('./../assets/images/bargain-finish-banner.png'),
-        // barginActiveBanner: require('./../assets/images/bargin-active-banner.png'),
+        bargainFinishBanner: require('@/assets/images/id-bargain-finish-banner.png'),
+        barginActiveBanner: require('@/assets/images/id-bargin-active-banner.png'),
     },
     forBargain: {
         cheaperNow: 'lebih murah sekarang',
@@ -130,8 +130,8 @@ export default {
         afterYourFriendOrder: 'Setelah teman Anda memesan, Anda akan mendapatkan',
         rewardsOnYourAccount: ' hadiah di akun Anda',
         alsoTakeItForFree: 'Ambil gratis juga',
-        // forBargainBanner: require('@/assets/images/forBargain-banner.png'),
-        // xingzhuang: require('@/assets/images/xingzhuang.png'),
+        forBargainBanner: require('@/assets/images/id-forBargain-banner.png'),
+        xingzhuang: require('@/assets/images/id-xingzhuang.png'),
     },
     purchase: {
         receiver: 'Receiver',
@@ -174,7 +174,7 @@ export default {
     },
     paymentSuccess: {
         successTit: 'Selamat, Anda telah berhasil membayar!',
-        // loveproducts: require('@/assets/images/loveproducts.png'),
+        loveproducts: require('@/assets/images/id-loveproducts.png'),
     },
     my: {
         VIPMember: ' anggota VIP',
@@ -259,7 +259,7 @@ export default {
         pleaseCheckItOut: 'Your withdrawal request has been initiated, please check it out!',
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
         iKnow: 'I know',
-        withdrawRule: require('@/assets/images/withdrawRule.png'),
+        withdrawRule: require('@/assets/images/id-withdrawRule.png'),
     },
     /************************ 页面 end *****************************************************/
 };
