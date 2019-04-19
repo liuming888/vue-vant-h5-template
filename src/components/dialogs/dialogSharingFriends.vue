@@ -138,6 +138,7 @@
 
       <button ref="copy"
         class="copy-link"
+        :style="{'background-image':`url(${$t('dialogSharingFriends.copylink')})`}"
         data-clipboard-action="copy"
         :data-clipboard-text="mx_copyTxt"
         @click="mx_copyLink"></button>

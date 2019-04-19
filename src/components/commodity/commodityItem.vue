@@ -77,56 +77,26 @@
 
 
       &.button-l {
-        // position: relative;
-        // display: inline-block;
-        // font-size: 28px;
-        // color: #fff;
-        // text-indent: 64px;
-        // line-height: 70px;
-        // width: 260px;
-        // height: 70px;
+      
         background: linear-gradient(
           90deg,
           rgba(246, 174, 1, 1) 0%,
           rgba(246, 75, 1, 1) 100%
         );
-        // border-radius: 35px;
-        // text-decoration: none;
+      
         &::before {
-          // content: "";
-          // display: block;
-          // width: 34px;
-          // height: 34px;
-          // position: absolute;
-          // top: 18px;
-          // left: 19px;
           background: url("~@/assets/images/btn-1.png") no-repeat 0 0/100% auto;
         }
       }
       &.button-r {
-        // position: relative;
         float: right;
-        // font-size: 28px;
-        // color: #fff;
-        // text-indent: 64px;
-        // line-height: 70px;
-        // width: 260px;
-        // height: 70px;
         background: linear-gradient(
           90deg,
           rgba(246, 78, 1, 1) 0%,
           rgba(211, 12, 5, 1) 100%
         );
-        // border-radius: 35px;
-        // text-decoration: none;
+       
         &::before {
-          // content: "";
-          // display: block;
-          // width: 34px;
-          // height: 34px;
-          // position: absolute;
-          // top: 18px;
-          // left: 19px;
           background: url("~@/assets/images/btn-2.png") no-repeat 0 0/100% auto;
         }
       }

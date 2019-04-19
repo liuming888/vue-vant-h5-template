@@ -23,6 +23,7 @@
                 top: 25px;
                 left: 35px;
                 text-align: center;
+                margin-bottom: 20px;
                 .bargain-info {
                     // position: relative;
                     // margin: 25px 0 0 35px;
@@ -153,8 +154,7 @@
                             top: 0;
                             left: 0;
                             height: 100%;
-                            background:url('~@/assets/images/progress-bar-2.png') no-repeat 0 0/100% 100%,
-                            linear-gradient(-45deg,rgba(213,16,5,1),rgba(245,75,1,1));
+                            background: url('~@/assets/images/progress-bar-2.png') no-repeat 0 0/100% 100%, linear-gradient(-45deg, rgba(213, 16, 5, 1), rgba(245, 75, 1, 1));
                             border-radius: 20px;
                         }
                         > .schedule-item {
@@ -202,7 +202,7 @@
 
                     > .share-btn {
                         color: #a53a06;
-                        font-size: 36px;
+                        font-size: 32px;
                         height: 103px;
                         line-height: 103px;
                         background: linear-gradient(180deg, rgba(248, 229, 163, 1), rgba(244, 204, 109, 1));
@@ -296,13 +296,13 @@
         > .recommend-products {
             display: flex;
             flex-wrap: wrap;
-            background-color: #fff;
+            background-color: #f5f5f5;
             padding: 0 35px;
             > .page-title {
                 position: relative;
                 width: 100%;
                 display: block;
-                height: 160px;
+                height: 100px;
                 line-height: 160px;
                 // margin: 50px 0;
                 font-size: 34px;
@@ -315,8 +315,8 @@
                 align-items: center;
                 justify-content: center;
                 > img {
-                    width: 281px;
-                    height: auto;
+                    width: auto;
+                    height: 39px;
                     margin-right: 24px;
                 }
             }
@@ -324,7 +324,7 @@
                 background: #fff;
                 box-sizing: border-box;
                 width: calc(50% - 10px);
-                height: 500px;
+                height: 520px;
                 border: 1px solid #f1ecec;
                 border-radius: 10px;
                 overflow: hidden;
@@ -334,7 +334,7 @@
                     height: 334px;
                 }
                 > .products-title {
-                    margin: 15px 10px 27px 10px;
+                    margin: 15px 10px 10px 10px;
                     color: #323232;
                     font-size: 28px;
                     text-align: center;
@@ -342,24 +342,28 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
-                > .products-ctrl {
-                    line-height: 50px;
+
+                > .money {
                     color: #888;
+                    font-size: 20px;
+                    padding: 0 20px;
+                    margin-bottom: 20px;
+                }
+
+                > .btn {
+                    display: block;
                     font-size: 24px;
-                    padding: 0 10px;
-                    margin-bottom: 45px;
-                    > .btn {
-                        display: block;
-                        float: right;
-                        font-size: 24px;
-                        color: #fff;
-                        text-align: center;
-                        width: 160px;
-                        height: 50px;
-                        background: linear-gradient(90deg, rgba(246, 78, 1, 1) 0%, rgba(211, 12, 5, 1) 100%);
-                        border-radius: 25px;
-                        text-decoration: none;
-                    }
+                    color: #fff;
+                    text-align: center;
+                    width: 220px;
+                    height: 50px;
+                    line-height: 50px;
+                    background: linear-gradient(90deg, rgba(246, 78, 1, 1) 0%, rgba(211, 12, 5, 1) 100%);
+                    border-radius: 25px;
+                    text-decoration: none;
+                    padding: 0 20px;
+                    margin: 0 auto;
+                    
                 }
             }
             > .recommend-item:nth-of-type(2n) {
@@ -386,8 +390,8 @@
                 box-shadow: 0px 2px 4px 0px rgba(152, 19, 0, 0.46);
                 font-weight: 500;
             }
-            
-             img {
+
+            img {
                 display: block;
                 width: 100%;
                 height: auto;

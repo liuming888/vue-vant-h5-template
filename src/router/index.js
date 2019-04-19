@@ -15,17 +15,17 @@ const curRouter = new VueRouter({
             redirect: '/',
         },
         {
-            path: '/',
+            path: '/',  //1
             name: '首页',
             component: resolve => require(['../views/home/home.vue'], resolve),
         },
         {
-            path: '/bargain',
+            path: '/bargain', //1
             name: '砍价详情页',
             component: resolve => require(['../views/bargain.vue'], resolve),
         },
         {
-            path: '/isBargainingList',
+            path: '/isBargainingList', //1
             name: '更多砍价内页',
             component: resolve => require(['../views/isBargainingList.vue'], resolve),
         },

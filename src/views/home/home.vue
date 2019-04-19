@@ -374,8 +374,8 @@ export default {
       if (
         localStorage.getItem(
           "userInfo"
-        ) /* ||
-        process.env.VUE_APP_ENV == "development" */
+        ) ||
+        process.env.VUE_APP_ENV == "development"
       ) {
         this.initBargainOrderSpusList();
         this.initMybargainSpus();

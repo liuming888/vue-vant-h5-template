@@ -27,6 +27,7 @@ export default {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Share to friends and you can get freebies faster.',
         helpYourselfCutDown: 'Help yourself cut down',
         shareBackground: require('@/assets/images/share-background.png'),
+        copylink: require('@/assets/images/copylink.png'),
     },
     commodityItem: {
         cashBack: 'Cash Back',
@@ -37,6 +38,7 @@ export default {
         shareToYourFriends: 'Share to your friends.',
         youWillGainBonusIfYourFriendsBuyIt: 'You will gain bonus if your friends buy it.',
         fenxiangzhuanba: require('@/assets/images/fenxiangzhuanba.png'),
+        copylink: require('@/assets/images/copylink.png'),
     },
     dialogBidPriceCompleted: {
         congratulationsOnCompletingTheBargain: 'Congratulations on completing the bargain!',

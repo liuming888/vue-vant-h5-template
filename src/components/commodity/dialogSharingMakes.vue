@@ -31,7 +31,7 @@
     box-sizing: border-box;
     text-align: center;
     margin: 0 auto;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
     line-height: 38px;
@@ -146,7 +146,10 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+    background: none;
+    // background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+    background-repeat: no-repeat;
+    background-size:100% 100%; 
   }
 
   .close-img {
@@ -222,6 +225,7 @@
 
         <button ref="copy"
           class="copy-link"
+          :style="{'background-image':`url(${$t('dialogSharingMakes.copylink')})`}"
           data-clipboard-action="copy"
           :data-clipboard-text="mx_copyTxt"
           @click="mx_copyLink"></button>

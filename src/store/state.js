@@ -1,6 +1,9 @@
 export default {
-    loaddingNum:0,  // 当前loading的请求数
-    userInfo: {}, // 当前用户信息
+    loaddingNum: 0, // 当前loading的请求数
+    userInfo: {
+        user_id: process.env.VUE_APP_ENV == "development"?'342':'',
+        access_token:  process.env.VUE_APP_ENV == "development"?'b8d6eb6278f64a1080bba0d8fb6f014b':'',
+    }, // 当前用户信息
     isreFreshToken: false, // 是否已经请求了刷新token（前提本地存了上次的）
     goodsList: [
         // 商品列表数据（默认每个商品前端更改记录是否已砍价是否已砍价）
@@ -27,8 +30,9 @@ export default {
             // 砍价完成弹窗
             show: false,
         },
-        newGiftBag:{  // 新手礼包弹窗
-            show:false
-        }
+        newGiftBag: {
+            // 新手礼包弹窗
+            show: false,
+        },
     },
 };

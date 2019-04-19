@@ -132,11 +132,9 @@
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
-          <div class="products-ctrl">
-            <span class="money">{{item.deliver_count}} {{$t('bargain.sent')}}</span>
-            <span class="btn"
-              @click="jumpCurBargainPage(item)">{{$t('bargain.getAFreebie')}}</span>
-          </div>
+          <div class="money">{{item.deliver_count}} {{$t('bargain.sent')}}</div>
+          <div class="btn"
+            @click="jumpCurBargainPage(item)">{{$t('bargain.getAFreebie')}}</div>
         </div>
       </div>
     </div>
@@ -253,7 +251,7 @@ export default {
       document.getElementById("contentContainer").scroll(0, 0);
     }
 
-    document.title = this.$t('bargain.gettingFreebies');
+    document.title = this.$t("bargain.gettingFreebies");
     setTimeout(() => {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
       this.isLoad = true;
@@ -441,7 +439,7 @@ export default {
 
         // 强制返回首页去
         Dialog({
-          message:this.$t('bargain.pleaseReturnToTheHomepage'),
+          message: this.$t("bargain.pleaseReturnToTheHomepage"),
           confirmButtonText: "ok"
         }).then(() => {
           this.$router.replace("/");
@@ -538,7 +536,7 @@ export default {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       } else {
-        this.$toast(this.$t('bargain.failedToGetSharingInformation'));
+        this.$toast(this.$t("bargain.failedToGetSharingInformation"));
       }
     },
     jumpCurBargainPage(item) {
