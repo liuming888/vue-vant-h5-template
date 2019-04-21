@@ -1,12 +1,12 @@
 {
-    "name": "zdd-test",
-    "short_name": "z-t",
+    "name": "ISTARBUY",
+    "short_name": "ISTARBUY",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#5eace0",
-    "description": "一个demo",
+    "background_color": "#d30c05",
+    "description": "can buy directly for test mode.",
     "orientation": "portrait-primary",
-    "theme_color": "#5eace0",
+    "theme_color": "#d30c05",
     "icons": [
         {
             "src": "./static/icons/book-32.png",
