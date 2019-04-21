@@ -1,7 +1,7 @@
 {
     "name": "ISTARBUY",
     "short_name": "ISTARBUY",
-    "start_url": "/",
+    "start_url": "/?source=pwa",
     "display": "standalone",
     "background_color": "#d30c05",
     "description": "can buy directly for test mode.",

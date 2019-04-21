@@ -155,5 +155,22 @@
             ga('create', gaId, 'auto');
             ga('send', window.location.href);
         </script>
+
+        <script>
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.register('./sw.js');
+            }
+
+            window.addEventListener('beforeinstallprompt', function(e) {
+                // beforeinstallprompt event fired
+                e.userChoice.then(function(choiceResult) {
+                    if (choiceResult.outcome === 'dismissed') {
+                        console.log('用户取消安装应用');
+                    } else {
+                        console.log('用户安装了应用');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
