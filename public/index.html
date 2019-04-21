@@ -158,7 +158,9 @@
 
         <script>
             if (navigator.serviceWorker) {
-                navigator.serviceWorker.register('./sw.js');
+                navigator.serviceWorker.register('./sw.js').then(function() {
+                    console.log('Service Worker 注册成功');
+                });
             }
 
             window.addEventListener('beforeinstallprompt', function(e) {
