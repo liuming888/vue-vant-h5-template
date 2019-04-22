@@ -455,7 +455,7 @@ export default {
         // Retrieve the singleton for the GoogleAuth library and set up the client.
         vm.auth2 = gapi.auth2.init({
           client_id:
-            "1003879582574-d1k8jo3b1m55m7pfhvqlvfug5gqk3omg.apps.googleusercontent.com", //客户端ID
+            "510253586292-c00176cjlo0okpl63o3ar8go4slvvo6f.apps.googleusercontent.com", //客户端ID
           cookiepolicy: "single_host_origin",
           scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
         });
