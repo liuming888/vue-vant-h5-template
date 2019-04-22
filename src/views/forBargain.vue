@@ -319,8 +319,8 @@ export default {
     isNGo() {
       return (
         !this.isOne &&
-        this.bargain_user_info &&
-        this.bargain_info.status != 2 /* &&
+        this.bargain_user_info /*&&
+        this.bargain_info.status != 2  &&
         this.isHelpOk */
       );
     },
