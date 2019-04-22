@@ -1,5 +1,5 @@
 export default {
-    lang:'us',
+    lang: 'us',
     common: {
         hello: 'en hello world',
         pleaseLoginAgain: 'please login again !',
@@ -86,6 +86,7 @@ export default {
         tCs: 'T&Cs',
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
+        gengduotop: require('@/assets/images/gengduotop.png'),
     },
     bargain: {
         sent: 'Sent',

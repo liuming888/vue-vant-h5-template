@@ -250,7 +250,7 @@
         <template v-if="goodsList.length>0">
           <div class="home-goods-title"
             v-if="goodsList.length>0&&homeBargainList.length>0">
-            <img v-lazy="require('@/assets/images/gengduotop.png')">
+            <img v-lazy="$t('home.gengduotop')">
           </div>
           <ul class="home-goods-list">
             <li is="commodity-item"

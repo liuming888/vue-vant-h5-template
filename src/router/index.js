@@ -34,7 +34,7 @@ const curRouter = new VueRouter({
             component: resolve => require(['../views/forBargain.vue'], resolve),
         },
         {
-            path: '/purchase',
+            path: '/purchase',  
             name: '支付页面',
             component: resolve => require(['../views/purchase/index.vue'], resolve),
         },

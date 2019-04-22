@@ -1,7 +1,8 @@
 <style lang="scss" scoped>
 .cur-popup {
   width: 610px;
-  min-height: 650px;
+  min-height: 668px;
+  border-radius:20px;
   overflow: visible;
   top: 36%;
 }

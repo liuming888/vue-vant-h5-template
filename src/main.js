@@ -8,7 +8,7 @@ import { Toast, Popup, Lazyload } from 'vant';
 Vue.use(Toast);
 Vue.use(Popup);
 Vue.use(Lazyload);
-// loadLanguageAsync('id'); // 设置为印尼语
+loadLanguageAsync('id'); // 设置为印尼语
 
 Vue.prototype.$curStore = store;
 Vue.prototype.$curRouter = router;
