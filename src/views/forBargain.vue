@@ -63,7 +63,7 @@
         <p v-else
           class="title">
           {{$t('forBargain.heHadCutDown')}}&nbsp;<span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>
-          , {{$t('forBargain.you')}} <br> {{$t('forBargain.contributed')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>
+          , {{$t('forBargain.you')}} <br> {{$t('forBargain.contributed')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_user_info.bargain_amount||0}}</span>
         </p>
 
         <div class="schedule">
