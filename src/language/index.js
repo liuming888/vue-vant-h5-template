@@ -1,15 +1,16 @@
 // import Vue from 'vue';
 // import VueI18n from 'vue-i18n'
-import us from './lib/us.js';
+// import us from './lib/us.js';
+import id from './lib/id.js';
 import axios from 'axios';
 // Vue.use(VueI18n);
-const loadedLanguages = ['us']; // 我们的预装默认语言
+const loadedLanguages = ['id']; // 我们的预装默认语言
 
 export const i18n = new VueI18n({
-    locale: 'us', // 设置语言环境
-    fallbackLocale: 'us',  // 回退的默认语言
+    locale: 'id', // 设置语言环境
+    fallbackLocale: 'id',  // 回退的默认语言
     messages: {
-        us,
+        id,
     },
 });
 

@@ -106,6 +106,7 @@ curRouter.beforeEach((to, from, next) => {
     const { lang } = to.query;
     if (lang && lang != Vue.prototype.$lang) {
         Vue.prototype.$loadLanguageAsync(lang);
+        Vue.prototype.$lang = lang;
     }
 
     Vue.prototype.$curStore.commit('setLoaddingNum', 1);
