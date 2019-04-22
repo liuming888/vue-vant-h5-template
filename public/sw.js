@@ -29,7 +29,7 @@ self.addEventListener('fetch', function(e) {
     var cacheRequestUrls = [
         /* '/my/Tutorial' */
     ];
-    console.log('现在正在请求：' + e.request.url);
+    // console.log('现在正在请求：' + e.request.url);
 
     // 判断当前请求是否需要缓存
     var needCache = cacheRequestUrls.some(function(url) {
@@ -48,7 +48,7 @@ self.addEventListener('fetch', function(e) {
             });
         });
     } else {
-    /* ******************************* */
+        /* ******************************* */
         // 非api请求，直接查询cache
         // 如果有cache则直接返回，否则通过fetch请求
         e.respondWith(
@@ -66,15 +66,32 @@ self.addEventListener('fetch', function(e) {
 });
 
 // 监听activate事件，激活后通过cache的key来判断是否更新cache中的静态资源
-self.addEventListener('activate', function (e) {
+self.addEventListener('activate', function(e) {
     console.log('Service Worker 状态： activate');
-    var cachePromise = caches.keys().then(function (keys) {
-        return Promise.all(keys.map(function (key) {
-            if (key !== cacheName) {
-                return caches.delete(key);
-            }
-        }));
+    var cachePromise = caches.keys().then(function(keys) {
+        return Promise.all(
+            keys.map(function(key) {
+                if (key !== cacheName) {
+                    return caches.delete(key);
+                }
+            })
+        );
     });
     e.waitUntil(cachePromise);
     return self.clients.claim();
+});
+
+/* ============== */
+/* push处理相关部分 */
+/* ============== */
+// 添加service worker对push的监听
+self.addEventListener('push', function(e) {
+    var data = e.data;
+    if (e.data) {
+        data = data.json();
+        console.log('push的数据为：', data);
+        self.registration.showNotification(data.text);
+    } else {
+        console.log('push没有任何数据');
+    }
 });
