@@ -9,10 +9,12 @@
         > .good-img {
             width: 202px;
             height: 202px;
+            padding: 18px 0;
             margin-right: 30px;
         }
         > .good-detail {
             overflow: hidden;
+            position: relative;
             > .good-title {
                 font-size: 30px;
                 color: #323232;
@@ -23,7 +25,9 @@
 
             .left-box {
                 width: 235px;
-
+                position: absolute;
+                bottom:0;
+                left: 0;
                 .num-box {
                     max-width: 100%;
 

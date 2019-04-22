@@ -12,6 +12,7 @@ export default {
     /************************ 组件  start *****************************************************/
     countDown: {
         endIn: 'End in',
+        payWithin: 'Pay within',
     },
     aCommodityThatIsBeingBargained: {
         completed: 'completed',

@@ -10,7 +10,7 @@
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
           <count-down :dateDiff="spuBargainItem.expire_ttl"
-            v-if="spuBargainItem.expire_ttl"></count-down>
+            v-if="spuBargainItem.expire_ttl" :timeType="timeType"></count-down>
 
           <div class="left-box">
             <div class="num-box">
@@ -86,6 +86,15 @@ export default {
       },
       shareInfo: {}
     };
+  },
+  computed: {
+    timeType(){
+      if(this.spuBargainItem.can_buy==1){
+        return 'buy';
+      }else{
+        return 'endIn'
+      }
+    }
   },
   created() {
     this.init();

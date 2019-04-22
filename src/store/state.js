@@ -1,7 +1,7 @@
 let user_id=1;
 let access_token = '486dcad761f8425e8aa2a49e964a984c';
 let userStr = localStorage.getItem('userInfo');
-if (userStr) {
+if (userStr && process.env.VUE_APP_ENV == 'development') {
     let userInfo = JSON.parse(userStr);
     user_id = userInfo.user_id;
     access_token = userInfo.access_token;

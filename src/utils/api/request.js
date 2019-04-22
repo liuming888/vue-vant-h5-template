@@ -22,7 +22,9 @@ if (userStr && process.env.VUE_APP_ENV == 'development') {
     access_token = userInfo.access_token;
 }
 
-
+// 手动应付别的情况
+user_id=342;
+access_token = 'e24343e21b3d47cdb68b003745c57141';
 
 console.log('666666666666', process.env.VUE_APP_ENV);
 

@@ -335,7 +335,7 @@
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
-            <count-down :dateDiff="item.bargain_info.expire_ttl"></count-down>
+            <count-down :dateDiff="item.bargain_info.expire_ttl" :timeType=timeType(item.bargain_info)></count-down>
             <div class="price-box go-on-price-box">
               <div class="price-item">
                 <div class="msg-box">{{$t('isBargainingList.cut')}} Rp {{item.bargain_info.bargain_amount||0}}</div>
@@ -385,6 +385,13 @@ export default {
     this.getMyBargainInfo();
   },
   methods: {
+    timeType(bargain_info){
+      if(bargain_info.can_buy==1){
+        return "buy";
+      }else{
+        return 'endIn'
+      }
+    },
     async getMyBargainInfo() {
       const params = {
         page_size: 10,
