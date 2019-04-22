@@ -204,7 +204,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 break;
             case 'contact-me':
                 alert(2);
-                location.href = 'liuming@batmobi.net';
+                location.href = '1311737393@qq.com';
                 break;
             default:
                 // 默认点击别的地方的行为
@@ -225,7 +225,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 break;
             case 'contact-me':
                 alert(2);
-                location.href = 'liuming@batmobi.net';
+                location.href = '1311737393@qq.com';
                 break;
             default:
                 // 默认点击别的地方的行为
@@ -303,7 +303,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 //                 break;
 //             case 'contact-me':
 //                 alert(2);
-//                 location.href = 'liuming@batmobi.net';
+//                 location.href = '1311737393@qq.com';
 //                 break;
 //             default:
 //                 // 默认点击别的地方的行为
@@ -324,7 +324,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 //                 break;
 //             case 'contact-me':
 //                 alert(2);
-//                 location.href = 'liuming@batmobi.net';
+//                 location.href = '1311737393@qq.com';
 //                 break;
 //             default:
 //                 // 默认点击别的地方的行为
