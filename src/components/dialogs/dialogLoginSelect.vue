@@ -14,7 +14,7 @@
   .dialog-content {
     width: 610px;
     // height: 600px;
-    height: 780px;
+    height: 790px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;

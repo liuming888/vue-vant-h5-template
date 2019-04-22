@@ -41,7 +41,7 @@
     </div>
 
     <img v-lazy="require('@/assets/images/Addressmodification.png')"
-      style="width:100vw;height:auto;margin-bottom:50px;">
+      style="width:100vw;height:auto;margin-bottom:20px;">
 
     <div class="commodity-info">
       <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('@/assets/images/add.png')"

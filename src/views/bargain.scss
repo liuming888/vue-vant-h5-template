@@ -4,10 +4,10 @@
 
     > .bargain-header {
         position: relative;
-        padding: 40px 10px 10px 10px;
+        padding: 40px 10px 40px 10px;
         // height: 400px;
-        background: url('~@/assets/images/bargain-bg-1.png') no-repeat;
-        background-size: 100%;
+        // background: url('~@/assets/images/bargain-bg-1.png') no-repeat;
+        // background-size: 100%;
         > .bargain-info-box {
             position: relative;
             border-radius: 20px;
@@ -65,12 +65,9 @@
                             display: flex;
                             align-items: flex-end;
                             > .price-box-item {
-                                // width: 100px;
-                                flex: 1;
+                                // flex: 1;
                                 &:nth-of-type(2) {
                                     width: 100px;
-                                    // margin-left: 6px;
-                                    // flex: auto;
                                 }
                                 > .p-t-1 {
                                     font-size: 12px;

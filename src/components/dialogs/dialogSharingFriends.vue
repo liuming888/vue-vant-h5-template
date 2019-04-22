@@ -26,8 +26,8 @@
   position: relative;
 
   .tip {
-    width: 463px;
-    font-size: 30px;
+    width: 580px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     color: rgba(255, 255, 255, 1);
@@ -42,7 +42,7 @@
     font-weight: bold;
     color: rgba(211, 12, 5, 1);
     text-align: center;
-    margin-bottom: 21px;
+    margin-bottom: 48px;
   }
 
   .share-types {
@@ -73,7 +73,7 @@
     position: absolute;
     width: 429px;
     height: 81px;
-    bottom: 50px;
+    bottom: 40px;
     left: 0;
     right: 0;
     margin: 0 auto;

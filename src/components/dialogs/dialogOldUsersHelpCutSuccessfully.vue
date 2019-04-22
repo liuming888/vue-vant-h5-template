@@ -100,7 +100,7 @@
 
           <div class="take-btn"
             @click="$router.push('/')">
-            {{forBargain.alsoTakeItForFree}}
+            {{$t('forBargain.alsoTakeItForFree')}}
           </div>
 
         </div>

@@ -63,7 +63,7 @@
               @click="goChopShare">{{$t('bargain.cutAKnife')}}</div>
             <div class="buy-btn"
               v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
-              @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} {{bargain.buyNow}}</div>
+              @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} {{$t('bargain.buyNow')}}</div>
             <div class="buy-btn cur"
               v-else>
               <!-- Rp {{bargain_info.left_amount}} buy now -->

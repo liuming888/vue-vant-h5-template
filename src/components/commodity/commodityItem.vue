@@ -85,7 +85,7 @@
         );
       
         &::before {
-          background: url("~@/assets/images/btn-1.png") no-repeat 0 0/100% auto;
+          background: url("~@/assets/images/btn-1.png") no-repeat 0 0/auto 100%;
         }
       }
       &.button-r {

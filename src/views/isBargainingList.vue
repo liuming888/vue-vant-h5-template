@@ -252,7 +252,7 @@
     display: inline-block;
     margin-left: 10px;
     position: relative;
-    width: 262px;
+    width: 248px;
     height: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(252, 123, 119, 1);
@@ -285,6 +285,7 @@
     height: 150px;
     display: flex;
     flex-direction: column-reverse;
+    font-size: 20px;
   }
 }
 </style>

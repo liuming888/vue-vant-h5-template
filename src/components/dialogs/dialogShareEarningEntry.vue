@@ -15,7 +15,7 @@
     text-align: center;
     > .top-tips {
       margin-top: 400px;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: bold;
       color: rgba(108, 12, 6, 1);
       line-height: 47px;
