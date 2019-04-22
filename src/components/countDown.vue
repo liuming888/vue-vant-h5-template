@@ -30,7 +30,7 @@
 
 <template>
   <div class="count-down">
-    <span class="dec">End in</span>
+    <span class="dec">{{$t('countDown.endIn')}}</span>
 
     <span class="time">{{time.h}}</span>
     :

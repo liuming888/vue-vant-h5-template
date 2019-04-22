@@ -8,6 +8,9 @@ export default {
     },
 
     /************************ 组件  start *****************************************************/
+    countDown: {
+        endIn: 'End in',
+    },
     aCommodityThatIsBeingBargained: {
         completed: 'lengkap',
         goOn: 'Lanjutkan',

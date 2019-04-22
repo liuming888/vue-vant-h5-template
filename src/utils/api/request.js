@@ -8,19 +8,21 @@ const { Toast } = require('vant');
 
 let user_id = '';
 let access_token = '';
+if (process.env.VUE_APP_ENV == 'development') {
+    // 最初固定开发时账号
+      user_id = 1;
+      access_token = '486dcad761f8425e8aa2a49e964a984c';
+}
+
 let userStr = localStorage.getItem('userInfo');
-if (userStr) {
+if (userStr && process.env.VUE_APP_ENV == 'development') {
+    // 主要复制localStorage用来模拟线上环境
     let userInfo = JSON.parse(userStr);
     user_id = userInfo.user_id;
     access_token = userInfo.access_token;
 }
 
-if (process.env.VUE_APP_ENV == 'development') {
-    //   user_id = 1;
-    //   access_token = '486dcad761f8425e8aa2a49e964a984c';
-    user_id = 342;
-    access_token = 'b8d6eb6278f64a1080bba0d8fb6f014b';
-}
+
 
 console.log('666666666666', process.env.VUE_APP_ENV);
 
@@ -41,7 +43,7 @@ console.log('curCode: ', curCode);
 // 请求拦截
 instance.interceptors.request.use(
     config => {
-        Vue.prototype.$curStore.commit('setLoaddingNum',1);
+        Vue.prototype.$curStore.commit('setLoaddingNum', 1);
         if (!Vue.prototype.$mainAppLoad && document.getElementById('mainApp').style.display != 'none') {
             document.getElementById('mainApp').style.display = 'none';
             Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
@@ -73,20 +75,20 @@ instance.interceptors.response.use(
         //     Vue.prototype.$toast.clear();
         // }
 
-         Vue.prototype.$curStore.commit('setLoaddingNum', -1);
+        Vue.prototype.$curStore.commit('setLoaddingNum', -1);
         try {
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
                 try {
-                      Toast({
-                          message: window.curVueObj.$t('common.pleaseLoginAgain'),
+                    Toast({
+                        message: window.curVueObj.$t('common.pleaseLoginAgain'),
                         //   duration: 1000,
-                      });
+                    });
                 } catch (error) {
                     console.warn('请求提示这里出错1', error);
                 }
-              
+
                 Vue.prototype.$curStore.commit('setUserInfo', {});
                 axios.defaults.headers.common['User-Id'] = '';
                 axios.defaults.headers.common['Access-Token'] = '';
@@ -106,14 +108,14 @@ instance.interceptors.response.use(
                     return error;
                 }
             } else {
-                 try {
-                     Toast({
-                         message: window.curVueObj.$t('common.theRequestFailed'),
+                try {
+                    Toast({
+                        message: window.curVueObj.$t('common.theRequestFailed'),
                         //  duration: 1000,
-                     });
-                 } catch (error) {
-                     console.warn('请求提示这里出错2', error);
-                 }
+                    });
+                } catch (error) {
+                    console.warn('请求提示这里出错2', error);
+                }
             }
             console.error('封装的接口异常处理,', error);
             return false;

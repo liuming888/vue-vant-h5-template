@@ -320,8 +320,7 @@ export default {
       return (
         !this.isOne &&
         this.bargain_user_info /*&&
-        this.bargain_info.status != 2  &&
-        this.isHelpOk */
+        this.bargain_info.status != 2*/
       );
     },
     // 新用户帮砍成功

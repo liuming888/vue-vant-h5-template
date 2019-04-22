@@ -252,7 +252,7 @@
     display: inline-block;
     margin-left: 10px;
     position: relative;
-    width: 248px;
+    width: 238px;
     height: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(252, 123, 119, 1);
