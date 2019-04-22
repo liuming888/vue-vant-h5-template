@@ -1,3 +1,4 @@
+
 <style lang="scss">
 .freebing-box {
   .freebing-container {
@@ -106,11 +107,13 @@
   margin-top: 42px;
   background-color: #fff;
   border-radius: 20px;
-  text-align: center;
+  // height: 300px;
 
   > .freebing-title {
-    display: inline-block;
-    padding: 0 50px;
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 175px);
+    width: 350px;
     height: 60px;
     background: linear-gradient(
       0deg,
@@ -150,6 +153,7 @@
   }
 
   .freebing-more {
+    // margin-top: 35px;
     display: block;
     font-size: 24px;
     text-align: center;

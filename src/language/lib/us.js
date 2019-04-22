@@ -1,4 +1,5 @@
 export default {
+    lang:'us',
     common: {
         hello: 'en hello world',
         pleaseLoginAgain: 'please login again !',

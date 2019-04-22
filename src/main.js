@@ -15,6 +15,7 @@ Vue.prototype.$curRouter = router;
 Vue.prototype.$util = $util;
 Vue.prototype.$gaSend = $util.gaSend;
 Vue.prototype.$loadLanguageAsync = loadLanguageAsync;
+Vue.prototype.$lang = i18n.locale;
 
 Vue.config.productionTip = false;
 Vue.mixin({

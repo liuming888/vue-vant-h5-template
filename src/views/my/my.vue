@@ -83,12 +83,14 @@
         position: absolute;
         right: 0;
         top: 70px;
-        width: 199px;
+        // width: 280px;
+        padding: 0 24px;
         height: 70px;
         line-height: 70px;
         background: rgba(153, 103, 16, 1);
         border: 2px solid rgba(148, 103, 29, 1);
         border-radius: 14px 0px 0px 14px;
+        box-sizing: border-box;
         color: #fff;
         font-size: 28px;
         white-space:nowrap; 

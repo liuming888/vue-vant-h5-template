@@ -40,11 +40,11 @@
               class="spu-count-down"
               v-if="bargain_info.expire_ttl||spu.ttl"></count-down>
 
-            <span class="spu-num">{{spu.deliver_count || 1}} Sent</span>
+            <span class="spu-num">{{spu.deliver_count || 1}} {{$t('forBargain.Sent')}}</span>
           </div>
 
           <div class="rp-box">
-            <div>
+            <div style="font-size:12px;">
               <span class="rp">Rp</span>{{spu.price}}
             </div>
 
@@ -184,7 +184,7 @@
       </div>
 
       <!-- 推荐商品 -->
-      <div class="recommend-products"
+      <!-- <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="$t('forBargain.xingzhuang')">
@@ -193,13 +193,33 @@
           v-for="item in spu_list"
           :key="item.spu_id">
           <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo" @click="jumpCurBargainPage(item)">
+            class="products-photo"
+            @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
           <div class="products-ctrl">
             <span class="money">{{item.deliver_count}} {{$t('forBargain.Sent')}}</span>
             <span class="btn"
               @click="jumpCurBargainPage(item)">{{$t('forBargain.getAFreebie')}}</span>
           </div>
+        </div>
+      </div> -->
+
+
+       <div class="recommend-products"
+        v-if="spu_list.length>0">
+        <p class="page-title">
+          <img v-lazy="$t('forBargain.xingzhuang')">
+        </p>
+        <div class="recommend-item"
+          v-for="item in spu_list"
+          :key="item.spu_id">
+          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
+            class="products-photo"
+            @click="jumpCurBargainPage(item)">
+          <p class="products-title">{{item.title}}</p>
+          <div class="money">{{item.deliver_count}} {{$t('forBargain.sent')}}</div>
+          <div class="btn"
+            @click="jumpCurBargainPage(item)">{{$t('forBargain.getAFreebie')}}</div>
         </div>
       </div>
     </div>
@@ -291,7 +311,8 @@ export default {
         (this.$route.query.helpCur != "ok" &&
           !this.bargain_user_info &&
           this.bargain_info.status == 1) ||
-        !this.$store.state.userInfo.user_id
+        !this.$store.state.userInfo.user_id ||
+        process.env.VUE_APP_ENV == "development"
       );
     },
     // 是否是老用户帮砍过的
@@ -317,7 +338,7 @@ export default {
     this.init();
   },
   mounted() {
-    document.title = this.$t('forBargain.gettingFreebies');
+    document.title = this.$t("forBargain.gettingFreebies");
 
     this.$gaSend({
       eventCategory: "帮砍页面",
@@ -556,11 +577,15 @@ export default {
      * @description: 时间定时器
      */
     refreshTime() {
-      let result = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
+      let result = this.$util.expiration(
+        this.bargain_info.expire_ttl || this.spu.ttl
+      );
       if (!result) return;
       this.expirationDat = result;
       const timer = setInterval(() => {
-        this.expirationDat = this.$util.expiration(this.bargain_info.expire_ttl||this.spu.ttl);
+        this.expirationDat = this.$util.expiration(
+          this.bargain_info.expire_ttl || this.spu.ttl
+        );
       }, 1000);
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
