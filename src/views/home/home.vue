@@ -106,13 +106,11 @@
   margin-top: 42px;
   background-color: #fff;
   border-radius: 20px;
-  // height: 300px;
+  text-align: center;
 
   > .freebing-title {
-    position: absolute;
-    top: -20px;
-    left: calc(50% - 175px);
-    width: 350px;
+    display: inline-block;
+    padding: 0 50px;
     height: 60px;
     background: linear-gradient(
       0deg,
@@ -152,7 +150,6 @@
   }
 
   .freebing-more {
-    // margin-top: 35px;
     display: block;
     font-size: 24px;
     text-align: center;

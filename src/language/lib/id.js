@@ -75,7 +75,7 @@ export default {
 
     /************************ 页面  start *****************************************************/
     home: {
-        ongoingFreebies: 'Ongoing Freebies',
+        ongoingFreebies: 'Freebies yang sedang berlangsung',
         moreAbout: 'Lebih banyak tentang',
         copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
         privacyPolicy: 'Privacy Policy',
