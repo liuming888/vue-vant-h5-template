@@ -9,10 +9,12 @@
         > .good-img {
             width: 202px;
             height: 202px;
+            padding: 18px 0;
             margin-right: 30px;
         }
         > .good-detail {
             overflow: hidden;
+            position: relative;
             > .good-title {
                 font-size: 30px;
                 color: #323232;
@@ -23,7 +25,9 @@
 
             .left-box {
                 width: 235px;
-
+                position: absolute;
+                bottom:0;
+                left: 0;
                 .num-box {
                     max-width: 100%;
 
@@ -46,7 +50,7 @@
                 .progress {
                     margin: 19px 0;
                     position: relative;
-                    width: 100%;
+                    // width: 100%;
                     height: 28px;
                     border-radius: 14px;
                     background-color: #fececa;
@@ -93,7 +97,7 @@
                 }
             }
             > .goods-control {
-                width: 120px;
+                width: 150px;
                 position: absolute;
                 right: 0;
                 bottom: 6px;

@@ -22,12 +22,12 @@
               <p class="title">{{spu.title}}</p>
               <div class="price-box">
                 <div class="price-box-item">
-                  <p class="p-t-3">{{spu.deliver_count || 1}} Sent</p>
+                  <p class="p-t-3">{{spu.deliver_count || 1}} {{$t('bargain.sent')}}</p>
                   <p class="p-t-1">
-                    Price
+                    {{$t('bargain.price')}}
                     <span>RP</span><span>{{spu.original_price}}</span>
                   </p>
-                  <p class="p-t-2">current price</p>
+                  <p class="p-t-2">{{$t('bargain.currentPrice')}}</p>
                 </div>
                 <div class="price-box-item">
                   <p class="p-n-1"><span>Rp</span>{{spu.price}}</p>
@@ -37,18 +37,18 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span>&nbsp; {{$t('bargain.cheaperNowLeaving')}} &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':curRate+'%'}"></div>
               <div class="schedule-item">
-                <span class="description"><span class="highlight">{{curRate}}%</span> off</span>
+                <span class="description"><span class="highlight">{{curRate}}%</span> {{$t('bargain.off')}}</span>
               </div>
               <div class="schedule-item ball ball-center">
-                <span class="description">Available for purchase</span>
+                <span class="description">{{$t('bargain.availableForPurchase')}}</span>
               </div>
               <div class="schedule-item ball ball-right">
-                <span class="description">Take it free</span>
+                <span class="description">{{$t('bargain.takeItFree')}}</span>
               </div>
             </div>
           </div>
@@ -57,17 +57,17 @@
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
-              v-if="!isShareEarningEntry">Share friends for freebies</div>
+              v-if="!isShareEarningEntry">{{$t('bargain.shareFriendsForFreebies')}}</div>
             <div class="share-btn"
               v-else
-              @click="goChopShare">Cut a knife</div>
+              @click="goChopShare">{{$t('bargain.cutAKnife')}}</div>
             <div class="buy-btn"
               v-if="bargain_info.can_buy&&bargain_info.can_buy==1"
-              @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} buy now</div>
+              @click="jumpBuyPage">Rp {{bargain_info.bargain_after}} {{$t('bargain.buyNow')}}</div>
             <div class="buy-btn cur"
               v-else>
               <!-- Rp {{bargain_info.left_amount}} buy now -->
-              Buy now
+              {{$t('bargain.BuyNow')}}
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
-          <img v-lazy="require('@/assets/images/xingzhuang.png')">
+          <img v-lazy="$t('bargain.xingzhuang')">
         </p>
         <div class="recommend-item"
           v-for="item in spu_list"
@@ -132,11 +132,9 @@
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
-          <div class="products-ctrl">
-            <span class="money">{{item.deliver_count}} Sent</span>
-            <span class="btn"
-              @click="jumpCurBargainPage(item)">Get a freebie</span>
-          </div>
+          <div class="money">{{item.deliver_count}} {{$t('bargain.sent')}}</div>
+          <div class="btn"
+            @click="jumpCurBargainPage(item)">{{$t('bargain.getAFreebie')}}</div>
         </div>
       </div>
     </div>
@@ -253,8 +251,7 @@ export default {
       document.getElementById("contentContainer").scroll(0, 0);
     }
 
-    document.title = "Getting Freebies";
-
+    document.title = this.$t("bargain.gettingFreebies");
     setTimeout(() => {
       this.bannerAutoPlayTime = 8000; // 首屏渲染后才设置为8秒自动轮播
       this.isLoad = true;
@@ -442,8 +439,7 @@ export default {
 
         // 强制返回首页去
         Dialog({
-          message:
-            "Please return to the homepage and re-select the product to enter !",
+          message: this.$t("bargain.pleaseReturnToTheHomepage"),
           confirmButtonText: "ok"
         }).then(() => {
           this.$router.replace("/");
@@ -540,7 +536,7 @@ export default {
         this.shareInfo = result.data;
         this.dialogs.sharingFriends.show = true;
       } else {
-        this.$toast("Failed to get sharing information");
+        this.$toast(this.$t("bargain.failedToGetSharingInformation"));
       }
     },
     jumpCurBargainPage(item) {

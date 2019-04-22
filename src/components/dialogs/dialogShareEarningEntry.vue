@@ -15,7 +15,7 @@
     text-align: center;
     > .top-tips {
       margin-top: 400px;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: bold;
       color: rgba(108, 12, 6, 1);
       line-height: 47px;
@@ -79,14 +79,14 @@
       :close-on-click-overlay="false"
       style="background-color: transparent;width: 100%">
       <div class="box">
-        <img v-lazy="require('@/assets/images/fenxiangzhuang.png')"
+        <img v-lazy="$t('dialogShareEarningEntry.fenxiangzhuang')"
           class="bg">
         <div class="box-info">
-          <p class="top-tips">Your friends help you save</p>
+          <p class="top-tips">{{$t('dialogShareEarningEntry.yourFriendsHelpYouSave')}}</p>
           <p class="cut-num"><span>Rp</span> {{preAmount}}</p>
 
           <div class="go-buy-btn"
-            @click="goBuyNow">Go buy now</div>
+            @click="goBuyNow">{{$t('dialogShareEarningEntry.goBuyNow')}}</div>
         </div>
         <div class="close"
           @click="closeDialog"></div>

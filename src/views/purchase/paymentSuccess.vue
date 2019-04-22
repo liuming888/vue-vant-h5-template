@@ -46,12 +46,12 @@
       <img src="@/assets/images/success.png"
         alt
         class="success-icon">
-      <p>Selamat, Anda telah berhasil membayar!</p>
+      <p>{{$t('paymentSuccess.successTit')}}</p>
     </div>
     <section class="like-goods"
       v-show="goodsList.length > 0">
       <div class="like-goods-title">
-        <img src="@/assets/images/loveproducts.png">
+        <img :src="$t('paymentSuccess.loveproducts')">
       </div>
 
       <ul class="like-goods-list">

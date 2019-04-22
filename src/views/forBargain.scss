@@ -2,14 +2,14 @@
     background: linear-gradient(45deg, rgba(232, 43, 35, 1), rgba(253, 84, 72, 1));
 
     .banner-box {
-        padding-top: 31px;
+        padding-top: 10px;
         width: 100vw;
         height: 293px;
         text-align: center;
         position: relative;
 
         .banner-img {
-            width: 717px;
+            width: 100%;
             height: auto;
         }
     }
@@ -62,10 +62,9 @@
                     .spu-num {
                         flex: 1;
                         text-align: right;
-
                         width: 105px;
                         height: 19px;
-                        font-size: 24px;
+                        font-size: 20px;
                         font-family: 'DIN-Medium';
                         font-weight: 500;
                         color: rgba(136, 136, 136, 1);
@@ -158,7 +157,7 @@
                     color: rgba(255, 255, 255, 1);
                     line-height: 28px;
                     position: relative;
-                    left: 100px;
+                    left: 230px;
                 }
 
                 > .schedule-item {
@@ -182,7 +181,7 @@
                     right: 0;
                     width: 28px;
                     height: 28px;
-                    border-radius: 12px;
+                    border-radius: 50%;
                     background: linear-gradient(-45deg, rgba(238, 93, 47, 1), rgba(255, 155, 4, 1));
                 }
                 > .ball-center::after {
@@ -219,7 +218,7 @@
             color: rgba(211, 12, 5, 1);
             margin-bottom: 53px;
             transform: translateZ(0);
-            animation:btnmove 0.3s ease-in-out infinite alternate;
+            animation: btnmove 0.3s ease-in-out infinite alternate;
         }
 
         .team-box {
@@ -434,13 +433,13 @@
         > .recommend-products {
             display: flex;
             flex-wrap: wrap;
-            background-color: #fff;
+            background-color: #f5f5f5;
             padding: 0 35px;
             > .page-title {
                 position: relative;
                 width: 100%;
                 display: block;
-                height: 160px;
+                height: 100px;
                 line-height: 160px;
                 // margin: 50px 0;
                 font-size: 34px;
@@ -453,8 +452,8 @@
                 align-items: center;
                 justify-content: center;
                 > img {
-                    width: 281px;
-                    height: auto;
+                    width: auto;
+                    height: 39px;
                     margin-right: 24px;
                 }
             }
@@ -462,7 +461,7 @@
                 background: #fff;
                 box-sizing: border-box;
                 width: calc(50% - 10px);
-                height: 500px;
+                height: 540px;
                 border: 1px solid #f1ecec;
                 border-radius: 10px;
                 overflow: hidden;
@@ -472,7 +471,7 @@
                     height: 334px;
                 }
                 > .products-title {
-                    margin: 15px 10px 27px 10px;
+                    margin: 15px 10px 10px 10px;
                     color: #323232;
                     font-size: 28px;
                     text-align: center;
@@ -480,24 +479,27 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
-                > .products-ctrl {
-                    line-height: 50px;
+
+                > .money {
                     color: #888;
-                    font-size: 24px;
-                    padding: 0 10px;
-                    margin-bottom: 45px;
-                    > .btn {
-                        display: block;
-                        float: right;
-                        font-size: 24px;
-                        color: #fff;
-                        text-align: center;
-                        width: 160px;
-                        height: 50px;
-                        background: linear-gradient(90deg, rgba(246, 78, 1, 1) 0%, rgba(211, 12, 5, 1) 100%);
-                        border-radius: 25px;
-                        text-decoration: none;
-                    }
+                    font-size: 20px;
+                    padding: 0 20px;
+                    margin-bottom: 20px;
+                }
+
+                > .btn {
+                    display: block;
+                    font-size: 26px;
+                    color: #fff;
+                    text-align: center;
+                    width: 220px;
+                    height: 60px;
+                    line-height: 60px;
+                    background: linear-gradient(90deg, rgba(246, 78, 1, 1) 0%, rgba(211, 12, 5, 1) 100%);
+                    border-radius: 60px;
+                    text-decoration: none;
+                    padding: 0 20px;
+                    margin: 0 auto;
                 }
             }
             > .recommend-item:nth-of-type(2n) {

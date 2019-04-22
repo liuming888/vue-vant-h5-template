@@ -77,7 +77,7 @@
   }
   > .btn {
     display: inline-block;
-    width: 274px;
+    width:300px;
     height: 64px;
     color: #d30c05;
     line-height: 64px;
@@ -100,7 +100,7 @@
   <div>
     <div class="order-header">
       <span>{{curDat.create_time}}</span>
-      <label>Completed</label>
+      <label>{{$t('myOrder.completedTit')}}</label>
     </div>
     <div class="info-box">
       <img v-lazy="curDat.spu_url"
@@ -113,12 +113,12 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">Order Number:{{curDat.order_no}}</p>
+        <p class="address">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">
       <div class="pay-time"></div>
-      <div class="btn" @click="handleCustomerService">Customer Service</div>
+      <div class="btn" @click="handleCustomerService">{{$t('myOrder.customerService')}}</div>
     </div>
   </div>
 </template>

@@ -8,19 +8,23 @@ const { Toast } = require('vant');
 
 let user_id = '';
 let access_token = '';
+if (process.env.VUE_APP_ENV == 'development') {
+    // 最初固定开发时账号
+      user_id = 1;
+      access_token = '486dcad761f8425e8aa2a49e964a984c';
+}
+
 let userStr = localStorage.getItem('userInfo');
-if (userStr) {
+if (userStr && process.env.VUE_APP_ENV == 'development') {
+    // 主要复制localStorage用来模拟线上环境
     let userInfo = JSON.parse(userStr);
     user_id = userInfo.user_id;
     access_token = userInfo.access_token;
 }
 
-if (process.env.VUE_APP_ENV == 'development') {
-    //   user_id = 1;
-    //   access_token = '486dcad761f8425e8aa2a49e964a984c';
-    // user_id = 753;
-    // access_token = 'd434876a73e74f9d91c7d8e396ff53e4';
-}
+// 手动应付别的情况
+user_id=342;
+access_token = 'e24343e21b3d47cdb68b003745c57141';
 
 console.log('666666666666', process.env.VUE_APP_ENV);
 
@@ -35,22 +39,13 @@ instance.defaults.baseURL = url;
 instance.defaults.timeout = 6000;
 instance.defaults.withCredentials = true;
 
-// Vue.prototype.$loaddingNum = 0;
-
 const curCode = process.env.VUE_APP_ENV == 'mock' ? 1 : 0; // 当前代表成功的code (mock 1为成功)
 console.log('curCode: ', curCode);
 
 // 请求拦截
 instance.interceptors.request.use(
     config => {
-        // Vue.prototype.$loaddingNum++;
-        // Vue.prototype.$toast.loading({
-        //     mask: true, // 是否显示背景蒙层
-        //     duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
-        //     forbidClick: true, // 是否禁止背景点击
-        // });
-
-        Vue.prototype.$curStore.commit('setLoaddingNum',1);
+        Vue.prototype.$curStore.commit('setLoaddingNum', 1);
         if (!Vue.prototype.$mainAppLoad && document.getElementById('mainApp').style.display != 'none') {
             document.getElementById('mainApp').style.display = 'none';
             Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
@@ -82,15 +77,20 @@ instance.interceptors.response.use(
         //     Vue.prototype.$toast.clear();
         // }
 
-         Vue.prototype.$curStore.commit('setLoaddingNum', -1);
+        Vue.prototype.$curStore.commit('setLoaddingNum', -1);
         try {
             if (response.data.code == curCode) {
                 return response.data;
             } else if (response.data.code == 3) {
-                Toast({
-                    message: 'please login again !',
-                    duration: 1000,
-                });
+                try {
+                    Toast({
+                        message: window.curVueObj.$t('common.pleaseLoginAgain'),
+                        //   duration: 1000,
+                    });
+                } catch (error) {
+                    console.warn('请求提示这里出错1', error);
+                }
+
                 Vue.prototype.$curStore.commit('setUserInfo', {});
                 axios.defaults.headers.common['User-Id'] = '';
                 axios.defaults.headers.common['Access-Token'] = '';
@@ -110,7 +110,14 @@ instance.interceptors.response.use(
                     return error;
                 }
             } else {
-                Toast('The request failed. Please try again later!');
+                try {
+                    Toast({
+                        message: window.curVueObj.$t('common.theRequestFailed'),
+                        //  duration: 1000,
+                    });
+                } catch (error) {
+                    console.warn('请求提示这里出错2', error);
+                }
             }
             console.error('封装的接口异常处理,', error);
             return false;
