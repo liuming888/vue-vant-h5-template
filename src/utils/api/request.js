@@ -10,8 +10,8 @@ let user_id = '';
 let access_token = '';
 if (process.env.VUE_APP_ENV == 'development') {
     // 最初固定开发时账号
-      user_id = 1;
-      access_token = '486dcad761f8425e8aa2a49e964a984c';
+    user_id = 1;
+    access_token = '486dcad761f8425e8aa2a49e964a984c';
 }
 
 let userStr = localStorage.getItem('userInfo');
@@ -23,8 +23,10 @@ if (userStr && process.env.VUE_APP_ENV == 'development') {
 }
 
 // 手动应付别的情况
-user_id=342;
-access_token = 'e24343e21b3d47cdb68b003745c57141';
+if (process.env.VUE_APP_ENV == 'development') {
+    user_id = 342;
+    access_token = 'e24343e21b3d47cdb68b003745c57141';
+}
 
 console.log('666666666666', process.env.VUE_APP_ENV);
 
