@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-24 00:02:42
+ * @LastEditTime: 2019-04-24 00:47:05
  */
 
 /**
@@ -308,14 +308,14 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log(`receive post-message from sw, action is '${e.data}'`);
         switch (action) {
             case 'show-book':
-                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新域名
+                location.href = location.href; // 跳转到新域名
                 break;
             case 'contact-me':
-                location.href = 'https://abicenter.todaysindia.net/?cbType=3&isf=1&category=';
+                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新正式域名
                 break;
             default:
                 // 默认点击别的地方的行为
-                location.href = 'https://www.lovingistarbuy.com/';
+                location.href = location.href;
                 break;
         }
     });
@@ -327,15 +327,15 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         var action = e.data;
         console.log(`receive post-message from sw, action is '${e.data}'`);
         switch (action) {
-            case 'show-book':
-                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新域名
+             case 'show-book':
+                location.href = location.href; // 跳转到新域名
                 break;
             case 'contact-me':
-                location.href = 'https://abicenter.todaysindia.net/?cbType=3&isf=1&category=';
+                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新正式域名
                 break;
             default:
                 // 默认点击别的地方的行为
-                location.href = 'https://www.lovingistarbuy.com/';
+                location.href = location.href;
                 break;
         }
     });
