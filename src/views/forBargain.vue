@@ -38,7 +38,7 @@
           <div class="time-and-sum">
             <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
               class="spu-count-down"
-              v-if="bargain_info.expire_ttl||spu.ttl"></count-down>
+              v-if="bargain_info.expire_ttl||spu.ttl" timeType="endIn"></count-down>
 
             <span class="spu-num">{{spu.deliver_count || 1}} {{$t('forBargain.Sent')}}</span>
           </div>
