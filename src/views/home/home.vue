@@ -221,7 +221,7 @@
           :show-indicators="false"
           indicator-color="#D30C05"
           class="home-banner"
-          @click.native="$router.push('/my/Tutorial')">
+          @click.native="$router.push('/userGuidance')">
           <template v-if="bannerList.length>0">
             <template v-for="(item,index) of bannerList">
               <van-swipe-item @click="handleBannerClick"

@@ -13,28 +13,33 @@ const curRouter = new VueRouter({
             redirect: '/',
         },
         {
-            path: '/', //1
+            path: '/',
             name: '首页',
             component: resolve => require(['../views/home/home.vue'], resolve),
         },
         {
-            path: '/bargain', //1
+            path: '/userGuidance',
+            name: '用户引导页',
+            component: resolve => require(['../views/userGuidance.vue'], resolve),
+        },
+        {
+            path: '/bargain',
             name: '砍价详情页',
             component: resolve => require(['../views/bargain.vue'], resolve),
         },
         {
-            path: '/isBargainingList', //1
+            path: '/isBargainingList',
             name: '更多砍价内页',
             component: resolve => require(['../views/isBargainingList.vue'], resolve),
         },
 
         {
-            path: '/forBargain', //1
+            path: '/forBargain',
             name: '帮砍页面',
             component: resolve => require(['../views/forBargain.vue'], resolve),
         },
         {
-            path: '/purchase',  
+            path: '/purchase',
             name: '支付页面',
             component: resolve => require(['../views/purchase/index.vue'], resolve),
         },
@@ -44,13 +49,13 @@ const curRouter = new VueRouter({
             component: resolve => require(['../views/shippingAddress.vue'], resolve),
         },
         {
-            path: '/purchase/paymentSuccess', //1
+            path: '/purchase/paymentSuccess',
             name: '支付成功页面',
             component: resolve => require(['../views/purchase/paymentSuccess.vue'], resolve),
         },
 
         {
-            path: '/my', //1
+            path: '/my',
             name: '我的账户页面',
             component: resolve => require(['../views/my/my.vue'], resolve),
         },
@@ -61,12 +66,12 @@ const curRouter = new VueRouter({
         },
 
         {
-            path: '/my/myFriends', //1
+            path: '/my/myFriends',
             name: '我的好友',
             component: resolve => require(['../views/my/myFriends.vue'], resolve),
         },
         {
-            path: '/my/myOrder', //1
+            path: '/my/myOrder',
             name: '我的订单',
             component: resolve => require(['../views/myOrder/index.vue'], resolve),
             redirect: '/my/myOrder/semua',
@@ -89,12 +94,12 @@ const curRouter = new VueRouter({
             ],
         },
         {
-            path: '/my/revenueDetails', //1
+            path: '/my/revenueDetails',
             name: '收益明细',
             component: resolve => require(['../views/my/revenueDetails.vue'], resolve),
         },
         {
-            path: '/my/Tutorial', //1
+            path: '/my/Tutorial',
             name: '新手教程',
             component: resolve => require(['../views/my/Tutorial.vue'], resolve),
         },
