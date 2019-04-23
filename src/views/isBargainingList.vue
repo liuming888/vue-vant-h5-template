@@ -233,9 +233,15 @@
   margin-top: 20px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+
   > .cut {
+    flex:1;
+    text-align: left;
     color: #888;
-    font-size: 18px;
+    font-size: 24px;
     > span {
       font-size: 24px;
       margin-right: 10px;
@@ -246,7 +252,7 @@
     display: inline-block;
     margin-left: 10px;
     position: relative;
-    width: 352px;
+    width: 238px;
     height: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(252, 123, 119, 1);
@@ -279,6 +285,7 @@
     height: 150px;
     display: flex;
     flex-direction: column-reverse;
+    font-size: 20px;
   }
 }
 </style>
@@ -288,7 +295,7 @@
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
-        <img v-lazy="require('./../assets/images/bargain-finish-banner.png')">
+        <img v-lazy="$t('isBargainingList.bargainFinishBanner')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
@@ -306,8 +313,8 @@
               </div>
               <div class="price-item">
                 <div class="btn"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
-                <p class="completed">completed</p>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.toBuy')}}</div>
+                <p class="completed">{{$t('isBargainingList.completed')}}</p>
               </div>
             </div>
           </div>
@@ -317,7 +324,7 @@
     <div class="ing-box"
       v-if="ingList.length > 0">
       <div class="banner">
-        <img v-lazy="require('./../assets/images/bargin-active-banner.png')">
+        <img v-lazy="$t('isBargainingList.barginActiveBanner')">
       </div>
       <ul class="goods-list">
         <li class="goods-item"
@@ -328,25 +335,25 @@
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
-            <count-down :dateDiff="item.bargain_info.expire_ttl"></count-down>
+            <count-down :dateDiff="item.bargain_info.expire_ttl" :timeType=timeType(item.bargain_info)></count-down>
             <div class="price-box go-on-price-box">
               <div class="price-item">
-                <div class="msg-box">cut Rp {{item.bargain_info.bargain_amount||0}}</div>
+                <div class="msg-box">{{$t('isBargainingList.cut')}} Rp {{item.bargain_info.bargain_amount||0}}</div>
                 <p class="now-price"><span>Rp</span>{{item.bargain_info.bargain_after||0}}</p>
                 <p class="real-price"><span>Rp</span>{{item.bargain_info.price||0}}</p>
               </div>
               <div class="price-item go-on-item-btn">
                 <div class="btn go-on"
-                  @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">Go On</div>
+                  @click="jumpCurBargainPage(item.bargain_info.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.goOn')}}</div>
 
                 <div class="btn"  style="position: relative;top: -5px;"
                   v-show="item.bargain_info.can_buy==1"
-                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">To Buy</div>
+                  @click="jumpPurchasePage(item.spu.spu_id,item.bargain_info.bargain_id)">{{$t('isBargainingList.toBuy')}}</div>
               </div>
             </div>
 
             <div class="cut-schedule">
-              <span class="cut">cut <span>{{item.bargain_info.bargain_rate}}%</span></span>
+              <span class="cut">{{$t('isBargainingList.cut')}} <span>{{item.bargain_info.bargain_rate}}%</span></span>
               <div class="schedule">
                 <div class="active"
                   :style="{'width': `${item.bargain_info.bargain_rate}%`}"></div>
@@ -378,6 +385,13 @@ export default {
     this.getMyBargainInfo();
   },
   methods: {
+    timeType(bargain_info){
+      if(bargain_info.can_buy==1){
+        return "buy";
+      }else{
+        return 'endIn'
+      }
+    },
     async getMyBargainInfo() {
       const params = {
         page_size: 10,

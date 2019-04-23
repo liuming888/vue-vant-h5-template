@@ -1,6 +1,17 @@
+let user_id=1;
+let access_token = '486dcad761f8425e8aa2a49e964a984c';
+let userStr = localStorage.getItem('userInfo');
+if (userStr && process.env.VUE_APP_ENV == 'development') {
+    let userInfo = JSON.parse(userStr);
+    user_id = userInfo.user_id;
+    access_token = userInfo.access_token;
+}
 export default {
-    loaddingNum:0,  // 当前loading的请求数
-    userInfo: {}, // 当前用户信息
+    loaddingNum: 0, // 当前loading的请求数
+    userInfo: {
+        user_id: process.env.VUE_APP_ENV == 'development' ? user_id : '',
+        access_token: process.env.VUE_APP_ENV == 'development' ? access_token : '',
+    }, // 当前用户信息
     isreFreshToken: false, // 是否已经请求了刷新token（前提本地存了上次的）
     goodsList: [
         // 商品列表数据（默认每个商品前端更改记录是否已砍价是否已砍价）
@@ -27,8 +38,9 @@ export default {
             // 砍价完成弹窗
             show: false,
         },
-        newGiftBag:{  // 新手礼包弹窗
-            show:false
-        }
+        newGiftBag: {
+            // 新手礼包弹窗
+            show: false,
+        },
     },
 };

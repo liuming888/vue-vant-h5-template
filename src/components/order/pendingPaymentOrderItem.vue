@@ -103,7 +103,7 @@
   <div>
     <div class="order-header">
       <span>{{curDat.create_time}}</span>
-      <label>Pending payment</label>
+      <label>{{$t('myOrder.pendingPayment')}}</label>
     </div>
     <div class="info-box">
       <img v-lazy="curDat.spu_url"
@@ -116,16 +116,16 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">Order Number:{{curDat.order_no}}</p>
+        <p class="address">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">
       <div class="pay-time">
-        Please
-        <span>{{exitTime}}</span> complete payment
+        {{$t('myOrder.please')}}
+        <span>{{exitTime}}</span> {{$t('myOrder.completePayment')}}
       </div>
       <div class="btn"
-        @click="goRepaidPay">Go buy</div>
+        @click="goRepaidPay">{{$t('myOrder.goBuy')}}</div>
     </div>
   </div>
 </template>

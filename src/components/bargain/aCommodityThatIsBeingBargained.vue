@@ -10,11 +10,11 @@
         <div class="good-detail">
           <p class="good-title">{{spuBargainItem.title}}</p>
           <count-down :dateDiff="spuBargainItem.expire_ttl"
-            v-if="spuBargainItem.expire_ttl"></count-down>
+            v-if="spuBargainItem.expire_ttl" :timeType="timeType"></count-down>
 
           <div class="left-box">
             <div class="num-box">
-              <span class="rp-box">Rp{{spuBargainItem.bargain_amount||0}}</span> <span class="compeled">completed</span>
+              <span class="rp-box">Rp{{spuBargainItem.bargain_amount||0}}</span> <span class="compeled">{{$t('aCommodityThatIsBeingBargained.completed')}}</span>
             </div>
 
             <div class="progress">
@@ -32,11 +32,11 @@
               class="go-on-btn"
               :class="{'r-b':spuBargainItem.can_buy==2}"
               @click="jumpBargain">
-              Go On
+              {{$t('aCommodityThatIsBeingBargained.goOn')}}
             </span>
             <span class="buy-btn r-b"
               v-if="spuBargainItem.can_buy==1"
-              @click="jumpPurchasePage">Buy</span>
+              @click="jumpPurchasePage">{{$t('aCommodityThatIsBeingBargained.buy')}}</span>
           </div>
         </div>
       </div>
@@ -63,11 +63,11 @@ export default {
         return {
           //类型：Object  必有字段  备注：无
           spu_id: 1, //类型：Number  必有字段  备注：商品id
-          title: "mock", //类型：String  必有字段  备注：商品标题
+          title: "", //类型：String  必有字段  备注：商品标题
           bargain_rate: 1, //类型：Number  必有字段  备注：已砍价比例
-          bargain_coin: "mock", //类型：String  必有字段  备注：已砍价金额
-          expire_time: "mock", //类型：String  必有字段  备注：砍价过期时间
-          bargain_id: "mock" //类型：String  必有字段  备注：砍价号
+          bargain_coin: "", //类型：String  必有字段  备注：已砍价金额
+          expire_time: "", //类型：String  必有字段  备注：砍价过期时间
+          bargain_id: "" //类型：String  必有字段  备注：砍价号
         };
       }
     }
@@ -86,6 +86,15 @@ export default {
       },
       shareInfo: {}
     };
+  },
+  computed: {
+    timeType(){
+      if(this.spuBargainItem.can_buy==1){
+        return 'buy';
+      }else{
+        return 'endIn'
+      }
+    }
   },
   created() {
     this.init();

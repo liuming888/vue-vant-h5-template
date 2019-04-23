@@ -55,13 +55,13 @@ export default {
       tabBarList: [
         {
           path: "/",
-          title: "HOME",
+          title: this.$t('tabBar.homeTab'),
           imgUrl: require("../../../assets/images/tabBar-home.png"),
           imgActiveUrl: require("../../../assets/images/tabBar-home-active.png")
         },
         {
           path: "/my",
-          title: "ME",
+          title: this.$t('tabBar.meTab'),
           imgUrl: require("../../../assets/images/tabBar-me.png"),
           imgActiveUrl: require("../../../assets/images/tabBar-me-active.png")
         }

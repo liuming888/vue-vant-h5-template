@@ -10,6 +10,7 @@
       flex: 1;
       color: #888888;
       font-size: 24px;
+      white-space:nowrap; 
     }
   }
 }
@@ -19,9 +20,9 @@
   <div class="myFriends-container">
     <div class="friendsHeader">
       <ul>
-        <li>Friend nickname</li>
-        <li>Join time</li>
-        <li>Contribution</li>
+        <li>{{$t('myFriends.friendNickname')}}</li>
+        <li>{{$t('myFriends.joinTime')}}</li>
+        <li>{{$t('myFriends.contribution')}}(Rp)</li>
       </ul>
     </div>
     <div class="friendsContent"

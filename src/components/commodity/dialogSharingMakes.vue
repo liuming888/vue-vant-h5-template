@@ -17,8 +17,10 @@
 .share-box {
   width: 610px;
   height: 966px;
-  background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
-    100%;
+  // background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
+  //   100%;
+  background-repeat: no-repeat;
+  background-size:100% 100%; 
   padding-top: 220px;
   box-sizing: border-box;
   position: relative;
@@ -29,7 +31,7 @@
     box-sizing: border-box;
     text-align: center;
     margin: 0 auto;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
     line-height: 38px;
@@ -144,7 +146,10 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+    background: none;
+    // background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
+    background-repeat: no-repeat;
+    background-size:100% 100%; 
   }
 
   .close-img {
@@ -164,13 +169,13 @@
 <template>
   <div class="dialogSharingMakes-container"
     v-show="dialogVisible.show"
-    @click.stop="abc=1">
+    @click.stop>
 
-    <div class="share-box">
+    <div class="share-box" :style="{'background-image':`url(${$t('dialogSharingMakes.fenxiangzhuanba')})`}">
       <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
       <h5 class="tit">
-        <p>Share to your friends.</p>
-        <p> You will gain bonus if your friends buy it.</p>
+        <p>{{$t('dialogSharingMakes.shareToYourFriends')}}</p>
+        <p>{{$t('dialogSharingMakes.youWillGainBonusIfYourFriendsBuyIt')}}</p>
       </h5>
 
       <div class="content">
@@ -220,6 +225,7 @@
 
         <button ref="copy"
           class="copy-link"
+          :style="{'background-image':`url(${$t('dialogSharingMakes.copylink')})`}"
           data-clipboard-action="copy"
           :data-clipboard-text="mx_copyTxt"
           @click="mx_copyLink"></button>
@@ -237,7 +243,7 @@ import share from "@/mixins/share.js";
 import fbInit from "@/mixins/fbInit.js";
 export default {
   mixins: [share, fbInit],
-  name: "dialogSharingMakes",
+  name: "dialogSharingMakes", // 点击分享赚弹起浮窗
   props: {
     dialogVisible: {
       type: Object,
@@ -252,9 +258,9 @@ export default {
       default() {
         return {
           share_url: window.location.origin + "/forBargain", // 从点击打开的链接
-          share_title: "分享标题",
-          share_desp: "分享的描述",
-          share_image: "https://s.pinimg.com/images/facebook_share_image.png" //  分享的预览图（图片有限制）
+          share_title: "",
+          share_desp: "",
+          share_image: "" //  分享的预览图（图片有限制）
           // quote:
           //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"
           // hashtag:"FB分享的tag标签"

@@ -1,3 +1,4 @@
+
 <style lang="scss">
 .freebing-box {
   .freebing-container {
@@ -232,7 +233,7 @@
 
         <div class="freebing-box"
           v-if="homeBargainList.length>0">
-          <div class="freebing-title">Ongoing Freebies</div>
+          <div class="freebing-title">{{$t('home.ongoingFreebies')}}</div>
           <template v-for="(item,index) of homeBargainList">
             <!-- 抢购商品 -->
             <freebing-box :key="index"
@@ -241,7 +242,7 @@
 
           <a href="javascript:;"
             class="freebing-more"
-            @click="handleMoreAbout">More About ></a>
+            @click="handleMoreAbout">{{$t('home.moreAbout')}} ></a>
         </div>
 
       </section>
@@ -249,7 +250,7 @@
         <template v-if="goodsList.length>0">
           <div class="home-goods-title"
             v-if="goodsList.length>0&&homeBargainList.length>0">
-            <img v-lazy="require('@/assets/images/gengduotop.png')">
+            <img v-lazy="$t('home.gengduotop')">
           </div>
           <ul class="home-goods-list">
             <li is="commodity-item"
@@ -264,13 +265,13 @@
       </section>
 
       <div class="privacy-agreement-box">
-        <p>Copyright © 2019 Istarbuy</p>
+        <p>{{$t('home.copyright_2019Istarbuy')}}</p>
 
         <ul>
-          <li onclick="window.open('Privacy Policy.html');">Privacy Policy</li>
-          <li onclick="window.open('Terms & Conditions.html');">T&Cs</li>
-          <li onclick="window.open('About us.html');">About Us</li>
-          <li onclick="window.open('Contact us.html');">Contact Us</li>
+          <li onclick="window.open('Privacy Policy.html');">{{$t('home.privacyPolicy')}}</li>
+          <li onclick="window.open('Terms & Conditions.html');">{{$t('home.tCs')}}</li>
+          <li onclick="window.open('About us.html');">{{$t('home.aboutUs')}}</li>
+          <li onclick="window.open('Contact us.html');">{{$t('home.contactUs')}}</li>
         </ul>
       </div>
     </div>
@@ -374,8 +375,8 @@ export default {
       if (
         localStorage.getItem(
           "userInfo"
-        ) /* ||
-        process.env.VUE_APP_ENV == "development" */
+        ) ||
+        process.env.VUE_APP_ENV == "development"
       ) {
         this.initBargainOrderSpusList();
         this.initMybargainSpus();
@@ -491,4 +492,3 @@ export default {
   }
 };
 </script>
-

@@ -154,15 +154,15 @@ export default {
     return {
       tabList: [
         {
-          tit: "My oders",
+          tit: this.$t('myOrder.myOdersTit'),
           path: "/my/myOrder/semua"
         },
         {
-          tit: "Pending payment",
+          tit: this.$t('myOrder.pendingPaymentTit'),
           path: "/my/myOrder/pendingPayment"
         },
         {
-          tit: "Completed",
+          tit: this.$t('myOrder.completedTit'),
           path: "/my/myOrder/completed"
         }
       ]

@@ -44,10 +44,14 @@ export function expiration(expire_time) {
 export function paymentCancellationPrompt() {
     setTimeout(() => {
         const Toast = require('vant').Toast;
-        Toast({
-            message: `Payment has been cancelled, you can re-initiate payment in "My Order" !`,
-            duration: 2000,
-        });
+          try {
+              Toast({
+                  message: window.curVueObj.$t('common.youCanReInitiatePaymentInMyOrder'),
+                    duration: 2000,
+              });
+          } catch (error) {
+              console.warn('这里出错3', error);
+          }
     }, 500);
 }
 

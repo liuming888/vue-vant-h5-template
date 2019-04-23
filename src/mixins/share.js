@@ -2,7 +2,7 @@
  * @Description: 分享组件相关的公共方法
  * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-04-15 16:18:50
+ * @LastEditTime: 2019-04-18 14:32:33
  */
 import { FBConfig } from '@/config/index.js';
 import Clipboard from 'clipboard';
@@ -37,10 +37,10 @@ export default {
             let vm = this;
             let clipboard = vm.mx_copyBtn;
             clipboard.on('success', function() {
-                vm.$toast('Successful copy');
+                vm.$toast(vm.$t('common.successfulCopy'));
             });
             clipboard.on('error', function() {
-                vm.$toast('Replication failed');
+                vm.$toast(vm.$t('common.replicationFailed'));
             });
         },
         /**

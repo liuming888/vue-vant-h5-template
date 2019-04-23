@@ -88,7 +88,7 @@ export default {
     info: {
       type: Object,
       default: {
-        content: 'test',
+        content: '',
         cancleText: 'cancel',
         okText: 'ok',
         delId:0
