@@ -9,7 +9,7 @@ export default {
 
     /************************ 组件  start *****************************************************/
     countDown: {
-        endIn: 'End in',
+        endIn: 'diakhiri',
         payWithin: 'Bayar dalam',
     },
     aCommodityThatIsBeingBargained: {
@@ -199,9 +199,9 @@ export default {
         tutorialTxt: 'Tutorial',
         heroesTxt: 'Pahlawan',
         rankingsTxt: 'Peringkat',
-        numberOfFansTxt: 'jumlah penggemar', 
-        cumulativeReturnTxt: 'Pengembalian kumulatif', 
-        signOutTxt: 'keluar', 
+        numberOfFansTxt: 'jumlah penggemar',
+        cumulativeReturnTxt: 'Pengembalian kumulatif',
+        signOutTxt: 'keluar',
     },
     myFriends: {
         friendNickname: 'Nama panggilan teman',
@@ -214,7 +214,7 @@ export default {
         completedTit: 'Lengkap',
         tidakAdaPesananTerkait: 'Tidak ada pesanan terkait',
         bukaHalamanBerandaDanLihat: 'Buka halaman beranda dan lihat',
-        contactUsBy: 'Hubungi kami oleh', 
+        contactUsBy: 'Hubungi kami oleh',
         iKnow: 'Saya mengerti',
         orderNumber: 'Nomor pesanan',
         customerService: 'Pelayan Pelanggan',
