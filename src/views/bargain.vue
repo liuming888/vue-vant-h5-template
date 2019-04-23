@@ -37,7 +37,7 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span>&nbsp; {{$t('bargain.cheaperNowLeaving')}} &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; {{$t('bargain.cheaperNowLeaving')}} &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':curRate+'%'}"></div>
@@ -53,7 +53,7 @@
             </div>
           </div>
           <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
-            class="spu-count-down"></count-down>
+            class="spu-count-down"  :timeType="timeType"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
@@ -243,6 +243,13 @@ export default {
     },
     isLogin() {
       return this.$store.state.userInfo.user_id;
+    },
+    timeType(){
+      if(this.bargain_info&&this.bargain_info.can_buy==1){
+        return 'buy';
+      }else{
+        return 'endIn';
+      }
     }
   },
   created() {

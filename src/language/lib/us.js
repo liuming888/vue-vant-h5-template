@@ -58,6 +58,8 @@ export default {
         numberCannotBeEmpty: 'Number cannot be empty !',
         verificationCodeMustBeFilled: 'verification code must be filled !',
         yourSmsCodeWillBeSent: 'Please be patient，Your SMS code will be sent in 120 second!',
+        enterMobileNumber: 'Enter Mobile Number',
+        enterCodeSms: 'Enter Code SMS',
     },
     dialogNewGiftBag: {
         newcomerGiftBag: 'Newcomer Gift Bag',
@@ -91,6 +93,7 @@ export default {
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/gengduotop.png'),
+        goTopBtn: require('@/assets/images/top.png'),
     },
     bargain: {
         sent: 'Sent',

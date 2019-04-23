@@ -202,7 +202,7 @@
 
 <template>
   <div>
-    <img v-lazy="require('@/assets/images/top.png')"
+    <img v-lazy="$t('home.goTopBtn')"
       class="go-top-btn"
       v-if="showGoTopBtn"
       @click.stop="goPageTop" />
