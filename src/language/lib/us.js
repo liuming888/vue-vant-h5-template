@@ -93,6 +93,7 @@ export default {
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/gengduotop.png'),
+        goTopBtn: require('@/assets/images/top.png'),
     },
     bargain: {
         sent: 'Sent',
