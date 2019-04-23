@@ -118,22 +118,49 @@ function sendSubscriptionToServer(body, url) {
     });
 }
 
+
+var notification={};  // Notification的实例对象
+
 /**                               Notification API
  * @description: Notification的功能本身与Push并不耦合 你完全可以只使用Notification API或者Push API来构建Web App的某些功能 作为Notification的“黄金搭档” 组合使用Push & Notification（消息推送与提醒）
- * 对Notification API的方法Notification.requestPermission()进行封装
- * 由于Notification.requestPermission()在某些版本浏览器中会接收一个回调函数（Notification.requestPermission(callback)）作为参数，而在另一些浏览器版本中会返回一个promise，因此将该方法进行包装，统一为promise调用
  */
 function askPermission() {
-    return new Promise(function(resolve, reject) {
-        var permissionResult = Notification.requestPermission(function(result) {
-            resolve(result);
-        });
+    return new Promise(function(resolve) {
+        // var options = {
+        //     dir: 'rtl', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
+        //     // lang: 指定通知中所使用的语言。这个字符串必须在 BCP 47 language tag 文档中是有效的
+        //     body: '111111111111111111',
+        //     tag: '1',
+        //     icon: 'https://www.lovingistarbuy.com/bitbug_favicon.ico',
+        // };
+        // 先检查浏览器是否支持
+        if (!('Notification' in window)) {
+            console.warn('浏览器不支持Notification API');
+        } else if (Notification.permission === 'granted') {
+            // 检查用户是否同意接受通知
+            // notification = new Notification('Hi there!', options);
+            resolve(true);
+        } else if (Notification.permission !== 'denied') {
+            // 否则我们需要向用户获取权限
+            var permissionResult = Notification.requestPermission(function(permission) {
+                //     // 如果用户同意，就可以向他们发送通知
+                if (permission === 'granted') {
+                    // notification = new Notification('Hi there!', options);
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
 
-        if (permissionResult) {
-            permissionResult.then(resolve, reject);
+            if (permissionResult == 'granted') {
+                // 用户同意接受通知
+                resolve(true);
+            } else {
+                resolve(false);
+            }
         }
-    }).then(function(permissionResult) {
-        if (permissionResult !== 'granted') {
+    }).then(function(result) {
+        if (!result) {
             throw new Error("We weren't granted permission.");
         }
     });
@@ -142,9 +169,9 @@ function askPermission() {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     var publicKey = 'BOEQSjdhorIf8M0XFNlwohK3sTzO9iJwvbYU-fuXRF0tvRpPPMGO6d_gJC_pUQwBT7wD8rKutpNTFHOHN3VqJ0A';
     // 注册service worker
-    registerServiceWorker('./sw.js')
+    registerServiceWorker('./swdemo.js')
         .then(function(registration) {
-            console.log('Service Worker 注册成功');
+            console.warn('Service Worker 注册成功');
             // 开启该客户端的消息推送订阅功能
             // return subscribeUserToPush(registration, publicKey);
 
@@ -152,7 +179,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         })
         .then(function(result) {
             var registration = result[1];
-            document.querySelector('#app').addEventListener('click', function() {
+            document.querySelector('#pwaT').addEventListener('click', function() {
+                console.warn('点击了');
                 var title = 'PWA即学即用';
                 var options = {
                     body: '邀请你一起学习',
@@ -172,9 +200,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 };
                 registration.showNotification(title, options);
                 // 目前移动端浏览器普遍还不支持该特性。但是在Mac OS上的safari里面是支持该特性的，不过其调用方式与上文代码有些不太一样
-                // var notification = new Notification(title, options);
+                // notification = new Notification(title, options);
             });
-
 
             // 服务器推送消息主要逻辑
             var body = { subscription: result[0] };
@@ -182,8 +209,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             body.uniqueid = new Date().getTime();
             console.log('uniqueid', body.uniqueid);
             console.log('body---------------------', body);
-            // 将生成的客户端订阅信息存储在自己的服务器上
-            // return sendSubscriptionToServer(JSON.stringify(body));
+            // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
+            return sendSubscriptionToServer(JSON.stringify(body));
         })
         .then(function(res) {
             console.log(res);
@@ -203,7 +230,6 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新域名
                 break;
             case 'contact-me':
-                alert(2);
                 location.href = '1311737393@qq.com';
                 break;
             default:
@@ -213,27 +239,40 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         }
     });
 
-    /**
-     * @description: Mac OS上的safari
-     */
-    notification.addEventListener('click', function(e) {
-        var action = e.data;
-        console.log(`receive post-message from sw, action is '${e.data}'`);
-        switch (action) {
-            case 'show-book':
-                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新域名
-                break;
-            case 'contact-me':
-                alert(2);
-                location.href = '1311737393@qq.com';
-                break;
-            default:
-                // 默认点击别的地方的行为
-                // document.querySelector('.panel').classList.add('show');
-                break;
-        }
-    });
+    // /**
+    //  * @description: Mac OS上的safari
+    //  */
+    // notification.addEventListener('click', function(e) {
+    //     var action = e.data;
+    //     console.log(`receive post-message from sw, action is '${e.data}'`);
+    //     switch (action) {
+    //         case 'show-book':
+    //             location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新域名
+    //             break;
+    //         case 'contact-me':
+    //             alert(2);
+    //             location.href = '1311737393@qq.com';
+    //             break;
+    //         default:
+    //             // 默认点击别的地方的行为
+    //             // document.querySelector('.panel').classList.add('show');
+    //             break;
+    //     }
+    // });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // /**                               Notification API
 //  * @description: Notification的功能本身与Push并不耦合 你完全可以只使用Notification API或者Push API来构建Web App的某些功能 作为Notification的“黄金搭档” 组合使用Push & Notification（消息推送与提醒）

@@ -12,22 +12,22 @@ self.addEventListener('install', function(e) {
 
 //  缓存可能造成问题
 // 简单缓存
-self.addEventListener('fetch', function(e) {
-    // 如果有cache则直接返回，否则不操作
-    e.respondWith(
-        caches
-            .match(e.request)
-            .then(function(cache) {
-                // return cache || fetch(e.request);
-                return cache;
-            })
-            .catch(function(err) {
-                console.log(err);
-                // return fetch(e.request);
-                return false;
-            })
-    );
-});
+// self.addEventListener('fetch', function(e) {
+//     // 如果有cache则直接返回，否则不操作
+//     e.respondWith(
+//         caches
+//             .match(e.request)
+//             .then(function(cache) {
+//                 // return cache || fetch(e.request);
+//                 return cache;
+//             })
+//             .catch(function(err) {
+//                 console.log(err);
+//                 // return fetch(e.request);
+//                 return false;
+//             })
+//     );
+// });
 
 // 复杂缓存
 // self.addEventListener('fetch', function(e) {
