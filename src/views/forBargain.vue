@@ -38,7 +38,8 @@
           <div class="time-and-sum">
             <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
               class="spu-count-down"
-              v-if="bargain_info.expire_ttl||spu.ttl" timeType="endIn"></count-down>
+              v-if="bargain_info.expire_ttl||spu.ttl"
+              timeType="endIn"></count-down>
 
             <span class="spu-num">{{spu.deliver_count || 1}} {{$t('forBargain.Sent')}}</span>
           </div>
@@ -59,7 +60,7 @@
       <!-- 砍价进度 -->
       <div class="bargain-schedule">
         <p v-if="isBargain"
-          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>&nbsp; {{$t('forBargain.cheaperNow')}}, {{$t('forBargain.leaving')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span></p>
+          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>&nbsp; {{$t('forBargain.cheaperNow')}}, {{$t('forBargain.leaving')}} &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
         <p v-else
           class="title">
           {{$t('forBargain.heHadCutDown')}}&nbsp;<span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>
@@ -204,8 +205,7 @@
         </div>
       </div> -->
 
-
-       <div class="recommend-products"
+      <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
           <img v-lazy="$t('forBargain.xingzhuang')">
