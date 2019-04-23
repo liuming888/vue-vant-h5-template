@@ -99,12 +99,12 @@
         </ul>
       </div>
       <div class="goods-detail"
-        v-if="!$route.query.bargainId">
+        v-if="!$route.query.bargainId&&spu.desp_pics&&spu.desp_pics.length>0">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
         <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
 
-        <van-swipe :autoplay="spuImgPlayTime"
+        <!-- <van-swipe :autoplay="spuImgPlayTime"
           :show-indicators="false"
           indicator-color="#D30C05"
           class="product-item">
@@ -116,7 +116,13 @@
               </van-swipe-item>
             </template>
           </template>
-        </van-swipe>
+        </van-swipe> -->
+
+        <ul>
+          <li v-for="(item,index) of spu.desp_pics" :key="index">
+            <img v-lazy="item">
+          </li>
+        </ul>
       </div>
 
       <!-- 推荐商品 -->
