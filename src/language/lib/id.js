@@ -90,7 +90,7 @@ export default {
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/id-gengduotop.png'),
-        goTopBtn: require('@/assets/images/top.png'),
+        goTopBtn: require('@/assets/images/id-top.png'),
     },
     bargain: {
         sent: 'terkirim gratis',
