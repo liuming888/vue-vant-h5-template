@@ -100,7 +100,7 @@ export default {
         cheaperNowLeaving: 'sekarang lebih murah, sisa',
         off: 'off',
         availableForPurchase: 'Tersedia untuk pembelian',
-        takeItFree: 'Gratis',
+        takeItFree: 'hanya Rp',
         shareFriendsForFreebies: 'Tim tawar-menawar untuk dapat freebies',
         cutAKnife: 'Cut a knife',
         buyNow: 'beli sekarang',

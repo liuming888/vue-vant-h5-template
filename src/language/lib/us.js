@@ -103,7 +103,7 @@ export default {
         cheaperNowLeaving: 'cheaper now, leaving',
         off: 'off',
         availableForPurchase: 'Available for purchase',
-        takeItFree: 'For free',
+        takeItFree: 'only Rp',
         shareFriendsForFreebies: 'Share friends for freebies',
         cutAKnife: 'Cut a knife',
         buyNow: 'buy now',

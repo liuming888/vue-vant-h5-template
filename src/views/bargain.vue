@@ -48,7 +48,7 @@
                 <span class="description">{{$t('bargain.availableForPurchase')}}</span>
               </div>
               <div class="schedule-item ball ball-right">
-                <span class="description">{{$t('bargain.takeItFree')}}</span>
+                <span class="description">{{$t('bargain.takeItFree')}}{{bargain_info.must_buy_price||0}}</span>
               </div>
             </div>
           </div>
