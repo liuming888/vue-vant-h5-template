@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-23 23:39:55
+ * @LastEditTime: 2019-04-24 00:02:42
  */
 
 /**
@@ -117,7 +117,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 /****************************************************** 浏览器消息推送相关逻辑start *******************************************/
-var env = document.getElementById('pageBody').dataset.env;
+var env = process.env.VUE_APP_ENV;
 console.log('env---------------------------------------------------: ', env);
 var notification = {}; // 全局变量  存放Notification的实例对象
 notification.addEventListener = function() {};
@@ -267,7 +267,7 @@ function pushInfo(registration) {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     var publicKey = 'BOEQSjdhorIf8M0XFNlwohK3sTzO9iJwvbYU-fuXRF0tvRpPPMGO6d_gJC_pUQwBT7wD8rKutpNTFHOHN3VqJ0A';
     // 注册service worker
-    registerServiceWorker('./sw.js')
+    registerServiceWorker('/sw.js')
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
             // 开启该客户端的消息推送订阅功能

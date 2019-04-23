@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-23 23:55:31
+ * @LastEditTime: 2019-04-24 00:01:55
  */
 
 /**
@@ -117,7 +117,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 /****************************************************** 浏览器消息推送相关逻辑start *******************************************/
-var env = document.getElementById('pageBody').dataset.env;
+var env = process.env.VUE_APP_ENV;
 console.log('env---------------------------------------------------: ', env);
 var notification = {}; // 全局变量  存放Notification的实例对象
 notification.addEventListener = function() {};
