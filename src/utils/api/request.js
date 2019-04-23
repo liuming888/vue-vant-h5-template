@@ -24,8 +24,10 @@ if (userStr && process.env.VUE_APP_ENV == 'development') {
 
 // 手动应付别的情况
 if (process.env.VUE_APP_ENV == 'development') {
-    user_id = 342;
-    access_token = 'e24343e21b3d47cdb68b003745c57141';
+    // user_id = 342;
+    // access_token = 'e24343e21b3d47cdb68b003745c57141';
+    user_id = '';
+    access_token = '';
 }
 
 console.log('666666666666', process.env.VUE_APP_ENV);

@@ -65,10 +65,10 @@
     }
     > .home-banner {
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 26px;
       img {
         width: 100%;
-        max-height: 500px;
+        height: auto;
       }
     }
   }
