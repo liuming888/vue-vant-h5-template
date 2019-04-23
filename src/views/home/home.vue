@@ -26,7 +26,7 @@
 
 <style lang="scss" scoped>
 .home-container {
-  background-color: #d30c05;
+  background-color:#f5f5f5;
   height: 89vh;
   overflow-y: auto;
   padding-bottom: 36px;
@@ -65,6 +65,8 @@
     }
     > .home-banner {
       width: 100%;
+      max-height: 324px;
+      overflow: hidden;
       margin-bottom: 26px;
       img {
         width: 100%;
@@ -90,7 +92,7 @@
       }
     }
     > .home-goods-list {
-      padding: 0 30px 36px 30px;
+      padding: 0 22px 36px;
       > div + div {
         margin-top: 30px;
       }
@@ -375,8 +377,8 @@ export default {
       if (
         localStorage.getItem(
           "userInfo"
-        ) ||
-        process.env.VUE_APP_ENV == "development"
+        ) /* ||
+        process.env.VUE_APP_ENV == "development" */
       ) {
         this.initBargainOrderSpusList();
         this.initMybargainSpus();

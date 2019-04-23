@@ -16,15 +16,20 @@
     }
   }
   > .goods-detail {
-    padding: 49px 31px 0 31px;
+    padding: 32px 24px 28px;
     overflow: hidden;
     > .goods-title {
       display: block;
-      font-size: 36px;
       color: #323232;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      font-size: 28px;
+      font-family: Helvetica;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 35px;
+      margin-bottom: 30px;
     }
     > .goods-description {
       line-height: 40px;
@@ -35,36 +40,41 @@
       white-space: nowrap;
     }
     > .goods-price {
-      padding: 10px 0;
-      line-height: 44px;
+      // padding: 10px 0;
+      line-height: 35px;
       > .discount {
-        font-size: 44px;
         color: #d30c05;
+        font-size: 38px;
+        font-family: "DIN-Medium";
+        font-weight: 500;
+        color: rgba(211, 12, 5, 1);
       }
       > .real {
-        padding-left: 17px;
-        font-size: 24px;
-        color: #888888;
+        margin-left: 17px;
         text-decoration: line-through;
+        font-size: 20px;
+        font-family: Helvetica;
+        font-weight: 400;
+        color: rgba(136, 136, 136, 1);
       }
     }
   }
   > .goods-control {
-    padding: 0 31px 39px 31px;
+    padding: 0 31px 32px 31px;
     // display: flex;
     height: 70px;
+    overflow: hidden;
 
     > span {
       position: relative;
       font-size: 28px;
       display: inline-block;
       color: #fff;
-      text-indent: 64px;
-      height: 70px;
-      line-height: 70px;
-      border-radius: 35px;
+      height: 60px;
+      line-height: 60px;
+      border-radius: 30px;
       text-decoration: none;
-      padding-right: 24px;
+      padding: 0 24px ;
 
       &::before {
         content: "";
@@ -76,30 +86,14 @@
         left: 19px;
       }
 
-
       &.button-l {
-      
-        background: linear-gradient(
-          90deg,
-          rgba(246, 174, 1, 1) 0%,
-          rgba(246, 75, 1, 1) 100%
-        );
-      
-        &::before {
-          background: url("~@/assets/images/btn-1.png") no-repeat 0 0/auto 100%;
-        }
+        color: #f64e01;
+        border: 1px solid rgba(246, 78, 1, 1);
       }
       &.button-r {
         float: right;
-        background: linear-gradient(
-          90deg,
-          rgba(246, 78, 1, 1) 0%,
-          rgba(211, 12, 5, 1) 100%
-        );
-       
-        &::before {
-          background: url("~@/assets/images/btn-2.png") no-repeat 0 0/100% auto;
-        }
+        color: #d30c05;
+        border: 1px solid rgba(211, 12, 5, 1);
       }
     }
   }
@@ -130,11 +124,11 @@
         <a href="javascript:;"
           class="goods-title"
           @click="jumpBargain">{{itemData.title || ''}}</a>
-        <p class="goods-description">{{itemData.sub_title || ''}}</p>
-        <p class="goods-description">{{itemData.deliver_count}} Sent</p>
+        <!-- <p class="goods-description">{{itemData.sub_title || ''}}</p> -->
+        <!-- <p class="goods-description">{{itemData.deliver_count}} Sent</p> -->
         <div class="goods-price">
-          <span class="discount">RP {{itemData.price || 0}}</span>
-          <span class="real">RP{{itemData.original_price || 0}}</span>
+          <span class="discount">Rp{{itemData.price || 0}}</span>
+          <span class="real">{{$t('commodityItem.platformPrice')}}:Rp{{itemData.original_price || 0}}</span>
         </div>
       </div>
       <div class="goods-control">

@@ -35,6 +35,7 @@ export default {
     commodityItem: {
         cashBack: 'Uang kembali',
         getAFreebie: 'Dapatkan freebie',
+        platformPrice: 'Harga platform',
     },
 
     dialogSharingMakes: {
