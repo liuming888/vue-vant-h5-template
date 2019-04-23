@@ -26,7 +26,7 @@
 
 <style lang="scss" scoped>
 .home-container {
-  background-color: #d30c05;
+  background-color:#f5f5f5;
   height: 89vh;
   overflow-y: auto;
   padding-bottom: 36px;
@@ -65,10 +65,12 @@
     }
     > .home-banner {
       width: 100%;
-      margin-bottom: 30px;
+      max-height: 324px;
+      overflow: hidden;
+      margin-bottom: 26px;
       img {
         width: 100%;
-        max-height: 500px;
+        height: auto;
       }
     }
   }
@@ -90,7 +92,7 @@
       }
     }
     > .home-goods-list {
-      padding: 0 30px 36px 30px;
+      padding: 0 22px 36px;
       > div + div {
         margin-top: 30px;
       }
@@ -202,7 +204,7 @@
 
 <template>
   <div>
-    <img v-lazy="require('@/assets/images/top.png')"
+    <img v-lazy="$t('home.goTopBtn')"
       class="go-top-btn"
       v-if="showGoTopBtn"
       @click.stop="goPageTop" />
@@ -219,7 +221,7 @@
           :show-indicators="false"
           indicator-color="#D30C05"
           class="home-banner"
-          @click.native="$router.push('/my/Tutorial')">
+          @click.native="$router.push('/userGuidance')">
           <template v-if="bannerList.length>0">
             <template v-for="(item,index) of bannerList">
               <van-swipe-item @click="handleBannerClick"
@@ -375,8 +377,8 @@ export default {
       if (
         localStorage.getItem(
           "userInfo"
-        ) ||
-        process.env.VUE_APP_ENV == "development"
+        ) /* ||
+        process.env.VUE_APP_ENV == "development" */
       ) {
         this.initBargainOrderSpusList();
         this.initMybargainSpus();

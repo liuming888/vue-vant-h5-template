@@ -37,7 +37,7 @@
           </div>
           <!-- 砍价进度 -->
           <div class="bargain-schedule">
-            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span>&nbsp; {{$t('bargain.cheaperNowLeaving')}} &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span></p>
+            <p class="title"><span class="n-1"><span class="dollar">RP</span>{{bargain_info.bargain_amount||shareInfo.pre_bargain_amount||0}}</span>&nbsp; {{$t('bargain.cheaperNowLeaving')}} &nbsp;<span class="n-2"><span class="dollar">RP</span>{{bargain_info.bargain_after||spu.price}}</span></p>
             <div class="schedule">
               <div class="active"
                 :style="{'width':curRate+'%'}"></div>
@@ -48,12 +48,12 @@
                 <span class="description">{{$t('bargain.availableForPurchase')}}</span>
               </div>
               <div class="schedule-item ball ball-right">
-                <span class="description">{{$t('bargain.takeItFree')}}</span>
+                <span class="description">{{$t('bargain.takeItFree')}}{{bargain_info.must_buy_price||0}}</span>
               </div>
             </div>
           </div>
           <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
-            class="spu-count-down"></count-down>
+            class="spu-count-down"  :timeType="timeType"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
@@ -99,12 +99,12 @@
         </ul>
       </div>
       <div class="goods-detail"
-        v-if="!$route.query.bargainId">
+        v-if="!$route.query.bargainId&&spu.desp_pics&&spu.desp_pics.length>0">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
         <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
 
-        <van-swipe :autoplay="spuImgPlayTime"
+        <!-- <van-swipe :autoplay="spuImgPlayTime"
           :show-indicators="false"
           indicator-color="#D30C05"
           class="product-item">
@@ -116,7 +116,13 @@
               </van-swipe-item>
             </template>
           </template>
-        </van-swipe>
+        </van-swipe> -->
+
+        <ul>
+          <li v-for="(item,index) of spu.desp_pics" :key="index">
+            <img v-lazy="item">
+          </li>
+        </ul>
       </div>
 
       <!-- 推荐商品 -->
@@ -237,6 +243,13 @@ export default {
     },
     isLogin() {
       return this.$store.state.userInfo.user_id;
+    },
+    timeType(){
+      if(this.bargain_info&&this.bargain_info.can_buy==1){
+        return 'buy';
+      }else{
+        return 'endIn';
+      }
     }
   },
   created() {

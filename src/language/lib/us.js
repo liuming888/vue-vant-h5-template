@@ -37,6 +37,7 @@ export default {
     commodityItem: {
         cashBack: 'Cash Back',
         getAFreebie: 'Get a freebie',
+        platformPrice: 'Platform price',
     },
 
     dialogSharingMakes: {
@@ -58,6 +59,8 @@ export default {
         numberCannotBeEmpty: 'Number cannot be empty !',
         verificationCodeMustBeFilled: 'verification code must be filled !',
         yourSmsCodeWillBeSent: 'Please be patient，Your SMS code will be sent in 120 second!',
+        enterMobileNumber: 'Enter Mobile Number',
+        enterCodeSms: 'Enter Code SMS',
     },
     dialogNewGiftBag: {
         newcomerGiftBag: 'Newcomer Gift Bag',
@@ -91,6 +94,7 @@ export default {
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/gengduotop.png'),
+        goTopBtn: require('@/assets/images/top.png'),
     },
     bargain: {
         sent: 'Sent',
@@ -99,7 +103,7 @@ export default {
         cheaperNowLeaving: 'cheaper now, leaving',
         off: 'off',
         availableForPurchase: 'Available for purchase',
-        takeItFree: 'For free',
+        takeItFree: 'only Rp',
         shareFriendsForFreebies: 'Share friends for freebies',
         cutAKnife: 'Cut a knife',
         buyNow: 'buy now',

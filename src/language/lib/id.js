@@ -2,14 +2,14 @@ export default {
     lang: 'id',
     common: {
         hello: 'en hello world',
-        pleaseLoginAgain: 'please login again !',
+        pleaseLoginAgain: 'Silakan masuk lagi !',
         theRequestFailed: 'The request failed. Please try again later!',
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
     },
 
     /************************ 组件  start *****************************************************/
     countDown: {
-        endIn: 'End in',
+        endIn: 'diakhiri',
         payWithin: 'Bayar dalam',
     },
     aCommodityThatIsBeingBargained: {
@@ -18,8 +18,8 @@ export default {
         buy: 'Beli',
     },
     tabBar: {
-        homeTab: 'HOME',
-        meTab: 'ME',
+        homeTab: 'Beranda',
+        meTab: 'Akun',
     },
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Teman membantu Anda menghemat',
@@ -35,6 +35,7 @@ export default {
     commodityItem: {
         cashBack: 'Uang kembali',
         getAFreebie: 'Dapatkan freebie',
+        platformPrice: 'Harga platform',
     },
 
     dialogSharingMakes: {
@@ -56,6 +57,8 @@ export default {
         numberCannotBeEmpty: 'Nomor tidak boleh kosong !',
         verificationCodeMustBeFilled: 'kode verifikasi harus diisi !',
         yourSmsCodeWillBeSent: 'Mohon bersabarlah, kode SMS Anda akan dikirim dalam 120 detik!',
+        enterMobileNumber: 'Masukkan nomor telepon',
+        enterCodeSms: 'Masukkan Kode SMS',
     },
     dialogNewGiftBag: {
         newcomerGiftBag: 'Tas hadiah pendatang baru',
@@ -88,6 +91,7 @@ export default {
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/id-gengduotop.png'),
+        goTopBtn: require('@/assets/images/id-top.png'),
     },
     bargain: {
         sent: 'terkirim gratis',
@@ -96,7 +100,7 @@ export default {
         cheaperNowLeaving: 'sekarang lebih murah, sisa',
         off: 'off',
         availableForPurchase: 'Tersedia untuk pembelian',
-        takeItFree: 'Gratis',
+        takeItFree: 'hanya Rp',
         shareFriendsForFreebies: 'Tim tawar-menawar untuk dapat freebies',
         cutAKnife: 'Cut a knife',
         buyNow: 'beli sekarang',
@@ -190,15 +194,15 @@ export default {
         cashOut: 'Uang tunai keluar',
         estimatedEarningsToday: 'Taksiran penghasilan hari ini',
         revenueArrivedToday: 'Penghasilan tiba hari ini',
-        friendsTxt: 'Friends',
-        myOrderTxt: 'My order',
-        revenueDetailsTxt: 'Revenue details',
+        friendsTxt: 'teman',
+        myOrderTxt: 'Pesanan saya',
+        revenueDetailsTxt: 'Detail pendapatan',
         tutorialTxt: 'Tutorial',
         heroesTxt: 'Pahlawan',
-        rankingsTxt: 'Rankings',
-        numberOfFansTxt: 'Number of fans',
-        cumulativeReturnTxt: 'Cumulative return',
-        signOutTxt: 'Sign out',
+        rankingsTxt: 'Peringkat',
+        numberOfFansTxt: 'jumlah penggemar',
+        cumulativeReturnTxt: 'Pengembalian kumulatif',
+        signOutTxt: 'keluar',
     },
     myFriends: {
         friendNickname: 'Nama panggilan teman',
@@ -211,7 +215,7 @@ export default {
         completedTit: 'Lengkap',
         tidakAdaPesananTerkait: 'Tidak ada pesanan terkait',
         bukaHalamanBerandaDanLihat: 'Buka halaman beranda dan lihat',
-        contactUsBy: 'Hubungi kami oleh', //1
+        contactUsBy: 'Hubungi kami oleh',
         iKnow: 'Saya mengerti',
         orderNumber: 'Nomor pesanan',
         customerService: 'Pelayan Pelanggan',
