@@ -48,7 +48,7 @@
                 <span class="description">Available for purchase</span>
               </div>
               <div class="schedule-item ball ball-right">
-                <span class="description">Take it free</span>
+                <span class="description">only Rp{{bargain_info.must_buy_price||0}}</span>
               </div>
             </div>
           </div>
