@@ -124,13 +124,13 @@
         <!-- End Facebook Pixel Code -->
     </head>
 
-    <body>
+    <body  data-env="<%= VUE_APP_ENV %>" id="pageBody">
         <div style="height:50px;" id="pwaT">pwa ceshi</div>
         <div class="pre-app" id="mainApp"></div>
         <noscript>
             <strong>We're sorry but ISTARBUY doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
         </noscript>
-        <div id="app" data-env="<%= VUE_APP_ENV %>"></div>
+        <div id="app"></div>
         <!-- built files will be auto injected -->
         <script src="https://apis.google.com/js/api:client.js"></script>
         <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>

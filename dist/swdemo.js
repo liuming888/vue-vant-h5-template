@@ -145,6 +145,7 @@ self.addEventListener('notificationclick', function(e) {
             .matchAll()
             .then(function(clients) {
                 if (!clients || clients.length === 0) {
+                    console.warn("不存在该client");
                     // 当不存在client时，打开该网站
                     self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
                     return;
@@ -157,6 +158,7 @@ self.addEventListener('notificationclick', function(e) {
                 });
             })
             .then(() => {
+                console.warn("关闭系统通知框");
                 e.notification.close();
             })
     );
