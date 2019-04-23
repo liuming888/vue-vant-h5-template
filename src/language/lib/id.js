@@ -2,7 +2,7 @@ export default {
     lang: 'id',
     common: {
         hello: 'en hello world',
-        pleaseLoginAgain: 'please login again !',
+        pleaseLoginAgain: 'please login again !', //1
         theRequestFailed: 'The request failed. Please try again later!',
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
     },
@@ -18,8 +18,8 @@ export default {
         buy: 'Beli',
     },
     tabBar: {
-        homeTab: 'HOME',
-        meTab: 'ME',
+        homeTab: 'HOME', //1
+        meTab: 'ME', //1
     },
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Teman membantu Anda menghemat',
@@ -56,6 +56,8 @@ export default {
         numberCannotBeEmpty: 'Nomor tidak boleh kosong !',
         verificationCodeMustBeFilled: 'kode verifikasi harus diisi !',
         yourSmsCodeWillBeSent: 'Mohon bersabarlah, kode SMS Anda akan dikirim dalam 120 detik!',
+        enterMobileNumber: 'Enter Mobile Number', //1
+        enterCodeSms: 'Enter Code SMS', //1
     },
     dialogNewGiftBag: {
         newcomerGiftBag: 'Tas hadiah pendatang baru',
@@ -83,10 +85,10 @@ export default {
         ongoingFreebies: 'Sedang berlangsung',
         moreAbout: 'Lebih banyak tentang',
         copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
-        privacyPolicy: 'Privacy Policy',
-        tCs: 'T&Cs',
-        aboutUs: 'About Us',
-        contactUs: 'Contact Us',
+        privacyPolicy: 'Privacy Policy', //1
+        tCs: 'T&Cs',//1
+        aboutUs: 'About Us',//1
+        contactUs: 'Contact Us',//1
         gengduotop: require('@/assets/images/id-gengduotop.png'),
     },
     bargain: {
@@ -190,15 +192,15 @@ export default {
         cashOut: 'Uang tunai keluar',
         estimatedEarningsToday: 'Taksiran penghasilan hari ini',
         revenueArrivedToday: 'Penghasilan tiba hari ini',
-        friendsTxt: 'Friends',
-        myOrderTxt: 'My order',
-        revenueDetailsTxt: 'Revenue details',
-        tutorialTxt: 'Tutorial',
+        friendsTxt: 'Friends', //1
+        myOrderTxt: 'My order',//1
+        revenueDetailsTxt: 'Revenue details',//1
+        tutorialTxt: 'Tutorial',//1
         heroesTxt: 'Pahlawan',
-        rankingsTxt: 'Rankings',
-        numberOfFansTxt: 'Number of fans',
-        cumulativeReturnTxt: 'Cumulative return',
-        signOutTxt: 'Sign out',
+        rankingsTxt: 'Rankings',//1
+        numberOfFansTxt: 'Number of fans',//1
+        cumulativeReturnTxt: 'Cumulative return',//1
+        signOutTxt: 'Sign out',//1
     },
     myFriends: {
         friendNickname: 'Nama panggilan teman',

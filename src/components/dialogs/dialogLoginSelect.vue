@@ -227,7 +227,7 @@
           <span class="quhao">+62</span>
           <input type="number"
             class="input code-input"
-            placeholder="Enter Mobile Number"
+            :placeholder="$t('dialogLoginSelect.enterMobileNumber')"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
             v-model="phone">
@@ -247,7 +247,7 @@
             class="input"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Enter Code SMS"
+            :placeholder="$t('dialogLoginSelect.enterCodeSms')"
             v-model="authCode">
 
           <!-- <span class="send"

@@ -58,6 +58,8 @@ export default {
         numberCannotBeEmpty: 'Number cannot be empty !',
         verificationCodeMustBeFilled: 'verification code must be filled !',
         yourSmsCodeWillBeSent: 'Please be patient，Your SMS code will be sent in 120 second!',
+        enterMobileNumber: 'Enter Mobile Number',
+        enterCodeSms: 'Enter Code SMS',
     },
     dialogNewGiftBag: {
         newcomerGiftBag: 'Newcomer Gift Bag',
