@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-23 23:35:51
+ * @LastEditTime: 2019-04-23 23:55:31
  */
 
 /**
@@ -267,7 +267,7 @@ function pushInfo(registration) {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     var publicKey = 'BOEQSjdhorIf8M0XFNlwohK3sTzO9iJwvbYU-fuXRF0tvRpPPMGO6d_gJC_pUQwBT7wD8rKutpNTFHOHN3VqJ0A';
     // 注册service worker
-    registerServiceWorker('./swdemo.js')
+    registerServiceWorker('/swdemo.js')
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
             // 开启该客户端的消息推送订阅功能
