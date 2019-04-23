@@ -59,7 +59,7 @@
       <!-- 砍价进度 -->
       <div class="bargain-schedule">
         <p v-if="isBargain"
-          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span></p>
+          class="title"><span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_amount||0}}</span>&nbsp; cheaper now, leaving &nbsp;<span class="n-2"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span></p>
         <p v-else
           class="title">
           He had cut down&nbsp;<span class="n-1"><span class="dollar">Rp</span>{{bargain_info.bargain_after||spu.price||0}}</span>
