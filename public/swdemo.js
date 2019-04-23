@@ -138,22 +138,28 @@ self.addEventListener('notificationclick', function(e) {
             action = 'default';
             break;
     }
-    e.notification.close();
 
     e.waitUntil(
         // 获取所有clients
-        self.clients.matchAll().then(function(clients) {
-            if (!clients || clients.length === 0) {
-                // 当不存在client时，打开该网站
-                self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
-                return;
-            }
-            // 切换到该站点的tab
-            clients[0].focus && clients[0].focus();
-            clients.forEach(function(client) {
-                // 使用postMessage进行通信
-                client.postMessage(action);
-            });
-        })
+        self.clients
+            .matchAll()
+            .then(function(clients) {
+                if (!clients || clients.length === 0) {
+                    console.warn("不存在该client");
+                    // 当不存在client时，打开该网站
+                    self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
+                    return;
+                }
+                // 切换到该站点的tab
+                clients[0].focus && clients[0].focus();
+                clients.forEach(function(client) {
+                    // 使用postMessage进行通信
+                    client.postMessage(action);
+                });
+            })
+            .then(() => {
+                console.warn("关闭系统通知框");
+                e.notification.close();
+            })
     );
 });

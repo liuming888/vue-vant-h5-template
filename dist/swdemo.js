@@ -12,22 +12,22 @@ self.addEventListener('install', function(e) {
 
 //  缓存可能造成问题
 // 简单缓存
-self.addEventListener('fetch', function(e) {
-    // 如果有cache则直接返回，否则不操作
-    e.respondWith(
-        caches
-            .match(e.request)
-            .then(function(cache) {
-                // return cache || fetch(e.request);
-                return cache;
-            })
-            .catch(function(err) {
-                console.log(err);
-                // return fetch(e.request);
-                return false;
-            })
-    );
-});
+// self.addEventListener('fetch', function(e) {
+//     // 如果有cache则直接返回，否则不操作
+//     e.respondWith(
+//         caches
+//             .match(e.request)
+//             .then(function(cache) {
+//                 // return cache || fetch(e.request);
+//                 return cache;
+//             })
+//             .catch(function(err) {
+//                 console.log(err);
+//                 // return fetch(e.request);
+//                 return false;
+//             })
+//     );
+// });
 
 // 复杂缓存
 // self.addEventListener('fetch', function(e) {
@@ -138,22 +138,26 @@ self.addEventListener('notificationclick', function(e) {
             action = 'default';
             break;
     }
-    e.notification.close();
 
     e.waitUntil(
         // 获取所有clients
-        self.clients.matchAll().then(function(clients) {
-            if (!clients || clients.length === 0) {
-                // 当不存在client时，打开该网站
-                self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
-                return;
-            }
-            // 切换到该站点的tab
-            clients[0].focus && clients[0].focus();
-            clients.forEach(function(client) {
-                // 使用postMessage进行通信
-                client.postMessage(action);
-            });
-        })
+        self.clients
+            .matchAll()
+            .then(function(clients) {
+                if (!clients || clients.length === 0) {
+                    // 当不存在client时，打开该网站
+                    self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
+                    return;
+                }
+                // 切换到该站点的tab
+                clients[0].focus && clients[0].focus();
+                clients.forEach(function(client) {
+                    // 使用postMessage进行通信
+                    client.postMessage(action);
+                });
+            })
+            .then(() => {
+                e.notification.close();
+            })
     );
 });
