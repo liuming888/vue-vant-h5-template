@@ -162,17 +162,8 @@
         id="cashWithdrawalRule">{{$t('withdrawImmediately.withdrawalRules')}}</div>
 
       <div class="cash-withdrawal-rule-des">
-        <p>
-          1. The first withdrawal of Rp5000, the premise of 18 o'clock on the same day, will arrive before 19 o'clock on the same day, after 18 o'clock will arrive before 19 o'clock the next day, if you encounter peak period, may delay the account, please be patient
-        </p>
-        <p>
-          2. In case of holidays, the delivery time will be postponed.
-        </p>
-        <p>
-          3. One withdrawal account can only be bound to one user id , multiple bindings will be considered invalid.One withdrawal account can only get one new user bag -Rp5000
-        </p>
-        <p>
-          4. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover.
+        <p v-for="(item,index) of $t('withdrawImmediately.cashWithdrawalRuleDes')" :key="index">
+          {{item}}
         </p>
       </div>
 

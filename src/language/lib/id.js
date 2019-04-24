@@ -273,6 +273,12 @@ export default {
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
         iKnow: 'I know',
         withdrawRule: require('@/assets/images/id-withdrawRule.png'),
+        cashWithdrawalRuleDes:[
+            `1. Penarikan pertama sebesar Rp5000, penarikan sebelum pukul 18 dalam hari yang sama, akan masuk sebelum pukul 19 pada hari yang sama, penarikan setelah pukul 18 akan masuk sebelum pukul 19 pada hari berikutnya, jika penarikan Anda dalam waktu puncak periode, ada kemungkinan akan delay,mohon sabar.`,
+            `2. Dalam hal hari libur, waktu pengiriman akan ditunda.`,
+            `3. Satu akun penarikan hanya dapat diikat ke satu id pengguna, jika memiliki beberapa binding akan dianggap tidak valid. Satu akun penarikan hanya bisa mendapatkan satu paket hadiah pengguna baru -Rp5000`,
+            `4. Jika penarikan dilakukan melalui cara yang tidak banar atau dengan cara kecurangan lain, Istarbuy memiliki hak untuk membekukan dana akun. Jika itarbuy menderita kerugian,maka itarbuy memiliki hak mengurangi ekuitas dalam akun langsung ,sampai kerugian dapat di cover.`
+        ]
     },
     /************************ 页面 end *****************************************************/
 };
