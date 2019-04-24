@@ -221,6 +221,7 @@ export default {
         contactUsBy: 'Contact us by',
         iKnow: 'I know',
         orderNumber: 'Order Number',
+        shipmentNumber:'Shipment Number',
         customerService: 'Customer Service',
         pendingPayment: 'Pending payment',
         please: 'Please',

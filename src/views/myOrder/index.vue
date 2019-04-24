@@ -49,7 +49,7 @@
           background-image: url("../../assets/images/facbookIcon.png");
         }
         &:nth-of-type(2) {
-          background-image: url("../../assets/images/weixinIcon.png");
+          background-image: url("../../assets/images/whatsappIcon.png");
         }
         &:nth-of-type(3) {
           background-image: url("../../assets/images/lineIcon.png");

@@ -218,6 +218,7 @@ export default {
         contactUsBy: 'Hubungi kami oleh',
         iKnow: 'Saya mengerti',
         orderNumber: 'Nomor pesanan',
+        shipmentNumber:'Nomor pengiriman',
         customerService: 'Pelayan Pelanggan',
         pendingPayment: 'Pembayaran tertunda',
         please: 'Silahkan',

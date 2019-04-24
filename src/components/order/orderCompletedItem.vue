@@ -113,7 +113,7 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
+        <p class="address">{{$t('myOrder.shipmentNumber')}}:{{curDat.shipment_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">
