@@ -25,8 +25,8 @@
       <div class="alertWrap">
         <h1>Contact us by</h1>
         <ul>
-          <li class="alertWrap-item">facebook fanpage : @Lovingistarbuy</li>
-          <li class="alertWrap-item">Wechat : ISTARBUY</li>
+          <li class="alertWrap-item">facebook fanpage : Istarbuyofficial</li>
+          <li class="alertWrap-item">Whatsapp : 18027340756</li>
           <li class="alertWrap-item">Line : ISTARBUY</li>
         </ul>
         <div @click="contactVisible=false">I know</div>
