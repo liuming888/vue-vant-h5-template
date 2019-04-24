@@ -26,7 +26,8 @@
         alt
         class="none-file-icon">
       <p>Tidak ada pesanan terkait</p>
-      <div class="btn"  @click="$router.push('/');">Buka halaman beranda dan lihat</div>
+      <div class="btn"
+        @click="$router.push('/');">Buka halaman beranda dan lihat</div>
     </div>
     <!-- 联系我们弹窗 -->
     <div class="alertBox"
@@ -34,8 +35,8 @@
       <div class="alertWrap">
         <h1>Contact us by</h1>
         <ul>
-          <li class="alertWrap-item">facebook fanpage : @Lovingistarbuy</li>
-          <li class="alertWrap-item">Wechat : ISTARBUY</li>
+          <li class="alertWrap-item">facebook fanpage : Istarbuyofficial</li>
+          <li class="alertWrap-item">Whatsapp : 18027340756</li>
           <li class="alertWrap-item">Line : ISTARBUY</li>
         </ul>
         <div @click="contactVisible=false">I know</div>
