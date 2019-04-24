@@ -117,7 +117,10 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">Shipment Number:{{curDat.shipment_no}}</p>
+        <p class="address"
+          v-if="curDat.shipment_no">Shipment Number:{{curDat.shipment_no}}</p>
+        <p class="address"
+          v-else>Order Number:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">
@@ -178,13 +181,13 @@ export default {
       // }
 
       this.$router.push({
-        path:'/purchase',
-        query:{
-          orderNo:this.curDat.order_no,
-          bargainId:this.curDat.bargain_id,
-          spuId:this.curDat.spu_id
+        path: "/purchase",
+        query: {
+          orderNo: this.curDat.order_no,
+          bargainId: this.curDat.bargain_id,
+          spuId: this.curDat.spu_id
         }
-      })
+      });
     }
   }
 };

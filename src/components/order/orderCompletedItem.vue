@@ -114,7 +114,8 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">Shipment Number:{{curDat.shipment_no}}</p>
+        <p class="address" v-if="curDat.shipment_no">Shipment Number:{{curDat.shipment_no}}</p>
+         <p class="address" v-else>Order Number:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">
