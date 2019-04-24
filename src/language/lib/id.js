@@ -63,7 +63,7 @@ export default {
     dialogNewGiftBag: {
         newcomerGiftBag: 'Tas hadiah pendatang baru',
         receive: 'Menerima',
-        youHaveSuccessfullyReceivedANewGiftPackage: 'You have successfully received a new gift package',
+        youHaveSuccessfullyReceivedANewGiftPackage: 'Anda telah berhasil menerima paket hadiah baru',
     },
     dialogWaitPayment: {
         waitingForBuyerPayment: 'Anda yakin ingin membatalkan pembayaran ini?',
@@ -146,7 +146,7 @@ export default {
         xingzhuang: require('@/assets/images/id-xingzhuang.png'),
     },
     purchase: {
-        receiver: 'Receiver',
+        receiver: 'Penerima',
         receivingAddress: 'Receiving address',
         addShippingAddress: 'Tambahkan alamat pengiriman',
         actualPayment: 'Pembayaran aktual',
@@ -169,7 +169,7 @@ export default {
         thereIsNoShippingAddress: 'Tidak ada alamat pengiriman',
         receivingAddress: 'Receiving address',
         tetapkanSebagaiAlamatDefault: 'Tetapkan alamat umum untuk digunakan',
-        edit: 'Edit',
+        edit: 'edit',
         tambahkanAlamat: 'Tambahkan alamat',
         youAreSureYouWantToDeleteTheAddress: 'Pastikan anda ingin menghapus alamat itu',
         cancelText: 'Batalkan',
@@ -269,7 +269,7 @@ export default {
         },
 
         withdrawalApplication: 'Withdrawal application',
-        pleaseCheckItOut: 'Your withdrawal request has been initiated, please check it out!',
+        pleaseCheckItOut: 'Permintaan penarikan Anda telah dimulai, silakan periksa!',
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
         iKnow: 'I know',
         withdrawRule: require('@/assets/images/id-withdrawRule.png'),
