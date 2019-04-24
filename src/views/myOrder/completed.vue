@@ -20,28 +20,17 @@
     </div>
 
      <!-- 联系我们弹窗 -->
-    <div class="alertBox"
-      v-if="contactVisible">
-      <div class="alertWrap">
-        <h1>{{$t('myOrder.contactUsBy')}}</h1>
-        <ul>
-          <li class="alertWrap-item">facebook fanpage : Istarbuyofficial</li>
-          <li class="alertWrap-item">Whatsapp : 18027340756</li>
-          <li class="alertWrap-item">Line : ISTARBUY</li>
-        </ul>
-        <div @click="contactVisible=false">{{$t('myOrder.iKnow')}}</div>
-      </div>
-    </div>
+     <dialog-contact-us :dialogVisible.sync="contactVisible"/>
   </div>
 </template>
 
 <script>
-import orderCompletedItem from "@/components/order/orderCompletedItem.vue";
-
 import { orderList } from "@/server/pay.js";
 export default {
   components: {
-    orderCompletedItem
+    orderCompletedItem:resolve=>require(['@/components/order/orderCompletedItem.vue'],resolve),
+     dialogContactUs: resolve =>
+      require(["@/components/dialogs/dialogContactUs.vue"], resolve)  //联系我们弹窗
   },
   data() {
     return {
@@ -50,7 +39,9 @@ export default {
         page_num: 1,
         page_size: 5
       },
-      contactVisible:false
+      contactVisible:{
+        show:false
+      }
     };
   },
   created() {
@@ -65,7 +56,7 @@ export default {
     },
      // 联系我们弹窗
     handleCustomerService() {
-      this.contactVisible = true;
+      this.contactVisible.show = true;
     }
   }
 };
