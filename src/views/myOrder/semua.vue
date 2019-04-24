@@ -76,7 +76,7 @@ export default {
         page_size: 10
       },
       //联系我们弹窗
-      contactVisible: true
+      contactVisible: false
     };
   },
   created() {
