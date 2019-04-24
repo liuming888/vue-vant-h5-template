@@ -191,7 +191,6 @@
 
 <script>
 import { Icon, Dialog } from "vant";
-import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 
 import {
   getWithdrawInfo,
@@ -200,9 +199,9 @@ import {
 } from "@/server/finance.js";
 export default {
   components: {
-    DialogDefault,
+    DialogDefault: resolve=>require(['@/components/dialogs/dialogDefault.vue'],resolve),
+    
     [Icon.name]: Icon
-    // [Dialog.name]: Dialog
   },
   data() {
     return {

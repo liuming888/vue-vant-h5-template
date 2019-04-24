@@ -148,11 +148,6 @@
 <script>
 import { Icon, Dialog } from "vant";
 
-import shippingAddress from "../shippingAddress.vue";
-import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
-import DialogDefault from "@/components/dialogs/dialogDefault.vue";
-import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
-
 import loadings from "@/mixins/loadings.js";
 
 import { getInfo, getSpuSpecs } from "@/server/goods.js";
@@ -171,11 +166,15 @@ export default {
   components: {
     userOrderMessage: resolve =>
       require(["@/components/userOrderMessage.vue"], resolve), // 用户订单消息播放
-    DialogDefault,
-    shippingAddress, // 地址列表组件
-    dialogPostAddAddress,
-    dialogWaitPayment, // 等待用户付款弹窗
-    // ...vantCom,
+    DialogDefault:resolve =>
+      require(["@/components/dialogs/dialogDefault.vue"], resolve),
+    shippingAddress:resolve =>
+      require(["../shippingAddress.vue"], resolve), // 地址列表页组件（路由配置了，但通过组件的方式用）
+    dialogPostAddAddress:resolve =>
+      require(["@/components/dialogs/dialogPostAddAddress.vue"], resolve), // 增加地址
+    dialogWaitPayment:resolve =>
+      require(["@/components/dialogs/dialogWaitPayment.vue"], resolve), // 等待用户付款弹窗
+      
     [Icon.name]: Icon
   },
   data() {

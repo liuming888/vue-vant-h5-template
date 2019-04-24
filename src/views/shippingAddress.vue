@@ -149,15 +149,14 @@
 </template>
 
 <script>
-import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
-import dialogDefault from "@/components/dialogs/dialogDefault.vue";
-
 import { getMyAddress, dealMyAddress } from "@/server/user.js";
 export default {
   name: "shippingAddress",
   components: {
-    dialogPostAddAddress, // （已有）收货地址页
-    dialogDefault
+    dialogPostAddAddress:resolve =>
+      require(["@/components/dialogs/dialogPostAddAddress.vue"], resolve), // （已有）收货地址页
+    dialogDefault:resolve =>
+      require(["@/components/dialogs/dialogDefault.vue"], resolve)
   },
   props: {
     showAddressPage: {
