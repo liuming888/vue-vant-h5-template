@@ -19,12 +19,12 @@ function getUrl(VUE_APP_ENV) {
             // url = 'https://test-ht-zdd-api.istarbuy.com/api';
 
             // 测试环境外网
-            url = 'https://test-ht-zdd-api.istarbuy.com:8443/api';
+            // url = 'https://test-ht-zdd-api.istarbuy.com:8443/api';
 
             // 最新测试环境
             // url = 'https://pubtest-ht-zdd-api.istarbuy.com/api';
 
-            // url = 'https://api.istarbuy.com/api';
+            url = 'https://api.istarbuy.com/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';

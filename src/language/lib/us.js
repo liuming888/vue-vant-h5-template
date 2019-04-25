@@ -87,7 +87,9 @@ export default {
     /************************ 页面  start *****************************************************/
     home: {
         ongoingFreebies: 'Ongoing Freebies',
-        moreAbout: 'More About',
+        tawarMenawar:'Bargaining',
+        moreAbout: 'More',
+        complete:'complete',
         copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
         privacyPolicy: 'Privacy Policy',
         tCs: 'T&Cs',

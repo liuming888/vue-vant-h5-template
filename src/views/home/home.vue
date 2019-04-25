@@ -316,10 +316,10 @@
             <div class="l-top-tit">
               <img v-lazy="require('@/assets/images/lishixiao.png')"
                 class="lishixiao">
-              <span class="tawar-menawar">Tawar-menawar</span>
+              <span class="tawar-menawar">{{$t('home.tawarMenawar')}}</span>
             </div>
-            <div class="r-top-tit">
-              <span class="lebih-banyak">Lebih banyak</span>
+            <div class="r-top-tit"  @click="handleMoreAbout">
+              <span class="lebih-banyak">{{$t('home.moreAbout')}}</span>
               <img v-lazy="require('@/assets/images/home-jiantou.png')"
                 class="home-jiantou">
             </div>

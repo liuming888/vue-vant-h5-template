@@ -79,6 +79,16 @@
                     color: rgba(136, 136, 136, 1);
                     line-height: 30px;
                 }
+
+                &.complete-txt {
+                    width: 100%;
+                    font-size: 24px;
+                    font-family: Helvetica;
+                    font-weight: 400;
+                    color: rgba(136, 136, 136, 1);
+                    line-height: 30px;
+                    margin-top: 7px;
+                }
             }
         }
     }
@@ -112,7 +122,7 @@
         .hot {
             background: rgba(211, 12, 5, 1);
             border: 1px solid rgba(211, 12, 5, 1);
-            color: #FFFFFF;
+            color: #ffffff;
         }
     }
 }
