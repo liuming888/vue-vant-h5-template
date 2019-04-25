@@ -214,7 +214,7 @@
       <img src="~@/assets/images/login-top.png"
         class="login-top-img">
 
-      <h3 class="login-tit">Sign in can get Rp 5000 phone bill !</h3>
+      <h3 class="login-tit">Welcome to Istarbuy world!</h3>
 
       <div class="input-big-box">
         <div class="phone-box input-box">
