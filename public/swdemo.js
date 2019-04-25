@@ -1,5 +1,5 @@
 var cacheName = 'zdd-0-0-1';
-var cacheFiles = ['/About us.html', '/bitbug_favicon.ico', '/Contact us.html', '/Privacy Policy.html', '/Terms & Conditions.html', '/timg.jpg', '/timg1.gif', '/timg2.gif', '/timg3.gif', '/wangzhanicon.png', '/static/lib/vue.runtime.min.js', '/static/lib/vue-router.min.js', '/static/lib/vuex.min.js', '/static/lib/axios.min.js'];
+var cacheFiles = ['/About us.html', '/bitbug_favicon.ico', '/Contact us.html', '/Privacy Policy.html', '/Terms & Conditions.html', '/static/timg.jpg', '/static/timg1.gif', '/static/timg2.gif', '/static/timg3.gif', '/static/wangzhanicon.png', '/static/lib/vue.runtime.min.js', '/static/lib/vue-router.min.js', '/static/lib/vuex.min.js', '/static/lib/axios.min.js'];
 
 // // 监听install事件，安装完成后，进行文件缓存
 self.addEventListener('install', function(e) {
@@ -95,19 +95,22 @@ self.addEventListener('push', function(e) {
     if (e.data) {
         data = data.json();
         console.log('push的数据为：', data);
-        var title = 'PWA即学即用';
+        var title = 'ISTARBUY';
         var options = {
+            dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
             body: data,
-            icon: '/img/icons/book-128.png',
-            image: '/img/icons/book-521.png', // no effect
+            icon: '/static/icons/istarbuy-128.png',
+            image: '/static/icons/istarbuy-512.png', // no effect
             actions: [
                 {
-                    action: 'show-book',
-                    title: '去看看',
+                    action: 'show-istarbuy',
+                    // title: '去看看',
+                    title: 'Go and see',
                 },
                 {
                     action: 'contact-me',
-                    title: '联系我',
+                    // title: '联系我',
+                    title: 'contact me',
                 },
             ],
             tag: 'pwa-starter',
@@ -127,8 +130,8 @@ self.addEventListener('notificationclick', function(e) {
     console.log(`action tag: ${e.notification.tag}`, `action: ${action}`);
 
     switch (action) {
-        case 'show-book':
-            console.log('show-book');
+        case 'show-istarbuy':
+            console.log('show-istarbuy');
             break;
         case 'contact-me':
             console.log('contact-me');
@@ -145,9 +148,9 @@ self.addEventListener('notificationclick', function(e) {
             .matchAll()
             .then(function(clients) {
                 if (!clients || clients.length === 0) {
-                    console.warn("不存在该client");
+                    console.warn('不存在该client,默认打开lovingistarbuy');
                     // 当不存在client时，打开该网站
-                    self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com/');
+                    self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com');
                     return;
                 }
                 // 切换到该站点的tab
@@ -158,7 +161,7 @@ self.addEventListener('notificationclick', function(e) {
                 });
             })
             .then(() => {
-                console.warn("关闭系统通知框");
+                console.warn('关闭系统通知框');
                 e.notification.close();
             })
     );

@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-24 00:47:05
+ * @LastEditTime: 2019-04-25 14:05:23
  */
 
 /**
@@ -117,25 +117,26 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 /****************************************************** 浏览器消息推送相关逻辑start *******************************************/
-var env = process.env.VUE_APP_ENV;
-console.log('env---------------------------------------------------: ', env);
+let { BASE_URL, VUE_APP_ENV: env, VUE_APP_URL } = process.env;
 var notification = {}; // 全局变量  存放Notification的实例对象
 notification.addEventListener = function() {};
 
-var title = 'PWA即学即用';
+var title = 'ISTARBUY';
 var options = {
-    dir: 'rtl', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
-    body: '邀请你一起学习',
-    // icon: '/static/icons/book-128.png',
-    icon: 'https://www.lovingistarbuy.com/bitbug_favicon.ico',
+    dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
+    body: 'Buy your favorite products with your friends.',
+    // icon: '/static/icons/istarbuy-128.png',
+    icon: VUE_APP_URL + BASE_URL + 'static/icons/istarbuy-128.png',
     actions: [
         {
-            action: 'show-book',
-            title: '去看看',
+            action: 'show-istarbuy',
+            // title: '去看看',
+            title: 'Go and see',
         },
         {
             action: 'contact-me',
-            title: '联系我',
+            // title: '联系我',
+            title: 'contact me',
         },
     ],
     tag: 'pwa-starter',
@@ -224,18 +225,18 @@ function showNotification() {
 function notifyMe() {
     // 先检查浏览器是否支持
     if (!('Notification' in window)) {
-       console.warn('浏览器不支持Notification API,直接使用Service Worker : Push API');
-       throw "浏览器不支持Notification API";
-    }else if (Notification.permission === 'granted') {
-    // 检查用户是否同意接受通知
+        console.warn('浏览器不支持Notification API,直接使用Service Worker : Push API');
+        throw '浏览器不支持Notification API';
+    } else if (Notification.permission === 'granted') {
+        // 检查用户是否同意接受通知
         // If it's okay let's create a notification
-      notification = new Notification(title, options);
-    }else if (Notification.permission !== 'denied') {
-         // 否则我们需要向用户获取权限
+        notification = new Notification(title, options);
+    } else if (Notification.permission !== 'denied') {
+        // 否则我们需要向用户获取权限
         Notification.requestPermission(function(permission) {
             // 如果用户同意，就可以向他们发送通知
             if (permission === 'granted') {
-               notification = new Notification(title, options);
+                notification = new Notification(title, options);
             }
         });
     }
@@ -251,9 +252,11 @@ function pushInfo(registration) {
     var curIsPc = isPC();
     try {
         if (!curIsPc) {
+             console.warn("走Service Worker : Push API Api推送");
             // Service Worker : Push API （移动端兼容些）
             showNotification(registration);
         } else {
+            console.warn("走Notification Api推送");
             //  Notification Api (PC端兼容些)
             notifyMe();
         }
@@ -300,43 +303,37 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             console.log(err);
         });
 
+    /******************************************** 点击消息通知框时的操作 start  ************************************************/
+    /**
+     * @description: 点击消息通知框后
+     */
+    function clickAction(e) {
+         var action = e.data;
+        switch (action) {
+            case 'show-istarbuy':
+                // location.href = location.href; // 跳转当前页面
+                window.open(location.href);
+                break;
+            case 'contact-me':
+                // location.href = location.origin+'/my/Tutorial#contactUs'; // 跳转到新手教程底部联系方式那了
+                window.open(location.origin + '/my/Tutorial#contactUs');
+                break;
+            default:
+                // 默认点击别的打开首页
+                // location.href = location.origin;
+                window.open(location.origin);
+                break;
+        }
+    }
+
     /**
      * @description:  在client中监听  message事件，判断data，进行不同的操作
      */
-    navigator.serviceWorker.addEventListener('message', function(e) {
-        var action = e.data;
-        console.log(`receive post-message from sw, action is '${e.data}'`);
-        switch (action) {
-            case 'show-book':
-                location.href = location.href; // 跳转到新域名
-                break;
-            case 'contact-me':
-                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新正式域名
-                break;
-            default:
-                // 默认点击别的地方的行为
-                location.href = location.href;
-                break;
-        }
-    });
+    navigator.serviceWorker.addEventListener('message', clickAction);
 
     /**
-     * @description:notification全局变量 Notification的实例 
+     * @description:notification全局变量 Notification的实例
      */
-    notification.addEventListener('click', function(e) {
-        var action = e.data;
-        console.log(`receive post-message from sw, action is '${e.data}'`);
-        switch (action) {
-             case 'show-book':
-                location.href = location.href; // 跳转到新域名
-                break;
-            case 'contact-me':
-                location.href = 'https://www.lovingistarbuy.com/'; // 跳转到新正式域名
-                break;
-            default:
-                // 默认点击别的地方的行为
-                location.href = location.href;
-                break;
-        }
-    });
+    notification.addEventListener('click',clickAction);
+    /******************************************** 点击消息通知框时的操作 end  ************************************************/
 }

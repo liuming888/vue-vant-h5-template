@@ -108,6 +108,7 @@
         </ul>
       </div>
       <div class="totorial-ct-contact"
+        id="contactUs"
         :style="{'background-image':`url(${$t('Tutorial.contactUs')})`}"></div>
     </div>
   </div>
@@ -125,6 +126,10 @@ export default {
     ) {
       document.getElementById("mainApp").style.display = "none";
       Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
+    }
+
+    if (window.location.hash) {
+        window.location = window.location.hash;
     }
   }
 };

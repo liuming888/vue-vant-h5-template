@@ -3,26 +3,26 @@
     <head>
         <meta charset="utf-8" />
         <meta content="origin" name="referrer">
-        <meta content="/wangzhanicon.png" itemprop="image">
+        <meta content="<%= VUE_APP_URL %><%= BASE_URL %>static/wangzhanicon.png" itemprop="image">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         <meta property="og:url" class="share_url" content="<%= VUE_APP_URL %>" />
         <meta property="og:type" content="article" />
         <meta property="og:title" class="share_title" content="Come and see what you like." />
         <meta property="og:description" content="Buy your favorite products with your friends." />
-        <meta property="og:image" content="<%= VUE_APP_URL %>/wangzhanicon.png" />
+        <meta property="og:image" content="<%= VUE_APP_URL %><%= BASE_URL %>static/wangzhanicon.png" />
         <meta name="theme-color" content="#d30c05" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="ISTARBUY" />
         <meta name="application-name" content="ISTARBUY" />
         <meta name="msapplication-TileColor" content="#d30c05" />
-        <meta name="msapplication-square70x70logo" content="static/icons/book-72.png" />
-        <meta name="msapplication-square150x150logo" content="static/icons/book-144.png" />
-        <meta name="msapplication-square310x310logo" content="static/icons/book-256.png" />
+        <meta name="msapplication-square70x70logo" content="<%= BASE_URL %>static/icons/istarbuy-72.png" />
+        <meta name="msapplication-square150x150logo" content="<%= BASE_URL %>static/icons/istarbuy-144.png" />
+        <meta name="msapplication-square310x310logo" content="<%= BASE_URL %>static/icons/istarbuy-256.png" />
 
         <!-- <meta http-equiv="x-dns-prefetch-control" content="on"/> -->
-        <link rel="icon" href="<%= BASE_URL %>bitbug_favicon.ico" />
+        <link rel="icon" href="<%= VUE_APP_URL %><%= BASE_URL %>bitbug_favicon.ico" />
 
         <link rel="preconnect" href="https://api.istarbuy.com" />
         <link rel="preconnect" href="https://rscdn.istarbuy.com" />
@@ -33,8 +33,8 @@
         <link rel="dns-prefetch" href="https://staticxx.facebook.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="static/icons/book-256.png" />
+        <link rel="manifest" href="<%= BASE_URL %>manifest.json" />
+        <link rel="apple-touch-icon" href="<%= BASE_URL %>static/icons/istarbuy-256.png" />
 
         <title>ISTARBUY</title>
         <style>
@@ -64,7 +64,7 @@
                 display: block;
                 width: 30px;
                 height: 30px;
-                background: url('<%= BASE_URL %>bitbug_favicon.ico') no-repeat;
+                background: url('<%= VUE_APP_URL %><%= BASE_URL %>bitbug_favicon.ico') no-repeat;
                 background-size: 30px 30px;
                 position: fixed;
                 z-index: 9999;
@@ -135,10 +135,10 @@
         <div id="app"></div>
         <!-- built files will be auto injected -->
         <script src="https://apis.google.com/js/api:client.js"></script>
-        <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
-        <script src="<%= BASE_URL %>static/lib/vue-i18n.min.js"></script>
-        <script src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
-        <script src="<%= BASE_URL %>static/lib/vue-router.min.js"></script>
+        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
+        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue-i18n.min.js"></script>
+        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vuex.min.js"></script>
+        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue-router.min.js"></script>
         <!-- <script src="<%= BASE_URL %>static/lib/axios.min.js"></script> -->
         <script>
             var gaId = '<%= VUE_APP_ENV %>' == 'newProduction' ? 'UA-137995919-1' : 'UA-136763280-1';
