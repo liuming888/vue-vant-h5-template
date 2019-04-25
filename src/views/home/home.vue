@@ -176,7 +176,7 @@
 .privacy-agreement-box {
   margin-top: 20px;
   text-align: center;
-  color: #fff;
+  color: #888888;
 
   p {
     margin-bottom: 10px;
@@ -191,7 +191,7 @@
 
     li {
       flex: 3;
-      border-left: 1px solid #fff;
+      border-left: 1px solid #888888;
       line-height: 30px;
 
       &:nth-of-type(1) {
