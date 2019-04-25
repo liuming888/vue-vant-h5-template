@@ -318,17 +318,16 @@
                 class="lishixiao">
               <span class="tawar-menawar">{{$t('home.tawarMenawar')}}</span>
             </div>
-            <div class="r-top-tit"  @click="handleMoreAbout">
+            <div class="r-top-tit"
+              @click="handleMoreAbout">
               <span class="lebih-banyak">{{$t('home.moreAbout')}}</span>
               <img v-lazy="require('@/assets/images/home-jiantou.png')"
                 class="home-jiantou">
             </div>
           </div>
 
-          <template v-for="(item,index) of homeBargainList">
-            <freebing-box :key="index"
-              :spuBargainItem="{...item.bargain_info,...item.spu}" />
-          </template>
+          <freebing-box :key="index"
+            :spuBargainItem="{...homeBargainList[0].bargain_info,...homeBargainList[0].spu}" />
         </div>
 
       </section>
