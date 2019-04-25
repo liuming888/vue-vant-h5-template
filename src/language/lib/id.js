@@ -51,6 +51,7 @@ export default {
     },
     dialogLoginSelect: {
         signInCanGetRp_5000PhoneBill: 'Tanda tangani ini bisa mendapatkan Rp5000 untuk tagihan telepon !',
+        welcomeToIstarbuyWorld: 'Selamat datang di dunia Istarbuy!',
         Send: 'Kirim',
         signInRegister: 'Tanda tangan/ Daftar',
         otherWaysToLogIn: 'Cara lain untuk masuk',
@@ -84,9 +85,9 @@ export default {
     /************************ 页面  start *****************************************************/
     home: {
         ongoingFreebies: 'Sedang berlangsung',
-        tawarMenawar:'Tawar-menawar',
+        tawarMenawar: 'Tawar-menawar',
         moreAbout: 'Lebih banyak',
-        complete:'complete',
+        complete: 'complete',
         copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
         privacyPolicy: 'Privacy Policy',
         tCs: 'T&Cs',
@@ -220,7 +221,7 @@ export default {
         contactUsBy: 'Hubungi kami oleh',
         iKnow: 'Saya mengerti',
         orderNumber: 'Nomor pesanan',
-        shipmentNumber:'Nomor pengiriman',
+        shipmentNumber: 'Nomor pengiriman',
         customerService: 'Pelayan Pelanggan',
         pendingPayment: 'Pembayaran tertunda',
         please: 'Silahkan',
@@ -275,13 +276,13 @@ export default {
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
         iKnow: 'I know',
         withdrawRule: require('@/assets/images/id-withdrawRule.png'),
-        cashWithdrawalRuleDes:[
+        cashWithdrawalRuleDes: [
             `1. The first withdrawal of Rp5000, the premise of 14:30  on the same day, will arrive before 00:00 on the same day, after 14:30  will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient`,
             `2. In case of holidays, the delivery time will be postponed.`,
             `3. One withdrawal account can only be bound to one user id , multiple bindings will be considered invalid.One withdrawal account can only get one new user bag -Rp5000`,
             `4.Now we only support phone charging  to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756`,
-            `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`
-        ]
+            `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`,
+        ],
     },
     /************************ 页面 end *****************************************************/
 };

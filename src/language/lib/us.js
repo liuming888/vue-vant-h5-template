@@ -53,6 +53,7 @@ export default {
     },
     dialogLoginSelect: {
         signInCanGetRp_5000PhoneBill: 'Sign in can get Rp 5000 phone bill !',
+        welcomeToIstarbuyWorld:'Welcome to Istarbuy world!',
         Send: 'Send',
         signInRegister: 'Sign in / Register',
         otherWaysToLogIn: 'Other ways to log in',
