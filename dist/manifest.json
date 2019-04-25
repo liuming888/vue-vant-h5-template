@@ -9,37 +9,37 @@
     "theme_color": "#d30c05",
     "icons": [
         {
-            "src": "./static/icons/book-32.png",
+            "src": "./static/icons/istarbuy-32.png",
             "sizes": "32x32",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-72.png",
+            "src": "./static/icons/istarbuy-72.png",
             "sizes": "72x72",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-128.png",
+            "src": "./static/icons/istarbuy-128.png",
             "sizes": "128x128",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-144.png",
+            "src": "./static/icons/istarbuy-144.png",
             "sizes": "144x144",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-192.png",
+            "src": "./static/icons/istarbuy-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-256.png",
+            "src": "./static/icons/istarbuy-256.png",
             "sizes": "256x256",
             "type": "image/png"
         },
         {
-            "src": "./static/icons/book-512.png",
+            "src": "./static/icons/istarbuy-512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
