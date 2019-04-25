@@ -161,6 +161,12 @@
       <div class="cash-withdrawal-rule-title"
         id="cashWithdrawalRule">{{$t('withdrawImmediately.withdrawalRules')}}</div>
 
+      <div class="cash-withdrawal-rule-des">
+        <p v-for="(item,index) of $t('withdrawImmediately.cashWithdrawalRuleDes')" :key="index">
+          {{item}}
+        </p>
+      </div>
+
       <div class="cash-withdrawal-rule-img">
         <img :src="$t('withdrawImmediately.withdrawRule')">
       </div>
@@ -185,7 +191,6 @@
 
 <script>
 import { Icon, Dialog } from "vant";
-import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 
 import {
   getWithdrawInfo,
@@ -194,9 +199,9 @@ import {
 } from "@/server/finance.js";
 export default {
   components: {
-    DialogDefault,
+    DialogDefault: resolve=>require(['@/components/dialogs/dialogDefault.vue'],resolve),
+    
     [Icon.name]: Icon
-    // [Dialog.name]: Dialog
   },
   data() {
     return {

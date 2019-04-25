@@ -367,13 +367,11 @@
 </template>
 
 <script>
-import aCommodityThatIsBeingBargained from "@/components/bargain/aCommodityThatIsBeingBargained.vue";
-import countDown from "@/components/countDown.vue";
 import { getMyBargainSpus } from "@/server/bargain.js";
 export default {
   components: {
-    aCommodityThatIsBeingBargained, // 一件正在进行砍价商品
-    countDown
+    aCommodityThatIsBeingBargained:resolve=>require(['@/components/bargain/aCommodityThatIsBeingBargained.vue'],resolve), // 一件正在进行砍价商品
+    countDown:resolve=>require(['@/components/countDown.vue'],resolve)
   },
   data() {
     return {

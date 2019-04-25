@@ -16,18 +16,18 @@
         alt
         class="none-file-icon">
       <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
-      <div class="btn"   @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
+      <div class="btn"
+        @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
   </div>
 </template>
 
 <script>
-import pendingPaymentOrderItem from "@/components/order/pendingPaymentOrderItem.vue";
-
 import { orderList } from "@/server/pay.js";
 export default {
   components: {
-    pendingPaymentOrderItem
+    pendingPaymentOrderItem: resolve =>
+      require(["@/components/order/pendingPaymentOrderItem.vue"], resolve)
   },
   data() {
     return {

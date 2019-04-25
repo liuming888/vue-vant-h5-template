@@ -40,11 +40,12 @@
 </template>
 
 <script>
-import FriendListCommon from "@/components/FriendListCommon.vue";
 
 import { getMyFriends } from "@/server/user.js";
 export default {
-  components: { FriendListCommon },
+  components: { 
+    FriendListCommon:resolve=>require(["@/components/FriendListCommon.vue"],resolve) 
+    },
   data() {
     return {
       friendList: [],

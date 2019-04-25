@@ -113,7 +113,8 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
+        <p class="address" v-if="curDat.shipment_no">{{$t('myOrder.shipmentNumber')}}:{{curDat.shipment_no}}</p>
+         <p class="address" v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">

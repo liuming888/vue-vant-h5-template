@@ -40,11 +40,11 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom:-44px;
+      bottom: -44px;
     }
 
-    &:nth-last-of-type(1){
-      &::before{
+    &:nth-last-of-type(1) {
+      &::before {
         display: none;
       }
     }
@@ -63,8 +63,8 @@
     color: #888888;
     line-height: 45px;
     margin-top: 10px;
-    word-break:break-all; 
-    
+    word-break: break-all;
+
     img {
       width: 100%;
     }
@@ -81,11 +81,13 @@
 
 <template>
   <div class="totorial">
-    <turn-home/>
+    <turn-home />
 
-    <div class="totorial-bg" :style="{'background-image':`url(${$t('Tutorial.theme')})`}">
+    <div class="totorial-bg"
+      :style="{'background-image':`url(${$t('Tutorial.theme')})`}">
       <div class="totorial-ct">
-        <div class="totorial-ct-tit" :style="{'background-image':`url(${$t('Tutorial.commonProblem')})`}"></div>
+        <div class="totorial-ct-tit"
+          :style="{'background-image':`url(${$t('Tutorial.commonProblem')})`}"></div>
         <ul class="totorial-ct-ul">
           <li class="totorial-ct-li">
             <p class="totorial-ct-li-q">{{$t('Tutorial.howLongCanIReceiveTheGoods')}}</p>
@@ -105,7 +107,8 @@
           </li>
         </ul>
       </div>
-      <div class="totorial-ct-contact"  :style="{'background-image':`url(${$t('Tutorial.contactUs')})`}"></div>
+      <div class="totorial-ct-contact"
+        :style="{'background-image':`url(${$t('Tutorial.contactUs')})`}"></div>
     </div>
   </div>
 </template>
@@ -114,6 +117,15 @@
 export default {
   components: {
     turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+  },
+  mounted() {
+    if (
+      !Vue.prototype.$mainAppLoad &&
+      document.getElementById("mainApp").style.display != "none"
+    ) {
+      document.getElementById("mainApp").style.display = "none";
+      Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
+    }
   }
 };
 </script>

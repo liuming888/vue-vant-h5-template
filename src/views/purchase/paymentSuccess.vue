@@ -67,11 +67,10 @@
 </template>
 
 <script>
-import commodityItem from "@/components/commodity/commodityItem.vue";
 import { getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
-    commodityItem, //商品列表展示的商品X
+    commodityItem:resolve => require(["@/components/commodity/commodityItem.vue"], resolve), //商品列表展示的商品X
     turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
   },
   data() {
