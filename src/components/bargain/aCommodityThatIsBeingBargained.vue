@@ -3,7 +3,7 @@
 <template>
   <div class="freebing-big-box">
     <!-- <div class="freebing-title">Ongoing Freebies</div> -->
-    <div class="freebing-container">
+    <!-- <div class="freebing-container">
       <div class="good-box">
         <img class="good-img"
           v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
@@ -21,7 +21,6 @@
               <img v-lazy="require('@/assets/images/progress-bar.png')"
                 :width="spuBargainItem.bargain_rate+'%'">
               <div class="progress-content">
-                <!-- <span>has been cut {{spuBargainItem.bargain_amount}}</span> -->
                 <span>{{spuBargainItem.bargain_rate}}%</span>
               </div>
             </div>
@@ -40,6 +39,41 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+    <div class="t-box">
+      <img class="good-img"
+        v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
+
+      <div class="c-content">
+        <p class="good-title">{{spuBargainItem.title}}</p>
+
+        <count-down :dateDiff="spuBargainItem.expire_ttl"
+          v-if="spuBargainItem.expire_ttl"
+          :timeType="timeType"
+          page="home"></count-down>
+
+        <div class="progress">
+          <div class="progress-content"
+            :style="{'width':spuBargainItem.bargain_rate+'%'}">
+          </div>
+          <span>{{spuBargainItem.bargain_rate}}%</span>
+        </div>
+      </div>
+
+      <div class="price-box">
+        <div class="price-num">
+          Rp{{spuBargainItem.price}}
+        </div>
+        <div class="original-price">
+          Rp{{spuBargainItem.original_price}}
+        </div>
+      </div>
+    </div>
+
+    <div class="d-box">
+      <div class="lanjutkan-btn">Lanjutkan</div>
+      <div class="beli-btn hot">Beli</div>
     </div>
 
     <!-- 弹窗 -->
@@ -88,11 +122,11 @@ export default {
     };
   },
   computed: {
-    timeType(){
-      if(this.spuBargainItem.can_buy==1){
-        return 'buy';
-      }else{
-        return 'endIn'
+    timeType() {
+      if (this.spuBargainItem.can_buy == 1) {
+        return "buy";
+      } else {
+        return "endIn";
       }
     }
   },

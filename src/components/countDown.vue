@@ -30,7 +30,7 @@
 
 <template>
   <div class="count-down">
-    <span class="dec">{{decTxt}}</span>
+    <span class="dec" v-if="page!='home'">{{decTxt}}</span>
 
     <span class="time">{{time.h}}</span>
     :
@@ -51,6 +51,10 @@ export default {
     timeType:{
       type:String,
       default:'endIn'
+    },
+    page:{
+      type:String,
+      default:''
     }
   },
   data() {
