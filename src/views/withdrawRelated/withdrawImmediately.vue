@@ -163,7 +163,7 @@
 
       <div class="cash-withdrawal-rule-des">
         <p>
-          1. The first withdrawal of Rp5000, the premise of 18 o'clock on the same day, will arrive before 19 o'clock on the same day, after 18 o'clock will arrive before 19 o'clock the next day, if you encounter peak period, may delay the account, please be patient
+          1. The first withdrawal of Rp5000, the premise of 14:30 on the same day, will arrive before 00:00 on the same day, after 14:30 will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient
         </p>
         <p>
           2. In case of holidays, the delivery time will be postponed.
@@ -172,7 +172,10 @@
           3. One withdrawal account can only be bound to one user id , multiple bindings will be considered invalid.One withdrawal account can only get one new user bag -Rp5000
         </p>
         <p>
-          4. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover.
+          4.Now we only support phone charging to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756
+        </p>
+        <p>
+          5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover
         </p>
       </div>
 
