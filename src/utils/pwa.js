@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-26 13:34:35
+ * @LastEditTime: 2019-04-26 18:26:10
  */
 
 /**
@@ -132,11 +132,13 @@ var options = {
             action: 'show-istarbuy',
             // title: '去看看',
             title: 'Go and see',
+            // "icon": "images/yes.png"
         },
         {
             action: 'contact-me',
             // title: '联系我',
             title: 'contact me',
+            // "icon": "images/yes.png"
         },
     ],
     tag: 'pwa-starter',
@@ -207,10 +209,37 @@ function sendSubscriptionToServer(body, url) {
 }
 
 /**
+ * @description: 获取权限的 API 相对简单，但是不太好的是这个 API 最近由原来的回调方式变为返回一个 Promise 对象。这个变动造成了我们不能分辨当前浏览器究竟实现了哪一个，所以必须同时实现并处理两者。
+ */
+function askPermission() {
+    return new Promise(function(resolve, reject) {
+        const permissionResult = Notification.requestPermission(function(result) {
+            resolve(result);
+        });
+
+        if (permissionResult) {
+            permissionResult.then(resolve, reject);
+        }
+    }); /* .then(function(permissionResult) {
+        if (permissionResult !== 'granted') {
+            throw new Error("We weren't granted permission.");
+        }
+    }); */
+}
+
+/**
  * @description: Service Worker : Push API （移动端兼容些）
  */
 function showNotification() {
-    Notification.requestPermission(function(result) {
+    // Notification.requestPermission(function(result) {
+    //     if (result === 'granted') {
+    //         navigator.serviceWorker.ready.then(function(registration) {
+    //             registration.showNotification(title, options);
+    //         });
+    //     }
+    // });
+
+    askPermission().then(function(result) {
         if (result === 'granted') {
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(title, options);
@@ -233,7 +262,14 @@ function notifyMe() {
         notification = new Notification(title, options);
     } else if (Notification.permission !== 'denied') {
         // 否则我们需要向用户获取权限
-        Notification.requestPermission(function(permission) {
+        // Notification.requestPermission(function(permission) {
+        //     // 如果用户同意，就可以向他们发送通知
+        //     if (permission === 'granted') {
+        //         notification = new Notification(title, options);
+        //     }
+        // });
+
+        askPermission().then(function(permission) {
             // 如果用户同意，就可以向他们发送通知
             if (permission === 'granted') {
                 notification = new Notification(title, options);
@@ -252,11 +288,11 @@ function pushInfo(registration) {
     var curIsPc = isPC();
     try {
         if (!curIsPc) {
-             console.warn("走Service Worker : Push API Api推送");
+            console.warn('走Service Worker : Push API Api推送');
             // Service Worker : Push API （移动端兼容些）
             showNotification(registration);
         } else {
-            console.warn("走Notification Api推送");
+            console.warn('走Notification Api推送');
             //  Notification Api (PC端兼容些)
             notifyMe();
         }
@@ -268,6 +304,8 @@ function pushInfo(registration) {
 }
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
+    window.getPushReq = askPermission(); // 获取权限方法
+
     var publicKey = 'BOEQSjdhorIf8M0XFNlwohK3sTzO9iJwvbYU-fuXRF0tvRpPPMGO6d_gJC_pUQwBT7wD8rKutpNTFHOHN3VqJ0A';
     // 注册service worker
     registerServiceWorker('/sw.js')
@@ -276,24 +314,28 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             // 开启该客户端的消息推送订阅功能
             // return subscribeUserToPush(registration, publicKey);
 
-            return Promise.all([subscribeUserToPush(registration, publicKey), registration]);
+            return Promise.all([registration /* , subscribeUserToPush(registration, publicKey) */]);
         })
         .then(function(result) {
-            var registration = result[1];
-            document.querySelector('#pwaT').addEventListener('click', function() {
+            var registration = result[0];
+            var pwaPush=window.pwaPush = function() {  // 推送消息
                 console.warn('点击了');
                 // 推送消息（pc和移动都支持）
                 pushInfo(registration);
-            });
+            };
+            document.querySelector('#pwaT').addEventListener('click', pwaPush);
 
             /*********************************** 服务器推送消息主要逻辑 start ************************************************************/
-            var body = { subscription: result[0] };
-            // 为了方便之后的推送，为每个客户端简单生成一个标识
-            body.uniqueid = new Date().getTime();
-            console.log('uniqueid', body.uniqueid);
-            console.log('body---------------------', body);
-            // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
-            return sendSubscriptionToServer(JSON.stringify(body));
+            if (result[1]) {
+                //  当一打开网页就请求权限时
+                var body = { subscription: result[1] };
+                // 为了方便之后的推送，为每个客户端简单生成一个标识
+                body.uniqueid = new Date().getTime();
+                console.log('uniqueid', body.uniqueid);
+                console.log('body---------------------', body);
+                // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
+                return sendSubscriptionToServer(JSON.stringify(body));
+            }
             /*********************************** 服务器推送消息主要逻辑 end ************************************************************/
         })
         .then(function(res) {
@@ -308,7 +350,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
      * @description: 点击消息通知框后
      */
     function clickAction(e) {
-         var action = e.data;
+        var action = e.data;
         switch (action) {
             case 'show-istarbuy':
                 // location.href = location.href; // 跳转当前页面
@@ -334,6 +376,6 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     /**
      * @description:notification全局变量 Notification的实例
      */
-    notification.addEventListener('click',clickAction);
+    notification.addEventListener('click', clickAction);
     /******************************************** 点击消息通知框时的操作 end  ************************************************/
 }
