@@ -2,44 +2,50 @@
 
 <template>
   <div class="freebing-big-box">
-    <!-- <div class="freebing-title">Ongoing Freebies</div> -->
-    <div class="freebing-container">
-      <div class="good-box">
-        <img class="good-img"
-          v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
-        <div class="good-detail">
-          <p class="good-title">{{spuBargainItem.title}}</p>
-          <count-down :dateDiff="spuBargainItem.expire_ttl"
-            v-if="spuBargainItem.expire_ttl" :timeType="timeType"></count-down>
 
-          <div class="left-box">
-            <div class="num-box">
-              <span class="rp-box">Rp{{spuBargainItem.bargain_amount||0}}</span> <span class="compeled">{{$t('aCommodityThatIsBeingBargained.completed')}}</span>
-            </div>
+    <div class="t-box">
+      <img class="good-img"
+        v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
 
-            <div class="progress">
-              <img v-lazy="require('@/assets/images/progress-bar.png')"
-                :width="spuBargainItem.bargain_rate+'%'">
-              <div class="progress-content">
-                <!-- <span>has been cut {{spuBargainItem.bargain_amount}}</span> -->
-                <span>{{spuBargainItem.bargain_rate}}%</span>
-              </div>
-            </div>
+      <div class="c-content">
+        <p class="good-title">{{spuBargainItem.title}}</p>
+
+        <count-down :dateDiff="spuBargainItem.expire_ttl"
+          v-if="spuBargainItem.expire_ttl"
+          :timeType="timeType"
+          page="home"></count-down>
+
+        <div class="progress">
+          <div class="progress-content"
+            :style="{'width':spuBargainItem.bargain_rate+'%'}">
           </div>
-
-          <div class="goods-control">
-            <span v-if="spuBargainItem.status==1"
-              class="go-on-btn"
-              :class="{'r-b':spuBargainItem.can_buy==2}"
-              @click="jumpBargain">
-              {{$t('aCommodityThatIsBeingBargained.goOn')}}
-            </span>
-            <span class="buy-btn r-b"
-              v-if="spuBargainItem.can_buy==1"
-              @click="jumpPurchasePage">{{$t('aCommodityThatIsBeingBargained.buy')}}</span>
-          </div>
+          <span>{{spuBargainItem.bargain_rate}}%</span>
         </div>
       </div>
+
+      <div class="price-box">
+        <div class="price-num">
+          Rp{{spuBargainItem.price}}
+        </div>
+        <div class="original-price"
+          v-if="spuBargainItem.status==1&&spuBargainItem.can_buy!=1">
+          Rp{{spuBargainItem.original_price}}
+        </div>
+        <div class="complete-txt"
+          v-else>
+          {{$t('home.complete')}}
+        </div>
+      </div>
+    </div>
+
+    <div class="d-box">
+      <div class="lanjutkan-btn"
+        v-if="spuBargainItem.status==1"
+        :class="{'hot':spuBargainItem.can_buy==2}"
+        @click="jumpBargain">{{$t('aCommodityThatIsBeingBargained.goOn')}}</div>
+      <div class="beli-btn hot"
+        v-if="spuBargainItem.can_buy==1"
+        @click="jumpPurchasePage">{{$t('aCommodityThatIsBeingBargained.buy')}}</div>
     </div>
 
     <!-- 弹窗 -->
@@ -88,11 +94,11 @@ export default {
     };
   },
   computed: {
-    timeType(){
-      if(this.spuBargainItem.can_buy==1){
-        return 'buy';
-      }else{
-        return 'endIn'
+    timeType() {
+      if (this.spuBargainItem.can_buy == 1) {
+        return "buy";
+      } else {
+        return "endIn";
       }
     }
   },

@@ -48,7 +48,8 @@
                 <span class="description">{{$t('bargain.availableForPurchase')}}</span>
               </div>
               <div class="schedule-item ball ball-right">
-                <span class="description">{{$t('bargain.takeItFree')}}{{bargain_info.must_buy_price||0}}</span>
+                <!-- 该商品地板价  must_buy_price字段控制  做了兼容两个接口查看这字段处理  -->
+                <span class="description">{{$t('bargain.takeItFree')}}{{floorPrice}}</span>
               </div>
             </div>
           </div>
@@ -231,6 +232,13 @@ export default {
     };
   },
   computed: {
+    /**
+     * @description: 地板价  must_buy_price字段控制  做了兼容两个接口查看这字段处理  都没有的话就默认商品现价的百分之二十
+     */
+    floorPrice(){
+      const {bargain_info,spu}=this;
+      return bargain_info.must_buy_price||spu.must_buy_price||spu.price*0.2;
+    },
     /**
      * @description:  当前砍价比例
      */

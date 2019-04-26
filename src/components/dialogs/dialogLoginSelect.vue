@@ -217,7 +217,7 @@
       <img src="~@/assets/images/login-top.png"
         class="login-top-img">
 
-      <h3 class="login-tit">{{$t('dialogLoginSelect.signInCanGetRp_5000PhoneBill')}}</h3>
+      <h3 class="login-tit">{{$t('dialogLoginSelect.welcomeToIstarbuyWorld')}}</h3>
 
       <div class="input-big-box">
         <div class="phone-box input-box">
@@ -322,6 +322,7 @@ export default {
       eventAction: "浮窗展示"
     });
 
+    if(process.env.VUE_APP_ENV=='development') return;
     this.startApp();
   },
   methods: {
