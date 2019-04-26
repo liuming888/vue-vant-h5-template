@@ -12,7 +12,7 @@
 
     <!-- 弹窗 -->
     <dialog-login-select v-if="$store.state.dialogs.loginSelect.show" />
-    <dialog-new-gift-bag v-if="$store.state.dialogs.newGiftBag.show" />
+    <!-- <dialog-new-gift-bag v-if="$store.state.dialogs.newGiftBag.show" /> -->
   </div>
 </template>
 
@@ -27,8 +27,8 @@ export default {
       require(["@/components/dialogs/dialogBidPriceCompleted.vue"], resolve), // 砍价完成弹窗
     dialogLoginSelect: resolve =>
       require(["@/components/dialogs/dialogLoginSelect.vue"], resolve), // 登录选择弹窗
-    dialogNewGiftBag: resolve =>
-      require(["@/components/dialogs/dialogNewGiftBag.vue"], resolve) // 新人礼包
+    // dialogNewGiftBag: resolve =>
+    //   require(["@/components/dialogs/dialogNewGiftBag.vue"], resolve) // 新人礼包
   },
   watch: {
     $route(val) {
