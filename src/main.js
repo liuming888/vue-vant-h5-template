@@ -34,4 +34,4 @@ window.curVueObj=new Vue({
     render: h => h(App),
 }).$mount('#app');
 
-import "@/utils/pwademo.js";
+import "@/utils/pwa.js";
