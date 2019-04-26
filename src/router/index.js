@@ -5,7 +5,7 @@ import { gaSend } from '../utils/util.js';
 // Vue.use(Router);
 
 const curRouter = new VueRouter({
-    mode: 'history',
+    mode:  process.env.VUE_APP_CUR=='apk'?'hash':'history',
     base: process.env.BASE_URL,
     routes: [
         {
