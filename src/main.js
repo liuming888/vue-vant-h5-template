@@ -27,6 +27,9 @@ Vue.mixin({
     },
 });
 
+import Vconsole from "vconsole";
+new Vconsole();
+
 window.curVueObj=new Vue({
     router,
     store,
