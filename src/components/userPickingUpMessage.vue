@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       curIdx: 0, // 当前播放的消息下标
-      clickInfoNum: 0 // 点击消息框次数，默认点击3次就出现调试的Vconsole框
+      clickInfoNum: 0 // 点击消息框次数，默认点击6次就出现调试的Vconsole框
     };
   },
   computed: {
@@ -99,9 +99,10 @@ export default {
     clickInfo() {
       console.log("点击info框了");
       this.clickInfoNum++;
-      if (this.clickInfoNum === 3) {
+      if (this.clickInfoNum === 6) {
         try {
-          new this.$Vconsole;
+          let $Vconsole = require("vconsole");
+          new $Vconsole;
         } catch (error) {
           console.log("error vconsole: ", error);
         }

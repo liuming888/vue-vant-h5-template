@@ -27,13 +27,6 @@ Vue.mixin({
     },
 });
 
-try {
-    let $Vconsole=window.$Vconsole=Vue.prototype.$Vconsole=require('vconsole');
-    // new $Vconsole;
-} catch (error) {
-    console.log('error vconsole: ', error);
-}
-
 window.curVueObj=new Vue({
     router,
     store,
