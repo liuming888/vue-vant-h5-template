@@ -65,12 +65,12 @@
     }
     > .home-banner {
       width: 100%;
-      max-height: 324px;
       overflow: hidden;
       margin-bottom: 26px;
       img {
         width: 100%;
         height: auto;
+        max-height: 500px; // 旧版本的banner高度
       }
     }
   }
