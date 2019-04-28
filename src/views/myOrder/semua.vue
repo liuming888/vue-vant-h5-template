@@ -40,7 +40,7 @@ import { orderList } from "@/server/pay.js";
 export default {
   components: {
     pendingPaymentOrderItem: resolve => 
-      require(["@/components/order/pendingPaymentOrderItem.vue"].resolve),  // 待完成
+      require(["@/components/order/pendingPaymentOrderItem.vue"],resolve),  // 待完成
     orderCompletedItem: resolve =>
       require(["@/components/order/orderCompletedItem.vue"], resolve), // 已完成
     dialogContactUs: resolve =>
