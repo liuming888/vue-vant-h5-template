@@ -54,12 +54,14 @@
     > .info-description,
     > .address {
       font-size: 24px;
+      line-height: 30px;
       color: #888;
       margin-top: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
       margin-bottom: 40px;
+      word-break: break-all;
     }
   }
 }
@@ -116,8 +118,10 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address" v-if="curDat.shipment_no">{{$t('myOrder.shipmentNumber')}}:{{curDat.shipment_no}}</p>
-         <p class="address" v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
+        <p class="address"
+          v-if="curDat.shipment_no">{{$t('myOrder.shipmentNumber')}}:{{curDat.shipment_no}}</p>
+        <p class="address"
+          v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
       </div>
     </div>
     <div class="ctrl-box">

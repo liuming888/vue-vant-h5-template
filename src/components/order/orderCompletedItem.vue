@@ -55,12 +55,14 @@
     > .info-description,
     > .address {
       font-size: 24px;
+      line-height: 30px;
       color: #888;
       margin-top: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
       margin-bottom: 40px;
+      word-break:break-all;
     }
   }
 }
