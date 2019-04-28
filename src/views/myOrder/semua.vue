@@ -42,7 +42,7 @@ export default {
     pendingPaymentOrderItem: resolve => 
       require(["@/components/order/pendingPaymentOrderItem.vue"].resolve),  // 待完成
     orderCompletedItem: resolve =>
-      request(["@/components/order/orderCompletedItem.vue"], resolve), // 已完成
+      require(["@/components/order/orderCompletedItem.vue"], resolve), // 已完成
     dialogContactUs: resolve =>
       require(["@/components/dialogs/dialogContactUs.vue"], resolve)  //联系我们弹窗
   },
