@@ -69,8 +69,9 @@
       margin-bottom: 26px;
       img {
         width: 100%;
-        height: auto;
-        max-height: 500px; // 旧版本的banner高度
+        // height: auto;
+        // max-height: 500px; // 旧版本的banner高度
+        height: 324px;  // 新版本的banner高度
       }
     }
   }
