@@ -1,5 +1,7 @@
-let user_id=1;
-let access_token = '486dcad761f8425e8aa2a49e964a984c';
+// let user_id=1;
+// let access_token = '486dcad761f8425e8aa2a49e964a984c';
+let user_id="";
+let access_token = '';
 let userStr = localStorage.getItem('userInfo');
 if (userStr && process.env.VUE_APP_ENV == 'development') {
     let userInfo = JSON.parse(userStr);

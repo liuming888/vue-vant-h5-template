@@ -121,7 +121,6 @@
         </noscript>
         <div id="app"></div>
         <!-- built files will be auto injected -->
-        <script src="https://apis.google.com/js/api:client.js"></script>
         <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
         <script src="<%= BASE_URL %>static/lib/vue-i18n.min.js"></script>
         <script src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
@@ -146,5 +145,6 @@
             ga('create', gaId, 'auto');
             ga('send', window.location.href);
         </script>
+        <script src="https://apis.google.com/js/api:client.js" async></script>
     </body>
 </html>
