@@ -5,6 +5,8 @@ export default {
         pleaseLoginAgain: 'Silakan masuk lagi !',
         theRequestFailed: 'The request failed. Please try again later!',
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
+        successfulCopy: 'Salinan yang berhasil',
+        replicationFailed: 'Replikasi gagal',
     },
 
     /************************ 组件  start *****************************************************/

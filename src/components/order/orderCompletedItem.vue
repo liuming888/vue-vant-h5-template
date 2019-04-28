@@ -124,13 +124,17 @@
           v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p> -->
 
         <button v-if="curDat.shipment_no"
-          ref="copy"
+          ref="copy1"
           class="address"
           data-clipboard-action="copy"
           :data-clipboard-text="curDat.shipment_no"
           @click="mx_copyLink">{{$t('myOrder.shipmentNumber')}}: {{curDat.shipment_no}}</button>
-        <p class="address"
-          v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
+       <button v-else
+          ref="copy2"
+          class="address"
+          data-clipboard-action="copy"
+          :data-clipboard-text="curDat.order_no"
+          @click="mx_copyLink">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</button>
 
       </div>
     </div>

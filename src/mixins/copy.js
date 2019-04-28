@@ -6,8 +6,9 @@ export default {
         };
     },
     mounted() {
-        if (this.$refs.copy) {
-            this.mx_copyBtn = new Clipboard(this.$refs.copy);
+        let copyEle=this.$refs.copy1||this.$refs.copy2;
+        if (copyEle) {
+            this.mx_copyBtn = new Clipboard(copyEle);
         }
     },
     methods: {

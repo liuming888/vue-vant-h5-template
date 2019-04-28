@@ -52,7 +52,10 @@
       }
     }
     > .info-description,
-    > .address {
+     > .address {
+      display: block;
+      background: none;
+      text-align: left;
       font-size: 24px;
       line-height: 30px;
       color: #888;
@@ -118,10 +121,23 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address"
+        <!-- <p class="address"
           v-if="curDat.shipment_no">{{$t('myOrder.shipmentNumber')}}:{{curDat.shipment_no}}</p>
         <p class="address"
-          v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p>
+          v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p> -->
+        <button v-if="curDat.shipment_no"
+          ref="copy1"
+          class="address"
+          data-clipboard-action="copy"
+          :data-clipboard-text="curDat.shipment_no"
+          @click="mx_copyLink">{{$t('myOrder.shipmentNumber')}}: {{curDat.shipment_no}}</button>
+        <button v-else
+          ref="copy2"
+          class="address"
+          data-clipboard-action="copy"
+          :data-clipboard-text="curDat.order_no"
+          @click="mx_copyLink">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</button>
+
       </div>
     </div>
     <div class="ctrl-box">
@@ -137,7 +153,10 @@
 
 <script>
 import { repaidOrder } from "@/server/pay.js";
+
+import copy from "@/mixins/copy.js";
 export default {
+  mixins: [copy],
   props: {
     curDat: {
       type: Object,
