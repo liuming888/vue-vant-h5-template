@@ -1,8 +1,9 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-26 18:26:10
+ * @LastEditTime: 2019-04-28 14:03:41
  */
+// import $request from './api/request.js';
 
 /**
  * @description: 判断是pc不
@@ -181,8 +182,9 @@ function subscribeUserToPush(registration, publicKey) {
  */
 function sendSubscriptionToServer(body, url) {
     var httpPath = getUrl(env);
-    console.log('httpPath: ', httpPath);
-    url = httpPath + (url || '/check');
+    console.log('httpPath------------------------------------------: ', httpPath);
+    // url = httpPath + (url || '/check');
+    url = "/pwa/save-subscription";  // 自己本地测试
     return new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.timeout = 60000;
@@ -206,6 +208,10 @@ function sendSubscriptionToServer(body, url) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(body);
     });
+
+    // $request.post({
+    //     url:'/pwa/save-subscription'
+    // })
 }
 
 /**
@@ -311,16 +317,16 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     registerServiceWorker('/sw.js')
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
-            // 开启该客户端的消息推送订阅功能
+            // 开启该客户端的服务端消息推送订阅功能
             // return subscribeUserToPush(registration, publicKey);
 
-            return Promise.all([registration /* , subscribeUserToPush(registration, publicKey) */]);
+            return Promise.all([registration , subscribeUserToPush(registration, publicKey)]);
         })
         .then(function(result) {
             var registration = result[0];
             var pwaPush=window.pwaPush = function() {  // 推送消息
                 console.warn('点击了');
-                // 推送消息（pc和移动都支持）
+                // 前端直接推送消息（pc和移动都支持）
                 pushInfo(registration);
             };
             document.querySelector('#pwaT').addEventListener('click', pwaPush);
