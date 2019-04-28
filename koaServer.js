@@ -15,16 +15,11 @@ var webpush = require('web-push');
  * 这里可以替换为你业务中实际的值
  */
 var vapidKeys = {
-    publicKey: 'BIptml2QKXHTp68CMcjVTXsVO9puoZdENwYEEXygL_6JocgYGUOhSLED2avqUCxd5PuoDbhYDhrB3067sBsV9JQ',
-    privateKey: '9NxiyeyeiFZ-P2pbpBjSdnnvrGYZH_htTgH0RbmhrkM'
+    publicKey: 'BM-fAdnJinrq11GkGf4Ze5iU75_UXgy7qLM9DFiMuZG3RWC1r1dEv_t59djnLu9fHrUcaASZJTcTU0b5GNH39Cg',
+    privateKey: 'mZQ7qnMTVkM0Y222A2lv3nC-dAWGW5zN2P8epJvbIdo',
 };
 
-webpush.setVapidDetails(
-    'mailto:liu1311737393@outlook.com',
-    vapidKeys.publicKey,
-    vapidKeys.privateKey
-);
-
+webpush.setVapidDetails('mailto:alienzhou16@163.com', vapidKeys.publicKey, vapidKeys.privateKey);
 
 router.get('/', async (ctx, next) => {
     ctx.body = `<h1 style="font-size:66px;text-align:center;margin-top:66px;">Hello World!</h1>`;
@@ -94,11 +89,34 @@ function find(query) {
     });
 }
 
+function remove(obj) {
+    return new Promise((r, j) => {
+        db.remove(obj, { multi: true }, (err, num) => {
+            if (err) {
+                j(err);
+                return;
+            }
+            r(num);
+        });
+    });
+}
+
 /* ===================== */
 /* 使用web-push进行消息推送 */
 /* ===================== */
 const options = {
-    // proxy: 'http://localhost:1087' // 使用FCM（Chrome）需要配置代理
+    //   gcmAPIKey: '< GCM API Key >',
+    vapidDetails: {
+        subject: 'mailto:alienzhou16@163.com',
+        publicKey: 'BIptml2QKXHTp68CMcjVTXsVO9puoZdENwYEEXygL_6JocgYGUOhSLED2avqUCxd5PuoDbhYDhrB3067sBsV9JQ',
+        privateKey: '9NxiyeyeiFZ-P2pbpBjSdnnvrGYZH_htTgH0RbmhrkM',
+    },
+    //   TTL: <Number>,
+    //   headers: {
+    //     '< header name >': '< header value >'
+    //   },
+    //   contentEncoding: '< Encoding type, e.g.: aesgcm or aes128gcm >',
+    //   proxy: '< proxy server address >'
 };
 
 /**
@@ -108,7 +126,7 @@ const options = {
  */
 function pushMessage(subscription, data = {}) {
     webpush
-        .sendNotification(subscription, data, options)
+        .sendNotification(subscription, 'ceshi' /* data */, options)
         .then(data => {
             console.log('push service的相应数据:', JSON.stringify(data));
             return;
@@ -116,10 +134,10 @@ function pushMessage(subscription, data = {}) {
         .catch(err => {
             // 判断状态码，440和410表示失效
             if (err.statusCode === 410 || err.statusCode === 404) {
-                return util.remove(subscription);
+                return remove(subscription);
             } else {
-                console.log(subscription);
-                console.log(err);
+                // console.log(subscription);
+                console.log('server push 消息错误', err);
             }
         });
 }
@@ -128,7 +146,6 @@ function pushMessage(subscription, data = {}) {
  * 提交subscription信息，并保存
  */
 router.post('/subscription', async (ctx, next) => {
-    console.log('66666666666666666', ctx.request.body);
     // 检查请求请求的 body, 且至少要检查是否含有 endpoint
     if (!ctx.request.body || (ctx.request.body.subscription && !ctx.request.body.subscription.endpoint)) {
         // 不是有效的订阅
@@ -142,8 +159,7 @@ router.post('/subscription', async (ctx, next) => {
         return false;
     }
 
-    let result = await saveRecord(ctx.request.body);
-    console.log('result22222222222222222222222222222222222222222222: ', result);
+    await saveRecord(ctx.request.body);
     ctx.body = {
         status: 0,
         msg: 'sucesss',
@@ -153,14 +169,15 @@ router.post('/subscription', async (ctx, next) => {
 /**
  * 消息推送API，可以在管理后台进行调用
  */
-router.post('/push', koaBody(), async ctx => {
+router.post('/push', async ctx => {
     let { uniqueid, payload } = ctx.request.body;
     let list = uniqueid ? await find({ uniqueid }) : await findAll();
+    console.log('list---------------------------------: ', list);
     let status = list.length > 0 ? 0 : -1;
 
     for (let i = 0; i < list.length; i++) {
         let subscription = list[i].subscription;
-        pushMessage(subscription, /* JSON.stringify(payload) */'ceshi server push');
+        pushMessage(subscription, JSON.stringify(payload));
     }
 
     ctx.response.body = {

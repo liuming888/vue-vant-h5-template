@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-28 17:44:43
+ * @LastEditTime: 2019-04-28 19:30:40
  */
 // import $request from './api/request.js';
 
@@ -312,7 +312,7 @@ function pushInfo(registration) {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     window.getPushReq = askPermission(); // 获取权限方法
 
-    var publicKey = 'BOEQSjdhorIf8M0XFNlwohK3sTzO9iJwvbYU-fuXRF0tvRpPPMGO6d_gJC_pUQwBT7wD8rKutpNTFHOHN3VqJ0A';
+    var publicKey = 'BM-fAdnJinrq11GkGf4Ze5iU75_UXgy7qLM9DFiMuZG3RWC1r1dEv_t59djnLu9fHrUcaASZJTcTU0b5GNH39Cg';
     // 注册service worker
     registerServiceWorker('/sw.js')
         .then(function(registration) {
@@ -348,7 +348,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             console.log(res);
         })
         .catch(function(err) {
-            console.log(err);
+            console.warn("异常",err);
         });
 
     /******************************************** 点击消息通知框时的操作 start  ************************************************/
