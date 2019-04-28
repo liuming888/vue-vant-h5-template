@@ -541,11 +541,11 @@ export default {
     },
     // 更多砍价点击
     handleMoreAbout() {
-      this.$router.push({ path: "/isBargainingList" });
-      this.$gaSend({
+        this.$gaSend({
         eventCategory: "首页_更多砍价",
         eventAction: "点击"
       });
+      this.$router.push({ path: "/isBargainingList" });
     },
     //ga统计商品列表点击
     cashBackGa(item) {
