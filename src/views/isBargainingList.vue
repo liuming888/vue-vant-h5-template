@@ -292,6 +292,9 @@
 
 <template>
   <div class="isBargainingList-container">
+     <!-- 返回首页 -->
+    <turn-home />
+
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
@@ -371,7 +374,8 @@ import { getMyBargainSpus } from "@/server/bargain.js";
 export default {
   components: {
     aCommodityThatIsBeingBargained:resolve=>require(['@/components/bargain/aCommodityThatIsBeingBargained.vue'],resolve), // 一件正在进行砍价商品
-    countDown:resolve=>require(['@/components/countDown.vue'],resolve)
+    countDown:resolve=>require(['@/components/countDown.vue'],resolve),
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve), // 返回首页按钮
   },
   data() {
     return {
