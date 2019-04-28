@@ -273,10 +273,10 @@ export default {
             okText: 'aku tahu',
         },
 
-        withdrawalApplication: 'Withdrawal application',
+        withdrawalApplication: 'Penarikan aplikasi',
         pleaseCheckItOut: 'Permintaan penarikan Anda telah dimulai, silakan periksa!',
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
-        iKnow: 'I know',
+        iKnow: 'Saya mengerti',
         withdrawRule: require('@/assets/images/id-withdrawRule.png'),
         cashWithdrawalRuleDes: [
             `1. The first withdrawal of Rp5000, the premise of 14:30  on the same day, will arrive before 00:00 on the same day, after 14:30  will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient`,
