@@ -13,8 +13,8 @@
 
   .dialog-content {
     width: 610px;
-    // height: 600px;
-    height: 790px;
+    height: 600px;
+    // height: 790px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;
@@ -263,19 +263,21 @@
         {{$t('dialogLoginSelect.signInRegister')}}
       </div>
 
-      <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
-      <div class="login-types">
-        <div class="login-item"
-          id="customBtn">
-          <img src="~@/assets/images/gooleIcon.png">
-        </div>
+      <template v-if="false">
+        <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
+        <div class="login-types">
+          <div class="login-item"
+            id="customBtn">
+            <img src="~@/assets/images/gooleIcon.png">
+          </div>
 
-        <div v-if="showFB"
-          class="login-item"
-          @click="loginFB">
-          <img src="~@/assets/images/facbookIcon.png">
+          <div v-if="showFB"
+            class="login-item"
+            @click="loginFB">
+            <img src="~@/assets/images/facbookIcon.png">
+          </div>
         </div>
-      </div>
+      </template>
     </div>
 
   </div>
@@ -322,7 +324,7 @@ export default {
       eventAction: "浮窗展示"
     });
 
-    if(process.env.VUE_APP_ENV=='development') return;
+    if (process.env.VUE_APP_ENV == "development") return;
     this.startApp();
   },
   methods: {
