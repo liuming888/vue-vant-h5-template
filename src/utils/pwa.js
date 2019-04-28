@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-28 14:03:41
+ * @LastEditTime: 2019-04-28 17:44:43
  */
 // import $request from './api/request.js';
 
@@ -184,7 +184,7 @@ function sendSubscriptionToServer(body, url) {
     var httpPath = getUrl(env);
     console.log('httpPath------------------------------------------: ', httpPath);
     // url = httpPath + (url || '/check');
-    url = "/pwa/save-subscription";  // 自己本地测试
+    url = "/pwa/subscription";  // 自己本地测试
     return new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.timeout = 60000;
@@ -318,7 +318,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
             // 开启该客户端的服务端消息推送订阅功能
-            // return subscribeUserToPush(registration, publicKey);
+            // subscribeUserToPush(registration, publicKey);
 
             return Promise.all([registration , subscribeUserToPush(registration, publicKey)]);
         })
