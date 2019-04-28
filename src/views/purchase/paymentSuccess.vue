@@ -46,12 +46,12 @@
       <img src="@/assets/images/success.png"
         alt
         class="success-icon">
-      <p>Selamat, Anda telah berhasil membayar!</p>
+      <p>{{$t('paymentSuccess.successTit')}}</p>
     </div>
     <section class="like-goods"
       v-show="goodsList.length > 0">
       <div class="like-goods-title">
-        <img src="@/assets/images/loveproducts.png">
+        <img :src="$t('paymentSuccess.loveproducts')">
       </div>
 
       <ul class="like-goods-list">
@@ -67,11 +67,10 @@
 </template>
 
 <script>
-import commodityItem from "@/components/commodity/commodityItem.vue";
 import { getBargainSpus } from "@/server/goods.js";
 export default {
   components: {
-    commodityItem, //商品列表展示的商品X
+    commodityItem:resolve => require(["@/components/commodity/commodityItem.vue"], resolve), //商品列表展示的商品X
     turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
   },
   data() {

@@ -13,7 +13,8 @@
 
   .dialog-content {
     width: 610px;
-    height: 600px;
+    // height: 600px;
+    height: 790px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;
@@ -30,9 +31,9 @@
       top: -130px;
     }
 
-    &.show-fb {
-      height: 780px;
-    }
+    // &.show-fb {
+    //   height: 780px;
+    // }
 
     .login-tit {
       text-align: center;
@@ -186,14 +187,17 @@
       align-items: center;
 
       .login-item {
-        flex: 1;
-        margin-right: 20px;
+        margin-right: 65px;
         text-align: center;
         font-size: 20px;
         color: #323232;
 
+        &:nth-last-of-type(1) {
+          margin-right: 0;
+        }
+
         img {
-          width: 80px;
+          width: 66px;
           height: auto;
           border-radius: 50%;
         }
@@ -208,13 +212,12 @@
     @click="close">
 
     <div class="dialog-content"
-      :class="{'show-fb':showFB}"
       @click.stop>
 
       <img src="~@/assets/images/login-top.png"
         class="login-top-img">
 
-      <h3 class="login-tit">Welcome to Istarbuy world!</h3>
+      <h3 class="login-tit">{{$t('dialogLoginSelect.welcomeToIstarbuyWorld')}}</h3>
 
       <div class="input-big-box">
         <div class="phone-box input-box">
@@ -224,14 +227,14 @@
           <span class="quhao">+62</span>
           <input type="number"
             class="input code-input"
-            placeholder="Enter Mobile Number"
+            :placeholder="$t('dialogLoginSelect.enterMobileNumber')"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
             v-model="phone">
 
           <span class="send"
             v-if="!initCodeTime"
-            @click.stop="getCode">Send</span>
+            @click.stop="getCode">{{$t('dialogLoginSelect.Send')}}</span>
           <span class="send"
             v-else>{{initCodeTime}} s</span>
         </div>
@@ -244,7 +247,7 @@
             class="input"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Enter Code SMS"
+            :placeholder="$t('dialogLoginSelect.enterCodeSms')"
             v-model="authCode">
 
           <!-- <span class="send"
@@ -257,18 +260,22 @@
 
       <div class="login-btn"
         @click.stop="loginTel">
-        Sign in / Register
+        {{$t('dialogLoginSelect.signInRegister')}}
       </div>
 
-      <template v-if="showFB">
-        <p class="other-log">Other ways to log in</p>
-        <div class="login-types">
-          <div class="login-item"
-            @click="loginFB">
-            <img v-lazy="require('@/assets/images/facbookIcon.png')">
-          </div>
+      <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
+      <div class="login-types">
+        <div class="login-item"
+          id="customBtn">
+          <img src="~@/assets/images/gooleIcon.png">
         </div>
-      </template>
+
+        <div v-if="showFB"
+          class="login-item"
+          @click="loginFB">
+          <img src="~@/assets/images/facbookIcon.png">
+        </div>
+      </div>
     </div>
 
   </div>
@@ -314,6 +321,9 @@ export default {
       eventCategory: "第三方登陆浮窗",
       eventAction: "浮窗展示"
     });
+
+    if(process.env.VUE_APP_ENV=='development') return;
+    this.startApp();
   },
   methods: {
     init() {
@@ -321,12 +331,13 @@ export default {
       this.authCode = "";
       this.initCodeTime = 0;
     },
+
     close() {
       this.$store.commit("setLoginSelectShow", false);
     },
     async getCode() {
       if (!this.phone) {
-        this.$toast("Number cannot be empty !");
+        this.$toast(this.$t("dialogLoginSelect.numberCannotBeEmpty"));
         return;
       }
       let params = {
@@ -339,8 +350,7 @@ export default {
       if (result) {
         if (result.code == 0) {
           this.$toast({
-            message:
-              "Please be patient，Your SMS code will be sent in 120 second!",
+            message: this.$t("dialogLoginSelect.yourSmsCodeWillBeSent"),
             duration: 2000
           });
           this.authCode = result.data;
@@ -406,11 +416,11 @@ export default {
      */
     async loginTel() {
       if (!this.phone) {
-        this.$toast("Number cannot be empty !");
+        this.$toast(this.$t("dialogLoginSelect.numberCannotBeEmpty"));
         return;
       }
       if (!this.authCode) {
-        this.$toast("verification code must be filled !");
+        this.$toast(this.$t("dialogLoginSelect.verificationCodeMustBeFilled"));
         return;
       }
 
@@ -426,9 +436,93 @@ export default {
       }
 
       let result = await telLogin(param);
+
+      const { pathname, search } = window.location;
+      this.$gaSend({
+        eventCategory: "手机登陆按钮",
+        eventAction: "点击",
+        eventLabel: pathname + search
+      });
+
       if (result && result.data) {
         this.loginApiEnd(result.data);
       }
+    },
+    /**
+     * @description: 初始化goole登录
+     */
+    startApp() {
+      var vm = this;
+      vm.auth2 = null;
+      gapi.load("auth2", function() {
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        vm.auth2 = gapi.auth2.init({
+          client_id:
+            "510253586292-c00176cjlo0okpl63o3ar8go4slvvo6f.apps.googleusercontent.com", //客户端ID
+          cookiepolicy: "single_host_origin",
+          scope: "profile" //可以请求除了默认的'profile' and 'email'之外的数据
+        });
+        vm.attachSignin(document.getElementById("customBtn"));
+      });
+    },
+    /**
+     * @description: 监听点击goole后的
+     */
+    attachSignin(element) {
+      let vm = this;
+      vm.auth2.attachClickHandler(
+        element,
+        {},
+        async function(googleUser) {
+          const { pathname, search } = window.location;
+          vm.$gaSend({
+            eventCategory: "google登陆按钮",
+            eventAction: "点击",
+            eventLabel: pathname + search
+          });
+          console.warn("googleUser", googleUser);
+
+          // var profile = vm.auth2.currentUser.get().getBasicProfile();
+          // console.log('profile: ', profile);
+          // console.log("ID: " + profile.getId());
+          // console.log("Full Name: " + profile.getName());
+          // console.log("Given Name: " + profile.getGivenName());
+          // console.log("Family Name: " + profile.getFamilyName());
+          // console.log("Image URL: " + profile.getImageUrl());
+          // console.log("Email: " + profile.getEmail());
+
+          const {
+            Zi: {
+              access_token: tp_token /* expires_at,expires_in,first_issued_at,id_token,idpId,login_hint,scope,session_state:{extraQueryParams:{authuser}},token_type */
+            },
+            w3: {
+              Eea: tp_id,
+              Paa: tp_avatar,
+              U3: tp_email,
+              ig: tp_username,
+              ofa,
+              wea
+            }
+          } = googleUser;
+          let param = {
+            tp_id,
+            tp_token,
+            tp_type: 3,
+            tp_username,
+            tp_avatar,
+            tp_email
+          };
+          vm.setParams(param);
+          console.log("goole-param", param);
+          let result = await login(param);
+          if (result && result.data) {
+            vm.loginApiEnd(result.data);
+          }
+        },
+        function(error) {
+          console.log(JSON.stringify(error, undefined, 2));
+        }
+      );
     },
     /**
      * @description: FB登录
@@ -458,6 +552,13 @@ export default {
         let result = await login(param);
         console.log("result: ", result);
         this.mx_closeLoad();
+
+        const { pathname, search } = window.location;
+        this.$gaSend({
+          eventCategory: "facebook登陆按钮",
+          eventAction: "点击",
+          eventLabel: pathname + search
+        });
 
         if (result && result.data) {
           this.loginApiEnd(result.data);

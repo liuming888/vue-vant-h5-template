@@ -52,13 +52,12 @@
 }
 </style>
 
-
 <template>
   <div class="incomeWindow-container"
     :class="{cur:showCur}"
     @click="setShow"
     v-lazy:background-image="require('@/assets/images/fudai.png')">
-    <p class="income">Income</p>
+    <p class="income">{{$t('incomeWindow.income')}}</p>
     <p class="num">RP6.00</p>
   </div>
 </template>

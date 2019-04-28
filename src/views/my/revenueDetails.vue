@@ -1,69 +1,3 @@
-<!--  -->
-<template>
-  <div class="revenue_detail">
-    <!-- 返回首页 -->
-    <turn-home />
-
-    <header>
-      Revenue Rp
-      <span>{{total_revenue||0}}</span> &nbsp; &nbsp;
-      Expenses Rp
-      <span>{{total_expenses||0}}</span>
-    </header>
-    <div class="revenue-content">
-      <ul>
-        <li v-for="(item,index) in detailList"
-          :key="index">
-          <div>
-            <img :src="item.icon">
-          </div>
-          <div class="con">
-            <div class="intro">
-              <p>{{item.summary}}</p>
-              <p>{{item.update_time}}</p>
-            </div>
-            <div class="count"
-              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}{{item.amount}}</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
-
-<script>
-import { getFundRecordList } from "@/server/finance.js";
-export default {
-  components: {
-    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
-  },
-  data() {
-    return {
-      detailList: [],
-      curPageDat: {
-        page_size: 10,
-        page_num: 1
-      },
-      total_revenue: 0,
-      total_expenses: 0
-    };
-  },
-  created() {
-    this.init();
-  },
-  methods: {
-    async init() {
-      let result = await getFundRecordList(this.curPageDat);
-      if (result && result.data) {
-        const { total_revenue, total_expenses, fund_records } = result.data;
-        this.detailList = fund_records;
-        this.total_revenue = total_revenue;
-        this.total_expenses = total_expenses;
-      }
-    }
-  }
-};
-</script>
 <style lang='scss' scoped>
 .revenue_detail {
   header {
@@ -108,7 +42,6 @@ export default {
         }
 
         > div {
-          // border-bottom: 1px solid #ececec;
           padding: 30px 0;
           &.count {
             flex: 1;
@@ -116,6 +49,7 @@ export default {
             color: #d30c05;
             font-size: 36px;
             padding-top: 60px;
+            font-weight: 500;
             &.cash {
               color: #323232;
             }
@@ -133,9 +67,79 @@ export default {
               }
             }
           }
+
+          .rp{
+            font-size: 24px;
+          }
         }
       }
     }
   }
 }
 </style>
+
+<template>
+  <div class="revenue_detail">
+    <!-- 返回首页 -->
+    <turn-home />
+
+    <header>
+      {{$t('revenueDetails.revenue')}} Rp
+      <span>{{total_revenue||0}}</span> &nbsp; &nbsp;
+      {{$t('revenueDetails.expenses')}} Rp
+      <span>{{total_expenses||0}}</span>
+    </header>
+    <div class="revenue-content">
+      <ul>
+        <li v-for="(item,index) in detailList"
+          :key="index">
+          <div>
+            <img :src="item.icon">
+          </div>
+          <div class="con">
+            <div class="intro">
+              <p>{{item.summary}}</p>
+              <p>{{item.update_time}}</p>
+            </div>
+            <div class="count"
+              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}<span class="rp">Rp</span>{{item.amount}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getFundRecordList } from "@/server/finance.js";
+export default {
+  components: {
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+  },
+  data() {
+    return {
+      detailList: [],
+      curPageDat: {
+        page_size: 10,
+        page_num: 1
+      },
+      total_revenue: 0,
+      total_expenses: 0
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    async init() {
+      let result = await getFundRecordList(this.curPageDat);
+      if (result && result.data) {
+        const { total_revenue, total_expenses, fund_records } = result.data;
+        this.detailList = fund_records;
+        this.total_revenue = total_revenue;
+        this.total_expenses = total_expenses;
+      }
+    }
+  }
+};
+</script>

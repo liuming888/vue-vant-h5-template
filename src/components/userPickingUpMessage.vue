@@ -56,9 +56,9 @@
 }
 </style>
 
-
 <template>
-  <div class="home-top-msg">
+  <div class="home-top-msg"
+    @click="clickInfo">
     <div class="info-box">
       <img class="home-top-msg-img"
         v-lazy="curDat&&curDat.avatar">
@@ -78,7 +78,8 @@ export default {
   },
   data() {
     return {
-      curIdx: 0 // 当前播放的消息下标
+      curIdx: 0, // 当前播放的消息下标
+      clickInfoNum: 0 // 点击消息框次数，默认点击6次就出现调试的Vconsole框
     };
   },
   computed: {
@@ -93,6 +94,20 @@ export default {
     this.$once("hook:beforeDestroy", () => {
       clearInterval(timer);
     });
+  },
+  methods: {
+    clickInfo() {
+      console.log("点击info框了");
+      this.clickInfoNum++;
+      if (this.clickInfoNum === 6) {
+        try {
+          let $Vconsole = require("vconsole");
+          new $Vconsole;
+        } catch (error) {
+          console.log("error vconsole: ", error);
+        }
+      }
+    }
   }
 };
 </script>

@@ -15,19 +15,19 @@
       <img src="~@/assets/images/order-none.png"
         alt
         class="none-file-icon">
-      <p>Tidak ada pesanan terkait</p>
-      <div class="btn"  @click="$router.push('/');">Buka halaman beranda dan lihat</div>
+      <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
+      <div class="btn"
+        @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
   </div>
 </template>
 
 <script>
-import pendingPaymentOrderItem from "@/components/order/pendingPaymentOrderItem.vue";
-
 import { orderList } from "@/server/pay.js";
 export default {
   components: {
-    pendingPaymentOrderItem
+    pendingPaymentOrderItem: resolve =>
+      require(["@/components/order/pendingPaymentOrderItem.vue"], resolve)
   },
   data() {
     return {

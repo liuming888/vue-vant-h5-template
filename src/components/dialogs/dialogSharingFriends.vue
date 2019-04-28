@@ -17,15 +17,17 @@
 .share-box {
   width: 610px;
   height: 749px;
-  background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
-    100%;
+  // background: url("~@/assets/images/share-background.png") no-repeat 0 0/100%
+  //   100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   padding-top: 200px;
   box-sizing: border-box;
   position: relative;
 
   .tip {
-    width: 463px;
-    font-size: 30px;
+    width: 580px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     color: rgba(255, 255, 255, 1);
@@ -40,7 +42,7 @@
     font-weight: bold;
     color: rgba(211, 12, 5, 1);
     text-align: center;
-    margin-bottom: 21px;
+    margin-bottom: 48px;
   }
 
   .share-types {
@@ -71,7 +73,7 @@
     position: absolute;
     width: 429px;
     height: 81px;
-    bottom: 50px;
+    bottom: 40px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -95,13 +97,16 @@
 <template>
   <div class="dialogSharingFriends-container"
     v-show="dialogVisible.show"
-    @click.stop="abc=1">
-    <div class="share-box">
+    @click.stop>
+    <div class="share-box"
+      :style="{'background-image':`url(${$t('dialogSharingFriends.shareBackground')})`}">
       <div class="tip">
-        Tip: Share to friends and you can get freebies faster.
+        {{$t('dialogSharingFriends.shareToFriendsAndYouCanGetFreebiesFaster')}}
       </div>
 
-      <h5 class="tit"><!-- Share on --></h5>
+      <h5 class="tit">
+        <!-- Share on -->
+      </h5>
 
       <div class="share-types">
 
@@ -133,6 +138,7 @@
 
       <button ref="copy"
         class="copy-link"
+        :style="{'background-image':`url(${$t('dialogSharingFriends.copylink')})`}"
         data-clipboard-action="copy"
         :data-clipboard-text="mx_copyTxt"
         @click="mx_copyLink"></button>
@@ -164,8 +170,8 @@ export default {
       default() {
         return {
           share_url: window.location.origin + "/forBargain", // 从点击打开的链接
-          share_title: "分享标题",
-          share_desp: "分享的描述",
+          share_title: "",
+          share_desp: "",
           share_image: "https://s.pinimg.com/images/facebook_share_image.png" //  分享的预览图（图片有限制）
           // quote:
           //   "FB随分享的链接一同显示的引文可由用户自行高亮选择，也可由开发者预先定义（例如文章的醒目引文）"

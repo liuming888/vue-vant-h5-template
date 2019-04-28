@@ -1,7 +1,8 @@
 <style lang="scss" scoped>
 .cur-popup {
   width: 610px;
-  min-height: 650px;
+  min-height: 668px;
+  border-radius:20px;
   overflow: visible;
   top: 36%;
 }
@@ -106,17 +107,17 @@
         class="close"
         @click="closeDialog">
 
-      <h5 class="tit">Add address</h5>
+      <h5 class="tit">{{$t('shippingAddress.addAddress')}}</h5>
 
       <div class="name-and-phone-box">
         <van-field v-model.trim="curAddress.username"
-          placeholder="name"
+          :placeholder="$t('shippingAddress.Name')"
            @blur.native="mx_resizeWindow"
           class="user-name input-size"
           style="border-right:1px solid #F2F2F2;" />
         <van-field v-model.trim="curAddress.telephone"
-          placeholder="phone"
-          @blur.native="mx_resizeWindow"
+          :placeholder="$t('shippingAddress.phone')"
+           @blur.native="mx_resizeWindow"
           class="user-phone input-size"
           type="number" />
       </div>
@@ -131,17 +132,17 @@
       </div>
 
       <textarea class="alamat-lengkap input-size"
-        placeholder="Alamat lengkap (jalan, nomor rumah)"
+        :placeholder="$t('shippingAddress.alamatLengkap')"
         v-model="curAddress.address_one"></textarea>
 
       <van-field v-model.trim="curAddress.zip"
-        placeholder="Zip code"
-        @blur.native="mx_resizeWindow"
+        :placeholder="$t('shippingAddress.zipCode')"
+         @blur.native="mx_resizeWindow"
         class="input-size zip-code" />
 
       <div class="simpan-btn"
         @click="simpan">
-        Confirm
+        {{$t('shippingAddress.confirm')}}
       </div>
     </van-popup>
 
@@ -201,7 +202,7 @@ export default {
           show: false
         }
       },
-      addressTxt: "Pilih alamat pengiriman",
+      addressTxt: this.$t('shippingAddress.pilihAlamatPengiriman'),
       curAddress: JSON.parse(JSON.stringify(defaultAddress))
     };
   },
@@ -227,7 +228,7 @@ export default {
         !address_one
       ) {
         Dialog.alert({
-          message: "Please complete the full address information",
+          message: this.$t('shippingAddress.pleaseCompleteTheFullAddressInformation'),
           confirmButtonText: "ok"
         });
         return;
@@ -245,7 +246,7 @@ export default {
         user_address: this.curAddress
       });
       if (result) {
-        this.$toast("success !");
+        this.$toast(this.$t('shippingAddress.success'));
         this.closeDialog();
       }
     },

@@ -54,13 +54,18 @@
     }
     > .info-description,
     > .address {
+      display: block;
+      background: none;
+      text-align: left;
       font-size: 24px;
+      line-height: 30px;
       color: #888;
       margin-top: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
       margin-bottom: 40px;
+      word-break: break-all;
     }
   }
 }
@@ -77,7 +82,7 @@
   }
   > .btn {
     display: inline-block;
-    width: 274px;
+    width: 300px;
     height: 64px;
     color: #d30c05;
     line-height: 64px;
@@ -96,12 +101,11 @@
 }
 </style>
 
-
 <template>
   <div>
     <div class="order-header">
       <span>{{curDat.create_time}}</span>
-      <label>Completed</label>
+      <label>{{$t('myOrder.completedTit')}}</label>
     </div>
     <div class="info-box">
       <img v-lazy="curDat.spu_url"
@@ -114,20 +118,40 @@
         <p class="info-description">
           {{curDat.sku_attr}}
         </p>
-        <p class="address" v-if="curDat.shipment_no">Shipment Number:{{curDat.shipment_no}}</p>
-         <p class="address" v-else>Order Number:{{curDat.order_no}}</p>
+        <!-- <p class="address"
+          v-if="curDat.shipment_no">{{$t('myOrder.shipmentNumber')}}: {{curDat.shipment_no}}</p>
+        <p class="address"
+          v-else>{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</p> -->
+
+        <button v-if="curDat.shipment_no"
+          ref="copy1"
+          class="address"
+          data-clipboard-action="copy"
+          :data-clipboard-text="curDat.shipment_no"
+          @click="mx_copyLink">{{$t('myOrder.shipmentNumber')}}: {{curDat.shipment_no}}</button>
+       <button v-else
+          ref="copy2"
+          class="address"
+          data-clipboard-action="copy"
+          :data-clipboard-text="curDat.order_no"
+          @click="mx_copyLink">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</button>
+
       </div>
     </div>
     <div class="ctrl-box">
       <div class="pay-time"></div>
-      <div class="btn" @click="handleCustomerService">Customer Service</div>
+      <div class="btn"
+        @click="handleCustomerService">{{$t('myOrder.customerService')}}</div>
     </div>
   </div>
 </template>
 
 <script>
 import { repaidOrder } from "@/server/pay.js";
+
+import copy from "@/mixins/copy.js";
 export default {
+  mixins: [copy],
   props: {
     curDat: {
       type: Object,
@@ -143,8 +167,8 @@ export default {
     }
   },
   methods: {
-    handleCustomerService(){
-      this.$emit('on-customer-service');
+    handleCustomerService() {
+      this.$emit("on-customer-service");
     }
   }
 };

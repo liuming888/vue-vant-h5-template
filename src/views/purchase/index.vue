@@ -16,13 +16,13 @@
       <div class="shipping-address-content">
         <div class="top-box">
           <span class="Receiver">
-            Receiver: {{myAddress.username}}
+            {{$t('purchase.receiver')}}: {{myAddress.username}}
           </span>
 
           <span class="phone">{{myAddress.telephone}}</span>
         </div>
         <div class="receiving-address">
-          Receiving address:
+          {{$t('purchase.receivingAddress')}}:
           <!--  {{myAddress.address_two}}, -->{{myAddress.address_one}},{{myAddress.city}},{{myAddress.region}},{{myAddress.country}}
         </div>
       </div>
@@ -36,12 +36,12 @@
       @click="showAddressDialog.show = true">
       <img v-lazy="require('@/assets/images/add.png')"
         class="add-icon">
-      <div class="txt">Add shipping address</div>
+      <div class="txt">{{$t('purchase.addShippingAddress')}}</div>
       <van-icon name="arrow" />
     </div>
 
     <img v-lazy="require('@/assets/images/Addressmodification.png')"
-      style="width:100vw;height:auto;margin-bottom:50px;">
+      style="width:100vw;height:auto;margin-bottom:20px;">
 
     <div class="commodity-info">
       <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('@/assets/images/add.png')"
@@ -104,25 +104,25 @@
     <div class="down-box">
       <div class="left-box">
         <div class="l-t-box">
-          Actual payment:
+          {{$t('purchase.actualPayment')}}:
           <div class="num-box">
-            <b>Rp</b>{{bargain_info.bargain_after}}
+            <b>Rp</b>{{bargain_info.bargain_after||0}}
           </div>
         </div>
 
-        <div class="l-d-box">About ${{(bargain_info.bargain_after/exchangeRateDat.exchange_rate).toFixed(2)}}</div>
+        <div class="l-d-box">{{$t('purchase.about')}} ${{bargain_info.bargain_after?(bargain_info.bargain_after/exchangeRateDat.exchange_rate).toFixed(2):0}}</div>
       </div>
 
       <div class="pay-immediately"
         @click="goPaly">
-        Place Oder
+        {{$t('purchase.placeOder')}}
       </div>
     </div>
 
     <!-- 商品列表页以组件形式  默认阻止点击穿透 -->
     <div class="dialog-box"
       v-if="showShippingAddressPage"
-      @click.stop="abc=1">
+      @click.stop>
       <shipping-address :showAddressPage.sync="showShippingAddressPage" />
     </div>
 
@@ -139,7 +139,7 @@
       @ok="goRepaidPay">
       <div slot="content"
         class="pay-error">
-        <p>Pesanan pembayaran akan kedaluwarsa dalam waktu dekat, harap membayar sesegera mungkin</p>
+        <p>{{$t('purchase.harapMembayarSesegeraMungkin')}}</p>
       </div>
     </dialog-default>
   </div>
@@ -147,11 +147,6 @@
 
 <script>
 import { Icon, Dialog } from "vant";
-
-import shippingAddress from "../shippingAddress.vue";
-import dialogPostAddAddress from "@/components/dialogs/dialogPostAddAddress.vue";
-import DialogDefault from "@/components/dialogs/dialogDefault.vue";
-import dialogWaitPayment from "@/components/dialogs/dialogWaitPayment.vue";
 
 import loadings from "@/mixins/loadings.js";
 
@@ -171,11 +166,14 @@ export default {
   components: {
     userOrderMessage: resolve =>
       require(["@/components/userOrderMessage.vue"], resolve), // 用户订单消息播放
-    DialogDefault,
-    shippingAddress, // 地址列表组件
-    dialogPostAddAddress,
-    dialogWaitPayment, // 等待用户付款弹窗
-    // ...vantCom,
+    DialogDefault: resolve =>
+      require(["@/components/dialogs/dialogDefault.vue"], resolve),
+    shippingAddress: resolve => require(["../shippingAddress.vue"], resolve), // 地址列表页组件（路由配置了，但通过组件的方式用）
+    dialogPostAddAddress: resolve =>
+      require(["@/components/dialogs/dialogPostAddAddress.vue"], resolve), // 增加地址
+    dialogWaitPayment: resolve =>
+      require(["@/components/dialogs/dialogWaitPayment.vue"], resolve), // 等待用户付款弹窗
+
     [Icon.name]: Icon
   },
   data() {
@@ -196,11 +194,7 @@ export default {
         show: false
       },
       myAddress: {},
-      info: {
-        content: "Konfirmasikan untuk melunasi?",
-        cancleText: "Menyerah",
-        okText: "Terus bayar"
-      },
+      info: this.$t("purchase.info"),
       dialogVisible: false,
 
       exchangeRateDat: {
@@ -226,7 +220,7 @@ export default {
     }
   },
   mounted() {
-    document.title = "Check out";
+    document.title = this.$t("purchase.checkOut");
 
     fbq("track", "AddToCart");
   },
@@ -334,9 +328,9 @@ export default {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
       const { bargain_after } = this.bargain_info;
-      if (bargain_after < this.currentType.min_amount) {
+      if (bargain_after != 0 && bargain_after < this.currentType.min_amount) {
         this.$toast(
-          "The payment amount is too small, please try again by alternative payment method."
+          this.$t("purchase.pleaseTryAgainByAlternativePaymentMethod")
         );
         return;
       }
@@ -344,10 +338,7 @@ export default {
       fbq("track", "InitiateCheckout");
 
       if (!this.myAddress.id) {
-        Dialog.alert({
-          message: "Please choose a shipping address",
-          confirmButtonText: "ok"
-        });
+        Dialog.alert(this.$t("purchase.pleaseChooseAShippingAddressDialog"));
         return;
       }
 
@@ -407,7 +398,7 @@ export default {
       const { bargain_after } = this.bargain_info;
       if (bargain_after < this.currentType.min_amount) {
         this.$toast(
-          "The payment amount is too small, please try again by alternative payment method."
+          this.$t("purchase.pleaseTryAgainByAlternativePaymentMethod")
         );
         return;
       }

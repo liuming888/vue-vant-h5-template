@@ -44,7 +44,6 @@
 }
 </style>
 
-
 <template>
   <div class="home-top-msg">
     <div class="info-box">

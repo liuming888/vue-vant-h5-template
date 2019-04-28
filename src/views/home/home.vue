@@ -1,31 +1,32 @@
-<style lang="scss">
-.freebing-box {
-  .freebing-container {
-    position: relative;
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 24px;
-      width: 638px;
-      height: 1px;
-      background: rgba(242, 242, 242, 1);
-    }
-  }
 
-  .freebing-big-box:nth-last-of-type(1) {
-    .freebing-container {
-      &::after {
-        display: none;
-      }
-    }
-  }
-}
+<style lang="scss">
+// .freebing-box {
+//   .freebing-container {
+//     position: relative;
+//     &::after {
+//       content: "";
+//       position: absolute;
+//       bottom: 0;
+//       left: 24px;
+//       width: 638px;
+//       height: 1px;
+//       background: rgba(242, 242, 242, 1);
+//     }
+//   }
+
+//   .freebing-big-box:nth-last-of-type(1) {
+//     .freebing-container {
+//       &::after {
+//         display: none;
+//       }
+//     }
+//   }
+// }
 </style>
 
 <style lang="scss" scoped>
 .home-container {
-  background-color: #d30c05;
+  background-color: #f5f5f5;
   height: 89vh;
   overflow-y: auto;
   padding-bottom: 36px;
@@ -64,10 +65,12 @@
     }
     > .home-banner {
       width: 100%;
-      margin-bottom: 30px;
+      overflow: hidden;
+      margin-bottom: 26px;
       img {
         width: 100%;
-        max-height: 500px;
+        height: auto;
+        max-height: 500px; // 旧版本的banner高度
       }
     }
   }
@@ -75,21 +78,36 @@
     min-height: 70vh;
 
     > .home-goods-title {
-      padding: 37px 0;
-      padding-bottom: 47px;
-      font-size: 28px;
-      color: #fff;
+      // padding: 37px 0;
+      // padding-bottom: 47px;
+      // font-size: 28px;
+      // color: #fff;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+
+      // img {
+      //   width: 560px;
+      //   height: auto;
+      // }
+      width: 100%;
+      height: 113px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-family: Helvetica;
+      font-weight: 400;
+      color: #333333;
 
       img {
-        width: 560px;
+        width: 34px;
         height: auto;
+        margin-right: 24px;
       }
     }
     > .home-goods-list {
-      padding: 0 30px 36px 30px;
+      padding: 0 22px 36px;
       > div + div {
         margin-top: 30px;
       }
@@ -97,66 +115,115 @@
   }
 }
 
-.freebing-box {
-  position: relative;
-  z-index: 10;
-  margin: 0 30px;
-  margin-bottom: 10px;
-  padding-bottom: 30px;
-  margin-top: 42px;
-  background-color: #fff;
-  border-radius: 20px;
-  // height: 300px;
+// .freebing-box {
+//   position: relative;
+//   z-index: 10;
+//   margin: 0 30px;
+//   margin-bottom: 10px;
+//   padding-bottom: 30px;
+//   margin-top: 42px;
+//   background-color: #fff;
+//   border-radius: 20px;
+//   // height: 300px;
 
-  > .freebing-title {
-    position: absolute;
-    top: -20px;
-    left: calc(50% - 175px);
-    width: 350px;
-    height: 60px;
-    background: linear-gradient(
-      0deg,
-      rgba(246, 76, 1, 1),
-      rgba(246, 171, 1, 1)
-    );
-    border-radius: 0px 0px 8px 8px;
-    font-size: 28px;
-    font-weight: 600;
-    text-align: center;
-    line-height: 60px;
-    color: #fff;
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -2px;
-      left: -21px;
-      width: 0;
-      height: 0;
-      border-color: #f06904 transparent;
-      border-width: 0px 0px 21px 21px;
-      border-style: solid;
-    }
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -2px;
-      right: -21px;
-      width: 0;
-      height: 0;
-      border-color: #f06904 transparent;
-      border-width: 0px 21px 21px 0;
-      border-style: solid;
-    }
-  }
+//   > .freebing-title {
+//     position: absolute;
+//     top: -20px;
+//     left: calc(50% - 175px);
+//     width: 350px;
+//     height: 60px;
+//     background: linear-gradient(
+//       0deg,
+//       rgba(246, 76, 1, 1),
+//       rgba(246, 171, 1, 1)
+//     );
+//     border-radius: 0px 0px 8px 8px;
+//     font-size: 28px;
+//     font-weight: 600;
+//     text-align: center;
+//     line-height: 60px;
+//     color: #fff;
+//     &::before {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       top: -2px;
+//       left: -21px;
+//       width: 0;
+//       height: 0;
+//       border-color: #f06904 transparent;
+//       border-width: 0px 0px 21px 21px;
+//       border-style: solid;
+//     }
+//     &::after {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       top: -2px;
+//       right: -21px;
+//       width: 0;
+//       height: 0;
+//       border-color: #f06904 transparent;
+//       border-width: 0px 21px 21px 0;
+//       border-style: solid;
+//     }
+//   }
 
-  .freebing-more {
-    // margin-top: 35px;
-    display: block;
-    font-size: 24px;
-    text-align: center;
-    color: #585858;
+//   .freebing-more {
+//     // margin-top: 35px;
+//     display: block;
+//     font-size: 24px;
+//     text-align: center;
+//     color: #585858;
+//   }
+// }
+
+.in-progress {
+  width: 705px;
+  min-height: 332px;
+  margin: 22px auto 0;
+  background: #fff;
+
+  .in-progress-top-tit {
+    width: 100%;
+    border-bottom: 1px solid #f2f2f2;
+    height: 70px;
+    line-height: 70px;
+    overflow: hidden;
+
+    .l-top-tit {
+      padding-left: 25px;
+      float: left;
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      font-family: Helvetica;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+
+      .lishixiao {
+        width: 30px;
+        height: auto;
+        margin-right: 14px;
+      }
+    }
+
+    .r-top-tit {
+      float: right;
+      padding-right: 28px;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-family: Helvetica;
+      font-weight: 400;
+      color: rgba(136, 136, 136, 1);
+
+      .home-jiantou {
+        width: 18px;
+        height: auto;
+        margin-left: 8px;
+      }
+    }
   }
 }
 
@@ -173,7 +240,7 @@
 .privacy-agreement-box {
   margin-top: 20px;
   text-align: center;
-  color: #fff;
+  color: #888888;
 
   p {
     margin-bottom: 10px;
@@ -188,7 +255,7 @@
 
     li {
       flex: 3;
-      border-left: 1px solid #fff;
+      border-left: 1px solid #888888;
       line-height: 30px;
 
       &:nth-of-type(1) {
@@ -201,7 +268,7 @@
 
 <template>
   <div>
-    <img v-lazy="require('@/assets/images/top.png')"
+    <img v-lazy="$t('home.goTopBtn')"
       class="go-top-btn"
       v-if="showGoTopBtn"
       @click.stop="goPageTop" />
@@ -218,7 +285,7 @@
           :show-indicators="false"
           indicator-color="#D30C05"
           class="home-banner"
-          @click.native="$router.push('/my/Tutorial')">
+          @click.native="$router.push('/userGuidance')">
           <template v-if="bannerList.length>0">
             <template v-for="(item,index) of bannerList">
               <van-swipe-item @click="handleBannerClick"
@@ -230,18 +297,37 @@
           </template>
         </van-swipe>
 
-        <div class="freebing-box"
+        <!-- <div class="freebing-box"
           v-if="homeBargainList.length>0">
-          <div class="freebing-title">Ongoing Freebies</div>
+          <div class="freebing-title">{{$t('home.ongoingFreebies')}}</div>
           <template v-for="(item,index) of homeBargainList">
-            <!-- 抢购商品 -->
             <freebing-box :key="index"
               :spuBargainItem="{...item.bargain_info,...item.spu}" />
           </template>
 
           <a href="javascript:;"
             class="freebing-more"
-            @click="handleMoreAbout">More About ></a>
+            @click="handleMoreAbout">{{$t('home.moreAbout')}} ></a>
+        </div> -->
+
+        <div class="in-progress"
+          v-if="homeBargainList.length>0">
+          <div class="in-progress-top-tit">
+            <div class="l-top-tit">
+              <img v-lazy="require('@/assets/images/lishixiao.png')"
+                class="lishixiao">
+              <span class="tawar-menawar">{{$t('home.tawarMenawar')}}</span>
+            </div>
+            <div class="r-top-tit"
+              @click="handleMoreAbout">
+              <span class="lebih-banyak">{{$t('home.moreAbout')}}</span>
+              <img v-lazy="require('@/assets/images/home-jiantou.png')"
+                class="home-jiantou">
+            </div>
+          </div>
+
+          <freebing-box :key="index"
+            :spuBargainItem="{...homeBargainList[0].bargain_info,...homeBargainList[0].spu}" />
         </div>
 
       </section>
@@ -249,7 +335,9 @@
         <template v-if="goodsList.length>0">
           <div class="home-goods-title"
             v-if="goodsList.length>0&&homeBargainList.length>0">
-            <img v-lazy="require('@/assets/images/gengduotop.png')">
+            <!-- <img v-lazy="$t('home.gengduotop')"> -->
+            <img v-lazy="require('@/assets/images/shoucangxiao.png')">
+            Penjualan terbaik
           </div>
           <ul class="home-goods-list">
             <li is="commodity-item"
@@ -264,13 +352,13 @@
       </section>
 
       <div class="privacy-agreement-box">
-        <p>Copyright © 2019 Istarbuy</p>
+        <p>{{$t('home.copyright_2019Istarbuy')}}</p>
 
         <ul>
-          <li onclick="window.open('Privacy Policy.html');">Privacy Policy</li>
-          <li onclick="window.open('Terms & Conditions.html');">T&Cs</li>
-          <li onclick="window.open('About us.html');">About Us</li>
-          <li onclick="window.open('Contact us.html');">Contact Us</li>
+          <li onclick="window.open('Privacy Policy.html');">{{$t('home.privacyPolicy')}}</li>
+          <li onclick="window.open('Terms & Conditions.html');">{{$t('home.tCs')}}</li>
+          <li onclick="window.open('About us.html');">{{$t('home.aboutUs')}}</li>
+          <li onclick="window.open('Contact us.html');">{{$t('home.contactUs')}}</li>
         </ul>
       </div>
     </div>
@@ -491,4 +579,3 @@ export default {
   }
 };
 </script>
-

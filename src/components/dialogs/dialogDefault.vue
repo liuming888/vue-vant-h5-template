@@ -56,6 +56,7 @@
     }
   }
 </style>
+
 <template>
   <div class="dialog-default" v-show="dialogVisible">
     <div class="bg" @click.stop="closeDialog()"></div>
@@ -87,7 +88,7 @@ export default {
     info: {
       type: Object,
       default: {
-        content: 'test',
+        content: '',
         cancleText: 'cancel',
         okText: 'ok',
         delId:0

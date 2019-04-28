@@ -1,48 +1,3 @@
-<!--  -->
-<template>
-  <li class="hero-list-item">
-    <div class="column">
-      <div class="hero-img first" :class="'first'+index">
-        <img v-lazy="item.avatar" class="avatar-img"
-          alt>
-      </div>
-      <div class="hero-info">
-        <div v-if="index < 3"
-          alt
-          :class="`hero-no hero-no-${index + 1}`"></div>
-        <p v-else
-          class="hero-no">NO.{{index + 1}}</p>
-        <p class="hero-name">{{item.username}}</p>
-      </div>
-    </div>
-    <div class="column column-time">{{item.joinTime||item.fans_count}}</div>
-    <div class="column">{{item.profit||item.sum_amount||0}}</div>
-  </li>
-</template>
-
-<script>
-export default {
-  name: "FriendListCommon",
-  props: {
-    item: {
-      type: Object,
-      default() {
-        return {
-          //类型：Object  必有字段  备注：无
-          user_id: 1, //类型：Number  必有字段  备注：无
-          joinTime: "2019-03-08 16:50:50", //类型：String  必有字段  备注：无
-          avatar: "12", //类型：String  必有字段  备注：无
-          profit: 50, //类型：Number  必有字段  备注：无
-          username: "1212" //类型：String  必有字段  备注：无
-        };
-      }
-    },
-    index: {
-      type: Number
-    }
-  }
-};
-</script>
 <style lang='scss' scoped>
 .hero-list-title {
   color: #888;
@@ -166,3 +121,48 @@ export default {
   }
 }
 </style>
+
+<template>
+  <li class="hero-list-item">
+    <div class="column">
+      <div class="hero-img first" :class="'first'+index">
+        <img v-lazy="item.avatar" class="avatar-img"
+          alt>
+      </div>
+      <div class="hero-info">
+        <div v-if="index < 3"
+          alt
+          :class="`hero-no hero-no-${index + 1}`"></div>
+        <p v-else
+          class="hero-no">NO.{{index + 1}}</p>
+        <p class="hero-name">{{item.username}}</p>
+      </div>
+    </div>
+    <div class="column column-time">{{item.joinTime||item.fans_count}}</div>
+    <div class="column">{{item.profit||item.sum_amount||0}}</div>
+  </li>
+</template>
+
+<script>
+export default {
+  name: "FriendListCommon",
+  props: {
+    item: {
+      type: Object,
+      default() {
+        return {
+          //类型：Object  必有字段  备注：无
+          user_id: 1, //类型：Number  必有字段  备注：无
+          joinTime: "2019-03-08 16:50:50", //类型：String  必有字段  备注：无
+          avatar: "12", //类型：String  必有字段  备注：无
+          profit: 50, //类型：Number  必有字段  备注：无
+          username: "1212" //类型：String  必有字段  备注：无
+        };
+      }
+    },
+    index: {
+      type: Number
+    }
+  }
+};
+</script>

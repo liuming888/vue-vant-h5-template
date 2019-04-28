@@ -91,7 +91,6 @@
 }
 </style>
 
-
 <template>
   <div class="dialogBidPriceCompleted-container">
     <van-popup v-model="show"
@@ -102,14 +101,14 @@
           alt=""
           class="bg">
         <div class="info-container">
-          <p class="title">Congratulations on completing the bargain!</p>
+          <p class="title">{{$t('dialogBidPriceCompleted.congratulationsOnCompletingTheBargain')}}</p>
           <ul class="goods-list">
             <li>
               <img src="./../../assets/images/good-large.png"
                 alt=""
                 class="photo">
               <div class="content">
-                <p class="c-title">Casual Large Capacity Copartment Handbag</p>
+                <p class="c-title">商品tit</p>
                 <p class="p-1">Rp280.000</p>
                 <p class="p-2"><span>Rp</span>0.00</p>
               </div>
@@ -119,7 +118,7 @@
                 alt=""
                 class="photo">
               <div class="content">
-                <p class="c-title">Casual Large Capacity Copartment Handbag</p>
+                <p class="c-title">商品tit</p>
                 <p class="p-1">Rp280.000</p>
                 <p class="p-2"><span>Rp</span>0.00</p>
               </div>
@@ -129,15 +128,15 @@
                 alt=""
                 class="photo">
               <div class="content">
-                <p class="c-title">Casual Large Capacity Copartment Handbag</p>
+                <p class="c-title">商品tit</p>
                 <p class="p-1">Rp280.000</p>
                 <p class="p-2"><span>Rp</span>0.00</p>
               </div>
             </li>
           </ul>
           <div class="btn"
-            @click="goBuy">Go buy</div>
-          <p class="description">After the purchase is completed, you can view the details in [My] - [My order].</p>
+            @click="goBuy">{{$t('dialogBidPriceCompleted.goBuy')}}</div>
+          <p class="description">{{$t('dialogBidPriceCompleted.afterThePurchase')}}</p>
         </div>
         <img src="./../../assets/images/guanbi@2x.png"
           alt=""
@@ -149,7 +148,7 @@
 
 <script>
 export default {
-  name: "dialogBidPriceCompleted",
+  name: "dialogBidPriceCompleted", // // 砍价完成弹窗(暂时没用到)
   data() {
     return {
       show: true

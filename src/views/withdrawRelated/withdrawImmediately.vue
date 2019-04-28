@@ -7,18 +7,18 @@
     <div class="alertBox"
       v-if="showAlert">
       <div class="alertWrap">
-        <h1>Withdrawal application</h1>
+        <h1>{{$t('withdrawImmediately.withdrawalApplication')}}</h1>
         <p>
-          Your withdrawal request has been initiated, please check it out!
-          <br>If you have any questions, please ask customer service
+          {{$t('withdrawImmediately.pleaseCheckItOut')}}
+          <br>{{$t('withdrawImmediately.pleaseAskCustomerService')}}
         </p>
-        <div @click="cashOk">I know</div>
+        <div @click="cashOk">{{$t('withdrawImmediately.iKnow')}}</div>
       </div>
     </div>
 
     <div class="balance-box border-bttom">
       <div class="current-balance">
-        <h5 class="tit">Current balance</h5>
+        <h5 class="tit">{{$t('withdrawImmediately.currentBalance')}}</h5>
         <div class="balance-item">
           <span class="units">Rp</span>
           <span class="balance-num">{{user_fund.balance}}</span>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="can-withdraw">
-        <h5 class="tit">Can withdraw</h5>
+        <h5 class="tit">{{$t('withdrawImmediately.canWithdraw')}}</h5>
         <div class="balance-item">
           <span class="units">Rp</span>
           <span class="balance-num">{{user_fund.withdraw_amount}}</span>
@@ -36,9 +36,9 @@
     <div class="border-bttom border-bttom2">
       <div class="play-box ">
         <div class="top-txt">
-          <div class="cash-withdrawal-method">Cash withdrawal method</div>
+          <div class="cash-withdrawal-method">{{$t('withdrawImmediately.cashWithdrawalMethod')}}</div>
           <div class="embodiment-statement"
-            @click="goHash">Introduction</div>
+            @click="goHash">{{$t('withdrawImmediately.introduction')}}</div>
         </div>
 
         <div class="play-types clearfix">
@@ -57,7 +57,7 @@
       <div v-if="withdrawParam.pay_type === 2"
         class="operator-type play-box">
         <div class="top-txt">
-          <div class="cash-withdrawal-method">Operator</div>
+          <div class="cash-withdrawal-method">{{$t('withdrawImmediately.operator')}}</div>
         </div>
         <div class="play-types clearfix">
           <div class="play-item"
@@ -74,7 +74,7 @@
       <div class="play-box"
         v-if="withdrawParam.pay_type === 2">
         <div class="top-txt">
-          <div class="cash-withdrawal-method">Recharge denomination</div>
+          <div class="cash-withdrawal-method">{{$t('withdrawImmediately.rechargeDenomination')}}</div>
         </div>
         <div class="play-types clearfix play-types2">
           <div class="play-item"
@@ -96,49 +96,49 @@
     <div class="list border-bttom border-bttom-no">
       <ul v-if="withdrawParam.pay_type !== 2">
         <li>
-          <span>Withdrawal Amount</span>
+          <span>{{$t('withdrawImmediately.withdrawalAmount')}}</span>
           <!-- <input v-model="amount"
             type="text"
             placeholder="Enter the amount"> -->
           <span style="text-align: right;">{{user_fund.withdraw_amount}}</span>
         </li>
         <li>
-          <span>Account Name</span>
+          <span>{{$t('withdrawImmediately.accountName')}}</span>
           <input v-model.trim="withdrawParam.account_name"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Enter the amount"
+            :placeholder="$t('withdrawImmediately.enterTheAmount')"
             type="text">
         </li>
         <li>
-          <span>Confirm the account</span>
+          <span>{{$t('withdrawImmediately.confirmTheAccount')}}</span>
           <input v-model.trim="withdrawParam.account_no"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Confirm the amount"
+            :placeholder="$t('withdrawImmediately.confirmTheAmount')"
             type="text">
         </li>
       </ul>
       <ul v-else>
         <li>
-          <span>Phone number</span>
+          <span>{{$t('withdrawImmediately.phoneNumber')}}</span>
           <input v-model.trim.number="withdrawParam.account_name"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Enter phone number"
+            :placeholder="$t('withdrawImmediately.enterPhoneNumber')"
             type="number">
 
         </li>
-        <li> <span>Confirm phone number</span>
+        <li> <span>{{$t('withdrawImmediately.confirmPhoneNumber')}}</span>
           <input v-model.trim.number="withdrawParam.account_no"
             onfocus="this.select();"
             @blur="mx_resizeWindow"
-            placeholder="Confirm phone number"
+            :placeholder="$t('withdrawImmediately.enterPhoneNumber')"
             type="number"></li>
       </ul>
     </div>
     <div class="cash-withdrawal-box border-bttom border-bttom2">
-      <p class="cash-withdrawal-tit">Cash withdrawal method</p>
+      <p class="cash-withdrawal-tit">{{$t('withdrawImmediately.cashWithdrawalMethod')}}</p>
 
       <div class="progress-content-box">
         <div class="progress-box">
@@ -159,43 +159,31 @@
     </div>
     <div class="cash-withdrawal-rule border-bttom">
       <div class="cash-withdrawal-rule-title"
-        id="cashWithdrawalRule">Withdrawal rules</div>
+        id="cashWithdrawalRule">{{$t('withdrawImmediately.withdrawalRules')}}</div>
 
       <div class="cash-withdrawal-rule-des">
-        <p>
-          1. The first withdrawal of Rp5000, the premise of 14:30 on the same day, will arrive before 00:00 on the same day, after 14:30 will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient
-        </p>
-        <p>
-          2. In case of holidays, the delivery time will be postponed.
-        </p>
-        <p>
-          3. One withdrawal account can only be bound to one user id , multiple bindings will be considered invalid.One withdrawal account can only get one new user bag -Rp5000
-        </p>
-        <p>
-          4.Now we only support phone charging to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756
-        </p>
-        <p>
-          5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover
+        <p v-for="(item,index) of $t('withdrawImmediately.cashWithdrawalRuleDes')" :key="index">
+          {{item}}
         </p>
       </div>
 
       <div class="cash-withdrawal-rule-img">
-        <img src="../../assets/images/withdrawRule.png">
+        <img :src="$t('withdrawImmediately.withdrawRule')">
       </div>
     </div>
 
     <div class="cash-out-btn"
-      @click.stop="goApplyWithdraw">Cash out</div>
+      @click.stop="goApplyWithdraw">{{$t('withdrawImmediately.cashOut')}}</div>
     <dialog-default :info="info"
       :dialogVisible="dialogVisible"
       noCancle
       @ok="dialogVisible = false">
       <div slot="content"
         class="cash-description">
-        <p>1. The balance is over 88 rounds, and 8 rounds can be withdrawn. The arrival time is the same day;</p>
-        <p>2. The balance is 338 rounds, 138 rounds can be withdrawn, and the time of arrival is 3-5 working days;</p>
-        <p>3. The balance is 438 rounds, 188 rounds can be withdrawn, and the time of arrival is 7-14 working days;</p>
-        <p>4. The balance is 538 rounds, 238 rounds can be withdrawn, and the time of arrival is 15-20 working days;</p>
+        <p v-for="(item,index) of $t('withdrawImmediately.cashDescriptionList')"
+          :key="index">
+          {{item}}
+        </p>
       </div>
     </dialog-default>
   </div>
@@ -203,7 +191,6 @@
 
 <script>
 import { Icon, Dialog } from "vant";
-import DialogDefault from "@/components/dialogs/dialogDefault.vue";
 
 import {
   getWithdrawInfo,
@@ -212,17 +199,13 @@ import {
 } from "@/server/finance.js";
 export default {
   components: {
-    DialogDefault,
+    DialogDefault: resolve=>require(['@/components/dialogs/dialogDefault.vue'],resolve),
+    
     [Icon.name]: Icon
-    // [Dialog.name]: Dialog
   },
   data() {
     return {
-      info: {
-        content: "Withdrawal rules",
-        cancleText: "cancel",
-        okText: "I know"
-      },
+      info: this.$t("withdrawImmediately.info"),
       dialogVisible: false,
       username: "",
       password: "",

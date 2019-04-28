@@ -28,10 +28,9 @@
 }
 </style>
 
-
 <template>
   <div class="count-down">
-    <span class="dec">End in</span>
+    <span class="dec" v-if="page!='home'">{{decTxt}}</span>
 
     <span class="time">{{time.h}}</span>
     :
@@ -44,6 +43,20 @@
 <script>
 import { setInterval, clearInterval } from "timers";
 export default {
+   props: {
+    dateDiff: {
+      // type: Number,
+      default: 0
+    },
+    timeType:{
+      type:String,
+      default:'endIn'
+    },
+    page:{
+      type:String,
+      default:''
+    }
+  },
   data() {
     return {
       time: {
@@ -55,10 +68,9 @@ export default {
       newTime: 0
     };
   },
-  props: {
-    dateDiff: {
-      // type: Number,
-      default: 0
+  computed: {
+    decTxt(){
+      return this.timeType=='endIn'?this.$t('countDown.endIn'):this.$t('countDown.payWithin');
     }
   },
   mounted() {

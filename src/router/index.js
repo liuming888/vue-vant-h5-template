@@ -1,13 +1,11 @@
 // import Vue from 'vue';
 // import Router from 'vue-router';
-import {
-    gaSend
-} from '../utils/util.js';
+import { gaSend } from '../utils/util.js';
 // import quicklink from 'quicklink/dist/quicklink.mjs';
 // Vue.use(Router);
 
 const curRouter = new VueRouter({
-    mode: 'history',
+    mode:  process.env.VUE_APP_CUR=='apk'?'hash':'history',
     base: process.env.BASE_URL,
     routes: [
         {
@@ -18,6 +16,11 @@ const curRouter = new VueRouter({
             path: '/',
             name: '首页',
             component: resolve => require(['../views/home/home.vue'], resolve),
+        },
+        {
+            path: '/userGuidance',
+            name: '用户引导页',
+            component: resolve => require(['../views/userGuidance.vue'], resolve),
         },
         {
             path: '/bargain',
@@ -57,7 +60,7 @@ const curRouter = new VueRouter({
             component: resolve => require(['../views/my/my.vue'], resolve),
         },
         {
-            path: '/withdrawRelated',
+            path: '/withdrawRelated', // 1
             name: '提现页面',
             component: resolve => require(['../views/withdrawRelated/withdrawImmediately.vue'], resolve),
         },
@@ -105,17 +108,23 @@ const curRouter = new VueRouter({
 
 // 全局前置守卫
 curRouter.beforeEach((to, from, next) => {
+    const { lang } = to.query;
+    if (lang && lang != Vue.prototype.$lang) {
+        Vue.prototype.$loadLanguageAsync(lang);
+        Vue.prototype.$lang = lang;
+    }
+
     Vue.prototype.$curStore.commit('setLoaddingNum', 1);
     let userStr = localStorage.getItem('userInfo');
     // 第一次进页面时，得先刷新token接口调用了后才行
     if (process.env.VUE_APP_ENV != 'development' && userStr && !Vue.prototype.$curStore.state.isreFreshToken) {
         Vue.prototype.$curStore.watch(
             // 当返回结果改变...
-            function (state) {
+            function(state) {
                 return state.isreFreshToken;
             },
             // 执行回调函数
-            function () {
+            function() {
                 next();
             }
         );
@@ -127,16 +136,16 @@ curRouter.beforeEach((to, from, next) => {
 // const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
 // 全局后置钩子
 curRouter.afterEach(current => {
-     Vue.prototype.$curStore.commit('setLoaddingNum', -1);
+    Vue.prototype.$curStore.commit('setLoaddingNum', -1);
     // const path = current.path;
     // if (routerShows.includes(path)) {
-        const { pathname, search } = window.location;
-        gaSend({
-            eventCategory: current.name,
-            eventAction: '页面展示',
-            hitType: 'pageview',
-            page: pathname + search,
-        });
+    const { pathname, search } = window.location;
+    gaSend({
+        eventCategory: current.name,
+        eventAction: '页面展示',
+        hitType: 'pageview',
+        page: pathname + search,
+    });
     // }
     // quicklink({
     //     // 默认2秒

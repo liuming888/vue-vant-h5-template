@@ -25,58 +25,38 @@
       <img src="@/assets/images/order-none.png"
         alt
         class="none-file-icon">
-      <p>Tidak ada pesanan terkait</p>
+      <p>{{$t('myOrder.tidakAdaPesananTerkait')}}</p>
       <div class="btn"
-        @click="$router.push('/');">Buka halaman beranda dan lihat</div>
+        @click="$router.push('/');">{{$t('myOrder.bukaHalamanBerandaDanLihat')}}</div>
     </div>
-    <!-- 联系我们弹窗 -->
-    <div class="alertBox"
-      v-if="contactVisible">
-      <div class="alertWrap">
-        <h1>Contact us by</h1>
-        <ul>
-          <li class="alertWrap-item">facebook fanpage : Istarbuyofficial</li>
-          <li class="alertWrap-item">Whatsapp : 18027340756</li>
-          <li class="alertWrap-item">Line : ISTARBUY</li>
-        </ul>
-        <div @click="contactVisible=false">I know</div>
-      </div>
-    </div>
+
+    <!-- 弹窗 -->
+    <dialog-contact-us :dialogVisible.sync="contactVisible"/>
   </div>
 </template>
 
 <script>
-import pendingPaymentOrderItem from "@/components/order/pendingPaymentOrderItem.vue";
-import orderCompletedItem from "@/components/order/orderCompletedItem.vue";
 import { orderList } from "@/server/pay.js";
 export default {
   components: {
-    pendingPaymentOrderItem,
-    orderCompletedItem
+    pendingPaymentOrderItem: resolve => 
+      require(["@/components/order/pendingPaymentOrderItem.vue"],resolve),  // 待完成
+    orderCompletedItem: resolve =>
+      require(["@/components/order/orderCompletedItem.vue"], resolve), // 已完成
+    dialogContactUs: resolve =>
+      require(["@/components/dialogs/dialogContactUs.vue"], resolve)  //联系我们弹窗
   },
   data() {
     return {
-      orderList: [
-        /* 
-        //类型：Array  必有字段  备注：无
-        {
-          //类型：Object  必有字段  备注：无
-          order_no: "", //类型：String  必有字段  备注：订单号
-          spu_title: "", //类型：String  必有字段  备注：商品标题
-          sku_attr: "", //类型：String  必有字段  备注：sku属性（颜色：黑色，尺码：M）
-          amount: "", //类型：String  必有字段  备注：订单金额
-          create_time: "", //类型：String  必有字段  备注：创建时间
-          expire_time: 1, //类型：Number  必有字段  备注：过期时间，毫秒
-          order_status: "" //类型：String  必有字段  备注：订单状态（1：待支付 2：已支付 3：已发货 4：订单超时失效）
-        }
-       */
-      ],
+      orderList: [],
       orderPageDat: {
         page_num: 1,
         page_size: 10
       },
       //联系我们弹窗
-      contactVisible: false
+      contactVisible:{
+        show:false
+      }
     };
   },
   created() {
@@ -91,7 +71,7 @@ export default {
     },
     // 联系我们弹窗
     handleCustomerService() {
-      this.contactVisible = true;
+      this.contactVisible.show = true;
     }
   }
 };

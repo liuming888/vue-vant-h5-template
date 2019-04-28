@@ -10,6 +10,7 @@
     "build:test": "cross-env VUE_APP_ENV=test VUE_APP_URL=https://pubtest-ht-zdd.lovingistarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 vue-cli-service build --modern",
     "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=2408818452475633 vue-cli-service build --modern --dest new_dist",
+    "build:apk": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 VUE_APP_CUR=apk vue-cli-service build",
     "build:allprod":"npm run build:prod && npm run build:newprod",
     "git:dev":"git add -A && git commit -am 打个dev包 && git push",
     "git:test":"git add -A && git commit -am 打个test包 && git push",
@@ -26,6 +27,7 @@
     "quicklink": "^1.0.0",
     "vant": "^1.6.7",
     "vue": "^2.6.6",
+    "vue-i18n": "^8.10.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
