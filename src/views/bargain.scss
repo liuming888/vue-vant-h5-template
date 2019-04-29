@@ -329,6 +329,8 @@
                 border-radius: 10px;
                 overflow: hidden;
                 margin-bottom: 28px;
+                text-align: center;
+
                 > .products-photo {
                     width: 100%;
                     // height: 334px;
@@ -338,7 +340,6 @@
                     margin: 15px 10px 10px 10px;
                     color: #323232;
                     font-size: 28px;
-                    text-align: center;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -364,7 +365,6 @@
                     text-decoration: none;
                     padding: 0 20px;
                     margin: 0 auto;
-                    
                 }
             }
             > .recommend-item:nth-of-type(2n) {
