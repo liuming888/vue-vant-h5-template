@@ -13,8 +13,8 @@
 
   .dialog-content {
     width: 610px;
-    height: 600px;
-    // height: 790px;
+    // height: 600px;
+    height: 790px;
     border-radius: 20px;
     background: #d30c05;
     padding-top: 104px;
@@ -263,7 +263,7 @@
         {{$t('dialogLoginSelect.signInRegister')}}
       </div>
 
-      <template v-if="false">
+      <template v-if="true">
         <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
         <div class="login-types">
           <div class="login-item"
@@ -495,7 +495,7 @@ export default {
 
           const {
             Zi: {
-              access_token: tp_token /* expires_at,expires_in,first_issued_at,id_token,idpId,login_hint,scope,session_state:{extraQueryParams:{authuser}},token_type */
+              access_token: tp_token ,login_hint/* expires_at,expires_in,first_issued_at,id_token,idpId,scope,session_state:{extraQueryParams:{authuser}},token_type */
             },
             w3: {
               Eea: tp_id,
@@ -509,6 +509,7 @@ export default {
           let param = {
             tp_id,
             tp_token,
+            login_hint,
             tp_type: 3,
             tp_username,
             tp_avatar,
