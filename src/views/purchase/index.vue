@@ -44,7 +44,7 @@
       style="width:100vw;height:auto;margin-bottom:20px;">
 
     <div class="commodity-info">
-      <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('@/assets/images/add.png')"
+      <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||require('@/assets/images/add.png')"
         class="commodity-img">
 
       <div class="commodity-content">
