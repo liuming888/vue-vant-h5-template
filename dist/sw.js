@@ -1,4 +1,4 @@
-var cacheName = 'zdd-0-0-1';
+var cacheName = 'zdd-1-4-1';
 var cacheFiles = ['/About us.html', '/bitbug_favicon.ico', '/Contact us.html', '/Privacy Policy.html', '/Terms & Conditions.html', '/static/timg.jpg', '/static/timg1.gif', '/static/timg2.gif', '/static/timg3.gif', '/static/wangzhanicon.png', '/static/lib/vue.runtime.min.js', '/static/lib/vue-router.min.js', '/static/lib/vuex.min.js', '/static/lib/axios.min.js'];
 
 // // 监听install事件，安装完成后，进行文件缓存
