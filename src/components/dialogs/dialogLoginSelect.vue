@@ -351,6 +351,12 @@ export default {
       const result = await sendCode(params);
       if (result) {
         if (result.code == 0) {
+          this.$gaSend({
+            eventCategory: "手机登陆_获取验证码",
+            eventAction: "获取",
+            eventLabel: params.phone
+          });
+
           this.$toast({
             message: this.$t("dialogLoginSelect.yourSmsCodeWillBeSent"),
             duration: 2000
@@ -495,7 +501,8 @@ export default {
 
           const {
             Zi: {
-              access_token: tp_token ,login_hint/* expires_at,expires_in,first_issued_at,id_token,idpId,scope,session_state:{extraQueryParams:{authuser}},token_type */
+              access_token: tp_token,
+              login_hint /* expires_at,expires_in,first_issued_at,id_token,idpId,scope,session_state:{extraQueryParams:{authuser}},token_type */
             },
             w3: {
               Eea: tp_id,
