@@ -16,7 +16,7 @@
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
             <div class="img-box">
-              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''">
+              <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||''">
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
@@ -103,21 +103,7 @@
         v-if="!$route.query.bargainId&&spu.desp_pics&&spu.desp_pics.length>0">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
-        <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
-
-        <!-- <van-swipe :autoplay="spuImgPlayTime"
-          :show-indicators="false"
-          indicator-color="#D30C05"
-          class="product-item">
-          <template>
-            <template v-for="(item,index) of spu.spu_pics">
-              <van-swipe-item :key="index"
-                v-if="!isLoad&&index==0||isLoad">
-                <img v-lazy="item">
-              </van-swipe-item>
-            </template>
-          </template>
-        </van-swipe> -->
+       
 
         <ul>
           <li v-for="(item,index) of spu.desp_pics" :key="index">
@@ -135,7 +121,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
+          <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||''"
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
@@ -206,7 +192,8 @@ export default {
       shareInfo: {},
 
       spu: {
-        spu_pics: []
+        spu_pics: [],
+        spu_small_pics:[]
       },
 
       bargain_info: {
