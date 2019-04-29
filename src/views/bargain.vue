@@ -121,7 +121,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||''"
+          <img v-lazy="item.spu_small_pics&&item.spu_small_pics[0]||''"
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
