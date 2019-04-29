@@ -98,6 +98,20 @@ export default {
         gengduotop: require('@/assets/images/id-gengduotop.png'),
         goTopBtn: require('@/assets/images/id-top.png'),
     },
+     userGuidance:{
+        imagesList:[
+            require('@/assets/images/user_guidance/id-yindaoye1.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye2.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye3.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye4.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye5.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye6.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye7.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye8.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye9.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye10.jpg')
+        ],
+    },
     bargain: {
         sent: 'terkirim gratis',
         price: 'Price',

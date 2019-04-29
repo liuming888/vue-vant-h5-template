@@ -99,6 +99,20 @@ export default {
         gengduotop: require('@/assets/images/gengduotop.png'),
         goTopBtn: require('@/assets/images/top.png'),
     },
+    userGuidance:{
+        imagesList:[
+            require('@/assets/images/user_guidance/us-yindaoye1.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye2.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye3.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye4.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye5.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye6.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye7.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye8.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye9.jpg'),
+            require('@/assets/images/user_guidance/us-yindaoye10.jpg')
+        ],
+    },
     bargain: {
         sent: 'Sent',
         price: 'Price',
