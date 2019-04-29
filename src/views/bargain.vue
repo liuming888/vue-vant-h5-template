@@ -237,7 +237,8 @@ export default {
      */
     floorPrice(){
       const {bargain_info,spu}=this;
-      return bargain_info.must_buy_price||spu.must_buy_price||spu.price*0.2;
+      let num=bargain_info.must_buy_price||spu.must_buy_price||spu.price*0.2;
+      return num&&num.toFixed(2);
     },
     /**
      * @description:  当前砍价比例
