@@ -180,7 +180,7 @@
 
       <div class="content">
         <div class="good-box">
-          <img v-lazy="itemData.spu_pics&&itemData.spu_pics[0]"
+          <img v-lazy="itemData.spu_small_pics&&itemData.spu_small_pics[0]"
             class="good-img">
           <div class="right-box">
             <div class="good-tit">

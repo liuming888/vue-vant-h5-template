@@ -88,7 +88,7 @@ export default {
       type: Object,
       default() {
         return {
-          show: true
+          show: false
         };
       }
     },

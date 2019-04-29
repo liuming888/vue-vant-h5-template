@@ -28,7 +28,7 @@
 
     <div class="main-content">
       <div class="spu-box">
-        <img v-lazy="spu.spu_pics&&spu.spu_pics[0]"
+        <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]"
           alt=""
           class="spu-img">
         <div class="spu-info">
@@ -184,27 +184,6 @@
         </ul>
       </div>
 
-      <!-- 推荐商品 -->
-      <!-- <div class="recommend-products"
-        v-if="spu_list.length>0">
-        <p class="page-title">
-          <img v-lazy="$t('forBargain.xingzhuang')">
-        </p>
-        <div class="recommend-item"
-          v-for="item in spu_list"
-          :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
-            class="products-photo"
-            @click="jumpCurBargainPage(item)">
-          <p class="products-title">{{item.title}}</p>
-          <div class="products-ctrl">
-            <span class="money">{{item.deliver_count}} {{$t('forBargain.Sent')}}</span>
-            <span class="btn"
-              @click="jumpCurBargainPage(item)">{{$t('forBargain.getAFreebie')}}</span>
-          </div>
-        </div>
-      </div> -->
-
       <div class="recommend-products"
         v-if="spu_list.length>0">
         <p class="page-title">
@@ -213,7 +192,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
+          <img v-lazy="item.spu_small_pics&&item.spu_small_pics[0]||''"
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
@@ -272,7 +251,7 @@ export default {
 
       shareInfo: {},
 
-      spu: { spu_pics: [] },
+      spu: { spu_pics: [],spu_small_pics:[] },
 
       bargain_info: {},
       bargain_user_info: {},
