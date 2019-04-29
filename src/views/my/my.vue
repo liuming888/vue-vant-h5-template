@@ -161,6 +161,21 @@
       color: #323232;
       height: 100%;
       cursor: pointer;
+
+      &.revenuedetails {
+        position: relative;
+
+        .hot {
+          position: absolute;
+          right: 50px;
+          top: 50px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #d40e07;
+        }
+      }
+
       > img {
         padding-top: 48px;
         width: 64px;
@@ -258,6 +273,9 @@
     z-index: 10;
     text-indent: 1em;
     color: #7d7575;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 </style>
@@ -265,7 +283,7 @@
   <div>
     <div class="my-container">
       <div class="failure-prompt"
-        v-if="showFailurePrompt">
+        v-if="showFailurePrompt" @click="handleMyIncomeDetail">
         {{accountInfo.withdraw_msg}}
       </div>
 
@@ -315,7 +333,9 @@
           <p>{{$t('my.myOrderTxt')}}</p>
         </li>
         <li class="my-control-item"
+          :class="{'revenuedetails':accountInfo.withdraw_status==1}"
           @click="handleMyIncomeDetail">
+          <span class="hot"></span>
           <img v-lazy="require('@/assets/images/Revenuedetails@2x.png')"
             alt>
           <p>{{$t('my.revenueDetailsTxt')}}</p>
@@ -372,7 +392,8 @@ export default {
   data() {
     return {
       showFailurePrompt: false, // 显示提现失败消息
-      accountInfo: {/* 
+      accountInfo: {
+        /* 
         user_id: "", //类型：String  可有字段  备注：用户ID
         user_name: "", //类型：String  必有字段  备注：用户名
         vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
@@ -382,7 +403,8 @@ export default {
         today_received_price: 0, //类型：String  必有字段  备注：今日到账收益
         withdraw_msg: "", // 用户提现状态提示语
         withdraw_status: "" // 用户提现状态（1：驳回 0：正常）
-       */},
+       */
+      },
 
       hero_tips: []
     };
@@ -404,7 +426,7 @@ export default {
       let result = await getMyAccount();
       if (result && result.data) {
         this.accountInfo = result.data;
-        if(this.accountInfo.withdraw_status==1){
+        if (this.accountInfo.withdraw_status == 1) {
           this.setShowFailurePrompt();
         }
       }
@@ -476,7 +498,8 @@ export default {
       axios.defaults.headers.common["User-Id"] = "";
       axios.defaults.headers.common["Access-Token"] = "";
       localStorage.clear();
-      this.accountInfo = {/* 
+      this.accountInfo = {
+        /* 
         user_id: "", //类型：String  可有字段  备注：用户ID
         user_name: "", //类型：String  必有字段  备注：用户名
         vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
@@ -486,7 +509,8 @@ export default {
         today_received_price: 0, //类型：String  必有字段  备注：今日到账收益
         withdraw_msg: "", // 用户提现状态提示语
         withdraw_status: "" // 用户提现状态（1：驳回 0：正常）
-       */};
+       */
+      };
       this.hero_tips = [];
       this.$toast({
         message: this.$t("common.pleaseLoginAgain"),
