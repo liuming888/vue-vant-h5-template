@@ -105,7 +105,10 @@
     <div class="home-goods-item">
       <div class="goods-img"
         @click="jumpBargain">
-        <van-swipe v-if="itemData.spu_pics&&itemData.spu_pics.length>0"
+        <div v-if="itemData.spu_pics&&itemData.spu_pics.length<2">
+           <img v-lazy="itemData.spu_pics[0]">
+        </div>
+        <van-swipe v-else-if="itemData.spu_pics"
           :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="white">
@@ -116,8 +119,6 @@
             </van-swipe-item>
           </template>
         </van-swipe>
-        <img v-else
-          v-lazy="itemData.imgUrl||''">
       </div>
 
       <div class="goods-detail">
