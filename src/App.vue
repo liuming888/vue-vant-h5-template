@@ -41,7 +41,6 @@
 <script>
 import { Loading } from 'vant';
 import axios from "axios";
-import { mapState } from "vuex";
 import { FBConfig } from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
 
@@ -53,7 +52,9 @@ export default {
     "zdd-layout": zddMain,
   },
   computed: {
-    ...mapState(["loaddingNum"])
+    loaddingNum(){
+      return this.$store.state.loaddingNum
+    }
   },
   created() {
     let newUserStr = localStorage.getItem("newUserInfo");
