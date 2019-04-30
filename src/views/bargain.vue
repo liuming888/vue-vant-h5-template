@@ -54,7 +54,8 @@
             </div>
           </div>
           <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
-            class="spu-count-down"  :timeType="timeType"></count-down>
+            class="spu-count-down"
+            :timeType="timeType"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
@@ -103,10 +104,10 @@
         v-if="!$route.query.bargainId&&spu.desp_pics&&spu.desp_pics.length>0">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
-       
 
         <ul>
-          <li v-for="(item,index) of spu.desp_pics" :key="index">
+          <li v-for="(item,index) of spu.desp_pics"
+            :key="index">
             <img v-lazy="item">
           </li>
         </ul>
@@ -193,7 +194,7 @@ export default {
 
       spu: {
         spu_pics: [],
-        spu_small_pics:[]
+        spu_small_pics: []
       },
 
       bargain_info: {
@@ -222,10 +223,11 @@ export default {
     /**
      * @description: 地板价  must_buy_price字段控制  做了兼容两个接口查看这字段处理  都没有的话就默认商品现价的百分之二十
      */
-    floorPrice(){
-      const {bargain_info,spu}=this;
-      let num=bargain_info.must_buy_price||spu.must_buy_price||spu.price*0.2;
-      return num&&num.toFixed(2);
+    floorPrice() {
+      const { bargain_info, spu } = this;
+      let num =
+        bargain_info.must_buy_price || spu.must_buy_price || spu.price * 0.2;
+      return num && num.toFixed(2);
     },
     /**
      * @description:  当前砍价比例
@@ -240,11 +242,11 @@ export default {
     isLogin() {
       return this.$store.state.userInfo.user_id;
     },
-    timeType(){
-      if(this.bargain_info&&this.bargain_info.can_buy==1){
-        return 'buy';
-      }else{
-        return 'endIn';
+    timeType() {
+      if (this.bargain_info && this.bargain_info.can_buy == 1) {
+        return "buy";
+      } else {
+        return "endIn";
       }
     }
   },
@@ -253,11 +255,21 @@ export default {
   },
   mounted() {
     if (this.$refs.bargainContainer.scrollTo) {
-      this.$refs.bargainContainer.scroll(0, 0);
+      try {
+        this.$refs.bargainContainer.scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        this.$refs.bargainContainer.scrollTop = 0;
+      }
     }
 
     if (document.getElementById("contentContainer").scrollTop) {
-      document.getElementById("contentContainer").scroll(0, 0);
+      try {
+        document.getElementById("contentContainer").scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        document.getElementById("contentContainer").scrollTop = 0;
+      }
     }
 
     document.title = this.$t("bargain.gettingFreebies");
@@ -568,7 +580,12 @@ export default {
           spuId: item.spu_id
         }
       });
-      document.getElementsByClassName("content-container")[0].scroll(0, 0);
+      try {
+        document.getElementById("contentContainer").scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        document.getElementById("contentContainer").scrollTop = 0;
+      }
       this.init();
     },
 
