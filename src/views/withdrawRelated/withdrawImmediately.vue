@@ -144,7 +144,9 @@
         <div class="progress-box">
           <div class="schedule">
             <div class="active"
-              :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div>
+              :style="setScheduleActiveW"></div>
+            <!-- <div class="active"
+              :style="{'width':rule.length?user_fund.withdraw_amount/rule[rule.length-1].amount*100+'%':'0%'}"></div> -->
 
             <div v-for="(item,index) of rule"
               :key="index"
@@ -162,7 +164,8 @@
         id="cashWithdrawalRule">{{$t('withdrawImmediately.withdrawalRules')}}</div>
 
       <div class="cash-withdrawal-rule-des">
-        <p v-for="(item,index) of $t('withdrawImmediately.cashWithdrawalRuleDes')" :key="index">
+        <p v-for="(item,index) of $t('withdrawImmediately.cashWithdrawalRuleDes')"
+          :key="index">
           {{item}}
         </p>
       </div>
@@ -199,8 +202,9 @@ import {
 } from "@/server/finance.js";
 export default {
   components: {
-    DialogDefault: resolve=>require(['@/components/dialogs/dialogDefault.vue'],resolve),
-    
+    DialogDefault: resolve =>
+      require(["@/components/dialogs/dialogDefault.vue"], resolve),
+
     [Icon.name]: Icon
   },
   data() {
@@ -235,6 +239,33 @@ export default {
       // 当前面额
       currentRechargeDenomination: 0
     };
+  },
+  computed: {
+    setScheduleActiveW() {
+      let W = 0; // 最后的W比例
+      let withdrawAmount = this.user_fund.withdraw_amount || 0;
+      let curObj = {};
+      let obj = this.rule.find((item, index) => {
+        let curAmount = item.amount;
+        let oldAmount = index != 0 && this.rule[index - 1].amount;
+        if (withdrawAmount >= oldAmount && withdrawAmount < curAmount) {
+          curObj.index = index;
+          return true;
+        } else {
+          return false;
+        }
+      });
+      curObj = Object.assign({}, curObj, obj);
+      if (curObj.index && curObj.index != 0) {
+        let nums =
+          this.rule[curObj.index].amount - this.rule[curObj.index - 1].amount; // 位于区间的金额差
+        let num = withdrawAmount - this.rule[curObj.index - 1].amount;
+        // 当前的前一项在数组中索引除以this.rule.length-2 代表占的总进度条的百分比   再加上   。。。        再乘以100  就刚好是进度条的比例了
+        W = ((curObj.index - 1) /(this.rule.length-2) + (num / nums) * 0.1) * 100;
+      }
+      console.log("当今进度条比例为", W);
+      return { width: W + "%" };
+    }
   },
   created() {
     this.init();
@@ -354,6 +385,7 @@ export default {
         }
       ];
     },
+
     // 提现ok
     cashOk() {
       console.log("ok");
