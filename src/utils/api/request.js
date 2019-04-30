@@ -30,8 +30,6 @@ if (process.env.VUE_APP_ENV == 'development'&&!userStr) {
     access_token = '';
 }
 
-console.log('666666666666', process.env.VUE_APP_ENV);
-
 axios.defaults.headers.common['User-Id'] = user_id;
 axios.defaults.headers.common['Access-Token'] = access_token;
 
