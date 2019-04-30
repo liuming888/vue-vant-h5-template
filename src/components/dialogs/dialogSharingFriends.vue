@@ -128,11 +128,11 @@
           <p>WhatsApp</p>
         </div>
 
-        <div class="share-item">
+        <!-- <div class="share-item">
           <img v-lazy="require('@/assets/images/messenger.png')"
             @click="share(mx_shareMessenger)">
           <p>Messenger</p>
-        </div>
+        </div> -->
 
       </div>
 
