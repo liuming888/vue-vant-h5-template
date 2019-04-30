@@ -5,12 +5,12 @@
 
     <div class="t-box">
       <img class="good-img"
-        v-lazy="spuBargainItem.spu_pics&&spuBargainItem.spu_pics.length>0&&spuBargainItem.spu_pics[0]">
+        v-lazy="spuBargainItem.spu_small_pics&&spuBargainItem.spu_small_pics.length>0&&spuBargainItem.spu_small_pics[0]">
 
       <div class="c-content">
         <p class="good-title">{{spuBargainItem.title}}</p>
 
-        <count-down :dateDiff="spuBargainItem.expire_ttl"
+        <count-down :dateDiff="spuBargainItem.order_expire_time||spuBargainItem.expire_ttl"
           v-if="spuBargainItem.expire_ttl"
           :timeType="timeType"
           page="home"></count-down>

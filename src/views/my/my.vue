@@ -3,6 +3,8 @@
   background: rgb(245, 245, 245);
   height: 92vh;
   overflow-y: auto;
+  position: relative;
+
   > .my-header {
     padding: 32px 30px 0 30px;
     position: relative;
@@ -63,7 +65,7 @@
         color: #d40e07;
         background-color: #fff;
         font-size: 24px;
-        white-space:nowrap; 
+        white-space: nowrap;
       }
     }
     > .my-wallet {
@@ -93,7 +95,7 @@
         box-sizing: border-box;
         color: #fff;
         font-size: 28px;
-        white-space:nowrap; 
+        white-space: nowrap;
       }
       > .top {
         margin-bottom: 40px;
@@ -159,6 +161,21 @@
       color: #323232;
       height: 100%;
       cursor: pointer;
+
+      &.revenuedetails {
+        position: relative;
+
+        .hot {
+          position: absolute;
+          right: 50px;
+          top: 50px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #d40e07;
+        }
+      }
+
       > img {
         padding-top: 48px;
         width: 64px;
@@ -242,11 +259,34 @@
     font-weight: 400;
     color: rgba(212, 13, 5, 1);
   }
+
+  .failure-prompt {
+    width: 700px;
+    height: 36px;
+    border-radius: 36px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #f5f5f5;
+    z-index: 10;
+    text-indent: 1em;
+    color: #7d7575;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 </style>
 <template>
   <div>
     <div class="my-container">
+      <div class="failure-prompt"
+        v-if="showFailurePrompt" @click="handleMyIncomeDetail">
+        {{accountInfo.withdraw_msg}}
+      </div>
+
       <section class="my-header">
         <div class="my-info">
           <div class="my-img">
@@ -293,7 +333,9 @@
           <p>{{$t('my.myOrderTxt')}}</p>
         </li>
         <li class="my-control-item"
+          :class="{'revenuedetails':accountInfo.withdraw_status==1}"
           @click="handleMyIncomeDetail">
+          <span class="hot"></span>
           <img v-lazy="require('@/assets/images/Revenuedetails@2x.png')"
             alt>
           <p>{{$t('my.revenueDetailsTxt')}}</p>
@@ -339,6 +381,7 @@ import tabBar from "@/components/layout/tabBar/tabBar.vue";
 import { getMyAccount, getHeroList } from "@/server/user.js";
 
 import loadings from "@/mixins/loadings.js";
+import { clearTimeout } from "timers";
 export default {
   mixins: [loadings],
   components: {
@@ -348,14 +391,19 @@ export default {
   },
   data() {
     return {
+      showFailurePrompt: false, // 显示提现失败消息
       accountInfo: {
+        /* 
         user_id: "", //类型：String  可有字段  备注：用户ID
         user_name: "", //类型：String  必有字段  备注：用户名
         vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
         avatar: "", //类型：String  必有字段  备注：头像地址
         total_future_price: 0, //类型：String  必有字段  备注：累计预估收益
         today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
-        today_received_price: 0 //类型：String  必有字段  备注：今日到账收益
+        today_received_price: 0, //类型：String  必有字段  备注：今日到账收益
+        withdraw_msg: "", // 用户提现状态提示语
+        withdraw_status: "" // 用户提现状态（1：驳回 0：正常）
+       */
       },
 
       hero_tips: []
@@ -368,43 +416,6 @@ export default {
     // }
   },
   methods: {
-    /**
-     * @description: 退出登录
-     */
-    async signOut() {
-      this.mx_showLoad();
-
-      this.$store.commit("setUserInfo", {});
-      axios.defaults.headers.common["User-Id"] = "";
-      axios.defaults.headers.common["Access-Token"] = "";
-      localStorage.clear();
-      this.accountInfo = {
-        user_id: "", //类型：String  可有字段  备注：用户ID
-        user_name: "", //类型：String  必有字段  备注：用户名
-        vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
-        avatar: "", //类型：String  必有字段  备注：头像地址
-        total_future_price: 0, //类型：String  必有字段  备注：累计预估收益
-        today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
-        today_received_price: 0 //类型：String  必有字段  备注：今日到账收益
-      };
-      this.hero_tips = [];
-      this.$toast({
-        message: this.$t('common.pleaseLoginAgain'),
-        duration: 1000
-      });
-
-      // 退出FB接口暂时无效
-      // try {
-      //   await window.$faceBookApi.logoutFB();
-      // } catch (error) {
-      //   console.warn("FB退出登录无效", error);
-      // }
-      
-      this.$util.deleteAllCookies();
-      this.$store.commit("setLoginSelectShow", true);
-
-      this.mx_closeLoad();
-    },
     async initHeroTips() {
       let result = await getHeroList();
       if (result && result.data) {
@@ -415,9 +426,12 @@ export default {
       let result = await getMyAccount();
       if (result && result.data) {
         this.accountInfo = result.data;
+        if (this.accountInfo.withdraw_status == 1) {
+          this.setShowFailurePrompt();
+        }
       }
     },
-    // 去支付
+    // 去提现
     handleCashOut() {
       //统计
       this.$gaSend({
@@ -461,8 +475,60 @@ export default {
         eventAction: "点击"
       });
       this.$router.push("/my/Tutorial");
+    },
+    /**
+     * @description: 显示提现失败提示
+     */
+    setShowFailurePrompt() {
+      this.showFailurePrompt = true;
+      const timer = setTimeout(() => {
+        this.showFailurePrompt = false;
+      }, 10000);
+      this.$once("hook:beforeDestroy", () => {
+        clearTimeout(timer);
+      });
+    },
+    /**
+     * @description: 退出登录
+     */
+    async signOut() {
+      this.mx_showLoad();
+
+      this.$store.commit("setUserInfo", {});
+      axios.defaults.headers.common["User-Id"] = "";
+      axios.defaults.headers.common["Access-Token"] = "";
+      localStorage.clear();
+      this.accountInfo = {
+        /* 
+        user_id: "", //类型：String  可有字段  备注：用户ID
+        user_name: "", //类型：String  必有字段  备注：用户名
+        vip_type: 1, //类型：Number  必有字段  备注：vip等级（1：普通会员 2：高级会员）
+        avatar: "", //类型：String  必有字段  备注：头像地址
+        total_future_price: 0, //类型：String  必有字段  备注：累计预估收益
+        today_future_price: 0, //类型：String  必有字段  备注：今日预估收益
+        today_received_price: 0, //类型：String  必有字段  备注：今日到账收益
+        withdraw_msg: "", // 用户提现状态提示语
+        withdraw_status: "" // 用户提现状态（1：驳回 0：正常）
+       */
+      };
+      this.hero_tips = [];
+      this.$toast({
+        message: this.$t("common.pleaseLoginAgain"),
+        duration: 1000
+      });
+
+      // 退出FB接口暂时无效
+      // try {
+      //   await window.$faceBookApi.logoutFB();
+      // } catch (error) {
+      //   console.warn("FB退出登录无效", error);
+      // }
+
+      this.$util.deleteAllCookies();
+      this.$store.commit("setLoginSelectShow", true);
+
+      this.mx_closeLoad();
     }
-    // 立即提现
   }
 };
 </script>

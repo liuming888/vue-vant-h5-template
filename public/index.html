@@ -26,12 +26,13 @@
 
         <link rel="preconnect" href="https://api.istarbuy.com" />
         <link rel="preconnect" href="https://rscdn.istarbuy.com" />
-        <link rel="preconnect" href="https://staticxx.facebook.com" />
-        <link rel="preconnect" href="https://connect.facebook.net" />
+        <!-- <link rel="preconnect" href="https://staticxx.facebook.com" /> -->
+        <!-- <link rel="preconnect" href="https://connect.facebook.net" /> -->
+
         <link rel="dns-prefetch" href="https://api.istarbuy.com" />
         <link rel="dns-prefetch" href="https://rscdn.istarbuy.com" />
-        <link rel="dns-prefetch" href="https://staticxx.facebook.com" />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <!-- <link rel="dns-prefetch" href="https://staticxx.facebook.com" /> -->
+        <!-- <link rel="dns-prefetch" href="https://connect.facebook.net" /> -->
 
         <link rel="manifest" href="<%= BASE_URL %>manifest.json" />
         <link rel="apple-touch-icon" href="<%= BASE_URL %>static/icons/istarbuy-256.png" />
@@ -133,11 +134,10 @@
         </noscript>
         <div id="app"></div>
         <!-- built files will be auto injected -->
-        <script src="https://apis.google.com/js/api:client.js"></script>
-        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
-        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue-i18n.min.js"></script>
-        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vuex.min.js"></script>
-        <script src="<%= VUE_APP_URL %><%= BASE_URL %>static/lib/vue-router.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vue.runtime.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vue-i18n.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vuex.min.js"></script>
+        <script src="<%= BASE_URL %>static/lib/vue-router.min.js"></script>
         <!-- <script src="<%= BASE_URL %>static/lib/axios.min.js"></script> -->
         <script>
             var gaId = '<%= VUE_APP_ENV %>' == 'newProduction' ? 'UA-137995919-1' : 'UA-136763280-1';
@@ -158,5 +158,6 @@
             ga('create', gaId, 'auto');
             ga('send', window.location.href);
         </script>
+        <script src="https://apis.google.com/js/api:client.js" async></script>
     </body>
 </html>

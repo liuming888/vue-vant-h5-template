@@ -292,6 +292,9 @@
 
 <template>
   <div class="isBargainingList-container">
+     <!-- 返回首页 -->
+    <turn-home />
+
     <div class="finish-box"
       v-if="finishList.length > 0">
       <div class="banner">
@@ -302,7 +305,7 @@
           v-for="(item, index) in finishList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_small_pics&&item.spu.spu_small_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
@@ -331,7 +334,7 @@
           v-for="(item, index) in ingList"
           :key="index">
           <div class="img-box">
-            <img v-lazy="item.spu&&item.spu.spu_pics&&item.spu.spu_pics[0]">
+            <img v-lazy="item.spu&&item.spu.spu_small_pics&&item.spu.spu_small_pics[0]">
           </div>
           <div class="detail">
             <p class="title">{{item.spu.title}}</p>
@@ -371,7 +374,8 @@ import { getMyBargainSpus } from "@/server/bargain.js";
 export default {
   components: {
     aCommodityThatIsBeingBargained:resolve=>require(['@/components/bargain/aCommodityThatIsBeingBargained.vue'],resolve), // 一件正在进行砍价商品
-    countDown:resolve=>require(['@/components/countDown.vue'],resolve)
+    countDown:resolve=>require(['@/components/countDown.vue'],resolve),
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve), // 返回首页按钮
   },
   data() {
     return {

@@ -8,11 +8,11 @@
     margin-top: 60px;
   }
   > .goods-img {
-    min-height: 369px;
+    height: 369px;
     img {
       width: 100%;
-      height: auto;
-      max-height: 369px;
+      // height: auto;
+      height: 369px;
     }
   }
   > .goods-detail {

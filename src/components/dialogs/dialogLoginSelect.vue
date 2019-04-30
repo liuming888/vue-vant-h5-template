@@ -263,19 +263,21 @@
         {{$t('dialogLoginSelect.signInRegister')}}
       </div>
 
-      <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
-      <div class="login-types">
-        <div class="login-item"
-          id="customBtn">
-          <img src="~@/assets/images/gooleIcon.png">
-        </div>
+      <template v-if="true">
+        <p class="other-log">{{$t('dialogLoginSelect.otherWaysToLogIn')}}</p>
+        <div class="login-types">
+          <div class="login-item"
+            id="customBtn">
+            <img src="~@/assets/images/gooleIcon.png">
+          </div>
 
-        <div v-if="showFB"
-          class="login-item"
-          @click="loginFB">
-          <img src="~@/assets/images/facbookIcon.png">
+          <div v-if="showFB"
+            class="login-item"
+            @click="loginFB">
+            <img src="~@/assets/images/facbookIcon.png">
+          </div>
         </div>
-      </div>
+      </template>
     </div>
 
   </div>
@@ -322,7 +324,7 @@ export default {
       eventAction: "浮窗展示"
     });
 
-    if(process.env.VUE_APP_ENV=='development') return;
+    if (process.env.VUE_APP_ENV == "development") return;
     this.startApp();
   },
   methods: {
@@ -349,6 +351,12 @@ export default {
       const result = await sendCode(params);
       if (result) {
         if (result.code == 0) {
+          this.$gaSend({
+            eventCategory: "手机登陆_获取验证码",
+            eventAction: "获取",
+            eventLabel: params.phone
+          });
+
           this.$toast({
             message: this.$t("dialogLoginSelect.yourSmsCodeWillBeSent"),
             duration: 2000
@@ -493,7 +501,8 @@ export default {
 
           const {
             Zi: {
-              access_token: tp_token /* expires_at,expires_in,first_issued_at,id_token,idpId,login_hint,scope,session_state:{extraQueryParams:{authuser}},token_type */
+              access_token: tp_token,
+              login_hint /* expires_at,expires_in,first_issued_at,id_token,idpId,scope,session_state:{extraQueryParams:{authuser}},token_type */
             },
             w3: {
               Eea: tp_id,
@@ -507,6 +516,7 @@ export default {
           let param = {
             tp_id,
             tp_token,
+            login_hint,
             tp_type: 3,
             tp_username,
             tp_avatar,

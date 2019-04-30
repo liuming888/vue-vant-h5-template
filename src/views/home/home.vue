@@ -65,12 +65,13 @@
     }
     > .home-banner {
       width: 100%;
-      max-height: 324px;
       overflow: hidden;
       margin-bottom: 26px;
       img {
         width: 100%;
-        height: auto;
+        // height: auto;
+        // max-height: 500px; // 旧版本的banner高度
+        height: 324px;  // 新版本的banner高度
       }
     }
   }
@@ -454,7 +455,12 @@ export default {
       }
     },
     goPageTop() {
-      this.$refs.homeContainer.scroll(0, 0);
+       try {
+         this.$refs.homeContainer.scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        this.$refs.homeContainer.scrollTop = 0;
+      }
     },
     init() {
       this.initBanners();
@@ -540,11 +546,11 @@ export default {
     },
     // 更多砍价点击
     handleMoreAbout() {
-      this.$router.push({ path: "/isBargainingList" });
-      this.$gaSend({
+        this.$gaSend({
         eventCategory: "首页_更多砍价",
         eventAction: "点击"
       });
+      this.$router.push({ path: "/isBargainingList" });
     },
     //ga统计商品列表点击
     cashBackGa(item) {

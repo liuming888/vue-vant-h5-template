@@ -13,9 +13,9 @@
 <template>
   <div class="userGuidance-container">
     <turn-home />
-    <img v-for="item in 4"
-      :key="item"
-      v-lazy="require(`@/assets/images/user_guidance/yindao_0${item}.jpg`)"
+    <img v-for="(item,index) in $t('userGuidance.imagesList')"
+      :key="index"
+      v-lazy="item"
       class="img-item">
   </div>
 </template>

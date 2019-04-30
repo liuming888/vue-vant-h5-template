@@ -5,6 +5,8 @@ export default {
         pleaseLoginAgain: 'Silakan masuk lagi !',
         theRequestFailed: 'The request failed. Please try again later!',
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
+        successfulCopy: 'Salinan yang berhasil',
+        replicationFailed: 'Replikasi gagal',
     },
 
     /************************ 组件  start *****************************************************/
@@ -95,6 +97,20 @@ export default {
         contactUs: 'Contact Us',
         gengduotop: require('@/assets/images/id-gengduotop.png'),
         goTopBtn: require('@/assets/images/id-top.png'),
+    },
+     userGuidance:{
+        imagesList:[
+            require('@/assets/images/user_guidance/id-yindaoye1.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye2.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye3.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye4.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye5.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye6.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye7.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye8.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye9.jpg'),
+            require('@/assets/images/user_guidance/id-yindaoye10.jpg')
+        ],
     },
     bargain: {
         sent: 'terkirim gratis',
@@ -231,6 +247,7 @@ export default {
     revenueDetails: {
         revenue: 'Pendapatan',
         expenses: 'Beban',
+        rejectedHasViolatedUserRules:"ditolak：Pelanggaran aturan pengguna"
     },
     Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: Berapa lama saya bisa menerima barang?',
@@ -271,10 +288,10 @@ export default {
             okText: 'aku tahu',
         },
 
-        withdrawalApplication: 'Withdrawal application',
+        withdrawalApplication: 'Penarikan aplikasi',
         pleaseCheckItOut: 'Permintaan penarikan Anda telah dimulai, silakan periksa!',
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
-        iKnow: 'I know',
+        iKnow: 'Saya mengerti',
         withdrawRule: require('@/assets/images/id-withdrawRule.png'),
         cashWithdrawalRuleDes: [
             `1. The first withdrawal of Rp5000, the premise of 14:30  on the same day, will arrive before 00:00 on the same day, after 14:30  will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient`,

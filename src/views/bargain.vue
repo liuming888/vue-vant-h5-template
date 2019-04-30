@@ -16,7 +16,7 @@
           <!-- 砍价商品信息 -->
           <div class="bargain-info">
             <div class="img-box">
-              <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||''">
+              <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||''">
             </div>
             <div class="detail">
               <p class="title">{{spu.title}}</p>
@@ -54,7 +54,8 @@
             </div>
           </div>
           <count-down :dateDiff="bargain_info.expire_ttl||spu.ttl"
-            class="spu-count-down"  :timeType="timeType"></count-down>
+            class="spu-count-down"
+            :timeType="timeType"></count-down>
           <div class="ctrl-box">
             <div class="share-btn"
               @click="openSharingFriendsDialog"
@@ -103,24 +104,10 @@
         v-if="!$route.query.bargainId&&spu.desp_pics&&spu.desp_pics.length>0">
         <!-- 商品详情图 -->
         <p class="page-title">Product details</p>
-        <!-- <img v-lazy="spu&&spu.spu_pics[0]"> -->
-
-        <!-- <van-swipe :autoplay="spuImgPlayTime"
-          :show-indicators="false"
-          indicator-color="#D30C05"
-          class="product-item">
-          <template>
-            <template v-for="(item,index) of spu.spu_pics">
-              <van-swipe-item :key="index"
-                v-if="!isLoad&&index==0||isLoad">
-                <img v-lazy="item">
-              </van-swipe-item>
-            </template>
-          </template>
-        </van-swipe> -->
 
         <ul>
-          <li v-for="(item,index) of spu.desp_pics" :key="index">
+          <li v-for="(item,index) of spu.desp_pics"
+            :key="index">
             <img v-lazy="item">
           </li>
         </ul>
@@ -135,7 +122,7 @@
         <div class="recommend-item"
           v-for="item in spu_list"
           :key="item.spu_id">
-          <img v-lazy="item.spu_pics&&item.spu_pics[0]||''"
+          <img v-lazy="item.spu_small_pics&&item.spu_small_pics[0]||''"
             class="products-photo"
             @click="jumpCurBargainPage(item)">
           <p class="products-title">{{item.title}}</p>
@@ -206,7 +193,8 @@ export default {
       shareInfo: {},
 
       spu: {
-        spu_pics: []
+        spu_pics: [],
+        spu_small_pics: []
       },
 
       bargain_info: {
@@ -235,9 +223,11 @@ export default {
     /**
      * @description: 地板价  must_buy_price字段控制  做了兼容两个接口查看这字段处理  都没有的话就默认商品现价的百分之二十
      */
-    floorPrice(){
-      const {bargain_info,spu}=this;
-      return bargain_info.must_buy_price||spu.must_buy_price||spu.price*0.2;
+    floorPrice() {
+      const { bargain_info, spu } = this;
+      let num =
+        bargain_info.must_buy_price || spu.must_buy_price || spu.price * 0.2;
+      return num && num.toFixed(2);
     },
     /**
      * @description:  当前砍价比例
@@ -252,11 +242,11 @@ export default {
     isLogin() {
       return this.$store.state.userInfo.user_id;
     },
-    timeType(){
-      if(this.bargain_info&&this.bargain_info.can_buy==1){
-        return 'buy';
-      }else{
-        return 'endIn';
+    timeType() {
+      if (this.bargain_info && this.bargain_info.can_buy == 1) {
+        return "buy";
+      } else {
+        return "endIn";
       }
     }
   },
@@ -265,11 +255,21 @@ export default {
   },
   mounted() {
     if (this.$refs.bargainContainer.scrollTo) {
-      this.$refs.bargainContainer.scroll(0, 0);
+      try {
+        this.$refs.bargainContainer.scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        this.$refs.bargainContainer.scrollTop = 0;
+      }
     }
 
     if (document.getElementById("contentContainer").scrollTop) {
-      document.getElementById("contentContainer").scroll(0, 0);
+      try {
+        document.getElementById("contentContainer").scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        document.getElementById("contentContainer").scrollTop = 0;
+      }
     }
 
     document.title = this.$t("bargain.gettingFreebies");
@@ -580,7 +580,12 @@ export default {
           spuId: item.spu_id
         }
       });
-      document.getElementsByClassName("content-container")[0].scroll(0, 0);
+      try {
+        document.getElementById("contentContainer").scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        document.getElementById("contentContainer").scrollTop = 0;
+      }
       this.init();
     },
 

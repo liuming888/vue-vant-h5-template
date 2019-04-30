@@ -44,7 +44,7 @@
       style="width:100vw;height:auto;margin-bottom:20px;">
 
     <div class="commodity-info">
-      <img v-lazy="spu.spu_pics&&spu.spu_pics[0]||require('@/assets/images/add.png')"
+      <img v-lazy="spu.spu_small_pics&&spu.spu_small_pics[0]||require('@/assets/images/add.png')"
         class="commodity-img">
 
       <div class="commodity-content">
@@ -166,15 +166,14 @@ export default {
   components: {
     userOrderMessage: resolve =>
       require(["@/components/userOrderMessage.vue"], resolve), // 用户订单消息播放
-    DialogDefault:resolve =>
+    DialogDefault: resolve =>
       require(["@/components/dialogs/dialogDefault.vue"], resolve),
-    shippingAddress:resolve =>
-      require(["../shippingAddress.vue"], resolve), // 地址列表页组件（路由配置了，但通过组件的方式用）
-    dialogPostAddAddress:resolve =>
+    shippingAddress: resolve => require(["../shippingAddress.vue"], resolve), // 地址列表页组件（路由配置了，但通过组件的方式用）
+    dialogPostAddAddress: resolve =>
       require(["@/components/dialogs/dialogPostAddAddress.vue"], resolve), // 增加地址
-    dialogWaitPayment:resolve =>
+    dialogWaitPayment: resolve =>
       require(["@/components/dialogs/dialogWaitPayment.vue"], resolve), // 等待用户付款弹窗
-      
+
     [Icon.name]: Icon
   },
   data() {
@@ -195,7 +194,7 @@ export default {
         show: false
       },
       myAddress: {},
-      info: this.$t('purchase.info'),
+      info: this.$t("purchase.info"),
       dialogVisible: false,
 
       exchangeRateDat: {
@@ -221,7 +220,7 @@ export default {
     }
   },
   mounted() {
-    document.title = this.$t('purchase.checkOut');
+    document.title = this.$t("purchase.checkOut");
 
     fbq("track", "AddToCart");
   },
@@ -329,15 +328,17 @@ export default {
       this.dialogVisible = false; // 关闭支付失败弹窗
 
       const { bargain_after } = this.bargain_info;
-      if (bargain_after < this.currentType.min_amount) {
-        this.$toast(this.$t('purchase.pleaseTryAgainByAlternativePaymentMethod'));
+      if (bargain_after != 0 && bargain_after < this.currentType.min_amount) {
+        this.$toast(
+          this.$t("purchase.pleaseTryAgainByAlternativePaymentMethod")
+        );
         return;
       }
 
       fbq("track", "InitiateCheckout");
 
       if (!this.myAddress.id) {
-        Dialog.alert(this.$t('purchase.pleaseChooseAShippingAddressDialog'));
+        Dialog.alert(this.$t("purchase.pleaseChooseAShippingAddressDialog"));
         return;
       }
 
@@ -396,7 +397,9 @@ export default {
     async goRepaidPay() {
       const { bargain_after } = this.bargain_info;
       if (bargain_after < this.currentType.min_amount) {
-        this.$toast(this.$t('purchase.pleaseTryAgainByAlternativePaymentMethod'));
+        this.$toast(
+          this.$t("purchase.pleaseTryAgainByAlternativePaymentMethod")
+        );
         return;
       }
 
