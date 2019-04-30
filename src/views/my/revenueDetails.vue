@@ -29,6 +29,7 @@
         flex: 1;
         padding-left: 20px;
         display: flex;
+        align-items: center;
         position: relative;
 
         &::after {
@@ -48,10 +49,19 @@
             text-align: right;
             color: #d30c05;
             font-size: 36px;
-            padding-top: 60px;
+            padding-top: 42px;
             font-weight: 500;
             &.cash {
               color: #323232;
+            }
+
+            .rejected-rules {
+              color: #323232;
+              font-size: 24px;
+              margin-top: 10px;
+              max-width: 300px;
+              text-align: left;
+              word-break: break-all;
             }
           }
           &.intro {
@@ -68,7 +78,7 @@
             }
           }
 
-          .rp{
+          .rp {
             font-size: 24px;
           }
         }
@@ -102,7 +112,15 @@
               <p>{{item.update_time}}</p>
             </div>
             <div class="count"
-              :class="{cash:item.amount_status==2}">{{item.amount_status==2?'-':'+'}}<span class="rp">Rp</span>{{item.amount}}</div>
+              :class="{cash:item.amount_status==2}">
+              <div class="count-t-num">
+                {{item.amount_status==2?'-':'+'}}<span class="rp">Rp</span>{{item.amount}}
+              </div>
+              <div class="rejected-rules"
+                v-if="item.tip">
+                {{item.tip}}
+              </div>
+            </div>
           </div>
         </li>
       </ul>

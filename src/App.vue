@@ -11,7 +11,7 @@
   left: 0;
   top: 0;
   z-index: 12000;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.73);
 
    .van-loading {
       position: absolute;

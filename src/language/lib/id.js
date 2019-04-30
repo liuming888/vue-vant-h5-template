@@ -247,6 +247,7 @@ export default {
     revenueDetails: {
         revenue: 'Pendapatan',
         expenses: 'Beban',
+        rejectedHasViolatedUserRules:"ditolak：Pelanggaran aturan pengguna"
     },
     Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: Berapa lama saya bisa menerima barang?',

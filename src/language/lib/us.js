@@ -248,6 +248,7 @@ export default {
     revenueDetails: {
         revenue: 'Revenue',
         expenses: 'Expenses',
+        rejectedHasViolatedUserRules:"rejected: Has violated user rules"
     },
     Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: How long can I receive the goods?',
