@@ -110,7 +110,7 @@ export default {
         availableForPurchase: 'Tersedia untuk pembelian',
         takeItFree: 'hanya Rp',
         shareFriendsForFreebies: 'Tim tawar-menawar untuk dapat freebies',
-        cutAKnife: 'Cut a knife',
+        cutAKnife: 'Potong harganya',
         buyNow: 'beli sekarang',
         BuyNow: 'Beli sekarang',
         getAFreebie: 'Dapatkan freebie',
@@ -251,7 +251,7 @@ export default {
         da4: `① Halaman penggemar Facebook: @Lovingistarbuy  ② LINE: Istarbuy  ③ WeChat: Istarbuy`,
         theme: '/static/images/tutorial/id-theme.png',
         commonProblem: '/static/images/tutorial/id-commonProblem.png',
-        contactUs: '/static/images/id-contact-us.png',
+        contactUs: '/static/images/tutorial/id-contact-us.png',
     },
     withdrawImmediately: {
         currentBalance: 'Saldo saat ini',

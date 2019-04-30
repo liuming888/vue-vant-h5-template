@@ -182,7 +182,7 @@
           v-if="messageList.length>0"></user-picking-up-message>
 
         <div class="home-banner"
-          v-if="bannerList.length<2">
+          v-if="bannerList.length<2" @click="$router.push('/userGuidance')">
           <img v-lazy="bannerList[0]&&bannerList[0].url">
         </div>
         <van-swipe v-else
