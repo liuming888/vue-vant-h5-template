@@ -455,7 +455,12 @@ export default {
       }
     },
     goPageTop() {
-      this.$refs.homeContainer.scroll(0, 0);
+       try {
+         this.$refs.homeContainer.scroll(0, 0);
+      } catch (error) {
+        console.warn("scroll方法失效: ", error);
+        this.$refs.homeContainer.scrollTop = 0;
+      }
     },
     init() {
       this.initBanners();
