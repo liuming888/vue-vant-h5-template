@@ -306,13 +306,11 @@ export default {
      * @description: 显示FB相关（旧dsp投放的环境不显示）
      */
     showFB() {
-      // if (process.env.VUE_APP_ENV != "production") {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-
-      return true;
+      if (process.env.VUE_APP_ENV != "newProduction") {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   created() {

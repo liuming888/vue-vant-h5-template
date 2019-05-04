@@ -76,8 +76,8 @@ export default {
     }
     this.initToken();
 
-    if (process.env.VUE_APP_ENV == "production") return;
-    // this.initFB();
+    if (process.env.VUE_APP_ENV == "newProduction") return;
+    this.initFB();
   },
   methods: {
     /**
