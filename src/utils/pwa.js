@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-04-28 19:30:40
+ * @LastEditTime: 2019-05-04 16:38:19
  */
 // import $request from './api/request.js';
 
@@ -312,7 +312,7 @@ function pushInfo(registration) {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     window.getPushReq = askPermission(); // 获取权限方法
 
-    var publicKey = 'BM-fAdnJinrq11GkGf4Ze5iU75_UXgy7qLM9DFiMuZG3RWC1r1dEv_t59djnLu9fHrUcaASZJTcTU0b5GNH39Cg';
+    var publicKey = 'BFikkgYxQH1ymWOzWhFaVduuCcA3VGLSu7vCh_bMQfF22LLINmI_r-8241pEBJeZqh25dUN_zlRewBWgU3MLhEs';
     // 注册service worker
     registerServiceWorker('/sw.js')
         .then(function(registration) {

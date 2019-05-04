@@ -114,9 +114,12 @@ self.addEventListener('push', function(e) {
                 },
             ],
             tag: 'pwa-starter',
-            renotify: true,
+            renotify: true, // 是否替换之前的通知
+            //  silent: true, // 静音
+            //  requireInteraction: true  // 此选项会展示通知直到用户消除或点击
         };
-        self.registration.showNotification(title, options);
+        var promiseChain = self.registration.showNotification(title, options);
+        event.waitUntil(promiseChain);
     } else {
         console.log('push没有任何数据');
     }
@@ -165,4 +168,14 @@ self.addEventListener('notificationclick', function(e) {
                 e.notification.close();
             })
     );
+});
+
+/**
+ * @description: 通知的关闭事件
+ */
+self.addEventListener('notificationclose', function(event) {
+    var dismissedNotification = event.notification;
+
+    var promiseChain = notificationCloseAnalytics();
+    event.waitUntil(promiseChain);
 });

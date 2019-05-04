@@ -15,8 +15,8 @@ var webpush = require('web-push');
  * 这里可以替换为你业务中实际的值
  */
 var vapidKeys = {
-    publicKey: 'BM-fAdnJinrq11GkGf4Ze5iU75_UXgy7qLM9DFiMuZG3RWC1r1dEv_t59djnLu9fHrUcaASZJTcTU0b5GNH39Cg',
-    privateKey: 'mZQ7qnMTVkM0Y222A2lv3nC-dAWGW5zN2P8epJvbIdo',
+    publicKey: 'BFikkgYxQH1ymWOzWhFaVduuCcA3VGLSu7vCh_bMQfF22LLINmI_r-8241pEBJeZqh25dUN_zlRewBWgU3MLhEs',
+    privateKey: '_E5CHTZiEKBprZn2zcUZJPXusTJbWr64NrcIkpE6174',
 };
 
 webpush.setVapidDetails('mailto:alienzhou16@163.com', vapidKeys.publicKey, vapidKeys.privateKey);
