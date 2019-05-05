@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-04 16:38:19
+ * @LastEditTime: 2019-05-05 18:38:24
  */
 // import $request from './api/request.js';
 
@@ -340,7 +340,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 console.log('uniqueid', body.uniqueid);
                 console.log('body---------------------', body);
                 // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
-                return sendSubscriptionToServer(JSON.stringify(body));
+                // return sendSubscriptionToServer(JSON.stringify(body));
             }
             /*********************************** 服务器推送消息主要逻辑 end ************************************************************/
         })
