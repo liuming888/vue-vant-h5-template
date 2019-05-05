@@ -1,29 +1,3 @@
-
-<style lang="scss">
-// .freebing-box {
-//   .freebing-container {
-//     position: relative;
-//     &::after {
-//       content: "";
-//       position: absolute;
-//       bottom: 0;
-//       left: 24px;
-//       width: 638px;
-//       height: 1px;
-//       background: rgba(242, 242, 242, 1);
-//     }
-//   }
-
-//   .freebing-big-box:nth-last-of-type(1) {
-//     .freebing-container {
-//       &::after {
-//         display: none;
-//       }
-//     }
-//   }
-// }
-</style>
-
 <style lang="scss" scoped>
 .home-container {
   background-color: #f5f5f5;
@@ -71,7 +45,7 @@
         width: 100%;
         // height: auto;
         // max-height: 500px; // 旧版本的banner高度
-        height: 324px;  // 新版本的banner高度
+        height: 324px; // 新版本的banner高度
       }
     }
   }
@@ -79,18 +53,6 @@
     min-height: 70vh;
 
     > .home-goods-title {
-      // padding: 37px 0;
-      // padding-bottom: 47px;
-      // font-size: 28px;
-      // color: #fff;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-
-      // img {
-      //   width: 560px;
-      //   height: auto;
-      // }
       width: 100%;
       height: 113px;
       display: flex;
@@ -115,69 +77,6 @@
     }
   }
 }
-
-// .freebing-box {
-//   position: relative;
-//   z-index: 10;
-//   margin: 0 30px;
-//   margin-bottom: 10px;
-//   padding-bottom: 30px;
-//   margin-top: 42px;
-//   background-color: #fff;
-//   border-radius: 20px;
-//   // height: 300px;
-
-//   > .freebing-title {
-//     position: absolute;
-//     top: -20px;
-//     left: calc(50% - 175px);
-//     width: 350px;
-//     height: 60px;
-//     background: linear-gradient(
-//       0deg,
-//       rgba(246, 76, 1, 1),
-//       rgba(246, 171, 1, 1)
-//     );
-//     border-radius: 0px 0px 8px 8px;
-//     font-size: 28px;
-//     font-weight: 600;
-//     text-align: center;
-//     line-height: 60px;
-//     color: #fff;
-//     &::before {
-//       content: "";
-//       display: block;
-//       position: absolute;
-//       top: -2px;
-//       left: -21px;
-//       width: 0;
-//       height: 0;
-//       border-color: #f06904 transparent;
-//       border-width: 0px 0px 21px 21px;
-//       border-style: solid;
-//     }
-//     &::after {
-//       content: "";
-//       display: block;
-//       position: absolute;
-//       top: -2px;
-//       right: -21px;
-//       width: 0;
-//       height: 0;
-//       border-color: #f06904 transparent;
-//       border-width: 0px 21px 21px 0;
-//       border-style: solid;
-//     }
-//   }
-
-//   .freebing-more {
-//     // margin-top: 35px;
-//     display: block;
-//     font-size: 24px;
-//     text-align: center;
-//     color: #585858;
-//   }
-// }
 
 .in-progress {
   width: 705px;
@@ -282,34 +181,24 @@
         <user-picking-up-message :messageList="messageList"
           v-if="messageList.length>0"></user-picking-up-message>
 
-        <van-swipe :autoplay="bannerAutoPlayTime"
+        <div class="home-banner"
+          v-if="bannerList.length<2" @click="$router.push('/userGuidance')">
+          <img v-lazy="bannerList[0]&&bannerList[0].url">
+        </div>
+        <van-swipe v-else
+          :autoplay="bannerAutoPlayTime"
           :show-indicators="false"
           indicator-color="#D30C05"
           class="home-banner"
           @click.native="$router.push('/userGuidance')">
-          <template v-if="bannerList.length>0">
-            <template v-for="(item,index) of bannerList">
-              <van-swipe-item @click="handleBannerClick"
-                :key="item.id"
-                v-if="!isLoad&&index==0||isLoad">
-                <img v-lazy="item.url">
-              </van-swipe-item>
-            </template>
+          <template v-for="(item,index) of bannerList">
+            <van-swipe-item @click="handleBannerClick"
+              :key="item.id"
+              v-if="!isLoad&&index==0||isLoad">
+              <img v-lazy="item.url">
+            </van-swipe-item>
           </template>
         </van-swipe>
-
-        <!-- <div class="freebing-box"
-          v-if="homeBargainList.length>0">
-          <div class="freebing-title">{{$t('home.ongoingFreebies')}}</div>
-          <template v-for="(item,index) of homeBargainList">
-            <freebing-box :key="index"
-              :spuBargainItem="{...item.bargain_info,...item.spu}" />
-          </template>
-
-          <a href="javascript:;"
-            class="freebing-more"
-            @click="handleMoreAbout">{{$t('home.moreAbout')}} ></a>
-        </div> -->
 
         <div class="in-progress"
           v-if="homeBargainList.length>0">
@@ -455,8 +344,8 @@ export default {
       }
     },
     goPageTop() {
-       try {
-         this.$refs.homeContainer.scroll(0, 0);
+      try {
+        this.$refs.homeContainer.scroll(0, 0);
       } catch (error) {
         console.warn("scroll方法失效: ", error);
         this.$refs.homeContainer.scrollTop = 0;
@@ -546,7 +435,7 @@ export default {
     },
     // 更多砍价点击
     handleMoreAbout() {
-        this.$gaSend({
+      this.$gaSend({
         eventCategory: "首页_更多砍价",
         eventAction: "点击"
       });

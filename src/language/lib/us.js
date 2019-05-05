@@ -26,13 +26,13 @@ export default {
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Your friends help you save',
         goBuyNow: 'Go buy now',
-        fenxiangzhuang: require('@/assets/images/fenxiangzhuang.png'),
+        fenxiangzhuang: '/static/images/fenxiangzhuang.png',
     },
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Share to friends and you can get freebies faster.',
         helpYourselfCutDown: 'Help yourself cut down',
-        shareBackground: require('@/assets/images/share-background.png'),
-        copylink: require('@/assets/images/copylink.png'),
+        shareBackground: '/static/images/share-background.png',
+        copylink: '/static/images/copylink.png',
     },
     commodityItem: {
         cashBack: 'Cash Back',
@@ -43,8 +43,8 @@ export default {
     dialogSharingMakes: {
         shareToYourFriends: 'Share to your friends.',
         youWillGainBonusIfYourFriendsBuyIt: 'You will gain bonus if your friends buy it.',
-        fenxiangzhuanba: require('@/assets/images/fenxiangzhuanba.png'),
-        copylink: require('@/assets/images/copylink.png'),
+        fenxiangzhuanba: '/static/images/fenxiangzhuanba.png',
+        copylink: '/static/images/copylink.png',
     },
     dialogBidPriceCompleted: {
         congratulationsOnCompletingTheBargain: 'Congratulations on completing the bargain!',
@@ -53,7 +53,7 @@ export default {
     },
     dialogLoginSelect: {
         signInCanGetRp_5000PhoneBill: 'Sign in can get Rp 5000 phone bill !',
-        welcomeToIstarbuyWorld:'Welcome to Istarbuy world!',
+        welcomeToIstarbuyWorld: 'Welcome to Istarbuy world!',
         Send: 'Send',
         signInRegister: 'Sign in / Register',
         otherWaysToLogIn: 'Other ways to log in',
@@ -77,10 +77,10 @@ export default {
         income: 'Income',
     },
     dialogOldUsersHelpCutSuccessfully: {
-        forBargainSucess: require('@/assets/images/forBargain-sucess.png'),
+        forBargainSucess: '/static/images/forBargain-sucess.png',
     },
     dialogPotongSendiri: {
-        zikanyidaotanchuang: require('@/assets/images/zikanyidaotanchuang.png'),
+        zikanyidaotanchuang: '/static/images/zikanyidaotanchuang.png',
     },
 
     /************************ 组件  end *****************************************************/
@@ -88,30 +88,19 @@ export default {
     /************************ 页面  start *****************************************************/
     home: {
         ongoingFreebies: 'Ongoing Freebies',
-        tawarMenawar:'Bargaining',
+        tawarMenawar: 'Bargaining',
         moreAbout: 'More',
-        complete:'complete',
+        complete: 'complete',
         copyright_2019Istarbuy: 'Copyright © 2019 Istarbuy',
         privacyPolicy: 'Privacy Policy',
         tCs: 'T&Cs',
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
-        gengduotop: require('@/assets/images/gengduotop.png'),
-        goTopBtn: require('@/assets/images/top.png'),
+        gengduotop: '/static/images/gengduotop.png',
+        goTopBtn: '/static/images/top.png',
     },
-    userGuidance:{
-        imagesList:[
-            require('@/assets/images/user_guidance/us-yindaoye1.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye2.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye3.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye4.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye5.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye6.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye7.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye8.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye9.jpg'),
-            require('@/assets/images/user_guidance/us-yindaoye10.jpg')
-        ],
+    userGuidance: {
+        imagesList: ['/static/images/user_guidance/us-yindaoye1.jpg', '/static/images/user_guidance/us-yindaoye2.jpg', '/static/images/user_guidance/us-yindaoye3.jpg', '/static/images/user_guidance/us-yindaoye4.jpg', '/static/images/user_guidance/us-yindaoye5.jpg', '/static/images/user_guidance/us-yindaoye6.jpg', '/static/images/user_guidance/us-yindaoye7.jpg', '/static/images/user_guidance/us-yindaoye8.jpg', '/static/images/user_guidance/us-yindaoye9.jpg', '/static/images/user_guidance/us-yindaoye10.jpg'],
     },
     bargain: {
         sent: 'Sent',
@@ -129,7 +118,7 @@ export default {
         gettingFreebies: 'Getting Freebies',
         pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
         failedToGetSharingInformation: 'Failed to get sharing information',
-        xingzhuang: require('@/assets/images/xingzhuang.png'),
+        xingzhuang: '/static/images/xingzhuang.png',
     },
     isBargainingList: {
         toBuy: 'To Buy',
@@ -137,8 +126,8 @@ export default {
         cut: 'cut',
         goOn: 'Go On',
         toBuy: 'To Buy',
-        bargainFinishBanner: require('@/assets/images/bargain-finish-banner.png'),
-        barginActiveBanner: require('@/assets/images/bargin-active-banner.png'),
+        bargainFinishBanner: '/static/images/bargain-finish-banner.png',
+        barginActiveBanner: '/static/images/bargin-active-banner.png',
     },
     forBargain: {
         cheaperNow: 'cheaper now',
@@ -162,8 +151,8 @@ export default {
         afterYourFriendOrder: 'After your friend order, you will get',
         rewardsOnYourAccount: 'rewards on your account',
         alsoTakeItForFree: 'Also take it for free',
-        forBargainBanner: require('@/assets/images/forBargain-banner.png'),
-        xingzhuang: require('@/assets/images/xingzhuang.png'),
+        forBargainBanner: '/static/images/forBargain-banner.png',
+        xingzhuang: '/static/images/xingzhuang.png',
     },
     purchase: {
         receiver: 'Receiver',
@@ -195,7 +184,7 @@ export default {
         cancelText: 'Cancel',
         determine: 'Determine',
         addAddress: 'Add address',
-        alamatLengkap: 'Alamat lengkap (jalan, nomor rumah)',
+        alamatLengkap: 'Alamat lengkap (jalan, nomor rumah  ',
         zipCode: 'Zip code',
         confirm: 'Confirm',
         pilihAlamatPengiriman: 'Pilih alamat pengiriman',
@@ -206,7 +195,7 @@ export default {
     },
     paymentSuccess: {
         successTit: 'Congratulations, you have successfully paid!',
-        loveproducts: require('@/assets/images/loveproducts.png'),
+        loveproducts: '/static/images/loveproducts.png',
     },
     my: {
         VIPMember: ' VIP Member',
@@ -238,7 +227,7 @@ export default {
         contactUsBy: 'Contact us by',
         iKnow: 'I know',
         orderNumber: 'Order Number',
-        shipmentNumber:'Shipment Number',
+        shipmentNumber: 'Shipment Number',
         customerService: 'Customer Service',
         pendingPayment: 'Pending payment',
         please: 'Please',
@@ -248,22 +237,22 @@ export default {
     revenueDetails: {
         revenue: 'Revenue',
         expenses: 'Expenses',
-        rejectedHasViolatedUserRules:"rejected: Has violated user rules"
+        rejectedHasViolatedUserRules: 'rejected: Has violated user rules',
     },
     Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: How long can I receive the goods?',
         da1: 'A: 3-15 Days.',
         whenCanIWithdrawCash: 'Q: When can I withdraw cash？',
-        da2: require('@/assets/images/withdrawRule.png'),
+        da2: '/static/images/withdrawRule.png',
         shareEarn: 'Q: Share & Earn',
         da3: `A: Invite your friends to join Istarbuy, and you will get referral bonus.
               Sharing Istarbuy to one or multiple friends.
               Copy & paste the invite link to your friends.`,
         theWayAsFollow: 'Q: You can contact us in the way as follow',
         da4: `A: ① Facebook fan page: @Lovingistarbuy  ② LINE: Istarbuy  ③ WeChat: Istarbuy`,
-        theme: require('@/assets/images/tutorial/theme.png'),
-        commonProblem: require('@/assets/images/tutorial/commonProblem.png'),
-        contactUs: require('@/assets/images/tutorial/contact-us.png'),
+        theme: '/static/images/tutorial/theme.png',
+        commonProblem: '/static/images/tutorial/commonProblem.png',
+        contactUs: '/static/images/tutorial/contact-us.png',
     },
     withdrawImmediately: {
         currentBalance: 'Current balance',
@@ -293,13 +282,15 @@ export default {
         pleaseCheckItOut: 'Your withdrawal request has been initiated, please check it out!',
         pleaseAskCustomerService: 'If you have any questions, please ask customer service',
         iKnow: 'I know',
-        withdrawRule: require('@/assets/images/withdrawRule.png'),
-        cashWithdrawalRuleDes:[
+        withdrawRule: '/static/images/withdrawRule.png',
+        cashWithdrawalRuleDes: [
             `1. The first withdrawal of Rp5000, the premise of 14:30  on the same day, will arrive before 00:00 on the same day, after 14:30  will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient`,
             `2. In case of holidays, the delivery time will be postponed.`,
             `3. One withdrawal account can only be bound to one user id , multiple bindings will be considered invalid.One withdrawal account can only get one new user bag -Rp5000`,
             `4.Now we only support phone charging  to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756`,
-            `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`
-        ]
+            `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`,
+        ],
+        accountInformationCannotBeEmpty:"Account information cannot be empty",
+        inconsistentAccountsAreEnteredTwice:"Inconsistent accounts are entered twice"
     },
 };

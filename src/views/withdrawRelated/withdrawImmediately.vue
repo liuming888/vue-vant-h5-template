@@ -176,7 +176,11 @@
     </div>
 
     <div class="cash-out-btn"
-      @click.stop="goApplyWithdraw">{{$t('withdrawImmediately.cashOut')}}</div>
+      @click.stop="goApplyWithdraw"
+      v-if="withdrawParam.amount>0">{{$t('withdrawImmediately.cashOut')}}</div>
+    <div v-else
+      class="cash-out-btn no">{{$t('withdrawImmediately.cashOut')}}</div>
+
     <dialog-default :info="info"
       :dialogVisible="dialogVisible"
       noCancle
@@ -261,7 +265,9 @@ export default {
           this.rule[curObj.index].amount - this.rule[curObj.index - 1].amount; // 位于区间的金额差
         let num = withdrawAmount - this.rule[curObj.index - 1].amount;
         // 当前的前一项在数组中索引除以this.rule.length-2 代表占的总进度条的百分比   再加上   。。。        再乘以100  就刚好是进度条的比例了
-        W = ((curObj.index - 1) /(this.rule.length-2) + (num / nums) * 0.1) * 100;
+        W =
+          ((curObj.index - 1) / (this.rule.length - 2) + (num / nums) * 0.1) *
+          100;
       }
       console.log("当今进度条比例为", W);
       return { width: W + "%" };
@@ -339,12 +345,15 @@ export default {
     },
     async goApplyWithdraw() {
       const { account_name, account_no } = this.withdrawParam;
+
       if (!account_name || !account_no) {
         // Dialog.alert({
         //   message: "Account information cannot be empty",
         //   confirmButtonText: "ok"
         // });
-        this.$toast("Account information cannot be empty");
+        this.$toast(
+          this.$t("withdrawImmediately.accountInformationCannotBeEmpty")
+        );
         return;
       }
       if (account_name !== account_no) {
@@ -352,7 +361,9 @@ export default {
         //   message: "Inconsistent accounts are entered twice",
         //   confirmButtonText: "ok"
         // });
-        this.$toast("Inconsistent accounts are entered twice");
+        this.$toast(
+          this.$t("withdrawImmediately.inconsistentAccountsAreEnteredTwice")
+        );
         return;
       }
 

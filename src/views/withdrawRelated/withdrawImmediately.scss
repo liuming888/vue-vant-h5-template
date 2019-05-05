@@ -11,6 +11,10 @@
     font-size: 32px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
+
+    &.no{
+        background:#e2e2e2;
+    }
 }
 
 .withdrawImmediately-container {

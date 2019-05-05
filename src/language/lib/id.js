@@ -26,13 +26,13 @@ export default {
     dialogShareEarningEntry: {
         yourFriendsHelpYouSave: 'Teman membantu Anda menghemat',
         goBuyNow: 'Beli sekarang',
-        fenxiangzhuang: require('@/assets/images/id-fenxiangzhuang.png'),
+        fenxiangzhuang: '/static/images/id-fenxiangzhuang.png',
     },
     dialogSharingFriends: {
         shareToFriendsAndYouCanGetFreebiesFaster: 'Tip: Bagikan kepada teman dan anda akan mendapatkan freebies lebih cepat.',
         helpYourselfCutDown: 'Bantu dirimu mengurangi',
-        shareBackground: require('@/assets/images/id-share-background.png'),
-        copylink: require('@/assets/images/id-copylink.png'),
+        shareBackground: '/static/images/id-share-background.png',
+        copylink: '/static/images/id-copylink.png',
     },
     commodityItem: {
         cashBack: 'Uang kembali',
@@ -43,8 +43,8 @@ export default {
     dialogSharingMakes: {
         shareToYourFriends: 'Bagikan pada teman-teman. anda akan mendapatkan bonus jika teman membeli itu.',
         youWillGainBonusIfYourFriendsBuyIt: '',
-        fenxiangzhuanba: require('@/assets/images/id-fenxiangzhuanba.png'),
-        copylink: require('@/assets/images/id-copylink.png'),
+        fenxiangzhuanba: '/static/images/id-fenxiangzhuanba.png',
+        copylink: '/static/images/id-copylink.png',
     },
     dialogBidPriceCompleted: {
         congratulationsOnCompletingTheBargain: 'Selamat telah menyelesaikan penawaran!',
@@ -77,10 +77,10 @@ export default {
         income: 'Income',
     },
     dialogOldUsersHelpCutSuccessfully: {
-        forBargainSucess: require('@/assets/images/id-forBargain-sucess.png'),
+        forBargainSucess: '/static/images/id-forBargain-sucess.png',
     },
     dialogPotongSendiri: {
-        zikanyidaotanchuang: require('@/assets/images/id-zikanyidaotanchuang.png'),
+        zikanyidaotanchuang: '/static/images/id-zikanyidaotanchuang.png',
     },
     /************************ 组件  end *****************************************************/
 
@@ -95,22 +95,11 @@ export default {
         tCs: 'T&Cs',
         aboutUs: 'About Us',
         contactUs: 'Contact Us',
-        gengduotop: require('@/assets/images/id-gengduotop.png'),
-        goTopBtn: require('@/assets/images/id-top.png'),
+        gengduotop: '/static/images/id-gengduotop.png',
+        goTopBtn: '/static/images/id-top.png',
     },
-     userGuidance:{
-        imagesList:[
-            require('@/assets/images/user_guidance/id-yindaoye1.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye2.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye3.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye4.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye5.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye6.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye7.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye8.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye9.jpg'),
-            require('@/assets/images/user_guidance/id-yindaoye10.jpg')
-        ],
+    userGuidance: {
+        imagesList: ['/static/images/user_guidance/id-yindaoye1.jpg', '/static/images/user_guidance/id-yindaoye2.jpg', '/static/images/user_guidance/id-yindaoye3.jpg', '/static/images/user_guidance/id-yindaoye4.jpg', '/static/images/user_guidance/id-yindaoye5.jpg', '/static/images/user_guidance/id-yindaoye6.jpg', '/static/images/user_guidance/id-yindaoye7.jpg', '/static/images/user_guidance/id-yindaoye8.jpg', '/static/images/user_guidance/id-yindaoye9.jpg', '/static/images/user_guidance/id-yindaoye10.jpg'],
     },
     bargain: {
         sent: 'terkirim gratis',
@@ -121,14 +110,14 @@ export default {
         availableForPurchase: 'Tersedia untuk pembelian',
         takeItFree: 'hanya Rp',
         shareFriendsForFreebies: 'Tim tawar-menawar untuk dapat freebies',
-        cutAKnife: 'Cut a knife',
+        cutAKnife: 'Potong harganya',
         buyNow: 'beli sekarang',
         BuyNow: 'Beli sekarang',
         getAFreebie: 'Dapatkan freebie',
         gettingFreebies: 'Getting Freebies',
         pleaseReturnToTheHomepage: 'Please return to the homepage and re-select the product to enter !',
         failedToGetSharingInformation: 'Failed to get sharing information',
-        xingzhuang: require('@/assets/images/id-xingzhuang.png'),
+        xingzhuang: '/static/images/id-xingzhuang.png',
     },
     isBargainingList: {
         toBuy: 'Membeli',
@@ -136,8 +125,8 @@ export default {
         cut: 'memotong',
         goOn: 'Lanjutkan',
         toBuy: 'Beli',
-        bargainFinishBanner: require('@/assets/images/id-bargain-finish-banner.png'),
-        barginActiveBanner: require('@/assets/images/id-bargin-active-banner.png'),
+        bargainFinishBanner: '/static/images/id-bargain-finish-banner.png',
+        barginActiveBanner: '/static/images/id-bargin-active-banner.png',
     },
     forBargain: {
         cheaperNow: 'lebih murah sekarang',
@@ -161,8 +150,8 @@ export default {
         afterYourFriendOrder: 'Setelah teman Anda memesan, Anda akan mendapatkan',
         rewardsOnYourAccount: ' hadiah di akun Anda',
         alsoTakeItForFree: 'Ambil gratis juga',
-        forBargainBanner: require('@/assets/images/id-forBargain-banner.png'),
-        xingzhuang: require('@/assets/images/id-xingzhuang.png'),
+        forBargainBanner: '/static/images/id-forBargain-banner.png',
+        xingzhuang: '/static/images/id-xingzhuang.png',
     },
     purchase: {
         receiver: 'Penerima',
@@ -194,7 +183,7 @@ export default {
         cancelText: 'Batalkan',
         determine: 'Menentukan',
         addAddress: 'Tambahkan alamat',
-        alamatLengkap: 'Alamat lengkap (jalan, nomor rumah)',
+        alamatLengkap: 'Alamat lengkap (jalan, nomor rumah',
         zipCode: 'Zip code',
         confirm: 'Konfirmasi',
         pilihAlamatPengiriman: 'Pilih alamat pengiriman',
@@ -205,7 +194,7 @@ export default {
     },
     paymentSuccess: {
         successTit: 'Selamat, Anda telah berhasil membayar!',
-        loveproducts: require('@/assets/images/id-loveproducts.png'),
+        loveproducts: '/static/images/id-loveproducts.png',
     },
     my: {
         VIPMember: ' anggota VIP',
@@ -247,22 +236,22 @@ export default {
     revenueDetails: {
         revenue: 'Pendapatan',
         expenses: 'Beban',
-        rejectedHasViolatedUserRules:"ditolak：Pelanggaran aturan pengguna"
+        rejectedHasViolatedUserRules: 'ditolak：Pelanggaran aturan pengguna',
     },
     Tutorial: {
         howLongCanIReceiveTheGoods: 'Q: Berapa lama saya bisa menerima barang?',
         da1: 'A: 13-15 hari.',
         whenCanIWithdrawCash: 'Q: Kapan saya bisa menarik uang tunai？',
-        da2: require('@/assets/images/withdrawRule.png'),
+        da2: '/static/images/withdrawRule.png',
         shareEarn: 'Q: Bagikan & Dapatkan',
         da3: `A: Undang teman Anda untuk bergabung dengan Istarbuy, dan Anda akan mendapatkan bonus referensi.
               Berbagi Istarbuy kepada satu atau beberapa teman.
               Salin & tempel tautan undangan kepada teman Anda.`,
         theWayAsFollow: 'Q: Anda dapat menghubungi kami dengan cara berikut',
         da4: `① Halaman penggemar Facebook: @Lovingistarbuy  ② LINE: Istarbuy  ③ WeChat: Istarbuy`,
-        theme: require('@/assets/images/tutorial/id-theme.png'),
-        commonProblem: require('@/assets/images/tutorial/id-commonProblem.png'),
-        contactUs: require('@/assets/images/id-contact-us.png'),
+        theme: '/static/images/tutorial/id-theme.png',
+        commonProblem: '/static/images/tutorial/id-commonProblem.png',
+        contactUs: '/static/images/tutorial/id-contact-us.png',
     },
     withdrawImmediately: {
         currentBalance: 'Saldo saat ini',
@@ -292,7 +281,7 @@ export default {
         pleaseCheckItOut: 'Permintaan penarikan Anda telah dimulai, silakan periksa!',
         pleaseAskCustomerService: 'Jika Anda ada yang tidak mengerti, silakan tanyakan pada layanan pelanggan',
         iKnow: 'Saya mengerti',
-        withdrawRule: require('@/assets/images/id-withdrawRule.png'),
+        withdrawRule: '/static/images/id-withdrawRule.png',
         cashWithdrawalRuleDes: [
             `1. The first withdrawal of Rp5000, the premise of 14:30  on the same day, will arrive before 00:00 on the same day, after 14:30  will arrive before 00:00 the next day, if you encounter peak period, may delay the account, please be patient`,
             `2. In case of holidays, the delivery time will be postponed.`,
@@ -300,6 +289,8 @@ export default {
             `4.Now we only support phone charging  to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756`,
             `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`,
         ],
+        accountInformationCannotBeEmpty: 'Informasi akun tidak boleh kosong',
+        inconsistentAccountsAreEnteredTwice: 'Akun yang tidak konsisten dimasukkan dua kali',
     },
     /************************ 页面 end *****************************************************/
 };
