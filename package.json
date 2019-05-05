@@ -11,12 +11,12 @@
     "build:prod": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 VUE_APP_FBID=2292102501067089 vue-cli-service build --modern",
     "build:newprod": "cross-env VUE_APP_ENV=newProduction VUE_APP_URL=https://www.lovingistarbuy.com VUE_APP_PXID=2408818452475633 VUE_APP_FBID=856321351386952 vue-cli-service build --modern --dest new_dist",
     "build:apk": "cross-env VUE_APP_ENV=production VUE_APP_URL=https://www.istarbuy.com VUE_APP_PXID=318284192219723 VUE_APP_CUR=apk VUE_APP_FBID=2292102501067089 vue-cli-service build",
-    "build:allprod":"npm run build:prod && npm run build:newprod",
-    "git:dev":"git add -A && git commit -am 打个dev包 && git push",
-    "git:test":"git add -A && git commit -am 打个test包 && git push",
-    "git:oldprod":"git add -A && git commit -am 打个旧域名正式包 && git push",
-    "git:newprod":"git add -A && git commit -am 打个新域名正式包 && git push",
-    "git:allprod":"git add -A && git commit -am 打个最新正式包 && git push",
+    "build:allprod": "npm run build:prod && npm run build:newprod",
+    "git:dev": "git add -A && git commit -am 打个dev包 && git push",
+    "git:test": "git add -A && git commit -am 打个test包 && git push",
+    "git:oldprod": "git add -A && git commit -am 打个旧域名正式包 && git push",
+    "git:newprod": "git add -A && git commit -am 打个新域名正式包 && git push",
+    "git:allprod": "git add -A && git commit -am 打个最新正式包 && git push",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
     "terser-webpack-plugin": "^1.2.3",
+    "vconsole": "^3.3.0",
     "vue-template-compiler": "^2.5.21",
     "web-push": "^3.3.3"
   }
