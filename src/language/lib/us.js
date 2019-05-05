@@ -290,5 +290,7 @@ export default {
             `4.Now we only support phone charging  to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756`,
             `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`,
         ],
+        accountInformationCannotBeEmpty:"Account information cannot be empty",
+        inconsistentAccountsAreEnteredTwice:"Inconsistent accounts are entered twice"
     },
 };
