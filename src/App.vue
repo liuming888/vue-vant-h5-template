@@ -13,14 +13,14 @@
   z-index: 12000;
   background: rgba(0, 0, 0, 0.73);
 
-   .van-loading {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
+  .van-loading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
 }
 </style>
 
@@ -28,10 +28,14 @@
 
 <template>
   <div id="app">
+    <div style="height:50px;"
+      id="pwaT"
+      v-show="showpwaCeshiPushInfo">pwa ceshi push info</div>
+
     <div class="loading-box"
       v-show="loaddingNum>0"
       @click.stop>
-      <van-loading color="#D30C05"/>
+      <van-loading color="#D30C05" />
     </div>
 
     <zdd-layout></zdd-layout>
@@ -39,7 +43,7 @@
 </template>
 
 <script>
-import { Loading } from 'vant';
+import { Loading } from "vant";
 import axios from "axios";
 import { FBConfig } from "@/config/index.js";
 import zddMain from "@/components/layout/zddMain.vue";
@@ -48,12 +52,18 @@ import { login, refreshToken } from "@/server/user.js";
 export default {
   name: "App",
   components: {
-    [Loading.name]:Loading,
-    "zdd-layout": zddMain,
+    [Loading.name]: Loading,
+    "zdd-layout": zddMain
   },
   computed: {
-    loaddingNum(){
-      return this.$store.state.loaddingNum
+    loaddingNum() {
+      return this.$store.state.loaddingNum;
+    },
+    /**
+     * @description:   显示前端直接发起浏览器消息推送  测试点击的元素
+     */
+    showpwaCeshiPushInfo() {
+      return this.$route.query.pwa === "show";
     }
   },
   created() {
@@ -90,7 +100,6 @@ export default {
         FB.init(FBConfig);
         FB.AppEvents.logPageView();
         console.warn("已经初始化FB了");
-
 
         /* let checkResInfo = await window.$faceBookApi.checkFBLoginState();
         console.log("是否已经登录了checkResInfo: ", checkResInfo);
