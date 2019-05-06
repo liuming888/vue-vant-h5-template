@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 15:12:15
+ * @LastEditTime: 2019-05-06 15:25:28
  */
 // import $request from './api/request.js';
 
@@ -239,7 +239,7 @@ function askPermission() {
 /**
  * @description: Service Worker : Push API （移动端兼容些）
  */
-function showNotification(tit, opt) {
+function showNotification(oldRegistration,tit, opt) {
     askPermission().then(function(result) {
         if (result === 'granted') {
             navigator.serviceWorker.ready.then(function(registration) {
@@ -283,6 +283,7 @@ function pushInfo(registration,tit, opt) {
             console.warn('走Service Worker : Push API Api推送');
             // Service Worker : Push API （移动端兼容些）
             showNotification(registration,tit, opt);
+            console.log('tit, opt: ', tit, opt);
         } else {
             console.warn('走Notification Api推送');
             //  Notification Api (PC端兼容些)
@@ -319,8 +320,10 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         .then(function(result) {
             // console.log("67777777777777777")
             var registration = result[0];
-            var pwaPush=window.pwaPush = function(tit, opt) {  // *****************************************************推送消息
+            var pwaPush=window.pwaPush = function(obj) {  // *****************************************************推送消息
                 console.warn('点击了');
+                var tit=obj.tit;
+                var opt=obj.opt;
                 // 前端直接推送消息（pc和移动都支持）
                 pushInfo(registration,tit, opt);
             };
