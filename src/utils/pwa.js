@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 15:56:43
+ * @LastEditTime: 2019-05-06 16:18:54
  */
 // import $request from './api/request.js';
 
@@ -328,8 +328,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             /*********************************** 前端直接推送消息主要逻辑 start ************************************************************/
             var pwaPush = (window.pwaPush = function(obj) {
                 console.warn('点击了');
-                var tit = obj.tit;
-                var opt = obj.opt;
+                var tit = obj && obj.tit;
+                var opt = obj && obj.opt;
                 // 前端直接推送消息（pc和移动都支持）
                 pushInfo(tit, opt);
             });
@@ -373,4 +373,18 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
      */
     notification.addEventListener('click', clickAction);
     /******************************************** 点击消息通知框时的操作 end  ************************************************/
+
+    /**
+     * @description:   判断用户进入和离开当前页面
+     */
+    document.addEventListener('visibilitychange', function() {
+        var isHidden = document.hidden;
+
+        if (isHidden) {
+            console.log("'死鬼，你去哪儿了'");
+            window.pwaPush();
+        } else {
+            console.log('你终于回来了啊');
+        }
+    });
 }
