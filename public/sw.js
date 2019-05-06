@@ -159,7 +159,7 @@ self.addEventListener('notificationclick', function(e) {
                 if (!clients || clients.length === 0) {
                     console.warn('不存在该client,默认打开lovingistarbuy');
                     // 当不存在client时，打开该网站
-                    self.clients.openWindow && self.clients.openWindow('https://www.lovingistarbuy.com');
+                    self.clients.openWindow && self.clients.openWindow('/');
                     return;
                 }
                 // 切换到该站点的tab
