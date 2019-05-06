@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 14:48:15
+ * @LastEditTime: 2019-05-06 15:12:15
  */
 // import $request from './api/request.js';
 
@@ -239,19 +239,11 @@ function askPermission() {
 /**
  * @description: Service Worker : Push API （移动端兼容些）
  */
-function showNotification() {
-    // Notification.requestPermission(function(result) {
-    //     if (result === 'granted') {
-    //         navigator.serviceWorker.ready.then(function(registration) {
-    //             registration.showNotification(title, options);
-    //         });
-    //     }
-    // });
-
+function showNotification(tit, opt) {
     askPermission().then(function(result) {
         if (result === 'granted') {
             navigator.serviceWorker.ready.then(function(registration) {
-                registration.showNotification(title, options);
+                registration.showNotification(tit||title, opt||options);
             });
         }
     });
@@ -260,28 +252,19 @@ function showNotification() {
 /**
  * @description: Notification Api (PC端兼容些)
  */
-function notifyMe() {
+function notifyMe(tit, opt) {
     // 先检查浏览器是否支持
     if (!('Notification' in window)) {
         console.warn('浏览器不支持Notification API,直接使用Service Worker : Push API');
         throw '浏览器不支持Notification API';
     } else if (Notification.permission === 'granted') {
         // 检查用户是否同意接受通知
-        // If it's okay let's create a notification
-        notification = new Notification(title, options);
+        notification = new Notification(tit||title, opt||options);
     } else if (Notification.permission !== 'denied') {
-        // 否则我们需要向用户获取权限
-        // Notification.requestPermission(function(permission) {
-        //     // 如果用户同意，就可以向他们发送通知
-        //     if (permission === 'granted') {
-        //         notification = new Notification(title, options);
-        //     }
-        // });
-
         askPermission().then(function(permission) {
             // 如果用户同意，就可以向他们发送通知
             if (permission === 'granted') {
-                notification = new Notification(title, options);
+                notification = new Notification(tit||title, opt||options);
             }
         });
     }
@@ -293,27 +276,35 @@ function notifyMe() {
 /**
  * @description: 组合使用Push & Notification（消息推送与提醒）
  */
-function pushInfo(registration) {
+function pushInfo(registration,tit, opt) {
     var curIsPc = isPC();
     try {
         if (!curIsPc) {
             console.warn('走Service Worker : Push API Api推送');
             // Service Worker : Push API （移动端兼容些）
-            showNotification(registration);
+            showNotification(registration,tit, opt);
         } else {
             console.warn('走Notification Api推送');
             //  Notification Api (PC端兼容些)
-            notifyMe();
+            notifyMe(tit, opt);
         }
     } catch (error) {
         console.log('推送消息错误', error);
         // 默认使用Service Worker : Push API
-        showNotification(registration);
+       showNotification(registration,tit, opt);
     }
 }
 
+
+
+
+
+
+
+
+
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-    window.getPushReq = askPermission; // 获取权限方法
+    window.getPushReq = askPermission; // **************************************************************获取权限方法
 
     var publicKey = 'BFikkgYxQH1ymWOzWhFaVduuCcA3VGLSu7vCh_bMQfF22LLINmI_r-8241pEBJeZqh25dUN_zlRewBWgU3MLhEs';
     // 注册service worker
@@ -328,10 +319,10 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         .then(function(result) {
             // console.log("67777777777777777")
             var registration = result[0];
-            var pwaPush=window.pwaPush = function() {  // 推送消息
+            var pwaPush=window.pwaPush = function(tit, opt) {  // *****************************************************推送消息
                 console.warn('点击了');
                 // 前端直接推送消息（pc和移动都支持）
-                pushInfo(registration);
+                pushInfo(registration,tit, opt);
             };
             document.querySelector('#pwaT').addEventListener('click', pwaPush);
 
