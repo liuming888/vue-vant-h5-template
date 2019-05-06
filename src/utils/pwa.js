@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 15:25:28
+ * @LastEditTime: 2019-05-06 15:32:10
  */
 // import $request from './api/request.js';
 
@@ -167,13 +167,16 @@ function subscribeUserToPush(registration, publicKey) {
         userVisibleOnly: true,
         applicationServerKey: window.urlBase64ToUint8Array(publicKey),
     };
-    return registration.pushManager.subscribe(subscribeOptions).then(function(pushSubscription) {
-        console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-        return pushSubscription;
-    }).catch(function(err){
-        console.warn('异常err: ', err);
-        return false;
-    });
+    return registration.pushManager
+        .subscribe(subscribeOptions)
+        .then(function(pushSubscription) {
+            console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+            return pushSubscription;
+        })
+        .catch(function(err) {
+            console.warn('异常err: ', err);
+            return false;
+        });
 }
 
 /**
@@ -187,7 +190,7 @@ function sendSubscriptionToServer(body, url) {
     var httpPath = getUrl(env);
     console.log('httpPath------------------------------------------: ', httpPath);
     // url = httpPath + (url || '/check');
-    url = "/pwa/subscription";  // 自己本地测试
+    url = '/pwa/subscription'; // 自己本地测试
     return new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.timeout = 60000;
@@ -239,11 +242,11 @@ function askPermission() {
 /**
  * @description: Service Worker : Push API （移动端兼容些）
  */
-function showNotification(oldRegistration,tit, opt) {
+function showNotification(tit, opt) {
     askPermission().then(function(result) {
         if (result === 'granted') {
             navigator.serviceWorker.ready.then(function(registration) {
-                registration.showNotification(tit||title, opt||options);
+                registration.showNotification(tit || title, opt || options);
             });
         }
     });
@@ -259,12 +262,12 @@ function notifyMe(tit, opt) {
         throw '浏览器不支持Notification API';
     } else if (Notification.permission === 'granted') {
         // 检查用户是否同意接受通知
-        notification = new Notification(tit||title, opt||options);
+        notification = new Notification(tit || title, opt || options);
     } else if (Notification.permission !== 'denied') {
         askPermission().then(function(permission) {
             // 如果用户同意，就可以向他们发送通知
             if (permission === 'granted') {
-                notification = new Notification(tit||title, opt||options);
+                notification = new Notification(tit || title, opt || options);
             }
         });
     }
@@ -276,13 +279,13 @@ function notifyMe(tit, opt) {
 /**
  * @description: 组合使用Push & Notification（消息推送与提醒）
  */
-function pushInfo(registration,tit, opt) {
+function pushInfo(tit, opt) {
     var curIsPc = isPC();
     try {
         if (!curIsPc) {
             console.warn('走Service Worker : Push API Api推送');
             // Service Worker : Push API （移动端兼容些）
-            showNotification(registration,tit, opt);
+            showNotification(tit, opt);
             console.log('tit, opt: ', tit, opt);
         } else {
             console.warn('走Notification Api推送');
@@ -292,17 +295,9 @@ function pushInfo(registration,tit, opt) {
     } catch (error) {
         console.log('推送消息错误', error);
         // 默认使用Service Worker : Push API
-       showNotification(registration,tit, opt);
+        showNotification(tit, opt);
     }
 }
-
-
-
-
-
-
-
-
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     window.getPushReq = askPermission; // **************************************************************获取权限方法
@@ -312,41 +307,33 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     registerServiceWorker('/sw.js')
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
-            // 开启该客户端的服务端消息推送订阅功能
-            // var res=subscribeUserToPush(registration, publicKey);
-
-            return Promise.all([registration/* ,res */]);
-        })
-        .then(function(result) {
-            // console.log("67777777777777777")
-            var registration = result[0];
-            var pwaPush=window.pwaPush = function(obj) {  // *****************************************************推送消息
-                console.warn('点击了');
-                var tit=obj.tit;
-                var opt=obj.opt;
-                // 前端直接推送消息（pc和移动都支持）
-                pushInfo(registration,tit, opt);
-            };
-            document.querySelector('#pwaT').addEventListener('click', pwaPush);
-
             /*********************************** 服务器推送消息主要逻辑 start ************************************************************/
-            if (result[1]) {
-                //  当一打开网页就请求权限时
-                var body = { subscription: result[1] };
-                // 为了方便之后的推送，为每个客户端简单生成一个标识
-                body.uniqueid = new Date().getTime();
-                console.log('uniqueid', body.uniqueid);
-                console.log('body---------------------', body);
-                // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
-                // return sendSubscriptionToServer(JSON.stringify(body));
-            }
+            // var res = subscribeUserToPush(registration, publicKey); // 开启该客户端的服务端消息推送订阅功能
+            // if (res) {
+            //     //  当一打开网页就请求权限时
+            //     var body = { subscription: res };
+            //     // 为了方便之后的推送，为每个客户端简单生成一个标识
+            //     body.uniqueid = new Date().getTime();
+            //     console.log('uniqueid', body.uniqueid);
+            //     console.log('body---------------------', body);
+            //     // 将生成的客户端订阅信息存储在自己的服务器上(得后台输出个接口)
+            //     // return sendSubscriptionToServer(JSON.stringify(body));
+            // }
             /*********************************** 服务器推送消息主要逻辑 end ************************************************************/
-        })
-        .then(function(res) {
-            console.log(res);
+
+            /*********************************** 前端直接推送消息主要逻辑 start ************************************************************/
+            var pwaPush = (window.pwaPush = function(obj) {
+                console.warn('点击了');
+                var tit = obj.tit;
+                var opt = obj.opt;
+                // 前端直接推送消息（pc和移动都支持）
+                pushInfo(tit, opt);
+            });
+            document.querySelector('#pwaT').addEventListener('click', pwaPush);
+            /*********************************** 前端直接推送消息主要逻辑 end ************************************************************/
         })
         .catch(function(err) {
-            console.warn("异常",err);
+            console.warn('异常', err);
         });
 
     /******************************************** 点击消息通知框时的操作 start  ************************************************/
