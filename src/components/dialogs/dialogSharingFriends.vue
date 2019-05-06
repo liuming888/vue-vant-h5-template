@@ -110,12 +110,6 @@
 
       <div class="share-types">
 
-        <!-- <div class="share-item">
-          <img v-lazy="require('@/assets/images/facbook.png')"
-            @click="share(mx_shareFacebook)">
-          <p>Facebook</p>
-        </div> -->
-
         <div class="share-item">
           <img v-lazy="require('@/assets/images/line.png')"
             @click="share(mx_shareLine)">
@@ -128,11 +122,18 @@
           <p>WhatsApp</p>
         </div>
 
-        <!-- <div class="share-item">
-          <img v-lazy="require('@/assets/images/messenger.png')"
-            @click="share(mx_shareMessenger)">
-          <p>Messenger</p>
-        </div> -->
+        <template v-if="mx_showFB">
+          <div class="share-item">
+            <img v-lazy="require('@/assets/images/messenger.png')"
+              @click="share(mx_shareMessenger)">
+            <p>Messenger</p>
+          </div>
+          <!-- <div class="share-item">
+            <img v-lazy="require('@/assets/images/facbook.png')"
+              @click="share(mx_shareFacebook)">
+            <p>Facebook</p>
+          </div> -->
+        </template>
 
       </div>
 
@@ -152,9 +153,9 @@
 
 <script>
 import share from "@/mixins/share.js";
-import fbInit from "@/mixins/fbInit.js";
+// import fbInit from "@/mixins/fbInit.js";
 export default {
-  mixins: [share, fbInit],
+  mixins: [share/* , fbInit */],
   name: "dialogSharingFriends",
   props: {
     dialogVisible: {

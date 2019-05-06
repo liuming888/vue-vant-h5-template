@@ -249,12 +249,6 @@
             @blur="mx_resizeWindow"
             :placeholder="$t('dialogLoginSelect.enterCodeSms')"
             v-model="authCode">
-
-          <!-- <span class="send"
-            v-if="!initCodeTime"
-            @click.stop="getCode">Send</span>
-          <span class="send"
-            v-else>{{initCodeTime}} s</span> -->
         </div>
       </div>
 
@@ -286,11 +280,11 @@
 <script>
 import axios from "axios";
 import { login, check_login, telLogin, sendCode } from "@/server/user.js";
-import fbInit from "@/mixins/fbInit.js";
+// import fbInit from "@/mixins/fbInit.js";
 import loadings from "@/mixins/loadings.js";
 export default {
   name: "dialogLoginSelect",
-  mixins: [fbInit, loadings],
+  mixins: [/* fbInit,  */loadings],
   data() {
     return {
       phone: "",
@@ -303,7 +297,7 @@ export default {
       return this.$store.state.dialogs.loginSelect.show;
     },
     /**
-     * @description: 显示FB相关（旧dsp投放的环境不显示）
+     * @description: 显示FB相关
      */
     showFB() {
       if (process.env.VUE_APP_ENV != "newProduction") {

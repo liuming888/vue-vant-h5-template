@@ -1,8 +1,7 @@
 /*
  * @Description: 分享组件相关的公共方法
- * @LastEditors: liuming
  * @Date: 2019-03-10 10:35:30
- * @LastEditTime: 2019-04-18 14:32:33
+ * @LastEditTime: 2019-05-06 14:30:49
  */
 import { FBConfig } from '@/config/index.js';
 import Clipboard from 'clipboard';
@@ -23,6 +22,16 @@ export default {
         this.mx_copyBtn = new Clipboard(this.$refs.copy);
     },
     methods: {
+        /**
+         * @description: 是否显示FB相关
+         */
+        mx_showFB() {
+            if (process.env.VUE_APP_ENV != 'newProduction') {
+                return true;
+            } else {
+                return false;
+            }
+        },
         /**
          * @description:  点击复制按钮后
          */

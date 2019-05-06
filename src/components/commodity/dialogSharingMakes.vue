@@ -17,10 +17,9 @@
 .share-box {
   width: 610px;
   height: 966px;
-  // background: url("~@/assets/images/fenxiangzhuanba.png") no-repeat 0 0/100%
-  //   100%;
+ 
   background-repeat: no-repeat;
-  background-size:100% 100%; 
+  background-size: 100% 100%;
   padding-top: 220px;
   box-sizing: border-box;
   position: relative;
@@ -147,9 +146,8 @@
     right: 0;
     margin: 0 auto;
     background: none;
-    // background: url("~@/assets/images/copylink.png") no-repeat 0 0/100% 100%;
     background-repeat: no-repeat;
-    background-size:100% 100%; 
+    background-size: 100% 100%;
   }
 
   .close-img {
@@ -171,8 +169,8 @@
     v-show="dialogVisible.show"
     @click.stop>
 
-    <div class="share-box" :style="{'background-image':`url(${$t('dialogSharingMakes.fenxiangzhuanba')})`}">
-      <!-- <h5 class="tit">Share with friends, friends buy up to <span>$29</span></h5> -->
+    <div class="share-box"
+      :style="{'background-image':`url(${$t('dialogSharingMakes.fenxiangzhuanba')})`}">
       <h5 class="tit">
         <p>{{$t('dialogSharingMakes.shareToYourFriends')}}</p>
         <p>{{$t('dialogSharingMakes.youWillGainBonusIfYourFriendsBuyIt')}}</p>
@@ -193,15 +191,8 @@
           </div>
         </div>
 
-        <!-- <div class="share-to">Share To</div> -->
 
         <div class="share-types">
-
-          <!-- <div class="share-item">
-            <img v-lazy="require('@/assets/images/facbook.png')"
-              @click="share(mx_shareFacebook)">
-            <p>Facebook</p>
-          </div> -->
 
           <div class="share-item">
             <img v-lazy="require('@/assets/images/line.png')"
@@ -209,17 +200,24 @@
             <p>LINE</p>
           </div>
 
-          <!-- <div class="share-item">
-            <img v-lazy="require('@/assets/images/messenger.png')"
-              @click="share(mx_shareMessenger)">
-            <p>Messenger</p>
-          </div> -->
-
           <div class="share-item">
             <img v-lazy="require('@/assets/images/whatsapp.png')"
               @click="share(mx_shareWhatsapp)">
             <p>WhatsApp</p>
           </div>
+
+          <template v-if="mx_showFB">
+            <div class="share-item">
+              <img v-lazy="require('@/assets/images/messenger.png')"
+                @click="share(mx_shareMessenger)">
+              <p>Messenger</p>
+            </div>
+            <!-- <div class="share-item">
+            <img v-lazy="require('@/assets/images/facbook.png')"
+              @click="share(mx_shareFacebook)">
+            <p>Facebook</p>
+          </div> -->
+          </template>
 
         </div>
 
@@ -240,9 +238,9 @@
 
 <script>
 import share from "@/mixins/share.js";
-import fbInit from "@/mixins/fbInit.js";
+// import fbInit from "@/mixins/fbInit.js";
 export default {
-  mixins: [share, fbInit],
+  mixins: [share/* , fbInit */],
   name: "dialogSharingMakes", // 点击分享赚弹起浮窗
   props: {
     dialogVisible: {
