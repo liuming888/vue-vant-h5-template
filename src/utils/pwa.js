@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 15:32:10
+ * @LastEditTime: 2019-05-06 15:56:43
  */
 // import $request from './api/request.js';
 
@@ -126,8 +126,12 @@ var title = 'ISTARBUY';
 var options = {
     dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
     body: 'Buy your favorite products with your friends.',
-    // icon: '/static/icons/istarbuy-128.png',
-    icon: VUE_APP_URL + BASE_URL + 'static/icons/istarbuy-128.png',
+    icon: BASE_URL + 'static/icons/istarbuy-128.png',
+    badge: BASE_URL + 'static/icons/istarbuy-72.png',
+    // image: BASE_URL + 'static/icons/istarbuy-32.png',
+    vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+    //  sound: '/demos/notification-examples/audio/notification-sound.mp3',
+    timestamp: +new Date(),
     actions: [
         {
             action: 'show-istarbuy',
