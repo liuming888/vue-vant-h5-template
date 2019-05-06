@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 16:18:54
+ * @LastEditTime: 2019-05-06 16:22:46
  */
 // import $request from './api/request.js';
 
@@ -348,8 +348,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         var action = e.data;
         switch (action) {
             case 'show-istarbuy':
-                // location.href = location.href; // 跳转当前页面
-                window.open(location.href);
+                location.href = location.href; // 跳转当前页面
+                // window.open(location.href);
                 break;
             case 'contact-me':
                 // location.href = location.origin+'/my/Tutorial#contactUs'; // 跳转到新手教程底部联系方式那了
@@ -357,8 +357,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                 break;
             default:
                 // 默认点击别的打开首页
-                // location.href = location.origin;
-                window.open(location.origin);
+                location.href = location.origin;
+                // window.open(location.origin);
                 break;
         }
     }
