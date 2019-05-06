@@ -7,6 +7,7 @@ export default {
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
         successfulCopy: 'Salinan yang berhasil',
         replicationFailed: 'Replikasi gagal',
+        pleaseCheckTheNetwork: 'Tampaknya Anda memiliki koneksi jaringan yang buruk, silakan periksa jaringan.',
     },
 
     /************************ 组件  start *****************************************************/

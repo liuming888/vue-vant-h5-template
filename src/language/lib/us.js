@@ -7,6 +7,7 @@ export default {
         youCanReInitiatePaymentInMyOrder: 'you can re-initiate payment in "My Order"',
         successfulCopy: 'Successful copy',
         replicationFailed: 'Replication failed',
+        pleaseCheckTheNetwork:"You seem to have a bad network connection, please check the network."
     },
 
     /************************ 组件  start *****************************************************/

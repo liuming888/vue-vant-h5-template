@@ -4,7 +4,7 @@ import App from './App.vue';
 import router from './router/index.js';
 import store from './store/index.js';
 import * as $util from './utils/util.js';
-import { Toast, Popup, Lazyload } from 'vant';
+import { Toast, Popup, Lazyload, Notify } from 'vant';
 Vue.use(Toast);
 Vue.use(Popup);
 Vue.use(Lazyload);
@@ -27,11 +27,25 @@ Vue.mixin({
     },
 });
 
-window.curVueObj=new Vue({
+window.curVueObj = new Vue({
     router,
     store,
     i18n,
     render: h => h(App),
 }).$mount('#app');
 
-import "@/utils/pwa.js";
+import '@/utils/pwa.js';
+
+window.addEventListener('online', function() {
+    console.log('网络连接恢复！');
+    console.log("")
+    Notify.clear();
+});
+window.addEventListener('offline', function() {
+    console.log('网络连接中断！');
+    Notify({
+        message: window.curVueObj.$t('common.pleaseCheckTheNetwork'),
+        duration: 10000,
+        background: '#D30C05',
+    });
+});
