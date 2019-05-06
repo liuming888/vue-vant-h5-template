@@ -98,23 +98,29 @@ self.addEventListener('push', function(e) {
         var title = 'ISTARBUY';
         var options = {
             dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
-            body: data,
+            body: 'Buy your favorite products with your friends.',
             icon: '/static/icons/istarbuy-128.png',
-            image: '/static/icons/istarbuy-512.png', // no effect
+            // image: '/static/icons/istarbuy-512.png', // no effect
+            badge: '/static/icons/istarbuy-72.png',
+            vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+            //  sound: '/demos/notification-examples/audio/notification-sound.mp3',
+            timestamp: +new Date(),
             actions: [
                 {
                     action: 'show-istarbuy',
                     // title: '去看看',
                     title: 'Go and see',
+                    // "icon": "images/yes.png"
                 },
                 {
                     action: 'contact-me',
                     // title: '联系我',
                     title: 'contact me',
+                    // "icon": "images/yes.png"
                 },
             ],
             tag: 'pwa-starter',
-            renotify: true, // 是否替换之前的通知
+            renotify: true,
             //  silent: true, // 静音
             //  requireInteraction: true  // 此选项会展示通知直到用户消除或点击
         };
@@ -170,13 +176,12 @@ self.addEventListener('notificationclick', function(e) {
     );
 });
 
-
 /**
  * @description: 通知的关闭事件
  */
 self.addEventListener('notificationclose', function(event) {
     var dismissedNotification = event.notification;
-    
+
     // var promiseChain = notificationCloseAnalytics();
     // event.waitUntil(promiseChain);
 });
