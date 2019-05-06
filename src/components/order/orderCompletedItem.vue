@@ -118,17 +118,17 @@
         </p>
 
         <button v-if="curDat.order_no"
-          ref="copy2"
-          class="address"
-          data-clipboard-action="copy"
-          :data-clipboard-text="curDat.order_no"
-          @click="mx_copyLink">{{$t('myOrder.orderNumber')}}:{{curDat.order_no}}</button>
-        <button v-if="curDat.shipment_no"
           ref="copy1"
           class="address"
           data-clipboard-action="copy"
+          :data-clipboard-text="curDat.order_no"
+          @click="mx_copyLink1">{{$t('myOrder.orderNumber')}}: {{curDat.order_no}}</button>
+        <button v-if="curDat.shipment_no"
+          ref="copy2"
+          class="address"
+          data-clipboard-action="copy"
           :data-clipboard-text="curDat.shipment_no"
-          @click="mx_copyLink">{{$t('myOrder.shipmentNumber')}}: {{curDat.shipment_no}}</button>
+          @click="mx_copyLink2">{{$t('myOrder.shipmentNumber')}}: <span class="c-num">{{curDat.shipment_no}}</span></button>
 
       </div>
     </div>

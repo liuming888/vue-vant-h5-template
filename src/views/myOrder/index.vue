@@ -48,6 +48,10 @@
     font-size: 32px;
   }
 }
+
+.c-num{
+  color:#0a0ae8ad;
+}
 </style>
 
 <template>
