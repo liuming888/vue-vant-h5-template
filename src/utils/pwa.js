@@ -1,7 +1,7 @@
 /*
  * @Description: PWA系列
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-05 18:38:24
+ * @LastEditTime: 2019-05-06 10:05:30
  */
 // import $request from './api/request.js';
 
@@ -170,6 +170,9 @@ function subscribeUserToPush(registration, publicKey) {
     return registration.pushManager.subscribe(subscribeOptions).then(function(pushSubscription) {
         console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
         return pushSubscription;
+    }).catch(function(err){
+        console.warn('异常err: ', err);
+        return false;
     });
 }
 
@@ -318,11 +321,12 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
         .then(function(registration) {
             console.warn('Service Worker 注册成功');
             // 开启该客户端的服务端消息推送订阅功能
-            // subscribeUserToPush(registration, publicKey);
+            var res=subscribeUserToPush(registration, publicKey);
 
-            return Promise.all([registration , subscribeUserToPush(registration, publicKey)]);
+            return Promise.all([registration,res]);
         })
         .then(function(result) {
+            // console.log("67777777777777777")
             var registration = result[0];
             var pwaPush=window.pwaPush = function() {  // 推送消息
                 console.warn('点击了');

@@ -170,12 +170,13 @@ self.addEventListener('notificationclick', function(e) {
     );
 });
 
+
 /**
  * @description: 通知的关闭事件
  */
 self.addEventListener('notificationclose', function(event) {
     var dismissedNotification = event.notification;
-
-    var promiseChain = notificationCloseAnalytics();
-    event.waitUntil(promiseChain);
+    
+    // var promiseChain = notificationCloseAnalytics();
+    // event.waitUntil(promiseChain);
 });
