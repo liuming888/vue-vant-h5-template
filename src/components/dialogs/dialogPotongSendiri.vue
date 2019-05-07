@@ -111,6 +111,9 @@ export default {
 
   methods: {
     closeDialog() {
+      if(window.getPushReq){
+        window.getPushReq();  // 如果之前没获取权限的获取下权限
+      }
       this.$emit("update:dialogVisible", { show: false });
     }
   }
