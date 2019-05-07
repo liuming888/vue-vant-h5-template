@@ -23,6 +23,11 @@ const curRouter = new VueRouter({
             component: resolve => require(['../views/userGuidance.vue'], resolve),
         },
         {
+            path: '/operationalActivities',
+            name: '运营活动页',
+            component: resolve => require(['../views/operationalActivities.vue'], resolve),
+        },
+        {
             path: '/bargain',
             name: '砍价详情页',
             component: resolve => require(['../views/bargain.vue'], resolve),
