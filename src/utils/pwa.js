@@ -1,7 +1,9 @@
 /*
  * @Description: PWA系列
+             window.getPushReq  获取权限方法
+             window.pwaPush  推送条默认消息的方法
  * @Date: 2019-04-23 01:38:25
- * @LastEditTime: 2019-05-06 16:22:46
+ * @LastEditTime: 2019-05-07 16:08:03
  */
 // import $request from './api/request.js';
 
@@ -126,6 +128,10 @@ var title = 'ISTARBUY';
 var options = {
     dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
     body: 'Buy your favorite products with your friends.',
+    data: {
+        time: new Date().toString(),
+        message: 'Hello World!',
+    },
     icon: BASE_URL + 'static/icons/istarbuy-128.png',
     badge: BASE_URL + 'static/icons/istarbuy-72.png',
     // image: BASE_URL + 'static/icons/istarbuy-32.png',
@@ -148,6 +154,8 @@ var options = {
     ],
     tag: 'pwa-starter',
     renotify: true,
+    //  silent: true, // 静音
+    //  requireInteraction: true  // 此选项会展示通知直到用户消除或点击
 };
 
 /**
@@ -364,7 +372,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     }
 
     /**
-     * @description:  在client中监听  message事件，判断data，进行不同的操作
+     * @description:  在client中监听sw文件postMessage过来的  message事件，判断data，进行不同的操作
      */
     navigator.serviceWorker.addEventListener('message', clickAction);
 

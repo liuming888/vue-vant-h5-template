@@ -1,3 +1,9 @@
+/*
+ * @Description: Service Worker文件
+    self.registration.showNotification  发送通知
+ * @Date: 2019-05-07 13:57:03
+ * @LastEditTime: 2019-05-07 16:07:01
+ */
 var cacheName = 'zdd-1-4-1';
 var cacheFiles = ['/About us.html', '/bitbug_favicon.ico', '/Contact us.html', '/Privacy Policy.html', '/Terms & Conditions.html', '/static/timg.jpg', '/static/timg1.gif', '/static/timg2.gif', '/static/timg3.gif', '/static/wangzhanicon.png', '/static/lib/vue.runtime.min.js', '/static/lib/vue-router.min.js', '/static/lib/vuex.min.js', '/static/lib/axios.min.js'];
 
@@ -10,7 +16,7 @@ self.addEventListener('install', function(e) {
     e.waitUntil(cacheOpenPromise);
 });
 
-//  缓存可能造成问题
+//  缓存可能造成问题  （所有请求都会经过Service Worker文件   导致network面板好多带图标的请求 不方便开发调试）
 // 简单缓存
 // self.addEventListener('fetch', function(e) {
 //     // 如果有cache则直接返回，否则不操作
@@ -88,9 +94,34 @@ self.addEventListener('activate', function(e) {
 });
 
 /**
+ * @description: 判断用户是否正在浏览我们的站点
+ */
+function isClientFocused() {
+    return clients
+        .matchAll({
+            type: 'window',
+            includeUncontrolled: true,
+        })
+        .then(windowClients => {
+            let clientIsFocused = false;
+
+            for (let i = 0, max = windowClients.length; i < max; i++) {
+                if (windowClients[i].focused) {
+                    clientIsFocused = true;
+                    break;
+                }
+            }
+
+            return clientIsFocused;
+        });
+}
+
+/**
  * @description: push处理相关部分
  */
 self.addEventListener('push', function(e) {
+    console.log('aaaaaaaaaaaaaaaaaa', e);
+    console.log('bbbbbbbbbbbbbbbbbb接收到的data', e.notification.data);
     var data = e.data;
     if (e.data) {
         data = data.json();
@@ -99,6 +130,10 @@ self.addEventListener('push', function(e) {
         var options = {
             dir: 'auto', // auto（自动）, ltr（从左到右）, or rtl（从右到左）
             body: 'Buy your favorite products with your friends.',
+            data: {
+                time: new Date().toString(),
+                message: 'Hello sw里!',
+            },
             icon: '/static/icons/istarbuy-128.png',
             // image: '/static/icons/istarbuy-512.png', // no effect
             badge: '/static/icons/istarbuy-72.png',
@@ -124,7 +159,17 @@ self.addEventListener('push', function(e) {
             //  silent: true, // 静音
             //  requireInteraction: true  // 此选项会展示通知直到用户消除或点击
         };
-        var promiseChain = self.registration.showNotification(title, options);
+        // var promiseChain = self.registration.showNotification(title, options);
+        var promiseChain = isClientFocused().then(clientIsFocused => {
+            // 窗口处于激活状态，不需要发送通知
+            if (clientIsFocused) {
+                console.warn('用户正在浏览我们的站点！');
+                return;
+            }
+            // 需要发送通知
+            return self.registration.showNotification(title, options);
+        });
+
         event.waitUntil(promiseChain);
     } else {
         console.log('push没有任何数据');
@@ -136,6 +181,8 @@ self.addEventListener('push', function(e) {
  */
 self.addEventListener('notificationclick', function(e) {
     var action = e.action;
+    console.log('11111111111111', e);
+    console.log('22222222222222接收到的data', e.notification.data);
     console.log(`action tag: ${e.notification.tag}`, `action: ${action}`);
 
     switch (action) {
@@ -154,7 +201,10 @@ self.addEventListener('notificationclick', function(e) {
     e.waitUntil(
         // 获取所有clients
         self.clients
-            .matchAll()
+            .matchAll({
+                type: 'window', // 需要寻找打开的窗口和标签，不包括 web workers
+                includeUncontrolled: true, // 不被 service worker 控制的但是属于自己域下的标签和窗口也都纳入搜索范围
+            })
             .then(function(clients) {
                 if (!clients || clients.length === 0) {
                     console.warn('不存在该client,默认打开lovingistarbuy');
