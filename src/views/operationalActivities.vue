@@ -12,6 +12,7 @@
 
 <template>
   <div class="operationalActivities-container">
+    <turn-home />
     <img v-for="(item,index) of $t('operationalActivities.imagesList')"
       :key="index"
       v-lazy="item"
@@ -21,6 +22,9 @@
 
 <script>
 export default {
+  components: {
+    turnHome: resolve => require(["@/components/turnHome.vue"], resolve) // 返回首页按钮
+  },
   mounted() {
     if (
       !Vue.prototype.$mainAppLoad &&
