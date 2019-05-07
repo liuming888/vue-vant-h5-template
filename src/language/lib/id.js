@@ -101,6 +101,9 @@ export default {
     userGuidance: {
         imagesList: ['/static/images/user_guidance/id-yindaoye1.jpg', '/static/images/user_guidance/id-yindaoye2.jpg', '/static/images/user_guidance/id-yindaoye3.jpg', '/static/images/user_guidance/id-yindaoye4.jpg', '/static/images/user_guidance/id-yindaoye5.jpg', '/static/images/user_guidance/id-yindaoye6.jpg', '/static/images/user_guidance/id-yindaoye7.jpg', '/static/images/user_guidance/id-yindaoye8.jpg', '/static/images/user_guidance/id-yindaoye9.jpg', '/static/images/user_guidance/id-yindaoye10.jpg'],
     },
+    operationalActivities: {
+        imagesList: ['/static/images/operationalActivities/id-yyhd1.jpg', '/static/images/operationalActivities/id-yyhd2.jpg', '/static/images/operationalActivities/id-yyhd3.jpg', '/static/images/operationalActivities/id-yyhd4.jpg', '/static/images/operationalActivities/id-yyhd5.jpg', '/static/images/operationalActivities/id-yyhd6.jpg', '/static/images/operationalActivities/id-yyhd7.jpg', '/static/images/operationalActivities/id-yyhd8.jpg', '/static/images/operationalActivities/id-yyhd9.jpg'],
+    },
     bargain: {
         sent: 'terkirim gratis',
         price: 'Price',

@@ -102,6 +102,9 @@ export default {
     userGuidance: {
         imagesList: ['/static/images/user_guidance/us-yindaoye1.jpg', '/static/images/user_guidance/us-yindaoye2.jpg', '/static/images/user_guidance/us-yindaoye3.jpg', '/static/images/user_guidance/us-yindaoye4.jpg', '/static/images/user_guidance/us-yindaoye5.jpg', '/static/images/user_guidance/us-yindaoye6.jpg', '/static/images/user_guidance/us-yindaoye7.jpg', '/static/images/user_guidance/us-yindaoye8.jpg', '/static/images/user_guidance/us-yindaoye9.jpg', '/static/images/user_guidance/us-yindaoye10.jpg'],
     },
+    operationalActivities: {
+        imagesList: ['/static/images/operationalActivities/id-yyhd1.jpg', '/static/images/operationalActivities/id-yyhd2.jpg', '/static/images/operationalActivities/id-yyhd3.jpg', '/static/images/operationalActivities/id-yyhd4.jpg', '/static/images/operationalActivities/id-yyhd5.jpg', '/static/images/operationalActivities/id-yyhd6.jpg', '/static/images/operationalActivities/id-yyhd7.jpg', '/static/images/operationalActivities/id-yyhd8.jpg', '/static/images/operationalActivities/id-yyhd9.jpg'],
+    },
     bargain: {
         sent: 'Sent',
         price: 'Price',
@@ -290,7 +293,7 @@ export default {
             `4.Now we only support phone charging  to withdraw,not the paypal ,Please confirm that you have selected the correct carrier and filled in the correct mobile number, otherwise you will not receive our remittance. If you have any questions, please contact our official customer service whatspp:18027340756`,
             `5. If any withdrawal is made through any improper means or other cheating, Istarbuy has the right to freeze the funds of the account. If itarbuy suffers losses, it has the right to directly deduct the equity in the account and has the right to continue to recover`,
         ],
-        accountInformationCannotBeEmpty:"Account information cannot be empty",
-        inconsistentAccountsAreEnteredTwice:"Inconsistent accounts are entered twice"
+        accountInformationCannotBeEmpty: 'Account information cannot be empty',
+        inconsistentAccountsAreEnteredTwice: 'Inconsistent accounts are entered twice',
     },
 };
