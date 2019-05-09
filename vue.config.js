@@ -1,25 +1,18 @@
 // const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
+/**
+ * @description:   当前环境的接口地址
+ * 注意别返回空字符串   不然运行一堆报错！！！！！！！！！！！！！！！！！！！！
+ */
 function getUrl(VUE_APP_ENV) {
     let url = '';
     switch (VUE_APP_ENV) {
         case 'mock':
             break;
         case 'development':
-            // 锦涛
-            // url = 'http://192.168.4.128:8024/api';
             // 阳
-          // url = 'http://192.168.4.32:8024/api';
-
-            // 开发环境
-            // url = '';
-
-
-            // 最新测试环境
-            url = '';
-
-            // url = '';
+            url = 'http://192.168.4.32:8024/api';
             break;
         case 'test':
             // url = 'http://127.0.0.1:7001';
@@ -69,7 +62,7 @@ module.exports = {
             }),
         ];
         //打包将console删除
-        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production' || process.env.VUE_APP_ENV =='newProduction') {
+        if (process.env.VUE_APP_ENV == 'test' || process.env.VUE_APP_ENV == 'production' || process.env.VUE_APP_ENV == 'newProduction') {
             config.plugins = [...config.plugins, ...plugins];
         }
 
@@ -102,7 +95,7 @@ module.exports = {
     devServer: {
         port: 8099,
         disableHostCheck: true,
-        proxy: {/* 
+        proxy: {
             '/api': {
                 target: getUrl(process.env.VUE_APP_ENV),
 
@@ -115,7 +108,7 @@ module.exports = {
                 },
             },
             '/pwa': {
-                target:"http://127.0.0.1:3000",  // PWA测试
+                target: 'http://127.0.0.1:3000', // PWA测试
 
                 ws: true,
 
@@ -125,7 +118,7 @@ module.exports = {
                     '^/pwa': '/', // 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
                 },
             },
-         */},
+        },
     },
 };
 

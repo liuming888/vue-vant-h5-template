@@ -19,6 +19,12 @@ Vue.prototype.$lang = i18n.locale;
 
 Vue.config.productionTip = false;
 Vue.mixin({
+    mounted () {
+        if (!Vue.prototype.$mainAppLoad && document.getElementById('mainApp').style.display != 'none') {
+            document.getElementById('mainApp').style.display = 'none';
+            Vue.prototype.$mainAppLoad = true; // 已经加载了首屏
+        }  
+    },
     methods: {
         mx_resizeWindow() {
             console.warn('表单blur');

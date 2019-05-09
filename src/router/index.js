@@ -52,6 +52,7 @@ curRouter.beforeEach((to, from, next) => {
 // const routerShows = ['/', '/bargain', '/purchase', '/my', '/purchase/paymentSuccess', '/withdrawRelated', '/isBargainingList'];
 // 全局后置钩子
 curRouter.afterEach(current => {
+    console.log('current: ', current);
     Vue.prototype.$curStore.commit('setLoaddingNum', -1);
     // const path = current.path;
     // if (routerShows.includes(path)) {
