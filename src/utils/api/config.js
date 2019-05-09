@@ -7,18 +7,15 @@ export default {
             case 'development':
                 break;
             case 'dev': // 开发域名环境
-               url = 'https://dev-ht-zdd-api.istarbuy.com';
                 // 阳
-                // url = 'http://192.168.4.32:8024';
+                url = 'http://192.168.4.32:8024';
                 break;
             case 'test':
-                // url =' https://test-ht-zdd-api.istarbuy.com/';
-                // url = 'https://test-ht-zdd-api.istarbuy.com:8443';
-                url = 'https://pubtest-ht-zdd-api.istarbuy.com';
+              url = 'http://192.168.4.32:8024';
                 break;
             case 'newProduction':
             case 'production':
-                url = 'https://api.istarbuy.com';
+                url = '';
                 break;
         }
         return url;

@@ -1,6 +1,6 @@
 <style lang="scss">
 #app {
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -27,7 +27,7 @@
 <style lang="scss" src="./assets/css/init.scss"></style>
 
 <template>
-  <div id="app">
+  <div class="app-container">
     <div style="height:50px;"
       id="pwaT"
       v-show="showpwaCeshiPushInfo">pwa ceshi push info</div>
@@ -38,7 +38,8 @@
       <van-loading color="#D30C05" />
     </div>
 
-    <zdd-layout></zdd-layout>
+    <router-view></router-view>
+    <!-- <zdd-layout></zdd-layout> -->
   </div>
 </template>
 
@@ -46,14 +47,12 @@
 import { Loading } from "vant";
 import axios from "axios";
 import { FBConfig } from "@/config/index.js";
-import zddMain from "@/components/layout/zddMain.vue";
 
-import { login, refreshToken } from "@/server/user.js";
 export default {
   name: "App",
   components: {
-    [Loading.name]: Loading,
-    "zdd-layout": zddMain
+    [Loading.name]: Loading
+    // "zdd-layout": resolve=>require(["@/components/layout/zddMain.vue"],resolve)
   },
   computed: {
     loaddingNum() {
@@ -78,13 +77,13 @@ export default {
       return;
     }
 
-    if (
+    /*  if (
       process.env.VUE_APP_ENV == "development" ||
       process.env.VUE_APP_ENV == "mock"
     ) {
       return;
     }
-    this.initToken();
+    this.initToken(); */
 
     if (process.env.VUE_APP_ENV == "newProduction") return;
     this.initFB();
